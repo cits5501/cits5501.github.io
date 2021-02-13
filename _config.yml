@@ -1,1 +1,17 @@
 theme: jekyll-theme-leap-day
+title: "CITS5501 Software Testing and Quality Assurance"
+description: "CITS5501 Software Testing and Quality Assurance  unit @uwa"
+url: "https://cits5501.github.io/"
+author: arranstewart
+markdown: kramdown
+logo: "cits5501-logo.png"
+highlight: pygments
+excerpt_separator: "<!--more-->"
+exclude:
+    - LICENSE
+    - README.md
+    - INSTALL.md
+    - Makefile
+    - vendor
+# used in /includes/header.html for html-settings
+language: "en"
