@@ -1,17 +1,57 @@
-theme: jekyll-theme-leap-day
-title: "CITS5501 Software Testing and Quality Assurance"
-description: "CITS5501 Software Testing and Quality Assurance  unit @uwa"
-url: "https://cits5501.github.io/"
-author: arranstewart
-markdown: kramdown
-logo: "cits5501-logo.png"
-highlight: pygments
-excerpt_separator: "<!--more-->"
+---
+
+### site serving configuration ###
+
+port: 8080
+host: 0.0.0.0
+safe: false
+
 exclude:
     - LICENSE
     - README.md
     - INSTALL.md
     - Makefile
+    - Dockerfile
     - vendor
-# used in /includes/header.html for html-settings
+    - CNAME
+    - .gitignore
+
+plugins:
+  - jekyll-sitemap
+  - jekyll-redirect-from
+
+source: "./docs"
+
+# site settings
+title: "CITS5501 Software Testing and Quality Assurance"
+description: "CITS5501 Software Testing and Quality Assurance  unit @uwa"
+url: "https://cits5501.github.io/"
+repository: "cits5501/cits5501.github.io"
+
+# other site config
+permalink: /:title
+timezone: "Australia/Perth"
+markdown: kramdown
+#kramdown:
+#  math_engine: mathjax
+#  syntax_highlighter: rouge
+highlight: pygments
+
+## content structure
+include:
+  - "_pages"
+
+collections:
+   pages:
+     output: true
+     permalink: /:path/
+
+#plugins:
+#  - jekyll-include-cache
+#  - jekyll-feed
+#  - jekyll-sitemap
+#  - jekyll-redirect-from
+
+## used in /includes/header.html for html-settings
 language: "en"
+

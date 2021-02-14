@@ -1,0 +1,406 @@
+/* clear spacing */
+
+html, body, div, nav
+{
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%
+}
+
+.non-header {
+  display: flex;
+  flex-direction: column;
+  height: 100%
+}
+
+/* layout */
+
+/* we have: nav, main, footer
+ */
+main {
+    flex: 1 0 auto;
+}
+
+.content {
+  margin: 40px auto;
+  max-width: 550px;
+  color: black;
+  padding: 0 10px;
+}
+
+footer {
+  text-align: center;
+}
+
+/* icons */
+
+.icon:before {
+  font-family: "Genericons-Neue";
+}
+
+/* structured data */
+
+.teaching,
+.contact {
+  display: table;
+  border-collapse: collapse;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+}
+
+.teaching-period,
+.contact-group
+ {
+  border-collapse: collapse;
+  display: table-row;
+  padding: 0;
+  margin: 0;
+}
+
+
+.teaching-period *,
+.contact-group *
+ {
+  padding: 0;
+  margin: 0;
+}
+
+.teaching-period > div,
+.contact-group > div
+{
+  display: table-cell;
+}
+
+.teaching-period > div > div,
+.contact-group > div > div
+{
+  display: flex;
+  flex-direction: row;
+}
+
+.period-name,
+.contact-group-name
+{
+  flex: 1 0 3em;
+}
+
+.units,
+.contact-group-details
+{
+  flex: 3 0 3em;
+}
+
+
+/* heading spacing */
+
+h1,h2,h3 {
+  line-height: 1.2;
+}
+
+h1 {
+  font-size: 1.2em;
+  text-align: center;
+}
+
+h2 {
+  font-size: 1.2em;
+  margin-top: 1.8em;
+}
+
+
+/* theme
+---------*/
+
+/* solid bars: #44508c
+ * bar links & hrules: cceeee
+ * links: #333f8c  */
+
+body {
+  /* xfont-family: 'ff-tisa-web-pro', Georgia, 'Times New Roman', Times, Serif;
+  */
+  font-family: Georgia, 'Times New Roman', Times, Serif;
+  line-height: 1.6;
+}
+
+
+/* heading styles */
+
+h1, h2, h3, h4, h5 {
+  font-weight: normal;
+}
+
+h2, h3, h4, h5 {
+  font-family: 'ff-meta-serif-sc-web-pro', 'Trebuchet MS', 'Helvetica Neue', Tahoma;
+}
+
+h2 {
+  border-bottom: 1px solid #cce;
+}
+
+
+/* links */
+
+.content a {
+  color: #333f8c;
+  text-decoration:none;
+  border-bottom: dotted 1px #A1A3A1;
+}
+
+a:focus,
+a:hover  {
+  text-decoration:underline;
+  border-bottom: none;
+  color: #071cc8;
+}
+
+/* em-dash lists */
+
+.content ul {
+  list-style-type: none;
+  padding: 0px;
+  margin-left: 1em;
+}
+.content ul > li {
+  text-indent: -0.5em;
+}
+.content ul > li:before {
+  display: inline-block;
+  content: '\2012';
+  width: 0.5em;
+  text-indent: -0.5em;
+}
+
+/* semantic */
+
+.hi-pri {
+  color: #053cc9;
+}
+
+.xexpanded {
+  width: 200%;
+  margin: auto
+}
+
+.expanded {
+  position: absolute;
+  left:     0;
+  right:    0;
+}
+
+
+
+/* cits stuff: */
+
+table.csse-table {
+  border-collapse: collapse;
+  x-margin-bottom: 1.5em;
+  margin: auto;
+  width: 85%;
+}
+
+table.csse-table, table.csse-table th, table.csse-table td {
+  border: 1px gray solid;
+}
+
+table.csse-table th,  table.csse-table td  {
+  padding: 2px;
+  vertical-align: middle;
+}
+
+
+table.csse-table th {
+  text-align: center;
+  background-color:  lightgray;
+}
+
+code, pre {
+  background-color: transparent;
+}
+
+p.code {
+  text-indent: 0;
+  vertical-align: middle;
+  margin-top: -1.25em;
+  margin-bottom: 1.5em;
+  margin-left: 1em;
+  font-family: monospace;
+  white-space: pre;
+}
+
+.pjustify {
+  text-align: justify;
+}
+
+
+.even-row {
+  background-color: rgb(204, 204, 204);
+}
+
+.odd-row {
+  background-color: #eeeedf;
+}
+
+
+/* footer */
+.text-muted {
+  color: #666666;
+  font-size: 75%;
+}
+
+
+/* navigation for wide vs narrow
+--------------------------------*/
+
+/* wide */
+@media only screen and (min-width: 500px) {
+  /* horizontalish layout */
+  nav[role="navigation"].desktop-only {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding: 0.3em 17%;
+    font-family: 'ff-meta-serif-sc-web-pro', 'Trebuchet MS', 'Helvetica Neue', Tahoma;
+  }
+
+  nav[role="navigation"].mobile-only {
+    display: none;
+  }
+  nav[role="navigation"].desktop-only > a {
+    flex: 2 0 5em;
+    margin: 0.1em 0.3em;
+    padding: 0.5em 0em;
+    text-align: center;
+    background-clip: content-box;
+    text-shadow: 2px 2px 11px blue;
+  }
+
+  /* theme
+  ---------*/
+  body {
+    background: #FBFBFB ;
+  }
+
+  *[role="navigation"], .bar {
+    font-size:120%;
+    font-family: 'ff-meta-serif-sc-web-pro';
+    background: #44508c;
+  }
+
+  *[role="navigation"] a
+    { color: #f7f7ff;
+      text-decoration: none;
+    }
+
+  *[role="navigation"] a.active {
+    color: white;
+  }
+
+  .mobile-only {
+    display: none !important;
+    visibility: none !important;
+  }
+
+}
+/* not wide. Use toggled menu  */
+@media only screen and (max-width: 499px) {
+  .desktop-only {
+    display: none !important;
+    visibility: none !important;
+  }
+  nav[role="navigation"].mobile-only {
+    display: flex !important;
+    flex-direction: column;
+  }
+  nav[role="navigation"].mobile-only a {
+    background: #44508c;
+    width: 150%;
+    color: white;
+    height: 48px;
+    border-top: 1px solid white;
+    text-decoration: none;
+    font-family: 'ff-meta-serif-sc-web-pro', 'Trebuchet MS', 'Helvetica Neue', Tahoma;
+    line-height: 48px;
+    text-align: left;
+    padding-left: 7px;
+  }
+  nav[role="navigation"].mobile-only a:first-child {
+    border-top: none;
+  }
+
+
+  /* theme */
+  body {
+    background-color: #FBFBFB;
+  }
+
+  .toggle-bar {
+    background: #44508c;
+    width: 200%;
+    min-height: 48px;
+    height: 48px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    border-bottom: 1px solid white;
+    line-height: 48px;
+  }
+ .toggle-bar button
+ {
+    background: #44508c;
+    color: white;
+    border: none;
+    height: 48px;
+    width: 48px;
+    font-size: 20px;
+    line-height: 30px;
+  }
+
+}
+
+/* font size */
+
+/*
+.content {
+  font-size: 17px;
+}
+*/
+
+
+
+
+/* =Tablet (Portrait)
+-----------------------------------------------------------------------------*/
+@media only screen and (min-width: 768px) and (max-width: 959px) {
+  .content {
+    width: 748px;
+  }
+}
+
+/* =Mobile (Portrait)
+-----------------------------------------------------------------------------*/
+@media only screen and (max-width: 767px) {
+
+  .content {
+    width: 90%;
+  }
+
+  h1, h2, h3, h4, h5 {text-align:center;}
+}
+
+
+/* =Mobile (Landscape)
+-----------------------------------------------------------------------------*/
+@media only screen and (min-width: 480px) and (max-width: 767px) {
+
+}
+
+@media only print {
+  .mobile-only {
+    display: none;
+  }
+}
+
