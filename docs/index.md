@@ -180,7 +180,7 @@ and a final examination.
    <td>   week 12                     </td>
  </tr>
  <tr>
-   <td>   Workshop exercises          </td>
+   <td>   Quiz or workshop exercise       </td>
    <td>   {{ site.data.globals.wkmarks }}%</td>
    <td>   weeks 3, 6, 9               </td>
  </tr>
