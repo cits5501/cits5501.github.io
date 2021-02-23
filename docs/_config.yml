@@ -16,16 +16,16 @@ exclude:
     - CNAME
     - .gitignore
 
-plugins:
-  - jekyll-sitemap
-  - jekyll-redirect-from
+#plugins:
+#  - jekyll-sitemap
+#  - jekyll-redirect-from
 
 source: "./docs"
 
 # site settings
 title: "CITS5501 Software Testing and Quality Assurance"
 description: "CITS5501 Software Testing and Quality Assurance  unit @uwa"
-url: "https://cits5501.github.io/"
+#url: "https://cits5501.github.io/"
 repository: "cits5501/cits5501.github.io"
 
 # other site config
@@ -35,23 +35,20 @@ markdown: kramdown
 #kramdown:
 #  math_engine: mathjax
 #  syntax_highlighter: rouge
-highlight: pygments
 
 ## content structure
 include:
   - "_pages"
+  - "assets/css"
 
 collections:
    pages:
      output: true
      permalink: /:path/
 
-#plugins:
-#  - jekyll-include-cache
-#  - jekyll-feed
-#  - jekyll-sitemap
-#  - jekyll-redirect-from
+plugins:
+  - jekyll-relative-links
 
-## used in /includes/header.html for html-settings
-language: "en"
+
+
 

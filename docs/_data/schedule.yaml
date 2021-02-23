@@ -14,18 +14,19 @@ weeks:
 
   - id: 1
     weekNum: 1
-    date: "24 Feb"
+    date: "22 Feb"
     lectureTopic: |
         Unit info, testing and QA concepts
-    workshopTopic: No workshop
+    workshopTopic: "*No labs this week*"
     reading: |
       - Amman & Offutt, ch 1
       - Pressman, ch 8 ("Understanding Requirements"), ch 19 ("Quality concepts")
       - Bruegge and Dutoit, *Object-Oriented Software Engineering Using UML, Patterns, and Java* (3rd edn), ch 11 "Testing" (extract available [here](http://www.unitreadings.library.uwa.edu.au/leganto/public/61UWA_INST/lists/11016332940002101?auth=SAML&section=11308340080002101))
     assessmentDetails: ""
+
   - id: x
     weekNum: 2
-    date: "2 Mar"
+    date: "1 Mar"
 #    lectureTopic: |
 #      [Introduction to testing](/Lectures/lect02.pdf)\
 #      [Testing in Python](http://docs.python-guide.org/en/latest/writing/tests/)
@@ -41,9 +42,10 @@ weeks:
       - Barnes and Kölling, *Objects First With Java: A Practical Introduction Using BlueJ* (5th edn), ch 7 "Well-behaved objects" (extract available [here](http://www.unitreadings.library.uwa.edu.au/leganto/public/61UWA_INST/lists/11016332940002101?auth=SAML&section=11308340080002101))
 
     assessmentDetails: ! ' '
+
   - id: x
     weekNum: 3
-    date: "9 Mar"
+    date: "8 Mar"
     lectureTopic: |
         Test automation
     workshopTopic: |
@@ -52,9 +54,10 @@ weeks:
       - Amman & Offutt, ch 3
       - Pressman, ch 23 ("Testing conventional applications")
     assessmentDetails: "TBA"
+
   - id: x
     weekNum: 4
-    date: "16 Mar"
+    date: "15 Mar"
     lectureTopic: |
       Input space partitioning  
       Graph testing
@@ -64,8 +67,9 @@ weeks:
       - Pressman, ch 23 ("Testing conventional applications")
     assessmentDetails: ! ' '
   - id: x
+
     weekNum: 5
-    date: "23 Mar"
+    date: "22 Mar"
 #    lectureTopic: |
 #      [Mutation testing](../Lectures/lect05--mutation.pdf)\
 #      [old slides](http://teaching.csse.uwa.edu.au/units/CITS5501/Lectures/Mutants.pdf)\
@@ -89,9 +93,10 @@ weeks:
         Jorgensen, *Software Testing: A Craftsman's Approach*, 4th edn, ch 21
       -->
     assessmentDetails: ! ' '
+
   - id: x
     weekNum: 6
-    date: "30 Mar"
+    date: "29 Mar"
     lectureTopic: |
       Quality assurance, software reviews, performance testing
     workshopTopic: |
@@ -104,7 +109,7 @@ weeks:
 
   - id: x
     weekNum: null
-    date: "6 Apr"
+    date: "5 Apr"
     lectureTopic: |
       <span style="color: #696969;">***no class -- non-teaching week***</span>
     workshopTopic: ""
@@ -112,17 +117,10 @@ weeks:
     assessmentDetails: ''
 
 
-  - id: x
-    weekNum: null
-    date: "13 Apr"
-    lectureTopic: '<span style="color: #696969;">***no class -- study break***</span>'
-    workshopTopic: ! '  '
-    reading: ' '
-    assessmentDetails: ! '  '
 
   - id: x
     weekNum: 7
-    date: "20 Apr"
+    date: "12 Apr"
     lectureTopic: |
         Systems and standards, risk management
     workshopTopic: |
@@ -134,7 +132,7 @@ weeks:
 
   - id: x
     weekNum: 8
-    date: "27 Apr"
+    date: "19 Apr"
     lectureTopic: |
       Risk management,  
       software metrics
@@ -147,7 +145,7 @@ weeks:
 
   - id: x
     weekNum: 9
-    date: "4 May"
+    date: "26 Apr"
     lectureTopic: |
         Formal methods & program verification
     workshopTopic: |
@@ -158,7 +156,7 @@ weeks:
 
   - id: x
     weekNum: 10
-    date: "11 May"
+    date: "3 May"
     lectureTopic: |
         Formal specifications
     workshopTopic: |
@@ -166,9 +164,10 @@ weeks:
     reading: |
       - [Dafny language tutorial](https://rise4fun.com/Dafny/tutorial/guide)
     assessmentDetails: ! ' '
+
   - id: x
     weekNum: 11
-    date: "18 May"
+    date: "10 May"
     lectureTopic: |
         Specifications in Alloy
     workshopTopic: |
@@ -179,7 +178,7 @@ weeks:
 
   - id: x
     weekNum: 12
-    date: "25 May"
+    date: "17 May"
     lectureTopic: |
         revision
     workshopTopic: |

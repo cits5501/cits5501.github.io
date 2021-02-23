@@ -10,20 +10,16 @@
     <meta name="DC.Language"  content="en" />
     <meta name="DC.Subject"   content="computer, science, software, engineering, uwa" />
     <meta name='og:site_name' content='{{ site.title }}'/>
-    <link rel="icon" type="image/png" href="/assets/images/favicon.png">
-    <!-- local css -->
-    <!--
-    <link rel="stylesheet" type="text/css" href="X{X relURL "/" X}Xcss/cits.css" media="all" />
-    -->
+    <link rel="icon" type="image/png" href="{{ "/assets/images/favicon.png" | relative_url }}">
     <link href="https://fonts.googleapis.com/css?family=Cormorant+Garamond"
           rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css?family=Cormorant+SC"
           rel="stylesheet" />
-    <link rel="stylesheet" href="/assets/css/Genericons-Neue.css" />
-    <link rel="stylesheet" href="/assets/css/default.css" />
-    <link rel="stylesheet" href="/assets/css/responsive-nav.css" />
+    <link rel="stylesheet" href="{{ "/assets/css/Genericons-Neue.css" | relative_url }}" />
+    <link rel="stylesheet" href="{{ "/assets/css/default.css" | relative_url }}" />
+    <link rel="stylesheet" href="{{ "/assets/css/responsive-nav.css" | relative_url }}" />
 
-    <script src="/assets/js/responsive-nav.js"></script>
+    <script src="{{ "/assets/js/responsive-nav.js" | relative_url }}"></script>
     <script>
       window.onload = function ()  {
         var nav = responsiveNav("#mobile-nav", {
@@ -46,12 +42,15 @@
   <body>
 
       <nav id="nav" class="desktop-only" role="navigation">
-        <a href="/">Home</a>
-        {%- for node in site.pages -%}
-          {%- if node.tags contains "toppage" -%}
-            <a href="{{node.url}}">{{node.title}}</a>
+        <a href="{{ "/" | relative_url }}">Home</a>
+        {% for node in site.pages %}
+          {% if node.tags contains "toppage" -%}
+           <a href="{{ node.url | relative_url }}">{{node.title}}</a>
           {%- endif -%}
-        {%- endfor -%}
+        {% endfor %}
+        <a href="https://handbooks.uwa.edu.au/unitdetails?code={{ site.data.globals.unitcode }}"
+           target="_blank">Handbook entry</a>
+        <a href="https://lms.uwa.edu.au/bbcswebdav/institution/Unit_Outlines_{{ site.data.globals.year }}/{{ site.data.globals.unitcode }}_SEM-1_{{ site.data.globals.year }}/{{ site.data.globals.unitcode }}_SEM-1_{{ site.data.globals.year }}_UnitOutline.html" target="_blank">Unit outline</a>
         <a href="https://secure.csse.uwa.edu.au/run/help{{ site.data.globals.citscode }}"
            target="_blank">Forum</a>
         <a href="https://secure.csse.uwa.edu.au/run/csmarks"
@@ -68,17 +67,15 @@
         </div>
       </div>
       <nav id="mobile-nav" class="nav-collapse mobile-only" role="navigation">
-        <a href="/">Home</a>
-        {%- for node in site.pages -%}
-          {%- if node.tags contains "toppage" -%}
-            <a href="{{node.url}}">{{node.title}}</a>
+        <a href="{{ "/" | relative_url }}">Home</a>
+        {% for node in site.pages %}
+          {% if node.tags contains "toppage" -%}
+            <a href="{{ node.url | relative_url }}">{{node.title}}</a>
           {%- endif -%}
-        {%- endfor -%}
+        {% endfor %}
         <a href="https://handbooks.uwa.edu.au/unitdetails?code={{ site.data.globals.unitcode }}"
            target="_blank">Handbook entry</a>
-      <!--
         <a href="https://lms.uwa.edu.au/bbcswebdav/institution/Unit_Outlines_{{ site.data.globals.year }}/{{ site.data.globals.unitcode }}_SEM-1_{{ site.data.globals.year }}/{{ site.data.globals.unitcode }}_SEM-1_{{ site.data.globals.year }}_UnitOutline.html" target="_blank">Unit outline</a>
-      -->
         <a href="https://secure.csse.uwa.edu.au/run/help{{ site.data.globals.citscode }}"
            target="_blank">Forum</a>
         <a href="https://secure.csse.uwa.edu.au/run/csmarks"

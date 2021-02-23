@@ -10,35 +10,44 @@ ul, ol, dl, li p {
 }
 </style>
 
-### Welcome to CITS5501
+## Welcome to {{ site.data.globals.unitcode }}
 
 Welcome to the website for {{ site.data.globals.unitcode }}
 in {{ site.data.globals.year }}. **All material (lectures, workshops,
 assignments) for this unit will be published on these pages, and not on
 the LMS**{: class="hi-pri" :} -- with the exception of recorded lectures
-and the unit outline (which are available through the LMS).
+and the unit outline (which are available through the
+[LMS][lms]{: target="_blank" :} ).
 
-See below for details of the [**textbook**](#textbook){: class="hi-pri" :},
-the [**weekly timetable**](#weekly-timetable){: class="hi-pri" :}
-for the unit,
-[**assumed knowledge**](#assumed-knowledge){: class="hi-pri" :} for
-students taking this unit, and
-[**assessment**](#assessment){: class="hi-pri" :} details.
+[lms]: https://lms.uwa.edu.au
 
-A link to the [**schedule**](schedule){: class="hi-pri" :} of topics
-covered can be found on the left sidebar, as well as a link to the
-[**Materials and reading**](resources){: class="hi-pri" :} section of the
-website, where lecture slides and workshop exercise sheets will go up.
-The schedule includes a list of *recommended readings* for each topic.
-To gain maximum benefit from the lectures and workshops, I recommend you
-at least review these *before* attending class.
+See below for quick details of the
+[**weekly activities**](#weekly-activities){: class="hi-pri" :}
+and
+[**assessment**](#assessment){: class="hi-pri" :}
+for the unit.
+
+<!--
+, as well as [who will be facilitating](#facilitators) the labs/workshops.
+-->
+
+The prerequisites for this unit are 12 points of programming units --
+please note the [**assumed knowledge**](#assumed-knowledge){: class="hi-pri" :} for students taking this unit, below.
+
+At the top of the page, you should find links that
+give you more detail on the
+[**schedule**](schedule){: class="hi-pri" :} of topics
+covered and the online
+[**resources**](resources){: class="hi-pri" :}
+available to you (including lecture slides and lab/tutorial exercise
+sheets).
 
 If you have queries regarding the unit, a good place to ask them is
-on the [**discussion forum**][help5501]
-for the unit, [help5501][help5501]{: class="hi-pri" target="_blank" :} --
+on the [**discussion forum**][help]{: target="_blank" :}
+for the unit, [help{{ site.data.globals.citscode }}][help]{: class="hi-pri" target="_blank" :} --
 that way, all students can benefit from answers to your questions.
 
-[help5501]: https://secure.csse.uwa.edu.au/run/help5501
+[help]: https://secure.csse.uwa.edu.au/run/help{{ site.data.globals.citscode }}
 
 #### Overview
 
@@ -60,25 +69,25 @@ This unit covers testing and quality assurance topics including:
 
 #### Unit Coordinator
 
-[**Arran Stewart**][arran-stewart]{: target="_blank" :}  
-Rm G.08m, CSSE Building  
-**Email:** <span>arran.stewart</span>@<span>uwa.edu.au</span>
+[**{{ site.data.coordinator.name }}**][coordinator-dir]{: target="_blank" :}  
 
-**Consultation:** TBA, or email
-<span>arran.stewart</span>@<span>uwa.edu.au</span> for an appointment.  
-Students are also welcome to speak to me after
-the lectures.  
+| **Office** |{{ site.data.coordinator.room }}
+| **Email** | {{ site.data.coordinator.email | unescape }}
+| **Availability** | I am at UWA (physically or virtually) on Tuesdays, Thursdays and Fridays. 
+| **Consultation** | {{ site.data.coordinator.consultation | unescape }} 
+{: class="inline-table"}
 
-[arran-stewart]: https://directory.uwa.edu.au/view?dn=cn%3DArran+Stewart%2Cou%3DComputer+Science+and+Software+Engineering%2Cou%3DSchool+of+Physics\2C+Mathematics+and+Computing%2Cou%3DFaculty+of+Engineering+and+Mathematical+Sciences%2Cou%3DFaculties%2Co%3DThe+University+of+Western+Australia
+[coordinator-dir]: {{ site.data.coordinator.directory }}
 
 #### Textbook
 
 You will need access to the following:
 
+{:start="1"}
 1.  Ammann and Offutt,
     [*Introduction to Software Testing*][ammann-text]{: target="_blank" :},
     2nd ed, Cambridge University Press, 2016
-2.  Either of:
+1.  Either of:
 
     -   Pressman,
         [*Software Engineering: A Practitioner's Approach*][pressman-text]{: target="_blank" :},
@@ -106,33 +115,31 @@ also extracted readings from several texts available
 
 ------
 
-#### Weekly timetable
+#### Weekly activities
 
-There are two 1-hour lectures each week
-(starting <span>week 1</span>{: class="hi-pri" :}), and a 1-hour workshop
-(starting <span>week 2</span>{: class="hi-pri" :}).
+- There is one two-hour lecture each week (starting <span>week one</span>{: class="hi-pri" :}). You should either attend in person,
+  attend online (we will use Zoom), or watch the recorded lecture.
+- You should attend one lab/workshop each week, starting in week
+  ***two***{: class="hi-pri" :}.
+  If there is room available for you, you are welcome to attend other
+  lab sessions as well.
+
 **The lectures are recorded**{: class="hi-pri" :}, and will be
-available via the LMS. 
+available via the LMS.
 
-The timetable for CITS5501 is available
-[here][timetable-link]{: target="_blank" :}. Lectures
-are in the CSSE seminar room (1.24), and workshops in lab 2.01.
+Note that materials presented during class sessions
+**<span>*do not*</span> define the whole unit**{: class="hi-pri" :}.
+A six-point unit is deemed to be equivalent to one quarter of a
+full-time workload, and so you will be expected to commit 10--12 hours
+per week to the unit, averaged over the entire semester.
+Outside of the contact hours (3 hours per week) for the unit, the
+remainder of your time should be spent reading the recommended reading,
+attempting exercises and working on assignment tasks.
 
-Note that lab 2.01 is booked for the use of CITS5501 for two hours.
-The *second* hour (10am–11am) is when workshop/seminar work
-will be done, but you
-are welcome to make use of the lab earlier as well. If demand requires
-it, we'll run repeat sessions of the workshops.
-
-[timetable-link]: http://timetable.applications.uwa.edu.au/?selectunits=CITS5501
-
-It's recommended that you review the relevant textbook chapters for
-lectures *before* attending the lecture. For a detailed schedule, see the links
-in the left sidebar.
-
-**Workshops** elaborate on material introduced in the lectures and provide
-an opportunity to work on exercises in a group, and (in some weeks)
-get hands-on experience with testing and quality assurance technologies.
+The [**schedule**](schedule){: class="hi-pri" :}
+contains the list of **recommended readings**{: class="hi-pri" :} for each
+topic. To gain maximum benefit from the lectures and workshops, I
+recommend you at least review these *before* attending class.
 
 -----
 
@@ -164,43 +171,42 @@ library.
 
 #### Assessment
 
-The assessment for {{ site.data.globals.unitcode }} consists of a project,
-short pieces of work submitted at workshops,
-and a final examination.
+{{ site.data.globals.assessment | unescape }} See the
+[Assessment]({{ "/assets/css/responsive-nav.css" | relative_url }})
+page for further details.
 
-<table class="csse-table" style="width: 80%; text-align: center;" >
- <tr>
-   <th>   Assessment                  </th>
-   <th>   % of final mark             </th>
-   <th>   Assessment Dates            </th>
- </tr>
- <tr>
-   <td>   Project                     </td>
-   <td>   {{ site.data.globals.projmarks }}%</td>
-   <td>   week 12                     </td>
- </tr>
- <tr>
-   <td>   Quiz or workshop exercise       </td>
-   <td>   {{ site.data.globals.wkmarks }}%</td>
-   <td>   weeks 3, 6, 9               </td>
- </tr>
- <tr>
-   <td>   Examination                 </td>
-   <td>   {{ site.data.globals.exammarks }}</td>
-   <td>   June examination period </td>
- </tr>
-</table> 
+| Assessment | % of final mark | Assessment Dates
+|-
+| [Project]({{"/assessment#project"| relative_url }}) | {{ site.data.globals.projmarks }}% | week 12
+| [Short assessment (quiz or exercise)]({{"/assessment#quiz"| relative_url }}) | {{ site.data.globals.wkmarks }}% | weeks 3, 6, 9
+| [Examination]({{"/assessment#exam"| relative_url }}) | {{ site.data.globals.exammarks }}% | June examination period
+{: class="csse-table" style="width: 80%; text-align: center;" }
 
-
-
-All programming work is submitted using
-[cssubmit][cssubmit]{: target="_blank" :}. As the semester
-proceeds, your marks will be updated and recorded in
+{{ site.data.globals.submission | unescape }} As the
+semester proceeds, your marks will be updated and recorded in
 [csmarks][csmarks]{: target="_blank" :}.
 
 [cssubmit]: https://secure.csse.uwa.edu.au/run/cssubmit
 [csmarks]: https://secure.csse.uwa.edu.au/run/csmarks
 
+#### Who'll be helping in labs/workshops {#facilitators}
 
+TBA
 
+## Policies
 
+Before undertaking this unit,
+students are strongly encouraged to read the university policies that apply
+to this unit:
+
+- UWA's [University charter of student rights and responsibilities][charter]{: target="_blank" :}
+- UWA's [Policy on Assessment][assessment-policy]{: target="_blank" :} -- particularly &sect;10.2 <i>Principles of submission and penalty for late submission</i>,
+- UWA's [Policy on Academic Conduct][academic-conduct]{: target="_blank" :}
+
+[charter]: https://www.uwa.edu.au/policy/-/media/Policy/Policy/Student-Administration/Charter-of-Student-Right-and-Responsibilities/Charter-of-Student-Rights-and-Responsibilities.doc
+[assessment-policy]: https://www.uwa.edu.au/policy/-/media/Policy/Policy/Teaching-and-Research-Training/Learning-and-Teaching/Assessment/Assessment-Policy.doc
+[academic-conduct]: https://www.uwa.edu.au/policy/-/media/Policy/Policy/Student-Administration/Academic-Conduct/Academic-Conduct-Policy.doc
+
+<!--
+  vim: tw=72
+-->

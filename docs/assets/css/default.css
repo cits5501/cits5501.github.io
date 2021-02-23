@@ -26,7 +26,7 @@ main {
 
 .content {
   margin: 40px auto;
-  max-width: 550px;
+  max-width: 650px;
   color: black;
   padding: 0 10px;
 }
@@ -94,6 +94,9 @@ footer {
   flex: 3 0 3em;
 }
 
+.inline-table tr td {
+  vertical-align: top;
+}
 
 /* heading spacing */
 
@@ -120,8 +123,6 @@ h2 {
  * links: #333f8c  */
 
 body {
-  /* xfont-family: 'ff-tisa-web-pro', Georgia, 'Times New Roman', Times, Serif;
-  */
   font-family: Georgia, 'Times New Roman', Times, Serif;
   line-height: 1.6;
 }
@@ -129,18 +130,13 @@ body {
 
 /* heading styles */
 
-h1, h2, h3, h4, h5 {
+h2, h3, h4, h5 {
   font-weight: normal;
 }
 
-h2, h3, h4, h5 {
+h1, h2, h3, h4, h5 {
   font-family: 'ff-meta-serif-sc-web-pro', 'Trebuchet MS', 'Helvetica Neue', Tahoma;
 }
-
-h2 {
-  border-bottom: 1px solid #cce;
-}
-
 
 /* links */
 
@@ -180,11 +176,6 @@ a:hover  {
   color: #053cc9;
 }
 
-.xexpanded {
-  width: 200%;
-  margin: auto
-}
-
 .expanded {
   position: absolute;
   left:     0;
@@ -199,7 +190,6 @@ table.csse-table {
   border-collapse: collapse;
   x-margin-bottom: 1.5em;
   margin: auto;
-  width: 85%;
 }
 
 table.csse-table, table.csse-table th, table.csse-table td {
@@ -302,6 +292,10 @@ p.code {
   .mobile-only {
     display: none !important;
     visibility: none !important;
+  }
+
+  table.csse-table {
+    width: 60%;
   }
 
 }

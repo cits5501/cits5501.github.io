@@ -9,13 +9,13 @@ docker-build:
 
 shell:
 	docker -D run --rm -it --net=host  \
-		$(MEMORY) $(CPU)  $(MOUNT) \
 		-v $$PWD:/opt/work \
+		--workdir /opt/work \
 		$(NAME):$(TAG) sh
 
 serve:
 	docker -D run --rm -it --net=host  \
-		$(MEMORY) $(CPU)  $(MOUNT) \
 		-v $$PWD:/opt/work \
-		$(NAME):$(TAG) builder exec jekyll serve
+		--workdir /opt/work \
+		$(NAME):$(TAG) bundle exec jekyll serve --config ./docs/_config.yml -s ./docs/
 
