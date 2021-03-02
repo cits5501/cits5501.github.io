@@ -12,3 +12,10 @@ Lecture slides, labs and further reading will appear here as the semester progre
   Lecture 1 ([pdf]({{ "/lectures/lect01.pdf" | relative_url }}))  
   Lecture 2 ([pdf]({{ "/lectures/lect02.pdf" | relative_url }}))
 
+## Lab/workshops
+
+- Week 2     
+  Lab worksheet ([pdf]({{ "/workshops/workshop01.pdf" | relative_url }}))  
+  Soure code ([zip]({{ "/workshops/workshop-01-code.zip" | relative_url }}))
+
+
