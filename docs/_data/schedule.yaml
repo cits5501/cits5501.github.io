@@ -53,7 +53,7 @@ weeks:
     reading: |
       - Amman & Offutt, ch 3
       - Pressman, ch 23 ("Testing conventional applications")
-    assessmentDetails: "TBA"
+    assessmentDetails: "[Week 3 quiz](https://cits5501.github.io/assessment/#week-3-quiz) (deadline Sun 11:59pm)"
 
   - id: x
     weekNum: 4
