@@ -18,6 +18,6 @@ Lecture slides, labs and further reading will appear here as the semester progre
 
 - Week 2     
   Lab worksheet ([pdf]({{ "/workshops/workshop01.pdf" | relative_url }}))  
-  Soure code ([zip]({{ "/workshops/workshop-01-code.zip" | relative_url }}))
-
+  Soure code ([zip]({{ "/workshops/workshop-01-code.zip" | relative_url }}))   
+  Sample worksheet solutions (solutions at end) ([pdf]({{ "/workshops/workshop01-solutions.pdf" | relative_url }}))
 

@@ -23,8 +23,38 @@ See below for [tips on using cssubmit](#cssubmit-tips).
 
 For three weeks (3, 6 and 9), there will be either a quiz
 or a short exercise. Quizzes will be done on the LMS, and exercises
-will be submitted via cssubmit; further details TBA.
+will be submitted via cssubmit; further details will be released
+closer to the due dates.
 
+#### Week 3 Quiz
+
+- This quiz will be available on the [**LMS**][lms]{: target="_blank" class="hi-pri" :}
+  from 10am Tuesday 9th March until 11:59pm Sunday 14th March.
+- Ensure you leave at least 1-2 hours available in which to complete it.
+  If you wait until after 10pm Sunday 14th March to start the quiz, and
+  don't complete it, you will be awarded 0 marks.
+- The quiz is not timed, and there is no time limit, but it will need to
+  be completed in one sitting, and students are allowed only one attempt
+  at it.
+- You will not be able to correct your answer to a question once you
+  have answered it.
+- The quiz is open-book; you can make use of any book, website or
+  software you like.
+- Questions may be drawn from any content contained in lectures, lecture
+  slides, lab/workshop exercises or assigned readings up until the end
+  of week 2 (i.e. the week commencing Monday 8 March), or may require
+  you to make reasonable inferences from that material or to investigate
+  questions arising from that material.
+- Ensure you have a good Internet connection when sitting the quiz – you
+  should sit it either on a UWA lab computer, or at home, but not using
+  WiFi or a mobile device, as these could drop out part-way through.
+- If you use a WiFi or mobile connection and it fails, you won’t be
+  given extra time to complete the quiz.  
+  If for some reason you can't access the quiz on the LMS, email me
+  immediately from your University email account with a screenshot or
+  photo showing the problem.
+
+[lms]: https://lms.uwa.edu.au
 
 ### Project ({{ site.data.globals.projmarks }}%) {#project}
 
