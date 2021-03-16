@@ -61,7 +61,7 @@ weeks:
     lectureTopic: |
       Input space partitioning  
       Graph testing
-    workshopTopic: '<span style="color: #696969;">***PROSH – no workshop scheduled***</span>'
+    workshopTopic: 'Test automation'
     reading: |
       - Amman & Offutt, chs 6-7
       - Pressman, ch 23 ("Testing conventional applications")
