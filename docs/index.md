@@ -124,6 +124,12 @@ also extracted readings from several texts available
   If there is room available for you, you are welcome to attend other
   lab sessions as well.
 
+Currently, there are labs on Tuesdays, Wednesdays and Thursdays, all in the
+CSSE building. You can get full details of times and venues by
+visiting UWA's **2021 Timetable site**{: class="hi-pri" :} at
+**<https://timetable.applications.uwa.edu.au/>** -- enter "CITS5501" in the
+box labelled "Unit search", and then click "Show timetable".
+
 **The lectures are recorded**{: class="hi-pri" :}, and will be
 available via the LMS.
 
