@@ -32,6 +32,9 @@ university's [LMS][lms]{: target="_blank" :} (Learning Management System).
   Lecture 3, test automation ([pdf]({{ "/lectures/lect03--autom.pdf" | relative_url }}))
 - Week 3  
   (continuing slides from week 2)
+- Week 4  
+  Lecture 4, input space partitioning ([pdf]({{ "/lectures/lect04--isp.pdf" | relative_url }}))
+
 
 ## Lab/workshops
 
