@@ -197,7 +197,8 @@ semester proceeds, your marks will be updated and recorded in
 
 #### Who'll be helping in labs/workshops {#facilitators}
 
-TBA
+- Anna Taleb-Bendiab
+- Manou Rosenberg
 
 ## Policies
 
