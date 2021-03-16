@@ -200,6 +200,22 @@ semester proceeds, your marks will be updated and recorded in
 - Anna Taleb-Bendiab
 - Manou Rosenberg
 
+## Feedback survey
+
+We want to ensure everyone enrolled in the unit is able to access
+lectures, lab/workshops, and a suitable Java development environment in which to
+complete exercises and assignments. We also want to find out what you're
+finding useful (or not) about the unit.
+
+So there is a survey for CITS2003/CITS4407 students available on the MS
+Teams page for the unit -- you can also reach it by clicking
+[**here**][survey-link]{: target="_blank" class="hi-pri" :}. If you can
+assist us by completing the survey before the end of **week 4**{:
+class="hi-pri" :} (i.e., 5 pm Friday, 19 March) that would be greatly
+appreciated.
+
+[survey-link]: https://teams.microsoft.com/l/entity/81fef3a6-72aa-4648-a763-de824aeafb7d/_djb2_msteams_prefix_225387803?context=%7B%22subEntityId%22%3Anull%2C%22channelId%22%3A%2219%3A9a6540f366aa438c8fe185aadb8cb33a%40thread.tacv2%22%7D&groupId=8c2d8b6e-4af0-457b-8094-32e95c4d6107&tenantId=05894af0-cb28-46d8-8716-74cdb46e2226
+
 ## Policies
 
 Before undertaking this unit,
