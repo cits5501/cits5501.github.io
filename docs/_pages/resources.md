@@ -50,6 +50,8 @@ university's [LMS][lms]{: target="_blank" :} (Learning Management System).
   Soure code ([zip]({{ "/workshops/workshop-03-code.zip" | relative_url }}))   
 - Week 5     
   Lab worksheet ([pdf]({{ "/workshops/workshop04.pdf" | relative_url }}))  
+- Week 6     
+  Lab worksheet ([pdf]({{ "/workshops/workshop05.pdf" | relative_url }}))
 
 ## Attending lab/workshops online
 
