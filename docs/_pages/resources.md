@@ -37,6 +37,9 @@ university's [LMS][lms]{: target="_blank" :} (Learning Management System).
 - Week 5  
   Lecture 5, graph-based testing ([pdf]({{ "/lectures/lect05.pdf" | relative_url }}))  
   Lecture 5b, logic testing ([pdf]({{ "/lectures/lect05b--logic.pdf" | relative_url }}))
+- Week 6  
+  Lecture 6, syntax-based testing ([pdf]({{ "/lectures/lect06--syntax.pdf" | relative_url }}))  
+
 
 
 ## Lab/workshops
