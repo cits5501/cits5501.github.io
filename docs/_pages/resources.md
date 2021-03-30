@@ -34,6 +34,9 @@ university's [LMS][lms]{: target="_blank" :} (Learning Management System).
   (continuing slides from week 2)
 - Week 4  
   Lecture 4, input space partitioning ([pdf]({{ "/lectures/lect04--isp.pdf" | relative_url }}))
+- Week 5  
+  Lecture 5, graph-based testing ([pdf]({{ "/lectures/lect05.pdf" | relative_url }}))  
+  Lecture 5b, logic testing ([pdf]({{ "/lectures/lect05b--logic.pdf" | relative_url }}))
 
 
 ## Lab/workshops
@@ -45,9 +48,11 @@ university's [LMS][lms]{: target="_blank" :} (Learning Management System).
 - Week 3     
   Lab worksheet ([pdf]({{ "/workshops/workshop02.pdf" | relative_url }}))  
   Soure code ([zip]({{ "/workshops/workshop-02-code.zip" | relative_url }}))   
+  Sample worksheet solutions ([pdf]({{ "/workshops/workshop02-solutions.pdf" | relative_url }}))
 - Week 4     
   Lab worksheet ([pdf]({{ "/workshops/workshop03.pdf" | relative_url }}))  
   Soure code ([zip]({{ "/workshops/workshop-03-code.zip" | relative_url }}))   
+  Sample worksheet solutions ([pdf]({{ "/workshops/workshop03-solutions.pdf" | relative_url }}))
 - Week 5     
   Lab worksheet ([pdf]({{ "/workshops/workshop04.pdf" | relative_url }}))  
 - Week 6     
