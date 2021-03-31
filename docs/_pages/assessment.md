@@ -56,6 +56,25 @@ closer to the due dates.
 
 [lms]: https://lms.uwa.edu.au
 
+#### Week 6 Exercise
+
+The week 6 exercise is available on the 
+[**LMS**][lms]{: target="_blank" class="hi-pri" :},
+under "Week 6 Exercise".
+
+It is due by 11:59pm, Tuesday 6 April (later than
+originally due, to avoid it falling on a public holiday weekend).
+
+The exercise should not take long to do -- only brief answers
+(a paragraph or two for each question) are expected. It is to
+be done individually, but you may make use of any
+textbooks, slides or similar resources you like.
+
+The marking rubric is available [here][exercise-rubric] (PDF).
+
+[exercise-rubric]: {{ "/workshops/exercise-rubric.pdf" | relative_url }}
+
+
 ### Project ({{ site.data.globals.projmarks }}%) {#project}
 
 A project worth {{ site.data.globals.projmarks }}%
