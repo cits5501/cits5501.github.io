@@ -58,8 +58,10 @@ university's [LMS][lms]{: target="_blank" :} (Learning Management System).
   Sample worksheet solutions ([pdf]({{ "/workshops/workshop03-solutions.pdf" | relative_url }}))
 - Week 5     
   Lab worksheet ([pdf]({{ "/workshops/workshop04.pdf" | relative_url }}))  
+  Sample worksheet solutions ([pdf]({{ "/workshops/workshop04-solutions.pdf" | relative_url }}))
 - Week 6     
-  Lab worksheet ([pdf]({{ "/workshops/workshop05.pdf" | relative_url }}))
+  Lab worksheet ([pdf]({{ "/workshops/workshop05.pdf" | relative_url }}))  
+  Sample worksheet solutions ([pdf]({{ "/workshops/workshop05-solutions.pdf" | relative_url }}))
 
 ## Attending lab/workshops online
 
