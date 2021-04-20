@@ -42,6 +42,8 @@ university's [LMS][lms]{: target="_blank" :} (Learning Management System).
 - Week 7  
   Lecture 7A, integration and system testing ([pdf]({{ "/lectures/lect07A--system.pdf" | relative_url }}))  
   Lecture 7B, reviews and quality assurance ([pdf]({{ "/lectures/lect07B--quality.pdf" | relative_url }}))  
+- Week 8  
+  Lecture 8, Risk and intro to formal methods ([pdf]({{ "/lectures/lect08.pdf" | relative_url }}))  
 
 
 ## Lab/workshops
