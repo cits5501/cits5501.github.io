@@ -44,6 +44,9 @@ university's [LMS][lms]{: target="_blank" :} (Learning Management System).
   Lecture 7B, reviews and quality assurance ([pdf]({{ "/lectures/lect07B--quality.pdf" | relative_url }}))  
 - Week 8  
   Lecture 8, Risk and intro to formal methods ([pdf]({{ "/lectures/lect08.pdf" | relative_url }}))  
+- Week 9  
+  Lecture 9, Program verification ([pdf]({{ "/lectures/lect09.pdf" | relative_url }}))  
+  Lecture 10, Program specification ([pdf]({{ "/lectures/lect10.pdf" | relative_url }}))  
 
 
 ## Lab/workshops
