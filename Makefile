@@ -14,6 +14,7 @@ shell:
 		$(NAME):$(TAG) sh
 
 serve:
+	sudo rm -rf Gemfile.lock
 	docker -D run --rm -it --net=host  \
 		-v $$PWD:/opt/work \
 		--workdir /opt/work \
