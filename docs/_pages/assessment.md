@@ -74,6 +74,16 @@ The marking rubric is available [here][exercise-rubric] (PDF).
 
 [exercise-rubric]: {{ "/workshops/exercise-rubric.pdf" | relative_url }}
 
+#### Week 9 Exercise
+
+The week 9 exercise is available
+[here][wk-9-exercise]{: target="_blank" class="hi-pri" :} (PDF).
+As [`cssubmit`][cssubmit-wk-9] is up and working, we shall use it
+for submitting your answers. See the exercise PDF for the due
+date and full submission procedure.
+
+[wk-9-exercise]: {{ "/workshops/week-9-exercise.pdf" | relative_url }}
+[cssubmit-wk-9]: https://secure.csse.uwa.edu.au/run/cssubmit?p=np&open=CITS5501-1
 
 ### Project ({{ site.data.globals.projmarks }}%) {#project}
 
