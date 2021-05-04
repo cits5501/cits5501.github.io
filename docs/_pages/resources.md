@@ -77,7 +77,10 @@ university's [LMS][lms]{: target="_blank" :} (Learning Management System).
   Lab worksheet ([pdf]({{ "/workshops/workshop07.pdf" | relative_url }}))   
   Sample worksheet solutions ([pdf]({{ "/workshops/workshop07-solutions.pdf" | relative_url }}))
 - Week 9     
-  Lab worksheet ([pdf]({{ "/workshops/workshop08.pdf" | relative_url }}))
+  Lab worksheet ([pdf]({{ "/workshops/workshop08.pdf" | relative_url }}))  
+  Sample worksheet solutions ([pdf]({{ "/workshops/workshop08-solutions.pdf" | relative_url }}))
+- Week 10    
+  Lab worksheet ([pdf]({{ "/workshops/workshop09.pdf" | relative_url }}))
 
 ## Attending lab/workshops online
 
