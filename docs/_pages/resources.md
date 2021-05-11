@@ -47,6 +47,9 @@ university's [LMS][lms]{: target="_blank" :} (Learning Management System).
 - Week 9  
   Lecture 9, Program verification ([pdf]({{ "/lectures/lect09.pdf" | relative_url }}))  
   Lecture 10, Program specification ([pdf]({{ "/lectures/lect10.pdf" | relative_url }}))  
+- Week 11  
+  Lecture 11, Program specification cont'd ([pdf]({{ "/lectures/lect11.pdf" | relative_url }}))  
+  Lecture 12, Standards ([pdf]({{ "/lectures/lect12.pdf" | relative_url }}))  
 
 
 ## Lab/workshops
