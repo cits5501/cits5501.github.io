@@ -87,9 +87,12 @@ date and full submission procedure.
 
 ### Project ({{ site.data.globals.projmarks }}%) {#project}
 
-A project worth {{ site.data.globals.projmarks }}%
-of the unit's marks will be due in week 12 -- further details
-TBA.
+The project for the unit, worth {{ site.data.globals.projmarks }}%
+of the unit's marks is due in week 12.
+
+The details are available [here][project-pdf] (PDF)
+
+[project-pdf]: {{ "/workshops/project.pdf" | relative_url }}
 
 
 ### Exam ({{ site.data.globals.exammarks }}%)
