@@ -72,6 +72,7 @@ university's [LMS][lms]{: target="_blank" :} (Learning Management System).
 - Week 6     
   Lab worksheet ([pdf]({{ "/workshops/workshop05.pdf" | relative_url }}))  
   Sample worksheet solutions ([pdf]({{ "/workshops/workshop05-solutions.pdf" | relative_url }}))
+  (corrections made to answers 2 and 4 on 10 June)
 - Week 7     
   Soure code ([zip]({{ "/workshops/workshop-06-code.zip" | relative_url }}))   
   Lab worksheet ([pdf]({{ "/workshops/workshop06.pdf" | relative_url }}))   
