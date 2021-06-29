@@ -94,6 +94,13 @@ The details are available [here][project-pdf] (PDF)
 
 [project-pdf]: {{ "/workshops/project.pdf" | relative_url }}
 
+**UPDATE**{: class="hi-pri" :}:
+Sample solutions are available
+[**here**][project-solutions]{: class="hi-pri" :} (PDF file).
+
+[csmarks]: https://secure.csse.uwa.edu.au/run/csmarks
+[project-solutions]: {{ "workshops/project-solutions.pdf" | relative_url }}
+
 
 ### Exam ({{ site.data.globals.exammarks }}%)
 
