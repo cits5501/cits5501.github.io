@@ -74,6 +74,12 @@ The marking rubric is available [here][exercise-rubric] (PDF).
 
 [exercise-rubric]: {{ "/workshops/exercise-rubric.pdf" | relative_url }}
 
+Sample solutions are available
+[**here**][week-6-solutions]{: class="hi-pri" :} (PDF file), and were
+also provided with individual feedback via [csmarks][csmarks].
+
+[week-6-solutions]: {{ "workshops/week-6-exercise-solutions.pdf" | relative_url }}
+
 #### Week 9 Exercise
 
 The week 9 exercise is available
@@ -85,6 +91,13 @@ date and full submission procedure.
 [wk-9-exercise]: {{ "/workshops/week-9-exercise.pdf" | relative_url }}
 [cssubmit-wk-9]: https://secure.csse.uwa.edu.au/run/cssubmit?p=np&open=CITS5501-1
 
+Sample solutions are available
+[**here**][week-9-solutions]{: class="hi-pri" :} (PDF file).
+
+[week-9-solutions]: {{ "workshops/week-9-exercise-solutions.pdf" | relative_url }}
+
+
+
 ### Project ({{ site.data.globals.projmarks }}%) {#project}
 
 The project for the unit, worth {{ site.data.globals.projmarks }}%
@@ -94,7 +107,6 @@ The details are available [here][project-pdf] (PDF)
 
 [project-pdf]: {{ "/workshops/project.pdf" | relative_url }}
 
-**UPDATE**{: class="hi-pri" :}:
 Sample solutions are available
 [**here**][project-solutions]{: class="hi-pri" :} (PDF file).
 
