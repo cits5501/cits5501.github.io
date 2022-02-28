@@ -1,4 +1,3 @@
-
 FROM adstewart/eleventy:1.0.0
 
 RUN \

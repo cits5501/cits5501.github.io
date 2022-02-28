@@ -98,4 +98,17 @@ jobs:
 
           python3 ./build.py
 
+      - name: push to github registry
+        if: github.event_name != 'pull_request' && steps.docker_img_changes.outputs.src == 'true'
+        shell: bash
+        run: |
+          set -x
+          set -euo pipefail
+
+          GH_IMAGE_ID=${{ env.REGISTRY }}/${{ github.repository }}/${{ steps.info.outputs.IMAGE_NAME }}
+          IMAGE_VERSION=${{ steps.info.outputs.IMAGE_VERSION }}
+
+          docker push ${GH_IMAGE_ID}:${IMAGE_VERSION}
+          docker tag ${GH_IMAGE_ID}:${IMAGE_VERSION} ${GH_IMAGE_ID}:latest
+          docker push ${GH_IMAGE_ID}:latest
 
