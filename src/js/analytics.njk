@@ -1,0 +1,14 @@
+---
+permalink: "/js/analytics.js"
+eleventyExcludeFromCollections: true
+---
+{# -- Global site tag (gtag.js) - Google Analytics #}
+document.addEventListener("DOMContentLoaded", function() {
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', '{{ siteinfo.gua_code }}');
+  gtag('config', '{{ siteinfo.ga_code }}');
+});
+{#- vim: syntax=javascript :
+#}
