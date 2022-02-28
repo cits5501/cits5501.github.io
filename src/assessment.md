@@ -207,7 +207,7 @@ via the {{ siteinfo.lms }} -- look under "Previous exams".
 These exam papers are provided only to CITS5501 students for study
 purposes, and may not be published or distributed elsewhere.
 
-(Note that although the UWA Library's ["OneSearch" search site][onesearch]
+(Note that although the UWA Library's ["OneSearch" search][onesearch]
 facility lists some past exams as being available via OneSearch
 when "CITS5501" is entered as a query, the content
 of the unit has changed significantly since they were
@@ -216,7 +216,7 @@ expect.)
 
 The best use of past exams is for your practice purposes --
 if possible, try writing answers and timing how long you
-take. I do *not* published answers to past exams
+take. I do *not* publish answers to past exams
 for two reasons:
 
 - For many of the questions, there *is* no one correct answer.
