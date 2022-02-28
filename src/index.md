@@ -55,7 +55,7 @@ customStyle: |
 ## Welcome to {{ siteinfo.unitcode }}
 
 Welcome to the website for {{ siteinfo.unitcode }}
-in {{ siteinfo.year }}. Unit material (lectures slides and lab/workshop
+in {{ siteinfo.year }}. Unit material (lecture slides and lab/workshop
 sheets) for this unit will be **published on these pages, and not on
 the LMS**{ class="hi-pri" }; but refer to the {{ siteinfo.lms }}
 for recorded lectures and the unit outline.
@@ -77,9 +77,9 @@ for recorded lectures and the unit outline.
 - - - Want to know [**if the lectures are recorded**](#lecture-recordings){ class="hi-pri" }?
   - <i class="fa fa-arrow-circle-right"></i>
   - See below under [**"Lecture recordings"**](#lecture-recordings){ class="hi-pri" }.
-- - - Want to know [**what the assessments are**](/assessments){ class="hi-pri" }?
+- - - Want to know [**what the assessments are**](/assessment){ class="hi-pri" }?
   - <i class="fa fa-arrow-circle-right"></i>
-  - See the [**Assessments page**](/assessments){ class="hi-pri" }.
+  - See the [**Assessments page**](/assessment){ class="hi-pri" }.
 - - - Looking for [**lecture slides**](resources/#lectures){ class="hi-pri" }
       or [**lab/workshop exercise sheets**](resources/#labworkshops)?
   - <i class="fa fa-arrow-circle-right"></i>
@@ -87,8 +87,7 @@ for recorded lectures and the unit outline.
     (There's also a link to it at the top of every page.)
 - - - Want to [ask a question](questions){ class="hi-pri" } about the unit?
   - <i class="fa fa-arrow-circle-right"></i>
-  - See the page on [questions](questions){ class="hi-pri" },
-    or you can ask them on the [**discussion forum**]({{forum_url}}){ target="_blank" }
+  - Currently the best place to ask questions is on the [**discussion forum**]({{forum_url}}){ target="_blank" }
     for the unit, [**{{help_forum}}**]({{forum_url}}){ class="hi-pri" target="_blank" } --
     that way, all students can benefit from answers to your questions.
 - - - Want to know what you should
@@ -176,10 +175,12 @@ There are currently two face-to-face lab/workshop sessions:
 - Wednesday, 12 noon--2 pm, in CSSE lab 2.05
 - Wednesday, 2 pm--4 pm, in CSSE lab 2.05
 
-(You can always get full details of lecture and lab times and venues by
-visiting UWA's **{{ siteinfo.year }} [Timetable site]({{ siteinfo.timetable_url }})**{ class="hi-pri" } at
-**{{ siteinfo.timetable_url }}** -- enter "CITS5501" in the
+You can always get full details of lecture and lab times and venues by
+visiting UWA's **{{ siteinfo.year }} [Timetable site][cits5501-timetable]{ target="_blank" }**{ class="hi-pri" }.
+(If the information for {{ siteinfo.unitcode }} is not visible, then enter "CITS5501" in the
 box labelled "Unit search", and then click "Show timetable".)
+
+[cits5501-timetable]: https://timetable.applications.uwa.edu.au/?selectunits={{ siteinfo.unitcode }}
 
 ### Lecture recordings
 

@@ -33,7 +33,7 @@ function formatAssessmentDates(asstDates) {
 module.exports = function(configData) {
   let { render, renderInline, extLink, safe } = configData.markdownConfig
 
-  const year      = "2022";
+  const year      =  2022;
   const citscode  = "5501";
   const unitcode  = `CITS${citscode}`;
   const unitname  = "Software Testing and Quality Assurance";
@@ -54,8 +54,8 @@ module.exports = function(configData) {
         marksPercent: "7.5",
         //dates: "Available Mon 14 March\\\nCloses 5pm Thu 17 Mar",
         dates: {
-          available: new Date(2022, 2, 14), // Mon 14 Mar
-          closes:    new Date(2022, 2, 17, 17, 0) // 5pm Thu 17 Mar
+          available: new Date(year, 2, 14), // Mon 14 Mar
+          closes:    new Date(year, 2, 17, 17, 0) // 5pm Thu 17 Mar
         },
         submit: lms
       },
@@ -65,7 +65,7 @@ module.exports = function(configData) {
         //dates: "Due 5pm Thu 14 Apr",
         dates: {
           "available:": "**TBA**",
-          due: new Date(2022, 3, 14, 17, 0) // 5pm Thu 14 Apr
+          due: new Date(year, 3, 14, 17, 0) // 5pm Thu 14 Apr
         },
         submit: lms
       },
@@ -75,7 +75,7 @@ module.exports = function(configData) {
         //dates: "Due 5pm Thu 26 May",
         dates: {
           "available:": "**TBA**",
-          due: new Date(2022, 4, 26, 17, 0) // 5pm Thu 26 May
+          due: new Date(year, 4, 26, 17, 0) // 5pm Thu 26 May
         },
         submit: safe(extLink("cssubmit", `${cssubmit_url}?p=np&open=${unitcode}-1`))
       },
@@ -84,8 +84,8 @@ module.exports = function(configData) {
         marksPercent: "50",
         //dates: "Available 5pm Wed 8 Jun\\\nDue 5pm Fri 10 Jun",
         dates: {
-          available: new Date(2022, 5, 8, 17, 0), // 5pm Wed 8 Jun
-          due: new Date(2922, 5, 10, 17, 0) // 5pm Fri 10 Jun
+          available: new Date(year, 5, 8, 17, 0), // 5pm Wed 8 Jun
+          due:       new Date(year, 5, 10, 17, 0) // 5pm Fri 10 Jun
         },
         submit: lms
       },
