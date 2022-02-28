@@ -1,34 +1,22 @@
-FROM ruby:2.6.6-alpine3.13@sha256:1c944ecde7a4f6e1d91c85862efe891ff866cce3354fb880f5ee017c5e5a08e8
+
+FROM adstewart/eleventy:1.0.0
 
 RUN \
-    apk add --no-cache  \
-      bzip2-dev           \
-      ca-certificates     \
-      coreutils           \
-      gcc                 \
-      glib-dev            \
-      libc-dev            \
-      make                \
-      openssl-dev         \
-      tar                 \
-      xz                  \
-      yaml-dev            \
-      zlib-dev
+  cd /opt/site && \
+  npm install --save-dev \
+    clean-css                     \
+    csslint                       \
+    eleventy-plugin-excerpt       \
+    @11ty/eleventy-plugin-rss     \
+    markdown-it-deflist           \
+    markdown-it-div               \
+    markdown-it-docutils          \
+    markdown-it-fancy-lists       \
+    markdown-it-footnote          \
+    markdown-it-html              \
+    moment                        \
+    string-strip-html@8.3.0       \
+    striptags
 
-RUN \
-    apk add --no-cache  \
-      bison \
-      libffi-dev \
-      g++
-
-RUN \
-  mkdir /opt/build
-
-WORKDIR /opt/build
-
-COPY Gemfile .
-
-RUN \
-  bundle install
-
-
+# markdown-it-html:
+# source repo is: https://github.com/Akimyou/markdown-it-html/

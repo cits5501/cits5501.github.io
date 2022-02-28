@@ -2,3 +2,5 @@
 .*.swp
 _site/*
 /config
+/out/
+node_modules

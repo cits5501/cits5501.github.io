@@ -1,0 +1,101 @@
+name: build docker image
+
+on:
+  repository_dispatch:
+  push:
+    branches:
+      - master
+    paths-ignore:
+      - '.gitignore'
+      - '.dockerignore'
+      - 'README.md'
+      - 'LICENSE'
+
+env:
+  REGISTRY: ghcr.io
+
+jobs:
+  docker_build:
+    runs-on: ubuntu-20.04
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: dorny/paths-filter@v2
+        id: docker_img_changes
+        with:
+          filters: |
+            src:
+              - 'Dockerfile'
+              - 'build.py'
+
+      - name: set docker image info from Makefile
+        if: steps.docker_img_changes.outputs.src == 'true'
+        id: info
+        shell: bash
+        run: |
+          set -x
+          IMAGE_NAME=$(make print-image-name)
+          IMAGE_VERSION=$(make print-image-version)
+          echo "::set-output name=IMAGE_NAME::${IMAGE_NAME}"
+          echo "::set-output name=IMAGE_VERSION::${IMAGE_VERSION}"
+
+      - name: check info ok
+        if: steps.docker_img_changes.outputs.src == 'true'
+        run: |
+          IMAGE_NAME="${{ steps.info.outputs.IMAGE_NAME }}"
+          printf 'IMAGE_NAME is: <<%s>>\n' "${IMAGE_NAME}"
+          if [ -z ${IMAGE_NAME} ]; then
+            false
+          fi
+
+          IMAGE_VERSION="${{ steps.info.outputs.IMAGE_VERSION }}"
+          printf 'IMAGE_VERSION is: <<%s>>\n' "${IMAGE_VERSION}"
+          if [ -z ${IMAGE_VERSION} ]; then
+            false
+          fi
+
+      - name: Log in to github Container registry
+        if: steps.docker_img_changes.outputs.src == 'true' && github.event_name != 'pull_request'
+        uses: docker/login-action@f054a8b539a109f9f41c372932f1ae047eff08c9
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set up Docker Buildx
+        if: steps.docker_img_changes.outputs.src == 'true'
+        uses: docker/setup-buildx-action@v1
+
+      - name: Extract metadata (tags, labels) for Docker
+        if: steps.docker_img_changes.outputs.src == 'true'
+        id: meta
+        uses: docker/metadata-action@98669ae865ea3cffbcbaa878cf57c20bbf1c6c38
+        with:
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+
+      - name: debug - dump metadata
+        if: steps.docker_img_changes.outputs.src == 'true'
+        shell: bash
+        run: |
+          printf 'tags are: <<%s>>\n' "${{ steps.meta.outputs.tags }}"
+          printf 'tags labels are: <<%s>>\n' "${{ steps.meta.outputs.labels }}"
+          printf 'repos is: <<%s>>\n' "${{ github.repository }}"
+
+      - name: Build Docker image
+        if: steps.docker_img_changes.outputs.src == 'true'
+        shell: bash
+        run: |
+          set -x
+
+          export IMAGE_NAME="${{ steps.info.outputs.IMAGE_NAME }}"
+          export GH_IMAGE_ID="${{ env.REGISTRY }}/${{ github.repository }}/${{ steps.info.outputs.IMAGE_NAME }}"
+          export IMAGE_VERSION="${{ steps.info.outputs.IMAGE_VERSION }}"
+          export REPO_OWNER="${{ github.repository_owner }}"
+
+          echo "${{ steps.meta.outputs.labels }}" > oc_labels
+          # "
+
+          python3 ./build.py
+
+
