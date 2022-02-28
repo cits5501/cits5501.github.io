@@ -6,30 +6,44 @@ customStyle: |
     margin: 0 0 0.70em;
   }
 
-  .assessment-table {
-    width: 100%;
+  /* small */
+  @media (max-width: 767px) {
+    .assessment-table-ctr {
+      width: 100%;
+      overflow-x: scroll;
+    }
+
+    .assessment-table-ctr table {
+      width: 110%;
+      min-width: 500px;
+    }
+  }
+  /* big */
+  @media (min-width: 768px) {
+    .assessment-table-ctr table {
+      position: relative;
+      left: 50%;
+      transform: translateX(-50%);
+    }
   }
 
-  .assessment-table th {
+  .assessment-table-ctr th {
     background-color: var(--accent-v-v-light);
   }
 
-  .assessment-table table {
+  .assessment-table-ctr table {
     border-bottom: 1pt solid black;
     border-collapse: collapse;
-    position: relative;
-    left: 50%;
-    transform: translateX(-50%);
   }
 
-  .assessment-table th {
+  .assessment-table-ctr th {
     text-align: center;
     border-top: 1pt solid black;
     border-bottom: 1pt solid black;
   }
 
-  .assessment-table th,
-  .assessment-table td
+  .assessment-table-ctr th,
+  .assessment-table-ctr td
   {
     padding-top: 1ex;
     padding-left: 1em;
@@ -38,14 +52,14 @@ customStyle: |
   }
 
   /* col 1 */
-  .assessment-table td:nth-child(1)
+  .assessment-table-ctr td:nth-child(1)
   {
     text-align: left;
     width: 24%;
   }
 
   /* col 2 */
-  .assessment-table td:nth-child(2)
+  .assessment-table-ctr td:nth-child(2)
   {
     text-align: right;
     padding-right: 3em;
@@ -53,7 +67,7 @@ customStyle: |
   }
 
   /* col 3 */
-  .assessment-table td:nth-child(3)
+  .assessment-table-ctr td:nth-child(3)
   {
     text-align: left;
     width: 40%;
@@ -62,7 +76,7 @@ customStyle: |
 
 
   /* col 4 */
-  .assessment-table td:nth-child(4)
+  .assessment-table-ctr td:nth-child(4)
   {
     text-align: left;
     padding-left: 3em;
@@ -79,7 +93,7 @@ two short assessments (online quiz or written exercise), a project,
 and a final examination.
 
 
-::: { class="assessment-table" }
+::: { class="assessment-table-ctr" }
 
 ```{list-table}
 :header-rows: 1

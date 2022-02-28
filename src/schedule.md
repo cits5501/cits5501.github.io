@@ -16,18 +16,38 @@
       position: relative;
       left: 50%;
       transform: translateX(-50%);
-      width: 99vw;
-      x-min-width: 80vw;
+      width: 95vw;
       max-width: 950px;
       border-collapse: collapse;
-      border-bottom: solid back 2pt;
+    }
+
+    .table-container table {
+      margin: 0 5pt;
     }
   }
   /* small */
   @media (max-width: 767px) {
+    .table-container {
+      width: 100%;
+      left: 0;
+      padding-left: 5px;
+      overflow-x: scroll;
+    }
+
+    .table-container table {
+      left: 0;
+      margin-left: 3px;
+      width: 110%;
+      min-width: 800px;
+    }
   }
 
 
+
+  .schedule-table {
+    border-collapse: collapse;
+    border-bottom: solid black 2pt;
+  }
 
   .schedule-table tr.oddrow {
     background-color: var(--accent-v-v-light);
@@ -186,6 +206,8 @@ but earlier and later editions should have equivalent sections.
 
 
 <!--!
+<div class="table-container">
+
 <table class="schedule-table" >
 <colgroup>
 <col style="width: 10%;">
@@ -240,6 +262,8 @@ but earlier and later editions should have equivalent sections.
 <!--!
 </tbody>
 </table>
+
+</div>
 !-->
 
 

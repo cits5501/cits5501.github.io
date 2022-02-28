@@ -11,24 +11,17 @@ html, body, div, nav
   padding: 0;
 }
 
-
-
 html, body {
   height: 100%
 }
 
-
+/* stop targets scrolling to top
+   of viewport */
 main :target::before {
-    content: '';
-    display: block;
-    height:      85px;
+    content:    '';
+    display:    block;
+    height:     85px;
     margin-top: -85px;
-}
-
-.non-header {
-  display: flex;
-  flex-direction: column;
-  height: 100%
 }
 
 /* layout */
@@ -49,80 +42,12 @@ main :target::before {
   margin-top: 50pt;
 }
 
-.content {
-  margin: 40px auto;
-  max-width: 650px;
-  color: black;
-  padding: 0 10px;
-}
 
 footer {
   text-align: center;
 }
 
-/* icons */
-
-.icon:before {
-  font-family: "Genericons-Neue";
-}
-
-.icon {
-  font-family: "Genericons-Neue";
-}
-
-
-/* structured data */
-
-.teaching,
-.contact {
-  display: table;
-  border-collapse: collapse;
-  padding: 0;
-  margin: 0;
-  width: 100%;
-}
-
-.teaching-period,
-.contact-group
- {
-  border-collapse: collapse;
-  display: table-row;
-  padding: 0;
-  margin: 0;
-}
-
-
-.teaching-period *,
-.contact-group *
- {
-  padding: 0;
-  margin: 0;
-}
-
-.teaching-period > div,
-.contact-group > div
-{
-  display: table-cell;
-}
-
-.teaching-period > div > div,
-.contact-group > div > div
-{
-  display: flex;
-  flex-direction: row;
-}
-
-.period-name,
-.contact-group-name
-{
-  flex: 1 0 3em;
-}
-
-.units,
-.contact-group-details
-{
-  flex: 3 0 3em;
-}
+/* minor tables */
 
 .inline-table-ctr tr td,
 .inline-table tr td
@@ -135,8 +60,6 @@ footer {
 {
   padding-left: 1em;
 }
-
-
 
 
 /* heading spacing */
@@ -155,19 +78,12 @@ h2 {
 }
 
 
-/* theme
----------*/
-
-/* solid bars: #44508c
- * bar links & hrules: cceeee
- * links: #333f8c  */
+/* theme */
 
 body {
   font-family: 'Merriweather', Georgia, Serif;
   line-height: 1.6;
 }
-
-
 
 /* heading styles */
 
@@ -233,28 +149,6 @@ table {
 }
 
 
-/* cits stuff: */
-
-table.csse-table {
-  border-collapse: collapse;
-  x-margin-bottom: 1.5em;
-  margin: auto;
-}
-
-table.csse-table, table.csse-table th, table.csse-table td {
-  border: 1px gray solid;
-}
-
-table.csse-table th,  table.csse-table td  {
-  padding: 2px;
-  vertical-align: middle;
-}
-
-
-table.csse-table th {
-  text-align: center;
-  background-color:  lightgray;
-}
 
 code, pre {
   background-color: transparent;
