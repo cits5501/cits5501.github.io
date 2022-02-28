@@ -1,0 +1,32 @@
+  <meta charset="utf-8" />
+  <meta name="viewport"       content="width=device-width, initial-scale=1" />
+  <meta name="language"       content="{{siteinfo.language}}" />
+  <meta name="DC.Language"    content="{{siteinfo.language}}" />
+  <meta name="DC.Format"      content="text/html" />
+
+  <meta name="og:site_name"   content="{{siteinfo.title}}"/>
+  <meta property="og:url"     content="{{siteinfo.site_url + page.url.substring(1) }}" />
+
+  <meta name="author"         content="{{ siteinfo.author if (author == null) else author }}" />
+  <meta name="copyright"      content="{{ siteinfo.author if (author == null) else author }}" />
+  <meta name="DC.Creator"     content="{{ siteinfo.author if (author == null) else author }}" />
+
+  <meta name="keywords"       content="{{ [keywords, siteinfo.keywords] | concatNotNull | join(", ") }}" />
+  <meta name="DC.Subject"     content="{{ [keywords, siteinfo.keywords] | concatNotNull | join(", ") }}" />
+
+  <title>{{ [(title | stripTitle), siteinfo.title] | join(" - ")  }}</title>
+  <meta name="description"    content="{{ [(title | stripTitle), siteinfo.title] | join(" - ")  }}" />
+  <meta name="twitter:title"  content="{{ [(title | stripTitle), siteinfo.title] | join(" - ")  }}" />
+  <meta name="DC.Title"       content="{{ [(title | stripTitle), siteinfo.title] | join(" - ")  }}" />
+  <meta property="og:title"   content="{{ [(title | stripTitle), siteinfo.title] | join(" - ")  }}" />
+  <meta name="DC.Description" content="{{ [(title | stripTitle), siteinfo.title] | join(" - ")  }}" />
+
+  <meta name="date.created"         content="{{ page.date   | dateIso }}">
+  <meta name="date.available"       content="{{ page.date   | dateIso }}">
+  <meta name="DC.dateCopyrighted"   content="{{ page.date   | dateIso }}">
+
+  <meta name="date.modified"        content="{{ currentDate | dateIso }}">
+  <meta property="og:updated_time"  content="{{ currentDate | dateIso }}" />
+
+  <meta name="google-site-verification" content="{{ siteinfo.ga_code }}" />
+

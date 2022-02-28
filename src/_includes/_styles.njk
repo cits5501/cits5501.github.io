@@ -1,0 +1,67 @@
+{# inline styles go in this file
+#}
+<!-- extracts from bootstrap.css -->
+{%- set bootstrap_css %}
+  {%- include "css/_bootstrap.css" %}
+{%- endset %}
+{%- set nav_css %}
+  {%- include "css/_nav.css" %}
+{%- endset %}
+<style>
+{{ bootstrap_css | csslint(page, "bootstrap_css") | cssmin | safe -}}
+</style>
+<!-- end content extracted from bootstrap.css -->
+<!-- navbar styling -->
+<style>
+{{ nav_css | csslint(page, "nav_css") | cssmin | safe -}}
+</style>
+<!-- local theme -->
+<style>
+  {% set accent_h = siteinfo.accent_h %}
+  {% set accent_s = siteinfo.accent_s %}
+  {% set accent_l = siteinfo.accent_l %}
+
+  :root {
+      --accent: {{siteinfo.accent}};
+      --border-width:  5px ;
+      --lighten-percentage: 20%;
+      --accent-light: hsl({{accent_h}}, {{accent_s}}, calc({{accent_l}} + var(--lighten-percentage) ));
+      --accent-v-light: hsl({{accent_h}}, {{accent_s}}, calc({{accent_l}} + 2 * var(--lighten-percentage) ) );
+      --accent-v-v-light: hsl({{accent_h}}, {{accent_s}}, calc({{accent_l}} + 2.7 * var(--lighten-percentage) ) );
+  }
+
+  h2 {
+    margin-top: 1.8em;
+  }
+
+
+  h3 {
+    margin-top: 1.2em;
+  }
+
+
+
+  /* small */
+  @media (max-width: 767px) {
+    main {
+      font-size: 16px;
+    }
+  }
+  /* big */
+  @media (min-width: 768px) {
+    main {
+      font-size: 15px;
+    }
+  }
+
+</style>
+{# any custom rules a particular page specifies
+ # in front-matter
+ -#}
+{% if customStyle != null %}
+<style>
+{{ customStyle | safe }}
+</style>
+{% endif %}
+{#- vim: syntax=css :
+#}

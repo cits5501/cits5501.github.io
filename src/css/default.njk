@@ -1,0 +1,381 @@
+---
+permalink: /css/default.css
+eleventyExcludeFromCollections: true
+---
+
+/* clear spacing */
+
+html, body, div, nav
+{
+  margin: 0;
+  padding: 0;
+}
+
+
+
+html, body {
+  height: 100%
+}
+
+
+main :target::before {
+    content: '';
+    display: block;
+    height:      85px;
+    margin-top: -85px;
+}
+
+.non-header {
+  display: flex;
+  flex-direction: column;
+  height: 100%
+}
+
+/* layout */
+
+/* we have: nav, main, footer
+ */
+
+.page {
+  padding: 25px;
+  flex: 1 0 auto;
+  max-width: 750px;
+  position: relative;
+  left: 50%;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateX(-50%);
+  line-height: 1.7;
+  margin-top: 50pt;
+}
+
+.content {
+  margin: 40px auto;
+  max-width: 650px;
+  color: black;
+  padding: 0 10px;
+}
+
+footer {
+  text-align: center;
+}
+
+/* icons */
+
+.icon:before {
+  font-family: "Genericons-Neue";
+}
+
+.icon {
+  font-family: "Genericons-Neue";
+}
+
+
+/* structured data */
+
+.teaching,
+.contact {
+  display: table;
+  border-collapse: collapse;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+}
+
+.teaching-period,
+.contact-group
+ {
+  border-collapse: collapse;
+  display: table-row;
+  padding: 0;
+  margin: 0;
+}
+
+
+.teaching-period *,
+.contact-group *
+ {
+  padding: 0;
+  margin: 0;
+}
+
+.teaching-period > div,
+.contact-group > div
+{
+  display: table-cell;
+}
+
+.teaching-period > div > div,
+.contact-group > div > div
+{
+  display: flex;
+  flex-direction: row;
+}
+
+.period-name,
+.contact-group-name
+{
+  flex: 1 0 3em;
+}
+
+.units,
+.contact-group-details
+{
+  flex: 3 0 3em;
+}
+
+.inline-table-ctr tr td,
+.inline-table tr td
+{
+  vertical-align: top;
+}
+
+.inline-table-ctr td:nth-child(2),
+.inline-table td:nth-child(2)
+{
+  padding-left: 1em;
+}
+
+
+
+
+/* heading spacing */
+
+h1,h2,h3 {
+  line-height: 1.2;
+}
+
+h1 {
+  font-size: 1.30em;
+  text-align: center;
+}
+
+h2 {
+  font-size: 1.25em;
+}
+
+
+/* theme
+---------*/
+
+/* solid bars: #44508c
+ * bar links & hrules: cceeee
+ * links: #333f8c  */
+
+body {
+  font-family: 'Merriweather', Georgia, Serif;
+  line-height: 1.6;
+}
+
+
+
+/* heading styles */
+
+h2, h3, h4, h5 {
+  font-weight: normal;
+}
+
+h1, h2, h3, h4, h5 {
+  font-family: 'Merriweather Sans', 'Trebuchet MS', 'Helvetica Neue', Tahoma, sans-serif;
+}
+
+/* links */
+
+main a {
+  color: #333f8c;
+  text-decoration:none;
+  border-bottom: dotted 1px #A1A3A1;
+}
+
+nav a {
+  text-decoration:none;
+}
+
+
+main a:focus,
+main a:hover  {
+  text-decoration:underline;
+  border-bottom: none;
+  color: #071cc8;
+}
+
+/* em-dash lists */
+
+main ul {
+  list-style-type: none;
+  padding: 0px;
+  margin-left: 1em;
+}
+main ul > li {
+  text-indent: -0.5em;
+}
+main ul > li:before {
+  display: inline-block;
+  content: '\2012';
+  width: 0.5em;
+  text-indent: -0.5em;
+}
+
+/* semantic */
+
+.hi-pri {
+  color: #053cc9;
+}
+
+.expanded {
+  position: absolute;
+  left:     0;
+  right:    0;
+}
+
+table {
+  table-layout: fixed;
+}
+
+
+/* cits stuff: */
+
+table.csse-table {
+  border-collapse: collapse;
+  x-margin-bottom: 1.5em;
+  margin: auto;
+}
+
+table.csse-table, table.csse-table th, table.csse-table td {
+  border: 1px gray solid;
+}
+
+table.csse-table th,  table.csse-table td  {
+  padding: 2px;
+  vertical-align: middle;
+}
+
+
+table.csse-table th {
+  text-align: center;
+  background-color:  lightgray;
+}
+
+code, pre {
+  background-color: transparent;
+}
+
+p.code {
+  text-indent: 0;
+  vertical-align: middle;
+  margin-top: -1.25em;
+  margin-bottom: 1.5em;
+  margin-left: 1em;
+  font-family: monospace;
+  white-space: pre;
+}
+
+.pjustify {
+  text-align: justify;
+}
+
+
+.even-row {
+  background-color: rgb(204, 204, 204);
+}
+
+.odd-row {
+  background-color: #eeeedf;
+}
+
+
+/* footer */
+.text-muted {
+  color: #666666;
+  font-size: 75%;
+}
+
+
+/* pre on small-width screens */
+@media (max-width: 767px) {
+  pre {
+    overflow: scroll;
+  }
+}
+
+/* Inline code */
+:not(pre) code {
+  padding: 2px 4px;
+  font-size: 90%;
+  word-break: break-all !important;
+  color: #c7254e;
+  background-color: #f9f2f4;
+  border-radius: 4px;
+}
+
+/* Blocks of code */
+pre code {
+  padding: 0;
+  font-size: inherit;
+  color: inherit;
+  hyphens: none;
+  background-color: transparent;
+  border-radius: 0;
+}
+
+/* theme for wide vs narrow */
+/* small */
+@media (max-width: 767px) {
+  /* theme */
+  body {
+    background-color: #FBFBFB;
+  }
+}
+/* big */
+@media (min-width: 768px) {
+  body {
+    background: #FBFBFB ;
+  }
+
+  *[role="navigation"], .bar {
+    font-size:120%;
+    font-family: 'Merriweather Sans', 'ff-meta-serif-sc-web-pro';
+    background: #44508c;
+  }
+
+  *[role="navigation"] a
+    { color: #f7f7ff;
+      text-decoration: none;
+    }
+
+  *[role="navigation"] a.active {
+    color: white;
+  }
+}
+
+/* navbar */
+
+/* big */
+@media (min-width: 768px) {
+  .expandable-content-xs[data-expanded="false"] {
+    height: auto !important;
+  }
+}
+
+/* small */
+@media (max-width: 767px) {
+  /* content made initially 'invisible' (height 0) on eXtra-Small width screens*/
+  .expandable-content-xs {
+     overflow: hidden;
+     height:auto;
+     z-index: 900;
+     transition: height 0.3s ease-out;
+  }
+
+  .expandable-content-xs[data-expanded="false"] {
+    height: 0;
+  }
+  .expandable-content-xs[data-expanded="true"] {
+    height: auto;
+  }
+} /*end media */
+
+
+
+{# vim: syntax=css :
+#}

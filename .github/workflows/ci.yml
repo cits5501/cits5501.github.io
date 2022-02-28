@@ -112,3 +112,36 @@ jobs:
           docker tag ${GH_IMAGE_ID}:${IMAGE_VERSION} ${GH_IMAGE_ID}:latest
           docker push ${GH_IMAGE_ID}:latest
 
+  publish:
+    runs-on: ubuntu-20.04
+
+    needs: docker_build
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Log in to github Container registry
+        uses: docker/login-action@f054a8b539a109f9f41c372932f1ae047eff08c9
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: build site
+        shell: bash
+        run: |
+          set -x
+          make IMG=${{ env.REGISTRY }}/${{ github.repository }}/cits5501-website:latest \
+            build
+
+          ls -alt
+          sudo ls -alt `sudo find out -type f | sort`
+
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./out/_site
+          force_orphan: true
+
+
