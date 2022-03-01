@@ -215,6 +215,19 @@ Our facilitators for lab/workshops are:
 - Santiago Aguilar
 - Alvaro Ballester
 
+{% set facilitators = ['santiago', 'alvaro'] %}
+
+<div style="display: flex; justify-content: space-evenly;">
+{% for facilitator in facilitators %}
+<figure>
+<img src="{{ '/images/' + facilitator + '.jpg' | url }}" width=120px height=120px style="border-radius: 30%;">
+<figcaption style="text-align: center;" >{{ facilitator | initialCap }}</figcaption>
+</figure>
+{% endfor %}
+</div>
+
+
+
 -----
 
 ## Assumed knowledge

@@ -257,6 +257,15 @@ module.exports = function(eleventyConfig) {
   ////
   // utility filters and shortcodes
 
+  eleventyConfig.addFilter("initialCap", (str) =>
+    str[0].toUpperCase() + str.slice(1)
+  );
+
+
+
+
+
+
   eleventyConfig.addFilter("only_normal_tags", function(arr) {
     return arr.filter(el => el !== 'post' && el !== 'all');
   });
