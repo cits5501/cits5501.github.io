@@ -4,8 +4,6 @@ tags: ['toppage']
 layout: page-layout.njk
 ---
 
-Lecture slides, labs and further reading will appear here as the semester progresses.
-
 ## Streamed lectures
 
 If attending a lecture online, details of how
@@ -23,16 +21,18 @@ university's [LMS][lms]{ target="_blank" } (Learning Management System).
 [lms]: http://www.lms.uwa.edu.au/
 
 
-## Lectures
+## Lecture slides
 
 Lecture slides will be published here as the semester
 progresses.
 
+
+- Week 1\
+  Lecture 1 -- introduction ([pdf]({{ "/lectures/lect01.pdf" | url }}))\
+  Lecture 2 -- testing concepts ([pdf]({{ "/lectures/lect02.pdf" | url }}))
+
 {#
 
-- Week 1
-  Lecture 1 ([pdf]({{ "/lectures/lect01.pdf" | url }}))
-  Lecture 2 ([pdf]({{ "/lectures/lect02.pdf" | url }}))
 - Week 2
   Lecture 3, test automation ([pdf]({{ "/lectures/lect03--autom.pdf" | url }}))
 - Week 3
