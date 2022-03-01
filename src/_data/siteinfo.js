@@ -50,7 +50,7 @@ module.exports = function(configData) {
 
   let assessments = {
       week3_quiz: {
-        name: "[Week 3 quiz](/assessments/#week-3-quiz)",
+        name: "[Week 3 quiz](/assessment/#week-3-quiz)",
         marksPercent: "7.5",
         //dates: "Available Mon 14 March\\\nCloses 5pm Thu 17 Mar",
         dates: {
@@ -60,7 +60,7 @@ module.exports = function(configData) {
         submit: lms
       },
       week7_ex: {
-        name: "[Week 7 written exercise](/assessments/#week-7-exercise)",
+        name: "[Week 7 written exercise](/assessment/#week-7-exercise)",
         marksPercent: "7.5",
         //dates: "Due 5pm Thu 14 Apr",
         dates: {
@@ -70,7 +70,7 @@ module.exports = function(configData) {
         submit: lms
       },
       project: {
-        name: "[Project](/assessments/#project)",
+        name: "[Project](/assessment/#project)",
         marksPercent: "35",
         //dates: "Due 5pm Thu 26 May",
         dates: {
@@ -80,7 +80,7 @@ module.exports = function(configData) {
         submit: safe(extLink("cssubmit", `${cssubmit_url}?p=np&open=${unitcode}-1`))
       },
       exam: {
-        name: "[Take-home exam](/assessments/exam)",
+        name: "[Take-home exam](/assessment/#exam)",
         marksPercent: "50",
         //dates: "Available 5pm Wed 8 Jun\\\nDue 5pm Fri 10 Jun",
         dates: {
