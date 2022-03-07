@@ -11,3 +11,7 @@ Content on the website is copyright, but may be used pursuant to the
 
 [eleventy]: https://www.11ty.dev
 
+[GitHub corner SVG][github-corner] is copyright (c) 2016 Tim Holman (http://tholman.com) and
+licensed under the MIT License.
+
+[github-corner]: https://github.com/tholman/github-corners

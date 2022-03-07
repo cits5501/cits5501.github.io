@@ -1,7 +1,10 @@
 {# links to stylesheets, sitemaps, favicons, rss etc go in this file.
 #}
   <link rel="canonical"   href="{{siteinfo.site_url + page.url.substring(1) }}" />
+{#-
+  TODO: add news feed
   <link rel="alternate"   href="{{siteinfo.site_url + 'feed.xml'}}" type="application/atom+xml" title="{{siteinfo.title}}">
+#}
 
   <link rel="sitemap"     href="{{ siteinfo.site_url }}sitemap.xml" type="application/xml" title="Sitemap" />
   <link rel="icon"        href="{{ '/images/favicon.png' | url }}" type="image/png" />
