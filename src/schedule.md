@@ -100,14 +100,11 @@
         }
       }
     }
-    console.log("\nRES:", res );
     return res;
   },
 
   datesForWeek: (weekStartDate, assessmentDates_) => {
     const moment  = require('moment');
-    //console.log( "\n\n\nASST DTS", assessmentDates_ );
-
     function formatty(dt) {
       return moment(dt).format("h:mm a ddd D MMM")
     }
@@ -124,21 +121,16 @@
       }
     }
 
-    console.log("\n\nDT FOR WK", formatty(weekStartDate));
     let wkEndDate = new Date(weekStartDate);
     wkEndDate.setDate( weekStartDate.getDate() + 7 );
-    console.log("  end::", formatty(wkEndDate));
     let res = []
     for(let tm in assessmentDates_) {
       let dt = new Date(tm);
       dt.setTime(tm);
       if (weekStartDate <= dt  && dt < wkEndDate) {
-        console.log("  D", "\n    this", formatty(dt));
-        console.log("    YES");
         res.push(assessmentDates_[tm]);
       }
     }
-    console.log("\n\nRES", joinItems(res));
     return joinItems(res);
   },
 
@@ -250,8 +242,6 @@ but earlier and later editions should have equivalent sections.
   <td>
     {%- set weekStartDate = week.date %}
     {%- set stuff = datesForWeek(weekStartDate, assessmentDates_) %}
-    {{- "\n\n\nSTUFF" | log }}
-    {{- {"stuff": (stuff)  } | log }}
     {{- stripNewlines( stuff | mdBlock ) | safe  }}
   </td>
 </tr>
