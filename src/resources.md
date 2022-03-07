@@ -26,15 +26,13 @@ university's [LMS][lms]{ target="_blank" } (Learning Management System).
 Lecture slides will be published here as the semester
 progresses.
 
-
 - Week 1\
-  Lecture 1 -- introduction ([pdf]({{ "/lectures/lect01.pdf" | url }}))\
-  Lecture 2 -- testing concepts ([pdf]({{ "/lectures/lect02.pdf" | url }}))
+  Lecture 1 -- introduction ([pdf]({{ "/lectures/lect01--intro.pdf" | url }}))\
+  Lecture 2 -- testing concepts ([pdf]({{ "/lectures/lect02--testing.pdf" | url }}))
+- Week 2 \
+  Lecture 3 -- test automation ([pdf]({{ "/lectures/lect03--autom.pdf" | url }}))
 
 {#
-
-- Week 2
-  Lecture 3, test automation ([pdf]({{ "/lectures/lect03--autom.pdf" | url }}))
 - Week 3
   (continuing slides from week 2)
 - Week 4
