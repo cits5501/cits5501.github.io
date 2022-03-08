@@ -89,19 +89,20 @@ to join the relevant Microsoft Teams meeting are:
 #}
 
 
-{#
 
-- Week 2
-  Lab worksheet ([pdf]({{ "/workshops/workshop01.pdf" | url }}))
-  Soure code ([zip]({{ "/workshops/workshop-01-code.zip" | url }}))
+- Week 2 \
+  Lab worksheet ([pdf]({{ "/workshops/workshop01.pdf" | url }})) \
+  Source code ([zip]({{ "/workshops/workshop-01-code.zip" | url }}))
+
+{#
   Sample worksheet solutions (solutions at end) ([pdf]({{ "/workshops/workshop01-solutions.pdf" | url }}))
 - Week 3
   Lab worksheet ([pdf]({{ "/workshops/workshop02.pdf" | url }}))
-  Soure code ([zip]({{ "/workshops/workshop-02-code.zip" | url }}))
+  Source code ([zip]({{ "/workshops/workshop-02-code.zip" | url }}))
   Sample worksheet solutions ([pdf]({{ "/workshops/workshop02-solutions.pdf" | url }}))
 - Week 4
   Lab worksheet ([pdf]({{ "/workshops/workshop03.pdf" | url }}))
-  Soure code ([zip]({{ "/workshops/workshop-03-code.zip" | url }}))
+  Source code ([zip]({{ "/workshops/workshop-03-code.zip" | url }}))
   Sample worksheet solutions ([pdf]({{ "/workshops/workshop03-solutions.pdf" | url }}))
 - Week 5
   Lab worksheet ([pdf]({{ "/workshops/workshop04.pdf" | url }}))
@@ -111,7 +112,7 @@ to join the relevant Microsoft Teams meeting are:
   Sample worksheet solutions ([pdf]({{ "/workshops/workshop05-solutions.pdf" | url }}))
   (corrections made to answers 2 and 4 on 10 June)
 - Week 7
-  Soure code ([zip]({{ "/workshops/workshop-06-code.zip" | url }}))
+  Source code ([zip]({{ "/workshops/workshop-06-code.zip" | url }}))
   Lab worksheet ([pdf]({{ "/workshops/workshop06.pdf" | url }}))
   Sample worksheet solutions ([pdf]({{ "/workshops/workshop06-solutions.pdf" | url }}))
 - Week 8
