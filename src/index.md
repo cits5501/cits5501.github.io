@@ -89,7 +89,8 @@ for recorded lectures and the unit outline.
   - <i class="fa fa-arrow-circle-right"></i>
   - Currently the best place to ask questions is on the [**discussion forum**]({{forum_url}}){ target="_blank" }
     for the unit, [**{{help_forum}}**]({{forum_url}}){ class="hi-pri" target="_blank" } --
-    that way, all students can benefit from answers to your questions.
+    that way, all students can benefit from answers to your questions. \
+    (Or, if it's not a topic suitable for the forum, feel free to [email me](#unit-coordinator) instead.)
 - - - Want to know what you should
       [already know](#assumed-knowledge){ class="hi-pri" }
       before taking this unit?
@@ -135,7 +136,17 @@ This unit covers testing and quality assurance topics including:
 - - **Availability**
   - I work half-time at UWA, and am normally only on campus on Tuesdays and Wednesdays.
 - - **Consultation**
-  - Email {% email_el_spannized coordinator.email %} for an appointment, or visit my office between 4-5pm Wednesdays. Students are also welcome to speak to me after the lectures.
+  - Email {% email_el_spannized coordinator.email %} for an appointment,
+    or visit my office between 4-5pm Wednesdays. Students are also
+    welcome to speak to me after the lectures. \
+    **Changes due to Covid restrictions, March 2022**: While we're under restrictions due to Covid and most
+    students are off campus, I suggest emailing me anytime up until
+    Wednesday morning to make an appointment for an online meeting between 4
+    and 5pm Wednesday afternoon.
+    (Or, if between 4 and 5pm Wednesday doesn't suit, we can arrange some other
+    time.) My consultation time is usually fairly quiet this early in
+    semester -- if it gets busier later, I may get students to make
+    bookings through Outlook instead.
 ```
 
 :::
@@ -190,7 +201,7 @@ hour of the lecture finishing. (But please note that recordings do
 sometimes fail -- so if you *can* attend the lecture in-person or
 online, it's recommended.)
 
-### Time required 
+### Time required
 
 Note that materials presented during class sessions
 **<span>*do not*</span> define the whole unit**{ class="hi-pri" }.
