@@ -153,7 +153,11 @@ module.exports = function(configData) {
         { url: unit_outline_url,
           name: "Unit outline",
           ext:  true,
-        }
+        },
+        { url: forum_url,
+          name: "Help5501",
+          ext:  true,
+        },
     ],
 
     icon_menu: [],
