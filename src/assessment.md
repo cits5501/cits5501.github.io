@@ -112,6 +112,15 @@ and a final examination.
 ## Week 3 quiz
 
 - This quiz will be available on the {{ siteinfo.lms }}.
+
+
+<!--!
+<details>
+<summary>Test details (click to expand)</summary>
+<div style="border: inset 5pt var(--accent-v-light); margin: 2em; padding: 1em; border-radius: 5pt;">
+!-->
+
+
 - Ensure you leave at least 1-2 hours available in which to complete it.
   If you wait until 2 hours before the due time, and
   don't complete it, you will be awarded 0 marks.
@@ -141,6 +150,11 @@ and a final examination.
   If for some reason you can't access the quiz on the LMS, email me
   immediately from your University email account with a screenshot or
   photo showing the problem.
+
+<!--!
+</div>
+</details>
+!-->
 
 ## Week 7 exercise
 

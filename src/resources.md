@@ -17,6 +17,7 @@ If you have any difficulty attending the streamed lecture,
 you can still access recordings of the lectures via the
 university's [LMS][lms]{ target="_blank" } (Learning Management System).
 
+{# _x #}
 
 [lms]: http://www.lms.uwa.edu.au/
 
@@ -90,15 +91,14 @@ to join the relevant Microsoft Teams meeting are:
 
 
 
-- Week 2 \
+- Week 2 -- testing intro -- \
   Lab worksheet ([pdf]({{ "/workshops/workshop01.pdf" | url }})) \
-  Source code ([zip]({{ "/workshops/workshop-01-code.zip" | url }}))
-
-{#
-  Sample worksheet solutions (solutions at end) ([pdf]({{ "/workshops/workshop01-solutions.pdf" | url }}))
-- Week 3
-  Lab worksheet ([pdf]({{ "/workshops/workshop02.pdf" | url }}))
+  Source code ([zip]({{ "/workshops/workshop-01-code.zip" | url }})) \
+  Sample worksheet solutions ([pdf]({{ "/workshops/workshop01-solutions.pdf" | url }}))
+- Week 3 -- data-driven tests -- \
+  Lab worksheet ([pdf]({{ "/workshops/workshop02.pdf" | url }})) \
   Source code ([zip]({{ "/workshops/workshop-02-code.zip" | url }}))
+{#
   Sample worksheet solutions ([pdf]({{ "/workshops/workshop02-solutions.pdf" | url }}))
 - Week 4
   Lab worksheet ([pdf]({{ "/workshops/workshop03.pdf" | url }}))
