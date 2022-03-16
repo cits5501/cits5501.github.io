@@ -43,8 +43,6 @@ function sortByDate(arr) {
 }
 
 function extractExcerpt(article) {
-  //console.log("BEGIN EXTRACT");
-  //console.log("article:" + article );
 
   let excerpt = null;
   let content = article._templateContent;
@@ -321,13 +319,47 @@ module.exports = function(eleventyConfig) {
     `[${href}]${inner}{ target="_blank" }`
   );
 
-  // name of forum: e.g. help5501
-  eleventyConfig.addShortcode("help", () => {
-    console.log("\n\n\n\n\nHELP", this)
-    console.log("\n\n\n\n\nPAGE", page)
-    return `help`
-  }
-  );
+  // links to materials shortcodes
+
+  // create a "(pdf)" or "(md)" link for some resource
+  // resource_type = workshop | lecture
+  // format = md | pdf
+  eleventyConfig.addShortcode("resourceLink", (resource_type, format, name) => {
+    let url = eleventyConfig.javascriptFunctions.url,
+        path = "/"
+    if (resource_type == "lecture") {
+      path = path + "lectures"
+    } else if (resource_type == "workshop") {
+      path = path + "workshops"
+    } else {
+      throw Exception("bad resource_type arg to shortcode 'resourceLink': " + resource_type);
+    }
+
+    path = url(path + `/${name}.${format}`);
+    let result = `([${format}](${path}))`
+    return result
+  });
+
+  // name = base name, e.g. workshop01 or lect03--autom
+  // showSolutions = whether to include solutions
+  // formats = a list, usually ["pdf", "md"]
+  eleventyConfig.addShortcode("resourceList", (name, formats) => {
+    let resourceLink  = eleventyConfig.javascriptFunctions.resourceLink,
+        md            = eleventyConfig.javascriptFunctions.md
+
+    if (name.startsWith("lect")) {
+      let some_markdown = formats.map( format => resourceLink("lecture", format, name) ).join(" ")
+      return md(some_markdown)
+
+    } else if (name.startsWith("workshop")) {
+      let some_markdown = formats.map( format => resourceLink("workshop", format, name) ).join(" ")
+      return md(some_markdown)
+
+    } else {
+      throw Exception("bad 'name' argument to resourceList: " + name);
+    }
+  });
+
 
   /////
   // add RSS plugin
