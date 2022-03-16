@@ -181,12 +181,13 @@ Your understanding of the lecture and workshop
 material will be greatly enhanced if you work through these readings
 *prior*{ class="hi-pri" } to attending.
 
-References to
-"Ammann & Offutt" are to Ammann, P., & Offutt, J., *Introduction to
-software testing*, 2nd edn (Cambridge University Press, 2016).
-References to "Pressman" are to Pressman, R.S., & Maxim, B.R., *Software
-engineering: A practitioner's approach*, 8th edn (McGraw-Hill, 2015),
-but earlier and later editions should have equivalent sections.
+- References to "Ammann & Offutt" are to Ammann, P., & Offutt, J.,
+  *Introduction to software testing*, 2nd edn (Cambridge University
+  Press, 2016).
+- References to "Pressman" are to Pressman, R.S., & Maxim, B.R.,
+  *Software engineering: A practitioner's approach*, 8th edn
+  (McGraw-Hill, 2015), but earlier and later editions should have
+  equivalent sections.
 
 [unit-readings]: https://www.unitreadings.library.uwa.edu.au/leganto/readinglist/lists/13685908730002101
 

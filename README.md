@@ -1,8 +1,11 @@
 
 # cits5501.github.io
 
-Website built with [eleventy][eleventy] for UWA's
-CITS5501 "Software Testing and Quality Assurance" unit.
+This is the Git repository for the CITS5501 "Software Testing and Quality Assurance"
+website, which is built with [eleventy][eleventy] and published using
+[GitHub pages][gh-pages].
+
+[gh-pages]: https://pages.github.com
 
 The website is available at <https://cits5501.github.io/>.
 

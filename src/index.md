@@ -52,7 +52,7 @@ customStyle: |
 {% set help5501   = help_forum | extLink(forum_url) | safe %}
 
 
-## Welcome to {{ siteinfo.unitcode }}
+## Welcome to {{ siteinfo.unitcode }}  {{ siteinfo.unitname }}
 
 Welcome to the website for {{ siteinfo.unitcode }}
 in {{ siteinfo.year }}. Unit material (lecture slides and lab/workshop
