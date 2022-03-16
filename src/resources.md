@@ -2,6 +2,12 @@
 title: "Resources"
 tags: ['toppage']
 layout: page-layout.njk
+customStyle: |
+  .resource-list > ul > li {
+    padding-top: 1ex;
+    padding-bottom: 1ex;
+  }
+
 ---
 
 ## Streamed lectures
@@ -27,11 +33,16 @@ university's [LMS][lms]{ target="_blank" } (Learning Management System).
 Lecture slides will be published here as the semester
 progresses.
 
-- Week 1\
-  Lecture 1 -- introduction ([pdf]({{ "/lectures/lect01--intro.pdf" | url }}))\
-  Lecture 2 -- testing concepts ([pdf]({{ "/lectures/lect02--testing.pdf" | url }}))
-- Week 2 \
-  Lecture 3 -- test automation ([pdf]({{ "/lectures/lect03--autom.pdf" | url }}))
+
+
+
+::: { .resource-list }
+
+- Week 1
+  - Lecture 1 -- introduction {% resourceList "lect01--intro", ["pdf", "md"] %}
+  - Lecture 2 -- testing concepts {% resourceList "lect02--testing", ["pdf", "md"] %}
+- Week 2
+  - Lecture 3 -- test automation {% resourceList "lect03--autom", ["pdf", "md"] %}
 
 {#
 - Week 3
@@ -57,7 +68,9 @@ progresses.
 
 #}
 
-## Lab/workshops
+:::
+
+## Lab/workshops { #lab-workshops }
 
 Lab/workshops begin in week 2.
 Worksheets for the lab/workshops will be published here as the semester
@@ -70,6 +83,8 @@ you can attend your lab/workshop by going to the
 {{ siteinfo.unitcode }} team in MS Teams, finding the
 "channel" for your lab, and clicking "join"
 to join the online lab/workshop.
+
+### Worksheets
 
 {#
 
@@ -90,44 +105,50 @@ to join the relevant Microsoft Teams meeting are:
 #}
 
 
+::: { .resource-list }
 
-- Week 2 -- testing intro -- \
-  Lab worksheet ([pdf]({{ "/workshops/workshop01.pdf" | url }})) \
-  Source code ([zip]({{ "/workshops/workshop-01-code.zip" | url }})) \
-  Sample worksheet solutions ([pdf]({{ "/workshops/workshop01-solutions.pdf" | url }}))
-- Week 3 -- data-driven tests -- \
-  Lab worksheet ([pdf]({{ "/workshops/workshop02.pdf" | url }})) \
-  Source code ([zip]({{ "/workshops/workshop-02-code.zip" | url }}))
+- Week 2 -- testing intro
+  - Lab worksheet {% resourceList "workshop01", ["pdf", "md"] %}
+  - Source code ([zip]({{ "/workshops/workshop-01-code.zip" | url }}))
+  - Sample worksheet solutions {% resourceList "workshop01-solutions", ["pdf", "md"] %}
+- Week 3 -- data-driven tests
+  - Lab worksheet {% resourceList "workshop02", ["pdf", "md"] %}
+  - Source code ([zip]({{ "/workshops/workshop-02-code.zip" | url }}))
 {#
-  Sample worksheet solutions ([pdf]({{ "/workshops/workshop02-solutions.pdf" | url }}))
+{% resourceList "workshop10-solutions", ["pdf", "md"] %}
+
+  Sample worksheet solutions {% resourceList "workshop02-solutions", ["pdf", "md"] %}
 - Week 4
-  Lab worksheet ([pdf]({{ "/workshops/workshop03.pdf" | url }}))
+  Lab worksheet {% resourceList "workshop03", ["pdf", "md"] %}
   Source code ([zip]({{ "/workshops/workshop-03-code.zip" | url }}))
-  Sample worksheet solutions ([pdf]({{ "/workshops/workshop03-solutions.pdf" | url }}))
+  Sample worksheet solutions {% resourceList "workshop03-solutions", ["pdf", "md"] %}
 - Week 5
-  Lab worksheet ([pdf]({{ "/workshops/workshop04.pdf" | url }}))
-  Sample worksheet solutions ([pdf]({{ "/workshops/workshop04-solutions.pdf" | url }}))
+  Lab worksheet {% resourceList "workshop04", ["pdf", "md"] %}
+  Sample worksheet solutions {% resourceList "workshop04-solutions", ["pdf", "md"] %}
 - Week 6
-  Lab worksheet ([pdf]({{ "/workshops/workshop05.pdf" | url }}))
-  Sample worksheet solutions ([pdf]({{ "/workshops/workshop05-solutions.pdf" | url }}))
-  (corrections made to answers 2 and 4 on 10 June)
+  Lab worksheet {% resourceList "workshop05", ["pdf", "md"] %}
+  Sample worksheet solutions {% resourceList "workshop05-solutions", ["pdf", "md"] %}
 - Week 7
+  Lab worksheet {% resourceList "workshop06", ["pdf", "md"] %}
   Source code ([zip]({{ "/workshops/workshop-06-code.zip" | url }}))
-  Lab worksheet ([pdf]({{ "/workshops/workshop06.pdf" | url }}))
-  Sample worksheet solutions ([pdf]({{ "/workshops/workshop06-solutions.pdf" | url }}))
+  Sample worksheet solutions {% resourceList "workshop06-solutions", ["pdf", "md"] %}
 - Week 8
-  Lab worksheet ([pdf]({{ "/workshops/workshop07.pdf" | url }}))
-  Sample worksheet solutions ([pdf]({{ "/workshops/workshop07-solutions.pdf" | url }}))
+  Lab worksheet {% resourceList "workshop07", ["pdf", "md"] %}
+  Sample worksheet solutions {% resourceList "workshop07-solutions", ["pdf", "md"] %}
 - Week 9
-  Lab worksheet ([pdf]({{ "/workshops/workshop08.pdf" | url }}))
-  Sample worksheet solutions ([pdf]({{ "/workshops/workshop08-solutions.pdf" | url }}))
+  Lab worksheet {% resourceList "workshop08", ["pdf", "md"] %}
+  Sample worksheet solutions {% resourceList "workshop08-solutions", ["pdf", "md"] %}
 - Week 10
-  Lab worksheet ([pdf]({{ "/workshops/workshop09.pdf" | url }}))
-  Sample worksheet solutions ([pdf]({{ "/workshops/workshop09-solutions.pdf" | url }}))
+  Lab worksheet {% resourceList "workshop09", ["pdf", "md"] %}
+  Sample worksheet solutions {% resourceList "workshop09-solutions", ["pdf", "md"] %}
 - Week 11
-  Lab worksheet ([pdf]({{ "/workshops/workshop10.pdf" | url }}))
-  Sample worksheet solutions ([pdf]({{ "/workshops/workshop10-solutions.pdf" | url }}))
+  Lab worksheet {% resourceList "workshop10", ["pdf", "md"] %}
+  Sample worksheet solutions {% resourceList "workshop10-solutions", ["pdf", "md"] %}
 
 #}
+
+:::
+
+
 
 
