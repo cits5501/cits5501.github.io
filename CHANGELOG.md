@@ -2,6 +2,17 @@
 
 Notable changes will be documented in this file.
 
+### 2021-03-16
+
+Added
+
+- Links to markdown source for workshops and lectures
+
+Fixed
+
+- Footer creeping up when page content is short
+- Minor formatting issues
+
 ### 2021-03-15
 
 Added:
