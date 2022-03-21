@@ -43,12 +43,12 @@ progresses.
   - Lecture 2 -- testing concepts {% resourceList "lect02--testing", ["pdf", "md"] %}
 - Week 2
   - Lecture 3 -- test automation {% resourceList "lect03--autom", ["pdf", "md"] %}
-
-{#
 - Week 3
   (continuing slides from week 2)
 - Week 4
-  Lecture 4, input space partitioning ([pdf]({{ "/lectures/lect04--isp.pdf" | url }}))
+  - Lecture 4a -- input space partitioning intro {% resourceList "lect04a--isp-intro", ["pdf", "md"] %}
+  - Lecture 4b -- input space partitioning {% resourceList "lect04b--isp", ["pdf", "md"] %}
+{#
 - Week 5
   Lecture 5, graph-based testing ([pdf]({{ "/lectures/lect05.pdf" | url }}))
   Lecture 5b, logic testing ([pdf]({{ "/lectures/lect05b--logic.pdf" | url }}))
@@ -114,10 +114,10 @@ to join the relevant Microsoft Teams meeting are:
 - Week 3 -- data-driven tests
   - Lab worksheet {% resourceList "workshop02", ["pdf", "md"] %}
   - Source code ([zip]({{ "/workshops/workshop-02-code.zip" | url }}))
+  - Sample worksheet solutions {% resourceList "workshop02-solutions", ["pdf", "md"] %}
 {#
 {% resourceList "workshop10-solutions", ["pdf", "md"] %}
 
-  Sample worksheet solutions {% resourceList "workshop02-solutions", ["pdf", "md"] %}
 - Week 4
   Lab worksheet {% resourceList "workshop03", ["pdf", "md"] %}
   Source code ([zip]({{ "/workshops/workshop-03-code.zip" | url }}))

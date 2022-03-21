@@ -231,8 +231,9 @@ We will look at invariants more in the lab/workshops.
 
 ### Definition
 
-We define testing as a systematic attempt to find faults in a planned way a
-software system.
+We define testing as a systematic attempt to find faults
+in a software system.
+in a planned way.
 
 (Adapted from Bruegge & Dutoit)
 
