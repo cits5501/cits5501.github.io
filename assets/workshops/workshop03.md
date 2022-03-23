@@ -22,19 +22,22 @@ an array of `char`s for a particular value.
 
 ``` {.java .numberLines}
 /**
- * Performs a binary search for {@code value} in the ascending sorted array {@code array},
- * in the range specified by fromIndex (inclusive) and toIndex (exclusive).
- * Searching in an unsorted array has an undefined result. It's also undefined which element
- * is found if there are multiple occurrences of the same element.
+ * Performs a binary search for @code value in the ascending sorted
+ * array @code array, in the range specified by fromIndex (inclusive)
+ * and toIndex (exclusive).  Searching in an unsorted array has an
+ * undefined result. It's also undefined which element is found if there
+ * are multiple occurrences of the same element.
  *
  * @param array the sorted array to search.
  * @param startIndex the inclusive start index.
  * @param endIndex the exclusive start index.
  * @param value the element to find.
- * @return the non-negative index of the element, or a negative index which
- *         is {@code -index - 1} where the element would be inserted.
- * @throws IllegalArgumentException if {@code startIndex > endIndex}
- * @throws ArrayIndexOutOfBoundsException if {@code startIndex < 0 || endIndex > array.length}
+ * @return the non-negative index of the element, or a negative index
+ *         which is <code>-index - 1</code> where the element would be
+ *         inserted.
+ * @throws IllegalArgumentException if <code>startIndex > endIndex</code>
+ * @throws ArrayIndexOutOfBoundsException if
+ *         <code>startIndex < 0 || endIndex > array.length</code>
  * @since 1.6
  */
 public static int binarySearch(char[] array, int startIndex, int endIndex, char value)
@@ -59,7 +62,7 @@ method signatures:
 
 - `public IntStack ();`
 - `public void push (int i);`
-- `public int pop (); /** Throws an exception of empty */`
+- `public int pop (); /** Throws an exception if empty */`
 - `public boolean isEmpty()`
 
 Assume the object state consists of an `int` array.
