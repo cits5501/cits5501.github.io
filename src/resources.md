@@ -119,11 +119,9 @@ to join the relevant Microsoft Teams meeting are:
 - Week 4 -- ISP
   - Lab worksheet {% resourceList "workshop03", ["pdf", "md"] %}
   - Sample worksheet solutions {% resourceList "workshop03-solutions", ["pdf", "md"] %}
+- Week 5 -- graphs
+  - Lab worksheet {% resourceList "workshop04", ["pdf", "md"] %}
 {#
-  Source code ([zip]({{ "/workshops/workshop-03-code.zip" | url }}))
-  Sample worksheet solutions {% resourceList "workshop03-solutions", ["pdf", "md"] %}
-- Week 5
-  Lab worksheet {% resourceList "workshop04", ["pdf", "md"] %}
   Sample worksheet solutions {% resourceList "workshop04-solutions", ["pdf", "md"] %}
 - Week 6
   Lab worksheet {% resourceList "workshop05", ["pdf", "md"] %}
