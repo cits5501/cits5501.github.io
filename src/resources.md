@@ -49,9 +49,9 @@ progresses.
   - Lecture 4a -- input space partitioning intro {% resourceList "lect04a--isp-intro", ["pdf", "md"] %}
   - Lecture 4b -- input space partitioning {% resourceList "lect04b--isp", ["pdf", "md"] %}
 - Week 5
-  - Lecture 5a -- model-based testing ([pdf]({{ "/lectures/lect05a--intro.pdf" | url }}))
-  - Lecture 5b -- graph-based testing ([pdf]({{ "/lectures/lect05b--graph.pdf" | url }}))
-  - Lecture 5c -- logic-based testing ([pdf]({{ "/lectures/lect05c--logic.pdf" | url }}))
+  - Lecture 5a -- model-based testing {% resourceList "lect05a--intro", ["pdf", "md"] %}
+  - Lecture 5b -- graph-based testing {% resourceList "lect05b--graph", ["pdf", "md"] %}
+  - Lecture 5c -- logic-based testing {% resourceList "lect05c--logic", ["pdf", "md"] %}
 {#
 - Week 6
   Lecture 6, syntax-based testing ([pdf]({{ "/lectures/lect06--syntax.pdf" | url }}))
@@ -118,6 +118,7 @@ to join the relevant Microsoft Teams meeting are:
   - Sample worksheet solutions {% resourceList "workshop02-solutions", ["pdf", "md"] %}
 - Week 4 -- ISP
   - Lab worksheet {% resourceList "workshop03", ["pdf", "md"] %}
+  - Sample worksheet solutions {% resourceList "workshop03-solutions", ["pdf", "md"] %}
 {#
   Source code ([zip]({{ "/workshops/workshop-03-code.zip" | url }}))
   Sample worksheet solutions {% resourceList "workshop03-solutions", ["pdf", "md"] %}
