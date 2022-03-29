@@ -51,8 +51,8 @@ progresses.
 - Week 5
   - Lecture 5a -- model-based testing ([pdf]({{ "/lectures/lect05a--intro.pdf" | url }}))
   - Lecture 5b -- graph-based testing ([pdf]({{ "/lectures/lect05b--graph.pdf" | url }}))
+  - Lecture 5c -- logic-based testing ([pdf]({{ "/lectures/lect05c--logic.pdf" | url }}))
 {#
-  Lecture 5b, logic testing ([pdf]({{ "/lectures/lect05b--logic.pdf" | url }}))
 - Week 6
   Lecture 6, syntax-based testing ([pdf]({{ "/lectures/lect06--syntax.pdf" | url }}))
 - Week 7
