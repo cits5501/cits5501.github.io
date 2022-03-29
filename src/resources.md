@@ -48,9 +48,10 @@ progresses.
 - Week 4
   - Lecture 4a -- input space partitioning intro {% resourceList "lect04a--isp-intro", ["pdf", "md"] %}
   - Lecture 4b -- input space partitioning {% resourceList "lect04b--isp", ["pdf", "md"] %}
-{#
 - Week 5
-  Lecture 5, graph-based testing ([pdf]({{ "/lectures/lect05.pdf" | url }}))
+  - Lecture 5a -- model-based testing ([pdf]({{ "/lectures/lect05a--intro.pdf" | url }}))
+  - Lecture 5b -- graph-based testing ([pdf]({{ "/lectures/lect05b--graph.pdf" | url }}))
+{#
   Lecture 5b, logic testing ([pdf]({{ "/lectures/lect05b--logic.pdf" | url }}))
 - Week 6
   Lecture 6, syntax-based testing ([pdf]({{ "/lectures/lect06--syntax.pdf" | url }}))
