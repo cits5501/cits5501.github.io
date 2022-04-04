@@ -3,7 +3,7 @@ title: |
   `\LARGE\textmd{`{=latex}
   CITS5501 Software Testing and Quality Assurance `\\`{=latex}
   Semester 1, 2022 `\\`{=latex}
-   Workshop 4 (week 5) -- graphs 
+   Workshop 4 (week 5) -- graphs  -- solutions 
   `}`{=latex}
 ---
 
@@ -73,6 +73,68 @@ that's fine.
 
 
 
+`\begin{solbox}`{=latex}
+
+**Sample solutions**:
+
+**a\. ISP characteristics**
+
+Here are some possible characteristics, and values we might
+select from each partition:
+
+- Is the string empty, or non-empty?
+  - This gives us two partitions.
+  - For the "non-empty" option, we might choose  as test values a
+    "typical" string, say
+    `\texttt{"too many assessments :/"}`{=latex},
+    and maybe some less typical options
+    (perhaps very long strings, strings using non-English Unicode
+    characters, or the string
+    `\texttt{"not nearly enough assessments :/"}`{=latex})
+
+We'll make some *sub*-characteristics for the non-empty option.
+That is, the following characteristics all assume the string is
+non-empty:
+
+- Does the string contain spaces? (Gives 2 partitions; strings that do,
+  and strings that don't)
+- Does the string contain only spaces? (ditto -- gives 2 partitions)
+- Does the string contain spaces at the start? (gives 2 partitions)
+- Does the string contain spaces at the end? (gives 2 partitions)
+- Does the string contain a run of two or more contiguous spaces? (gives 2 partitions)
+- Does the string contain a run of two or more tab (`\t`) characters? (gives 2 partitions)
+- Does the string contain a run of two or more [zero-width
+  space](https://en.wikipedia.org/wiki/Zero-width_space) (unicode
+  `U+200B`) characters? (gives 2 partitions)
+
+`\end{solbox}`{=latex}
+
+
+
+
+
+`\begin{solbox}`{=latex}
+
+**Sample solutions**:
+
+**b\. control flow graph**
+
+Here is one possible control flow graph:
+
+`\begin{center}`{=latex}
+![](images/controlflow-solution.eps){ width=70% }
+`\end{center}`{=latex}
+
+Here, the nodes are labelled with the section of code they
+represent. Contiguous lines of code (e.g. lines 9--10 and the
+start of 12) are "collapsed" together to save space --
+since they must *always* be executed together (in our simple
+model of the function), there's no real point in giving
+each line its own node.
+
+
+`\end{solbox}`{=latex}
+
 
 
 
@@ -85,11 +147,35 @@ c.  Given your test cases from part (a), try mentally or on paper
 
 
 
+`\begin{solbox}`{=latex}
+
+**Sample solutions**:
+
+**c\. subjective graph coverage**
+
+The answers here will depend on your suggested tests.
+
+`\end{solbox}`{=latex}
+
+
+
 d.  Work out whether your tests give the following sorts
     of coverage:
 
     i.  node coverage
     #.  edge coverage
+
+
+
+`\begin{solbox}`{=latex}
+
+**Sample solutions**:
+
+**d\. node and edge coverage**
+
+The answers here will depend on your suggested tests.
+
+`\end{solbox}`{=latex}
 
 
 
@@ -99,6 +185,44 @@ e.  What are the *prime paths* in your graph?
 
     Can you construct some tests which exercise prime paths
     you haven't already covered?
+
+
+
+`\begin{solbox}`{=latex}
+
+**Sample solutions**:
+
+**e\. prime paths**
+
+For the graph solution shown earlier, the prime paths are:
+
+> ABG, ABCDEF, ABCDF, \
+> BCDEFB, CDEFBC, DEFBCD, EFBCDEF, FBCDEF *(these all execute the left-hand 'if' branch)* \
+> BCDFB, CDFBC, DFBCD *(these all execute the right-hand 'if' branch)* \
+> EFBCDF, *(this takes one left and one right branch)* \
+> CDEFBG, *(takes left branch)* \
+> CDFBG *(take rights branch)*
+
+What proportion of the prime paths your tests cover will
+depend on what tests you chose.
+But note that if your tests don't have
+node or statement coverage,
+then they certainly won't have prime path coverage.
+
+One useful path is the path ABG, which will get exercised
+when we pass in the
+empty. This is a useful test because
+it reveals a problem with the code -- passing in empty strings
+causes an exception to be thrown when we reach line 9 (the
+`.charAt` call fails).
+
+We might arrive at this test *either* by applying ISP
+techniques, or by looking to see what sort of graph coverage
+we have -- as long as we find the bug, either approach
+is fine!
+
+
+`\end{solbox}`{=latex}
 
 
 
@@ -234,6 +358,91 @@ are potential *fixtures* for any test.
 #.  Using the material from lectures, and the JUnit user guide,
     write a "teardown" method. What code should go in it?
     Is it necessary in this case? Why or why not?
+
+
+
+`\begin{solbox}`{=latex}
+
+**1\. setUp method**
+
+As suggested in the question -- you should compile and run the tests
+to find out how many times the `setUp()` method executes.
+
+**2\. failing tests**
+
+Some possibilities are:
+
+- inserting an assertion you know will fail (e.g.
+  `\texttt{assertTrue(false)}`{=latex})
+- throwing an exception (if your test is *intended* to throw an
+  exception, then throwing an exception other than the expected
+  one). For example:
+
+  ```java
+    throw new RuntimeException("test not implemented yet");
+  ```
+
+- calling the method `\texttt{fail(String message)}`{=latex} from
+  the `\texttt{org.junit.jupiter.api.\allowbreak Assertions}`{=latex} class
+  (or one of several similar overloaded `fail` methods). For
+  instance:
+
+  ```java
+    fail("test not implemented yet");
+  ```
+
+Of these, the last is the best, as it most clearly demonstrates the
+intention -- to fail, not because some assertion is false,
+but because a test is not complete or has not yet been written.
+
+(You can also check out the answers to this [StackOverflow
+question][so-pending] for some other possibilities.)
+
+Some testing frameworks have special assertions or annotations
+for marking a test as *pending* (not yet running, for some reason),
+but JUnit does not yet have this functionality built into it.
+
+[so-pending]: https://stackoverflow.com/questions/14341277/is-there-a-general-way-to-mark-a-junit-test-as-pending
+
+**3--4 unit test practice**
+
+You should gain practise writing tests by doing these exercises
+yourself -- model solutions are not provided. Feel free to show your
+code to facilitators or the unit coordinator for feedback
+if you have attempted them.
+
+**5\. tearDown method**
+
+
+You could write something like
+
+```java
+  @AfterEach
+  public void tearDown() {
+    mc1 = null;
+    mc2 = null;
+    mc3 = null;
+  }
+```
+
+But this is not actually necessary. The order of events is that for
+each test, the JVM will
+
+- create an instance of `MyClassTest`
+- run the `setUp` method, and
+- execute the test
+
+and sometime after this, the instance of `MyClassTest` will get
+garbage-collected and any memory associated with it will be
+freed.
+
+We only need to write a `tearDown` method when there are resources
+(e.g. files on disk, database tables) that are *not* cleaned up by
+the JVM. In that case, we would write a `tearDown` method that,
+for instance, deletes any created files.
+
+
+`\end{solbox}`{=latex}
 
 
 
