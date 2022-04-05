@@ -66,7 +66,7 @@ author: 'Unit coordinator: Arran Stewart'
     \pause
 
 -   Things it contains:
-    
+
     -   boolean variables ("$b$")\
         (technically, it might also include boolean literals, `true`
         and `false`, but there's no point in doing so)
@@ -132,8 +132,8 @@ T          & T          & T          \\ \bottomrule
 -   We would like to choose some subset of the total number of
     truth assignments, since $2^n$ quickly gets large.
 -   $2^6$ (a modest number of inputs) is 64, and even if we only have,
-    say, a few hundred logic expressions in our program, 
-    that's still potentially 19200 tests (assuming 300 expressions). 
+    say, a few hundred logic expressions in our program,
+    that's still potentially 19200 tests (assuming 300 expressions).
 -   It would be nice if we could do with fewer.
 
 ### Definitions
@@ -162,7 +162,7 @@ $(i < j) \wedge isAlpha(c) \vee b \vee (m \geq n*o)$
 
 -   Predicates can be joined by connectives -- logical operators.
 -   Common programming connectives:
-    
+
     $\lnot$, `!` \hspace{4em} -- \somespace logical not\
     $\wedge$, `and`, `&&` \hspace{1.5em} -- \somespace logical "and"\
     $\vee$, `or`, `||` \hspace{2.0em} -- \somespace logical "or"
@@ -489,7 +489,7 @@ of $c_i$ changes the value of $p$
 
 ####
 
-$p$: $A \leftrightarrow B$ 
+$p$: $A \leftrightarrow B$
 
 :::
 
@@ -579,7 +579,7 @@ with Restricted Active Clause Coverage (RACC).
 ::: foo
 
 
-#### MC/DC 
+#### MC/DC
 
 \small
 
@@ -594,7 +594,7 @@ with Restricted Active Clause Coverage (RACC).
     of the decision.
     -   Equivalent to active clause coverage
 
-:::    
+:::
 
 -   Since ACC is ambiguous, it follows MC/DC is too -- this has led to
     confusion.
@@ -659,7 +659,7 @@ $p$ is: $s \wedge (m \vee w)$
 Suppose we are asked to come up with tests which
 will satisfy the Restricted
 active clause coverage criterion.
- 
+
 We must make each of $s$, $m$ and $w$ active in turn.
 And the values for the *other* two clauses must be the
 same when the clause under consideration is true,
@@ -676,7 +676,7 @@ $p$ is: $s \wedge (m \vee w)$
 :::
 
 Making $s$ active:
- 
+
 -   $s$ will be active when $m \vee w$ is true; we
     just need to pick values of $m$ and $s$ which
     will make this so. Let's choose $m$ = true,
@@ -694,7 +694,7 @@ $p$ is: $s \wedge (m \vee w)$
 :::
 
 Making $m$ active:
- 
+
 -   We need $s$ to be true, otherwise $p$ will
     always be false.
 -   And we need $w$ to be false, otherwise $m \vee w$
@@ -717,7 +717,7 @@ Making $w$ active:
 -   This will be very similar to the last case (since
     $\vee$ is what is called "commutative" -- like
     "$+$" in arithmetic, where $a + b = b + a$).
- 
+
 -   $s$ must be true, and $m$ must be false.
 -   And then, $w$ determines the value of $p$.
 

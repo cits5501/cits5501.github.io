@@ -52,9 +52,9 @@ progresses.
   - Lecture 5a -- model-based testing {% resourceList "lect05a--intro", ["pdf", "md"] %}
   - Lecture 5b -- graph-based testing {% resourceList "lect05b--graph", ["pdf", "md"] %}
   - Lecture 5c -- logic-based testing {% resourceList "lect05c--logic", ["pdf", "md"] %}
-{#
 - Week 6
-  Lecture 6, syntax-based testing ([pdf]({{ "/lectures/lect06--syntax.pdf" | url }}))
+  - Lecture 6 -- syntax-based testing {% resourceList "lect06a--syntax", ["pdf", "md"] %}
+{#
 - Week 7
   Lecture 7A, integration and system testing ([pdf]({{ "/lectures/lect07A--system.pdf" | url }}))
   Lecture 7B, reviews and quality assurance ([pdf]({{ "/lectures/lect07B--quality.pdf" | url }}))
