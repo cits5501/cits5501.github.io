@@ -122,9 +122,9 @@ to join the relevant Microsoft Teams meeting are:
 - Week 5 -- graphs
   - Lab worksheet {% resourceList "workshop04", ["pdf", "md"] %}
   - Sample worksheet solutions {% resourceList "workshop04-solutions", ["pdf", "md"] %}
+- Week 6 -- logic
+  - Lab worksheet {% resourceList "workshop05", ["pdf", "md"] %}
 {#
-- Week 6
-  Lab worksheet {% resourceList "workshop05", ["pdf", "md"] %}
   Sample worksheet solutions {% resourceList "workshop05-solutions", ["pdf", "md"] %}
 - Week 7
   Lab worksheet {% resourceList "workshop06", ["pdf", "md"] %}
