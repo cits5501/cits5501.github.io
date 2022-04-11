@@ -477,24 +477,6 @@ compiler tells us we've committed a "syntax error".
   that we should probably test it.
 
 
-### An example of syntax-generated tests
-
--   *Mutation-based fuzzers* use a body of inputs, and generate new ones
-    (some valid, some invalid)
-    by repeatedly mutating existing inputs
--   Often the fuzzers aim to *crash* the program (get it to
-    exit unexpectedly, and/or, in the case of memory-unsafe languages
-    like C and C`++`, violate memory integrity).
--   e.g. We could start with a set of valid PNG files, and use a
-    mutation-based fuzzer to produce many variants of these
--   Often we'll want to be sure that our software handles any sort of input
-    *gracefully* -- regardless of whether the input is valid or invalid,
-    the program should give some sort of "proper" result (even if that
-    is just an error message). It *shouldn't* (usually) go into
-    an erroneous state.
-
-
-
 
 
 ### Example -- arithmetic expressions
@@ -1179,64 +1161,6 @@ of sunrise/sunset times for its current geographical location.)
 
 <!--
 
-# Property-based testing
-
-### Property-based testing
-
-XXX OLD
-
-\small
-
--   Consider the following method specification:
-
-    `List.remove(Object o)`: Search the list for elements which
-    are equal to object `o` (using `.equals()`). If there are any,
-    then the first such element is removed. Otherwise, the method
-    does nothing.
--   If $L_{before}$ is the length of the list before we execute
-    `remove()`, and $L_{after}$ is the length of the list after we
-    execute it, then the following invariant holds:\
-    $\quad (L_{after} = L_{before}) \vee (L_{after} = L_{before} - 1)$ \
-    Let's call this invariant $Inv_1$, for short.
--   It is certainly good practice to write tests for `remove()`
-    based on Input Space Partitioning -|- e.g. constructing
-    small lists that do or don't contain the element being
-    searched for, and constructing test inputs based on that.
-
-### Property-based testing
-
--   But if we can identify invariants like $Inv_1$, that we think
-    will *always* hold, then we can generate random data to
-    improve our confidence that this is so.
--   If our test framework generates a few thousand sample lists,
-    and our invariant holds for all of them, we can be fairly confident
-    that this theory about our method is true.\
-    (We cannot be *certain* -|- we might have failed to generate
-    a test case that exercises some particular fault -|- perhaps
-    our method fails on extremely long lists, and we never generated
-    those -|-
-    but our confidence is definitely improved.)
-
-### Property-based testing
-
-XXX OLD
-
-Testing frameworks that perform property-based testing include:
-
--   [Hypothesis][hypothesis], for Python
--   [QuickTheories][quicktheories], for Java
--   [jsverify][jsverify], for JavaScript
--   [QuickCheck][quickcheck], the inspiration for most of the others,
-    for Haskell
--   ... Many more [listed][pbtest-list] by David R. MacIver, the developer of
-    Hypothesis.
--   We will look at some of these testing frameworks in more detail.
-
-[hypothesis]: https://hypothesis.works/articles/intro/
-[quicktheories]: https://github.com/quicktheories/QuickTheories
-[jsverify]: https://github.com/jsverify/jsverify
-[quickcheck]: http://hackage.haskell.org/package/QuickCheck
-[pbtest-list]: https://hypothesis.works/articles/quickcheck-in-every-language/
 
 # Mutation coverage -|- FM OLD XXX
 
@@ -1307,61 +1231,6 @@ Mutation *production* coverage (MPC):
 -   `mutpy` instead produces random mutations of a program -|-
     given enough random mutations, we should get reasonable coverage
 
-
-# Property-based testing
-
-### Property-based testing
-
-\small
-
--   Consider the following method specification:
-
-    `List.remove(Object o)`: Search the list for elements which
-    are equal to object `o` (using `.equals()`). If there are any,
-    then the first such element is removed. Otherwise, the method
-    does nothing.
--   If $L_{before}$ is the length of the list before we execute
-    `remove()`, and $L_{after}$ is the length of the list after we
-    execute it, then the following invariant holds:\
-    $\quad (L_{after} = L_{before}) \vee (L_{after} = L_{before} - 1)$ \
-    Let's call this invariant $Inv_1$, for short.
--   It is certainly good practice to write tests for `remove()`
-    based on Input Space Partitioning -|- e.g. constructing
-    small lists that do or don't contain the element being
-    searched for, and constructing test inputs based on that.
-
-### Property-based testing
-
--   But if we can identify invariants like $Inv_1$, that we think
-    will *always* hold, then we can generate random data to
-    improve our confidence that this is so.
--   If our test framework generates a few thousand sample lists,
-    and our invariant holds for all of them, we can be fairly confident
-    that this theory about our method is true.\
-    (We cannot be *certain* -|- we might have failed to generate
-    a test case that exercises some particular fault -|- perhaps
-    our method fails on extremely long lists, and we never generated
-    those -|-
-    but our confidence is definitely improved.)
-
-### Property-based testing
-
-Testing frameworks that perform property-based testing include:
-
--   [Hypothesis][hypothesis], for Python
--   [QuickTheories][quicktheories], for Java
--   [jsverify][jsverify], for JavaScript
--   [QuickCheck][quickcheck], the inspiration for most of the others,
-    for Haskelll
--   ... Many more [listed][pbtest-list] by David R. MacIver, the developer of
-    Hypothesis.
--   We will look at some of these testing frameworks in more detail.
-
-[hypothesis]: https://hypothesis.works/articles/intro/
-[quicktheories]: https://github.com/quicktheories/QuickTheories
-[jsverify]: https://github.com/jsverify/jsverify
-[quickcheck]: http://hackage.haskell.org/package/QuickCheck
-[pbtest-list]: https://hypothesis.works/articles/quickcheck-in-every-language/
 
 
 -->
