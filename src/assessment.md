@@ -162,21 +162,18 @@ The week 7 exercise will be made available
 early in week 7 on the
 {{ siteinfo.lms }}, under "Week 7 Exercise".
 
-The exercise should not take long to do -- only brief answers
-(a paragraph or two for each question) are expected. It is to
+The exercise should not take long to do -- it should be possible to
+answer each question in a few paragraphs. It is to
 be done individually, but you may make use of any
 textbooks, slides or similar resources you like.
 
 The questions contained in the exercise should be
 good practice for the [exam](#exam).
 
-{#
-
 The marking rubric is available [here][exercise-rubric] (PDF).
 
-[exercise-rubric]: {{ "/workshops/exercise-rubric.pdf" | url }}
+[exercise-rubric]: {{ "/assignments/exercise-rubric.pdf" | url }}
 
-#}
 
 ## Project
 

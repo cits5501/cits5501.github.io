@@ -378,7 +378,7 @@ module.exports = function(eleventyConfig) {
 
   // This will copy these folders to the output without modifying them at all
   // (NB: these won't get mininified, linted, etc. TODO: minify and lint them)
-  var asset_dirs = ['css', 'fonts', 'images', 'js', 'lectures', 'workshops'];
+  var asset_dirs = ['css', 'fonts', 'images', 'js', 'lectures', 'workshops', 'assignments'];
   for (const dir of asset_dirs) {
     const src_dir = "/assets/" + dir;
     if (! fs.existsSync(src_dir) ) {

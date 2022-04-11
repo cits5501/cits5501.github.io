@@ -64,7 +64,7 @@ module.exports = function(configData) {
         marksPercent: "7.5",
         //dates: "Due 5pm Thu 14 Apr",
         dates: {
-          "available:": "**TBA**",
+          available: new Date(year, 3, 11, 17, 0), // 5pm Mon 11 Apr
           due: new Date(year, 3, 14, 17, 0) // 5pm Thu 14 Apr
         },
         submit: lms
