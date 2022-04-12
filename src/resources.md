@@ -126,10 +126,11 @@ to join the relevant Microsoft Teams meeting are:
 - Week 6 -- logic
   - Lab worksheet {% resourceList "workshop05", ["pdf", "md"] %}
   - Sample worksheet solutions {% resourceList "workshop05-solutions", ["pdf", "md"] %}
+- Week 7 -- syntax
+  - Lab worksheet {% resourceList "workshop06", ["pdf", "md"] %}
+  - Source code ([zip]({{ "/workshops/workshop-06-code.zip" | url }}))
 {#
-- Week 7
-  Lab worksheet {% resourceList "workshop06", ["pdf", "md"] %}
-  Source code ([zip]({{ "/workshops/workshop-06-code.zip" | url }}))
+  - Sample worksheet solutions {% resourceList "workshop05-solutions", ["pdf", "md"] %}
   Sample worksheet solutions {% resourceList "workshop06-solutions", ["pdf", "md"] %}
 - Week 8
   Lab worksheet {% resourceList "workshop07", ["pdf", "md"] %}
