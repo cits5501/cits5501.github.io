@@ -55,10 +55,10 @@ progresses.
 - Week 6
   - Lecture 6a -- syntax-based testing {% resourceList "lect06a--syntax", ["pdf", "md"] %}
   - Lecture 6b -- random testing       {% resourceList "lect06b--random", ["pdf", "md"] %}
-{#
 - Week 7
-  Lecture 7A, integration and system testing ([pdf]({{ "/lectures/lect07A--system.pdf" | url }}))
-  Lecture 7B, reviews and quality assurance ([pdf]({{ "/lectures/lect07B--quality.pdf" | url }}))
+  - Lecture 7A, integration and system testing {% resourceList "lect07a--system", ["pdf", "md"] %}
+  - Lecture 7B, reviews and quality assurance  {% resourceList "lect07b--quality", ["pdf", "md"] %}
+{#
 - Week 8
   Lecture 8, Risk and intro to formal methods ([pdf]({{ "/lectures/lect08.pdf" | url }}))
 - Week 9
@@ -68,6 +68,7 @@ progresses.
   Lecture 11, Program specification cont'd ([pdf]({{ "/lectures/lect11.pdf" | url }}))
   Lecture 12, Standards ([pdf]({{ "/lectures/lect12.pdf" | url }}))
 
+{% resourceList "lect07a--system", ["pdf", "md"] %}
 #}
 
 :::
@@ -129,6 +130,7 @@ to join the relevant Microsoft Teams meeting are:
 - Week 7 -- syntax
   - Lab worksheet {% resourceList "workshop06", ["pdf", "md"] %}
   - Source code ([zip]({{ "/workshops/workshop-06-code.zip" | url }}))
+  - Sample worksheet solutions {% resourceList "workshop06-solutions", ["pdf", "md"] %}
 {#
   - Sample worksheet solutions {% resourceList "workshop05-solutions", ["pdf", "md"] %}
   Sample worksheet solutions {% resourceList "workshop06-solutions", ["pdf", "md"] %}

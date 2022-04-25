@@ -60,7 +60,6 @@ sheets) for this unit will be **published on these pages, and not on
 the LMS**{ class="hi-pri" }; but refer to the {{ siteinfo.lms }}
 for recorded lectures and the unit outline.
 
-
 ## Quick links
 
 ::: { class="quicklinks-table-ctr" }
