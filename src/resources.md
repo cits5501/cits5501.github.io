@@ -131,6 +131,8 @@ to join the relevant Microsoft Teams meeting are:
   - Lab worksheet {% resourceList "workshop06", ["pdf", "md"] %}
   - Source code ([zip]({{ "/workshops/workshop-06-code.zip" | url }}))
   - Sample worksheet solutions {% resourceList "workshop06-solutions", ["pdf", "md"] %}
+- Week 8 -- code reviews
+  - Lab worksheet {% resourceList "workshop07", ["pdf", "md"] %}
 {#
   - Sample worksheet solutions {% resourceList "workshop05-solutions", ["pdf", "md"] %}
   Sample worksheet solutions {% resourceList "workshop06-solutions", ["pdf", "md"] %}
