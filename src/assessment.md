@@ -174,6 +174,11 @@ The marking rubric is available [here][exercise-rubric] (PDF).
 
 [exercise-rubric]: {{ "/assignments/exercise-rubric.pdf" | url }}
 
+Marks are now available on csmarks, and sample solutions
+are available [as a PDF][ex-sol].
+
+
+[ex-sol]: {{ "/assignments/exercise-solutions.pdf" | url }} 
 
 ## Project
 
