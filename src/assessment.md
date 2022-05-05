@@ -193,6 +193,17 @@ Students will be required to book a short (less than 10 mins) meeting
 where they should expect to answer some basic questions about their project
 and receive some feedback.
 
+The following project materials are available for you:
+
+- The [project description (PDF)][proj-pdf]
+- [JavaDoc for the project code][proj-javadoc]
+- [Source code for the project][proj-code]
+
+[proj-pdf]: {{ "/assignments/project.pdf" | url }}
+[proj-javadoc]: {{ "/assignments/project/doc" | url }}
+[proj-code]: {{ "/assignments/project_code.zip" | url }}
+
+
 {#
 
 The details are available [here][project-pdf] (PDF)
