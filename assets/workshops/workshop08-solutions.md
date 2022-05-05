@@ -3,7 +3,7 @@ title: |
   `\LARGE\textmd{`{=latex}
   CITS5501 Software Testing and Quality Assurance `\\`{=latex}
   Semester 1, 2022 `\\`{=latex}
-   Workshop 8 (week 9) -- Risk 
+   Workshop 8 (week 9) -- Risk  -- solutions 
   `}`{=latex}
 include-before: |
   ```{=latex}
@@ -93,6 +93,27 @@ c.  Inter-team delays: Your company is building an Internet of Things (IOT) enab
 
 \endgenericbox
 
+
+
+`~\vspace{1ex}`{=latex}
+\solbox
+
+Some sample answers (although others are quite possible):
+
+a\. Management change. If the new, lower priority of the project results in budget
+or staff being cut from the project, those would be project risks.
+It could also be that the new management simply do not see much value in the project
+being completed, which would be a business risk.
+
+b\. Documentation problems. This could be categorized as a technical risk:
+using the new library is more difficult than you anticipated, and ends up requiring
+more work.
+
+c\. Inter-team delays. This could be categorized as a project risk; one of the
+resources you need is the API for the toaster, and it isn't available when you need it.
+
+
+\endsolbox
 
 
 ## B. Risk identification

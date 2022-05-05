@@ -74,7 +74,7 @@ module.exports = function(configData) {
         marksPercent: "35",
         //dates: "Due 5pm Thu 26 May",
         dates: {
-          "available:": "**TBA**",
+          available: new Date(year, 4, 5, 17, 0), // 5pm Thu 5 May,
           due: new Date(year, 4, 26, 17, 0) // 5pm Thu 26 May
         },
         submit: safe(extLink("cssubmit", `${cssubmit_url}?p=np&open=${unitcode}-1`))
