@@ -1,0 +1,114 @@
+---
+eleventyExcludeFromCollections: true
+---
+
+<html>
+  <head>
+    <style>
+      .warning {
+        color: hsl(33, 100%, 50%);
+      }
+
+      .error {
+        color: hsl(33, 100%, 50%);
+      }
+
+      .okay {
+        color: hsl(96, 100%, 43%);
+      }
+
+    </style>
+
+    <script>
+      //let server_url = 'http://localhost:8080/project';
+      let server_url = 'http://janice.arranstewart.info:8080/project';
+
+      function displayMessages(messages, messageDiv) {
+        //console.log("messages", messages);
+        if (messages.length > 0) {
+          for (const message of messages) {
+            console.log("messages", message);
+            let newContent = `<span class="warning">${message.message}
+                              </span><br>`;
+            messageDiv.insertAdjacentHTML('beforeend', newContent);
+          }
+        } else {
+            let newContent = `<span class="okay">File formats look okay
+                              </span><br>`;
+            messageDiv.insertAdjacentHTML('beforeend', newContent);
+        }
+      }
+
+      function checkFiles() {
+        console.log("sending files to be checked");
+        let formData      = new FormData(),
+            reportUpload  = document.getElementById("report-inpt"),
+            codeUpload    = document.getElementById("code-inpt");
+            messageDiv    = document.getElementById("checkfiles-message-panel");
+        messageDiv.innerHTML = "";
+        formData.append("report", reportUpload.files[0]);
+        formData.append("code",   codeUpload.files[0]);
+        fetch(server_url, {
+          method: "POST", 
+          body: formData
+        })
+        .then( response => response.json()
+        )
+        .then( jsonData =>  {
+                  console.log("jsonData:", jsonData );
+                  //console.log("messageDiv:", messageDiv );
+                  if ('messages' in jsonData) {
+                    displayMessages(jsonData.messages, messageDiv);
+                  } else {
+                    throw "JSON response had no 'messages' key";
+                  }
+               }
+        )
+        .catch(function(err){
+          console.error("error", err);
+          let messageDiv = document.getElementById("checkfiles-message-panel");
+          messageDiv.innerHTML = `
+            Unable to check files, error was: ${err}
+          `;
+
+        });
+      }
+    </script>
+
+
+  </head>
+
+  <body>
+
+    <!--
+    <form action="http://localhost:8080/project" 
+          method="POST"
+          enctype="multipart/form-data"
+    >
+    -->
+    <form>
+      <table>
+        <tr>
+          <td> <label for="fname">PDF report:</label>
+          </td>
+          <td> <input type="file" id="report-inpt" name="report">
+          </td>
+        </tr>          
+        <tr>
+          <td> <label for="lname">Code zip file:</label>
+          </td>
+          <td> <input type="file" id="code-inpt" name="code">
+          </td>
+        </tr>
+        <tr>
+          <td><button id="checkfiles-btn" onclick="checkFiles(); return false" >basic submission check</button>
+            </td><td></td>
+        </tr>
+
+      </table>
+    </form>
+
+    <div id="checkfiles-message-panel" style="color: hsl(33, 100%, 50%); font-weight: bold;" >
+    </div>
+
+
