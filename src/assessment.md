@@ -203,6 +203,13 @@ The following project materials are available for you:
 [proj-javadoc]: {{ "/assignments/project/doc" | url }}
 [proj-code]: {{ "/assignments/project_code.zip" | url }}
 
+Your submission needs to contain a readable PDF file
+and Java source code as specified in the project description.
+To help you ensure your submission is in an acceptable format,
+use the [page here][checker-page]
+to do basic checking of the files you are submitting.
+
+[checker-page]: {{ "/project/submission-basic-check" | url }}
 
 {#
 
