@@ -12,6 +12,10 @@ eleventyExcludeFromCollections: true
     <meta name="DC.Format"      content="text/html" >
     <title>Basic check of submission files</title>
 
+    <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.4/themes/overcast/jquery-ui.css" media="screen" rel="StyleSheet" type="text/css">
+    <script language="javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js" type="text/javascript"></script>
+    <script language="javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.6/jquery-ui.min.js" type="text/javascript"></script>
+
   <style>
     html {
       line-height: 1.5;
@@ -228,6 +232,16 @@ eleventyExcludeFromCollections: true
         displayMessages([sampleCompileError], messageDiv);
       }
 
+      function readFile(file){
+        return new Promise((resolve, reject) => {
+          let fr = new FileReader();
+          fr.onload = () => {
+            resolve(fr.result)
+          };
+          fr.onerror = reject;
+          fr.readAsText(file);
+        });
+      }
 
       function checkFiles() {
         console.log("sending files to be checked");
@@ -301,7 +315,6 @@ eleventyExcludeFromCollections: true
       </table>
     </form>
 
-    
     <button class="test" id="test-display-btn" onclick="testDisplay(); return false" >display err</button>
 
 
