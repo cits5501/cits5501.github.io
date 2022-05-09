@@ -61,7 +61,9 @@ progresses.
 - Week 8
   - Lecture 8A, Risk                  {% resourceList "lect08a--risk", ["pdf", "md"] %}
   - Lecture 8A, Formal methods intro  {% resourceList "lect08b--formal", ["pdf", "md"] %}
-  - Case study -- Knight Capital trading loss {% resourceList "lect08c--knight", ["pdf"] %}
+  - Case study -- Knight Capital trading loss {% resourceList "lect08c--knight", ["pdf", "md"] %}
+- Week 9
+  - Lecture 9, Program verification {% resourceList "lect09a--verification", ["pdf", "md"] %}
 {#
 - Week 9
   Lecture 9, Program verification ([pdf]({{ "/lectures/lect09.pdf" | url }}))
