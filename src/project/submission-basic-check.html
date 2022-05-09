@@ -209,15 +209,25 @@ eleventyExcludeFromCollections: true
         }
 
 
+      window.MESSAGES = []
+
       function displayMessages(messages, messageDiv) {
         //console.log("messages", messages);
         if (messages.length > 0) {
           for (const message of messages) {
             console.log("messages", message);
             let messageX = breakify(message.message);
-            let newContent = `<span class="warning"><pre>${messageX}</pre>
-                              </span><br>`;
-            messageDiv.insertAdjacentHTML('beforeend', newContent);
+            if (message.tag == "Warning" || message.tag == "Error") {
+              let newContent = `<span class="warning"><pre>${messageX}</pre>
+                                </span><br>`;
+              messageDiv.insertAdjacentHTML('beforeend', newContent);
+            }
+            if (message.tag == "Info") {
+              let newContent = `<span class="okay"><pre>${messageX}</pre>
+                                </span><br>`;
+              messageDiv.insertAdjacentHTML('beforeend', newContent);
+            }
+
           }
         } else {
             let newContent = `<span class="okay">File formats look okay
