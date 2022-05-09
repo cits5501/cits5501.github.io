@@ -52,22 +52,22 @@ progresses.
   - Lecture 5a -- model-based testing {% resourceList "lect05a--intro", ["pdf", "md"] %}
   - Lecture 5b -- graph-based testing {% resourceList "lect05b--graph", ["pdf", "md"] %}
   - Lecture 5c -- logic-based testing {% resourceList "lect05c--logic", ["pdf", "md"] %}
-- Week 6
+- Week 6--7
   - Lecture 6a -- syntax-based testing {% resourceList "lect06a--syntax", ["pdf", "md"] %}
   - Lecture 6b -- random testing       {% resourceList "lect06b--random", ["pdf", "md"] %}
-- Week 7
+- Week 8
   - Lecture 7A, integration and system testing {% resourceList "lect07a--system", ["pdf", "md"] %}
   - Lecture 7B, reviews and quality assurance  {% resourceList "lect07b--quality", ["pdf", "md"] %}
-- Week 8
+- Week 9
   - Lecture 8A, Risk                  {% resourceList "lect08a--risk", ["pdf", "md"] %}
   - Lecture 8A, Formal methods intro  {% resourceList "lect08b--formal", ["pdf", "md"] %}
   - Case study -- Knight Capital trading loss {% resourceList "lect08c--knight", ["pdf", "md"] %}
-- Week 9
+- Week 10
   - Lecture 9, Program verification {% resourceList "lect09a--verification", ["pdf", "md"] %}
+  - Other material -- "[Mocks, stubs and spies with Mockito](https://youtu.be/xXO8ft-tsrY)" (YouTube) \
+    (see also ch 12 of the textbook)
+
 {#
-- Week 9
-  Lecture 9, Program verification ([pdf]({{ "/lectures/lect09.pdf" | url }}))
-  Lecture 10, Program specification ([pdf]({{ "/lectures/lect10.pdf" | url }}))
 - Week 11
   Lecture 11, Program specification cont'd ([pdf]({{ "/lectures/lect11.pdf" | url }}))
   Lecture 12, Standards ([pdf]({{ "/lectures/lect12.pdf" | url }}))
@@ -140,6 +140,9 @@ to join the relevant Microsoft Teams meeting are:
   - Sample worksheet solutions  {% resourceList "workshop07-solutions", ["pdf", "md"] %}
 - Week 9
   - Lab worksheet               {% resourceList "workshop08", ["pdf", "md"] %}
+  - Sample worksheet solutions  {% resourceList "workshop08-solutions", ["pdf", "md"] %}
+- Week 10
+  - Lab worksheet               {% resourceList "workshop09", ["pdf", "md"] %}
 {#
 - Week 9
   Lab worksheet {% resourceList "workshop08", ["pdf", "md"] %}
