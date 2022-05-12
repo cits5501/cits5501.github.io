@@ -10,7 +10,7 @@ SHELL=bash
 
 IMAGE_NAME=cits5501-website
 
-IMAGE_VERSION=0.1.0
+IMAGE_VERSION=0.1.1
 
 print-image-name:
 	@echo $(IMAGE_NAME)

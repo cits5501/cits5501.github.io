@@ -54,10 +54,15 @@ def verbose_run(cmd, **kwargs):
 cmd = ["docker", "pull", f"{gh_image_id}:{version}"]
 verbose_run(cmd, check=False)
 
+# pull existing images if there
+cmd = ["docker", "pull", f"{gh_image_id}:latest"]
+verbose_run(cmd, check=False)
+
 # main image
 cmd = f"""docker build --pull -f Dockerfile
   --cache-from {gh_image_id}:{version}-builder
   --cache-from {gh_image_id}:{version}
+  --cache-from {gh_image_id}:latest
   -t {gh_image_id}:{version}""".split()
 
 # build up --label args
