@@ -87,6 +87,9 @@ customStyle: |
 {% set csmarks_url = siteinfo.csmarks_url %}
 {% set cssubmit_url = siteinfo.cssubmit_url %}
 
+{% set help_forum = siteinfo.help_forum %}
+{% set forum_url  = siteinfo.forum_url %}
+
 
 The assessment for {{ siteinfo.unitcode }} consists of
 two short assessments (online quiz or written exercise), a project,
@@ -210,6 +213,14 @@ use the [page here][checker-page]
 to do basic checking of the files you are submitting.
 
 [checker-page]: {{ "/project/submission-basic-check" | url }}
+
+**Update**{ style="color: #B72240;" }: Please note that [revisions were
+made]{ style="color: #B72240;" }  to the project on 9th May
+and 12th May -- make sure you're working from the most up-to-date
+version. Announcements about revisions were posted in the
+[Help5501][help5501] forum.
+
+[help5501]: {{ forum_url }}
 
 {#
 
