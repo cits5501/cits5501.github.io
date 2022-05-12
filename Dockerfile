@@ -7,6 +7,7 @@ RUN \
     csslint                       \
     eleventy-plugin-excerpt       \
     @11ty/eleventy-plugin-rss     \
+    markdown-it-bracketed-spans   \
     markdown-it-deflist           \
     markdown-it-div               \
     markdown-it-docutils          \

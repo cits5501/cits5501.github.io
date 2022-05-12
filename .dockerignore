@@ -1,3 +1,7 @@
 _site
 /out/
 /app
+/.git
+/assets
+/docs
+/XXX
