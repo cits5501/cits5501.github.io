@@ -94,14 +94,15 @@ function mkMarkdownConfig() {
   let markdownIt          = require("markdown-it");
   // Allow classes, identifiers and attributes in braces
   // e.g. {.class #identifier attr=value attr2="spaced value"}
-  let markdownItAttrs     = require("markdown-it-attrs");
-  let markdownItAnchor    = require("markdown-it-anchor");
-  let markdownItDefList   = require('markdown-it-deflist');
-  let markdownItDiv       = require('markdown-it-div');
-  let markdownItDocutils  = require("markdown-it-docutils").docutilsPlugin;
-  let markdownItFancyList = require("markdown-it-fancy-lists").markdownItFancyListPlugin;
-  let markdownItFootnotes = require('markdown-it-footnote');
-  let markdownItHtml      = require('markdown-it-html'); // allow html escape
+  let markdownItAttrs     = require("markdown-it-attrs"),
+      markdownItSpans     = require('markdown-it-bracketed-spans'),
+      markdownItAnchor    = require("markdown-it-anchor"),
+      markdownItDefList   = require('markdown-it-deflist'),
+      markdownItDiv       = require('markdown-it-div'),
+      markdownItDocutils  = require("markdown-it-docutils").docutilsPlugin,
+      markdownItFancyList = require("markdown-it-fancy-lists").markdownItFancyListPlugin,
+      markdownItFootnotes = require('markdown-it-footnote'),
+      markdownItHtml      = require('markdown-it-html'); // allow html escape
 
   let options = {
     html: true,        // Enable HTML tags in source
@@ -111,6 +112,7 @@ function mkMarkdownConfig() {
 
   let markdownLib = markdownIt(options)
                       .use(markdownItAttrs)
+                      .use(markdownItSpans)
                       .use(markdownItAnchor)
                       .use(markdownItFootnotes)
                       .use(markdownItDefList)
