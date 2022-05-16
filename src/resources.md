@@ -143,6 +143,7 @@ to join the relevant Microsoft Teams meeting are:
   - Sample worksheet solutions  {% resourceList "workshop08-solutions", ["pdf", "md"] %}
 - Week 10
   - Lab worksheet               {% resourceList "workshop09", ["pdf", "md"] %}
+  - Sample worksheet solutions  {% resourceList "workshop09-solutions", ["pdf", "md"] %}
 {#
 - Week 9
   Lab worksheet {% resourceList "workshop08", ["pdf", "md"] %}
