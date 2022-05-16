@@ -143,9 +143,7 @@ This unit covers testing and quality assurance topics including:
     Wednesday morning to make an appointment for an online meeting between 4
     and 5pm Wednesday afternoon.
     (Or, if between 4 and 5pm Wednesday doesn't suit, we can arrange some other
-    time.) My consultation time is usually fairly quiet this early in
-    semester -- if it gets busier later, I may get students to make
-    bookings through Outlook instead.
+    time.)
 ```
 
 :::
