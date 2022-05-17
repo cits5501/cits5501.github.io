@@ -140,12 +140,14 @@ to join the relevant Microsoft Teams meeting are:
 - Week 8 -- code reviews
   - Lab worksheet               {% resourceList "workshop07", ["pdf", "md"] %}
   - Sample worksheet solutions  {% resourceList "workshop07-solutions", ["pdf", "md"] %}
-- Week 9
+- Week 9 -- risk
   - Lab worksheet               {% resourceList "workshop08", ["pdf", "md"] %}
   - Sample worksheet solutions  {% resourceList "workshop08-solutions", ["pdf", "md"] %}
-- Week 10
+- Week 10 -- program verification
   - Lab worksheet               {% resourceList "workshop09", ["pdf", "md"] %}
   - Sample worksheet solutions  {% resourceList "workshop09-solutions", ["pdf", "md"] %}
+- Week 11 -- specification languages
+  - Lab worksheet               {% resourceList "workshop10", ["pdf", "md"] %}
 {#
 - Week 9
   Lab worksheet {% resourceList "workshop08", ["pdf", "md"] %}
