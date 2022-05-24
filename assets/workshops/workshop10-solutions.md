@@ -3,7 +3,7 @@ title: |
   `\LARGE\textmd{`{=latex}
   CITS5501 Software Testing and Quality Assurance `\\`{=latex}
   Semester 1, 2022 `\\`{=latex}
-   Workshop 10 (week 11) -- Formal methods 
+   Workshop 10 (week 11) -- Formal methods  -- solutions 
   `}`{=latex}
 include-before: |
   ```{=latex}
@@ -124,6 +124,98 @@ a.  There exist such things as chessboards.
 #.  Configuration files have at least one section.
 
 
+
+
+`~\vspace{1ex}`{=latex}
+\solbox
+
+**Sample solutions**
+
+a.  There exist such things as chessboards:
+
+    ```
+    sig Chessboard { }
+    ```
+
+#.  There is one, and only one, tortoise in the world:
+
+    ```
+    one sig Tortoise { }
+
+    // Note that any time we want to constrain the number of
+    // members of a sig, we can do it in the shorthand way
+    // above; but it can also be constrained using a *fact*
+    // (syntax below).
+    // But putting it in the sig is usually easiest
+    // to read.
+
+    sig Tortoise {}
+
+    fact oneTortoise {
+      #Tortoise = 1
+    }
+
+    ```
+
+
+#.  There exists at least one policeman:
+
+    ```
+    some sig Policeman { }
+    ```
+
+#.  Files have exactly one parent directory.
+
+    Note that we *only model what we are asked to model*;
+    we don't add in any sigs or properties, besides the
+    ones needed.
+
+    The question doesn't say (for instance) that
+    files and directories are both types of "file system
+    object" -- so we shouldn't model it.
+
+    ```
+    sig Directory { }
+
+    // note that we could leave the 'one' off if
+    // we wanted -- it is the default multiplicity --
+    // but it's often clearest to leave it in.
+    sig File {  parent : one Directory }
+    ```
+
+
+
+#.  Directories have at most one parent directory.
+
+    ```
+    sig Directory { parent : lone Directory }
+    ```
+
+    There is no problem with having "recursive" sigs
+    that "refer to themselves". Recall that a property
+    is really just expressing a *relation* between
+    entitities. The above code just says that
+    there are such things as directories, and
+    that any directory can be in a relationship with
+    zero or one other directories.
+
+    (Extra exercise: does the sig allow a directory
+    to be its own parent? You should be able
+    to work this out from the lecture slides and
+    the tutorial -- or by using the Alloy Analyzer.)
+
+
+
+#.  Configuration files have at least one section.
+
+    ```
+    sig ConfigFile { sections: some Section }
+
+    sig Section {}
+    ```
+
+
+\endsolbox
 
 
 ## B. Viewing "possible universes"
@@ -291,6 +383,56 @@ a.  Assume we have a sig `LectureTheatre{}` and a sig `Venue{}`.
 
 
 
+`~\vspace{1ex}`{=latex}
+\solbox
+
+**Sample solutions:**
+
+a\. Every lecture theatre is a venue
+
+```
+sig Venue {}
+sig Lecture {}
+
+// All lecture theaters are venues
+fact { LectureTheatre in Venue }
+
+// However note that you will get a warning in Alloy if you
+// try this: by default, each sig is a distinct type.
+
+// the following will run without warnings:
+//
+// sig Venue {} 
+// sig Lecture in Venue {} 
+```
+
+
+
+b\. `Dog` is the intersection of `DomesticatedAnimal` and `Canine`.
+
+
+```
+sig DomesticatedAnimal { }
+sig Canine { }
+sig Dog {}
+
+fact { Dog = DomesticatedAnimal & Canine }
+
+// As before -- the above will give warnings.
+//
+// Code that runs without warnings:
+//
+// sig Animal {}
+// sig DomesticatedAnimal in Animal {}
+// sig Canine in Animal {}
+// sig Dog in Canine {}
+//
+// fact { Dog = DomesticatedAnimal & Canine }
+```
+
+\endsolbox
+
+
 
 ## D. Facts with quantifiers
 
@@ -340,6 +482,51 @@ a.  Economists are also people.
 #.  Students have at least one hobby.
 #.  Bots are not people.
 
+
+
+`~\vspace{1ex}`{=latex}
+\solbox
+
+**Sample solutions:**
+
+a.  Economists are also people:
+
+    ```
+    // if we assume Economist never overlaps with ComputerScientist
+    sig Economist extends Person {}
+    ```
+#.  Economists have at most one hobby.
+
+    ```
+    fact {
+      all econ : Economist | lone econ.hobbies
+    }
+    ```
+#.  Students are people.
+
+    ```
+    sig Student extends Person {}
+    // Alternative to this: plausibly, we might instead model
+    // students as a subset of Person, so you can
+    // be a student economist.
+    ```
+#.  Students have at least one hobby.
+
+    ```
+    fact {
+      all s : Student | some s.hobbies
+    }
+    ```
+#.  Bots are not people.
+
+    ```
+    // We can just declare bots as a separate sig --
+    // by default, they won't overlap with Person
+    sig Bot {}
+    ```
+
+
+\endsolbox
 
 
 <!-- vim: syntax=markdown
