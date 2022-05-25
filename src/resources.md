@@ -161,6 +161,8 @@ to join the relevant Microsoft Teams meeting are:
 - Week 11
   Lab worksheet {% resourceList "workshop10", ["pdf", "md"] %}
   Sample worksheet solutions {% resourceList "workshop10-solutions", ["pdf", "md"] %}
+- Week 12
+  Lab worksheet {% resourceList "workshop11", ["pdf", "md"] %}
 
 #}
 
