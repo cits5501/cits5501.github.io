@@ -214,7 +214,7 @@ to do basic checking of the files you are submitting.
 
 [checker-page]: {{ "/project/submission-basic-check" | url }}
 
-**Update**{ style="color: #B72240;" }: Please note that [revisions were
+Please note that [revisions were
 made]{ style="color: #B72240;" }  to the project on 9th May
 and 12th May -- make sure you're working from the most up-to-date
 version. Announcements about revisions were posted in the
@@ -222,20 +222,14 @@ version. Announcements about revisions were posted in the
 
 [help5501]: {{ forum_url }}
 
-{#
+### Model solutions
 
-The details are available [here][project-pdf] (PDF)
-
-[project-pdf]: {{ "/workshops/project.pdf" | relative_url }}
-
-Sample solutions are available
+**Update**{ style="color: #B72240;" }: Sample solutions are available
 [**here**][project-solutions]{: class="hi-pri" :} (PDF file).
 
+[project-solutions]: {{ "/assignments/project-solutions.pdf" | url }}
+
 [csmarks]: https://secure.csse.uwa.edu.au/run/csmarks
-[project-solutions]: {{ "workshops/project-solutions.pdf" | relative_url }}
-
-#}
-
 
 ## Exam
 
