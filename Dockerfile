@@ -6,6 +6,7 @@ RUN \
     clean-css                     \
     csslint                       \
     eleventy-plugin-excerpt       \
+    eleventy-plugin-toc           \
     @11ty/eleventy-plugin-rss     \
     markdown-it-bracketed-spans   \
     markdown-it-deflist           \
