@@ -47,7 +47,11 @@ docker_args = \
 	    --entrypoint sh
 
 docker-build:
-	docker build -f Dockerfile -t $(IMG) .
+	docker build -f Dockerfile \
+	  --cache-from cits3007-website:latest \
+	  --cache-from $(IMAGE_NAME):latest \
+	  --cache-from $(IMG) \
+	  -t $(IMG) -t $(IMAGE_NAME):latest .
 
 # real kill target
 kill_:
@@ -58,7 +62,7 @@ kill_:
 kill:
 	make kill_ 2>/dev/null>/dev/null
 
-pullfirst = -$(DOCKER) pull $(IMG)
+#pullfirst = -$(DOCKER) pull $(IMG)
 
 # quick-and-dirty serve, for local use
 # We use the dev environment
