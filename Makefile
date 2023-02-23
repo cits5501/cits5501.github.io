@@ -62,7 +62,7 @@ kill_:
 kill:
 	make kill_ 2>/dev/null>/dev/null
 
-#pullfirst = -$(DOCKER) pull $(IMG)
+pullfirst = -$(DOCKER) pull $(IMG)
 
 # quick-and-dirty serve, for local use
 # We use the dev environment
