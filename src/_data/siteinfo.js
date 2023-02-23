@@ -15,9 +15,13 @@ function formatAssessmentDate(asstDate) {
   if (isValidDate(dt)) {
     // either date, or date+time
     if (dt.getHours() == 0) {
+      // for debugging: try
+      //    dt = moment(dt).format("ddd D MMM YYYY");
       dt = moment(dt).format("ddd D MMM");
     } else {
       dt = moment(dt).format("h:mm a ddd D MMM");
+      // for debugging: try
+      //    dt = moment(dt).format("h:mm a ddd D MMM YYYY");
     }
   }
   return `${dateType} ${dt}`
@@ -31,9 +35,11 @@ function formatAssessmentDates(asstDates) {
 }
 
 module.exports = function(configData) {
+  console.log("siteinfo. configData = ", configData);
+
   let { render, renderInline, extLink, safe } = configData.markdownConfig
 
-  const year      =  2022;
+  const year      =  2023;
   const citscode  = "5501";
   const unitcode  = `CITS${citscode}`;
   const unitname  = "Software Testing and Quality Assurance";
@@ -45,37 +51,39 @@ module.exports = function(configData) {
   const timetable_url     = 'https://timetable.applications.uwa.edu.au/';
   const csmarks_url       = "https://secure.csse.uwa.edu.au/run/csmarks";
   const cssubmit_url      = "https://secure.csse.uwa.edu.au/run/cssubmit";
+  const moodle_url        = "https://quiz.jinhong.org/";
+  const lms_url           = "https://lms.uwa.edu.au";
 
-  const lms               = safe(extLink("LMS", "https://lms.uwa.edu.au"));
+  const lms               = safe(extLink("LMS",    lms_url));
+  const moodle            = safe(extLink("Moodle", moodle_url));
 
   let assessments = {
       week3_quiz: {
         name: "[Week 3 quiz](/assessment/#week-3-quiz)",
         marksPercent: "7.5",
-        //dates: "Available Mon 14 March\\\nCloses 5pm Thu 17 Mar",
         dates: {
-          available: new Date(year, 2, 14), // Mon 14 Mar
-          closes:    new Date(year, 2, 17, 17, 0) // 5pm Thu 17 Mar
+          //available: new Date(year, 2, 14), // Mon 14 Mar
+          closes:    new Date(year, 2, 16, 17, 0) // 5pm Thu 16 Mar, 2023
         },
-        submit: lms
+        submit: moodle
       },
       week7_ex: {
-        name: "[Week 7 written exercise](/assessment/#week-7-exercise)",
+        name: "[Week 6 take-home test](/assessment/#week-6-test)",
         marksPercent: "7.5",
         //dates: "Due 5pm Thu 14 Apr",
         dates: {
-          available: new Date(year, 3, 11, 17, 0), // 5pm Mon 11 Apr
-          due: new Date(year, 3, 14, 17, 0) // 5pm Thu 14 Apr
+          //available: new Date(year, 3, 11, 17, 0), // 5pm Mon 11 Apr
+          due: new Date(year, 3, 6, 17, 0) // 5pm Thurs 6 Apr, 2023
         },
-        submit: lms
+        submit: moodle
       },
       project: {
         name: "[Project](/assessment/#project)",
         marksPercent: "35",
         //dates: "Due 5pm Thu 26 May",
         dates: {
-          available: new Date(year, 4, 5, 17, 0), // 5pm Thu 5 May,
-          due: new Date(year, 4, 26, 17, 0) // 5pm Thu 26 May
+          //available: new Date(year, 4, 5, 17, 0), // 5pm Thu 5 May,
+          due: new Date(year, 4, 26, 17, 0) // 5pm Fri 26 May, 2023
         },
         submit: safe(extLink("cssubmit", `${cssubmit_url}?p=np&open=${unitcode}-1`))
       },
@@ -87,7 +95,7 @@ module.exports = function(configData) {
           available: new Date(year, 5, 15, 17, 0), // 5pm Wed 15 Jun
           due:       new Date(year, 5, 17, 17, 0) // 5pm Fri 17 Jun
         },
-        submit: lms
+        submit: moodle
       },
     }
 
@@ -113,9 +121,13 @@ module.exports = function(configData) {
     author:       "Arran D. Stewart",
 
     keywords:     ["computer science", "software engineering",
-                  "uwa", "testing", "quality assurance", "CITS5501"],
+                   "education", "tertiary education",
+                   "university of western australia", "uwa",
+                   "testing", "quality assurance", `${unitcode}`],
 
-    lecture_time: "Tuesday 11 a.m.",
+    lecture_time: "Tuesday 3 p.m.",
+
+    lecture_venue: safe(extLink("the Robert Street Lecture Theatre (Robert Street Building, room G.16)", "https://link.mazemap.com/UOjeeiDP")),
 
     // google analytics
     ga_code:      "G-1JWXS3FSPZ",
@@ -146,6 +158,10 @@ module.exports = function(configData) {
           name: "Assessment",
           ext:  false,
         },
+        { url:  "/faq/",
+          name: "FAQ",
+          ext:  false,
+        },
         { url:  handbook_url,
           name: "Handbook entry",
           ext:  true,
@@ -155,7 +171,7 @@ module.exports = function(configData) {
           ext:  true,
         },
         { url: forum_url,
-          name: "Help5501",
+          name: "Help" + citscode,
           ext:  true,
         },
     ],
@@ -164,17 +180,18 @@ module.exports = function(configData) {
 
     /// useful snippets
 
-    timetable_url: timetable_url,
-
-    csmarks_url: csmarks_url,
-
-    cssubmit_url: cssubmit_url,
+    timetable_url:  timetable_url,
+    csmarks_url:    csmarks_url,
+    cssubmit_url:   cssubmit_url,
+    moodle_url:     moodle_url,
+    lms_url:        lms_url,
+    forum_url:      forum_url,
 
     lms: lms,
+    moodle: moodle,
 
     help_forum: `help${citscode}`,
 
-    forum_url: forum_url,
 
     formatAssessmentDate: formatAssessmentDate,
 

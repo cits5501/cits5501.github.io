@@ -1,0 +1,14 @@
+---
+layout: base-layout.njk
+---
+<main class="page">
+<h1>{{ title | safe }}</h1>
+
+<h2>Contents</h2>
+
+{{ content | toc | safe }}
+
+{{ content | safe }}
+</main>
+{# vim: syntax=markdown :
+#}
