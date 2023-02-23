@@ -28,6 +28,12 @@ customStyle: |
 {% set moodle_url   = siteinfo.moodle_url %}
 {% set quiz_percent  = siteinfo.assessments["week3_quiz"]["marksPercent"] %}
 
+{% set blank  = "{ target=\"_blank\" }" %}
+
+{#
+  x_
+#}
+
 -----
 
 ## Study practices
@@ -237,7 +243,7 @@ of the timetabled labs.
 You should have a personal timetable available through
 CAS (UWA's Class Allocation System). But you can
 also get full details of lecture and lab times and venues by
-visiting UWA's **[Timetable site][timetable-site]{ target="_blank" }**{ class="hi-pri" }.
+visiting UWA's **[Timetable site][timetable-site]{{blank}}**{ class="hi-pri" }.
 (If the information for {{ siteinfo.unitcode }} is not visible, then enter "{{ siteinfo.unitcode }}" in the
 box labelled "Unit search", and then click "Show timetable".)
 
@@ -267,8 +273,7 @@ See also [Academic conduct and source citation](#academic-conduct-source-citatio
 
 Details of how to submit each assessment will be released on
 the [Assessment page](/assessment/).
-Most of the assessments will be submitted using [Moodle]({{moodle_url}}){ target="_blank" }.
-<!-- x_ -->
+Most of the assessments will be submitted using [Moodle]({{moodle_url}}){{blank}}.
 In order to submit an assessment, you'll need to create an account on
 the Moodle server by visiting the [Moodle signup page][moodle-signup].
 You'll need to use your UWA email address, select a username (usually,
@@ -406,7 +411,7 @@ Wherever possible, we adopt a rubric based on the following scheme:
       questions may be marked by different people!
     - Make sure you answer the question **fully**{ class="hi-pri" }. If you only answer
       part of the question (or do not at all answer the question asked),
-      you cannot be awarded any marks (no matter how relevant the facts
+      you cannot be awarded full marks (no matter how relevant the facts
       you discuss or how good a justification you provide).
       If you only answer part of a question, you may receive
       a proportion of the marks for that question.
@@ -439,9 +444,11 @@ For **projects**{ class="hi-pri" }:
 
 For **"long answer"**{ class="hi-pri" } questions in **quizzes, tests or exams**{ class="hi-pri" }:
 
-: If the question is ambiguous, or you believe it contains an error, or
-  requires you to make assumptions in order to answer it: then you may
-  make reasonable assumptions in order to answer it.
+: If the question is ambiguous, or you believe it contains an error or
+  requires you to make assumptions in order to answer it, then you may
+  make whatever reasonable assumptions are required in order to answer it.
+
+  Ensure you document these assumptions in your answer.
 
 For **"short answer"**{ class="hi-pri" } questions in **quizzes, tests or exams**{ class="hi-pri" }:
 
@@ -485,11 +492,7 @@ such as `JPlag`, `moss` or `turnitin` to detect plagiarism.
 You **must**{ class="hi-pri" } act in accordance with
 UWA's [academic conduct policy][acad-policy].
 See the STUDYSmarter team's [Guide to Avoiding Academic
-Misconduct][misconduct-guide]{ target="_blank" } (PDF) for additional details.
-
-<!--
-  x_
--->  
+Misconduct][misconduct-guide]{{blank}} (PDF) for additional details.
 
 In particular, you **must not**{ class="hi-pri" } plagiarize any
 work. Plagiarism is the unattributed use of
@@ -536,9 +539,8 @@ If scholarly references are included in submitted work, then students
 may use any standard citation style they wish (e.g. Harvard, APA, MLA,
 IEEE), as long as it is applied consistently. One recommended style
 is the "AMS short alpha-numeric" style (see the [AMS style
-guide][ams-style-guide]{ target="_blank" } (PDF), sec 10.3).
+guide][ams-style-guide]{{blank}} (PDF), sec 10.3).
 
-<!-- x_ -->
 
 [ams-style-guide]: https://www.ams.org/publications/authors/AMS-StyleGuide-online.pdf
 
@@ -712,7 +714,7 @@ Formatting expectations for these are as follows:
     at the end of the report (do not use citation keys (`@`),
     BibTex, or similar features). "AMS short alpha-numeric" would
     be a good citation style -- see
-    the [AMS style guide][ams-style-guide]{ target="_blank" } (PDF), sec 10.3.
+    the [AMS style guide][ams-style-guide]{{blank}} (PDF), sec 10.3.
 
 **Text input field**
 
@@ -791,10 +793,57 @@ covered in the current year.
 
 Because Blackboard is a very terrible LMS.[^lms-sucks]
 
-[^lms-sucks]: See "[Why Is Your School's LMS So Bad?](https://www.pathwright.com/blog/why-is-your-schools-lms-so-bad)".
+[^lms-sucks]: See "[Why Is Your School's LMS So Bad?][lms-so-bad]{{blank}}".
 
-In addition, it doesn't allow for (complete or partial)
-automatic marking of coding-based questions, but Moodle does.
+In addition
+
+- Blackboard LMS doesn't allow for (complete or partial) automatic
+  marking of coding-based questions, but Moodle does.
+- Blackboard LMS content isn't publicly published, but GitHub sites are,
+  and this content might be useful even to someone not doing the unit.
+
+[lms-so-bad]: https://www.pathwright.com/blog/why-is-your-schools-lms-so-bad
+
+------
+
+## Discussion forum
+
+### Can I post questions about the unit content to the discussion forum?
+
+Please do! But before posting, you might want to
+
+a.  search the forum (and this page) to see if
+    an answer to your question has already been posted, and
+b.  review the page ["How do I ask a good question?"][good-question]
+
+[good-question]: https://stackoverflow.com/help/how-to-ask
+
+Note that any posts on the discussion forum need to comply with UWA's
+[Code of Conduct](/#expectations) and
+[academic conduct policy][acad-policy]. That means you should
+
+- endeavour to treat everyone with respect and courtesy and without
+  harassment, and
+- not post your solutions to an assessment (as this can breach the
+  policy against collusion).
+
+### How do I subscribe to posts from the discussion forum? { #forum-subscriptions }
+
+You can set up an email subscription to the discussion forum
+as follows:
+
+1.  Ensure you're logged in to {{help5501}}.
+2.  Under the left-hand menu ("{{help_forum}}"), select "edit
+    preferences".
+3.  Select "yes" to one (or both) of the options
+    "email me a copy of every new article immediately" and
+    "email me a daily digest of new articles".
+4.  Click "Save these preferences".
+
+You should now receive regular updates by email when new posts are
+made on the forum.
+
+------
 
 ## Questions about this page
 
@@ -812,11 +861,11 @@ television in water" or "Do not put oatmeal in the CD drive".
 
 > - J. Matthews, "Every Rule Has a Story..." in *IEEE Communications
 >   Standards Magazine*, vol. 6, no. 1, pp. 4-4, March 2022, doi:
->   [10.1109/MCOMSTD.2022.9762870](https://doi.org/10.1109/MCOMSTD.2022.9762870)
-
+>   [10.1109/MCOMSTD.2022.9762870](https://doi.org/10.1109/MCOMSTD.2022.9762870){{blank}}
 
 See also [r/AskReddit][askreddit], "[What rule exists because of
-you?][what-rule]".
+you?][what-rule]{{blank}}".
+
 
 [askreddit]: https://www.reddit.com/r/AskReddit/
 [what-rule]: https://www.reddit.com/r/AskReddit/comments/576qaw/what_rule_exists_because_of_you/

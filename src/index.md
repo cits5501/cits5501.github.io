@@ -218,7 +218,7 @@ Note that materials presented during class sessions
 A six-point unit is deemed to be equivalent to one quarter of a
 full-time workload, so you would be expected to commit 10--12 hours
 per week to the unit, averaged over the entire semester.
-Outside of the contact hours (3 hours per week) for the unit, the
+Outside of the contact hours (4 hours per week) for the unit, the
 remainder of your time should be spent reading the recommended reading,
 attempting exercises and working on assignment tasks.
 
@@ -265,9 +265,9 @@ statically-typed language (e.g. Java, C), and
 CITS3301/CITS4401 Software Requirements and Design.
 
 Some basic familiarity with testing frameworks for an OO language will be
-helpful but are not required:
+helpful, but are not required:
 
-- **For CITS1001**{ class="hi-pri" } (which uses the Java programming
+- **For CITS1001/CITS2005**{ class="hi-pri" } (which uses the Java programming
   language), the relevant testing framework is [JUnit][junit]{ target="_blank" }.
   The textbook for CITS1001, [*Objects First with
   Java*][objects-first]{ target="_blank" } by Barnes and Kölling,
@@ -323,15 +323,21 @@ You will have completed the [Academic Conduct Essentials][acad-essentials]
 unit, which explains what is appropriate and inappropriate academic
 conduct.
 
-{#
-To avoid plagiarism, ensure you reference
-There is also a link one the Resources page to a
-<a href="./resources.html#Referencing guide">referencing guide (from MIT) specifically for code.</a>
-#}
-
 [code-of-conduct]: https://www.hr.uwa.edu.au/policies/policies/conduct/code/conduct
 [code-of-ethics]: https://www.hr.uwa.edu.au/policies/policies/conduct/code/ethics
 [acad-essentials]: https://www.uwa.edu.au/library/find-resources/ace
+
+It is expected that you regularly (at least twice a week) check
+the [**discussion forum**]({{forum_url}}){ target="_blank" }
+for the unit
+([**{{help_forum}}**]({{forum_url}}){ class="hi-pri" target="_blank" })
+for announcements. {#
+  x**
+#}
+(You can also [set up an email subscription][subscription] to the discussion forum
+as follows -- see the [FAQ page][subscription] for details.)
+
+[subscription]: /faq/#forum-subscriptions
 
 It is expected that you keep [reliable backups][backups] of your work,
 as computer and/or IT failures are [not grounds][no-it-failures] for special
