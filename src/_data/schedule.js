@@ -1,4 +1,6 @@
 
+// look down bottom for `startDate`
+
 module.exports = function(configData) {
 
   let schedule = {}
@@ -24,7 +26,10 @@ module.exports = function(configData) {
     lectureTopic:
       "Introduction to testing",
     workshopTopic:
-      "Introduction to testing",
+      `Introduction to testing
+
+      *No Monday lab (Labour Day holiday) -- attend another lab or self-directed study*`
+      ,
     reading:
       `- Pressman, ch 14 ("Component-level design"), ch 22 ("Software Testing Strategies"), ch 28 ("Formal modeling and verification")
       - Horstmann, *Object-Oriented Design and Patterns* (2nd edn), ch 3 "Guidelines for Class Design" (extract available [here](http://www.unitreadings.library.uwa.edu.au/leganto/public/61UWA_INST/lists/11016332940002101?auth=SAML&section=11308340080002101))
@@ -86,10 +91,21 @@ module.exports = function(configData) {
     lectureTopic:
       "Quality assurance, software reviews, performance testing",
     workshopTopic:
-      "Property-based testing and mutation testing",
+      `Property-based testing and mutation testing
+
+      *No Friday lab (Good Friday holiday) -- catchup in week 7 lab*`
+      ,
     reading:
       `- Pressman, ch 20 ("Review techniques"), ch 22 ("Software testing strategies")`,
     assessmentDetails: 'Test design exercise, due Sun 11:59 pm',
+    },
+
+    {weekNum: null,
+    lectureTopic:
+      `<span style="color: #696969;">***no class -- non-teaching week***</span>`,
+    workshopTopic: "",
+    reading: "",
+    assessmentDetails: '',
     },
 
 
@@ -104,20 +120,13 @@ module.exports = function(configData) {
       assessmentDetails: '',
     },
 
-    {weekNum: null,
-    lectureTopic:
-      `<span style="color: #696969;">***no class -- non-teaching week***</span>`,
-    workshopTopic: "",
-    reading: "",
-    assessmentDetails: '',
-    },
-
-
 
     {weekNum: 8,
       lectureTopic:
         `Risk management\\
-        software metrics`,
+        software metrics
+
+        *Tue 25 Apr: ANZAC day public holiday -- recorded lecture*`,
       workshopTopic:
         `Systems and standards`,
       reading:
@@ -167,7 +176,7 @@ module.exports = function(configData) {
   ]
 
   // add dates for start of week
-  const startDate = new Date(2022,01,28) // 28 Feb
+  const startDate = new Date(2023,01,27) // Mond 27 Feb, 2023
   let dt = new Date(startDate);
   for (let i=0; i < schedule.weeks.length; i+=1) {
     schedule.weeks[i].date = new Date(dt);

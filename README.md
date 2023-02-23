@@ -3,7 +3,8 @@
 
 This is the Git repository for the CITS5501 "Software Testing and Quality Assurance"
 website, which is built with [eleventy][eleventy] and published using
-[GitHub pages][gh-pages].
+[GitHub pages][gh-pages]. It uses a Docker image based on
+[arranstewart/eleventy-docker](https://github.com/arranstewart/eleventy-docker).
 
 [gh-pages]: https://pages.github.com
 

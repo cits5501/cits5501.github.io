@@ -60,9 +60,10 @@ module.exports = function(configData) {
   let assessments = {
       week3_quiz: {
         name: "[Week 3 quiz](/assessment/#week-3-quiz)",
-        marksPercent: "7.5",
+        marksPercent: "5",
         dates: {
           //available: new Date(year, 2, 14), // Mon 14 Mar
+          available: "TBA",
           closes:    new Date(year, 2, 16, 17, 0) // 5pm Thu 16 Mar, 2023
         },
         submit: moodle
@@ -73,7 +74,19 @@ module.exports = function(configData) {
         //dates: "Due 5pm Thu 14 Apr",
         dates: {
           //available: new Date(year, 3, 11, 17, 0), // 5pm Mon 11 Apr
+          available: "TBA",
           due: new Date(year, 3, 6, 17, 0) // 5pm Thurs 6 Apr, 2023
+        },
+        submit: moodle
+      },
+      week7b_ex: {
+        name: "[Take-home review exercise](/assessment/#week-6-test-review)",
+        marksPercent: "2.5",
+        //dates: "Due 5pm Thu 14 Apr",
+        dates: {
+          //available: new Date(year, 3, 11, 17, 0), // 5pm Mon 11 Apr
+          available: "TBA",
+          due: new Date(year, 3, 13, 17, 0) // 5pm Thurs 13 Apr, 2023
         },
         submit: moodle
       },
@@ -83,17 +96,19 @@ module.exports = function(configData) {
         //dates: "Due 5pm Thu 26 May",
         dates: {
           //available: new Date(year, 4, 5, 17, 0), // 5pm Thu 5 May,
-          due: new Date(year, 4, 26, 17, 0) // 5pm Fri 26 May, 2023
+          available: "TBA",
+          due: new Date(year, 4, 19, 17, 0) // 5pm Fri 19 May, 2023
         },
-        submit: safe(extLink("cssubmit", `${cssubmit_url}?p=np&open=${unitcode}-1`))
+        //submit: safe(extLink("cssubmit", `${cssubmit_url}?p=np&open=${unitcode}-1`))
+        submit: moodle
       },
       exam: {
         name: "[Take-home exam](/assessment/#exam)",
         marksPercent: "50",
         //dates: "Available 5pm Wed 8 Jun\\\nDue 5pm Fri 10 Jun",
         dates: {
-          available: new Date(year, 5, 15, 17, 0), // 5pm Wed 15 Jun
-          due:       new Date(year, 5, 17, 17, 0) // 5pm Fri 17 Jun
+          available: new Date(year, 5, 14, 17, 0), // 5pm Wed 15 Jun
+          due:       new Date(year, 5, 16, 17, 0) // 5pm Fri 17 Jun
         },
         submit: moodle
       },
@@ -199,7 +214,7 @@ module.exports = function(configData) {
 
     assessment_table: {
       header: ["Assessment", "% of final mark", "Assessment dates", "Where to submit"],
-      body: ["week3_quiz", "week7_ex", "project", "exam"].map( (key) => {
+      body: ["week3_quiz", "week7_ex", "week7b_ex", "project", "exam"].map( (key) => {
         let the_assessment = assessments[key];
         return [
           the_assessment.name,

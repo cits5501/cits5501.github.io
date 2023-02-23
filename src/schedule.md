@@ -144,7 +144,7 @@
 
 {% set help_forum = siteinfo.help_forum %}
 {% set forum_url  = siteinfo.forum_url %}
-{% set help5501   = help_forum | extLink(forum_url) | safe %}
+{% set help_forum_safe   = help_forum | extLink(forum_url) | safe %}
 
 
 <!--!
@@ -160,9 +160,9 @@ The order or delivery date of
 lectures on this page may change during the semester.
 
 - For **lecture slides**{ class="hi-pri" } and
-  **lab/workshop sheets**{ class="hi-pri" }
+  **lab worksheets**{ class="hi-pri" }
   see the [Resources page]({{ "/resources/" | url }}).
-- For **recordings**{ class="hi-pri" } of the lectures,
+- For [**recordings**]({{ siteinfo.lms_url }}){ class="hi-pri" } of the lectures,
   visit UWA's {{ siteinfo.lms }} (Learning
   Management System).
 
@@ -204,9 +204,9 @@ material will be greatly enhanced if you work through these readings
 <table class="schedule-table" >
 <colgroup>
 <col style="width: 10%;">
+<col style="width: 18%">
 <col style="width: 16%">
-<col style="width: 14%">
-<col style="width: 47%">
+<col style="width: 43%">
 <col style="width: 21%">
 </colgroup>
 <tbody>
@@ -218,7 +218,7 @@ material will be greatly enhanced if you work through these readings
  Lecture
 </th>
 <th>
- Lab/workshop
+ Lab
 </th>
 <th>
   Reading

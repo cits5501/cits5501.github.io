@@ -1,6 +1,6 @@
 ---
 title: "Assessment"
-layout: page-layout.njk
+layout: page-toc-layout.njk
 customStyle: |
   ul, ol, dl, li p {
     margin: 0 0 0.70em;
@@ -92,7 +92,7 @@ customStyle: |
 
 
 The assessment for {{ siteinfo.unitcode }} consists of
-two short assessments (online quiz or written exercise), a project,
+several short assessments (online or take-home quiz or test), a project,
 and a final examination.
 
 
@@ -114,8 +114,12 @@ and a final examination.
 
 ## Week 3 quiz
 
-- This quiz will be available on the {{ siteinfo.lms }}.
+- This quiz will be available on {{ siteinfo.moodle }}. For more
+  information, see the list of [**Frequently Asked
+  Questions**](/faq#are-lecturers-recorded){ class="hi-pri" }
+  and await further announcements.
 
+{#
 
 <!--!
 <details>
@@ -141,7 +145,7 @@ and a final examination.
   of anyone else), and you must not distribute your answers to other
   people.
 - Questions may be drawn from any content contained in lectures, lecture
-  slides, lab/workshop exercises or assigned readings up until the end
+  slides, lab exercises or assigned readings up until the end
   of week 2, or may require
   you to make reasonable inferences from that material or to investigate
   questions arising from that material.
@@ -159,11 +163,19 @@ and a final examination.
 </details>
 !-->
 
-## Week 7 exercise
+#}
 
-The week 7 exercise will be made available
-early in week 7 on the
-{{ siteinfo.lms }}, under "Week 7 Exercise".
+## Week 6 test
+
+The week 6 take-home test will be made available
+early in week 6.
+
+For more
+information, see the list of [**Frequently Asked
+Questions**](/faq#are-lecturers-recorded){ class="hi-pri" }
+and await further announcements.
+
+{#
 
 The exercise should not take long to do -- it should be possible to
 answer each question in a few paragraphs. It is to
@@ -183,6 +195,8 @@ are available [as a PDF][ex-sol].
 
 [ex-sol]: {{ "/assignments/exercise-solutions.pdf" | url }} 
 
+#}
+
 ## Project
 
 The project for the unit, worth
@@ -190,7 +204,10 @@ The project for the unit, worth
 of the unit's marks is due on
 {{ siteinfo.assessments.project.dates.due | dateFormat("dddd D MMM") }}.
 
-It will include both programming work and written work, plus an oral component.
+It will include both programming work and written work.
+
+{#
+
 Students will be required to book a short (less than 10 mins) meeting
 (either face-to-face or via MS Teams) with a marker,
 where they should expect to answer some basic questions about their project
@@ -231,13 +248,23 @@ version. Announcements about revisions were posted in the
 
 [csmarks]: https://secure.csse.uwa.edu.au/run/csmarks
 
+#}
+
 ## Exam
 
 The exam is a take-home exam, so open-book and not invigilated.
 
-To maintain exam integrity, students may be selected for a short (less than 10 mins)
+To maintain exam integrity, students may be selected for a short (less
+than 15 mins)
 follow-up meeting (either face-to-face, or via MS Teams) with a marker,
 where they should expect to answer some basic questions about their exam responses.
+
+The exam will be available for 48 hours from its publication on LMS
+to its due date, and can be submitted at any time within that range.
+It should take about 2 hours' work to complete.
+Refer to the table of assessments at the top of this page for
+details of the publication date and due date.
+
 
 ### Past exam papers
 
