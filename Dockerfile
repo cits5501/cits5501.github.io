@@ -15,6 +15,7 @@ RUN \
     markdown-it-fancy-lists       \
     markdown-it-footnote          \
     markdown-it-html              \
+    markdown-it-katex             \
     moment                        \
     string-strip-html@8.3.0       \
     striptags
