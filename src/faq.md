@@ -760,7 +760,7 @@ still have queries, you can also [make an appointment](/#unit-coordinator)
 with me to discuss your answers and remaining questions.
 
 Be sure to start your revision and formulate your questions *early*!
-If you try to make an appointment to discuss the exam less
+If you try to make an appointment to discuss the exam less than
 three working days before the exam, I may be either
 not at UWA or busy with exam
 preparations myself, and unable to schedule an appointment
@@ -806,9 +806,9 @@ In addition
 
 ------
 
-## Discussion forum
+## Discussion forum (help5501) { #help5501 }
 
-### Can I post questions about the unit content to the discussion forum?
+### Can I post questions about the unit content to the discussion forum? { #posting-questions }
 
 Please do! But before posting, you might want to
 
