@@ -232,8 +232,7 @@ We will look at invariants more in the lab/workshops.
 ### Definition
 
 We define testing as a systematic attempt to find faults
-in a software system.
-in a planned way.
+in a software system in a planned way.
 
 (Adapted from Bruegge & Dutoit)
 
@@ -241,12 +240,14 @@ in a planned way.
 
 We can classify tests by the "level" of component or system they work with:
 
--   We can test a single procedure, method or function -- this is called
-    *unit testing*. A *unit* just means a component of code -- typically a
-    small one, but sometimes the term is used to refer to modules (collections
-    of definitions).
+-   We can test some code which is a *small part* of a *larger system* --
+    for instance: a single procedure, method or function. (How small can it be?)
+    This is called *unit testing*.
 -   We can test how units, classes, modules or other components of a system work together -- this is called *integration testing*
--   We can test an entire system -- this is called *system testing*
+-   We can test an entire system -- this is called *system testing* (or "system-level testing").
+
+    We can test whether the system meets its specifications (system testing proper),
+    and whether it properly executes some scenario in an appropriate environment (end-to-end testing).
 
 ### What sorts of things can we test?
 
@@ -652,9 +653,42 @@ What should go in the API documentation?
     any *changes* the function makes to the system state
     (the "side effects" discussed earlier)
 
+Sometimes the postconditions will vary, depending on the
+arguments passed:
+
+-   "*IF* a valid email address is supplied, *THEN* the
+    `emailMyResignationLetter()` method will email a resignation letter.
+    But if not, then a `MalformedEmailAddress` exception will be thrown."
+
+We need to make sure we cover all circumstances, so that
+users will know what to expect.
+
+### APIs, cont'd
+
+If the preconditions are *not* satisifed, then the behaviour
+is **undefined**. This means the user has failed to live up to their part of
+the "bargain", and has NO guarantees about what the system might do.
+
+By way of example, we'll consider Java's `binarySearch` method in
+`java.util.Arrays`:
+
+- <https://docs.oracle.com/javase/7/docs/api/java/util/Arrays.html#binarySearch(byte[],%20byte)>
+
+<!--
+
 We often also will document what will happen if the preconditions
-*aren't* satisfied: in many languages, this will typically be an
+*aren't* satisfied.
+
+ in many languages, this will typically be an
 exception being thrown.
+
+***XXXXXXX XXXXXX ERROR XXXXX FIXME XXXXX***
+
+if precon isn't satisfied, that means we get undefined behaviour.
+
+exceptions are just another example of a *postcondition*.
+-->
+
 
 ### APIs, cont'd
 

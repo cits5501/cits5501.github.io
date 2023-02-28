@@ -80,17 +80,15 @@ complex (formal methods and software modelling).
 
 Some examples of these sorts of techniques in use:
 
+-   Data-driven testing (used in JUnit and many other testing
+    frameworks)
+-   Property-based testing (first introduced in the Haskell
+    language)
 -   Verification of software properties (e.g. the provably secure
     [seL4 Microkernel](https://sel4.systems/))
 -   Model checking – Microsoft uses model checking techniques
     to test that driver code (which runs with high privileges)
     is using the API correctly
--   Enforcing properties with rich type systems:
-    - Memory safety
-    - Microsoft's research [Singularity OS](https://en.wikipedia.org/wiki/Singularity_\(operating_system\))
-    - Encoding protocols using types ( [session types](http://simonjf.com/2016/05/28/session-type-implementations.html) )
--   Extracting programs from proofs (using e.g. proof assistants like
-    [Agda](http://wiki.portal.chalmers.se/agda/pmwiki.php))
 
 ### Methodology
 
@@ -104,23 +102,27 @@ testing and quality assurance plan.
 
 # Admin
 
-### Unit Information
+### Unit coordinator
 
-Unit Coordinator: Arran Stewart\
-Contact: arran.stewart@uwa.edu.au\
-Phone:  +61 8 6488 1945\
-Office: Rm G.08 CSSE Building\
-Consultation: Drop in from 4--5pm Wednesdays, or email for an appointment.
-
-Unit webpage: accessible via GitHub, at
-<https://github.com/cits5501>
+\begin{center}
+\bgroup
+\def\arraystretch{1.2}
+\begin{tabular}{@{}l>{\raggedright\arraybackslash}p{7cm}@{}}
+Unit Coordinator: & Arran Stewart \\
+Email:            & cits5501-pmc@uwa.edu.au \\
+Office:           & Room G.08 CSSE Building \\
+Consultation:     & Drop in from 3--5pm Mondays, or email for an appointment.\\
+Unit website:     & accessible via GitHub, at \url{https://github.com/cits5501/}
+\end{tabular}
+\egroup
+\end{center}
 
 ### Announcements
 
 Announcements will be made in lectures, and on the unit
 help forum, [`help5501`][help5501].
 
-It's important to check the forum regularly -- at least once
+It's important to check the forum regularly -- at least twice
 a week.
 
 [help5501]: https://secure.csse.uwa.edu.au/run/help5501
@@ -130,17 +132,19 @@ a week.
 Lectures:
 
 - You should attend one lecture per week -- you should either attend in
-  person, attend online (we will use MS Teams), or watch the recorded lecture.
+  person
+  <!-- , attend online (we will use MS Teams), -->
+  or watch the recorded lecture.
   (Recorded lectures are available via the university's
-  LMS, at <https://lms.uwa.edu.au/>.)
+  Blackboard LMS, at <https://lms.uwa.edu.au/>.)
 
-Workshops:
+Labs:
 
-- You should attend one lab/workshop each week, starting in week
+- You should attend one lab each week, starting in week
   *two*.\
   If there is room available for you, you are welcome to attend other
   lab sessions as well.
-- In the lab/workshops, we will work through practical exercises
+- In the labs, we will work through practical exercises
   related to the unit material. If you have a laptop, it may
   be useful to bring it, but you can use lab computers if not.
 
@@ -155,24 +159,26 @@ contact hours (3 hours per week) for the unit, the remainder of your
 time should be spent reading the recommended reading, attempting
 exercises and working on assignment tasks.
 
-### Textbook
+### Textbooks
 
 See the unit website for details of the textbooks
 you will need access to:
 
-<https://cits5501.github.io/>
+&nbsp; &nbsp; <https://cits5501.github.io/schedule/#recommended-readings>
+
+(Or just go to <https://cits5501.github.io/faq> and search for "textbook".) 
 
 ### Assessment
 
-The assessment for CITS5501 consists of two short assessments (online
-quiz or an on-paper exercise), a project, and a final examination:
+The assessment for CITS5501 consists of three short assessments (online
+quiz, test or exercise), a project, and a final examination:
 see the Assessment page at
 
 - <https://cits5501.github.io/assessment/>
 
-In general, the short assessments should be pretty straightforward --
-do-able in an afternoon, at most -- but we will allow most of a week from
-when they're available to when they're due.
+In general, the short assessments should be
+do-able in a matter of hours -- but we allow most of a week in which
+students can arrange for themselves a suitable time to do them.
 
 The project will be done individually, and
 involves designing and executing a testing and validation strategy for
@@ -188,11 +194,11 @@ some hypothetical software.
 
 - The current unit schedule is available on the unit website:
 
-  <https://cits5501.github.io/schedule/>
+  &nbsp; &nbsp; <https://cits5501.github.io/schedule/>
 
-- The schedule below gives recommended readings for each topic: either
+- The schedule gives recommended readings for each topic: either
   chapters from the recommended texts, or extracts. Your understanding
-  of the lecture and workshop material will be greatly enhanced if you
+  of the lecture and lab material will be greatly enhanced if you
   work through these readings prior to attending.
 
 ### Prerequisites
@@ -211,16 +217,9 @@ A *detailed* knowledge of Java is not essential -- if you have
 a good knowledge of Python, instead, it should be straightforward
 to pick up the parts of the language you need.
 
-(As a start -- start experimenting with the [`mypy`][mypy]
-optional static type checker for Python.)
-
-[mypy]: http://mypy-lang.org
-
-If you *aren't* familiar with Java, and would like some
-assistance getting familiar with the language, please post in
-the help forum (or send me an email, if you prefer) --
-I am putting together some suitable resources for beginners
-in the language.
+I will review some of the basics of the language in class; you
+should make sure you have access to a textbook on Java
+(almost any will do) to bring yourself up to speed.
 
 ### Programming languages
 
@@ -292,10 +291,10 @@ Testing is used in several ways in modern software development:
 
 ### Software Faults, Errors & Failures
 
-- Software Fault: A static defect in the software
-- Software Failure: External, incorrect behavior with respect to the
+- Software fault: A static defect in the software
+- Software failure: External, incorrect behavior with respect to the
   **requirements** (or other description of the expected behavior)
-- Software Error: An incorrect internal state that is the manifestation of some fault
+- Software error: An incorrect internal state that is the manifestation of some fault
 
 ### Software Faults, Errors & Failures
 
@@ -331,6 +330,8 @@ Based on process maturity:
 -   Level 2: The purpose of testing is to show that the software doesn’t work
 -   Level 3: The purpose of testing is not to prove anything specific, but to reduce the risk of using the software
 -   Level 4: Testing is a mental discipline that helps all IT professionals develop higher quality software
+
+<!--
 
 ### Level 0 Thinking
 
@@ -374,4 +375,4 @@ A mental discipline that increases quality
 -   Primary responsibility to measure and improve software quality
 -   Their expertise should help the developers
 
-
+-->
