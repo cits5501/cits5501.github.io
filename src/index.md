@@ -208,8 +208,8 @@ see the list of [**Frequently Asked
 Questions**](/faq#are-lecturers-recorded){ class="hi-pri" }.
 
 But please note that recordings do
-sometimes fail -- so if you *can* attend the lecture in-person or
-online, it's recommended.
+sometimes fail -- so if you *can* attend the lecture in-person
+{# or online #}, it's recommended.
 
 ### Time required
 
