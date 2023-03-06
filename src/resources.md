@@ -26,10 +26,10 @@ like to get an idea in advance of what will be covered.)
 - Week 1
   - Lecture 1 -- introduction {% resourceList "lect01--intro", ["pdf", "md"] %}
   - Lecture 2 -- testing concepts {% resourceList "lect02--testing", ["pdf", "md"] %}
-
-{#
 - Week 2
   - Lecture 3 -- test automation {% resourceList "lect03--autom", ["pdf", "md"] %}
+
+{#
 - Week 3
   (continuing slides from week 2)
 - Week 4

@@ -160,7 +160,7 @@ system][echo360] where the lecture recordings are stored.
 
 [echo360]: https://echo360.com
 
-### Can I attend lectures online?
+### Can I attend lectures online? { #online-lectures }
 
 Currently, it's the policy of the department of Computer Science and
 Software Engineering at UWA that units be offered in
@@ -220,7 +220,7 @@ feel free to ask questions and speak freely, which they may not do if
 they are being recorded. If all participants in an online lab have
 agreed beforehand, then the lab facilitator may record the lab.
 
-### Can I attend lab sessions other than the one I'm allocated to?
+### Can I attend lab sessions other than the one I'm allocated to? { #attending-labs }
 
 Yes -- as long as there is room available for you, you are welcome to attend other
 lab sessions. See [under "labs"][labs], on the site home page, for details.

@@ -44,10 +44,127 @@ does its actual behaviour match the expected behaviour?"
 
 ### Test structure
 
-That is, we can see any test as consisting of two things:
+Drilling down a little more into what this means, a test case
+needs to do the following three things:
 
--   Test values: anything required to set up the system (or some part of it),
-    and "ask it do" something, and observe the result. 
+1.  Prepare the system (and/or an appropriate environment)
+    so that it's in a suitable state for us to invoke some behaviour.
+2.  Invoke the desired behaviour.
+3.  Work out whether the system did what we expected it to.
+
+Sometimes each of these will be very simple; sometimes they're
+very complex.
+
+### Test structure
+
+If your test is going to be implemented as code, it's often helpful
+do each of the three things we mentioned in exactly the order given.
+If you do so, then you're following
+the \alert{Arrange--Act--Assert} pattern for writing tests.
+
+\alert{Arrange}
+
+:   Set up an appropriate environment
+
+\alert{Act}
+
+:   Invoke the desired behaviour
+
+\alert{Assert}
+
+:   Work out what the observed behaviour was, and
+    check whether it's the same as the expected behaviour.
+
+### Test patterns -- example 1
+
+Let's consider the
+JUnit test we saw in the previous lecture:
+
+::: block
+
+
+#### `CalculatorTest`
+
+``` {.java .numberLines}
+public class CalculatorTest {
+  @Test
+  public void evaluatesExpression() {
+    Calculator calculator = new Calculator();
+    int sum = calculator.evaluate("1+2+3");
+    assertEquals(6, sum);
+  }
+}
+```
+
+:::
+
+
+
+
+### Test structure -- example 1
+
+::: block
+
+\scriptsize
+
+#### `CalculatorTest`
+
+``` {.java .numberLines}
+public class CalculatorTest {
+  @Test
+  public void evaluatesExpression() {
+    Calculator calculator = new Calculator();
+    int sum = calculator.evaluate("1+2+3");
+    assertEquals(6, sum);
+  }
+}
+```
+
+:::
+
+\small
+
+- We \alert{arrange} in line 4 --
+  we invoke the constructor ("`new Calculator()`")
+  so we've got an object to operate on.
+- We \alert{act} in line 5 -- we invoke the `evaluate()` method
+  of the object we constructed,
+  and pass that method the string `"1+2+3"`.
+- We \alert{assert} in line 6 -- we check that result we got
+  (`sum`) equals the result we expected (`6`).
+
+### More complex "assertions"
+
+In the code examples we've seen, it's very simple
+to check whether the observed behaviour matches the
+expected behaviour.
+
+All we expected the method under test to do was
+return a value -- and it's very simple to check
+whether that value is what we expected.
+
+But what if the specification for the `evaluate()` method
+said that the result shouldn't be returned, but rather
+written to a file called "`myresult.txt`"?
+
+How can we tell if the test passed or failed?
+
+We'd need to run extra methods to open that file,
+read its contents, and check that the contents was
+what we expected. All this would be part of the
+"assertion" stage.
+
+
+### Ammann and Offutt textbook terminology
+
+The Ammann and Offutt textbook divides the structure
+of tests up a bit differently.
+
+For reference, it considers a test to consist of:
+
+-   Test values: anything required to set up a system or component,
+    "ask it do" something, observe the result, and
+    clean up the system so as to put it back in a stable state.
 -   Expected values: what the system is expected to do.
 
 "Values" is being used in a very broad sense. Suppose we are designing
@@ -56,77 +173,58 @@ in some cases, physical actions to be done by a tester to put the
 phone in a particular state (e.g. powered on and with the "Contacts"
 list displayed).
 
-### Test structure -- example 1
+### Ammann and Offutt textbook terminology
 
-For a *unit* test, we might be testing one method of a class.
+The textbook goes into quite a bit of detail about particular sorts
+of test values.
 
-Here, the "test values" are:
+For instance:
 
-- whatever actions/inputs we need to provide to get an instance of
-  the class, and execute the method, and store the result.
+- "prefix values" (which largely correspond to things
+  we do in the "Arrange" part of a test to set up test
+  fixtures)
+- "verification values" (things we need to do in order
+  to observe or measure the behaviour of a system or component --
+  running a database query, perhaps)
+- "exit values" (things we need to do in order to reset or
+  "tear down" our fixtures, and put the system back into
+  a stable state again).
 
-And our "expected values" are:
+For the most part, we will not need to make use of this
+terminology.
 
-- what we expect the method to return or do.
+### Cleaning up/"teardown" methods
 
-### Test structure -- example 1
+Ammann and Offutt's "exit values" don't really correspond
+to anything in the "Arrange--Act--Assert" pattern.
 
-For example, consider a JUnit test we saw in the
-previous lecture:
+If we need to do any sort of "cleanup" after a test,
+we would just do it after the "Assert" stage.
 
-~~~ {.java .numberLines}
-public class CalculatorTest {
-  @Test
-  public void evaluatesExpression() {
-    Calculator calculator = new Calculator();
-    int sum = calculator.evaluate("1+2+3");
-    assertEquals(6, sum);
-  }
-}
-~~~
+If we have multiple tests that all require the *same*
+cleanup steps (deleting files or resetting a database
+to a known state),
+it would be poor programming style to copy and paste the same cleanup code
+again and again. (Why?)
 
-### Test structure -- example 1
+Instead, most test frameworks give us a way of specifying
+bits of code -- often called "teardown methods" -- that should
+be run after each test in some test suite.
 
-~~~ {.java .numberLines}
-public class CalculatorTest {
-  @Test
-  public void evaluatesExpression() {
-    Calculator calculator = new Calculator();
-    int sum = calculator.evaluate("1+2+3");
-    assertEquals(6, sum);
-  }
-}
-~~~
-Here, the actions/inputs required to get a `Calculator` object
-and invoke the `evaluate()` method are:
+We'll see examples of these later.
 
-- invoke the constructor (line 4, "`new Calculator()`")
-- invoke "`evaluate`" on the object we got back
-- the string `"1+2+3"`
-
-
-### Test structure -- example 1
-
-~~~ {.java .numberLines}
-public class CalculatorTest {
-  @Test
-  public void evaluatesExpression() {
-    Calculator calculator = new Calculator();
-    int sum = calculator.evaluate("1+2+3");
-    assertEquals(6, sum);
-  }
-}
-~~~
-The *expected values* are:
-
-- the `int` value 6
 
 ### Test structure -- example 2
 
-For an *acceptance* test, we might be testing whether a whole travel booking
-system is "easily usable".
+\small
 
-The relevant system requirement might be:
+Tests need not always be implemented as code.
+
+For instance, we might want to test whether a whole travel booking
+system is "easily usable" (perhaps as part of an
+acceptance test).
+
+Let's suppose the relevant system requirement is:
 
 > "Travel agents shall be able to use all the system functions after
 > successful completion of a training course designed by the software
@@ -158,14 +256,9 @@ What are the "expected values" in this scenario?
 It's the number of errors per user not exceeding two per hour
 of system use.
 
-### Test structure - arrange, act, assert
 
-Another way of thinking about what tests consist of is
-to use what's called the "Arrange, Act, Assert" model.
 
-- **Arrange** means whatever setup is needed
-- **Act** means the way we invoke some behaviour of the test subject
-- **Assert** describes how we verify that the behaviour had the desired effect -- for instance, by evaluating a return value, or observing a side-effect (with a spy or mock, more on these later)
+
 
 ### Questions
 
@@ -196,7 +289,10 @@ is to think of them as forming a hierarchy:
 
 ### How tests relate
 
-- *Integration tests* are in the middle of the hierarchy,
+- *Integration tests* are in the middle of the hierarchy.
+  They test whether two or more components interoperate properly.
+
+  They focus on the flow of data and/or control between components,
   and often will test for properties implied by the system *design*.
   
   They often are run less frequently than unit tests -- e.g. if a unit
@@ -209,6 +305,7 @@ is to think of them as forming a hierarchy:
   sorts, perhaps including acceptance tests -- usually take more
   effort to set up, and are run fewer times (perhaps just once,
   in the case of acceptance tests).
+
 
 
 ### Questions
@@ -362,8 +459,8 @@ and provided as example programs.
 ::: incremental
 
 -   In the last lecture, we saw some example unit tests.
--   We said that a unit test tests a *unit* of code (function,
-    method, class, module) in isolation, and there are a few
+-   We said that a unit test tests a *unit* of code (a small
+    part of a large system) in isolation, and there are a few
     properties we would like it to have (e.g. run very quickly).
 -   But there are other sorts of tests as well -- integration tests
     and system tests -- which tend to run more slowly, and contain
@@ -487,135 +584,8 @@ So, why do test automation?
 -   Reduces variance in test quality from different individuals
 -   Significantly reduces the cost of regression testing
 
-# Test cases
-
-### Components of a Test Case
-
--   One thing all testing frameworks do is let us run *test cases*.
--   We can think of a test case as the smallest possible 'unit' of testing.
--   A test case has multiple parts that make it up.
--   Terminology is not standardised here, we follow the
-    terminology of Amman and Offutt.
-
-### Components of a Test Case
-
-As an example, we'll consider a Python function `addNumbers(m, n)`,
-which should add two numbers.
-
-And we'll suppose we have a particular test case for it in mind:
-
--   Test case 001: \
-    When passed the numbers 3 and 4, `addNumbers` should return 7.
-
-### Components of a Test Case
-
-Components that go to make up a test case:
-
--   Test values *or* test case values.
-
-    These are the *inputs* to the program that we supply. \
-    In this case, the numbers 3 and 4.
-
--   Expected results *or* expected values.
-
-    The values we expect to see if the program performs in
-    accordance with specifications. \
-    In this case, the number 7.
-
-### Components of a Test Case
-
-Definitions:
-
--   Test values: input values necessary to complete some execution of the
-    software.
--   Expected values: result to be produced iff program satisfies intended
-    behaviour on a test case.
-
-### Components of a Test Case
-
-Sometimes, we will need to supply or execute other values or
-commands in order to execute a test case.
-
--   Prefix values.
-
-    Inputs necessary to put the software
-    into the appropriate state to receive the test case values.
-
-    For instance, if `addNumbers` was actually a method of a class
-    called `Calculator` -- then before we can execute our test case,
-    we'll need to construct an object of type `Calculator`.
-
-    The 'prefix values' are all values, commands etc. we supply
-    in order to construct the `Calculator` object and get it ready.
-
-### Prefix values
-
-'Prefix values' can be more complicated than just parameters passed or code
-executed. They can include all sorts of setup activity ...
-
--   e.g. Suppose we're doing performance testing of a web site - we
-    start a server instances going, and send automated requests to
-    it to see how it performs.
-
-    Then the 'prefix values' can be everything needed to prepare that test --
-    the configuration for the server, the commands to run it, the
-    configuration of the request-sending program, annd the commands needed to
-    run it, etc.
 
 
-### Components of a Test Case
-
-A further possible component of a test case:
-
--   Postfix values:\
-    Any inputs, values, commands etc that need to be sent to the software after
-    the test case values have been sent.
-
-    -   Verification Values : Values needed to see the results of the
-        test case values
-    -   Exit Commands : Values needed to terminate the program or
-        otherwise return it to a stable state
-
-### Verification values
-
-For instance, suppose the specification for `addNumbers` instead said
-that, when the function is passed 2 numbers, it should write the
-results to a file called "`myresult.txt`".
-
-We run our test, and supply the input values 3 and 4. How can we tell
-if the test passed or failed?
-
-We will need to send further commands, paramaters etc
-to find out what whether the file got written, and what was
-written to it.
-
-### Exit commands
-
-If our software made use of, say, a database -- then 'exit commands'
-might include commands needed to restore the database to a known,
-stable state.
-
-### Test cases in real-world code
-
-Sometimes code that is packaged as a single "test" actually contains *multiple*
-test *cases*.
-
--   e.g.:
-
-    ``` {.python}
-    def myTest():
-      for n in range(0, 100):
-        m = 3
-        res = addNumbers(m, n)
-        assertEquals(res, m+n)
-    ```        
--   How many test cases do we have here?
-
-### Test fixtures
-
--   One bit of terminology we saw previously is "test fixture":
-    the commands/values needed to create test fixtures would
-    all be examples of prefix values
 
 ### Testing framework definitions
 
@@ -1023,17 +993,17 @@ functionality to be used during testing
 
 ### Mocks, stubs and more
 
--   Often, we'll use objects or function that mimic other ones
-    for testing purposes. There does not seem to be any universally accepted
-term for these, but one author [Gerard Meszaros] uses the generic term "Test
-Double".
--   Specific sorts of Test Double -
+- Often, we'll use objects or function that mimic other ones
+  for testing purposes. There does not seem to be any universally accepted
+  term for these, but one author (Gerard Meszaros) uses the generic term "Test
+  Double".
+- Specific sorts of Test Double -
 
-    - Dummy objects
-    - Fake objects
-    - Stubs
-    - Spies
-    - Mocks
+  - Dummy objects
+  - Fake objects
+  - Stubs
+  - Spies
+  - Mocks
 
 \[Fowler, in e.g. "Mocks Aren't Stubs", uses Meszaros's terminology.]
 
@@ -1047,7 +1017,8 @@ Double".
 
 ### Fake objects
 
--   *Fake* objects actually do have working implementations, but for some reason are not suitable for production
+-   *Fake* objects actually do have working implementations, but for some
+    reason are not suitable for production
 
     - An example of this is when we use an in-memory database, instead of an on-disk database
 
@@ -1060,7 +1031,9 @@ Double".
 ### Spies
 
 -   These are stubs that *record information* on how they were called.
--   These are particularly useful for testing code that calls (e.g.) an object representing a server, such as a mail server, or which writes to a file-like object.
+-   These are particularly useful for testing code that calls (e.g.) an object
+    representing a server, such as a mail server, or which writes to a
+    file-like object.
 
 ### Spies -- example
 
@@ -1231,9 +1204,12 @@ to any *invariants* we think should hold about a software component.
 ### Test Double Illustration
 
 `\begin{center}`{=latex}
-![](lect03-images/test-double.eps){ width=80% }
+![](lect03-images/test-double.eps)
 `\end{center}`{=latex}
 
+<!--
+{ width=80% }
+-->
 
 ### Next
 

@@ -277,12 +277,11 @@ We can also classify them by the purpose of the test, or when in the software de
     If we don't *have* any specifications for it, that obviously makes
     life difficult.
 -   So in general, we aim to *document* the intended behaviour of
-    any externally available unit.
+    any externally accessible unit.
 
-    (Some units might be purely internal -- "private", for instance, in
-    Java -- it is usually good practice to document those as well,
-    if we're going to test them -- else how will we know what to test
-    for?)
+    (Some units might be purely internal -- "protected" or "private", for
+    instance, in
+    Java -- it is usually good practice to document those as well.)
 
 
 # Documenting code
@@ -661,11 +660,11 @@ arguments passed:
     But if not, then a `MalformedEmailAddress` exception will be thrown."
 
 We need to make sure we cover all circumstances, so that
-users will know what to expect.
+users of an API will know what to expect.
 
 ### APIs, cont'd
 
-If the preconditions are *not* satisifed, then the behaviour
+If the preconditions are *not* satisfied, then the behaviour
 is **undefined**. This means the user has failed to live up to their part of
 the "bargain", and has NO guarantees about what the system might do.
 
@@ -673,22 +672,6 @@ By way of example, we'll consider Java's `binarySearch` method in
 `java.util.Arrays`:
 
 - <https://docs.oracle.com/javase/7/docs/api/java/util/Arrays.html#binarySearch(byte[],%20byte)>
-
-<!--
-
-We often also will document what will happen if the preconditions
-*aren't* satisfied.
-
- in many languages, this will typically be an
-exception being thrown.
-
-***XXXXXXX XXXXXX ERROR XXXXX FIXME XXXXX***
-
-if precon isn't satisfied, that means we get undefined behaviour.
-
-exceptions are just another example of a *postcondition*.
--->
-
 
 ### APIs, cont'd
 
@@ -728,13 +711,15 @@ Ideally, unit tests should be -
 
 ### JUnit and xUnit
 
-> -   One of the best-known unit-testing frameworks is JUnit.
+> -   One of the best-known testing frameworks -- originally
+>     written just for running unit tests, but now used for
+>     all sorts of other tests, as well -- is JUnit.
 > -   JUnit derives from a similar framework developed for Smalltalk by Kent Beck, named SUnit.
 > -   The same general framework has been implemented in a huge array of other languages:
 
 ### JUnit and xUnit
 
--   One of the best-known unit-testing frameworks is JUnit.
+-   One of the best-known testing frameworks is JUnit.
 -   JUnit derives from a similar framework developed for Smalltalk by Kent Beck, named SUnit.
 -   The same general framework has been implemented in a huge array of other languages:
 
@@ -747,7 +732,11 @@ Ideally, unit tests should be -
 
 ### Unit testing -- Java example
 
-~~~ {.java}
+::: code
+
+####
+
+``` {.java}
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 // ...
@@ -760,7 +749,9 @@ public class CalculatorTest {
     assertEquals(6, sum);
   }
 }
-~~~
+```
+
+:::
 
 ### Unit testing -- Java example
 
@@ -778,7 +769,11 @@ CalculatorTest
 
 - Using `unittest`, classes containing tests inherit from `unittest.TestCase`, and methods constituting tests begin with the letters "test":
 
-~~~ {.python}
+::: block
+
+####
+
+``` {.python}
 import unittest
 
 def fun(x):
@@ -787,23 +782,286 @@ def fun(x):
 class MyTest(unittest.TestCase):
     def test(self):
         self.assertEqual(fun(3), 4)
-~~~
+```
 
-### Unit-testing terminology
+:::
 
-> -   test case -- the basic unit of testing, which checks the behaviour of code in response to a particular set of inputs.\
-      It consists of one particular set of input data, and the expected output (behaviour).
-> -   test suite -- a collection of test cases (or other test suites)
-> -   test runner -- a software tool which manages the execution of tests,
->     and reports their outcome
-> -   test fixture -- the preparation needed to perform one or more tests
+### Testing terminology
+
+\alert{test case}
+
+:   the basic unit of testing, which checks the observable behaviour 
+    or characteristics of a
+    component or system
+    in response to a particular set of inputs.\
+    It consists of one particular set of input data, and the expected output (behaviour).
+
+\alert{system under test}
+
+:   the component or system being tested, whose behaviour we want to observe.\
+    Sometime also called the *unit under test/UUT* (if we're doing unit testing),
+    or *application under test/AUT*
+    (if we're doing system-level testing). We'll use "subject under test" to
+    refer to any or all of these. More rarely, you might see
+    it called the "test object".
+
+### Testing terminology
+
+\alert{test suite}
+
+:   a collection of test cases (or other test suites)
+
+\alert{test runner}
+
+:   a software tool which manages the execution of tests,
+    and reports their outcome
+
+\alert{test fixture}
+
+:   the preparation needed to perform one or more tests
+
+### Test case
+
+::: block
+
+#### Test case
+
+The basic unit of testing, which checks the observable behaviour 
+or characteristics of a
+component or system
+in response to a particular set of inputs.\
+It consists of one particular set of input data, and the expected output (behaviour).
+
+:::
+
+A test case could be testing:
+
+- How a method or function behaves when invoked
+- How two classes interoperate
+- How an entire system -- say, a command-line program -- behaves
+  when run from the command-line
+- Whether a system meets some criterion for usability.
+
+For each of these -- what label might you use to
+refer to such a test?
+
+### Test cases
+
+::: block
+
+#### Test case
+
+The basic unit of testing, which checks the observable behaviour 
+or characteristics of a
+component or system
+in response to a particular set of inputs.\
+It consists of one particular set of input data, and the expected output (behaviour).
+
+:::
+
+Some questions:
+
+- If you're asked to suggest a *test case* -- are you being asked to
+  write code?
+- If some Python programmer has written a class which inherits from `unittest.TestCase` --
+  does that mean the class represents exactly one test case?
+
+### Test cases vs code
+
+A *test case* is \alert{\textbf{not}} code.
+
+If you're asked to suggest a *test case*, you're being asked to
+describe (and usually, justify)
+
+- a set of inputs which can be supplied to a component or system, and
+- the expected output.
+
+### Describing test cases
+
+A good way to describe a test case (especially if there are several test
+cases you'll need to describe) is to put it in a table. At a minimum,
+you'll want to write out
+
+- SUT: What the system under test (SUT) is[^obviousness]
+- Input values: What values you supply in order to put the SUT into an appropriate state, and
+  invoke the desired behaviour
+- Expected output: What expected behaviour or characteristics you expect to see
+  (and possibly, what actions and/or measurements you'll take in order to
+  observe them).
+
+[^obviousness]: Unless there's only one possible system under test,
+  and/or it's obvious from the question
+
+### Describing test cases { .fragile }
+
+You'll see more examples of test case descriptions in the labs.
+
+But by way of example, here's a test case written out for the
+Java `CalculatorTest` from the previous slides:
+
+```{=latex}
+\begin{center}
+\bgroup
+\def\arraystretch{1.4}
+\begin{tabular}{@{}lp{7cm}@{}}
+\toprule
+\multicolumn{1}{c}{\textbf{Item}} & \multicolumn{1}{c}{\textbf{Details}}     \\ \midrule
+%SUT                                & \begin{tabular}[c]{@{}l@{}}wibble wobble\\ laaaap mamama\end{tabular} \\
+System under test                  & \lstinline!Calculator! class \\
+Input values                       & 
+      Construct a \lstinline!Calculator! object by invoking
+      the class constructor with no arguments. Invoke the
+      \lstinline!evaluate()! method of the constructed object with the
+      \lstinline!String! argument \lstinline!"1+2+3"!.
+      \\
+Expected output                   & The \lstinline!evaluate()! method should return the \lstinline!int!
+                                     value \lstinline!6!.  \\
+\bottomrule
+\end{tabular}
+\egroup
+\end{center}
+```
+
+### Describing test cases
+
+A test case description like the one shown will be sufficient for most
+purposes in this unit.
+
+If you have many tests and want to be able to easily refer to them, it
+can also be handy to add a \alert{test identifier} (a unique ID for each test) --
+perhaps something like T001, T002, T003 and so on.
+
+Should you ever need to write up a test plan more formally, then
+chapter 11 of the Ammann & Offutt text provides suggestions on how you might do so.
+
+### Test cases vs code
+
+\small
+Consider: if some Python programmer has written a class which inherits from `unittest.TestCase` --
+does that mean the class represents exactly one test case?
+
+No. The programmer could write the following:
+
+::: block
+
+\footnotesize
+
+####
+
+\vspace{-1em}
+
+``` {.python}
+import unittest
+
+def fun(x):
+    return x + 1
+
+class MyTest(unittest.TestCase):
+    def test1(self):
+        self.assertEqual(fun(3), 4)
+    def test2(self):
+        self.assertEqual(fun(3), 4)
+```
+
+:::
+
+\small\vspace{-1em}
+and that would constitute two test cases (why?).
+
+### Test cases vs code
+
+Or they could write this:
+
+::: block
+
+####
+
+``` {.python}
+import unittest
+
+def fun(x):
+    return x + 1
+
+class MyTest(unittest.TestCase):
+    def test(self):
+        self.assertEqual(fun(3), 4)
+        self.assertEqual(fun(4), 5)
+```
+
+:::
+
+### Test cases vs code
+
+Or this:
+
+::: block
+
+####
+
+``` {.python}
+import unittest
+
+def fun(x):
+    return x + 1
+
+class MyTest(unittest.TestCase):
+    def test(self):
+        self.assertEqual(fun(3), 4)
+        self.assertEqual(fun(4), 5)
+
+        # (... hundreds of other assertions follow)
+```
+
+:::
+
+### Test cases vs code
+
+Or this:
+
+::: block
+
+####
+
+\small
+
+``` {.python}
+import unittest
+
+def fun(x):
+    return x + 1
+
+class MyTest(unittest.TestCase):
+    def test(self):
+        for i in range(0, 100):
+          self.assertEqual(fun(i), i+1)
+```
+
+:::
+
+\small
+(How many test cases are there in each of these examples?
+Which of the examples will be easiest to deal with
+if an assertion fails? Which will be easiest to maintain? Why?\
+We'll talk more about well- and poorly-written tests later.)
 
 ### Test fixtures
+
+::: block
+
+#### Test fixture
+
+The preparation needed to perform one or more tests.
+
+:::
 
 The idea of a "fixture" comes from testing of hardware --
 a "fixture" is everything that holds the piece of hardware
 in place, and provides you with known environment and conditions it
 can be tested in.
+
+Suppose you wanted to test the behaviour of (say) a pressure sensor.
+If the air pressure and temperature of your lab were constantly
+changing, how would you ever know if the sensor were working correctly?
 
 ### Test fixtures
 
@@ -820,9 +1078,23 @@ can be tested in.
     -   Create files with known contents
     -   ... etc.
 
+### Test fixtures -- example
+
+Suppose we're doing performance testing of a web site - we
+start a server instances going, and send automated requests to
+it to see how it performs.
+
+In this situation, the "fixtures" are everything needed
+so that we can get the server to respond to the requests.
+
+They could include --
+the configuration for the server, the commands to run the server,
+configuration of a request-sending program, commands needed to
+run that program, etc.
+
 ### Framework features
 
-Most unit-testing frameworks provide the ability to -
+Most testing frameworks provide the ability to -
 
 - collect related tests together (e.g. into suites)
 - identify and run all unit tests (or suites) in a module, or the whole
@@ -842,6 +1114,8 @@ Most unit-testing frameworks provide the ability to -
 >
 > -   Unit testing frameworks will typically provide ways of detecting all
 >     of these, and comparing them with expected results.
+
+
 
 ### Indicating what the tests are
 
