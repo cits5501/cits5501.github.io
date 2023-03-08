@@ -1,9 +1,6 @@
 ---
-subtitle: |
-  ```{=latex}
-  \LARGE\textmd{
-  Workshop 1 -- Testing introduction  -- solutions  }
-  ```
+title: |
+  CITS5501 lab 1&nbsp;--&nbsp;Testing introduction&nbsp;--&nbsp;solutions
 reference-section-title: "References"
 link-citations: true
 
@@ -75,22 +72,104 @@ references:
 `~\vspace{-5em}`{=latex}
 
 
-## 0. Accessing required software
+## 1. Accessing required software
 
-We will be using the Java language for the bulk of the workshops,
-so you should make use of a Java IDE (Integrated Development Environment).
+We will be using the Java language for the bulk of the labs,
+so you should make sure you have access to a platform where
+the Java Development Kit (JDK) is installed, and you can make
+use of a good Java IDE (Integrated Development Environment) or editor.
 
-If you are using a university computer, you should be able to
-access the [BlueJ][bluej] IDE.
+**Microsoft VS Code**
 
-If you are using a laptop or home computer, you may install
-and use [BlueJ][bluej], or you may install
-another
-Java IDE if you prefer.
+:   One recommended editor is [Microsoft Visual Studio Code][vs-code] ("VS
+    Code", for short) --
+    it is available on all common operating systems (Windows, Linux and Mac
+    OS), so you should be able to install it on a laptop or home PC.
+    (It should also be available in the UWA computer labs.)
+    
+    [vs-code]: https://code.visualstudio.com/download 
+    
+    Some guidelines on configuring VS Code
+    for Java development can be found [on the VS Code website][vs-code-java].
+    
+    [vs-code-java]: https://code.visualstudio.com/docs/java/java-tutorial 
+    
+    If using VS Code, you will need to make sure that
+    
+    - you have the JDK installed (see the [Oracle website][jdk] for
+      downloads)
+    - you've installed the [Extension Pack for Java][java-ext] as a VS Code.
+      Click the "extensions" icon in the left sidebar of VS Code (looks like
+      this: ![](VSCode-Extension-Icon.png){ width="0.7cm" }), search for "Extension Pack for
+      Java" in the search bar at top, and click "install".
+    
+    [jdk]: https://www.oracle.com/au/java/technologies/downloads/
+    [java-ext]: https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-java-pack
+    [bluej]: https://www.bluej.org
 
-[bluej]: https://www.bluej.org
+    Download the `lab-01-code.zip` file from
+    <https://cits5501.github.io/resources/#lab-labs>, and unzip it
+    somewhere on your computer. Then run VS Code, select "File" / "Open
+    Folder", and open the folder containing the lab 1 code. (You can
+    "agree to trust" the authors of the code, if a message about that
+    pops up.)
 
-Some freely available options are:
+    Then open one of the `.java` files in the `src` subdirectory. 
+
+**GitPod**
+
+:   It's possible to access a VS Code–like environment on the web, without
+    needing to install any software. You'll first need to create a
+    [GitHub][github] account, so do so. Once that's done, ensure you're
+    logged in to GitHub.
+
+    Then, paste into your web browser the address
+    <https://gitpod.io#>, followed by the address of some GitHub repository --
+    for this lab, you can use <https://github.com/cits5501/lab01>.
+    (So the full address in your browser should be
+    <https://gitpod.io#https://github.com/cits5501/lab01>.)
+    Agree to let GitPod access your GitHub account, and you should see the
+    message "Starting ..." come up, and then a VS Code–like environment.
+    Clode any message that pops up asking "Do you want to open this workspace
+    in VS Code Desktop?".
+
+    Then open one of the `.java` files in the `src` subdirectory. 
+
+[github]: https://github.com/
+
+Using either VS Code on the desktop, or the VS Code–like environment,
+you should see a message about "Java projects being opened". Wait for
+that to pass, and there'll now be a "Testing" icon in the shape
+of a conical lab flask (like this: ![](vs-code-testing-icon.png){ width="0.7cm" }).
+
+Click on the testing icon, and then on the button "Enable Java Tests".
+Select "JUnit Jupyter" tests from the options that pop up, and you
+should see a message saying that "Test libraries have been downloaded
+into 'lib/'".
+
+If you open the `CalculatorSimpleTest.java` file, then after a short
+while, a green triangle icon should appear to the left of the line
+"`public class CalculatorSimpleTest`". Clicking it will run all `@Test`
+methods in the class.
+
+(If the icon doesn't appear: select "View" / "Problems" from the menu,
+and see if there have been any compilation problems. If there have:
+select "Java Projects" from the left sidebar, "Reference Libraries",
+and then the "+" (add) button. Add the
+`lib/junit-platform-console-standalone-1.9.2.jar` file that should be in
+the `lib` directory, then hit the "refresh" icon under "Referenced
+Libraries". Ideally, the "Problems" should now disappear and the green
+triangle icon appear. If it doesn't: click somewhere in the
+`CalculatorSimpleTest.java` source code, hit the `ctrl-shift-P` key
+combination, and type "java: run tests".)
+
+If you are able to run the tests, you should see some tests pass (for instance, `testAdd`),
+but most tests fail. This is expected!
+
+
+**Other IDEs**
+
+Some other freely available IDEs are:
 
 - Netbeans, downloadable from <https://netbeans.org>
 - Eclipse IDE for Java Developers, downloadable from
@@ -98,31 +177,20 @@ Some freely available options are:
 - IntelliJ IDEA Community, downloadable from
   <https://www.jetbrains.com/idea/download/>
 
-As a first step for today's workshop, ensure you can install and/or
+As a first step for today's lab, ensure you can install and/or
 access at least one of these.
 
-We will give instructions for BlueJ version 5.0, but it should
-be straightforward to adapt these to other IDEs.
-
-## 1. JUnit tests
-
-### Download and compile workshop code
-
-Download the `workshop-01-code.zip` file from
-<https://cits5501.github.io/resources/#lab-workshops>, and unzip it
-somewhere on your computer.
-
-Open the code as a "project" in your IDE. For BlueJ, this is done
-by selecting "Project" / "Open Non BlueJ", and selecting the directory
-containing the Workshop 1 code.
-
-Ensure you can compile the project -- in BlueJ, by selecting
-"Tools" / "Compile".
-
-If using an IDE other than Java: you may need to
-instruct the IDE to add the "JUnit 5" libraries to the project;
+After downloading and opening the lab code from
+<https://cits5501.github.io/resources/#lab-labs>,
+you may need to
+instruct your IDE to add the "JUnit 5" libraries to the project;
 typically, viewing the project *properties* in your IDE will
 reveal some way of doing this.
+
+
+## 2. JUnit tests
+
+### Download and compile lab code
 
 Take a look at the `Calculator` class, in `Calculator.java` --
 this class has trivial functionality, but is useful as an
@@ -141,8 +209,10 @@ followed by a description of the test (or just the word "Test").
 
 Run the tests in the `CalculatorSimpleTest` class.
 
-In BlueJ, this is done by right-clicking on the class (after compiling)
-and selecting "Test All".
+In many IDEs, this can be done by right-clicking on the class (after compiling)
+and selecting "Test All". In VS Code, it can be done by clicking the
+green triangle icon in the left margin of the code (see previous
+section).
 
 You should see that some tests "pass" (with green ticks) and
 some "fail" (with red crosses) -- see if you can work out
@@ -207,7 +277,7 @@ a mistake in the test code.)
 
 
 
-`\begin{solbox}`{=latex}
+<div class="solutions">
 
 **Sample solutions**:
 
@@ -216,14 +286,14 @@ option is to read its documentation. If there is no documentation
 for the method, then you can never really know what the
 developer's intention was.
 
-`\end{solbox}`{=latex}
+</div>
 
 
 
 
-## 2. API documentation
+## 3. API documentation
 
-Look at the `Calculator.java` class from the workshop 1 code.
+Look at the `Calculator.java` class from the lab 1 code.
 
 Can you identify
 
@@ -247,7 +317,7 @@ documentation?
 
 \newpage
 
-## 3. Fix the code
+## 4. Fix the code
 
 See if you can fix the code in the `Calculator` class
 so that all the tests pass.
@@ -270,7 +340,8 @@ other tests we might add?
 
 
 
-`\begin{solbox}`{=latex}
+<div class="solutions">
+
 
 **Sample solutions**:
 
@@ -291,11 +362,11 @@ e.g.
   }
 ```
 
-`\end{solbox}`{=latex}
+</div>
 
 
 
-## 4. Concepts review questions
+## 5. Concepts review questions
 
 Answer the following questions to test your understanding of
 concepts introduced in the lectures and prescribed reading.
@@ -330,7 +401,7 @@ a. The social media site "Witter" allows users to specify
 
 
 
-`\begin{solbox}`{=latex}
+<div class="solutions">
 
 **Possible solutions and discussion**:
 
@@ -464,10 +535,26 @@ c.  When Mila's method returns the result "`INFINITY`", we'd need to
     requirements, then there hasn't been a failure; but if it doesn't
     match them, then there has.
 
-`\end{solbox}`{=latex}
+</div>
 
 
 
+
+
+
+## 6. Moodle sign up
+
+There are two Moodle quizzes (not assessed, but it's recommended you
+attempt them) available for you to test your
+understanding of prerequisite knowledge and week 1 topics
+in CITS5501:
+
+- Java revision quiz, and
+- Testing concepts review quiz
+
+Visit <https://quiz.jinhong.org> and sign up
+with your UWA email address, then attempt the quizzes
+(in your own time, if you don't finish them in the lab).
 
 
 <!-- vim: syntax=markdown tw=72 :

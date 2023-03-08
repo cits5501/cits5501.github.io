@@ -85,12 +85,16 @@ the semester.
 
 ::: { .resource-list }
 
-{#
 
 - Week 2 -- testing intro
-  - Lab worksheet {% resourceList "workshop01", ["pdf", "md"] %}
+  - Lab worksheet {% resourceList "workshop01", ["html", "md"] %}
   - Source code ([zip]({{ "/workshops/workshop-01-code.zip" | url }}))
+
+{#
   - Sample worksheet solutions {% resourceList "workshop01-solutions", ["pdf", "md"] %}
+#}
+
+{#
 - Week 3 -- data-driven tests
   - Lab worksheet {% resourceList "workshop02", ["pdf", "md"] %}
   - Source code ([zip]({{ "/workshops/workshop-02-code.zip" | url }}))
