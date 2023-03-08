@@ -130,7 +130,7 @@ use of a good Java IDE (Integrated Development Environment) or editor.
     <https://gitpod.io#https://github.com/cits5501/lab01>.)
     Agree to let GitPod access your GitHub account, and you should see the
     message "Starting ..." come up, and then a VS Code–like environment.
-    Clode any message that pops up asking "Do you want to open this workspace
+    Close any message that pops up asking "Do you want to open this workspace
     in VS Code Desktop?".
 
     Then open one of the `.java` files in the `src` subdirectory. 
@@ -139,7 +139,8 @@ use of a good Java IDE (Integrated Development Environment) or editor.
 
 Using either VS Code on the desktop, or the VS Code–like environment,
 you should see a message about "Java projects being opened". Wait for
-that to pass, and there'll now be a "Testing" icon in the shape
+that to pass, and there'll now be a "Testing" icon on the left sidebar,
+in the shape
 of a conical lab flask (like this: ![](vs-code-testing-icon.png){ width="0.7cm" }).
 
 Click on the testing icon, and then on the button "Enable Java Tests".
@@ -443,9 +444,6 @@ a.  We are told that users can specify that their email and date of birth
 [newman]: https://www.wired.com/story/google-plus-bug-52-million-users-data-exposed/
 [googleplus-wiki]: https://en.wikipedia.org/wiki/2018_Google_data_breach
 
-`\end{solbox}`{=latex}
-
-`\begin{solbox}`{=latex}
 
 \small
 
@@ -489,9 +487,6 @@ b.  In this scenario, we aren't told exactly what the requirements for
 
 [fooling]: https://medium.com/@CodeTheDevil/busting-ola-wallet-1ceea6174b1f
 
-`\end{solbox}`{=latex}
-
-`\begin{solbox}`{=latex}
 
 \small
 

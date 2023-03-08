@@ -67,7 +67,7 @@ use of a good Java IDE (Integrated Development Environment) or editor.
     <https://gitpod.io#https://github.com/cits5501/lab01>.)
     Agree to let GitPod access your GitHub account, and you should see the
     message "Starting ..." come up, and then a VS Code–like environment.
-    Clode any message that pops up asking "Do you want to open this workspace
+    Close any message that pops up asking "Do you want to open this workspace
     in VS Code Desktop?".
 
     Then open one of the `.java` files in the `src` subdirectory. 
@@ -76,7 +76,8 @@ use of a good Java IDE (Integrated Development Environment) or editor.
 
 Using either VS Code on the desktop, or the VS Code–like environment,
 you should see a message about "Java projects being opened". Wait for
-that to pass, and there'll now be a "Testing" icon in the shape
+that to pass, and there'll now be a "Testing" icon on the left sidebar,
+in the shape
 of a conical lab flask (like this: ![](vs-code-testing-icon.png){ width="0.7cm" }).
 
 Click on the testing icon, and then on the button "Enable Java Tests".
