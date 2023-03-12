@@ -568,7 +568,7 @@ the workshops entitled "Critical thinking & academic culture" and
 
 -------
 
-## Tests, quizzes and exams
+## Tests, quizzes and exams { #tests-quizzes-and-exams }
 
 ### What topics are examinable in a quiz, test or exam? { #examinable-material }
 
@@ -669,7 +669,7 @@ answers.
 
 ## Projects
 
-### What are the formatting expectations for project reports?
+### What are the formatting expectations for project reports? { #project-formatting }
 
 The unit project will usually contain a written component.
 The project specification will explain how this is to be submitted.
@@ -735,14 +735,14 @@ See also:
 
 ## Exams
 
-### Are past exams available?
+### Are past exams available? { #past-exams-availability }
 
 Some are, yes -- refer to the Assessment page, under "[Past exam
 papers][past-papers]".
 
 [past-papers]: /assessment/#past-exam-papers
 
-### Are solutions to past exams available?
+### Are solutions to past exams available? { #past-exams-solutions }
 
 No -- see the Assessment page, under "[Past exam papers][past-papers]".
 The main reason for this is that providing students with exam
@@ -789,7 +789,7 @@ Note that the content of the unit does change slightly from year to
 year, so previous years' content will not be a perfect guide to what is
 covered in the current year.
 
-### Why is the unit content on GitHub and Moodle? Why not use UWA's Blackboard LMS?
+### Why is the unit content on GitHub and Moodle? Why not use UWA's Blackboard LMS? { #why-moodle }
 
 Because Blackboard is a very terrible LMS.[^lms-sucks]
 
@@ -847,7 +847,7 @@ made on the forum.
 
 ## Questions about this page
 
-### Why is this page so long?
+### Why is this page so long? { #faq-length }
 
 <div style="border: solid 2pt blue; background-color: hsla(241, 100%,50%, 0.1); padding: 0.5em 2em; border-radius: 5pt; margin-top: 0.5em; margin-bottom: 0.5em">
 

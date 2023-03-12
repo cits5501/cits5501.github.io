@@ -1,9 +1,6 @@
 ---
-subtitle: |
-  ```{=latex}
-  \LARGE\textmd{
-  Week 3 workshop -- Data-driven tests and test design  -- solutions  }
-  ```
+title: |
+  CITS5501 lab 1&nbsp;--&nbsp;Data-driven tests and test design&nbsp;--&nbsp;solutions
 ---
 
 `~\vspace{-5em}`{=latex}
@@ -41,14 +38,41 @@ to the number gives back the original `int`:
   }
 ```
 
-In effect, annotating the test with `@ParameterizedTest` says to
-JUnit "You need to call this test repeatedly, each time passing
-it an `int` from a list of `int`s I'm going to give you".
-And the `@ValueSource` annotation says "Here is the list of `int`s
-I mentioned".
+What do the `@ParameterizedTest` and `@ValueSource` annotations
+on this test method mean?
 
-So the test method, `addZeroHasNoEffect`, takes *one* parameter, an int,
-and each time the test method is called, it is passed a different
+Adding the `@ParameterizedTest` tells JUnit that this test
+needs to be run in a special way.
+In effect, this annotation tells
+JUnit: "You need to call this test multiple times. Each time
+you should call it with a different `int`." Where does Junit get the
+`int`s from?
+We supplied a
+`@ValueSource` annotation which tells JUnit "Here is the list of `int`s
+to use with the test". (But there are other ways of supplying the list
+of `int`s besides writing them out explicitly as we've done here -- you could
+put them in [a `.csv` text file][csv-source], or write a special method that
+[returns a "stream" of ints][method-source].[^param-sources])
+
+[csv-source]: https://junit.org/junit5/docs/5.7.1/api/org.junit.jupiter.params/org/junit/jupiter/params/provider/CsvFileSource.html
+[method-source]: https://junit.org/junit5/docs/5.7.1/api/org.junit.jupiter.params/org/junit/jupiter/params/provider/MethodSource.html 
+
+[^param-sources]: You can find a list of all the possible annotations
+  you can use for supplying parameters to parameterized tests in the
+  JUnit [API documentation][junit-providers] -- look down the bottom of
+  the page for class names ending in "`Source`". The API documentation
+  is fairly terse, though -- if you'd like to see examples of how the
+  different sources are used in practice, check out the
+  ["Guide to JUnit 5 Parameterized Tests"][baeldung-guide] by
+  [Ali Dehghani](https://www.baeldung.com/author/ali-dehghani).
+
+[baeldung-guide]: https://www.baeldung.com/parameterized-tests-junit-5
+
+[junit-providers]:
+
+So to summarize: the test method, `addZeroHasNoEffect`, takes *one*
+parameter, an `int`,
+and each time the method is called, it is passed a different
 int from the list given by `@ValueSource`.
 
 The code for this week's lab is the same as last week's,
@@ -56,47 +80,66 @@ but with some new test methods, so you can try out the
 `addZeroHasNoEffect` test if you haven't already:
 
 `\genericbox`{=latex}
+<div style="border: solid 2pt blue; background-color: hsla(241, 100%,50%, 0.1); padding: 1em; border-radius: 5pt; margin-top: 1em;">
+
 
 **Exercises**
 
-a.  Run the tests in BlueJ or your IDE to confirm that all those ints are
+a.  Run the tests in your IDE or editor to confirm that all those ints are
     used -- how can you tell?
 #.  Try changing them and/or adding to the list.
 #.  `addZeroHasNoEffect` is a single method. But (based on the material
     from lectures and the textbooks) is it also a single *test case*?
     If not, how many test cases does it comprise?
 
+
+</div>
 `\endgenericbox`{=latex}
 
 
 
 `\begin{solbox}`{=latex}
+<div class="solutions">
 
 **Sample solutions**:
 
 a.  Most IDEs should show you exactly what tests cases have
     been run -- check the documentation for your IDE if it is not clear.
-
-&nbsp;
-
+b.  No solution needed here; the aim is just to practice working
+    with JUnit-based code.
 c.  Seven test cases, because there are seven `int`s in the list.
 
+</div>
 `\end{solbox}`{=latex}
 
 
 
 Hopefully the use of `@ValueSource` seems straightforward.
-A question may now arise: What if we have multiple parameters?
-Or what if we wish to specify not just the *test* values, but the
-*expected* values?
+But a question may now arise: the `addZeroHasNoEffect(int num)`
+test method takes only one parameter, but what if we were
+working with a method that took two parameters (a `String` and an `int`,
+say).
+Or what if we wish to specify not just the *test* values, but also the
+*expected* values (a very common situation)? How could we supply
+multiple sets of parameters in that case?
 
-In this week's code, we have a new test method,
-`tableOfTests`. It is designed to get test values and expected values
-from some other source, and then run them as tests.
+Below is an example of such a method with multiple parameters.
+It's taken from this week's code, which includes an additional
+test method when compared with last week's:
+`tableOfTests()`. The `tableOfTests()` method is another parameterized
+test; it draws its test values and expected values from
+a method called `additionTestCasesProvider()`:
 
 ```java
   @ParameterizedTest
   @MethodSource("additionTestCasesProvider")
+  /** Test Calculator.add() with multiple test values
+   * and expected values.
+   *
+   * @param num1 First test value to be passed to Calculator.add()
+   * @param num1 Second test value to be passed to Calculator.add()
+   * @param expectedResult The expected result for Calculator.add()
+   */
   void tableOfTests(int num1, int num2, int expectedResult) {
       Calculator c = new Calculator(num1, num2);
       int result = c.add();
@@ -104,13 +147,17 @@ from some other source, and then run them as tests.
   }
 ```
 
-The `@ValueSource` annotation is used when you have
+In the previous example, we used the `@ValueSource` annotation, which is
+used when you have
 a straightforward list of literal values you want JUnit
 to iterate over.
 But in `tableOfTests`, we're using a new annotation,
-`@MethodSource`. When we annotate our test method with
+`@MethodSource`. If we annotate our test method with
+`@MethodSource("additionTestCasesProvider")`,
+<!--
 `\texttt{@MethodSource("additionTestCasesProvider")}`{=latex}
-we are effectively saying to JUnit, "Go and call the
+-->
+we are saying to JUnit, "Go and call the
 `additionTestCasesProvider` method in order to get a list of test values
 and expected values".
 You can read more about `MethodSource`s in the
@@ -119,19 +166,66 @@ JUnit documentation on [writing parameterized tests][junit-param-tests].
 [junit-param-tests]: https://junit.org/junit5/docs/snapshot/user-guide/index.html#writing-tests-parameterized-tests
 
 This sort of testing is called *data-driven* testing -- we have basically the same
-test being run, but with different values each team; so it makes sense to
-write the logic for the test just once (rather than three times).
+test being run, but with different values each time; so it makes sense to
+write the logic for the test just once (rather than four times).[^dry]
+
+[^dry]: This is an example of the ["DRY" principle][dry-wiki]
+  ("Don't Repeat Yourself") in action. Writing out the same test method
+  four times, but each time with different test values and expected
+  values, would just lead to unmaintainable code.
+
+[dry-wiki]: https://en.wikipedia.org/wiki/Don't_repeat_yourself 
+
+Let's look at the `additionTestCasesProvider()` method
+which supplies the parameters used by `tableOfTests()`.
+The `additionTestCasesProvider()` method uses Java's
+[Stream API][stream-api], introduced in
+Java 8. For the moment, you don't need to know the details
+of how the Stream API works -- just that it when used with
+JUnit, it gives us a convenient
+way of constructing "lists of lists". In the code below,
+the `arguments()` method will take any number of arguments
+we like (here, three `int`s, comprising two test values and
+an expected value) and group them together into a list-like
+object (`Arguments`); and the `Stream.of()` method will take
+any number of `Arguments` objects we like, and group *those* together
+in a list-like object (of type `Stream<Arguments>`):
+
+[stream-api]: https://docs.oracle.com/en/java/javase/19/docs/api/java.base/java/util/stream/package-summary.html
+
+```java
+  static Stream<Arguments> additionTestCasesProvider() {
+      return Stream.of(
+          // the arguments are:
+          //    num1, num2, and expected result.
+          arguments(1, 2, 3),
+          arguments(3, 7, 10),
+          arguments(3, 7, 11)
+          arguments(99, 1, 100)
+      );
+  }
+```
+
+
+
 
 `\genericbox`{=latex}
+<div style="border: solid 2pt blue; background-color: hsla(241, 100%,50%, 0.1); padding: 1em; border-radius: 5pt; margin-top: 1em;">
 
 **Exercises**
 
 a.  How many *test cases* would you say `tableOfTests` and
-    `\texttt{additionTestCasesProvider}`{=latex} comprise?
+    `additionTestCasesProvider` comprise?
 #.  Read through the JUnit documentation on writing parameterized tests.
-#.  In Java, `enum` classes are used to represent types that can
+    (You might find the [baeldung.com](https://www.baeldung.com/)
+    ["Guide to JUnit 5 Parameterized Tests"][baeldung-guide] by
+    [Ali Dehghani](https://www.baeldung.com/author/ali-dehghani)
+    helpful as well.) If you have time, try experimenting
+    with the different features it describes.
+#.  In Java, `enum` types are used to represent types that can
     take on values from only a distinct set. By convention, the values
-    are given names in ALL CAPS.
+    are given names in ALL CAPS with underscores to separate
+    words (also called ["SCREAMING_SNAKE_CASE"][snake-case]).
 
     For instance,
 
@@ -160,46 +254,72 @@ a.  How many *test cases* would you say `tableOfTests` and
     creating data-driven tests? Are these more or less convenient
     than the way things are done with JUnit?
 
+[snake-case]: https://en.wikipedia.org/wiki/Snake_case#:~:text=SCREAMING_SNAKE_CASE&text=uses-,SCREAMING_SNAKE_CASE 
 [enum-types]: https://docs.oracle.com/javase/tutorial/java/javaOO/enum.html
 
+</div>
 `\endgenericbox`{=latex}
 
 
 
 `\begin{solbox}`{=latex}
+<div class="solutions">
 
 **Sample solutions**:
 
 a.  Together, they comprise four test cases: `tableOfTests` will get
     invoked four times, each time with different test values and
     expected result.
-
-&nbsp;
-
+b.  No solution needed; the aim is just to familiarize yourself
+    with JUnit's parameterized tests.
 c.  The JUnit documentation explains how the `@EnumSource` annotation
     can be used with enum types. By default, an `@EnumSource` will
     iterate over all the possible values of an enum type,
     calling the test method once with each value.
 #.  Writing data-driven tests tends to be more convenient (and less
-    verbose) in languages which are not statically type-checked
+    verbose) in languages which either are not statically type-checked
     (for instance, JavaScript, Python and Ruby and Lisp-family
     languages) or which have
-    rich type systems and *type inference* (like Scala, Ocaml
+    rich type systems and type inference[^type-inference] (like Scala, Ocaml
     and Haskell).\
-    But as we have seen, it is certainly possible in Java.
+    But as we have seen, it is certainly possible in Java, and the
+    Streams API allows for more concise code than in earlier
+    versions of Java.
 
+[^type-inference]: [Type inference](https://en.wikipedia.org/wiki/Type_inference)
+  is a feature of some programming languages which allows the programmer
+  to omit types where compiler can work out what they should be.\
+  The Java language has only a very limited form of type inference.
+  It allows you to omit type arguments to generic types, in some cases --
+  e.g. `Map<String, List<String>> myMap = new HashMap<>()` doesn't need
+  type arguments after `new HashMap` -- and (since Java 10) allows you
+  to omit local variable declarations, instead using `var`.
+  See the Oracle documentation on [generics type inference][generics-infer]
+  and on [Java 10 local variable type inference][java-local-infer]
+
+[generics-infer]: https://docs.oracle.com/javase/tutorial/java/generics/genTypeInference.html
+[java-local-infer]: https://developer.oracle.com/learn/technical-articles/jdk-10-local-variable-type-inference
+
+
+</div>
 `\end{solbox}`{=latex}
 
 
 
 
 `\genericbox`{=latex}
+<div style="border: solid 2pt blue; background-color: hsla(241, 100%,50%, 0.1); padding: 1em; border-radius: 5pt; margin-top: 1em;">
 
-**Extension exercises**
+**Challenge exercise**
 
 Based on this example, try writing your own parameterized
 tests for other methods (for instance, subtraction).
 
+(Challenge exercises aren't compulsory, but may be interesting
+or good practice if you've completed all other work in the
+lab.)
+
+</div>
 `\endgenericbox`{=latex}
 
 \newpage
@@ -207,28 +327,36 @@ tests for other methods (for instance, subtraction).
 ## 2. Preconditions and postconditions
 
 Work through and discuss the following scenario and exercises
+in pairs or groups of three
 if there is sufficient time. If there is not, work through
 these in your own time.
 
 Consider the following scenario:
 
 `\genericbox`{=latex}
+<div style="border: solid 2pt blue; background-color: hsla(241, 100%,50%, 0.1); padding: 1em; border-radius: 5pt; margin-top: 1em;">
+
+<div style="text-align: center;">
+<b>Enrolment database</b>
+</div>
 
 `\begin{center}\textbf{Enrolment database}\end{center}`{=latex}
 
-> A database has a table for students, a table for units being
-> offered, and a table for enrolments.  When a *unit* is removed as an
-> offering, all *enrolments* relating to that unit must also be removed.
-> The code for doing a unit removal currently looks like this:
->
-> ```java
-> /** Remove a unit from the system
->  */
-> void removeUnit(String unitCode) {
->   units.removeRecord(unitCode);
-> }
-> ```
 
+A database has a table for students, a table for units being
+offered, and a table for enrolments.  When a *unit* is removed as an
+offering, all *enrolments* relating to that unit must also be removed.
+The code for doing a unit removal currently looks like this:
+
+```java
+/** Remove a unit from the system
+ */
+void removeUnit(String unitCode) {
+  units.removeRecord(unitCode);
+}
+```
+
+</div>
 `\endgenericbox`{=latex}
 
 
@@ -239,6 +367,7 @@ spend several minutes thinking about the questions yourself
 before sharing ideas with the class.
 
 `\genericbox`{=latex}
+<div style="border: solid 2pt blue; background-color: hsla(241, 100%,50%, 0.1); padding: 1em; border-radius: 5pt; margin-top: 1em;">
 
 **Exercises**
 
@@ -254,12 +383,14 @@ a.  What *preconditions* do you think there should be for calling
 If you don't recall what preconditions, postconditions, and
 invariants are, you might wish to review the week 1 readings.
 
+</div>
 `\endgenericbox`{=latex}
 
 
 
 
 `\begin{solbox}`{=latex}
+<div class="solutions">
 
 **Sample solutions**:
 
@@ -315,12 +446,13 @@ Other preconditions we need not document:
     since at runtime, the parameter passed need not be of type
     `str`.)
 
-**Tip**: If asked in assingments or the exam to specify preconditions
+**Tip**: If asked in assignments or the exam to specify preconditions
 for a method, we will nearly always be using the Java language.
 If you specify preconditions like "The parameter `String s` must be a
 `String`"
 you generally (a) will not get any marks for saying so, and (b) will
 make the markers think you don't understand how Java works.
+
 
 `\end{solbox}`{=latex}
 
@@ -330,6 +462,7 @@ make the markers think you don't understand how Java works.
 
 
 `\begin{solbox}`{=latex}
+
 
 **Alternative solutions:**
 
@@ -361,7 +494,8 @@ via the LMS.)
 
 `\begin{solbox}`{=latex}
 
-**Sample solutions**:
+
+**Sample solutions, cont'd**:
 
 ***b\. Postconditions***
 
@@ -434,6 +568,7 @@ Bruegge and Dutoit, *Object-Oriented Software Engineering Using UML, Patterns, a
 
 `\begin{solbox}`{=latex}
 
+
 **Alternative solution:**
 
 -   On the other hand, if we make the assumption that `removeRecord`
@@ -444,8 +579,72 @@ Bruegge and Dutoit, *Object-Oriented Software Engineering Using UML, Patterns, a
     say which one we are making and why.
 
 
+</div>
 `\end{solbox}`{=latex}
 
+
+
+
+## 3. Testability
+
+Consider the following, each of which is
+supposed to be a requirement or specification. Discuss with a partner --
+do you think it would be
+straightforward to write tests for them?
+If not, why not?
+
+a.  The flight booking system should be easy for travel agents to use.
+#.  The `int String.indexOf(char ch)` method should return a -1 if `ch`
+    does not appear in the receiver string, or the index at which it
+    appears, if it does.
+#.  Internet-aware Toast-O-Matic toasters should have a mean time
+    between failure of 6 months.
+
+
+
+
+`\begin{solbox}`{=latex}
+<div class="solutions">
+
+**Sample solutions**:
+
+\(a) This would be difficult to test.
+
+- "Easy to use" is not a very *precise* requirement.
+  It is the opposite of precise -- it is *vague* or *fuzzy*;
+  it is difficult to pinpoint exactly which systems satisfy
+  it and which don't.
+
+  A better requirement might be something like:
+
+  > "Travel agents shall be able to use all the system functions after
+  > successful completion of a training course designed by the software
+  > provider. After this training, the average number of errors made by
+  > experienced users shall not exceed two per hour of system use."
+
+  (This is adapted from *Pressman*.)
+
+- A test like this requires human users, and would
+  often not
+  be done until the *acceptance
+  testing* phase. Prior to that, the software provider
+  might try to come up with a quicker and cheaper test
+  to act as a *proxy* for the acceptance test -- they
+  might test it on non-technical staff in their own
+  organisation, for instance.
+
+\orangealert If you are not clear about what makes a good requirement,
+you might want to review the chapter from the *Pressman* textbook
+on "Understanding Requirements" (in the 9th edition)
+or "Requirements Engineering" (in earlier editions).\
+There is also a quick summary (taken from documentation
+for an IBM requirements management product) available
+[here][good-requirements].
+
+[good-requirements]: https://www.informit.com/articles/article.aspx?p=1152528&seqNum=4
+
+</div>
+`\end{solbox}`{=latex}
 
 
 

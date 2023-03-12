@@ -222,7 +222,6 @@
     code span.va { color: #19177c; } /* Variable */
     code span.vs { color: #4070a0; } /* VerbatimString */
     code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
     div.csl-bib-body { }
     div.csl-entry {
       clear: both;
@@ -251,6 +250,8 @@
       padding: 1em;
     }
   </style>
+<script data-external="1" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript">
+</script>
   <!--[if lt IE 9]>
     <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
   <![endif]-->
@@ -548,8 +549,6 @@ reporting on this <a href="https://www.wired.com/story/google-plus-bug-52-millio
 there is also a <a href="https://en.wikipedia.org/wiki/2018_Google_data_breach">Wikipedia
 page</a> on the incident.]</p></li>
 </ol>
-<p></p>
-<p></p>
 <ol start="2" type="a">
 <li><p>In this scenario, we aren’t told exactly what the requirements
 for the Habari system are; but presumably one of them is that
@@ -583,17 +582,14 @@ identified flaws in the security for the “Ola” ride-sharing app, as
 described in a <a href="https://medium.com">Medium.com</a> article, “<a href="https://medium.com/@CodeTheDevil/busting-ola-wallet-1ceea6174b1f">Fooling
 the Startup of the Year</a>”.]</p></li>
 </ol>
-<p></p>
-<p></p>
 <ol start="3" type="a">
 <li><p>When Mila’s method returns the result “<code>INFINITY</code>”,
-we’d need to know what method’s specifications where in order to know if
-this was a failure or not (i.e., we’d need to look at the method’s
+we’d need to know what the method’s specifications were in order to know
+if this was a failure or not (i.e., we’d need to look at the method’s
 documentation).</p>
-<p>As a matter of mathematics, the arithmetic mean for <span class="math inline"><em>n</em></span> numbers <span class="math inline"><em>a</em><sub>0</sub></span> through <span class="math inline"><em>a</em><sub><em>n</em></sub></span> is defined as
-<span class="math inline">$\displaystyle \frac{1}{n}\sum_{i=1}^n
-a_i$</span>, or <span class="math inline">$\displaystyle
-\frac{a_1+a_2+\cdots+a_n}{n}$</span> <span class="citation" data-cites="WeissteinMean2005">(<a href="#ref-WeissteinMean2005" role="doc-biblioref">Weisstein 2005</a>)</span>.</p>
+<p>As a matter of mathematics, the arithmetic mean for <span class="math inline">\(n\)</span> numbers <span class="math inline">\(a_0\)</span> through <span class="math inline">\(a_n\)</span> is defined as <span class="math inline">\(\displaystyle \frac{1}{n}\sum_{i=1}^n
+a_i\)</span>, or equivalently <span class="math inline">\(\displaystyle
+\frac{a_1+a_2+\cdots+a_n}{n}\)</span> <span class="citation" data-cites="WeissteinMean2005">(<a href="#ref-WeissteinMean2005" role="doc-biblioref">Weisstein 2005</a>)</span>.</p>
 <p>So when n = 0, the result is undefined, because dividing by zero is
 not defined. If we were writing a specification for this method, what
 are some reasonable things we could require the method to do in this

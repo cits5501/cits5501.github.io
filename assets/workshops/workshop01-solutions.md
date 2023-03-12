@@ -491,13 +491,14 @@ b.  In this scenario, we aren't told exactly what the requirements for
 \small
 
 c.  When Mila's method returns the result "`INFINITY`", we'd need to
-    know what method's specifications where in order to know if this
+    know what the method's specifications were in order to know if this
     was a failure or not (i.e., we'd need to look at the method's
     documentation).
 
     As a matter of mathematics, the
     arithmetic mean for $n$ numbers $a_0$ through $a_n$ is
     defined as $\displaystyle \frac{1}{n}\sum_{i=1}^n a_i$, or
+    equivalently
     $\displaystyle \frac{a_1+a_2+\cdots+a_n}{n}$ [@WeissteinMean2005].
 
     So when n = 0, the result is undefined, because dividing by zero is
