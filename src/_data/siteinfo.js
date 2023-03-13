@@ -62,8 +62,7 @@ module.exports = function(configData) {
         name: "[Week 3 quiz](/assessment/#week-3-quiz)",
         marksPercent: "5",
         dates: {
-          //available: new Date(year, 2, 14), // Mon 14 Mar
-          available: "TBA",
+          available: new Date(year, 2, 13, 10, 30), // 10.30am Mon 13 Mar, 2023
           closes:    new Date(year, 2, 16, 17, 0) // 5pm Thu 16 Mar, 2023
         },
         submit: moodle
