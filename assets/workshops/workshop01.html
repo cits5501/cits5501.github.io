@@ -425,20 +425,41 @@ code.</p>
 <li>A Javadoc comment, which documents the API?</li>
 <li>A Java comment which is <em>not</em> Javadoc?</li>
 </ol>
-<p>Use your IDE to run the <code>javadoc</code> tool, which generates
-API documentation from source code.</p>
+<p><strong>Viewing Javadoc comments from an IDE or editor</strong></p>
+<p>In most IDEs and editors, there is no need to explicitly run the
+<code>javadoc</code> tool in order to view API documentation for a
+method, class or annotation.</p>
+<p>Instead, you simply need to “hover” your mouse icon over some spot in
+the code where the item you’re interested in is defined or used, and a
+“pop-up” message should appear showing the API documentation.</p>
+<p>If you edit the Javadoc comments, the IDE or editor will normally use
+the edited, most up-to-date version when showing the documenttion.</p>
+<p><strong>Running the <code>javadoc</code> tool</strong></p>
+<p>If you wish, it’s also possible to run the <code>javadoc</code> tool
+from a terminal window, and the tool will generate HTML files from the
+source code.</p>
+<p>In VS Code, you can open a terminal window by selecting “Terminal” /
+“New Terminal” from the menu.</p>
+<p>Type <code>javadoc -help</code> to ensure you can invoke the command,
+and to see what the options for it are.</p>
+<p>To generate documentation for the <code>.java</code> files in the
+<code>src</code> directory, and put that documentation in a directory
+<code>doc</code>, run:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> javadoc <span class="at">-d</span> doc <span class="at">-sourcepath</span> src <span class="at">-subpackages</span></span></code></pre></div>
+<p>You can then open the generated HTML web pages in a browser to view
+them.</p>
+<p><strong>Javadoc exercises</strong></p>
 <ul>
-<li>In BlueJ, select “Tools” / “Project Documentation”, then look for a
-directory called “<code>doc</code>” which should be created within the
-source code directory.</li>
-<li>BlueJ should automatically open the generated documentation in your
-browser.</li>
+<li><p>In your IDE or editor, hover over a usage of a JUnit annotation
+or method (like one of the “assertion”) methods. You should be able to
+see the API documentation for it (and perhaps even click to get a fuller
+description) – can you?</p></li>
+<li><p>Identify one class member marked <code>private</code>, and make
+it <code>public</code> and write a Javadoc comment for it.</p>
+<p>Re-run <code>javadoc</code> (and/or re-view the documentation in your
+IDE/editor) – what changes do you see in the generated
+documentation?</p></li>
 </ul>
-<p>View the generated documentation in your browser.</p>
-<p>Identify one class member marked <code>private</code>, and make it
-<code>public</code> and write a Javadoc comment for it. Re-run
-<code>javadoc</code> – what changes do you see in the generated
-documentation?</p>
 <h2 id="fix-the-code">4. Fix the code</h2>
 <p>See if you can fix the code in the <code>Calculator</code> class so
 that all the tests pass.</p>
@@ -471,9 +492,9 @@ tech-savvy user could manipulate the system and obtain free
 rides.</p></li>
 <li><p>Your colleague Mila is writing a method which should return the
 arithmetic mean of numbers in a list:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> total <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> <span class="op">(</span><span class="dt">double</span> num <span class="op">:</span> number_list<span class="op">)</span> <span class="op">{</span> total <span class="op">+=</span> num <span class="op">;</span> <span class="op">}</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="cf">return</span> total <span class="op">/</span> number_list<span class="op">.</span><span class="fu">length</span></span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> total <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> <span class="op">(</span><span class="dt">double</span> num <span class="op">:</span> number_list<span class="op">)</span> <span class="op">{</span> total <span class="op">+=</span> num <span class="op">;</span> <span class="op">}</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="cf">return</span> total <span class="op">/</span> number_list<span class="op">.</span><span class="fu">length</span></span></code></pre></div>
 <p>However, when the list is of length 0, this code returns the result
 “<code>INFINITY</code>”.</p></li>
 </ol>

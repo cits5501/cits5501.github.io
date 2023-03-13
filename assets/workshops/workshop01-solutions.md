@@ -86,23 +86,23 @@ use of a good Java IDE (Integrated Development Environment) or editor.
     it is available on all common operating systems (Windows, Linux and Mac
     OS), so you should be able to install it on a laptop or home PC.
     (It should also be available in the UWA computer labs.)
-    
-    [vs-code]: https://code.visualstudio.com/download 
-    
+
+    [vs-code]: https://code.visualstudio.com/download
+
     Some guidelines on configuring VS Code
     for Java development can be found [on the VS Code website][vs-code-java].
-    
-    [vs-code-java]: https://code.visualstudio.com/docs/java/java-tutorial 
-    
+
+    [vs-code-java]: https://code.visualstudio.com/docs/java/java-tutorial
+
     If using VS Code, you will need to make sure that
-    
+
     - you have the JDK installed (see the [Oracle website][jdk] for
       downloads)
     - you've installed the [Extension Pack for Java][java-ext] as a VS Code.
       Click the "extensions" icon in the left sidebar of VS Code (looks like
       this: ![](VSCode-Extension-Icon.png){ width="0.7cm" }), search for "Extension Pack for
       Java" in the search bar at top, and click "install".
-    
+
     [jdk]: https://www.oracle.com/au/java/technologies/downloads/
     [java-ext]: https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-java-pack
     [bluej]: https://www.bluej.org
@@ -114,7 +114,7 @@ use of a good Java IDE (Integrated Development Environment) or editor.
     "agree to trust" the authors of the code, if a message about that
     pops up.)
 
-    Then open one of the `.java` files in the `src` subdirectory. 
+    Then open one of the `.java` files in the `src` subdirectory.
 
 **GitPod**
 
@@ -133,7 +133,7 @@ use of a good Java IDE (Integrated Development Environment) or editor.
     Close any message that pops up asking "Do you want to open this workspace
     in VS Code Desktop?".
 
-    Then open one of the `.java` files in the `src` subdirectory. 
+    Then open one of the `.java` files in the `src` subdirectory.
 
 [github]: https://github.com/
 
@@ -301,20 +301,54 @@ Can you identify
 a.  A Javadoc comment, which documents the API?
 b.  A Java comment which is *not* Javadoc?
 
-Use your IDE to run the `javadoc` tool, which generates
-API documentation from source code.
+**Viewing Javadoc comments from an IDE or editor**
 
-- In BlueJ, select "Tools" / "Project Documentation",
-  then look for a directory called "`doc`" which should
-  be created within the source code directory.
-- BlueJ should automatically open the generated documentation in your browser.
+In most IDEs and editors, there is no need to explicitly run
+the `javadoc` tool in order to view API documentation for a method,
+class or annotation.
 
-View the generated documentation in your browser.
+Instead, you simply need to "hover" your mouse icon over some spot
+in the code where the item you're interested in is defined or used,
+and a "pop-up" message should appear showing the API documentation.
 
-Identify one class member marked `private`, and make it `public`
-and write a Javadoc comment for it.
-Re-run `javadoc` -- what changes do you see in the generated
-documentation?
+If you edit the Javadoc comments, the IDE or editor will normally use
+the edited, most up-to-date version when showing the documenttion.
+
+**Running the `javadoc` tool**
+
+If you wish, it's also possible to run the `javadoc` tool from
+a terminal window, and the tool will generate HTML files
+from the source code.
+
+In VS Code, you can open a terminal window by selecting "Terminal" /
+"New Terminal" from
+the menu.
+
+Type `javadoc -help` to ensure you can invoke the command, and to see
+what the options for it are.
+
+To generate documentation for the `.java` files in the `src` directory,
+and put that documentation in a directory `doc`, run:
+
+```bash
+$ javadoc -d doc -sourcepath src -subpackages
+```
+
+You can then open the generated HTML web pages in a browser to view
+them.
+
+**Javadoc exercises**
+
+- In your IDE or editor, hover over a usage of a JUnit annotation
+  or method (like one of the "assertion") methods. You should be able to
+  see the API documentation for it (and perhaps even click to get a
+  fuller description) -- can you?
+
+- Identify one class member marked `private`, and make it `public`
+  and write a Javadoc comment for it.
+
+  Re-run `javadoc` (and/or re-view the documentation in your IDE/editor) -- what changes do you see in the generated
+  documentation?
 
 \newpage
 
