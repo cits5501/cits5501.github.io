@@ -262,20 +262,55 @@ of system use.
 
 ### Questions
 
+\scriptsize
+
 ::: foo
 
 ####
+
+\scriptsize
 
 -   How do different sorts of tests relate?
 
 :::
 
-A common way of thinking about the way tests relate
-is to think of them as forming a hierarchy:
+\scriptsize
 
+A common way of thinking about the way tests relate
+is to think of them as forming a "test pyramid":[^pyramid]
+
+<!--
 `\begin{center}`{=latex}
 ![](lect03-images/test-levels.eps){ width=80% }
 `\end{center}`{=latex}
+-->
+
+
+`\begin{center}~\\[0.3em]`{=latex}
+![](lect03-images/test-pyramid.eps){ width=80% }
+`~\\[2.7em]\end{center}`{=latex}
+
+[^pyramid]: \scriptsize Adapted from Ham Vocke, ["The Practical Test Pyramid"][vocke],
+  which is adapted from Mike Cohn (2009) *Succeeding with Agile*.
+
+[vocke]: https://martinfowler.com/articles/practical-test-pyramid.html
+
+
+
+### How tests relate
+
+`\begin{center}~\\[0.3em]`{=latex}
+![](lect03-images/test-pyramid.eps){ width=80% }
+`~\\[2.7em]\end{center}`{=latex}
+
+\scriptsize
+
+(Different authors might put other tests in the top level, instead
+or as well -- for instance, UI tests and end-to-end tests.
+
+Or might add a higher level still, for client acceptance tests
+or manually run tests.)
+
 
 ### How tests relate
 
@@ -456,80 +491,18 @@ and provided as example programs.
 
 ### Testing frameworks
 
-::: incremental
-
--   In the last lecture, we saw some example unit tests.
--   We said that a unit test tests a *unit* of code (a small
-    part of a large system) in isolation, and there are a few
-    properties we would like it to have (e.g. run very quickly).
--   But there are other sorts of tests as well -- integration tests
-    and system tests -- which tend to run more slowly, and contain
-    interacting sub-parts. How do we run those sorts of tests?
-
-:::
-
-### Testing frameworks
-
 -   Besides the fact that we can use them for unit tests,
     JUnit and the other xUnit frameworks are good examples of
-    *testing frameworks*, or *test automation frameworks*.
--   Amman and Offut define test automation as:`\\[2em]`{=latex}
+    *testing frameworks*, or *test automation frameworks* --
 
-    > The use of software to control the
-    > execution of tests, the comparison of actual outcomes to predicted
-    > outcomes, the setting up of test preconditions, and other test control
-    > and test reporting functions.
--   And a test framework as:`\\[2em]`{=latex}
+    software which controls the
+    execution of tests, compares actual outcomes to predicted
+    outcomes, sets up test fixtures, and reports results.
 
-    > A set of assumptions, concepts, and
-    > tools that support test automation.
 
 ### Testing frameworks
 
-\footnotesize
-
-We can see that JUnit supports test automation
-in multiple ways.    
-
-::: incremental
-
--   Does it let us control the execution of tests? 
-    -   Yes, we can run tests (or some subset of them), from the
-        command line or an IDE 
--   Does it let us compare actual outcomes to predicated outcomes?
-    -   Yes, we saw that we can use assertions to compare (for instance)
-        what we expect to be returned from a method, with what's
-        actually returned.
--   Does it let us set up test preconditions?
-    -   Yes, we can write code in the body of a unit test that does
-        this. (And we will see later that we can often pull common
-        code for this out into *test fixtures*.)
-
-:::       
-
-### Testing frameworks
-
-\footnotesize
-
-(... continued):
-
--   Does it provide other test control and reporting functions?
-    -   Yes, it provides multiple forms of output, that less us
-        see whether our tests failed or succeeded.
-
-### Testing frameworks
-
-Likewise, Python's `unittest` provides similar features:
-
--   A structure for writing test drivers
--   Assertions for testing expected results
--   Test features for sharing common test data
--   Test suites for easily organizing and running tests
--   Graphical and textual test runners
-
-### Testing frameworks
-
--   But they are just one sort of test automation tool.
+-   Note that testing frameworks like JUnit or Pyunit are just one sort of test automation tool.
 -   Test automation could be something as simple as a script which,
     once a day, compiles my team's project and sends an email
     to me if there are compilation errors.
@@ -632,72 +605,8 @@ OLD, removed:
      **[...what? not it doesn't.]**
 </div>
 
-### Unit testing frameworks
 
--   So, a testing framework is any set of assumptions, tools etc
-    that assist in executing our test cases.
--   They can range from the simple (a script that is automatically run,
-    and emails us with a result) to the complex (like the JUnit
-    and `unittest` frameworks).
--   **Unit** testing frameworks are frameworks that just happen to
-    be primarily intended for running unit tests.
 
-    They have that goal in mind, and thus tend to provide facilities
-    for testing a unit code in isolation (e.g. the ability to 'mock'
-    databases or other external systems, that we saw last lecture).
-
-### Unit testing frameworks
-
-::: incremental
-
--   We *can* actually use JUnit or `unittest` to test
-    -   interaction between several methods
-    -   interaction between several objects
-    -   setting up several systems/subsystems, and testing interaction between
-        them.
--   The framework may not always provide good support for the sort of things
-    we're doing, as it was set up with a different purpose in mind.
--   But we can still use its general features (e.g. report output)
-    regardless.
--   We should probably separate these non-unit tests out from
-    our unit tests, though, and document what their purpose is.
-
-:::
-
-<!--
-
-### JUNIT vsn: Writing Tests for JUnit [OLD, removed]
-
--   Need to use the methods of the junit.framework.assert class
-    -   javadoc gives a complete description of its capabilities
--   Each test method checks a condition (assertion) and reports to the
-    test runner whether the test failed or succeeded
--   The test runner uses the result to report to the user (in command
-    line mode) or update the display (in an IDE)
--   All of the methods return void
--   A few representative methods of junit.framework.assert
-    -   assertTrue (boolean)
-    -   assertTrue (String, boolean)
-    -   fail (String)
-
--->
-
-### unittest
-
--   The standard python module helps you write unit tests:
-
-~~~ { .python }
-import unittest
-from my_script import is_palindrome
-
-class KnownInput(unittest.TestCase):
-    knownValues = (('lego', False),('radar', True))
-    
-    def testKnownValues(self):
-      for word, palin in self.knownValues:
-        result = is_palindrome(word)
-        self.assertEqual(result, palin)
-~~~
 
 ### Test fixtures
 
@@ -792,8 +701,8 @@ Common assertions
   % & Other assertions
   \\
 \toprule
-assertTrue(x, msg=None)
-  % & assertAlmostEqual(a, b, places=7, msg=None, delta=None)
+\ttt{assertTrue(x, msg=None)}
+  % & \ttt{assertAlmostEqual(a, b, places=7, msg=None, delta=None)}
   \\ 
 \ttt{assertFalse(x, msg=None)}
   % & \ttt{assertNotAlmostEqual(a, b, places=7, msg=None, delta=None)}
@@ -833,6 +742,7 @@ assertTrue(x, msg=None)
  %  & assertDictEqual(a, b, msg=None) \\ 
 %\bottomrule
 \end{tabular}
+
 
 ### More assertion methods
 
@@ -886,7 +796,23 @@ assertTrue(x, msg=None)
 %\bottomrule
 \end{tabular}
 
+### How to use assertion methods -- some tips
 
+- In JUnit, the parameter order for assertions is: expected value, then
+  actual value, then message. (Hover over the assertion method in your IDE
+  to see the JavaDoc tooltip.)
+- It's good practice to give a message, and will be worth marks in
+  assessments.
+- In JUnit, the assertions are *overloaded* so as to apply to any of the
+  primitive types, any of the array types, and anything inheriting
+  from `Object` (i.e., any reference type)
+- Reference types need a sensible `.equals()` method in order for
+  equality tests to work. Most classes will already have an `.equals()` method,
+  but if you write your own classes, you'll need to implement one.
+- When comparing aggregate types like arrays or containers -- don't loop over them
+  and compare individual elements, just compare the aggregate types directly.
+
+<!--
 
 ### Running Tests
 
@@ -911,11 +837,13 @@ assertTrue(x, msg=None)
     $ python3 test_simple.py
     
     .
-    ----------------------------------------------------------------------
+    -|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|-
     Ran 1 test in 0.000s
     
     OK
     ~~~
+
+-->
 
 ### Structuring test code
 
@@ -1200,6 +1128,7 @@ to any *invariants* we think should hold about a software component.
 - Fault tolerance -- we can introduce redundancy into the system. For instance, the Airbus flight control system actually contains multiple systems, and control switches to a backup if one becomes unavailable.\
   (Query -- what sort of faults will this guard against? What sort might it not?)
 
+<!--
 
 ### Test Double Illustration
 
@@ -1207,14 +1136,28 @@ to any *invariants* we think should hold about a software component.
 ![](lect03-images/test-double.eps)
 `\end{center}`{=latex}
 
-<!--
+<!-|-
 { width=80% }
+-|->
+
 -->
 
 ### Next
 
 -   Next question - what test values to use, what test cases to write?
 -   This is test *design* ...
+
+### References
+
+
+
+
+- Cohn, Mike. *Succeeding with Agile: Software Development Using Scrum*. Upper
+  Saddle River, NJ: Addison-Wesley Professional, 2009.
+- Vocke, Ham. "The Practical Test Pyramid." MartinFowler.com.
+  February 26, 2018.
+  <https://martinfowler.com/articles/practical-test-pyramid.html>.
+
 
 
 
