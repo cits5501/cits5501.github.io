@@ -1,6 +1,6 @@
 ---
 title: |
-  CITS5501 lab 1&nbsp;--&nbsp;Data-driven tests and test design&nbsp;--&nbsp;solutions
+  CITS5501 lab 2&nbsp;--&nbsp;Data-driven tests and test design&nbsp;--&nbsp;solutions
 ---
 
 `~\vspace{-5em}`{=latex}
