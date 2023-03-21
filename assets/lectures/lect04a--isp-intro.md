@@ -104,11 +104,22 @@ inputs).
 \def\Z{\mathbb{Z}}
 
 If we want to indicate the domain and codomain of a function,
-we do it like this:
+we do it like this:[^zahren]
 
 $$
 abs : \Z \rightarrow \Z_{\geq 0}
 $$
+
+<!-- x_ -->
+
+[^zahren]: Hopefully you're familiar with standard mathematical
+  notation for sets like the integers, rational numbers and reals.
+  $\Z$ is from the German word "Zahlen", meaning "numbers" (German
+  mathematicians were responsible for formalising a great deal of
+  modern set theory in the early 19th century).\
+    &nbsp; If not, there's a short list of them [here][math-symbols].
+
+[math-symbols]: https://pasik-duncan.ku.edu/ksacg/145/2016_Fall/Math_symbols%20.pdf
 
 ### isLeapYear
 
