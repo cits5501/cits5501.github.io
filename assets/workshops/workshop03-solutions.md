@@ -1,10 +1,7 @@
 ---
-subtitle: |
-  ```{=latex}
-  \LARGE\textmd{
-  Week 3 workshop -- ISP  -- solutions  }
-  ```
+title: CITS5501 lab 3 (week 4)&nbsp;--&nbsp;ISP &nbsp;--&nbsp;solutions
 ---
+
 
 `~\vspace{-5em}`{=latex}
 
@@ -43,19 +40,20 @@ an array of `char`s for a particular value.
 public static int binarySearch(char[] array, int startIndex, int endIndex, char value)
 ```
 
-```{=latex}
-\end{small}
-```
-Discuss how you would go about creating tests using Input Space
+Based on what you have seen in lectures and the prescribed reading,
+discuss how you would go about creating tests using Input Space
 Partitioning. 
 
-a.  What steps are involved?
-b.  What is the input domain?
-c.  what characteristics and partitions would you use?
+a.  What steps are involved in doing ISP?
+b.  What is the input domain here?
+c.  What are some characteristics you could use? Check with a partner
+    (or small group), and make sure each characteristic does give you
+    a partitioning.
 
 
 
 `\begin{solbox}`{=latex}
+<div class="solutions">
 
 **Sample solutions**:
 
@@ -69,12 +67,19 @@ c.  what characteristics and partitions would you use?
 5. Refine these into tests
 6. Review
 
-***b\. The input domain consists of:***
+***b\. input domain***
+
+The input domain consists of:
 
 - the set of all possible *arrays* of `char`s (for all practical
   purposes, we can consider this domain as being infinite in size)
 - the set of all possible `int`s (2 parameters of this sort)
 - the set of all possible `char`s (there are 256 of them)
+
+Technically, the input domain consists of a 4-tuple made up of
+*(arrays-of-chars, ints, ints, chars)*. (We could, if needed, make
+the sets here a little more mathematically precise, but it's not
+needed for our purposes.)
 
 ***c\. Characteristics and partitions:***
 
@@ -91,14 +96,23 @@ i.  Are they less than, greater than, or equal to zero?
 
 Some comments on these:
 
-Characteristic (i) is okay, but doesn't show much thought has been
-put into what we're testing for here, and what the method does.
-It's something a machine might come up with (interface-based)
-rather than a person thinking about the intended behaviour of the
-method.
+Characteristic (i) is acceptable, but not a particularly
+useful characteristic in this case. Ask yourself: is it especially
+likely that the sorting routine would treat positive and negative
+values differently? If not, then what is the point of dividing
+an `int` up in this way? Recall that the purpose of partitioning is to
+divide a domain up into equivalence classes -- values where any one
+value is likely to be as good as any other. For a sorting routine,
+that's *already* true of an `int` -- there is little value to be got
+from splitting it up further (though you might do so for completeness,
+once other, more useful characteristics have been applied).
+
+In fact, this characteristic is something a machine might come up with
+(interface-based), as opposed to a person thinking about the intended
+behaviour of the method.
 
 Characteristic (iii) is a characteristic of *two* parameters
-combined.
+combined (which is fine).
 
 For characteristic (iv) - all of these partitions *are* sensible,
 and are worth testing for. When the first parameter is greater than
@@ -134,6 +148,7 @@ Some characteristics we could use for our char are:
 
 &nbsp;
 
+</div>
 `\end{solbox}`{=latex}
 
 
@@ -158,6 +173,7 @@ b.  Identify all the parameters for the `pop` method, and suggest
 
 
 `\begin{solbox}`{=latex}
+<div class="solutions">
 
 **Sample solutions**:
 
@@ -171,20 +187,26 @@ $$
 push : ([\Z], \Z) \rightarrow [\Z]
 $$
 
-(We use $[\Z]$ here to indicate an array of integers.) 
+(We use $[\Z]$ here to indicate an array of integers.)
 
-Basically, the function is treating the method as if were something more
-like:\
-`\texttt{[int] push( int oldState[], int i)}`{=latex}, and
-returned a new state.
+If we wanted our mathematical notation to be a little more informative
+to a reader, we could say:
+
+- Let $StateOfStack = [\Z]$
+- Let `push` be a function with signature: $push : (StateOfStack, \Z) \rightarrow StateOfStack$
+
+Basically, the function is treating the method as if it were something more
+like a `static` Java method with the signature
+`static [int] push( int oldState[], int i)`, which takes *in* a state,
+and returns a new state.
 
 For `pop`, we would model it as $pop : [\Z] \rightarrow (\Z, [\Z])$ -- a function
 that takes in the state  of the stack, and returns a result and a new
 state. That is, it's as if the method instead of
 having signature
-`\texttt{public int pop ()}`{=latex} had instead
+`public int pop ()` had instead
 a signature something like
-`\texttt{Pair<int, [int]> pop()}`{=latex}.
+`static Pair<int, [int]> pop()`.
 
 (See <https://docs.oracle.com/javase/9/docs/api/javafx/util/Pair.html>
 for the `Pair` type.)
@@ -196,150 +218,79 @@ Some possible characteristics:
 - Does the array have zero elements in it, or one, or more?\
   (This partitions the domain into 3.)
 
-It doesn't make sense to have "nullness" as a characteristic.
+Note that it doesn't make sense to have "nullness" as a characteristic.
 If the array were null, the object would be in an invalid state,
 and what "expected behaviour" could we possibly test for?
 
+</div>
 `\end{solbox}`{=latex}
 
 
 
+## 3. Discussion questions
+
+Discuss the following questions about ISP in pairs or a small group, and
+come up with answers:
+
+a.  Suppose we need to test some method (let's suppose it is a static
+    method `myMethod` that takes one
+    `int` for the sake of argument, and that it's sensible to partition it into positive,
+    negative and 0-valued `int`s. i.e. the signature is `static myMethod(int i)`).
+
+    Suppose you've already written three tests for the function; each of your
+    3 tests uses a test value from one partition.
+
+    Your supervisor says three tests is not enough, and you should write
+    more. What do you think? Would more tests be better? Could more
+    tests be *worse*?
+
+
+b.  Research suggests that the later in the development life cycle a
+    fault is discovered, the more expensive it is to fix. Why do you
+    think this is so?
 
 
 
-## 3. Requirements
+<div class="solutions">
 
-Consider the following, each of which is
-supposed to be a system requirement. Discuss with a partner --
-do you think it would be
-straightforward to write tests for them?
-If not, why not?
+***a\. Number of tests***
 
-a.  The flight booking system should be easy for travel agents to use.
-#.  The `int String.indexOf(char ch)` method should return a -1 if `ch`
-    does not appear in the receiver string, or the index at which it
-    appears, if it does.
-#.  Internet-aware Toast-O-Matic toasters should have a mean time
-    between failure of 6 months.
+The idea behind partitioning is that we've split the domain up into
+what are called equivalence classes, where any one value from each
+partition is "as good as any other" (so far as the behaviour of the
+method is concerned).
 
+If that really is the case, then once we have three tests for
+`myMethod`, writing more tests adds nothing of value. In fact, excessive
+tests could make things worse: more tests means regression tests become
+slower to run, and we have more code to maintain. Every test you write
+should "carry its weight" -- it should serve some useful purpose, and
+add more value than it costs to maintain.
 
+So -- if these really are equivalence classes, then writing more tests
+adds nothing of value. But in fact, we know that
+programmers tend to make
+mistakes around boundaries, so it's not *quite* true that every value
+from each partition is "as good as" any other.
 
+We could add in tests that use -1 and 1 as test values (or maybe even
+the maximum and minimum values of an `int`), and still have tests that
+"carry their weight".
 
+***b\. Costs of fixing defects***
 
-`\begin{solbox}`{=latex}
+The main reason is that the compnent which contains the fault
+becomes a more and more integral part of the system, and affects more
+components -- the fault has become "built in" to the documentation,
+larger components, other tests, etc.
 
-System requirements:
+This means that *fixing* the fault is (a) likely to take more effort,
+because we have to consider all the other components/documentation/tests
+that it affects, and (b) can have unexpected consequences -- our
+components may interact in complex ways.
 
-***a\. "Easiness of use" requirement***
+</div>
 
-This would be difficult to test.
-
-- "Easy to use" is not a very *precise* requirement.
-  It is the opposite of precise -- it is *vague* or *fuzzy*;
-  it is difficult to pinpoint exactly which systems satisfy
-  it and which don't.
-
-  A better requirement might be something like:
-
-  > "Travel agents shall be able to use all the system functions after
-  > successful completion of a training course designed by the software
-  > provider. After this training, the average number of errors made by
-  > experienced users shall not exceed two per hour of system use."
-
-  (This is adapted from *Pressman*.)
-
-- A test like this requires human users, and would
-  often not
-  be done until the *acceptance
-  testing* phase. Prior to that, the software provider
-  might try to come up with a quicker and cheaper test
-  to act as a *proxy* for the acceptance test -- they
-  might test it on non-technical staff in their own
-  organisation, for instance.
-
-  (The staff in their own organisation are acting as
-  a sort of *test double* or *mock*, here -- we will see more
-  about these later. When we write unit tests,
-  a "mock" is some sort of object that "stands in for"
-  a real object that for some reason is difficult or inappropriate
-  to use.)
-
-\orangealert If you are not clear about what makes a good requirement,
-you might want to review the chapter from the *Pressman* textbook
-on "Understanding Requirements" (in the 9th edition)
-or "Requirements Engineering" (in earlier editions).\
-There is also a quick summary (taken from documentation
-for an IBM requirements management product) available
-[here][good-requirements].
-
-[good-requirements]: https://www.informit.com/articles/article.aspx?p=1152528&seqNum=4
-
-`\end{solbox}`{=latex}
-
-
-
-
-
-
-`\begin{solbox}`{=latex}
-
-
-***b\. indexOf method***
-
-This seems straightforward to test, but leaves some behaviour
-*unspecified*.
-
-It doesn't specify what happens if the
-character appears in the string multiple times -- it
-says "the index at which it appears", implying there is only one.
-It would be better to specify "the *first* index at which it appears".
-
-Once that is done, the method
-could still be made *more* precise -- compare the
-[actual Javadoc][indexof-javadoc] for the
-Java `String.indexOf` method. That documentation clarifies
-that `ch` represents a Unicode code point, and explains
-what happens when `ch` falls in various ranges.
-
-Once corrected, the requirement is straightforward to write
-tests for.
-
-[indexof-javadoc]: https://docs.oracle.com/javase/8/docs/api/java/lang/String.html#indexOf-int-
-
-`\end{solbox}`{=latex}
-
-
-
-
-
-`\begin{solbox}`{=latex}
-
-
-***c\. "mean time between failure" requirement***
-
-For many purposes, this is probably precise enough
-(though one might want to add "under normal operating
-conditions", as opposed to "when operated in the open in
-a desert environment frequently subject to sandstorms").
-
-As it stands, it is not easy to test, however, until after
-the toasters have been sold and are in normal operational
-use.
-
-As with requirement (a),
-the manufacturer might make use of some sort of
-proxy test to assess the resilience of toasters. (Consider testing of
-car safety, for instance: do manufacturers "test" the safety
-of cars by simply selling them, and seeing what accidents
-occur? No -- they do things like simulating wear and tear,
-and the effects of collisions.)
-
-The manufacturer could perform studies to estimate what the effects of
-months or years of use on a toaster would look like, and
-find ways of achieving the same wear in a testing lab.
-
-
-`\end{solbox}`{=latex}
 
 
 

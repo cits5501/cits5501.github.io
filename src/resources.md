@@ -96,10 +96,9 @@ the semester.
 - Week 3 -- data-driven tests
   - Lab worksheet {% resourceList "workshop02", ["html", "md"] %}
   - Source code ([zip]({{ "/workshops/workshop-02-code.zip" | url }}))
-
-{#
-  - Sample worksheet solutions {% resourceList "workshop02-solutions", ["pdf", "md"] %}
-#}
+  - Sample worksheet solutions {% resourceList "workshop02-solutions", ["html", "md"] %}
+- Week 4 -- ISP
+  - Lab worksheet {% resourceList "workshop03", ["html", "md"] %}
 
 {#
 - Week 4 -- ISP

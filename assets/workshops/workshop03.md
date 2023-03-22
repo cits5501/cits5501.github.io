@@ -1,10 +1,7 @@
 ---
-subtitle: |
-  ```{=latex}
-  \LARGE\textmd{
-  Week 3 workshop -- ISP  }
-  ```
+title: CITS5501 lab 3 (week 4)&nbsp;--&nbsp;ISP 
 ---
+
 
 `~\vspace{-5em}`{=latex}
 
@@ -43,15 +40,15 @@ an array of `char`s for a particular value.
 public static int binarySearch(char[] array, int startIndex, int endIndex, char value)
 ```
 
-```{=latex}
-\end{small}
-```
-Discuss how you would go about creating tests using Input Space
+Based on what you have seen in lectures and the prescribed reading,
+discuss how you would go about creating tests using Input Space
 Partitioning. 
 
-a.  What steps are involved?
-b.  What is the input domain?
-c.  what characteristics and partitions would you use?
+a.  What steps are involved in doing ISP?
+b.  What is the input domain here?
+c.  What are some characteristics you could use? Check with a partner
+    (or small group), and make sure each characteristic does give you
+    a partitioning.
 
 
 
@@ -74,29 +71,27 @@ b.  Identify all the parameters for the `pop` method, and suggest
 
 
 
+## 3. Discussion questions
+
+Discuss the following questions about ISP in pairs or a small group, and
+come up with answers:
+
+a.  Suppose we need to test some method (let's suppose it is a static
+    method `myMethod` that takes one
+    `int` for the sake of argument, and that it's sensible to partition it into positive,
+    negative and 0-valued `int`s. i.e. the signature is `static myMethod(int i)`).
+
+    Suppose you've already written three tests for the function; each of your
+    3 tests uses a test value from one partition.
+
+    Your supervisor says three tests is not enough, and you should write
+    more. What do you think? Would more tests be better? Could more
+    tests be *worse*?
 
 
-
-## 3. Requirements
-
-Consider the following, each of which is
-supposed to be a system requirement. Discuss with a partner --
-do you think it would be
-straightforward to write tests for them?
-If not, why not?
-
-a.  The flight booking system should be easy for travel agents to use.
-#.  The `int String.indexOf(char ch)` method should return a -1 if `ch`
-    does not appear in the receiver string, or the index at which it
-    appears, if it does.
-#.  Internet-aware Toast-O-Matic toasters should have a mean time
-    between failure of 6 months.
-
-
-
-
-
-
+b.  Research suggests that the later in the development life cycle a
+    fault is discovered, the more expensive it is to fix. Why do you
+    think this is so?
 
 
 
