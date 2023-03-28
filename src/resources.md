@@ -36,10 +36,10 @@ like to get an idea in advance of what will be covered.)
   - Lecture 4b -- input space partitioning {% resourceList "lect04b--isp", ["pdf", "md"] %}
 - Week 5
   - Lecture 5a -- model-based testing {% resourceList "lect05a--intro", ["pdf", "md"] %}
-
-{#
   - Lecture 5b -- graph-based testing {% resourceList "lect05b--graph", ["pdf", "md"] %}
   - Lecture 5c -- logic-based testing {% resourceList "lect05c--logic", ["pdf", "md"] %}
+
+{#
 - Week 6--7
   - Lecture 6a -- syntax-based testing {% resourceList "lect06a--syntax", ["pdf", "md"] %}
   - Lecture 6b -- random testing       {% resourceList "lect06b--random", ["pdf", "md"] %}
@@ -99,11 +99,10 @@ the semester.
   - Sample worksheet solutions {% resourceList "workshop02-solutions", ["html", "md"] %}
 - Week 4 -- ISP
   - Lab worksheet {% resourceList "workshop03", ["html", "md"] %}
+  - Sample worksheet solutions {% resourceList "workshop03-solutions", ["html", "md"] %}
 
 {#
-- Week 4 -- ISP
   - Lab worksheet {% resourceList "workshop03", ["pdf", "md"] %}
-  - Sample worksheet solutions {% resourceList "workshop03-solutions", ["pdf", "md"] %}
 - Week 5 -- graphs
   - Lab worksheet {% resourceList "workshop04", ["pdf", "md"] %}
   - Sample worksheet solutions {% resourceList "workshop04-solutions", ["pdf", "md"] %}
