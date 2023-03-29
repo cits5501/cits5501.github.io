@@ -7,7 +7,7 @@ title: |
   `}`{=latex}
 ---
 
-## 1. Graphs and control flow
+## 1. ISP, graphs and control flow
 
 Consider the following Java method for collapsing sequences of blanks, taken
 from the `StringUtils` class of Apache Velocity
@@ -43,11 +43,23 @@ a.  Using the ISP principles we have covered in class, suggest
     some *characteristics* we could use to partition
     the `argStr` parameter.
 
-    Try generating some test values from your characteristics.
+    Once you have several characteristics, consider how you might choose
+    combinations of partitions from them. A recommended approach is to aim
+    for "Base Choice" coverage:
+
+    i.  For each characteristic, pick a "base choice" (and explain the
+        reasoning behind that choice)
+    ii. Select test values for a "base choice" test.
+    #.  Go through and derive test values for the "non-base" partitions.
+
+    Try 
+    writing JUnit tests for some of your test values.
+    Compare the characteristics and test
+    values you derived with those of someone else in the same lab.
+    Are your solutions the same?
 
 b.  Using the techniques outlined in the last lecture,
-    try to construct a *control
-    flow graph* of the method.
+    try to construct a *control flow graph* of the method.
 
     How many nodes do you end up with? \
     How many edges?
@@ -55,10 +67,11 @@ b.  Using the techniques outlined in the last lecture,
 You may wish to work with a partner for these exercises, and
 compare your answers.
 
-Note that when constructing a control flow graph, you may ignore calls
-to other methods, such as `.charAt()`,
-for the purposes of this exercise -- you only
-need model the control flow *within* the method.
+For the purposes of this exercise, we'll take a simplified approach:
+you may ignore calls
+to other methods, such as `.charAt()`, and need only
+model the control flow *within* the method. (What about possible
+exceptions?  Should they be modelled, or not? Why?)
 
 A typical way of "labelling" your graph nodes needs is to use letters
 ("A", "B", "C" and so on),
@@ -102,11 +115,7 @@ e.  What are the *prime paths* in your graph?
 
 
 
-## 2. Self-study -- test fixtures
-
-It is suggested that you complete the following exercises
-in your own time to consolidate
-your understanding of test automation.
+## 2. Test fixtures
 
 Review the material from the textbook on test automation
 (ch 6), and the JUnit 4 "Text fixtures" documentation
@@ -165,7 +174,7 @@ Create a new Java project, create a `MyClass.java`
 file containing the code above,
 and check that it compiles.
 
-### A test class
+**A test class**
 
 Suppose we use the following test code for our
 `MyClass` class:

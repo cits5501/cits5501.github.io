@@ -7,7 +7,7 @@ title: |
   `}`{=latex}
 ---
 
-## 1. Graphs and control flow
+## 1. ISP, graphs and control flow
 
 Consider the following Java method for collapsing sequences of blanks, taken
 from the `StringUtils` class of Apache Velocity
@@ -43,11 +43,23 @@ a.  Using the ISP principles we have covered in class, suggest
     some *characteristics* we could use to partition
     the `argStr` parameter.
 
-    Try generating some test values from your characteristics.
+    Once you have several characteristics, consider how you might choose
+    combinations of partitions from them. A recommended approach is to aim
+    for "Base Choice" coverage:
+
+    i.  For each characteristic, pick a "base choice" (and explain the
+        reasoning behind that choice)
+    ii. Select test values for a "base choice" test.
+    #.  Go through and derive test values for the "non-base" partitions.
+
+    Try 
+    writing JUnit tests for some of your test values.
+    Compare the characteristics and test
+    values you derived with those of someone else in the same lab.
+    Are your solutions the same?
 
 b.  Using the techniques outlined in the last lecture,
-    try to construct a *control
-    flow graph* of the method.
+    try to construct a *control flow graph* of the method.
 
     How many nodes do you end up with? \
     How many edges?
@@ -55,10 +67,11 @@ b.  Using the techniques outlined in the last lecture,
 You may wish to work with a partner for these exercises, and
 compare your answers.
 
-Note that when constructing a control flow graph, you may ignore calls
-to other methods, such as `.charAt()`,
-for the purposes of this exercise -- you only
-need model the control flow *within* the method.
+For the purposes of this exercise, we'll take a simplified approach:
+you may ignore calls
+to other methods, such as `.charAt()`, and need only
+model the control flow *within* the method. (What about possible
+exceptions?  Should they be modelled, or not? Why?)
 
 A typical way of "labelling" your graph nodes needs is to use letters
 ("A", "B", "C" and so on),
@@ -74,6 +87,7 @@ that's fine.
 
 
 `\begin{solbox}`{=latex}
+<div class="solutions">
 
 **Sample solutions**:
 
@@ -86,14 +100,14 @@ select from each partition:
   - This gives us two partitions.
   - For the "non-empty" option, we might choose  as test values a
     "typical" string, say
-    `\texttt{"too many assessments :/"}`{=latex},
+    `"too many assessments :/"`,
     and maybe some less typical options
     (perhaps very long strings, strings using non-English Unicode
     characters, or the string
-    `\texttt{"not nearly enough assessments :/"}`{=latex})
+    `"not nearly enough assessments :/"`)
 
-We'll make some *sub*-characteristics for the non-empty option.
-That is, the following characteristics all assume the string is
+We can define some *sub*-characteristics for the non-empty option.
+Some sample characteristics follow, all of which assume the string is
 non-empty:
 
 - Does the string contain spaces? (Gives 2 partitions; strings that do,
@@ -107,6 +121,49 @@ non-empty:
   space](https://en.wikipedia.org/wiki/Zero-width_space) (unicode
   `U+200B`) characters? (gives 2 partitions)
 
+For a *base choice*, we might select the following partitions from
+those:
+
+- Does the string contain spaces? Base choice: yes. (A string containing
+  some spaces would be a typical use case for this method.)
+- Does the string contain only spaces? Base choice: no. (A string with
+  all spaces would be atypical.)
+- Does the string contain spaces at the start? Base choice: no. (We
+  might think that the most common case is where the parameter starts
+  and ends with a letter or punctuation.)
+- Does the string contain spaces at the end? Base choice: no. (See
+  previous point)
+- Does the string contain a run of two or more contiguous spaces? Base
+  choice: we might decide either way, but let's say that we think "Yes"
+  represents a more typical use case here.
+- Does the string contain a run of two or more tab (`\t`) characters?
+  Base choice: we might select "no", on the grounds that spaces are more
+  common than tabs.
+- Does the string contain a run of two or more [zero-width
+  space](https://en.wikipedia.org/wiki/Zero-width_space) (unicode
+  `U+200B`) characters? Base choice: no, again (see previous point).
+
+We can then construct a test *value* which satisfies all those base
+choices -- `"some␣random␣␣string"`, perhaps (here, we've used the
+`␣` character to represent a space -- note the 2 spaces after
+"random").
+
+We would then go through and vary the partitions for different
+characteristics. (This *doesn't* mean we have to use our original test
+*value* as a template, though we could if we want.)
+
+For instance, "Does the string contain spaces at the start?". The base
+choice selects from the "no" partition; we could vary this by using
+`"␣some␣random␣␣string"` as a test value.
+
+There might well be better ways of organizing our characteristics --
+what were yours? (For instance, one other possibility is: partition
+strings into "Strings containing a run of two or more consecutive
+whitespace characters" vs "Strings that don't". We might then make most
+of the characteristics listed above *sub-*partitions of the "Strings that
+do..." partition.)
+
+</div>
 `\end{solbox}`{=latex}
 
 
@@ -114,6 +171,7 @@ non-empty:
 
 
 `\begin{solbox}`{=latex}
+<div class="solutions">
 
 **Sample solutions**:
 
@@ -122,7 +180,8 @@ non-empty:
 Here is one possible control flow graph:
 
 `\begin{center}`{=latex}
-![](images/controlflow-solution.eps){ width=70% }
+<!-- ![](images/controlflow-solution.eps){ width=70% } -->
+![](images/controlflow-solution.svg){ width=70% }
 `\end{center}`{=latex}
 
 Here, the nodes are labelled with the section of code they
@@ -132,7 +191,7 @@ since they must *always* be executed together (in our simple
 model of the function), there's no real point in giving
 each line its own node.
 
-
+</div>
 `\end{solbox}`{=latex}
 
 
@@ -148,6 +207,7 @@ c.  Given your test cases from part (a), try mentally or on paper
 
 
 `\begin{solbox}`{=latex}
+<div class="solutions">
 
 **Sample solutions**:
 
@@ -155,6 +215,7 @@ c.  Given your test cases from part (a), try mentally or on paper
 
 The answers here will depend on your suggested tests.
 
+</div>
 `\end{solbox}`{=latex}
 
 
@@ -168,6 +229,7 @@ d.  Work out whether your tests give the following sorts
 
 
 `\begin{solbox}`{=latex}
+<div class="solutions">
 
 **Sample solutions**:
 
@@ -175,6 +237,7 @@ d.  Work out whether your tests give the following sorts
 
 The answers here will depend on your suggested tests.
 
+</div>
 `\end{solbox}`{=latex}
 
 
@@ -189,19 +252,22 @@ e.  What are the *prime paths* in your graph?
 
 
 `\begin{solbox}`{=latex}
+<div class="solutions">
 
 **Sample solutions**:
 
 **e\. prime paths**
 
-For the graph solution shown earlier, the prime paths are:
+For the graph solution shown earlier, the prime paths are
+(we have grouped related paths together -- e.g. when they have a shared
+prefix, or represent paths through the same loop):
 
-> ABG, ABCDEF, ABCDF, \
-> BCDEFB, CDEFBC, DEFBCD, EFBCDEF, FBCDEF *(these all execute the left-hand 'if' branch)* \
-> BCDFB, CDFBC, DFBCD *(these all execute the right-hand 'if' branch)* \
-> EFBCDF, *(this takes one left and one right branch)* \
-> CDEFBG, *(takes left branch)* \
-> CDFBG *(take rights branch)*
+- ABG, ABCDEF, ABCDF
+- BCDEFB, CDEFBC, DEFBCD, EFBCDEF, FBCDEF *(these all execute the left-hand 'if' branch)*
+- BCDFB, CDFBC, DFBCD *(these all execute the right-hand 'if' branch)*
+- EFBCDF *(this takes one left and one right branch)*
+- CDEFBG *(takes left branch)*
+- CDFBG *(take rights branch)*
 
 What proportion of the prime paths your tests cover will
 depend on what tests you chose.
@@ -210,8 +276,7 @@ node or statement coverage,
 then they certainly won't have prime path coverage.
 
 One useful path is the path ABG, which will get exercised
-when we pass in the
-empty. This is a useful test because
+when we pass in the empty string. This is a useful test because
 it reveals a problem with the code -- passing in empty strings
 causes an exception to be thrown when we reach line 9 (the
 `.charAt` call fails).
@@ -221,16 +286,12 @@ techniques, or by looking to see what sort of graph coverage
 we have -- as long as we find the bug, either approach
 is fine!
 
-
+</div>
 `\end{solbox}`{=latex}
 
 
 
-## 2. Self-study -- test fixtures
-
-It is suggested that you complete the following exercises
-in your own time to consolidate
-your understanding of test automation.
+## 2. Test fixtures
 
 Review the material from the textbook on test automation
 (ch 6), and the JUnit 4 "Text fixtures" documentation
@@ -289,7 +350,7 @@ Create a new Java project, create a `MyClass.java`
 file containing the code above,
 and check that it compiles.
 
-### A test class
+**A test class**
 
 Suppose we use the following test code for our
 `MyClass` class:
@@ -362,6 +423,7 @@ are potential *fixtures* for any test.
 
 
 `\begin{solbox}`{=latex}
+<div class="solutions">
 
 **1\. setUp method**
 
@@ -373,7 +435,7 @@ to find out how many times the `setUp()` method executes.
 Some possibilities are:
 
 - inserting an assertion you know will fail (e.g.
-  `\texttt{assertTrue(false)}`{=latex})
+  `assertTrue(false)`)
 - throwing an exception (if your test is *intended* to throw an
   exception, then throwing an exception other than the expected
   one). For example:
@@ -382,8 +444,8 @@ Some possibilities are:
     throw new RuntimeException("test not implemented yet");
   ```
 
-- calling the method `\texttt{fail(String message)}`{=latex} from
-  the `\texttt{org.junit.jupiter.api.\allowbreak Assertions}`{=latex} class
+- calling the method `fail(String message)` from
+  the `org.junit.jupiter.api.\allowbreak Assertions` class
   (or one of several similar overloaded `fail` methods). For
   instance:
 
@@ -441,7 +503,7 @@ We only need to write a `tearDown` method when there are resources
 the JVM. In that case, we would write a `tearDown` method that,
 for instance, deletes any created files.
 
-
+</div>
 `\end{solbox}`{=latex}
 
 
