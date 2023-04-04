@@ -412,7 +412,7 @@ of $c_i$ changes the value of $p$
     -   But when $B$ is true, then $A \wedge B$ will be
         true when $A$ is true, and false when $A$ is false.
     -   Which is exactly the definition of "determination".
--   So: $A$ determines $p$ when $B$ is false.\
+-   So: $A$ determines $p$ when $B$ is true.\
     That is -- the value of $p$ depends on $A$.
 
 ### Active clause coverage
