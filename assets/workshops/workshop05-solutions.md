@@ -1,16 +1,22 @@
 ---
-title: |
-  `\LARGE\textmd{`{=latex}
-  CITS5501 Software Testing and Quality Assurance `\\`{=latex}
-  Semester 1, 2022 `\\`{=latex}
-   Workshop 5 (week 6) -- logic-based testing  -- solutions 
-  `}`{=latex}
+title: CITS5501 lab 5 (week 6)&nbsp;--&nbsp;logic-based testing &nbsp;--&nbsp;solutions
+include-before: |
+  ```{=html}
+  <style>
+  xtable {
+    border: solid 1pt black;
+  }
+
+  table tr, table th {
+    border: solid 1pt black;
+  }
+
+  tr td, th td {
+    border: solid 1pt black;
+  }
+  </style>
+  ```
 ---
-
-## Reading
-
-It is strongly suggested you complete the recommended readings for weeks
-1-5 *before* attempting this lab/workshop.
 
 ## 0. Notation
 
@@ -28,9 +34,17 @@ Java logical operators:
 - `||` -- "or"
 - `!` -- "not"
 
-(We won't be using any Python in this unit -- but for reference,
+<div style="border: solid 2pt blue; background-color: hsla(241, 100%,50%, 0.1); padding: 1em; border-radius: 5pt; margin-top: 1em;">
+
+**Other operators and languages**
+
+Java also has non–short-circuiting logic operators, `|` and `&`.
+
+We won't be using any Python in this unit -- but for reference,
 in Python, the logic operators are all spelled out: "and", "or" and
-"not".)
+"not".
+
+</div>
 
 
 ## 1. Terminology -- clauses and predicates
@@ -44,8 +58,17 @@ What are the *clauses* in the predicates below?
 
 a.  $((f \leqslant g) \wedge (x > 0)) \vee (M \wedge (e < d +c))$
 
-    
-    \solbox
+#.  $G \vee ((m > a) \vee (s \leqslant o + n)) \wedge U$
+
+
+
+\solbox
+<div class="solutions">
+
+**Solutions**
+
+a.  $((f \leqslant g) \wedge (x > 0)) \vee (M \wedge (e < d +c))$
+
     There are 4 clauses:
 
     i.  $f \leqslant g$
@@ -53,13 +76,9 @@ a.  $((f \leqslant g) \wedge (x > 0)) \vee (M \wedge (e < d +c))$
     #.  $M$
     #.  $(e < d +c)$
 
-    \endsolbox
-    
 
 #.  $G \vee ((m > a) \vee (s \leqslant o + n)) \wedge U$
 
-    
-    \solbox
     There are 4 clauses:
 
     i.  $G$
@@ -67,8 +86,11 @@ a.  $((f \leqslant g) \wedge (x > 0)) \vee (M \wedge (e < d +c))$
     #.  $s \leqslant o + n$
     #.  $U$
 
-    \endsolbox
-    
+
+</div>
+\endsolbox
+
+
 
 ## 2. Making clauses active
 
@@ -114,6 +136,24 @@ Make w active, and        &                                &                    
 \end{mdframed}
 ```
 
++-------------------------------+------------------------------------------+------------------------------+
+| **Test description**          | **Inputs**                               | **Predicate value**          |
++===============================+==========================================+==============================+
+| Make s active, and<br>        |                                          |                              |
+| &nbsp;       s = true<br>     | s = true, m = true, w = false<br>        | true<br>                     |
+| &nbsp;       s = false        | s = false, m = true, w = false           | false                        |
++-------------------------------+------------------------------------------+------------------------------+
+| Make m active, and<br>        |                                          |                              |
+| &nbsp;       m = true<br>     | s = true, m = true, w = false<br>        | true<br>                     |
+| &nbsp;       m = false        | s = true, m = false, w = false           | false                        |
++-------------------------------+------------------------------------------+------------------------------+
+| Make w active, and<br>        |                                          |                              |
+| &nbsp;       w = true<br>     | s = true, m = false, w = true<br>        | true<br>                     |
+| &nbsp;       w = false        | s = true, m = false, w = false           | false                        |
++-------------------------------+------------------------------------------+------------------------------+
+
+
+
 (Here, we aren't told what the expected outcome is if the predicate
 comes out true or false; if we were, we could add a column "Expected
 outcome" which listed this.)
@@ -127,7 +167,7 @@ $$
 $$
 
 you can assume that $M$ is a boolean, and that $x$, $c$, $d$ and $e$
-are some integral type (such as `int`).
+are some numeric type (such as `int`).
 
 
 For each of the clauses in the predicates below,
@@ -145,12 +185,14 @@ a.  $A \vee (B \wedge \neg C)$
 
 
 \solbox
+<div class="solutions">
 
 In the solutions, we explain our reasoning, and then give a table
 with test values. This is a good way to format your answers,
 if you're asked to come up with test values.
 
-Often there can be *multiple* possible solutions, but we show only one.
+Almost always, there are multiple possible solutions (because there are
+many possible choices for the test values), but we show only one.
 
 **For (a):**
 
@@ -162,7 +204,7 @@ Note that strictly speaking, we don't need the parentheses in
 $A \vee (B \wedge \neg C)$, since "$\wedge$" is considered to bind
 more tightly than "$\vee$", but we add them for clarity.
 (This is reflected in most programming languages, where
-"\texttt{\&\&}" has higher precedence than "\texttt{||}".)
+"`\&\&`" has higher precedence than "`||`".)
 
 
 i.  ***To make $A$ active:***
@@ -206,13 +248,25 @@ Make $C$ active, and        &                                &                  
 \end{mdframed}
 ```
 
-\endsolbox
+<!-- markdown version -->
+
++-----------------------------+------------------------------------------+--------------------------+
+| **Test description**        | **Inputs**                               | **Predicate value**      |
++=============================+==========================================+==========================+
+| Make $A$ active, and<br>    |                                          |                          |
+| &nbsp;       $A$ = true<br> | $A$ = true, $B$ = false, $C$ = true<br>  | true<br>                 |
+| &nbsp;       $A$ = false    | $A$ = false, $B$ = false, $C$ = true     | false                    |
++-----------------------------+------------------------------------------+--------------------------+
+| Make $B$ active, and<br>    |                                          |                          |
+| &nbsp;       $B$ = true<br> | $A$ = false, $B$ = true,  $C$ = false<br>| true<br>                 |
+| &nbsp;       $B$ = false    | $A$ = false, $B$ = false, $C$ = false    | false                    |
++-----------------------------+------------------------------------------+--------------------------+
+| Make $C$ active, and<br>    |                                          |                          |
+| &nbsp;       $C$ = true<br> | $A$ = false, $B$ = true, $C$ = true<br>  | false<br>                |
+| &nbsp;       $C$ = false    | $A$ = false, $B$ = true, $C$ = false     | true                     |
++-----------------------------+------------------------------------------+--------------------------+
 
 
-
-\newpage
-
-\solbox
 
 **For (b):**
 
@@ -271,14 +325,23 @@ Make $e < d + c$ active, and        &                                &          
 \end{mdframed}
 ```
 
-\endsolbox
++-----------------------------------------+--------------------------------------------------+------------------------------+
+| **Test description**                    | **Inputs**                                       | **Predicate value**          |
++=========================================+==================================================+==============================+
+| Make $x > 0$ active, and<br>            |                                                  |                              |
+| &nbsp;       $x > 0$ = true<br>         | $x = 1$, $M$ = false, $e = d = c = 0$<br>        | true<br>                     |
+| &nbsp;       $x > 0$ = false            | $x = 0$, $M$ = false, $e = d = c = 0$            | false                        |
++-----------------------------------------+--------------------------------------------------+------------------------------+
+| Make $M$ active, and<br>                |                                                  |                              |
+| &nbsp;       $M$ = true<br>             | $M = \text{true}$, $x = 0$, $e = d = c = 1$<br>  | true<br>                     |
+| &nbsp;       $M$ = false                | $M = \text{false}$, $x = 0$, $e = d = c = 0$     | false                        |
++-----------------------------------------+--------------------------------------------------+------------------------------+
+| Make $e < d + c$ active, and<br>        |                                                  |                              |
+| &nbsp;       $e < d + c$ = true<br>     | $x = 0, M = \text{true}$, $e = d = c = 1$<br>    | true<br>                     |
+| &nbsp;       $e < d + c$ = false        | $x = 0, M = \text{true}$, $e = d = c = 0$        | false                        |
++-----------------------------------------+--------------------------------------------------+------------------------------+
 
 
-
-
-\newpage
-
-\solbox
 
 **For (c):**
 
@@ -350,8 +413,33 @@ Make $U$ active, and        &                                &                  
 \end{mdframed}
 ```
 
++------------------------------------------+-----------------------------------------------------------------------------+------------------------------+
+| **Test description**                     | **Inputs**                                                                  | **Predicate value**          |
++==========================================+=============================================================================+==============================+
+| Make $G$ active, and<br>                 |                                                                             |                              |
+| &nbsp;       $G$ = true<br>              | $G = \text{true}$, $m = a = 0$, $H = U = \text{false}$<br>                  | true<br>                     |
+| &nbsp;       $G$ = false                 | $G = \text{false}$, $m = a = 0$, $H = U = \text{false}$                     | false                        |
++------------------------------------------+-----------------------------------------------------------------------------+------------------------------+
+| Make $m \geqslant a$ active, and<br>     |                                                                             |                              |
+| &nbsp;       $m \geqslant a$ = true<br>  | $m = a = 0$, $G = H = U = \text{false}$<br>                                 | true<br>                     |
+| &nbsp;       $m \geqslant a$ = false     | $m = 0, a = 1$, $G = H = U = \text{false}$                                  | false                        |
++------------------------------------------+-----------------------------------------------------------------------------+------------------------------+
+| Make $H$ active, and<br>                 |                                                                             |                              |
+| &nbsp;       $H$ = true<br>              | $H = \text{true}$, $G = \text{false}$, $m = 0, a = 1, U = \text{true}$<br>  | false<br>                    |
+|                        <br>              |                                                                       <br>  |      <br>                    |
+| &nbsp;       $H$ = false                 | $H = \text{false}$, $G = \text{false}$, $m = 0, a = 1, U = \text{true}$     | true                         |
++------------------------------------------+-----------------------------------------------------------------------------+------------------------------+
+| Make $U$ active, and<br>                 |                                                                             |                              |
+| &nbsp;       $U$ = true<br>              | $U = \text{true}$,  $G = \text{false}, m = 0, a = 1, H = \text{true}$<br>   | false<br>                    |
+|                        <br>              |                                                                       <br>  |      <br>                    |
+| &nbsp;       $U$ = false                 | $U = \text{false}$, $G = \text{false}, m = 0, a = 1, H = \text{true}$       | true                         |
++------------------------------------------+-----------------------------------------------------------------------------+------------------------------+
 
+
+</div>
 \endsolbox
+
+
 
 
 ## 3. Scenario -- trap-doors
@@ -360,12 +448,14 @@ Suppose a component under test has the following requirements:
 
 
 \genericbox
+<div style="border: solid 2pt blue; background-color: hsla(241, 100%,50%, 0.1); padding: 1em; border-radius: 5pt; margin-top: 1em;">
 
-> If the lever is pulled and the chair is occupied, open
-> the trap-door.
->
-> If the button is pressed, open the trap-door.
+If the lever is pulled and the chair is occupied, open
+the trap-door.
 
+If the button is pressed, open the trap-door.
+
+</div>
 \endgenericbox
 
 
@@ -375,14 +465,17 @@ means. (For an example, look in section 2 at the way we gave
 definitions for the variables in the predicate $s \wedge (m \vee w)$.)
 
 (Hint: if you're stuck, try writing out what the
-component does as one or more "\texttt{if}" statements,
+component does as one or more "`if`" statements,
 in pseudocode.
 Then recall that the set of all predicates in a system
 means the set of all logical expressions found in things
-like "\texttt{if}" statements.)
+like "`if`" statements.)
 
 
 \solbox
+<div class="solutions">
+
+
 
 **Answer:**
 
@@ -474,14 +567,14 @@ marks --
 it will be taken to indicate a poor understanding of logic-based
 testing.
 
+</div>
 \endsolbox
 
 
-## 4. Scenario -- login page
 
-If you don't finish the previous sections of this
-worksheet in class, then attempt this in your
-own time.
+
+
+## 4. Scenario -- login page
 
 Suppose you are part of a team developing a website
 called "RateMyVeterinarian", where people can log in
@@ -491,17 +584,18 @@ services they use.
 Requirements for the site are currently being finalised,
 and one requirement is stated as follows:
 
-\genericbox
+<div style="border: solid 2pt blue; background-color: hsla(241, 100%,50%, 0.1); padding: 1em; border-radius: 5pt; margin-top: 1em;">
 
-> When a user enters a user ID and password into
-> the login page and hits the "log in" button,
-> then if that user ID is listed in the "users" database,
-> and the password matches against the password in
-> the record for that user, and the user record
-> does not state that the account has been disabled,
-> a "Welcome" page should be displayed.
+When a user enters a user ID and password into
+the login page and hits the "log in" button,
+then if that user ID is listed in the "users" database,
+and the password matches against the password in
+the record for that user, and the user record
+does not state that the account has been disabled,
+a "Welcome" page should be displayed.
 
-\endgenericbox
+</div>
+
 
 
 a.  How easy to understand do you think this requirement
@@ -517,6 +611,9 @@ b.  One of your colleagues suggests that because correctly
 
 
 \solbox
+<div class="solutions">
+
+
 
 
 **a. Requirement clarity and readability**
@@ -526,21 +623,22 @@ various conditions were given as bullet points, rather than
 a run-on sentence (together with a little re-phrasing):
 
 
-\genericbox
+<div style="border: solid 2pt blue; background-color: hsla(241, 100%,50%, 0.1); padding: 1em; border-radius: 5pt; margin-top: 1em;">
 
-> When a user enters a user ID and password into
-> the login page and hits the "log in" button,
-> then if:
->
-> - the user ID is listed in the "users" database;
-> - the entered password matches against the password in
->   the database record for that user; and
-> - the user record does not state that the account has been
->   disabled
->
-> a "Welcome" page should be displayed.
+When a user enters a user ID and password into
+the login page and hits the "log in" button,
+then if:
+
+- the user ID is listed in the "users" database;
+- the entered password matches against the password in
+  the database record for that user; and
+- the user record does not state that the account has been
+  disabled
+
+a "Welcome" page should be displayed.
 
 \endgenericbox
+</div>
 
 You may have other suggestions for how the
 requirement could be made clearer.
@@ -620,7 +718,11 @@ Base Choice Coverage as criterion for your ISP tests,
 it's highly likely RACC will be satisfied for
 the requirement.)
 
+</div>
 \endsolbox
+
+
+
 
 
 
