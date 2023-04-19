@@ -323,7 +323,7 @@ b.  No, they cannot. Some grammars define languages
 <div class="solutions">
 
 a.  The number of terminals is the number of "raw" strings
-    in the grammar. They are:
+    in the grammar (i.e. things that aren't non-terminals). They are:
     
     - `"docker "`
     - `"--verbose "`
@@ -374,8 +374,11 @@ b.  A *production*, as we define it in class, is one of
 
     - three alternatives, "debian" or "ubuntu" or "fedora"
 
-    So there are $2 + 3 + 3$ productions, and thus
-    8 tests required. 
+    So there are $2 + 3 + 3$ productions, and we should need at most 8 tests
+    to cover them all.
+    But in this case, we could get by with the same 3 tests as in the
+    last question, and we would have covered all the different productions.
+
 
 </div>
 \endsolbox

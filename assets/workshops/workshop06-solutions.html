@@ -384,7 +384,7 @@ you think would be most appropriate?</p></li>
 <div class="solutions">
 <ol type="a">
 <li><p>The number of terminals is the number of “raw” strings in the
-grammar. They are:</p>
+grammar (i.e. things that aren’t non-terminals). They are:</p>
 <ul>
 <li><code>&quot;docker &quot;</code></li>
 <li><code>&quot;--verbose &quot;</code></li>
@@ -423,7 +423,10 @@ or not.)</p>
 <li>three alternatives, “debian” or “ubuntu” or “fedora”</li>
 </ul>
 <p>So there are <span class="math inline">\(2 + 3 + 3\)</span>
-productions, and thus 8 tests required.</p></li>
+productions, and we should need at most 8 tests to cover them all. But
+in this case, we could get by with the same 3 tests as in the last
+question, and we would have covered all the different
+productions.</p></li>
 </ol>
 </div>
 <p><strong>Exercise</strong>:</p>
