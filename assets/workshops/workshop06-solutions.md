@@ -142,6 +142,7 @@ turns green (once it *is* recognized).
 
 
 \solbox
+<div class="solutions">
 
 **Sample solution**
 
@@ -151,6 +152,7 @@ Amend the last line of the grammar so it reads:
 <image>      ::= "debian" | "ubuntu" | "fedora" | "alpine"
 ```
 
+</div>
 \endsolbox
 
 
@@ -181,6 +183,7 @@ chosen twice as often as the others?
 
 
 \solbox
+<div class="solutions">
 
 Alter the last line of the original grammar,
 which was:
@@ -205,6 +208,7 @@ to get
                 | "ubuntu" | "fedora"
 ```
 
+</div>
 \endsolbox
 
 
@@ -267,6 +271,7 @@ b.  Can all grammars be tested exhaustively? Why or why not?
 
 
 \solbox
+<div class="solutions">
 
 a.  Yes, we could. It defines a *finite* language -- that
     is, a language containing a finite set of strings.
@@ -295,21 +300,27 @@ b.  No, they cannot. Some grammars define languages
     string "0", then the string "END".
 
 
+</div>
 \endsolbox
 
 
 
 **Exercise**:
 
-- Looking at the original grammar -- how many tests would we need to write if
+- Looking at the original grammar -- consider how many tests we would need to write if
   we wanted to
-  get the following sorts of coverage for this grammar?
+  get the following sorts of coverage for this grammar.
 
   a. terminal coverage
   b. production coverage
 
+  What would be the minimum number of tests needed? How many tests do you
+  think would be most appropriate?
+
+
 
 \solbox
+<div class="solutions">
 
 a.  The number of terminals is the number of "raw" strings
     in the grammar. They are:
@@ -323,7 +334,18 @@ a.  The number of terminals is the number of "raw" strings
     - `"ubuntu"`
     - `"fedora"`
 
-    So, eight tests.
+    In general, since there are 8 terminals, we know we should need at most
+    8 tests to achieve terminal coverage.
+    But in this case, we can get away with three: we could use
+
+    - `docker --verbose pull debian`
+    - `docker run ubuntu`, and
+    - `docker build fedora`
+
+    And in this case, using more tests probably wouldn't add much to our test
+    suite. 
+ 
+
 
 b.  A *production*, as we define it in class, is one of
     the *alternatives* within a rule.
@@ -355,6 +377,7 @@ b.  A *production*, as we define it in class, is one of
     So there are $2 + 3 + 3$ productions, and thus
     8 tests required. 
 
+</div>
 \endsolbox
 
 
@@ -374,6 +397,7 @@ a.  Suppose you wanted to write a test ensuring
 
 
 \solbox
+<div class="solutions">
 
 We might define the test case as follows:
 
@@ -381,6 +405,7 @@ We might define the test case as follows:
 - Invoking the recognizer: run the recognizer on the test value.
 - Expected result: The recognizer should return "true".
 
+</div>
 \endsolbox
 
 
@@ -404,12 +429,15 @@ We might define the test case as follows:
 
 
 \solbox
+<div class="solutions">
+
 
 a.  The string "`10`" is not in the language --
     all strings in the language *end* with 1.
 b.  It cannot -- it represents all strings consisting of
     one or more zeroes, then a 1. It is infinite in size.    
 
+</div>
 \endsolbox
 
 

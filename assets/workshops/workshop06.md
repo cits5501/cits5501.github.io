@@ -231,12 +231,16 @@ b.  Can all grammars be tested exhaustively? Why or why not?
 
 **Exercise**:
 
-- Looking at the original grammar -- how many tests would we need to write if
+- Looking at the original grammar -- consider how many tests we would need to write if
   we wanted to
-  get the following sorts of coverage for this grammar?
+  get the following sorts of coverage for this grammar.
 
   a. terminal coverage
   b. production coverage
+
+  What would be the minimum number of tests needed? How many tests do you
+  think would be most appropriate?
+
 
 
 
