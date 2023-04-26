@@ -1,26 +1,6 @@
 ---
-title: |
-  `\LARGE\textmd{`{=latex}
-  CITS5501 Software Testing and Quality Assurance `\\`{=latex}
-  Semester 1, 2022 `\\`{=latex}
-   Workshop 7 (week 8) -- Reviews 
-  `}`{=latex}
-include-before: |
-  ```{=latex}
-  \lstdefinestyle{vsmalllistingstyle}{
-    breaklines=true,
-    numbers=left,
-    numberstyle=\tiny,
-    frame=none,
-    showstringspaces=true,
-    columns=fullflexible,
-    keepspaces=true,
-    basicstyle={\ttfamily\small},
-  }
-  ```
+title: CITS5501 lab 7 (week 8)&nbsp;--&nbsp;reviews 
 ---
-
-`~\vspace{-5em}`{=latex}
 
 ## Reading
 
@@ -67,15 +47,17 @@ to code review.
 
 ## B. Exercise
 
-If you are attending this workshop face to face, then for this exercise you
+For this exercise you
 should split up into small groups of 2-3 people.
 
+<!--
 If you are attending online via Teams, your facilitator should  be able to
 create "breakout rooms" for you, by following the [MS Teams
 instructions][ms-teams-breakout]; but failing that, instead do a solo review of the
 code, and report back to the class as a whole with your findings.
 
 [ms-teams-breakout]: https://support.microsoft.com/en-us/office/use-breakout-rooms-in-teams-meetings-7de1f48a-da07-466c-a5ab-4ebace28e461#bkmk_create-breakout-rooms
+-->
 
 For each of the following code samples, each person in a pair or group
 should take the time
@@ -91,7 +73,7 @@ may suggest some more.
 
 ### Code sample 1 -- `dayOfYear`
 
-\begin{lstlisting}[language=Java,style=vsmalllistingstyle]
+```java
 public static int dayOfYear(int month, int dayOfMonth, int year) {
     if (month == 2) {
         dayOfMonth += 31;
@@ -118,7 +100,8 @@ public static int dayOfYear(int month, int dayOfMonth, int year) {
     }
     return dayOfMonth;
 }
-\end{lstlisting}
+```
+
 
 What problems can you see with this code? What improvements
 would you suggest?
@@ -141,7 +124,7 @@ mins),
 then discuss these with your partner(s) (5--10 mins).
 
 
-\begin{lstlisting}[language=Java,style=vsmalllistingstyle]
+```java
 public static boolean leap(int y) {
     // convert to string so we can access 1st, 2nd digit etc
     String tmp = String.valueOf(y);
@@ -159,7 +142,7 @@ public static boolean leap(int y) {
     }
     return false; /*R5*/
 }
-\end{lstlisting}
+```
 
 
 
@@ -208,37 +191,89 @@ problems they can flag.
 
 \newpage
 
-## D. Challenge exercise
+## D. Ant build files and code coverage tools
 
-You don't need to complete this exercise in class, but if you have a
-good familiarity with coding, you might like to attempt it as an
-extra challenge (either in class, if there is time, or in your own
-time).
+This exercise is to get you familiar with code coverage tools and some of their weaknesses.
 
-Suppose you are desiging a custom database system, PriceWise,
-intended to allow managers of retail stores to query catalogs and stock.
+A repository with Java code is provided at 
+<https://github.com/cits5501/week-8-lab-coverage-example> which contains a simple class
+for detecting whether a Java string is a palindrome (`Palindrome.java`), and tests for
+this class using JUnit.
 
-Amongst the things it must do are the following:
+You can use [GitPod](https://www.gitpod.io) to work with this code online. You will need a GitHub account; once you
+have one set up, follow the link below:
 
-- Provide a GUI, in which users can enter a query in a custom query
-  language, RQL (Retail Query Language), specifically written for
-  retail systems
-  - This will involve parsing the RTL query and using it to consult an
-    internal database
-- Interact with point-of-sale (POS) systems and warehousing systems
-  to determine when stock has been added or sold.
+&nbsp; <https://gitpod.io/new/#https://github.com/cits5501/week-8-lab-coverage-example>
 
-1.  Try and sketch out as a system [block diagram][block-diag] what
-    you think some of the major components or subsystems of the
-    PriceWise system might be.
-2.  Of the different testing techniques we have seen in the unit
-    so far, which
-    might you apply, and to what parts of the system?
-3.  What would you development/integration testing approach be?
-    Would you develop and test the system top-down, bottom-up,
-    or in some other way?
+and select "New workspace".
 
-[block-diag]: https://www.clear.rice.edu/comp310/JavaResources/systemblockdiagrams.html
+After a minute or two, you should get access to an online version of the VS Code editor in which
+the source code for the repository is available. Take a look at the `build.xml` file; this file
+is used by the [Apache Ant][ant] build automation tool. It defines
+several "targets" representing tasks that can be run using the build
+file:
+
+[ant]: https://en.wikipedia.org/wiki/Apache_Ant
+
+- init
+- compile
+- compileTest
+- test, and
+- report.
+
+(Some of these tasks you can also do just using VS Code. For instance,
+open `PalindromeTest.java`, expand the "outline" and "java projects"
+panes, and wait for the background tasks to finish.
+A green triangle should appear next to the start of the `PalindromeTest`
+class, indicating that it can be clicked to run the JUnit tests it
+contains.)
+
+Click the "Terminal" pane, and type `ant test` to run the JUnit tests.
+The messages should indicate that four tests were run with no failures.
+
+Now run `ant report`, and not only will the tests be run, but the paths
+they take through the code of `PalindromeTest` will be recorded by a
+tool called [JaCoCo][jacoco], and a report produced.
+
+[jacoco]: https://www.jacoco.org/jacoco/
+
+You can view this by clicking "Go Live" in the VS Code taskbar (towards
+the right). This serves up the contents of the repository directory via
+HTTP, so it can be viewed in the browser. Click "report", and by
+clicking through, you should be able to see a coverage report for our
+tests:
+
+
+![](jacoco.png){ width="20cm" }
+
+Read the JaCoco documentation on "Coverage Counters", [here][cov],
+for more information about exactly what is being measured.
+
+[cov]: https://www.eclemma.org/jacoco/trunk/doc/counters.html
+
+**Exercises**
+
+- Comment out one of the assert statements (e.g. the one containing
+  `p.isPalindrome("redivider")`) and replace it with the bare call to
+  `p.isPalindrome()`.
+
+  Does the coverage report change at all? Try doing the same for all
+  tests, and check again. What weakness of coverage tools does this
+  suggest?
+
+- Comment out all but one of the tests. Again, does the coverage report
+  change?
+
+- Applying the idea from ISP (but without necessarily doing a detailed
+  analysis) -- can you spot any test cases that are missing from the
+  test suite?
+
+
+
+\newpage
+
+
+
 
 ## E. Summary
 

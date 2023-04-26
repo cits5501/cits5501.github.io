@@ -1,10 +1,5 @@
 ---
-title: |
-  `\LARGE\textmd{`{=latex}
-  CITS5501 Software Testing and Quality Assurance `\\`{=latex}
-  Semester 1, 2022 `\\`{=latex}
-   Workshop 6 (week 7) -- Grammars and syntax-based testing 
-  `}`{=latex}
+title: CITS5501 lab 6 (week 7)&nbsp;--&nbsp;grammars and syntax-based testing 
 include-before: |
   ```{=latex}
   \lstdefinestyle{vsmalllistingstyle}{
