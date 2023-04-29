@@ -245,7 +245,7 @@ Then we represent it as a mapping that takes in a *pair* of things. The
 Java method
 
 ```java
-  /** Returns the smaller of two double values.
+  /** Returns the smaller of two int values.
     */
   static int min(int a, int b)
 ```

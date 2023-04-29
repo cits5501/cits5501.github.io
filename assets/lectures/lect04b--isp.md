@@ -790,7 +790,7 @@ Answer: Enough to bring the risks to a tolerable level.)
     specified level of *coverage* of the code.
 -   *Test coverage* is some measure of the extent to which the
     source code of a program has been executed when a particular
-    test suit runs.
+    test suite runs.
 -   Coverage is often measured using *test coverage tools*.
 
 

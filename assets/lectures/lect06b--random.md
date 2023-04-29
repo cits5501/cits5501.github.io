@@ -16,7 +16,7 @@ author: "Unit coordinator: Arran Stewart"
 ### ISP
 
 When we looked at Input Space Partitioning (ISP),
-we say techniques for manually creating test cases
+we saw techniques for manually creating test cases
 for the functions in a software component.
 
 However, another possibility is to create tests
@@ -38,7 +38,7 @@ Some advantages of \alert{random testing}:
 ### Property-based testing
 
 Suppose we are trying to apply the idea of random testing
-to a method we say in lecture 5, `collapseSpaces`:[^collsp]
+to a method we saw in lecture 5, `collapseSpaces`:[^collsp]
 
 ::: code
 
@@ -159,6 +159,9 @@ Other benefits:
   checking our functions for silly mistakes -- *and* it forces us to
   clarify our thinking about what the preconditions and postconditions
   of our function are.
+
+### Benefits of property-based testing
+
 - Lets us "bootstrap" tricky functions:
   - Write a not necessarily efficient, but very straightforward
     implementation of a tricky function (say, for `editDistance()`,
@@ -174,7 +177,7 @@ Other benefits:
 Testing frameworks that perform property-based testing include:
 
 -   [Hypothesis][hypothesis], for Python
--   [QuickTheories][quicktheories], for Java
+-   [QuickTheories][quicktheories] and [jqwik][jqwik], for Java
 -   [jsverify][jsverify], for JavaScript
 -   [QuickCheck][quickcheck], the inspiration for most of the others,
     for Haskelll
@@ -184,6 +187,7 @@ Testing frameworks that perform property-based testing include:
 
 [hypothesis]: https://hypothesis.works/articles/intro/
 [quicktheories]: https://github.com/quicktheories/QuickTheories
+[jqwik]: https://jqwik.net
 [jsverify]: https://github.com/jsverify/jsverify
 [quickcheck]: http://hackage.haskell.org/package/QuickCheck
 [pbtest-list]: https://hypothesis.works/articles/quickcheck-in-every-language/
@@ -204,7 +208,89 @@ random data of different sorts, perhaps then checking it for
 usefulness ("Does this string actually contain some spaces?")
 and then applying our "laws" to it.
 
-### Generators
+### QuickTheories example
+
+QuickTheories can be used with JUnit as well as
+other test frameworks (e.g. TestNG).
+
+An example (from the QuickTheories documentation):
+
+::: block
+
+####
+
+\small
+
+```java
+import static org.quicktheories.QuickTheory.qt;
+import static org.quicktheories.generators.SourceDSL.*;
+
+public class SomeTests {
+  @Test
+  public void addingTwoPositiveIntsGivesAPositiveInt(){
+    qt()
+    .forAll(integers().allPositive()
+          , integers().allPositive())
+    .check((i,j) -> i + j > 0); 
+  }
+}
+```
+
+:::
+
+
+### Components of property-based testing frameworks
+
+Most property-based testing frameworks include the
+following components:
+
+- Generator: a way of generating random inputs to a function.
+
+  These range from the very basic (e.g. "all `int`s"), to
+  those with simple conditions (e.g. "all event `int`s"), to
+  complex (e.g. "all instances of the `JPEG` class (each of which
+  represents a valid JPEG graphic").
+
+  Much the same techniques come in handy here as we saw with
+  generators for grammars.
+
+- Checker: a way of testing whether a random input satisfies
+  the condition you've defined.
+
+  QuickTheories allows you to use JUnit `assert...` methods to do this.
+
+### Components of property-based testing frameworks
+
+
+- Shrinker: Once a test failure is found, good property-based testing frameworks
+  will attempt to *shrink* the input into the smallest possible that will
+  reproduce the error.
+
+  Let's see an example of this.
+
+
+### Shrinking
+
+Suppose we want to test methods for a class which represents (for instance)
+a Word document, or a JPEG graphic.
+
+A very common property for file formats is that they should "round-trip":
+if we write a JPEG object out to a file[^or_bytes], then read it back in,
+we should get a new object which is identical to the original.
+
+If we manage to generate a JPEG where this *doesn't* work, it could
+be tricky to track down exactly what part or aspect of the file is causing the failure.
+
+So a shrinker will attempt to simplify a failing input to get a slightly
+smaller input -- see if *that* still fails -- and continue until we
+have the smallest input that still fails our test. 
+
+[^or_bytes]: Or, more typically, we would
+  convert it to a sequence of bytes in memory, without ever
+  writing it to a file; this makes for faster tests.
+
+
+<!--
 
 One technique that comes in useful when doing property-based
 testing is to make use of syntax-based *generators*.
@@ -217,8 +303,10 @@ structure we like.
 
 Good property-based testing libraries also help us create rules
 so the framework can *shrink* test
-values for which a test fails -- reduce them to a smaller, simpler
+values for which a test fails -|- reduce them to a smaller, simpler
 example for which the test *still* fails.
+
+-->
 
 ### `reverse` example
 
@@ -361,7 +449,7 @@ There are many clever variants on this basic idea.
     internal structure.
   - But ideally, we would like our fuzzer to get good *code coverage*
     of the program under test.
-  - White- and grey-box fuzzers while analyse or *instrument* the
+  - White- and grey-box fuzzers will analyse or *instrument* the
     code of the program under test, and try to generate inputs
     which will e.g. take the program down execution paths it hasn't
     been before.

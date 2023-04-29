@@ -365,7 +365,7 @@ some predicate:
 
 The textbook definition of "determination" is as follows:
 
-::: foo
+::: block
 
 #### Determination
 
@@ -384,7 +384,7 @@ of $c_i$ changes the value of $p$
 
 ### Determination examples -- "OR"
 
-::: foo
+::: block
 
 #### Determination definition
 
@@ -431,7 +431,7 @@ of $c_i$ changes the value of $p$
 
 ### Active clause coverage definition
 
-::: foo
+::: block
 
 #### Active Clause Coverage (ACC)
 
@@ -452,7 +452,7 @@ of $c_i$ changes the value of $p$
 
 ### A problem with active clause coverage
 
-::: foo
+::: block
 
 #### Active Clause Coverage (ACC)
 
@@ -485,7 +485,7 @@ of $c_i$ changes the value of $p$
 \small
 
 
-::: foo
+::: block
 
 ####
 
@@ -507,7 +507,7 @@ $p$: $A \leftrightarrow B$
 
 ### General active clause coverage (GACC)
 
-::: foo
+::: block
 
 ####
 
@@ -528,7 +528,7 @@ p: $A \leftrightarrow B$ \
 
 The definition is the same as ACC, with an addition:
 
-::: foo
+::: block
 
 #### Active clause coverage
 
@@ -550,7 +550,7 @@ Alternatively, if we insist the values for minor clauses $c_j$
 must be the same when $c_i$ is true as when $c_i$ is false, we end up
 with Restricted Active Clause Coverage (RACC).
 
-::: foo
+::: block
 
 #### Restricted active clause coverage
 
@@ -576,7 +576,7 @@ with Restricted Active Clause Coverage (RACC).
 
 ### Modified condition/decision coverage (MC/DC)
 
-::: foo
+::: block
 
 
 #### MC/DC
@@ -648,7 +648,7 @@ with Restricted Active Clause Coverage (RACC).
 
 ### Example
 
-::: foo
+::: block
 
 ####
 
@@ -667,7 +667,7 @@ as when it is false.
 
 ### Example -- clause $s$
 
-::: foo
+::: block
 
 ####
 
@@ -685,7 +685,7 @@ Making $s$ active:
 
 ### Example -- clause $m$
 
-::: foo
+::: block
 
 ####
 
@@ -704,7 +704,7 @@ Making $m$ active:
 
 ### Example -- clause $w$
 
-::: foo
+::: block
 
 ####
 
@@ -723,7 +723,7 @@ Making $w$ active:
 
 ### Example {.fragile}
 
-::: foo
+::: block
 
 ####
 

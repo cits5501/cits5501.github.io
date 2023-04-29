@@ -78,7 +78,7 @@ in that they define the exact same set of strings -- but provides
 a few hints as to the *semantics* of bits of the string
 (and is probably a bit easier to read).
 
-::: foo
+::: block
 
 \small
 
@@ -899,7 +899,7 @@ Things to note when generating data structures:
 ### Mutation testing
 
 \alert{Mutation testing} (also called "mutation analysis") is a
-technique for evaluating the quality of a suit of software tests.
+technique for evaluating the quality of a suite of software tests.
 
 - Suppose we have some program under a test, and a suite of tests
   designed to identify defects in it.

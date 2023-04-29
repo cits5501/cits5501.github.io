@@ -337,9 +337,15 @@ when encountering an exceptional situation we can't handle:
 - log a warning or error message
 - abort execution by calling `System.exit()`, allowing cleanup of
   resources
-- send the JVM a `SIGKILL` signal, which cannot be handled or ignored,
+- send the JVM a `SIGKILL` signal,[^sigkill] which cannot be handled or ignored,
   and results in immediate termination of all threads, with no cleanup
   actions executed
 
 Which of them do you think would be best, and under what circumstances?
+
+[^sigkill]: See Roel van de Paar,
+  ["How Linux Signals Work: SIGINT, SIGTERM, and SIGKILL"][sigkill-art].
+  
+
+[sigkill-art]: https://www.howtogeek.com/devops/linux-signals-hacks-definition-and-more/ 
 

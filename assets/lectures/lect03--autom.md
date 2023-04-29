@@ -30,7 +30,7 @@ author: 'Unit coordinator: Arran Stewart'
 
 ### Questions
 
-::: foo
+::: block
 
 ####
 
@@ -264,7 +264,7 @@ of system use.
 
 \scriptsize
 
-::: foo
+::: block
 
 ####
 
@@ -345,7 +345,7 @@ or manually run tests.)
 
 ### Questions
 
-::: foo
+::: block
 
 ####
 
@@ -421,7 +421,7 @@ More on this in later lectures.
 
 ### Questions
 
-::: foo
+::: block
 
 ####
 
@@ -436,7 +436,7 @@ code or data).
 
 ### Questions
 
-::: foo
+::: block
 
 ####
 
@@ -454,7 +454,7 @@ We discuss the use of *mocks* to handle this.
 
 ### Questions
 
-::: foo
+::: block
 
 ####
 
