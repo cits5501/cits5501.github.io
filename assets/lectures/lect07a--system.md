@@ -7,29 +7,55 @@ author: 'Unit coordinator: Arran Stewart'
 
 ### Overview
 
--   Testing strategy
--   Integration testing
--   Regression testing
--   "Smoke" testing
--   Web testing
+- Types of tests
+- Testing strategy
+- Integration testing
+- Other types of testing:
+  - Regression testing
+  - "Smoke" testing
+  - End-to-end
+  - Alpha/beta
+- System testing
+
+### Types of tests
+
+Recall the "test pyramid" from lecture 3:
+
+![](../A--intro/lect03-images/test-pyramid.eps){ width=80% }
 
 ### Types of tests
 
 - We've looked in detail at unit tests, which test some "unit" of software
   - They are intended to check the *behaviour* of that unit -- to exercise it and look for deviations from its specification
   - We normally *mock* other external classes used in the test
+
+&nbsp;
+
 - *Integration testing* focuses on the flow of data and information
   between two components, and their *interface*
   - It asks, "Do they work properly together?"
+- It is probably impossible to draw a hard dividing line between units tests
+  and integration tests -- some tests might be hard to classify
+- But many tests will either have as their focus a small unit of code
+  in isolation (unit tests) or the interaction between two or more
+  components (integration tests)
 
+### Types of tests
 
-### Testing strategy
+- *System* tests aim to test the entire system against its requirements
+  and specifications.
 
-Types of testing:
+&nbsp;
 
-`\begin{center}`{=latex}
-![](images/test-hierarchy.eps){ width=90% }
-`\end{center}`{=latex}
+- Recall that many \alert{non-functional} requirements (security, scalability,
+  maintainability, performance) are *emergent* properties: they aren't a property
+  of any single component in isolation, but rather emerge from the way
+  multiple components interact as a whole
+- This means that towards the *bottom* of the test pyramid, we'll often be
+  more focussed on testing functional requirements/specifications
+- But as we move towards the top of the pyramid, it becomes possible to test
+  for non-functional requirements.
+
 
 ### Testing strategy
 
@@ -41,7 +67,13 @@ Types of testing:
 
 -   While doing unit testing, we will typically make use
     of "mocks"/doubles in place of other units or modules
--   In integration testing, we can test how units or modules work together
+-   In integration testing, we can test how two (or more) units or modules work together
+    - The units or modules under test will *not* be mocked, obviously, since what we want to know
+      is whether they work properly together
+    - But they might rely on additional components (e.g. databases) which *are* mocked.
+-   The closer we get to the top of the test pyramid, the fewer mocks we use,
+    in favour of using components which are as close to the production environment
+    as we can get.
 
 ### Integration vs unit testing
 
@@ -88,14 +120,15 @@ Yes ...
 - Conflicts arising due to side effects
   - e.g. two components try to make use of same temporary file
 
-### Examples of integration faults, cont''d
+### Examples of integration faults, cont'd
 
-- Emergent faults (non-functional properties)
-  - Many qualities of a system (e.g. performance, security)
+- Emergent failures (non-functional properties)
+  - We said that many qualities of a system (e.g. performance, security)
     can't be localised to a single component, but
     arise from the interaction of components.
-    
-
+  - It follows that *failures* relating to those qualities (poor performance,
+    poor security) sometimes can only be detected from the interaction
+    of components     
 
 ### Integration testing strategies
 
@@ -108,6 +141,8 @@ Main options:
 -   Variations of the above
 
 ### Drivers and stubs
+
+Terminology sometimes used in integration testing:
 
 - \alert{Driver}: A program that makes calls
   into the module being tested and reports the
@@ -210,8 +245,8 @@ Pro:
 
 Cons:
 
--   Writing stubs can be difficult: Stubs must allow all possible
-    conditions to be tested.
+-   Writing stubs can be difficult: stubs should allow for a wide range
+    of conditions to be tested.
 -   Possibly a very large number of stubs may be required, especially if
     the lowest level of the system contains many methods.
 -   One solution to avoid too many stubs: Modified top-down testing
@@ -429,6 +464,8 @@ Smoke testing steps:
     its current form) is smoke tested daily.
     -   The integration approach may be top down or bottom up.
 
+<!--
+
 ### WebApp Testing - I
 
 -   The content model for the WebApp is reviewed to uncover errors.
@@ -452,32 +489,167 @@ Smoke testing steps:
     and navigation errors, usability concerns, compatibility concerns, and
     WebApp reliability and performance.
 
+-->
+
 ### Other sorts of testing
 
+-   End-to-end testing
+    - Checks how a system or component behaves in a particular user-focused scenario (e.g.
+      use case, or user story), usually in a near-production environment,
+      and whether it behaves as expected.
+    - The focus differs a little from typical "system tests"
+    - System tests show that the system satisfies some requirement or specification      
+    - End-to-end tests demonstrates that particular processes can be done by or using the system
+    - e.g. Can a user successfully login, go to the product page, add a product to the
+      shopping cart, pay for items, and log out.
+
+### Other sorts of testing, cont'd
+
 -   Validation testing
-    -   Focus is on software requirements
--   System testing
-    -   Focus is on integration of sub-systems
+    - Ensures that the product actually meets the client's needs
+    - Demonstrates that the system fulfills its intended use when deployed in
+      an appropriate environment
 -   Alpha/Beta testing
     -   Focus is on customer usage
     -   Alpha testing = done by employees of development organisation,
         simulates typical use tasks
     -   Beta testing = done by releasing to a limited number of real users
 
-### Other sorts of testing, cont'd
+# System testing
+
+### Testing non-functional requirements
+
+Some sorts of non-functional, system-level test, we've already mentioned:
+
+- Load testing -- How does our software perform under high loads --
+  the largest volumes of data we expect to receive? Does it perform
+  correctly?
+- Stress testing -- How does our software behave when we *exceed*
+  the expected maximum? \
+  Does it degrade gracefully?
+- Robustness testing -- How well does our system handle malformed
+  inputs? \
+  Does it avoid undesirable behaviours (e.g. segfaults, security holes,
+  displaying raw stack traces to end users)?
+
+### Testing non-functional requirements
+
+What do tests of this sort look like?
+
+Good tests follow exactly the same pattern we've seen previously -- Arrange, Act, Assert.
+
+For a unit or integration test, we usually "Act" (invoke behaviour) by calling
+a method or function.
+
+But for tests of non-functional requirements, we could be
+
+- invoking the whole program and measuring particular properties
+  (e.g. how long it takes to execute)
+- starting a program (e.g. a web app), making requests against it,
+  and measuring the response to those requests
+
+### Frameworks for non-functional testing
+
+Sometimes we might write our tests of non-functional requirements
+in the same language(s) as our system, sometimes not.
+
+\alert{Scripting languages} like Bash, Python, and Perl are especially
+convenient for executing programs, launching other test utilities, and
+extracting performance data from the OS.
+
+So even if our system is written in Java, it might be convenient to
+write these tests using a Perl or Python test framework.
+
+### Testing non-functional requirements
+
+Besides load, stress, and robustness testing, some
+other sorts of system testing include:
 
 -   Recovery testing
-    -   forces the software to fail in a variety of ways and verifies that recovery is properly performed
+    -   forces the software to fail in a variety of ways and verifies that
+        recovery is properly performed
 -   Security testing
-    -   verifies that protection mechanisms built into a system will, in fact,
-        protect it from improper penetration
--   Stress testing
-    -   executes a system in a manner that demands resources in abnormal
-        quantity, frequency, or volume
+    -   verify that the system meets security requirements and
+        is protected from improper penetration
 -   Performance Testing
     -   test the run-time performance of software within the context of an
         integrated system
+ 
+ 
 
+### Load, stress and robustness testing
+
+For load and stress testing, we will normally generate random
+traffic/data for our system, and conduct tests which measure
+performance against requirements.
+
+
+For robustness testing, *fuzzing* (and other sorts of randomized testing)
+can be very effective.
+
+
+### Security testing
+
+Note that security problems cannot (typically) be avoided through
+testing alone -- good system security requires us to be mindful of
+security and incorporate it at all stages of the software development lifecycle.
+
+### Types of security testing
+
+
+Some typical sorts of security testing:
+
+- Vulnerability scanning: using automated software which aims to detect known
+  security vulnerabilities in a system.
+  - Vulnerabilities detected can include misconfigured software, versions
+    of particular packages known to be insecure, and more
+  - The term "vulnerability scanner" normally means a program which is run
+    against a live (running) system.
+  - Some popular vulnerability scanners include [Nessus][nessus] and [Nexpose][nexpose]
+    (both commercial), or [Nmap][nmap] and [Metasploit][metasploit] (partially or wholly
+    open source)
+
+[nessus]: https://www.tenable.com/products/nessus
+[nexpose]: https://www.rapid7.com/products/nexpose/
+[nmap]: https://nmap.org
+[metasploit]: https://www.metasploit.com
+
+### Types of security testing, cont'd
+
+- Penetration testing
+
+  - This simulates an attack by a malicious party. It usually involves evaluating a system (including
+    vulnerability scanning) and exploiting found vulnerabilities to gain access to the system
+    and breach data confidentiality, data integrity, or the availability of services.
+
+- Fuzzing
+
+  - Fuzzing, which we've looked at previously, can often identify security vulnerabilities.
+    The most common cause of program crashes is improper access to memory locations,
+    and these can often be exploited so as to compromise security.
+
+### Secure software development techniques
+
+Security tests should be part of a broader approach to security which
+might include:
+
+- Threat modelling: a structured way of identifying threats and mitigations
+  that could affect a system, and then organizing and communicating that information.
+  (The [OWASP page on threat modelling][owasp-threat] has more information on this.)
+- Security reviews: review of code (or other artifacts, e.g. design documents or specifications)
+  by a human reviewer, looking for insecure or problematic code.
+- Static code analysis: using programs which analyse code statically (i.e., without running it),
+  and aim to detect code that is likely to cause security problems
+  or is known to be problematic in other ways.
+
+[owasp-threat]: https://owasp.org/www-community/Threat_Modeling
+
+### Secure software development techniques, cont'd
+
+- Compliance or conformance testing: assessing whether a system conforms to particular
+  standards.
+- Security audits: a type of security review; a security audit
+  is a structured process for reviewing a system according to some defined standard.
 
 <!--
 

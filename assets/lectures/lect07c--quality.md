@@ -1,123 +1,15 @@
 ---
 title: |
   CITS5501  Software Testing and Quality Assurance\
-  Software reviews
+  Quality assurance
 author: 'Unit coordinator: Arran Stewart'
 ---
 
+### Outline
 
-# Reviews
-
-### Software reviews
-
--   A catch all term for *filters* that can be applied at various points
-    during the software development process
-
-
-### Static Testing Methods
-
--   Code Inspections
--   Code Walk-throughs
--   Semantic Analysis of Code
--   Fagan Inspections
--   Analysis of Code Metrics
-
-### Code Inspection Methods
-
--   Inspections are a formal, efficient and economical method of finding
-    faults in design and code [Fagan,76]
--   Code inspection amounts to "executing the code in your head" or on
-    paper
--   Code inspections are very effective at finding faults [statistics
-    from Pfleeger p.291]
-    -   detect 67% of faults [Fagan 76]
-    -   detect 85% of faults [Jones 77]
-    -   detect 93% of errors [Ackerman et al 86]
-
-### Code Walk-through
-
--   A Code Walk-through is an informal meeting where the programmer
-    leads the review team through his/her code and the reviewers try to
-    identify faults
--    You can do this with your own code but it is more effective if the
-    reviewer is not the same person as the programmer. See egoless
-    programming in many SE texts
--   Example: perform a code walk through of the getNumofDaysinMonth
-    method
-
-### getNumOfDays
-
-\footnotesize
-
-~~~ { .java }
-if (year<1) { 
-  throw new YearOutOfBounds(year);
-}
-
-if (month==1 || month==3 || month==5 || month=7 || month==10
-    || month==12) {
-   numDays = 32;
-} else if (month==4 || month==6 || month==9 || month==11) {
-  numDays = 30;
-} else if (month==2) {
-  if (isLeapYear(year)) { numDays = 29;
-  }
-  else { numDays = 28;
-  }
-} else {
-  throw new MonthOutOfBounds(month);
-}
-return numDays;
-~~~
-
-### Fagan Inspection
-
--   is a more formal version of a code walk-through
--   Procedure:
-
-    1.  Overview
-    2.  Preparation
-    3.  Inspection
-    4.  Rework
-    5.  Follow up
-
--   meetings are chaired by a team moderator rather than the programmer
-
-### Checklists
-
--   A set of questions to stimulate critical appraisal of all aspects of
-    the system
--   Questions are usually general in nature and thus applicable to many
-    types of system
--   Checklist examples will go up on website
-
-
-### Semantic Analysis
-
-Analysis based on a model of the meaning (i.e. semantics) of a program
-
--   Formal Proofs: prove a given program (model) satisfies a required
-    property
--   Control Flow Analysis: analysis of the directed graph of the control
-    structure of a program to identify inaccessible code, infinite loops
-    and poor structure
--   Data Flow Analysis: analysis of a diagrammatic representation of the
-    flow of data throughout a program
--   Symbolic Execution:  check for agreement between code and
-    specification using algebraic vars in place of input data.
-    Assignment statements produce algebraic output which can be compared
-    with expected results.
-
-### Code Metrics
-
--   Measures of properties of code which may predict how likely the code
-    is to contain errors
--   For example,
-    -   graph theoretic complexity (of the program's control graph)
-    -   module accessibility (how many ways a module may be accessed)
-    -   number of entry and exit points per module
-    -   for some Object Oriented Metrics see
-        <http://yunus.hun.edu.tr/~sencer/oom.html>
+- Quality assurance
+- Software Reliability, Availability, and Safety
+- Software Quality Assurance Plans
 
 
 # Quality assurance
@@ -132,8 +24,6 @@ Analysis based on a model of the meaning (i.e. semantics) of a program
     -   Who is responsible for software quality?
 -   Software reliability, availability, safety
 -   Quality assurance plans
--   Techniques
-    -   Software reviews 
 
 
 ### What is Quality Management
@@ -230,7 +120,9 @@ Some sub-types of quality, taken from manufacturing:
         design and how well the resulting system meets its
         requirements
 
-### Quality -- a user perspective
+<!--        
+
+### Quality -|- a user perspective
 
 -   Robert Glass's formulation:
 
@@ -240,11 +132,13 @@ Some sub-types of quality, taken from manufacturing:
                         delivery on time & within budget
     ~~~  
 
-### Quality -- a user perspective (cont'd)
+-->    
 
-> -   What if the user wanted something that's inadvisable? Or illegal?
->     -   "Store all user-names and passwords in a text file, so we can
->         easily manage and change them."
+### Quality -- a user perspective
+
+-   What if the user wanted something that's inadvisable? Or illegal?
+    -   "Store all user-names and passwords in a text file, so we can
+        easily manage and change them."
 
 ### Quality Control
 
@@ -352,10 +246,12 @@ In an organisation with end-users/customers:
 -   Coordinates the control and management of change
 -   Helps to collect and analyze software metrics
 
-<!--
-
 
 # Software Reliability, Availability, and Safety
+
+### Software Reliability, Availability, and Safety
+
+Three particular important aspects of quality.
 
 ### Reliability and Availability
 
@@ -405,7 +301,7 @@ Software availability
     computer-based system and its environment through the process of
     fault tree analysis or hazard analysis
 
-# SQA Plan
+# Software Quality Assurance Plans
 
 ### Purpose
 
@@ -435,4 +331,3 @@ Structured as follows:
 
 
 
--->

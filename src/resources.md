@@ -41,11 +41,12 @@ like to get an idea in advance of what will be covered.)
 - Week 6--7
   - Lecture 6a -- syntax-based testing {% resourceList "lect06a--syntax", ["pdf", "md"] %}
   - Lecture 6b -- random testing       {% resourceList "lect06b--random", ["pdf", "md"] %}
+- Week 8
+  - Lecture 7a, integration and system testing {% resourceList "lect07a--system", ["pdf", "md"] %}
+  - Lecture 7b, reviews and quality assurance  {% resourceList "lect07b--reviews", ["pdf", "md"] %}
+  - Lecture 7c, quality assurance  {% resourceList "lect07c--quality", ["pdf", "md"] %}
 
 {#
-- Week 8
-  - Lecture 7A, integration and system testing {% resourceList "lect07a--system", ["pdf", "md"] %}
-  - Lecture 7B, reviews and quality assurance  {% resourceList "lect07b--quality", ["pdf", "md"] %}
 - Week 9
   - Lecture 8A, Risk                  {% resourceList "lect08a--risk", ["pdf", "md"] %}
   - Lecture 8A, Formal methods intro  {% resourceList "lect08b--formal", ["pdf", "md"] %}
