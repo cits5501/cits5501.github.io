@@ -252,19 +252,17 @@ version. Announcements about revisions were posted in the
 
 ## Exam
 
-The exam is a take-home exam, so open-book and not invigilated.
+Unlike last year's (2022) exam, this year's
+exam is a practical, [**face-to-face**]{ class="hi-pri" } exam, held in
+a computer lab during
+the UWA examination period. For the exact time and venue, consult
+your exam timetable using StudentConnect.
 
-To maintain exam integrity, students may be selected for a short (less
-than 15 mins)
-follow-up meeting (either face-to-face, or via MS Teams) with a marker,
-where they should expect to answer some basic questions about their exam responses.
-
-The exam will be available for 48 hours from its publication on LMS
-to its due date, and can be submitted at any time within that range.
-It should take about 2 hours' work to complete.
-Refer to the table of assessments at the top of this page for
-details of the publication date and due date.
-
+The exam is *not* open book, but you will have access to copies of
+the unit materials (lecture slides and lab worksheets).
+You can additionally bring into the exam one A4, double-sided page of handwritten notes.
+The exam will be held in a computer lab, and the exam will be completed
+in Moodle.
 
 ### Past exam papers
 
