@@ -1,218 +1,326 @@
 ---
-title: |
-  `\LARGE\textmd{`{=latex}
-  CITS5501 Software Testing and Quality Assurance `\\`{=latex}
-  Semester 1, 2022 `\\`{=latex}
-   Workshop 8 (week 9) -- Risk 
-  `}`{=latex}
-include-before: |
-  ```{=latex}
-  \lstdefinestyle{vsmalllistingstyle}{
-    breaklines=true,
-    numbers=left,
-    numberstyle=\tiny,
-    frame=none,
-    showstringspaces=true,
-    columns=fullflexible,
-    keepspaces=true,
-    basicstyle={\ttfamily\small},
-  }
-  ```
+title: CITS5501 lab 8 (week 9)&nbsp;--&nbsp;system testing 
 ---
 
 `~\vspace{-5em}`{=latex}
 
 ## Reading
 
-It is strongly suggested you complete the recommended readings for weeks 1-8
+It is strongly suggested you complete the recommended readings for previous weeks
 *before* attempting this lab/workshop.
 
 
 
-## A. Risk classification
+## A. Sample web app
 
-Every project, no matter how small, involves *some* risk.
-In the lectures, we looked at one classification of risks:
+The Git repository at <https://github.com/cits5501/week-9-lab-system-testing>
+contains a very simple sample web application.
 
-Project risks
+You can use [GitPod](https://www.gitpod.io) to work with this code online. You will need a GitHub account; once you
+have one set up, follow the link below:
 
-: Risks that could affect the project plan or schedule,
-  because they alter what resources (people, equipment, software,
-  specifications)
-  you have available to complete the project, how effective
-  those resources are, or when they become available.
+&nbsp; <https://gitpod.io/new/#https://github.com/cits5501/week-9-lab-system-testing>
 
-Technical risks
+Alternatively, if you're familiar with using Git and Java from the command line, you
+can download a copy of the source code using the command
 
-: Risks resulting from the problem being harder to solve than we thought.
-  Often when these eventuate, they show up as problems with our
-  system design, or with our decision on whether to code some component
-  ourselves as opposed to outsourcing this (using an existing library
-  or paying for an off-the-shelf software component).
-  These risks alter the amount of work required to finish the project
-  (given your available resources).
+```bash
+git clone https://github.com/cits5501/week-9-lab-system-testing
+```
+
+This worksheet will assume you're using GitPod to access the repository.
+GitPod provides you with access to the Visual Studio Code (VS Code) editor.
+Once VS Code starts, it will take a few seconds to recognize the repository
+as containing Java source code and to analyse it; once it does, the project
+explorer should show expandable tabs entitled "JAVA PROJECTS" and "OUTLINE".
+
+Spend some time looking at the source code for the web app.
+The web app makes use of [Flak](https://github.com/pcdv/flak), a simple
+web framework inspired by Python's [Flask](https://flask.palletsprojects.com/en/2.3.x/)
+framework.
+
+Some of the major components of the web app are:
+
+[app-java]: https://github.com/pcdv/flak/blob/master/flak-api/src/main/java/flak/App.java
+
+
+**The `app` instance variable.**
+
+: The `App` interface is provided by Flak;
+  you can see the source code for it [here][app-java]. It allows the web
+  app to be started and stopped (using the `start()` and `stop()` methods),
+  and also allows code within the web app to obtain information about
+  the server it's running on (`getServer()`) and the web request currently
+  being processed (`getRequest()`).
+
+**Route handlers.**
+
+:   The URLs a user can access within a website are referred to as
+    *routes*, and when a user tries to access a particular URL,
+    the Flak framework processes it using a particular *route handler*.
+
+    Here is an example route handler for the `/login` route: 
+
+    ```java
+      @Route("/login")
+      public String login() throws IOException {
+        Path filePath = Path.of("resources/login.html");
+        String contents = Files.readString(filePath);
+        return contents;
+      }
+    ```
+
+    The `@Route` annotation tells Flak what route this is the handler
+    for. The code within the handler is responsible for returning
+    the contents of the web page (here, as a `String`, though
+    other formats are also possible).
+
+    Different routes handle the case where a web page is being
+    *viewed* (as in the case above), versus when data is being
+    sent by the browser to the server. For an example of the latter,
+    see the code that starts:
+
+    ```java
+      /**
+       * process a "/login" form submission
+       */
+      @Post
+      @Route("/login")
+      public void login(Response r, Form form, SessionManager sessionManager) {
+        // ...
+    ```
+
+    The `@Post` annotation here says that Flak should only invoke this handler
+    when data (in this case, the contents of a login form) is being sent *to* the
+    web server by a browser using what's called a "POST request".
+
+**`main()` method**
+
+:   The `VeryBasicWebApp` class has a `main()` method which can be used to start
+    the server running, listening for requests on a particular port.
+
+In VS Code, you should be able to start the web app running by right-clicking
+on the "VeryBasicWebApp.java" file in the VS Code explorer, and selecting
+"Run Java".
+
+<div style="border: solid 2pt blue; background-color: hsla(241, 100%,50%, 0.1); padding: 1em; border-radius: 5pt; margin-top: 1em;">
+
+<div style="text-align: center;"><b>Launching the app</b></div>
+
+You can also launch the web app from the command line.
+
+If the Java code for the web app has been compiled into `.class`
+files contained in the directory "bin", then the following
+will launch the app:
+
+```bash
+$ java -cp 'lib/*':.:bin VeryBasicWebApp
+```
+
+</div>
+
+A notification will appear at the bottom right of the editor similar to the
+following:
+
+```{=html}
+<div style="margin-left: auto; margin-right: auto; width: 80%;">
+```
+
+![](images/vs-code-service-available.png){ width=80% }
+
+```{=html}
+</div>
+```
+
+Click the "Open Browser" button, and a new browser tab should open,
+displaying the content "To log in, visit the login page".
+
+If you visit the "login" page, enter a username and password, and submit the
+form, the following method is the one that handles the attempted login:
+
+```{ .java .numberLines }
+  /**
+   * process a "/login" form submission
+   */
+  @Post
+  @Route("/login")
+  public void login(Response r, Form form, SessionManager sessionManager) {
+    // just for debugging
+    System.err.println("form params were:" + form.parameters());
+    
+    String username = form.get("username");
+    String password = form.get("password");
+
+    if (username.equals("foo") && password.equals("bar")) {
+      SessionManager sm = sessionManager;
+      FlakUser user = sm.createUser(username);
+      sm.openSession(app, user, r);
+      r.redirect("/app");
+    }
+    else
+      r.redirect("/login");
+  }
+```
+
+Key aspects of this code are:
+
+[web-session]: https://en.wikipedia.org/wiki/Session_(computer_science)
+
+- Currently, the code recognizes only one username ("foo") and
+  one password ("bar") -- lines 10--13.
+- If the username and password are correct, the code requests the
+  Flak framework to create a new [web session][web-session]
+  (a way of identifying a particular logged in user -- lines 14--16),
+  and then redirects the user to the `/app` page (line 17).
+
+  The `/app` page here represents protected content which only
+  logged-in users can access; take a look at the `appPage()` method
+  which handles it, and you can see a `@LoginRequired` annotation,
+  which tells Flak to restrict access to this page.
+- If the username and password are not correct, the user
+  is redirected back to the `/login` page again (line 20).
+
+## B. Load testing
+
+Suppose we want to perform load testing of our web app -- ensuring
+that it can handle the expected load of web requests. How can we do this?
+
+It's possible to access our web app from the command line, using Unix
+utilities such as cURL. In VS Code, with the server still running,
+open a new Bash terminal, by clicking on
+the "+" sign at the lower right of the window, and selecting "Bash".
+
+Within the terminal, type
+
+```bash
+  curl -w '%{time_connect}:%{time_starttransfer}:%{time_total}\n' http://localhost:8080/login
+```
+
+cURL will download the page you requested, display the page content, and display some statistics
+about how much data was transferred (with colons as separators) -- the time taken
+to set up a connection to the server (`time_connect`), the time at which
+cURL starts transferring data from the server (`time_starttransfer`), and
+the total time spent retrieving the page (`time_total`).
+
+We could do very simple load testing by making many requests using cURL in a short period
+of time against our web app, and measuring the time taken. (In reality: we would likely want
+the web app to be running on a different computer from the one where we do tests, so that
+the process of running tests doesn't interfere with the running of the web app.)
+
+A load test would follow the same 'Arrange, Act, Assert' pattern we have seen for
+other sorts of test:
+
+**Arrange**
+
+:   Start the web app running
+
+**Act**
+
+:   Make requests against the web app, and measure the time taken to
+    complete them.
+
+**Assert**
+
+:   Assert that the time taken meets whatever criterion we have specified.
+
+We could write our tests using JUnit if we wishes
+(perhaps using the [java.lang.Process][process] API to launch cURL,
+or perhaps making and timing web requests using Java libraries),
+or we could write our tests in a scripting language such as Bash or Python.
+
+[process]: https://docs.oracle.com/javase/8/docs/api/java/lang/Process.html
+
+More typically, however, we would use dedicated load-testing software.
+An example of this is [Apache JMeter][jmeter], which can be used to test the
+perform of a wide range of systems -- not just web applications, but also
+systems that act as (for instance) mail servers or authentication servers.
+As an exercise in your own time, you might like to try using JMeter to record and run
+load tests (see <https://jmeter.apache.org/usermanual/get-started.html>),
+but we will not include that in this lab.
+
+[jmeter]: https://jmeter.apache.org
+
+
+## C. Testability
+
+Currently, the `login()` method is very limited -- only one username
+and password are considered valid, and they are hard-coded into
+the app.
+
+We would like to allow different forms of authentication to be selected
+at run-time. Besides being more useful in the end product, this has
+other advantages, such as modularity.
+Each sort of authentication can be encapsulated as a
+class and tested separately from the main web application.
+
+To do this, we'll alter the web app code to use a separate interface,
+"Authenticator".
+
+- Add a new instance variable to `VeryBasicWebApp` --
+  `Authenticator auth`.
+
+- Alter the current constructor, `VeryBasicWebApp(int port)`.
+  It should now also take an `Authenticator auth` parameter,
+  and set the instance variable to that parameter.
+
+- Remove the code in the `login()` method, around
+  `if (username.equals("foo") && password.equals("bar"))`. Instead of using
+  those hard-coded values, query the `auth` instance variable to
+  find out if a username and password are valid.
+
+- If you've done the previous steps correctly, your editor or
+  IDE should now show an error in the `main()` method. The line
+
+  ```
+    VeryBasicWebApp hw = new VeryBasicWebApp(port);
+  ```
+
+  is no longer correct.
+
+- Add the following code to `main()`, near the top of the method:
+
+  ```java
+      Authenticator auth = new Authenticator() {
+        
+        @Override
+        public boolean isValid(String username, String password) {
+          return false;
+        }
+      };
+  ```
+
+  and then pass the new `auth` variable to the `VeryBasicWebApp` constructor.
+
+We've now made our web app more testable. Rather than being hard-coded,
+an `Authenticator` is created in the `main()` method, as the web app is started.
+Currently, our new `Authenticator` only ever returns `false` (indicating
+that a username and password combination is invalid). Alter the code so that
+one particular username and password are valid.
+
+If we wanted, we could analyse the `String[] args` parameters passed
+to `main()` (or make use of the Java [Properties][properties] API),
+and "slot in" different authenticators depending on how our web
+app was invoked from the command line.
+This is known as [dependency injection](https://en.wikipedia.org/wiki/Dependency_injection) --
+we have made our web app more independent from the authenticator.
+
+[properties]: https://docs.oracle.com/javase/8/docs/api/java/util/Properties.html
+
+As an exercise in your own time, you might like to try adding
+other implementations of `Authenticator`, which (for example)
+obtain lists of valid username+password pairs from a text file
+or a database.
+
+## D. Security testing
+
+We have seen that some portions of the web app are
+restricted to logged-in users. From what has been covered in
+lectures and the text books, what are some sorts of security testing
+we could use to ensure that these restrictions are effective?
+Are there any other security practices we would need to bear
+in mind besides testing?
  
-Business risks
 
-: These are risks which if they occur would not make the project
-  late, nor more difficult/expensive -- but they would destroy
-  the *business value* of the project (i.e. the benefit to be obtained
-  from it).
-
-  For instance, suppose we were developing a software system to be used by the
-  warehousing department of our organisation. If, part-way through, all warehousing
-  responsibilities are outsourced, that would probably destroy the value of the project.
-
-Work through the following list of risks for a software project, and decide
-which of these classifications each risk would fall into. (Some might fall into
-more than one). Justify your decisions, and then share as a class how you
-categorized each one and why.
-
-\genericbox
-
-
-a.  Management change: Your organization is bought by a larger company,
-    and undergoes significant restructuring. The new management has very
-    different priorities, and the project you are working on is low on that
-    list.
-b.  Documentation problems: You are working on a project which will create sales reports
-    to be used by management. One requirement of the reports it that they will
-    include complex statistical charts so that management can easily visualise
-    sales data, and you decide to use an open-source library to create them,
-    Shoshone Cybercharts.  However, it turns out the documentation for this
-    library is not adequate: your developers often can't be sure how the API is
-    intended to be called, and what the resulting charts will look like, so it
-    takes much longer to finish the implementation.
-c.  Inter-team delays: Your company is building an Internet of Things (IOT) enabled toaster.
-    Your team is developing an Android app which will be used to control the
-    toaster, and another team is developing the toaster itself. By the time
-    your team is ready to start implementation, you are still waiting on
-    specifications from the toaster team which will describe the API your app
-    should use to control the toaster.  The specifications arrive three weeks
-    later, causing delays in the project. 
-
-\endgenericbox
-
-
-
-## B. Risk identification
-
-If you are attending this workshop face to face, then for this
-exercise you should split up into groups of 3-5 people.
-If you are attending online via Teams, your facilitator should  be able to
-create "breakout rooms" for you, by following the [MS Teams
-instructions][ms-teams-breakout]; but failing that, instead do a solo review of the
-code, and report back to the class as a whole with your findings.
-
-[ms-teams-breakout]: https://support.microsoft.com/en-us/office/use-breakout-rooms-in-teams-meetings-7de1f48a-da07-466c-a5ab-4ebace28e461#bkmk_create-breakout-rooms
-
-Select one member of the group to describe a *project* they
-have worked on (or even better, are currently working on).
-If the group member is currently involved in a
-group design project,
-for instance from a CITS555X unit or CITS3200, that would be ideal.
-However, it needn't be a software project -- moving house, buying a car or
-planning a holiday could all count (although you will need to be
-creative in applying the "Risk checklist" at the end of this
-worksheet, as it is geared towards software projects).
-
-That student should describe the project, the resources available
-and the team involved to the other students in
-the group.
-
-Then, read through the "Risk checklist" at the end of this worksheet.
-Each member of your group should try to identify one risk 
-that could apply to the project. As a group, decide what sort of
-risk it is (project, technical, business), and what impact it could
-have if it eventuated (minor, major, show-stopper).
-
-## C. Pre-mortem
-
-One reason projects can fail is because team members or stakeholders
-may be reluctant to speak up and identify possible problems, or
-reservations they have about the project plan.
-So it can be helpful to put in place an environment where
-people with the best knowledge about potential problems
-feel safe in speaking up about those problems.
-
-One way is to undertake a "project pre-mortem" (first described by
-Gary Klein).[^klein] In a pre-mortem, the participants
-imagine that the project has failed,
-and then work backward to identify causes that could have lead to that failure.
-
-For this exercise, split back up into your groups from exercise B, and
-consider the same project.
-Start by imagining that the project has failed spectacularly.
-Then, each person should (on their own) write down every reason they can think
-of for the failure, for 3-5 minutes. Then see if you have identified any
-risks which weren't on your list from exercise B.
-
-This exercise doesn't give the full flavour of a project pre-mortem,
-because most members of your group are likely to be project outsiders,
-and may already feel safe about suggesting potential problems.
-Nevertheless, it introduces you to ways in which we can overcome
-reluctances or biases which might otherwise prevent us from
-identifying project risks.
-
-[^klein]: Klein, Gary. "Performing a project premortem." *Harvard business
-    review* 85.9 (2007): 18-19. Available at <https://hbr.org/2007/09/performing-a-project-premortem>
-
-Finally, share with the class as a whole whether your pre-mortem
-identified new risks you hadn't thought of in exercise B.
-
-\newpage
-
-# Risk checklist
-
-Consider whether the following questions when trying to identify risks.
-
-**Scope**
-
--   Is the project scope stable? Is it incomplete or unclear?
--   Do stakeholders demand additional scope, or have differing
-    ideas of the scope?
-
-**Clients**
-
--   Is the client technologically sophisticated? Do they communicate
-    in a timely manner?
--   Do end-users have realistic expectations?
-
-**Requirements**
-
--   Are the project requirements stable? Are they unclear or incomplete?
--   Have customers been involved fully in the definition of requirements?
--   Are the requirements fully understood by the project team?
-
-**Project resources and schedule**
-
--   Does the project team have sufficient staff? Do they have
-    sufficient experience with the technologies required? Do they have
-    the right mix of skills?
--   Are software or hardware items required easy to obtain?
-    Do they meet expectations? Are they well-documented?
--   Is the project behind schedule?
--   Can resources be secured when required?
--   Might staff become ill or otherwise unavailable?
-
-**Software development processes**
-
--   Is the design reasonably stable? Is it feasible? Practical?
-    Does it contain the features and/or flexibility required?
--   Does the organization have a well-understood software development
-    process?
--   Are software and project artifacts tracked by version control?
--   Can the project team prototype technologies or areas which
-    are poorly understood?
--   Does the project team have access to tools of the quality needed
-    for the project?
--   Is the technology being used well-understood? Is it novel?
-    Is it well-tested?
--   Is the system ...
-    -   ... especially large?
-    -   ... especially complex?
-    -   ... required to be especially secure/safe/reliable?
-    -   ... unusual in some other way?
 
 
 <!-- vim: syntax=markdown
