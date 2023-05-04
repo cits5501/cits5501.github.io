@@ -95,8 +95,8 @@ module.exports = function(configData) {
         //dates: "Due 5pm Thu 26 May",
         dates: {
           //available: new Date(year, 4, 5, 17, 0), // 5pm Thu 5 May,
-          available: "TBA",
-          due: new Date(year, 4, 19, 17, 0) // 5pm Fri 19 May, 2023
+          available: new Date(year, 4, 5, 17, 0),
+          due: new Date(year, 4, 25, 17, 0) // 5pm Thu 25 May, 2023
         },
         //submit: safe(extLink("cssubmit", `${cssubmit_url}?p=np&open=${unitcode}-1`))
         submit: moodle

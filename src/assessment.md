@@ -204,32 +204,25 @@ The project for the unit, worth
 of the unit's marks is due on
 {{ siteinfo.assessments.project.dates.due | dateFormat("dddd D MMM") }}.
 
-It will include both programming work and written work.
-
-{#
-
-Students will be required to book a short (less than 10 mins) meeting
-(either face-to-face or via MS Teams) with a marker,
-where they should expect to answer some basic questions about their project
-and receive some feedback.
+It includes both programming work and written work. Students may make
+look at any texts or online materials they wish, but any work must
+be their own.
+As with all open assessments – any
+statistical anomalies will be investigated, and anybody may be asked
+to (orally)
+[explain their thought process]{ class="hi-pri" } in coming up with their
+answers.
 
 The following project materials are available for you:
 
 - The [project description (PDF)][proj-pdf]
-- [JavaDoc for the project code][proj-javadoc]
 - [Source code for the project][proj-code]
 
-[proj-pdf]: {{ "/assignments/project.pdf" | url }}
-[proj-javadoc]: {{ "/assignments/project/doc" | url }}
-[proj-code]: {{ "/assignments/project_code.zip" | url }}
+[proj-pdf]: {{ "/project/project-spec.pdf" | url }}
+[proj-javadoc]: {{ "/project/project/doc" | url }}
+[proj-code]: {{ "/project/gladius-source.zip" | url }}
 
-Your submission needs to contain a readable PDF file
-and Java source code as specified in the project description.
-To help you ensure your submission is in an acceptable format,
-use the [page here][checker-page]
-to do basic checking of the files you are submitting.
-
-[checker-page]: {{ "/project/submission-basic-check" | url }}
+{#
 
 Please note that [revisions were
 made]{ style="color: #B72240;" }  to the project on 9th May
