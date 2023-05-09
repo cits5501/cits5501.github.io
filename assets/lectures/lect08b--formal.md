@@ -26,13 +26,44 @@ Some useful sources, for more information:
 
 ### Overview
 
--   When doing software engineering -- specifying and developing
-    software systems -- the activities done can be done with varying
-    levels of mathematical rigor.
+- Formal methods are maths-based techniques for describing system
+  properties
+- When doing software engineering -- specifying and developing
+  software systems -- the activities done can be done with varying
+  levels of mathematical rigor.
+- Things towards the "more formal" side of this spectrum
+  will tend to get called "lightweight formal methods" or "formal
+  methods".
+- Once a technique is very widely accepted and used, people
+  tend to stop thinking of it as a "formal method", and just
+  call it "programming" or "specification".
+
+###  Overview
+
+-   Why use formal methods?
+-   Building reliable software is hard.
+    -   Software systems can be hugely complex, and knowing exactly what
+        a system is doing at any point of time is likewise hard.
+-   So computer scientists and software engineers have come up with
+    all sorts of techniques for improving reliability (many of which
+    we've seen) -- testing, risk management, quality controls,
+    maths-based techniques for reasoning about the properties of
+    software
+
+###  Overview
+
+- By *reasoning* about the properties of software -- i.e., proving
+  things about it -- we can get *certainty* that our
+  programs are reliable and error-free
+- \alert{Testing} is *empirical* -- we go out and
+  check whether we can find something (bugs, in this case)
+  - But if we don't find a bug, that doesn't mean that no bugs exist -- we may
+    not have looked hard enough or in the right places.
+- \alert{Formal methods} are based on mathematical *deduction*.
 
 ### Example
 
-For instance, we could write a requirement
+We could write a requirement
 
 - informally, just using natural language, and perhaps tables and
   diagrams. 
@@ -45,432 +76,313 @@ For instance, we could write a requirement
   - much more work, and harder to ensure the notation matches our
   intuitive idea of what the system should do
   - little or no vagueness or ambiguity
+
+### Example
+
+If we wanted to specify
+
+- exact commands and parameters accepted by a program, or
+- the format of an HTTP request
+
+we could do so in natural language. But this is very verbose,
+and often imprecise.
+
+Or we could use a specification language we've already seen -- BNF
+(or EBNF: extended BNF).
+
+### Example -- HTTP
+
+A version of EBNF is, in fact, what is used to define the format of HTTP requests,
+in [RFC2616][rfc].
+
+[rfc]: https://www.ietf.org/rfc/rfc2616.txt
+
+::: block
+
+#### Example (source: RFC 2616)
+
+\small
+
+```plain
+  DIGIT          = "0".."9"
+
+  HEX            = "A" | "B" | "C" | "D" | "E" | "F"
+                 | "a" | "b" | "c" | "d" | "e" | "f" | DIGIT
+
+  HTTP-Version   = "HTTP" "/" 1*DIGIT "." 1*DIGIT
+```
+
+
+:::
+
+### Example
+
+The advantages of BNF (over natural language) are that it is
+
+- concise -- much shorter than an equivalent natural language
+  description would be
+- precise and unambiguous -- states exactly what is and isn't in the language
+  being described
+- capable of being processed and used programmatically -- a computer
+  can take your BNF and use it to create a parser or generator
+
+### Why use formal methods -- problems in specifying systems
+
+System specifications can suffer from a few potential problems.
+
+-   *Contradictions*. In a very large set of specifications, it can be
+    difficult to tell whether there are requirements that contradict
+    each other.
+    -   Can arise where e.g. specifications are obtained from multiple
+        users/stakeholders
+    -   Example: one requirement says "all temperatures" in a
+        chemical reactor must be monitored, another (obtained from
+        another member of staff) says only temperatures in a specific
+        range.
+
+<!-- source: pressman -->     
+
+### Problems in specifying systems
+
+::: incremental
+
+-   *Ambiguities*. i.e., statements which can be interpreted in
+    multiple different ways.\
+    "The operator identity consists of the operator name and password;
+    the password consists of six digits. It should be displayed on the
+    security screen and deposited in the login file when an operator
+    logs into the system."
+-   ... Does "it" refer to the identity, or the password?
+-   "Should" can be ambiguous -- does "The system should do *X*" mean
+    the system *must* do *X*, or that it is optional but desirable
+    that the system do *X*?
+-   Many terms have both technical and non-technical meanings (possibly
+    multiple of each): for instance, "reliable", "robust", "composable",
+    "category", "failure", "orthogonal",
+    "back end", "kernel", "platform", "entropy" ...
+
+:::
+
+### Problems in specifying systems 
+
+::: incremental
+
+-   *Vagueness*. Vagueness occurs when it's unclear what a concept
+    covers, or which things belong to a category and which don't.
+-   "is tall" is vague: some people are definitely tall, and some are
+    definitely short, but it can be difficult to tell when exactly
+    someone meets the criterion of being tall.
+-   Likewise "fast", "performant", "efficiently", "scalable",
+    "flexible", "is user-friendly",
+    "should
+    be secure", "straightforward to understand" are all vague.
+
+:::
+
+### Problems in specifying systems 
+
+::: incremental
+
+-   *Incompleteness*. This covers specifications that, for instance,
+    fail to specify what should happen in some case.
+-   e.g. An obviously incomplete requirement: "A user may specify normal
+    or emergency mode when requesting a system shutdown. In normal mode,
+    pending operations shall be logged and the system shut down within
+    2 minutes."
+-   ... So what happens in emergency mode?
+-   But other cases of incompleteness may be harder to spot.    
+    
+:::
+
+### Problems in specifying systems 
+
+::: incremental
+
+-   In addition to these, there are many other ways requirements
+    can be written poorly --\
+    e.g. Overly long and complex sentences,
+    mixed levels of abstraction (mixing high-level, abstract
+    statements with very low-level ones $\rightarrow$ difficult 
+    to distinguish high-level architecture from low-level details),
+    undefined jargon terms, specifying implementation rather
+    than requirements (how vs what), over-specifying, don't satisfy
+    business needs, etc.
+-   Formal specifications can potentially help
+    avoid ambiguity, vagueness, contradiction and some gaps
+    in completeness.
+-   Other problems, not so much. Just as it's possible to write programs
+    badly in any language, it's also possible to write formal
+    specifications badly.\
+    There is still a need for *review* of specifications, as with
+    any artifact.
+
+:::
+
+### Formal specifications
+
+-   Formal specifications can help with ameliorating these problems.
+-   Sometimes, just the process of attempting to formalize a requirement
+    can reveal problems with it.
+-   Using a formal model can help reveal *ambiguity* and *vagueness*
+    and allow them to be eliminated
+-   It may also be possible (depending on the mathematical model used)
+    to detect inconsistencies
+-   Detecting whether a specification is *complete* is more difficult.
+    -   Some gaps may be able to be detected
+    -   But there are nearly always some details that are left
+        undefined, or scenarios that may not have been considered.
+
+::: notes
+
+-   as with anything, there are diminishing returns.
+
+:::
+
+### Formal specifications
+
+
+<!--
+
+\scriptsize
+
+-   Formal specifications have a meaning defined in terms of
+    mathematics.
+-   Similar to programming languages, there are different sorts of
+    formal specification languages and tools, with different sorts
+    of scope.
+-   Some are small and specific in scope. For instance:
+    -   *State charts*, which we have seen, define states and
+        transitions between them.
+    -   *Backus-Naur Form*, which we have also seen, defines languages
+        -|- sets of strings.
+    -   *Regular expressions* also define sets of strings (most
+        programming languages have an implementation of them)
+    -   [$\pi$-calculus][pi-calc] is used to represent concurrent
+        systems
+-   Highlights another reason to use formal specifications: sometimes
+    they're the most concise way of saying something. Writing a grammar
+    or set of state transitions in natural language
+    (rather than BNF or as a state chart) would be a gruelling and
+    horrible exercise.
+-   Some are more general, and are intended to be able to describe
+    a wide range of systems. They may be based on numerous different
+    mathematical formalisms -|- predicate logic + set theory,
+    category theory, etc.
+-->
+
+Formal specifications
+
+- Meaning is defined in terms of mathematics
+- Many sorts of formal specification languages and tools with different
+  areas of application
+- Small and specific specification languages:
+    - *State charts* -- define states and transitions
+    - *BNF* -- defines context-free languages.
+    - *Regular expressions* -- define *regular languages*
+      (a subset of context-free languages)\
+      [NB: in practice, most programming languages use "extended regular
+      expressions", which can define much more]
+    - [$\pi$-calculus][pi-calc] -- used to represent concurrent
+      systems
+
+[pi-calc]: https://en.wikipedia.org/wiki/%CE%A0-calculus
+
+### Formal specification languages
+
+Some *general-purpose* specification languages:
+
+-   **Z notation**
+    -   based on set theory and predicate logic
+    -   developed in the 1970s. 
+    -   Now has an ISO standard, and variations (e.g.  object-oriented versions)
+-   **TLA+**:  
+    -   Stands for "Temporal Logic of Actions"
+    -   Especially well-suited for writing specifications of concurrent
+        and distributed systems
+    -   For finite state systems, can check (up to some number of steps)
+        that particular properties hold (e.g. safety, no deadlock)
+
+### Formal specification languages
+         
+-   We'll be using the **Alloy** specification language
+-   Alloy is both a language for describing structures, and a tool
+    (written in Java) for exploring and checking those structures.
+-   Influenced by Z notation, and modelling languages such as UML
+    (the Unified Modelling Language).
+-   Website: <http://alloy.mit.edu/> (The Alloy Analyzer tool
+    can be downloaded from here.)
+
       
-### (Lightweight) formal methods  
-
--   Things towards the "more formal" side of this spectrum
-    will tend to get called "lightweight formal methods" or "formal
-    methods".
--   We'll start with an example formal method (verification of
-    programs using Hoare logic), then come back to the definition,
-    and look at other sorts of formal methods.
-    
-
-###  Rationale
-
--   Why use formal methods?
--   Building reliable software is hard.
-    -   Software systems can be hugely complex, and knowing exactly what
-        a system is doing at any point of time is likewise hard.
--   So computer scientists and software engineers have come up with
-    all sorts of techniques for improving reliability (many of which
-    we've seen) -- testing, risk management, quality controls,
-    maths-based techniques for reasoning about the properties of
-    software
-    -   And this last sort of technique is what we call formal methods.
-
-###  Rationale
-
--   By *reasoning* about the properties of software -- i.e., proving
-    things about it -- we can get much greater certainty that our
-    programs are reliable and error-free, than we can through testing
--   Testing is a sort of *empirical investigation* -- we go out and
-    check whether we can find something (bugs, in this case)
--   But if we don't find it, that doesn't mean that whatever we were
-    looking for doesn't exist -- we may not have looked hard enough or
-    in the right places.
-    -   (People once thought it was an eternal and obvious truth that
-        there weren't such things as black swans, but it turned out they
-        weren't looking in the right places.)
-
-    
-###  Example
-    
--   Consider a bit of code, in some Python-like language, for
-    multiplying `i` by `j`
-    -   (We will look at more complex examples later)
-
-    ~~~
-    n := 0
-    while j > 0:
-      n := n + i
-      j := j - 1
-    return n
-    ~~~
-
-How can we show that this code is correct? (Assuming it is.)
-
-### Example (2)
-
--   We could try it on a number of inputs. (We might try using 0, values
-    near 0, and values not especially near zero.)
--   We could inspect the code and see if it conforms to our idea of
-    multiplication
--   We could try to *prove* that, once the code has finished executing,
-    for *any* integers `i` and `j`, `n` will equal `i * j`    
-
-### Program verification
-
--   *Proofs of correctness* use techniques from formal logic to prove
-    that if the starting state (i.e., "input" variables) of a
-    program satisfies particular properties,
-    than the end state after executing a program (i.e., "output"
-    variables) satisfies some other properties.
--   The first lot of properties are called *preconditions* (assertions
-    that hold prior to execution of a piece of code), and the second
-    lot are *postconditions* (assertions that hold after execution) 
-
-
-### Program verification (2)
+### Aspects of a formal method
 
 \small
 
-For instance, if our program $P$ is the snippet of code from before --
+Any formal method usually includes:
 
-~~~
-  n := 0
-  while j > 0:
-    n := n + i
-    j := j - 1
-  return n
-~~~
+- A domain of application: a topic or class of things to which
+  the method can usefully be applied.
 
--- then our input variables are `i` and `j`, our output variable is
-`n`, and our precondition might be
+  example: BNF is used to specify grammars (languages or document formats).
 
--   `i` and `j` are any integers
+- Some system property it can be used to specify or verify
 
-and our postcondition might be
+  example: What commands and arguments are accepted by a program.
 
--   `n` equals (the original value of) `i` times (the original value
-    of) `j`
+These properties could be
 
+- functional requirements
+- non-functional requirements (complexity, aspects of security)
+- protocols
+- etc. 
 
-###  Assertions
-
-Assertions are just statements we can make
-about variables in the program.
-
-Examples:
-
--   Bounds on elements of the data:
-
-    \indent $n \geq 0$
--   Ordering properties of the data:
-
-    \indent for all $j: 0 \leq j < n-1 : a_j  \leq a_{j+1}$
--   "Finding the maximum"
-
-    e.g. Asserting that $p$ is the position of the maximum element in
-    some array $a[0..n-1]$
-
-    \indent $0 \leq p < n \vee (\text{for all} \, j : 0 \leq j < n : a_j \leq a_p)$
-
-###  Assertions in a program - multiplication { .fragile }
-
-We'll distinguish our input variables from our working
-variables, by giving the, different names. We'll make `a` and `b` input.
-
-\small
-
-\begin{lstlisting}[mathescape]
-  { pre : $\top$ } // no precons -- "top" or "true"
-  i := a
-  j := b 
-  n := 0
-  while j > 0:
-    n = n + i
-    j = j - 1
-  { post: $n = a * b$ }
-\end{lstlisting}
-
-###  Assertions in a program - old values
-
--   The problem here is that we want to refer to the *old* values
-    of `i` and `j` in our postcondition
--   Systems and languages for program verification often will have a
-    special syntax for this, to avoid having to introduce new variables
--   e.g. In the Eiffel language, you can refer to the value of `i`
-    in the pre-state as just `old i`
--   In languages or notations that don't have such syntax, we may have to
-    manually do the work ourselves.
-    -   Often, we'll use prime marks (`'`) to indicate a subsequent state
-        of a variable
-    -   e.g. $i'$ often means "the *next* value of $i$" (e.g. after
-        a statement has executed, or a loop has executed, or we
-        have transitioned to a new state)
-
-###  Terminology
-
-Hoare triples:
-
-- Where we have a sequence [ *preconditions*, *code fragment*,
-  *postconditions* ], we call this a **Hoare triple** (after logician and
-  computer scientist Tony Hoare of Oxford, who also invented the
-  Quicksort algorithm, amongst other things)
-
-Loop invariants
-
-- Where we have an assertion which should hold before and after *every*
-  iteration of a loop, we call this a *loop invariant*
-
-### Proving things about loops
-
--   It often turns out to be much easier to do a proof of correctness
-    involving a loop if we tackle it in two steps:
-
-    1.  Prove that *if* the program terminates, *then* it produces
-        the results we want
-    2.  Prove that the program terminates
-
--   (Step 1 gives us something the formal methods people call \alert{partial correctness},
-    and steps 1 and 2 together gives us \alert{emph{total} correctness}.)
-            
-### Proving things
-
--   So how do we actually build up a proof?
-    -   We need rules about how to combine triples together.
-    -   We cover these rules now
-
-###  Composition
-
--   The composition rule says:
-
-    If we have { $a$ } $P_1$ { $b$ } and { $b$ } $P_2$ { $c$ } 
-
-    then we can derive { $a$ } $P_1; P_2$ { $c$ } 
-
-###  Assignment
-
--   The assignment rule states that, after an assignment, any predicate
-    that was previously true for the right-hand side of the assignment
-    now holds for the variable on the left-hand side.
--   Formally:
-
-    \indent { $A[E/x]$ } x := E { $A$ }
+### Aspects of a formal method
     
-    Here, $A$ represents some (probably and'ed together) assertion
-    about variables; \
-    $A[E/x]$ means, "$A$, but wherever $x$ appears, substitute for it 
-    the expression $E$ instead"
--   Which gives us the meaning we want: whatever *was* true of $E$ is
-    now true of $x$.
-    
-###  Conditional
-    
--   We represent "if" using the conditional rule
--   The rule is:
+A formal specification method usually includes:
 
-    If we have
-
-    \indent \{ $a \wedge C$ \} $P_1$ \{ $b$ \}, and we have \{ $a \wedge \neg
-    C$ \} $P_2$ \{ $b$ \}
-
-    then we can derive
-
-    \indent \{ $a$ \} if $C$ then $P_1$ else $P2$  \{ $b$ \}
--   (i.e., If we know that we end up with $b$ holding regardless
-    of whether $C$ is true or not, then we know it must be true
-    after the `if` statement)
-
-### "Partial while" {.fragile}
-
--   The rule for partial correctness of while loops is:
-
-    If we have a triple { $A \wedge B$ } $P$ { $A$ }
-    
-    then we can derive:
-    
-    \indent \{ $A$ \} while $B$ do $P$ done \{ $\neg B \wedge A$ \} 
--   Here, $A$ is what is called the **loop invariant** -- it is 
-    something that should be *preserved by* (i.e. is true before and
-    true after) the loop body.
--   After the loop is done, $A$ should still hold, no matter how many
-    times the loop executed.
--   *if* we got out of the loop, it must be the case afterwards that
-    $\neg B$ (since otherwise, "while $B$" would've continued)
-
-### "Total while"
-
--   If we can prove partial correctness for a while loop;\
-    and we can prove the loop terminates;\
-    then we've proved total correctness.
-    -   (There is syntax for this in Hoare logic, but we won't go
-        into it.)
-
-### Worked example {.fragile}
-
-\small 
-
--   program fragment:
-
-    \begin{lstlisting}[mathescape]
-      { pre : $b \geq 0$ } 
-      i := a
-      j := b 
-      n := 0
-      while j > 0:
-        n = n + i
-        j = j - 1
-      { post: $n = a * b$ }
-    \end{lstlisting}
-- ... we try to work out a loop invariant ...
-- invariant: $(j * i) + n = a * b$ \
-  i.e., if we add our "result so far" ($n$), which is increasing,
-  to the product of $j$ and $i$ (where $j$ is decreasing), that should
-  remain constant, and is equal to $a * b$.
-
-### Worked example {.fragile}
-
-\footnotesize
-
--   let our loop invariant $\bm{L}$ be
-    $(j * i) + n = a * b$
-
-    \begin{lstlisting}[mathescape]
-      { pre : $b \geq 0$ } 
-      i := a
-      j := b 
-      n := 0
-      { $j > 0 \wedge \bm{L}$ }
-      while j > 0:
-        n = n + i
-        j = j - 1
-      { $j \leq 0 \wedge \bm{L}$ } 
-      { post: $n = a * b$ }
-    \end{lstlisting}
-
--   The "partial while" rule lets us put assertions round the while
-    loop.
--   So one thing we know now is that *if* the loop finishes,
-    then $\bm{L}$ will still hold.
--   If $j$ ended up being 0, then that would be handy, because
-
-    \indent $(j = 0) \wedge (j * i + n = a * b)$ \
-    implies \
-    \indent $n = a * b$ \
-    which is what we would like to prove.
-
-### Worked example {.fragile}
-
--   So if we can prove that
-
-    -   at the end of the loop, $j = 0$, 
-    -   and that the loop terminates, 
-    -   and that the initialization statements and the program
-        preconditions satisfy the loop precondition
-
-    ... then we've proved that the program does what we want.
-    (Assuming $b \geq 0$, which is a precondition for the whole program.)
-
-### Worked example {.fragile}
-
--   We won't work through the rest of the proof in detail, but hopefully you 
-    have an idea of how it will go.
--   Roughly, to prove that the loop ends, and that $j$ is 0 at the end of it:\
-    Since $j$ is some finite number, and we are subtracting one off it
-    each time, some math and logic tells us that we must end
-    sometime,
-    and that $j$ will end up equaling zero.
-
-### Worked example {.fragile}
-
--   Coming up with the loop invariant is usually the hard part;\
-    the other rules can be applied in a more automatic kind of way.
--   Edsger Dijkstra said that to properly understand a while statement
-    is to understand its invariant.        
+- syntax: Rules for how the specification is written,
+  and what constitutes a well-formed specification.
+- semantics: How the specification is interpreted -- what it means.
+- rules of inference: Techniques for deriving useful
+  information from the specification. 
 
 
-# Sorts of formal methods
-
-###  A typical approach
-    
-Often, we'll apply formal methods in the following way:
-
--   We'll have something representing the system -- this is called a
-    *model*
-    -   This could be actual code, or it could be annotated code, or it
-        could be some more abstract model of the system (like state
-        machines, which we have seen earlier)
--   We'll have some specification -- some property that we want our
-    system to have 
-    -   e.g., that it calculates the factorial of a natural number; or
-        never gets deadlocked; or has certain security properties.
--   And we will try to show that the model meets the specification.
 
 
-### Back to formal methods
+###  Categorizing formal methods
 
--   So with our fragment of Python code, our *specifications* were assertions
-    about variable values before and after the program executed,
-    written as mathematical formulas.
--   We used a method that was largely *manual* -- putting
-    assertions around fragments of code.
--   Some bits of that could be partly automated -- the rules for
-    composition and assignment could be done by machine
--   The loop invariant, however, requires ingenuity to come up with
--   Our *model* of the system was, in fact, the code itself.
-    -   (The code is still just a *model*, a simplification,
-        of the actual running binary. It isn't itself the binary.\
-        We also might ignore such things as limits on sizes of ints,
-        if we are happy to accept that our proof only applies, if the
-        ints are sufficiently small.)
+We can categorize formal methods in various ways ...
 
-###  Categorizing formal methods  
+Degree of formality
 
--   We can categorize formal methods in various ways ...
+:   how formal are the specifications and the system description?
 
-###  Categorizing formal methods  
+Degree of automation
 
-Degree of formality:
+:   full automatic through to fully manual.
+    (Most computer-aided methods are somewhere in the middle.)
 
-- how formal are the specifications and the system description?
-- in natural language (informal), or something more mathematical?
+Properties verified
 
-###  Categorizing formal methods  
+:   What is being verified about the system? Just one property
+    (e.g. does not deadlock) or many (usually v expensive)
 
-Degree of automation:
+###  Categorizing formal methods, cont'd
 
--   the extremes are fully automatic and fully manual
--   most computer-aided methods are somewhere in the middle
 
-###  Categorizing formal methods  
+Intended domain of application
 
-Full or partial verification of properties in the specification
-
--   What is being verified about the system? Just one property?
-    (e.g., that it does not deadlock, say -- common for concurrent
-    systems)
--   Or many/all properties?
-    -   (This is usually very expensive, in terms of effort)
-
-###  Categorizing formal methods  
-
-Intended domain of application:
-
--   e.g. hardware vs software; 
--   reactive vs terminating; 
-    - reactive systems run a theoretically endless "loop" and aren't
-      intended to terminate -- they just keep *reacting* to an
-      environment
-    - e.g. operating systems, embedded hardware (modelled with state
-      machines, often)          
-    - terminating systems terminate, usually with some sort of
-      *result*           
--   sequential vs concurrent    
+:   e.g. hardware vs software; *reactive* systems (run in an
+    endless loop) vs terminating; sequential vs concurrent
    
-###  Categorizing formal methods  
+Life-cycle stage
 
-pre- vs post-development:
+:   Verification done early in development, vs later\
+    (Earlier is obviously better -- later is more expensive
+    to fix)
 
--   Is verification done early in development, vs later or
-    afterwards?
--   Earlier is obviously better, since things are much more expensive to
-    fix if early, if it turns out our system *doesn't* meet the specs
+###  Life-cycle stage  
 
-###  Categorizing formal methods  
-
--   But sometimes the system comes first, then the verification
+-   Sometimes the system comes first, *then* the verification
 -   Often true for programming languages ...
     -   e.g. Java was released in 1995, and in 1997, a machine-checked
         proof of "type soundness" of a subset of Java was 
@@ -486,32 +398,36 @@ pre- vs post-development:
 [^eiffel-unsound]: William R. Cook. A proposal for making Eiffel
     type-safe. The Computer Journal, 32(4):305–311, August 1989.
 
-###    Categorizing formal methods
 
-Are we trying to prove properties of an individual program?
-Or about *all* programs written in a particular language?
-
--   An example of the first one is proving that a sorting function
-    does what we want it to, or that a compiler implementation
-    obeys some particular formal specification
--   An example of the latter is proving results about the *type system*
-    for a language, which lets us show that *all* programs in the
-    language will have some sort of guarantees of good behaviour
-
-    - e.g. Proving that well-typed Java programs cannot be subverted
-      (assuming the JVM and compiler are implemented correctly) -- \
-      it should be impossible to get a reference which doesn't point to
-      a valid area of memory, for instance.
-
-
-###    Aside -- type systems
+###    Example -- type systems
 
 -   We often don't think of type systems as being a "formal method",
     but some type systems are very expressive, and allow us to prove
     quite strong results about our programs
 -   We can use them to prove that (for instance) unsanitized user
     data never gets output to a web page
-    
+
+###    Example -- type systems
+
+A common poor coding practice is "stringly typed" programs --
+programs representing information as string that could have been
+represented using types (e.g. enumerations)
+
+::: block
+
+####
+
+- Stringly-typed: encode flight types as "return" or "oneway"
+- Better: use an enum: `enum FlightType { RETURN, ONEWAY }`
+
+::::
+
+\pause
+
+Programmers who avoid "stringly typing" often still represent
+quantities as *numbers* when they represent completely incompatible
+things -- e.g. using a plain `double` for both velocity
+and body mass index.
 
 ###    Type systems
 
@@ -539,35 +455,22 @@ Or about *all* programs written in a particular language?
 [fortress]: https://github.com/stokito/fortress-lang
 [f-sharp]: https://fsharp.org/ 
 
-###  Categorizing formal methods  
+###    Type systems
 
-Model-based vs proof-based approaches:
+Other languages without a full unit system will still let you
+encapsulate numbers in some more specific type, that can't
+be freely added to normal numbers.
 
--   We've seen one example of a *proof* based approach, Hoare logic.
-    -   Your specification is some formula in some suitable logic
-    -   In Hoare logic, our specification is what we want the program to
-        *do* -- it's expressed as assertions (postconditions which
-        should hold after the program executes, if the preconditions
-        held)
-    -   You try and *prove* that the system (or some abstraction of it)
-        satisfies the specification.
--   Usually requires guidance and expertise from the user        
+e.g. in Haskell
 
-###  Categorizing formal methods
+::: block
 
-<!--
-from preamble:
+####
 
-\newcommand{\c}[1]{\mathcal{#1}}
--->
+```haskell
+newtype Velocity = Velocity Double
+  deriving (Read, Show, Num, Eq, Ord)
+```
 
-Model-based approaches:
-
--   Again, our specification is some sort of formula
--   This time, our system description is some mathematical structure,
-    a **model**, $\cl{M}$
--   We check whether the model $\cl{M}$ **satisfies** the specification
-    (i.e. has the properties we want)
--   In many cases, this can be done automatically.
-
+:::
 
