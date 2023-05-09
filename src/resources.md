@@ -49,7 +49,7 @@ like to get an idea in advance of what will be covered.)
   - Lecture 8a, Risk                  {% resourceList "lect08a--risk", ["pdf", "md"] %}
   - Lecture 8b, Formal methods intro  {% resourceList "lect08b--formal", ["pdf", "md"] %}
   - Case study -- Knight Capital trading loss {% resourceList "lect08c--knight", ["pdf", "md"] %}
-  - Lecture 9, Program verification {% resourceList "lect09a--verification", ["pdf", "md"] %}
+  - Lecture 9, Program verification {% resourceList "lect09--verification", ["pdf", "md"] %}
   - Other material -- "[Mocks, stubs and spies with Mockito](https://youtu.be/xXO8ft-tsrY)" (YouTube) \
     (see also ch 12 of the textbook)
 
