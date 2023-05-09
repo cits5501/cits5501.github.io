@@ -217,10 +217,12 @@ The following project materials are available for you:
 
 - The [project description (PDF)][proj-pdf]
 - [Source code for the project][proj-code]
+- A recent list of [IATA codes][proj-iata-codes] (zip)
 
 [proj-pdf]: {{ "/project/project-spec.pdf" | url }}
 [proj-javadoc]: {{ "/project/project/doc" | url }}
 [proj-code]: {{ "/project/gladius-source.zip" | url }}
+[proj-iata-codes]: {{ "/project/iata_codes.zip" | url }}
 
 {#
 
