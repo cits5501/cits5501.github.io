@@ -361,6 +361,12 @@ Wherever possible, we adopt a rubric based on the following scheme:
     most correct. (Or, if you think none are correct, give the one that's
     least incorrect.)
 
+    You can assume that the answer to any short answer question is
+    *never* more than 5 words long (and most will be only two or three
+    words long). You must always give a *single* answer -- responses
+    which try to "hedge" and give multiple alternatives "this ***or***
+    that" will be marked incorrect.
+
 
 **"Long answer" questions requiring code**{ class="hi-pri" }
 
