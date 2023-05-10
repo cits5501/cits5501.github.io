@@ -123,6 +123,8 @@ the semester.
 - Week 9 -- system testing
   - Lab worksheet               {% resourceList "workshop08", ["html", "md"] %}
   - Sample worksheet solutions  {% resourceList "workshop08-solutions", ["html", "md"] %}
+- Week 10 -- program verification
+  - Lab worksheet               {% resourceList "workshop09", ["html", "md"] %}
 
 {#
 - Week 9 -- risk
