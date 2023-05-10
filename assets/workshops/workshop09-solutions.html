@@ -394,10 +394,10 @@ program:</p>
 <p>Try compiling, verifying and running the program again:</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> dafny /compile:3 sample.dfy</span></code></pre></div>
 <p>Although the program verifies and compiles properly, it will not
-execute and produce any output, because the Dafny runtime method looks
-for a <code>Main</code> method to execute. If it does not find one, no
-warning or error is produced (you might have intended to create a
-library, rather than a program), but nothing will be executed.</p>
+execute and produce any output, because the Dafny runtime looks for a
+<code>Main</code> method to execute. If it does not find one, no warning
+or error is produced (you might have intended to create a library,
+rather than a program), but nothing will be executed.</p>
 <h2 id="c.-preconditions">C. Preconditions</h2>
 <p>Try compiling and running the following code:</p>
 <pre><code>method Main() {
@@ -445,7 +445,7 @@ inserting it instead:</p>
 <div class="sourceCode" id="cb13"><pre class="sourceCode c#"><code class="sourceCode cs"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>assert n<span class="op">!=</span><span class="dv">0</span> <span class="op">==&gt;</span> n<span class="op">*</span>n<span class="op">&gt;</span><span class="dv">0</span></span></code></pre></div>
 <p>This reads “<code>n*n</code> is greater than 0,
 <strong><em>if</em></strong> <code>n</code> does not equal 0”. This
-assertion is true, so Dadny should allow the program to be verified and
+assertion is true, so Dafny should allow the program to be verified and
 compiled.</p>
 <h2 id="d.-using-dafny-features">D. Using Dafny features</h2>
 <p>The following Dafny code is intended to find the position of the

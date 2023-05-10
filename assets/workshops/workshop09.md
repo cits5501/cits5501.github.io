@@ -205,7 +205,7 @@ $ dafny /compile:3 sample.dfy
 ```
 
 Although the program verifies and compiles properly, it will not execute and produce any output,
-because the Dafny runtime method looks for a `Main` method to execute. If it does not find one,
+because the Dafny runtime looks for a `Main` method to execute. If it does not find one,
 no warning or error is produced (you might have intended to create a library, rather than a program),
 but nothing will be executed.
 
@@ -280,7 +280,7 @@ assert n!=0 ==> n*n>0
 ```
 
 This reads "`n*n` is greater than 0, ***if*** `n` does not equal 0". This assertion
-is true, so Dadny should allow the program to be verified and compiled.
+is true, so Dafny should allow the program to be verified and compiled.
 
 
 \newpage
