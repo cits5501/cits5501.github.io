@@ -4,15 +4,28 @@ title: CITS5501 Project 2023
 
 \vspace{-3em}
 
-| **Version:** | 0.1          |
+| **Version:** | 0.2          |
 |--------------|--------------|
-| **Date:**    | 4 May, 2022  |
+| **Date:**    | 12 May, 2022 |
+
+**Changes in version 0.2**
+
+- Java code: `GladiusException` base class changed from
+  `Exception` to `RuntimeException`.
+- Long answer citation style suggested.
+- Good coding practices expanded on.
+- Syntactic vs semantic checks clarified.
+- Question 1: start symbol specified.
+- Question 4: correct name of method.
+- Question 6: requirements clarified.
+- Question 9: removed; total mark changed from 60 to 50.
+
+
 
 \def\gld{\textsc{gladius}}
 \def\iata{\textsc{iata}}
 \def\iso{\textsc{iso}~}
-\def\totalmarks{60}
-
+\def\totalmarks{50}
 
 # Introduction
 
@@ -27,8 +40,8 @@ title: CITS5501 Project 2023
     general principles required to understand this project, but the work you
     submit must be the result of your own effort.
 -   You must submit your project before the submission deadline above. There
-    are significant [Penalties for Late
-    Submission](https://ipoint.uwa.edu.au/app/answers/detail/a_id/2711/~/consequences-for-late-assignment-submission)
+    are significant [penalties for late
+    submission](https://ipoint.uwa.edu.au/app/answers/detail/a_id/2711/~/consequences-for-late-assignment-submission)
     (click the link for details).
 
 # Clarifications and changes to the project specification
@@ -41,27 +54,32 @@ project should be posted to the [Help5501 forum][help5501] with the
 [help5501]: https://secure.csse.uwa.edu.au/run/help5501
 
 Any clarifications or amendments that need to be made will be posted by
-teaching staff in the forum. After enough have been made that it is
-worth releasing a new version (typically after 5 days), a revised version
-of this specification will be posted on the CITS5501 website (and an
-announcement will be made in the forum). Make sure
-you are using the most up-to-date version of the project specification.
+teaching staff in the Help5501 forum.
 
 
 # Format and submission of your work
 
 All code and answers to questions should be submitted by making a
-Moodle submission (which should be open for submission shortly).
+Moodle submission.
 
 For any long English answers:
 
 - Please structure your answers using numbered headings where appropriate.
+  You may use [Markdown][markdown] to format your answers. Markdown will
+  be rendered into HTML for marking using the
+  "[Python-Markdown][pymarkdown]" package.
 - If you include any diagrams, charts or tables, they must be clear, legible and large enough
   to read when viewed on-screen at 100% magnification.
 - If you give scholarly references, you may use any standard
-  citation style you wish, as long as it is consistent.
+  citation style you wish, as long as it is consistent. However, a
+  recommended citation style is "AMS short alpha-numeric"
+  (see [AMS style guide][ams], sec 10.3).
 - Diagrams, charts, tables, bibliographies and
   reference lists do not count towards any word-count maximums.
+
+[markdown]: https://www.markdownguide.org
+[pymarkdown]: https://python-markdown.github.io
+[ams]: https://www.ams.org/publications/authors/AMS-StyleGuide-online.pdf
 
 Submitted code should meet the [usual guidelines][code-guide] for CITS5501
 code:
@@ -83,6 +101,16 @@ Any methods (including JUnit `@Test` methods) that you write should include a Ja
 documentation block which follows the guidelines at
 <https://www.oracle.com/au/technical-resources/articles/java/javadoc-tool.html>
 under "Writing Doc Comments".
+
+Note that code which does not compile will be awarded (at most) a very
+small number of marks. You can check that your code compiles using Moodle;
+teaching staff will not fix your code if it does not compile.
+
+Your code should never emit any output to `System.out` or `System.err` unless specified in the question.
+Doing so is extremely poor practice, and will typically result in your
+code being awarded a low
+number of marks (and in any case, will likely result in your code
+failing any checks or tests applied by Moodle).
 
 ## Documenting assumptions
 
@@ -119,7 +147,7 @@ prototyped, `shop flight fare` and `air book req`.
 
 ## \textmd{\textsc{gladius}} command description
 
-\gld commands make use of the following formats:
+\gld commands make use of a number of formats specified below. Some of these formats have rules for both syntactic validity (whether they have the correct "form") and semantic validity. To make syntax testing simpler and more tractable, simplified syntax testing rules are suggested in several cases.
 
 [iata-code]: https://en.wikipedia.org/wiki/IATA_airport_code
 [airline-code]: https://en.wikipedia.org/wiki/List_of_airline_codes_(0%E2%80%939)
@@ -132,6 +160,17 @@ prototyped, `shop flight fare` and `air book req`.
 >     exact full list of these 3-letter codes; you may make the simplifying
 >     assumption that any 3-letter sequence of the letters from 'A' through to
 >     'D' inclusive specify an \iata code.
+>
+>     For any other purposes, an airport code must be 3
+>     capital letters in the range 'A' to 'Z' inclusive in order to pass
+>     syntax validity checks, and must be looked
+>     up in a list of current IATA airport codes to be semantically valid.
+>     You can use the list provided in
+>     `iata_codes.zip` at <https://cits5501.github.io/assessment/#project>
+>     to come up with semantically valid or invalid airport codes. (In
+>     actuality,
+>     an "airport code validator" would likely be a class that could be
+>     mocked, but we won't make use of such a class.)
 > 
 > *Cabin types* 
 > 
@@ -139,30 +178,44 @@ prototyped, `shop flight fare` and `air book req`.
 >     P (premium first class), F (first class), J (premium business class), C
 >     (business class), S (premium economy class), and Y (economy class).
 > 
-> *Currency codes* 
+> *Currency codes*
 > 
 > :   Currency codes are 3-letter codes specifying a currency as per
 >     [\iso standard 4217](https://en.wikipedia.org/wiki/ISO_4217). For
 >     *syntax testing purposes only*, you may make the simplifying
 >     assumption that any 3-letter sequence of the letters from 'E' through
 >     to 'H' inclusive specifies an \iso 4217 currency code. (For example:
->     'EFGE' would be a valid currency code, for syntax testing purposes.)
+>     'EFG' would be a valid currency code, for syntax testing purposes.)
+>
+>     For other purposes, you may assume that a currency code must be
+>     3 capital letters in the range 'A' to 'Z' inclusive in order to pass
+>     syntax validity checks, and must be looked up in a list of current
+>     \iso 4217 currency codes to be semantically valid.
+>     You can use the list provided on the website at
+>     <https://cits5501.github.io/assessment/#project>
+>     to come up with semantically valid or invalid currency codes. (In
+>     actuality,
+>     a "currency code validator" would likely be a class that could be
+>     mocked, but we won't make use of such a class.)
 > 
 > *Dates*
 > 
-> :   A date is always specified in the form `YYYY-MM-DD`. For *syntax testing
->     purposes only*, the simplifying assumption may be made that there are no constraints
->     on the digits which can be used in a date. (For example: `0001-00-00`
->     counts as a valid date.) For all other purposes: the date must be a valid
+> :   A date is always specified in the form `YYYY-MM-DD`. To be
+>     syntactically valid, each character in a date (other than the
+>     hyphens) must be a digit in the range '0' to '9' inclusive.
+>     (For example: `0001-00-00`
+>     counts as a syntactically valid date.) To be semantically valid,
+>     the date must be a valid
 >     date in the Gregorian calendar.
 > 
 > *Datetimes*
 > 
 > :   A datetime is a date, followed by the letter "T", and
->     a time in the format `HH:MM:SS`. For *syntax testing purposes only*,
->     the simplifying assumption may be made that there are no constraints
->     on the digits which appear in the time. (For example: `99:99:99`
->     counts as a valid time.) For all other purposes: the time must be a valid
+>     a time in the format `HH:MM:SS`. To be syntactically valid, each
+>     character in a time (other than the colons)
+>     must be a digit in the range '0' to '9' inclusive.
+>     (For example: `99:99:99`
+>     counts as a syntactically valid time.) To be semantically valid, the time must be a valid
 >     24-hour clock time.
 > 
 > *Airline codes*
@@ -171,6 +224,18 @@ prototyped, `shop flight fare` and `air book req`.
 >     For *syntax testing purposes only*, you may make the simplifying
 >     assumption that any 2-letter sequence of the letters 'I' through to
 >     'L' inclusive specifies an \iata airline code.
+>
+>     For any other purposes, an airline code must be 2
+>     characters in the range 'A' to 'Z', 'a' to 'z' or '0' to '9'
+>     inclusive in order to pass
+>     syntax validity checks, and must be looked
+>     up in a list of current IATA airport codes to be semantically valid.
+>     You can use the list provided in
+>     `iata_codes.zip` at <https://cits5501.github.io/assessment/#project>
+>     to come up with semantically valid or invalid airline codes. (In
+>     actuality,
+>     an "airline code validator" would likely be a class that would be
+>     mocked, but we won't make use of such a class..)
 > 
 > *Flight numbers* 
 > 
@@ -190,6 +255,10 @@ The command may have subcommands; if it does, then after a newline is
 entered, multiple subcommands can be given (one per line). The command
 finishes when the word `EOC` ("end of command") is entered on its own
 on a line.
+
+Monospace font is used in the command descriptions to represent literal
+text. Parameters are represented in bold monospaced font (e.g.
+**`ORIGIN`**). Optional parameters are surround by square brackets (`[]`).
 
 \newpage
 
@@ -318,19 +387,18 @@ Detailed specifications for each class and method are provided as JavaDoc
 comments in the supplied code.
 
 You should **not submit** any of the code in the `src` directory. The
-Moodle test servers will have their own copies of the classes in that
+Moodle test servers will have their own versions of classes in that
 directory.
 
 # Tasks
 
-A Moodle area for submission will be available shortly where you can
-submit responses for the following questions. A more detailed
-rubric will also be available on Moodle.
+Answes to the following questions should be
+submitted via Moodle.
+A more detailed marking rubric will also be available on Moodle.
 Some of the questions require you to write English answers;
 others require you to write code.
 
 [bnf-playground]: https://bnfplayground.pauliankline.com
-
 
 
 **Question 1 [4 marks]**
@@ -343,6 +411,8 @@ others require you to write code.
     which could be pasted into the BNF playground and compiled without
     error.
 
+    The grammar should include a non-terminal
+    `<gladius_command>` to be used as the start symbol for the grammar.
     The grammar should specify any whitespace that needs to appear
     between other symbols in the command. (As a simplifying assumption,
     you may assume that a single space character is sufficient as
@@ -378,6 +448,10 @@ others require you to write code.
     The `countTerminalSymbols()` method would return the int `2` given
     the grammar `myGrammar`.\
 
+    You may assume that `java.util.*` and `java.util.regex.*` import
+    statements appear at the top of the source file for your code.
+
+
 
 **Question 3 [4 marks]**
 
@@ -398,10 +472,13 @@ others require you to write code.
     number of *productions* in a grammar (see the Amman and Offutt
     text for a definition of "production").
 
-    The signature for the method should be: `static int countTerminalSymbols(List<String>)`.
+    The signature for the method should be: `static int countProductions(List<String>)`.
     The input will be a grammar in BNF or EBNF format (specifically, the notation
     accepted by the [BNF playground][bnf-playground]), as detailed in
     question 2.
+
+    Your may assume that `java.util.*` and `java.util.regex.*` import
+    statements appear at the top of the source file for your code.
 
 \newpage
 
@@ -425,7 +502,8 @@ others require you to write code.
 
     - eight characteristics that would be useful for testing the constructor.
     - three test cases in detail, including all fixtures, test values and
-      expected values.
+      expected values. Include a test ID for each test case, so you can
+      refer to it in question 7.
 
     You need not exhaustively describe all characteristics, partitions,
     test cases and values that would be needed, but should briefly
@@ -446,7 +524,20 @@ others require you to write code.
     code, in the "test" directory.
 
     Your test cases should implement all appropriate best practices for
-    unit tests.\
+    unit tests.
+
+    Note that to obtain any marks, it is a requirement of the question that:
+
+    - you implement three of your question 6 test cases -- for each test,
+      include Javadoc documentation providing the test ID from question 6
+      which it corresponds to. If you implement something else instead, no
+      marks will be awarded.
+    - your tests properly "Arrange, Act and Assert" your test case. Tests that
+      (for instance) contain no assertions will not be awarded marks.
+
+    The code checks available via Moodle can be useful to highlight
+    possible problems in your code, but passing them is not a guarantee of any
+    marks being awarded.
 
 **Question 8 [4 marks]**
 
@@ -457,17 +548,7 @@ others require you to write code.
     as an answer to question 1. Explain why it is that your
     test cases satisfy this coverage criterion.\
 
-**Question 9 [10 marks]**
-
-:   \
-
-    Write a test class using JUnit 5 called `CommandProcessorTest`,
-    which contains `@Test` methods which implement at least 2 of the
-    test cases you described in question 8.
-    Skeleton code for this class is provided in the supplied Java
-    code, in the "test" directory.
-
-\newpage    
+    max 1000 words
 
 **Question 10 [4 marks]**
 

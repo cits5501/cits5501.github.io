@@ -215,10 +215,11 @@ answers.
 
 The following project materials are available for you:
 
-- The [project description (PDF)][proj-pdf]
+- The [project description (PDF)][proj-pdf] (also available [as Markdown][proj-md])
 - [Source code for the project][proj-code]
 - A recent list of [IATA codes][proj-iata-codes] (zip)
 
+[proj-md]: {{ "/project/project-spec.md" | url }}
 [proj-pdf]: {{ "/project/project-spec.pdf" | url }}
 [proj-javadoc]: {{ "/project/project/doc" | url }}
 [proj-code]: {{ "/project/gladius-source.zip" | url }}
