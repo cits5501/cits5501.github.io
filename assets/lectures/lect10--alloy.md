@@ -1,217 +1,16 @@
 ---
 title: |
   CITS5501  Software Testing and Quality Assurance\
-  Alloy
+  Specification languages -- Alloy
 author: 'Unit coordinator: Arran Stewart'
 ---
 
-\renewcommand{\figurename}{Figgy}
 
 ### Overview
 
-- More on motivation for formal methods
+\renewcommand{\figurename}{Figgy}
+
 - Alloy specification language and Alloy analyser
-
-# Issues with specifications
-
-### Some problems in specifying systems
-
-System specifications can suffer from a few potential problems:
-
-- contradictions
-- ambiguities
-- vagueness
-- incompleteness
-
-(NB: these terms all have precise meanings. Don't assume they're
-interchangeable.) 
-
-### Some problems in specifying systems 
-
--   *Contradictions*. In a very large set of specifications, it can be
-    difficult to tell whether there are requirements that contradict
-    each other.
-    -   Can arise where e.g. specifications are obtained from multiple
-        users/stakeholders
-    -   Example: one requirement says "all temperatures" in a
-        chemical reactor must be monitored, another (obtained from
-        another member of staff) says only temperatures in a specific
-        range.
-
-<!-- source: pressman -->        
-
-
-### Some problems in specifying systems 
-
-::: incremental
-
--   *Ambiguities*. i.e., statements which can be interpreted in
-    multiple different ways.\
-    "The operator identity consists of the operator name and password;
-    the password consists of six digits. It should be displayed on the
-    security screen and deposited in the login file when an operator
-    logs into the system."
--   ... Does "it" refer to the identity, or the password?
--   "Should" can be ambiguous -- does "The system should do *X*" mean
-    the system *must* do *X*, or that it is optional but desirable
-    that the system do *X*?
--   Many terms have both technical and non-technical meanings (possibly
-    multiple of each): for instance, "reliable", "robust", "composable",
-    "category", "failure", "orthogonal",
-    "back end", "kernel", "platform", "entropy" ...
-
-:::
-
-### Some problems in specifying systems 
-
-::: incremental
-
--   *Vagueness*. Vagueness occurs when it's unclear what a concept
-    covers, or which things belong to a category and which don't.
--   "is tall" is vague: some people are definitely tall, and some are
-    definitely short, but it can be difficult to tell when exactly
-    someone meets the criterion of being tall.
--   Likewise "fast", "performant", "efficiently", "scalable",
-    "flexible", "is user-friendly",
-    "should
-    be secure", "straightforward to understand" are all vague.
-
-:::
-
-### Some problems in specifying systems 
-
-::: incremental
-
--   *Incompleteness*. This covers specifications that, for instance,
-    fail to specify what should happen in some case.
--   e.g. An obviously incomplete requirement: "A user may specify normal
-    or emergency mode when requesting a system shutdown. In normal mode,
-    pending operations shall be logged and the system shut down within
-    2 minutes."
--   ... So what happens in emergency mode?
--   But other cases of incompleteness may be harder to spot.    
-    
-:::
-
-### Some problems in specifying systems 
-
-::: incremental
-
--   In addition to these, there are many other ways requirements
-    can be written poorly --\
-    e.g. Overly long and complex sentences,
-    mixed levels of abstraction (mixing high-level, abstract
-    statements with very low-level ones $\rightarrow$ difficult 
-    to distinguish high-level architecture from low-level details),
-    undefined jargon terms, specifying implementation rather
-    than requirements (how vs what), over-specifying, don't satisfy
-    business needs, etc.
--   Formal specifications can potentially help
-    avoid ambiguity, vagueness, contradiction and some gaps
-    in completeness.
--   Other problems, not so much. Just as it's possible to write programs
-    badly in any language, it's also possible to write formal
-    specifications badly.\
-    There is still a need for *review* of specifications, as with
-    any artifact. 
-
-:::
-
-### Some problems in specifying systems
-
-Some example requirements[^sources]:
-
--   "The system shall be highly reliable."
--   "Credit card details must be encrypted."
--   "The system should be easy to use by medical staff and should be
-    organized in such a way that user errors are minimized."
--   "The system shall have a response time of under 0.1 seconds."
--   "If the LAUNCH-MISSILE signal is set to TRUE and the
-    ABORT-MISSILE signal is set to TRUE then do not launch the
-    missile, unless the ABORT-MISSILE signal is set to FALSE and
-    the ABORT-MISSILE-OVERRIDE is also set to FALSE, in
-    which case the missile is not to be launched."
-
-[^sources]: Sources: Pressman; LaPlante, *Requirements Engineering*;
-  bitter experience.
-
-### Formal specifications
-
--   Formal specifications can help with ameliorating these problems.
--   Sometimes, just the process of attempting to formalize a requirement
-    can reveal problems with it.
--   Using a formal model can help reveal *ambiguity* and *vagueness*
-    and allow them to be eliminated
--   It may also be possible (depending on the mathematical model used)
-    to detect inconsistencies
--   Detecting whether a specification is *complete* is more difficult.
-    -   Some gaps may be able to be detected
-    -   But there are nearly always some details that are left
-        undefined, or scenarios that may not have been considered.
-
-::: notes
-
--   as with anything, there are diminishing returns.
-
-:::        
-
-### Formal specifications
-
-\scriptsize
-
--   Formal specifications have a meaning defined in terms of
-    mathematics.
--   Similar to programming languages, there are different sorts of
-    formal specification languages and tools, with different sorts
-    of scope.
--   Some are small and specific in scope. For instance:
-    -   *State charts*, which we have seen, define states and
-        transitions between them.
-    -   *Backus-Naur Form*, which we have also seen, defines languages
-        -- sets of strings.
-    -   *Regular expressions* also define sets of strings (most
-        programming languages have an implementation of them)
-    -   [$\pi$-calculus][pi-calc] is used to represent concurrent
-        systems
--   Highlights another reason to use formal specifications: sometimes
-    they're the most concise way of saying something. Writing a grammar
-    or set of state transitions in natural language
-    (rather than BNF or as a state chart) would be a gruelling and
-    horrible exercise.
--   Some are more general, and are intended to be able to describe
-    a wide range of systems. They may be based on numerous different
-    mathematical formalisms -- predicate logic + set theory,
-    category theory, etc.
-
-[pi-calc]: https://en.wikipedia.org/wiki/%CE%A0-calculus
-
-### Formal specification languages
-
-Some examples of general-purpose specification languages:
-
--   **Z notation**
-    -   based on set theory and predicate logic
-    -   developed in the 1970s. 
-    -   Now has an ISO standard, and variations (e.g.  object-oriented versions)
--   **TLA+**:  
-    -   Stands for "Temporal Logic of Actions"
-    -   A general-purpose specification language
-    -   Especially well-suited for writing specifications of concurrent
-        and distributed systems
-    -   For finite state systems, can check (up to some number of steps)
-        that particular properties hold (e.g. safety, no deadlock)
-        
-### Formal specification languages
-         
--   We'll be using the **Alloy** specification language
--   Alloy is both a language for describing structures, and a tool
-    (written in Java) for exploring and checking those structures.
--   Influenced by Z notation, and modelling languages such as UML
-    (the Unified Modelling Language).
--   Website: <http://alloy.mit.edu/> (The Alloy Analyzer tool
-    can be downloaded from here.)
-
-# Alloy language and analyser
 
 ### Alloy idea
 
@@ -252,9 +51,10 @@ and how they hang together.
 [src: jackson, alloy-6898.pdf, "a new approach"]
 -->
 
-[^temporal]: Alloy now also has an extension, Electrum, for modelling
-  properties of systems over time using temporal logic, but
-  we will restrict ourselves to plain Alloy.
+[^temporal]: An Alloy extension, Electrum, exists which is
+  well-suited for modelling
+  properties of systems over time using temporal logic. However,
+  we will restrict ourselves to very simple dynamic behaviours using plain Alloy.
 
 ### Alloy advantages
 
@@ -323,10 +123,12 @@ visit
 `\end{center}`{=latex}
 
 
-### Alloy
+### Alloy -- sigs
 
 In Alloy, we declare rules about a mini-universe: things that
 exist, and properties that should be true of them.
+
+We declare things that exist with `sigs` (short for "signatures"):
 
 -   "There are things called animals"
 
@@ -335,6 +137,27 @@ exist, and properties that should be true of them.
 -   "A cat is a sort of animal"
 
     `sig Cat extends Animal {}`
+
+The two declarations above declare kinds of "things" that exist.
+
+### Alloy -- facts and assertions
+
+We can also write:
+
+- \alert{facts}: These *force* something to be true of our model.
+  They act as constraints on it. Alloy won't generate any instances
+  of the model in which the facts don't hold.
+
+  - A fact is *part* of our specification.
+
+- \alert{assertions}: An assertion *claims* something is true of our model (but
+  it could be wrong).
+
+  - You can think of these as similar to assertions in Dafny or in other languages
+  - They're like a debugging tool such as `println` -- they let you *ask*
+    whether some fact is true or not.
+  - The assertion isn't part of the specification; it's something we use to check
+    what consequences flow from our specification.
 
 ### Alloy
 
@@ -348,22 +171,26 @@ the bare minimum of properties needed in order to show how the system
 
 -   For example -- we'll look at a simple model of a file system (based on
     the Alloy tutorial at <http://alloytools.org/tutorials/online/>)
--   The Alloy specification looks a little like Java:
+-   An Alloy specification looks a little like Java:
 
-    \footnotesize
+::: block
 
-    ~~~ { .alloy }
-    // A file system object in the file system
-    sig FSObject { parent: lone Dir }
-    
-    // A directory in the file system
-    sig Dir extends FSObject { contents: set FSObject }
-    
-    // A file in the file system
-    sig File extends FSObject { }
-    ~~~
+####
 
+\footnotesize
 
+``` { .alloy }
+// A file system object in the file system
+sig FSObject { parent: lone Dir }
+
+// A directory in the file system
+sig Dir extends FSObject { contents: set FSObject }
+
+// A file in the file system
+sig File extends FSObject { }
+```
+
+:::
 
 ### Alloy primitives
 
@@ -441,7 +268,7 @@ things.
 
 ### Alloy -- relations
 
-We can think of predicates as being functions -- an *n*-ary predicate
+We can think of predicates as being a bit like functions -- an *n*-ary predicate
 isn't true or false in itself, until we supply it with *n* arguments.
 
 -   "Is less than" isn't true or false, but "$2 < 4$" is.
@@ -508,13 +335,13 @@ of".
 -   So, **`extends`** indicates subtypes (similar to Java).
 -   Here, **`Dir`** and **`File`** are both subtypes of **`FSObject`**:
 
-    ~~~
+    ```java
     sig FSObject {}
 
     sig Dir extends FSObject {}
 
     sig File extends FSObject {}
-    ~~~
+    ```
 -   When we declare **`Dir`** or a **`File`** to be sub-types of
     **`FSObject`**, they are considered to be *mutually disjoint* sets
 -   The above says "There are things called FSObjects. An FSObject might
@@ -526,7 +353,11 @@ of".
 
 We can specify *properties* of entities:
 
-~~~
+::: block
+
+####
+
+```java
 // A file system object in the file system
 sig FSObject { parent: lone Dir }
 
@@ -535,11 +366,19 @@ sig Dir extends FSObject { contents: set FSObject }
 
 // A file in the file system
 sig File extends FSObject { }
-~~~
+```
+
+:::
 
 ### Alloy -- properties
 
-~~~
+::: block
+
+####
+
+\small
+
+```java
 // A file system object in the file system
 sig FSObject { parent: lone Dir }
 
@@ -548,7 +387,9 @@ sig Dir extends FSObject { contents: set FSObject }
 
 // A file in the file system
 sig File extends FSObject { }
-~~~
+```
+
+:::
 
 These are usually written within the sig of an entity.
 
@@ -556,10 +397,18 @@ They actually represent *relations* between entities.
 
 ### Alloy -- properties
 
-~~~
+::: block
+
+####
+
+\small
+
+```java
 // A file system object in the file system
 sig FSObject { parent: lone Dir }
-~~~
+```
+
+:::
 
 There are multiple ways of reading this:
 
@@ -574,10 +423,18 @@ These are exactly equivalent.
 
 ### Alloy -- properties
 
-~~~
+::: block
+
+####
+
+\small
+
+```java
 // A file system object in the file system
 sig FSObject { parent: lone Dir }
-~~~
+```
+
+:::
 
 -   The "`lone`" means "zero or one". It is a *cardinality*.
 -   Other possible cardinalities are:
@@ -593,9 +450,18 @@ sig FSObject { parent: lone Dir }
 
 ### Alloy -- properties
 
-~~~
+::: block
+
+####
+
+\small
+
+```java
 one sig RootDir extends Dir { }
-~~~
+```
+
+:::
+
 
 There exists a "RootDir", but only one of them.
 
@@ -610,9 +476,13 @@ Games:
 
 ### Alloy language -- comments
 
-\footnotesize
+::: block
 
-~~~
+####
+
+\small
+
+```java
 // A file system object in the file system
 sig FSObject { parent: lone Dir }
 
@@ -621,7 +491,9 @@ sig Dir extends FSObject { contents: set FSObject }
 
 // A file in the file system
 sig File extends FSObject { }
-~~~
+```
+
+:::
 
 > -   Comments can be written in multiple ways
 >     -   single-line comments with "`//`" or "`--`"
@@ -638,14 +510,20 @@ sig File extends FSObject { }
 > -   Alloy also allows us to specify *constraints*. These
 >     are introduced with the keyword **`fact`**.
 > 
->     ~~~
+>     ::: block
+>
+>     ####
+>
+>     ```java
 >     sig FSObject { parent: lone Dir }
 >     sig Dir extends FSObject { contents: set FSObject }
 >     sig File extends FSObject { }
 >     
 >     // All file system objects are either files or directories
 >     fact { File + Dir = FSObject }
->     ~~~
+>     ```
+>
+>     :::
 
 ### Alloy -- facts
 
@@ -657,11 +535,11 @@ sig File extends FSObject { }
 
 ### Alloy -- abstract signatures
 
-> -   (An alternative way to say that all FSObjects must be Dirs or Files
->     would be to declare FSObject **`abstract`**)
-> -   (This is similar to the use of the **`abstract`** keyword in Java; \
+> -   An alternative way to say that all FSObjects must be Dirs or Files
+>     would be to declare FSObject **`abstract`**
+> -   This is similar to the use of the **`abstract`** keyword in Java; \
 >     it means there are no objects that are *directly* of type 
->     FSObject; they must be members of some subtype, instead.)
+>     FSObject; they must be members of some subtype, instead.
 
 
 ### Alloy -- operators
@@ -693,20 +571,32 @@ Operators are available to construct Boolean expressions.
 
 \footnotesize
 
-~~~
+::: block
+
+####
+
+```java
 sig Animal {}
 sig Cat extends Animal {}
 sig Dog extends Animal {}
 sig FurryPet in Cat + Dog {}
-~~~    
+```
+
+:::
 
 -   "`FurryPet`" is a subset of the union of `Cat` and `Dog`.
 -   Some dogs and cats may not be furry (hairless breeds).
 -   We could *make* them all furry as follows:
 
-~~~
+::: block
+
+####
+
+```java
 fact { Cat + Dog = FurryPet }
-~~~
+```
+
+:::
 
 -   Are there animals other than cats and dogs? \
     Can they be furry?
@@ -720,64 +610,94 @@ fact { Cat + Dog = FurryPet }
     to join Boolean expressions.
 -   e.g.
 
-~~~
-fact { A + B = C and X + Y = Z }
-~~~
+::: block
 
+####
+
+```java
+fact { A + B = C and X + Y = Z }
+```
+
+:::
+
+
+### Relations
+
+
+-   In our file-system example, we also saw things in the
+    *body* of signatures (i.e., between the braces).
+
+\pause
+
+::: block
+
+####
+
+```java
+// A file system object in the file system
+sig FSObject { parent: lone Dir }
+
+// A directory in the file system
+sig Dir extends FSObject { contents: set FSObject }
+
+// A file in the file system
+sig File extends FSObject { }
+```
+
+:::
 
 ### Relations
 
 \small
 
--   In our file-system example, we also saw things in the
-    *body* of signatures (i.e., between the braces).
--   ~~~
-    // A file system object in the file system
-    sig FSObject { parent: lone Dir }
-    
-    // A directory in the file system
-    sig Dir extends FSObject { contents: set FSObject }
-    
-    // A file in the file system
-    sig File extends FSObject { }
-    ~~~
+::: block
 
-### Relations
+####
 
-\footnotesize
+\small
 
--   ~~~
-    // A file system object in the file system
-    sig FSObject { parent: lone Dir }
-    
-    // A directory in the file system
-    sig Dir extends FSObject { contents: set FSObject }
-    
-    // A file in the file system
-    sig File extends FSObject { }
-    ~~~
+```java
+// A file system object in the file system
+sig FSObject { parent: lone Dir }
+
+// A directory in the file system
+sig Dir extends FSObject { contents: set FSObject }
+
+// A file in the file system
+sig File extends FSObject { }
+```
+
+:::
+
 -   To a first approximation, we can think of relations as behaving like
     *fields* in an OO language.
 -   `sig FSObject { parent: lone Dir }` can be read as \
     "Things of type `FSObject` *have a parent*, which is of type `Dir`".
--   **`lone`** means "at most one" -- i.e., you can have zero or one
+-   Recall that **`lone`** means "at most one" -- i.e., you can have zero or one
     parents.\
     (We need this because the root directory has no parent.)
 
 ### Relations
 
+::: block
+
+####
+
 \small
 
--   ~~~
-    // A file system object in the file system
-    sig FSObject { parent: lone Dir }
-    
-    // A directory in the file system
-    sig Dir extends FSObject { contents: set FSObject }
-    
-    // A file in the file system
-    sig File extends FSObject { }
-    ~~~
+```java
+// A file system object in the file system
+sig FSObject { parent: lone Dir }
+
+// A directory in the file system
+sig Dir extends FSObject { contents: set FSObject }
+
+// A file in the file system
+sig File extends FSObject { }
+```
+
+:::
+
 -   More precisely, `parent` is a relation between
     `FSObject` and `Dir`.
 
@@ -823,12 +743,19 @@ fact { A + B = C and X + Y = Z }
 
 ### Relations
 
+::: block
+
+####
+
 \small
 
--   ~~~
-    // A directory in the file system
-    sig Dir extends FSObject { contents: set FSObject }
-    ~~~
+```java
+  // A directory in the file system
+  sig Dir extends FSObject { contents: set FSObject }
+```
+
+:::
+
 -   Here, we say that a `Dir` has a field `contents`, which is 
     a *set* of `FSObject`s.
 -   The could contain one item, many items, or no items.
@@ -856,9 +783,13 @@ fact { A + B = C and X + Y = Z }
 
 ###  Back to the file system example
 
-\footnotesize
+::: block
 
-~~~
+####
+
+\small
+
+```java
 sig FSObject { parent: lone Dir }
 
 sig Dir extends FSObject { contents: set FSObject }
@@ -867,7 +798,9 @@ sig File extends FSObject { }
 
 // There exists a root
 one sig Root extends Dir { } { no parent }
-~~~
+```
+
+:::
 
 -   FSObjects have parents, and directories have contents,
     and we have constrained the multiplicities ...

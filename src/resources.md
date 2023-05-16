@@ -52,6 +52,8 @@ like to get an idea in advance of what will be covered.)
   - Lecture 9, Program verification {% resourceList "lect09--verification", ["pdf", "md"] %}
   - Other material -- "[Mocks, stubs and spies with Mockito](https://youtu.be/xXO8ft-tsrY)" (YouTube) \
     (see also ch 12 of the textbook)
+- Week 11
+  - Lecture 10, Program specification -- alloy {% resourceList "lect10--alloy", ["pdf", "md"] %}
 
 {#
 - Week 9

@@ -109,33 +109,6 @@ but includes built-in features for program verification.
 
 Once a program is verified in Dafny, it can be compile to C#, Java, JavaScript or Go.
 
-### Using Dafny online -- Chalmers
-
-```{=latex}
-\begin{columns}[t]
-\begin{column}{0.35\textwidth}
-```
-
-\small
-
-Chalmers University of Technology, Sweden, provides
-a web page where you can compile Dafny code.
-
-```{=latex}
-\end{column}
-\begin{column}{0.65\textwidth}
-```
-
-`\begin{center}`{=latex}
-![](images/chalmers-dafny.png){ width=105% }
-`\end{center}`{=latex}
-
-```{=latex}
-\end{column}
-\end{columns}
-```
-
-<http://cse-212294.cse.chalmers.se/courses/tdv/dafny/>
 
 ### Using Dafny online -- Gitpod
 
