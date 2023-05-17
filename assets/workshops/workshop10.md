@@ -72,10 +72,10 @@ select "Courier" or "Courier New", and a reasonable font size (12pt or
 
 ### Accessing via Gitpod
 
-I have also set up a [GitHub repository][alloy-analyser-gitpod] which lets you use
-the Alloy analyser from within an online IDE using [Gitpod][gitpod] --
-visit <https://github.com/arranstewart-dev/alloy-analyser-gitpod/>
-and follow the instructions there.
+You can access a [GitHub repository][alloy-analyser-gitpod] which lets you use
+the Alloy analyser from within an online IDE using [Gitpod][gitpod] by 
+visiting <https://github.com/arranstewart-dev/alloy-analyser-gitpod/>
+and following the instructions there.
 
 [gitpod]: https://gitpod.io
 
@@ -92,7 +92,8 @@ file, one way to do it is:
 - Edit and/or paste content into the VS Code tab
 - In the Alloy Analyser tab, after you've made a change, select "File" / "Reload all"
   to load the current version of the code.
- 
+
+Downloading and running the `.jar` file for Alloy avoids this limitation. 
 
 ## More information on Alloy
 
@@ -200,6 +201,26 @@ pred example() {}
 run example for exactly 2 House
 ```
 
+<div style="border: solid 2pt blue; background-color: hsla(241, 100%,50%, 0.1); padding: 1em; border-radius: 5pt; margin: 1em 0em;">
+
+`Int` is a special predefined sig in Alloy representing integers.
+
+Alloy comes with other predefined sigs as will, but to use them
+you will have to import them from the module where they
+are defined using an "`open`" statement. If you write large Alloy
+models, then you can also use modules to break up your model
+into smaller, more comprehensible parts.
+
+You can read more about Alloy modules [here][alloy-modules]
+and see a list of modules the Alloy analyser ships with
+[here][alloy-utils]. You should be able to open any of these "utility"
+modules to see their contents.
+
+[alloy-modules]: http://alloytools.org/quickguide/path.html
+[alloy-utils]: http://alloytools.org/quickguide/util.html
+
+</div>
+
 #### Option 2:
 
 We could add in additional *facts* to constrain our "universes".
@@ -244,13 +265,27 @@ Try changing "set" to "some", and run again.
 
 Experiment with different scopes for the "run" command.
 
+<div style="border: solid 2pt blue; background-color: hsla(241, 100%,50%, 0.1); padding: 1em; border-radius: 5pt; margin: 1em 0em;">
+
+For all the remaining problems in this worksheet, you should
+check your work by:
+
+- creating an appropriate model in Alloy
+- using "`run`" commands to view the results.
+
+If the results aren't what you expect, you need to adjust your model
+and try again.
+
+</div>
+
 
 ## C. Alloy facts
 
 Recall that in Alloy, *facts* are additional constraints about the world,
 that aren't expressed in the sigs, and can be used to "tighten"
-the meaning of your model. (Some constraints could be expressed either in
-the sig, or as a fact.) For instance, using the example `File` and `Dir`
+the meaning of your model. (Some constraints can be expressed either in
+the sig, or as a fact -- in that case, you should choose whatever
+seems clearer.) For instance, using the example `File` and `Dir`
 and `FSObject` sigs from the lecture:
 
 ```
@@ -317,14 +352,27 @@ hobbies:"
   }
 ```
 
-In other words: people can have zero or more hobbies; but for
-all people who are computer scientists, if we look at their hobbies,
-the cardinality will be 0.
+The hash symbol operator ("`#`") gives us the *cardinality* or size
+of a set. `cs` is a bit like a "loop variable" in a Java "`for ... each`"
+loop: it gives us a way of refering to individuals in the set we're considering
+(in this case, computer scientists). 
+The pipe symbol can be read as "such that" or "it is the case that".
+
+So with the addition of this fact, our model can be translated into English as:
+
+- People can have zero or more hobbies; computer scientists
+  are a sort of person.
+- For all computer scientists -- let us use the name `cs`
+  to refer to some arbitrary computer scientist. 
+  If we look at their hobbies of `cs`,
+  it is the case that their number of hobbies will always be 0.
+
+  Or, more succinctly: all computer scientists have zero hobbies.
 
 \newpage
 
 It's also possible to write this using "no" (another sort of
-"multiplicty", like `lone` or `set`):
+"multiplicity", like `lone` or `set`):
 
 ```
   fact {
@@ -340,6 +388,42 @@ a.  Economists are also people.
 #.  Students have at least one hobby.
 #.  Bots are not people.
 
+<div style="border: solid 2pt blue; background-color: hsla(241, 100%,50%, 0.1); padding: 1em; border-radius: 5pt; margin: 1em 0em;">
+
+If you have worked with formal or mathematical logic at all: "all" in
+Alloy is the same as the "for all" quantifier in [predicate
+logic][pred-logic].
+
+[pred-logic]: https://en.wikipedia.org/wiki/First-order_logic
+
+</div>
+
+
+
+
+<div style="border: solid 2pt blue; background-color: hsla(241, 100%,50%, 0.1); padding: 1em; border-radius: 5pt; margin: 1em 0em;">
+
+<div style="text-align: center;"><b>Challenge exercise -- the Farmer River Crossing puzzle</b></div>
+
+As a challenge exercise, you might like to try solving the "Farmer River
+Crossing" puzzle using Alloy:
+
+> A farmer is on one shore of a river and has with him a fox, a chicken,
+> and a sack of grain. He has a boat that fits one object besides himself.
+> If the farmer is present, nothing gets eaten; but if left without
+> the farmer, the fox will eat the chicken, and the chicken will eat the
+> grain. How can the farmer get all three possessions across the river
+> safely?
+
+Before attempting to solve it, you may wish to work through the online
+[Alloy tutorial][tutorial], which covers some features of Alloy we
+haven't looked at yet. The tutorial presents the problem (and a possible
+solution) in [chapter
+2](http://alloytools.org/tutorials/online/frame-RC-1.html).
+
+[tutorial]: http://alloytools.org/tutorials/online/
+
+</div>
 
 
 <!-- vim: syntax=markdown
