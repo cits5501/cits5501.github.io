@@ -150,7 +150,7 @@ module.exports = function(configData) {
       workshopTopic:
           'Simple specifications',
       reading:
-        `- [Dafny language tutorial](https://rise4fun.com/Dafny/tutorial/guide)`,
+        `- [Dafny language tutorial](https://dafny.org/dafny/OnlineTutorial/guide.html)`,
       assessmentDetails: ' ',
     },
 
