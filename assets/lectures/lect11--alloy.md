@@ -9,6 +9,9 @@ author: 'Unit coordinator: Arran Stewart'
 ### Overview
 
 - Process for developing Alloy models
+- More on modelling
+- Facts and assertions
+- "Small scope" hypothesis
 
 ### Review -- Alloy signatures
 

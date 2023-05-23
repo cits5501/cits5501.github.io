@@ -54,6 +54,8 @@ like to get an idea in advance of what will be covered.)
     (see also ch 12 of the textbook)
 - Week 11
   - Lecture 10, Program specification -- alloy {% resourceList "lect10--alloy", ["pdf", "md"] %}
+  - Lecture 11, Program specification -- alloy, continued {% resourceList "lect11--alloy", ["pdf", "md"] %}
+
 
 {#
 - Week 9
@@ -128,6 +130,7 @@ the semester.
   - Sample worksheet solutions  {% resourceList "workshop09-solutions", ["html", "md"] %}
 - Week 11 -- specification languages
   - Lab worksheet               {% resourceList "workshop10", ["html", "md"] %}
+  - Sample worksheet solutions  {% resourceList "workshop10-solutions", ["html", "md"] %}
 
 {#
 - Week 9 -- risk
