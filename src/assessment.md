@@ -260,6 +260,28 @@ You can additionally bring into the exam one A4, double-sided page of handwritte
 The exam will be held in a computer lab, and the exam will be completed
 in Moodle.
 
+The date for the final exam should be accessible from the {{
+siteinfo.lms }}.
+The exam venues are available by looking in the "CITS5501" area of
+the LMS, under "Exam 2023". The exact venue you're in will depend on
+your surname.
+
+### Exam materials
+
+Besides your page of notes, the lectures and lab sheets, you can
+make use of the following:
+
+- [Java cheat sheet][java-cheat]      (PDF)
+- [Dafny cheat sheet][dafny-cheat]    (PDF)
+- [Alloy cheat sheet][alloy-cheat]    (PDF)
+- [JUnit 5 cheat sheet][junit-cheat]  (PDF)
+
+[java-cheat]:   {{ "/exam/java_quickref.pdf"    | url }}
+[dafny-cheat]:  {{ "/exam/DafnyCheatsheet.pdf"  | url }} 
+[alloy-cheat]:  {{ "/exam/alloy-cheatsheet.pdf" | url }} 
+[junit-cheat]:  {{ "/exam/junit-5.pdf"          | url }} 
+ 
+
 ### Past exam papers
 
 Exam papers from several previous years are available
