@@ -19,7 +19,7 @@ the semester. (It's also possible to access
 [previous years' content](/faq/#previous-content) if you'd
 like to get an idea in advance of what will be covered.)
 
-
+{#
 
 ::: { .resource-list }
 
@@ -56,6 +56,7 @@ like to get an idea in advance of what will be covered.)
   - Lecture 10, Program specification -- alloy {% resourceList "lect10--alloy", ["pdf", "md"] %}
   - Lecture 11, Program specification -- alloy, continued {% resourceList "lect11--alloy", ["pdf", "md"] %}
 
+#}
 
 {#
 - Week 9
@@ -78,7 +79,11 @@ like to get an idea in advance of what will be covered.)
 {% resourceList "lect07a--system", ["pdf", "md"] %}
 #}
 
+{#
+
 :::
+
+#}
 
 ## Labs { #labs }
 
@@ -92,6 +97,8 @@ students in the lab.
 Worksheets for the labs will be published here progressively throughout
 the semester.
 
+
+{#
 
 ::: { .resource-list }
 
@@ -132,7 +139,7 @@ the semester.
   - Lab worksheet               {% resourceList "workshop10", ["html", "md"] %}
   - Sample worksheet solutions  {% resourceList "workshop10-solutions", ["html", "md"] %}
 
-{#
+
 - Week 9 -- risk
   - Lab worksheet               {% resourceList "workshop08", ["html", "md"] %}
   - Sample worksheet solutions  {% resourceList "workshop08-solutions", ["html", "md"] %}
@@ -141,12 +148,12 @@ the semester.
   - Sample worksheet solutions  {% resourceList "workshop10-solutions", ["html", "md"] %}
 - Week 12 -- system testing
   - Lab worksheet {% resourceList "workshop11", ["html", "md"] %}
-#}
+
 
 
 :::
 
-
+#}
 
 <!--
   vim: tw=72

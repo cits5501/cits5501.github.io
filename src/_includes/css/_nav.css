@@ -100,7 +100,7 @@ nav ul {
     text-shadow: 2px 2px 11px blue;
     font-family: 'ff-meta-serif-sc-web-pro', 'Trebuchet MS', 'Helvetica Neue', Tahoma;
     font-size: 120%;
-  }    
+  }
 }
 
 /* small */
@@ -123,15 +123,12 @@ nav ul {
     border-top-style: none;
   }
 
-  .navbar-body {  
-    xx-padding: 0.3em 17%;
+  .navbar-body {
     padding-top: 1em;
     padding-bottom: 1em;
   }
 }
 
-.zub {
-  color: red;
-}  
+
 
 

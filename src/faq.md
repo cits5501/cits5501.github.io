@@ -26,7 +26,7 @@ customStyle: |
 {% set help5501     = help_forum | extLink(forum_url) | safe %}
 {% set outline_url  = siteinfo.unit_outline_url %}
 {% set moodle_url   = siteinfo.moodle_url %}
-{% set quiz_percent  = siteinfo.assessments["week3_quiz"]["marksPercent"] %}
+{% set quiz_percent  = siteinfo.assessments["week4_quiz"]["marksPercent"] %}
 
 {% set blank  = "{ target=\"_blank\" }" %}
 
@@ -81,11 +81,11 @@ learning][active-learning].
 
 ### How much study time will CITS5501 require? { #how-much-study-time }
 
-See the [site home page][time-required], under ["Time required"][time-required].
+See the [site welcome page][time-required], under ["Time required"][time-required].
 
 [time-required]: /#time-required
 
-### What are the textbooks and recommended readings for the unit?
+### What are the textbooks and recommended readings for the unit? { #recommended-readings }
 
 See ["Recommended readings"](/schedule/#recommended-readings) on the
 [Resources page](/resources). This lists the two textbooks,
@@ -127,6 +127,61 @@ can be purchased for less than $5 per month (e.g. from carbonite.com).
 
 [student-network-storage]: https://ipoint.uwa.edu.au/app/answers/detail/a_id/1570/~/student-network-storage-explained
 
+In [*addition* to keeping backups][is-not-version-control], it's a good idea to keep your work
+[under version control](#version-control).
+
+[is-not-version-control]: https://pragmatos.net/2011/09/01/time-machine-is-not-version-control/
+
+### How can I keep my work under version control? { #version-control }
+
+Use [Git][git]. It isn't the
+<a class="tooltip"
+  href="https://www.mercurial-scm.org"
+  target="_blank"
+  data-tooltip-text="That would be Mercurial">
+easiest</a> version-control system to use,
+nor the
+<a class="tooltip"
+  href="http://darcs.net"
+  target="_blank"
+  data-tooltip-text="That would be Darcs">
+most flexible</a>,
+nor the
+<a class="tooltip"
+  href="https://www.fossil-scm.org/"
+  target="_blank"
+  data-tooltip-text="That would be Fossil">
+most reliable</a> --
+nor, really, the best in any way at all, except that it *is* used almost everywhere in the
+software development industry, so you might as well get familiar with
+it.
+
+MIT University provides an [introduction to Git][mit-git] and an
+explanation of why you should use a version-control system.
+
+[git]: https://git-scm.com
+[mit-git]: https://missing.csail.mit.edu/2020/version-control/
+
+You might also find the following resources helpful:
+
+- [A Non-Programmer's Introduction to Git](https://blog.scottlowe.org/2015/01/14/non-programmer-git-intro/){{blank}}, a blog post by Scott Lowe
+- Eric Sink's book/website [*Version Control by Example*](https://ericsink.com/vcbe/index.html){{blank}}, especially
+  sections 1 ("Introduction"), 2 ("Basics"), and 8 ("Basics with Git").
+
+### Do I need a laptop in order to complete CITS5501? { #laptops }
+
+You will need a laptop when attending lab classes, as
+well as when **sitting the final exam**.
+
+A laptop is also strongly recommended for completing the unit project
+(though a desktop computer running Linux, or capable of running
+Oracle VirtualBox, may also be used).
+
+UWA provides [financial support][fin-supp] via the "SOS IT Equipment
+Scheme" to students who are unable to purchase a laptop due to financial
+hardship.
+
+
 -----
 
 ## Lectures
@@ -162,7 +217,9 @@ system][echo360] where the lecture recordings are stored.
 
 ### Can I attend lectures online? { #online-lectures }
 
-Currently, it's the policy of the department of Computer Science and
+Short answer: no, only face-to-face attendance is available.
+
+Longer answer: currently, it is the policy of the department of Computer Science and
 Software Engineering at UWA that units be offered in
 **face-to-face mode only**{ class="hi-pri" }.
 This is intended to convey to students that they need to engage and interact
@@ -195,16 +252,33 @@ For previous years' worksheets, see [here](#previous-content).
 
 [worksheets]: /resources/#worksheets
 
+### What's contained in the lab worksheets?
+
+The lab worksheets contain practical exercises to reinforce concepts
+covered in lectures, as well as occasional links to Moodle self-paced
+quizzes, or problems for you to attempt in-class.
+Some worksheets may include optional "challenge" exercises or problems for students
+seeking additional challenges -- these are not compulsory, but are
+provided for your interest.
+
+### Are solutions to lab problems published?
+
+Any solutions to problems in a lab worksheet will normally be published the following week,
+to allow students time to work through lab problems independently.
+Solutions to any "challenge" problems are typically not published, but you are welcome to
+discuss your solutions with the lab facilitators or the unit coordinator if you have
+attempted them.
+
 ### Is attendance recorded for labs?
 
 No -- if you don't want to attend the labs, you do not have to. However,
 the labs provide the best opportunity for getting feedback and
 assistance from teaching staff, as a lab [facilitator](/#facilitators)
-is available at each lab. It's therefore recommended that you do attend.
+is available at each lab. It's therefore strongly recommended that you do attend.
 
 ### Are there online labs? { #are-there-online-labs }
 
-As at the time of writing (February {{year}}), there are no online labs:
+There are currently no online labs:
 all labs will be delivered face-to-face.
 
 In the event of Covid 19 restrictions, lectures and labs will be
@@ -285,11 +359,14 @@ name. (All other details are optional.)
 
 ### Can I get an extension on the deadline for an assessment? { #extensions }
 
-For **quizzes, take-home tests and online tests**{ class="hi-pri" }:
+For **quizzes and tests**{ class="hi-pri" }:
 
 : No, in general it's not possible to
-  get an extension. These should be treated much like face-to-face tests:
-  you need to complete them at the specified date and time. If you're
+  get an extension. Even if conducted online, and even if generous
+  time-limits are permitted, these should still be treated much like face-to-face tests:
+  you need to complete them at the specified date and time.
+
+  If you're
   unable to complete a quiz or test due to illness or for some other valid
   reason, you should apply for
   [special consideration][special-consideration] (see the UWA [page on
@@ -297,7 +374,7 @@ For **quizzes, take-home tests and online tests**{ class="hi-pri" }:
   If you are granted special consideration, then you will be exempted
   from that assessment, and
   the remaining components of the unit will be re-weighted to make up
-  100%. For instance, if you are unable to complete the week 3 quiz
+  100%. For instance, if you are unable to complete the week 4 quiz
   (worth {{ quiz_percent }}%), then the weights of
   all the *other* components will be multiplied by $\frac{100.0}{100.0 - {{ quiz_percent }} }$.
 
@@ -313,6 +390,9 @@ For **quizzes, take-home tests and online tests**{ class="hi-pri" }:
   entitled to extra time for online assessments -- email the
   [Unit Coordinator](/#unit-coordinator) in accordance with your UAAP to
   let them know.
+
+  (See also: ["I have a UniAccess accommodation plan, do I need to let
+  you know about this?"](#accommodations).)
 
 
 For **projects**{ class="hi-pri" }:
@@ -361,11 +441,18 @@ Wherever possible, we adopt a rubric based on the following scheme:
     most correct. (Or, if you think none are correct, give the one that's
     least incorrect.)
 
+    If a question is ambiguous, you may make reasonable assumptions in
+    order to answer it. (If the assessment item provides space to record
+    your assumptions, then make sure to write them down -- make sure you
+    paste in the **full question text** your assumption relates to, as
+    not all students get the questions in the same order -- and give each
+    question a clear, bolded heading.)
+
     You can assume that the answer to any short answer question is
     *never* more than 5 words long (and most will be only two or three
     words long). You must always give a *single* answer -- responses
-    which try to "hedge" and give multiple alternatives "this ***or***
-    that" will be marked incorrect.
+    which try to "hedge" and give multiple alternatives ("this ***or***
+    that") will be marked incorrect.
 
 
 **"Long answer" questions requiring code**{ class="hi-pri" }
@@ -374,11 +461,18 @@ Wherever possible, we adopt a rubric based on the following scheme:
 
     Unless specified otherwise:
 
+    <div class="medium-list">
+
     - answers should be self-contained, and import any necessary
       packages
     - code should be clearly written, well-formatted, and easy for others
       to understand
-    - function bodies should not contain excessive inline comments
+    - function or method bodies should contain [only such inline comments
+      as are necessary for a reader to understand the code][no-inline]; excessive
+      inline comments will result in low marks for code clarity and style
+    - functions or methods should be documented using [documentation
+      blocks][docblocks] (see [here][lsst-doc] and [here][cmu-doc]
+      for guidelines)
     - code should compile without errors or warnings
     - code should follow sound programming practices, including:
       - the use of meaningful comments
@@ -387,6 +481,19 @@ Wherever possible, we adopt a rubric based on the following scheme:
       - appropriate choice of control-flow constructs
       - proper error-checking of any library functions called, and
       - cleaning up/closing any files or resources used.
+    - unless specifically required to, functions or methods should never print to
+      standard output. Besides
+      being poor practice, unnecessary printing to standard
+      output can interfere with the testing of your code; if it does, that will
+      result in 0 marks being awarded for functionality.
+
+
+    </div>
+
+[no-inline]: https://kevlinhenney.medium.com/comment-only-what-the-code-cannot-say-dfdb7b8595ac
+[docblocks]: https://en.wikipedia.org/wiki/Docblock
+[lsst-doc]: https://developer.lsst.io/cpp/api-docs.html
+[cmu-doc]: https://www.cs.cmu.edu/~410/doc/doxygen.html
 
 **"Long answer" questions requiring an answer in English:**{ class="hi-pri" }
 
@@ -482,15 +589,43 @@ For **"short answer"**{ class="hi-pri" } questions in **quizzes, tests or exams*
   (or any other person) regarding the content of questions while a test
   is running -- see ["Test conduct"](#test-conduct).
 
+### I have a UniAccess accommodation plan, do I need to let you know about this? { #accommodations }
+
+Yes.
+
+Your UniAccess accommodation plan (UAAP) will state that if you have alternative
+exam arrangements for a quiz, test, exam or other timed assessment, then
+you need to contact the Unit Coordinator at least 2-3 weeks prior to the
+date of the assessment to request that these arrangements be put in
+place. Please do so by [emailing the Unit Coordinator](/#unit-coordinator).
+
+The exam for {{ siteinfo.unitcode }} is School-run, rather than organised by the Exams
+Office, so you *will* need to email the Unit Coordinator to request that
+alternative exam arrangements be put in place.
+
+If your UniAccess accommodation plan states that you require flexibility
+with submission deadlines, then it will also state that you should
+"contact the Unit Coordinator in a timely manner, i.e. no later than
+three university working days after the due date". It will be greatly
+appreciated if you can alert the Unit Coordinator as early as possible
+that you'll be submitting late, but staff understand that this is not
+always feasible. Note that adjustments to submission deadlines do not
+apply to quizzes, tests or exams for {{ siteinfo.unitcode }}.
+
 
 ## Academic conduct and source citation { #academic-conduct-source-citation }
 
-### Are assessment submissions checked for plagiarism?
+### Are assessment submissions checked for plagiarism? { #plagiarism-checks }
 
 Yes, they are.
 Your submitted work or answers for any assessment item
 may be submitted to plagiarism detectors
 such as `JPlag`, `moss` or `turnitin` to detect plagiarism.
+
+Additionally, statistical anomalies in the results for an assessment may
+be investigated, and any student may be asked to (orally)
+**explain their thought process**{ class="hi-pri" } in coming up with their
+answers.
 
 
 ### What are the expectations regarding citation of sources/academic conduct? { #source-citation-conduct-expectations }
@@ -572,6 +707,50 @@ the workshops entitled "Critical thinking & academic culture" and
 
 [academic-skills-workshops]: https://www.uwa.edu.au/students/Support-services/Academic-support#workshops
 
+## Can I use ChatGPT, or other AI tools, when completing an assessment?
+
+No, you are not permitted to use AI tools when completing an assessment. Here is a
+[description of the University's policy][ai-policy] on the use of AI tools:
+
+[ai-policy]: https://ipoint.uwa.edu.au/app/answers/detail/a_id/3432/~/using-chatgpt-and-other-ai-tools-in-your-assessments
+
+> [T]hese tools must not be used as a replacement of your critical thinking and
+> analysis skills. AI tools may only be used in an assessment where it is explicitly
+> permitted by your Unit Coordinator. Where it is permitted by your Unit Coordinator to use
+> AI, you must always cite and reference your uses of it. You cannot submit for assessment
+> any work that is not your own.
+
+You can certainly use AI tools as part of your own *self-study* for the unit, but you may
+not use them as part of an assessment.
+
+In addition to constituting academic misconduct, using ChatGPT in assessments does yourself
+a disservice. Using ChatGPT in a test or project is depriving yourself of the opportunity to get honest
+feedback on your own competencies and abilities. In the final exam for the unit, you will
+*not* have access to any other tools besides [Moodle]({{moodle_url}}){{blank}} in the web
+browser, so you will have to know how to write code or English answers yourself – using AI
+tools for previous assessments may result in your having a lack of practice at doing so.
+
+## Wouldn't the use of ChatGPT or similar AI tools help ensure the accuracy of code or English answers?
+
+No, it would not. It's true that students sometimes mistakenly think that using ChatGPT or
+similar AI tools can help "ensure accuracy" in their code or English answers. But that idea
+is mistaken: large language models (LLMs), the class of tools ChatGPT belongs to, do not
+have any ability to distinguish correct from incorrect facts, and their sole guide to what
+sort of answers they produce is statistical likelihood of particular words appearing. LLM
+tools can frequently [hallucinate][hallicination] incorrect answers, and, due to their
+design, are incapable of dealing with certain sorts of questions.
+
+An interactive website [here](https://quiz.cord.com) highlights some of the limitations
+get a better idea of their limitations.
+
+[hallicination]: https://www.iguazio.com/glossary/llm-hallucination/
+
+<!--
+
+TODO: mention pig latin, caesar, morse code
+
+-->
+
 -------
 
 ## Tests, quizzes and exams { #tests-quizzes-and-exams }
@@ -598,7 +777,7 @@ exam. That said, the lab exercises are usually a good guide to the
 sort of questions that may be asked.
 
 
-### What happens if a submit a test, quiz or exam late? { #late-submissions }
+### What happens if I submit a test, quiz or exam late? { #late-submissions }
 
 Online quizzes, tests and exams **must**{ class="hi-pri" } be submitted by the
 due date and time -- this will be enforced strictly (just as it is for
@@ -620,7 +799,8 @@ is running -- see ["Test conduct"](#test-conduct).
 
 ### Are the quizzes/tests/exams open book? (Test conduct) { #test-conduct }
 
-Unless specified otherwise, all quizzes, tests and exams are "take-home"
+Unless specified otherwise, all quizzes and tests (but **not** the final
+exam) are "take-home"
 and open-book. You **may**{ class="hi-pri" } ***look at***{ class="hi-pri" }
 any book,
 website or software you like, but the answers must be
@@ -630,12 +810,17 @@ and in **your own words**{ class="hi-pri" },
 and you must not distribute the questions or your
 answers to any other person.
 
-The tests are not invigilated but – as with all open assessments – any
+The quizzes and tests are not invigilated but – as with all open assessments – any
 statistical anomalies will be investigated, and anybody may be asked
 to (orally)
 **explain their thought process**{ class="hi-pri" } in coming up with their
 answers.
 
+The **exam is *not* open-book**{ class="hi-pri" }, and is invigilated, but you are permitted
+access to some materials and tools -- refer to the [Assessment
+page][ass-exam]{ class="hi-pri" } for more details.
+
+[ass-exam]: /assessment#exam
 
 **Checking your answers**{ class="hi-pri" }
 
@@ -671,13 +856,112 @@ answers.
     UWA rules for online exams]
     See also, ["Errors in questions"](#errors-in-questions).
 
+### Can I access previous online tests while completing a test? { #previous-test-access }
+
+No, we generally will remove access to previous online tests while a test is in progress.
+If you want to make use of feedback you were given on a previous test, you should compile
+your own notes incorporating this feedback.
+
+### What if a network infrastructure outage occurs during a test? { #test-outages }
+
+If severe problems occur with the University network infrastructure
+or the [Moodle]({{moodle_url}}){{blank}} server occur during a timed quiz, test or
+exam, the Unit Coordinator may, at their discretion, permit students
+affected by the outage to re-sit the assessment.
+
+Students affected by such an outage should immediately
+
+- take a screenshot showing the issue, if possible
+- log the problem with [University IT](https://www.it.uwa.edu.au/it-help/local-support)
+- email the [unit coordinator](/#unit-coordinator)
+
+However, this only applies to infrastructure maintained by the
+University. If you choose to complete a test at home, it's your
+responsibility to ensure you have a reliable computer system and network
+connection in order to complete the assessment.
+
+### Can I find out what marks I achieved for a test question? { #test-marks-breakdown }
+
+Yes -- tests are done through [Moodle]({{moodle_url}}){{blank}}, and once marks for the test
+are released, you should be able to log in to Moodle and view, for each question, the marks
+received, the correct answer, and (for most questions) a short explanation of the answer.
+The answer explanation may refer you to content from the lectures, labs, or the recommended
+readings.
+For questions requiring you to write a long English answer or to submit code, you may also
+receive individual feedback from the marker.
+
+Note that a marks breakdown is not provided on Moodle for the exam. If you want to
+obtain feedback on your exam performace, you should email the [unit coordinator](/#unit-coordinator)
+and make an appointment to discuss the exam.
+
+### How can I seek clarification on the marks I achieved for a test question? { #test-marks-query }
+
+You should email the [unit coordinator](/#unit-coordinator). Before emailing, make sure you:
+
+- Carefully read through the [marking rubric](#marking-rubric) and any [feedback and
+  explanation](#test-marks-breakdown) relating to a question. Often, these will answer
+  questions you may have about why a particular answer was considered correct or incorrect.
+- Include a subject line which states what unit and what assessment your email relates to.
+- Include the full text of the question, the answer you submitted, and the correct answer -- this
+  assists teaching staff in responding to your email.\
+  (Multiple choice and short answer questions are selected randomly, so if you give only a
+  question number, it won't be immediately obvious to a recipient which question you are
+  referring to.)
+- Explain where you have already looked (usually, the [rubric](#marking-rubric), the
+  [answer explanation](#test-marks-breakdown), and any relevant lecture and lab content) and
+  why those weren't of assistance.
+
 -----
 
 ## Projects
 
+### How are problems with the project specification resolved?
+
+An initial specification for the unit project will be published via this
+website, and an announcement of this made on the discussion
+forum.
+
+Students should aim to read through the specification as early as
+possible, and clarify any ambiguities, apparent contradictions, or
+missing information by posting in the discussion
+forum.
+
+After initial clarifications have been made -- usually after about a week -- a revised
+specification will be released, consolidating any changes or answers
+made by the unit coordinator in the discussion
+forum.
+
+After a revised specification has been published:
+
+<div class="loose-list">
+
+- If there is anything in the specification that appears to be contradictory,
+  ambiguous, or under-determined, then students should post to the
+  forum to clarify their interpretation of the
+  specification.<span class="br"></span>
+  The unit coordinator may clarify the specification further, or they may decide
+  that the specification is now sufficiently clear, and that it's up to
+  each student to interpret the specification according to their best judgment
+  and ability.
+- Unless serious problems with the specification are identified, no further
+  revision of the specification will be published -- students should instead
+  make sure to check the forum for subsequent corrections or
+  clarifications (if any).
+
+</div>
+
+If, at the time of project submission, anything in the project specification is
+contradictory, ambiguous, or under-determined,
+and no student has requested clarification in the forum,
+then the unit coordinator may interpret those portions of the specification
+in any way they wish (as long as it does not conflict with the remainder of
+the specification), and mark submissions accordingly.
+
+
+
 ### What are the formatting expectations for project reports? { #project-formatting }
 
-The unit project will usually contain a written component.
+The unit project may contain a written English component.
 The project specification will explain how this is to be submitted.
 Usually, the written component will be submitted as either:
 
@@ -743,14 +1027,20 @@ See also:
 
 ### Are past exams available? { #past-exams-availability }
 
-Some are, yes -- refer to the Assessment page, under "[Past exam
-papers][past-papers]".
+Because the exam is completed using Moodle, past exam papers in the current
+format are not
+available via the UWA Library, as they are for some other units.
+
+However, the labs and earlier quizzes and tests provide a good guide
+to the sort of questions you may be asked.
+
+See the [Assessment](/assessment/) page from more details.
 
 [past-papers]: /assessment/#past-exam-papers
 
 ### Are solutions to past exams available? { #past-exams-solutions }
 
-No -- see the Assessment page, under "[Past exam papers][past-papers]".
+No -- see the [Assessment](/assessment/) page.
 The main reason for this is that providing students with exam
 solutions usually does *not* lead to them studying effectively for the exam.
 Studying effectively requires [active
@@ -805,8 +1095,10 @@ In addition
 
 - Blackboard LMS doesn't allow for (complete or partial) automatic
   marking of coding-based questions, but Moodle does.
-- Blackboard LMS content isn't publicly published, but GitHub sites are,
-  and this content might be useful even to someone not doing the unit.
+- Blackboard LMS content is only available to enrolled students.
+  By publishing the unit content as a website,
+  I can make potentially useful content available even to someone not
+  enrolled in the unit.
 
 [lms-so-bad]: https://www.pathwright.com/blog/why-is-your-schools-lms-so-bad
 
@@ -878,5 +1170,5 @@ you?][what-rule]{{blank}}".
 
 
 <!--
-  vim: tw=72
+  vim: tw=92
 -->

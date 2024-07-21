@@ -5,3 +5,5 @@ _site/*
 /out/
 node_modules
 [A-BD-QS-Z]*.md
+*TOKEN*
+git.*.tgz

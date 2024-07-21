@@ -1,5 +1,12 @@
 
-// look down bottom for `startDate`
+// returns an object schedule with the following properties:
+//  - 'weeks', an array of topics (each with keys `weekNum`, `lectureTopic`,
+//    `workshopTopic` and `reading`), and more importantly
+//  - makeWeeksFromStartDate() -- given a `Date` object, it will
+//    return the weeks array with a `.date` field added to each,
+//    which is the Monday of that week.
+
+// Citations are roughly MLA-ish.
 
 module.exports = function(configData) {
 
@@ -8,7 +15,10 @@ module.exports = function(configData) {
   schedule.weeks = [
     {weekNum: 1,
     lectureTopic:
-        "Unit info, testing and QA concepts",
+        `
+- Unit info
+- testing and QA concepts
+        `,
     workshopTopic: "*No labs this week*",
     reading:
       `- Amman & Offutt, ch 1
@@ -27,8 +37,7 @@ module.exports = function(configData) {
       "Introduction to testing",
     workshopTopic:
       `Introduction to testing
-
-      *No Monday lab (Labour Day holiday) -- attend another lab or self-directed study*`
+      `
       ,
     reading:
       `- Pressman, ch 14 ("Component-level design"), ch 22 ("Software Testing Strategies"), ch 28 ("Formal modeling and verification")
@@ -52,8 +61,10 @@ module.exports = function(configData) {
 
     {weekNum: 4,
     lectureTopic:
-      `Input space partitioning\\
-      Graph testing`,
+      `
+- Input space partitioning
+- Graph testing
+      `,
     workshopTopic: 'Test automation',
     reading:
       `- Amman & Offutt, chs 6-7
@@ -71,13 +82,18 @@ module.exports = function(configData) {
 //      <span class="unavailable"><a href="http://teaching.csse.uwa.edu.au/units/CITS5501/Workshops/Chow-TSE87.pdf">Chow’s Conformance Test</a>\
 //      <a href="http://teaching.csse.uwa.edu.au/units/CITS5501/Workshops/workshop4Notes.pdf">Notes</a></span>
     lectureTopic:
-      `Logic testing\\
-      Mutation testing\\
-      Property-based testing`,
+      `
+- Logic testing
+- Mutation testing
+- Property-based testing
+      `,
     workshopTopic:
       "Graph-based testing",
     reading:
       `- Amman & Offutt, chs 8--9
+      <!--
+      - TODO http://marvin.cs.uidaho.edu/Handouts/grammar.pdf
+      -->
       - [Beginner's Guide to Fuzzing](https://fuzzing-project.org/tutorials.html)
       - [Hypothesis Quick Start Guide](https://hypothesis.readthedocs.io/en/latest/quickstart.html)
       - [QuickTheories README](https://github.com/quicktheories/QuickTheories)`,
@@ -92,8 +108,7 @@ module.exports = function(configData) {
       "Quality assurance, software reviews, performance testing",
     workshopTopic:
       `Property-based testing and mutation testing
-
-      *No Friday lab (Good Friday holiday) -- catchup in week 7 lab*`
+      `
       ,
     reading:
       `- Pressman, ch 20 ("Review techniques"), ch 22 ("Software testing strategies")`,
@@ -176,12 +191,12 @@ module.exports = function(configData) {
   ]
 
   // add dates for start of week
-  const startDate = new Date(2023,01,27) // Mond 27 Feb, 2023
-  let dt = new Date(startDate);
-  for (let i=0; i < schedule.weeks.length; i+=1) {
-    schedule.weeks[i].date = new Date(dt);
-    dt.setDate( dt.getDate() + 7 );
-  }
+  //const startDate = new Date(2023,01,27) // Mond 27 Feb, 2023
+  //let dt = new Date(startDate);
+  //for (let i=0; i < schedule.weeks.length; i+=1) {
+  //  schedule.weeks[i].date = new Date(dt);
+  //  dt.setDate( dt.getDate() + 7 );
+  //}
   return schedule;
 
 }

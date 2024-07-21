@@ -178,10 +178,10 @@ jobs:
       - name: build site
         shell: bash
         run: |
-          GH_IMAGE_ID=${{ env.REGISTRY }}/${{ github.repository }}/${{ steps.info.outputs.IMAGE_NAME }}
+          #GH_IMAGE_ID=${{ env.REGISTRY }}/${{ github.repository }}/${{ steps.info.outputs.IMAGE_NAME }}
 
           set -x
-          make IMG=${GH_IMAGE_ID}:latest \
+          make IMG=${{ env.REGISTRY }}/${{ github.repository }}/cits5501-website:latest \
             build
 
           ls -alt

@@ -8,7 +8,7 @@ SHELL=bash
 
 # docker
 
-IMAGE_NAME=cits5501-website
+IMAGE_NAME=cits3007-website
 
 IMAGE_VERSION=0.1.1
 
@@ -48,7 +48,7 @@ docker_args = \
 
 docker-build:
 	docker build -f Dockerfile \
-	  --cache-from cits3007-website:latest \
+	  --cache-from cits5501-website:latest \
 	  --cache-from $(IMAGE_NAME):latest \
 	  --cache-from $(IMG) \
 	  -t $(IMG) -t $(IMAGE_NAME):latest .
@@ -77,14 +77,14 @@ serve: kill
 # build static site
 build: kill
 	$(pullfirst)
-	$(DOCKER) run --pull --rm \
+	echo make build && $(DOCKER) run  --rm \
 	    $(docker_args) \
 	    $(IMG) \
 	    -c "$(DEBUG_FLAGS) $(ENVIRO_FLAGS) eleventy.sh $(PACKAGE_DIR) $(ELEVENTY_JS_FILE)"
 
 docker-shell: kill
 	$(pullfirst)
-	set -x && $(DOCKER) run --pull --rm -it \
+	echo make Docker shell && set -x && $(DOCKER) run --pull --rm -it \
 	    $(docker_args) \
 	    -p 8080:8080 \
 	    $(IMG)

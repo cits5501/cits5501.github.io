@@ -1,5 +1,7 @@
 ---js
 {
+  // For semester dates, see startDate (at bottom of this js section)
+  // and siteinfo.semesterStartDateStr
   title: "Schedule",
   layout: "special-layout.njk",
 
@@ -7,6 +9,15 @@
   customStyle:  `
   ul, ol, dl, li p {
     margin: 0 0 0.70em;
+  }
+
+  td p {
+    padding: 0pt;
+    margin: 0pt;
+  }
+
+  .ref {
+    font-variant: small-caps;
   }
 
   /* big */
@@ -138,7 +149,13 @@
     str.replaceAll(/\n\s+/g, '\n'),
 
   stripNewlines: (str) =>
-    str.replaceAll(/\n/g, '')
+    str.replaceAll(/\n/g, ''),
+
+  // semester start date
+  startDate: '2024-07-22',
+  // should be same as siteinfo.semesterStartDateStr.
+  // ugh. can we DRY?
+
 }
 ---
 
@@ -146,6 +163,7 @@
 {% set forum_url  = siteinfo.forum_url %}
 {% set help_forum_safe   = help_forum | extLink(forum_url) | safe %}
 
+{% set weeks   = schedule.weeks %}
 
 <!--!
 <main>
@@ -204,8 +222,8 @@ material will be greatly enhanced if you work through these readings
 <table class="schedule-table" >
 <colgroup>
 <col style="width: 10%;">
-<col style="width: 18%">
 <col style="width: 16%">
+<col style="width: 18%">
 <col style="width: 43%">
 <col style="width: 21%">
 </colgroup>
@@ -230,15 +248,17 @@ material will be greatly enhanced if you work through these readings
 !-->
 
 {% set assessmentDates_  = assessmentDates( siteinfo.assessments, siteinfo.formatAssessmentDate ) %}
-{%- for week in schedule.weeks -%}
+{%- for week in weeks -%}
 <tr{{ (' class = "oddrow"' | safe) if (loop.index % 2 == 1) else "" }}>
   <td style="text-align: center;">
    <strong>{{ week.weekNum        }}</strong>
    <br/>
    {{ week.date | dateFormat('D MMM') }}
   </td>
-  <td>{{ week.lectureTopic      | md | safe }}</td>
-  <td>{{ week.workshopTopic     | md | safe }}</td>
+  <td>
+    {{ week.lectureTopic      | mdBlock | safe }}
+  </td>
+  <td>{{ stripIndent(week.workshopTopic) | mdBlock | safe }}</td>
   <td>{{ stripIndent(week.reading)  | mdBlock | safe }}</td>
   <td>
     {%- set weekStartDate = week.date %}

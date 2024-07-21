@@ -1,6 +1,9 @@
 const moment  = require('moment');
 const util    = require('util');
 
+///////
+// utility functions
+
 function isValidDate(d) {
   return d instanceof Date && !isNaN(d);
 }
@@ -34,19 +37,25 @@ function formatAssessmentDates(asstDates) {
   return dates.join("\\\n");
 }
 
+////
+// module exports
+//
+// the final object returned is `config`, q.v.
+
 module.exports = function(configData) {
   console.log("siteinfo. configData = ", configData);
 
   let { render, renderInline, extLink, safe } = configData.markdownConfig
 
-  const year      =  2023;
+  const year      =  2024;
+  const semester  =  2;
   const citscode  = "5501";
   const unitcode  = `CITS${citscode}`;
   const unitname  = "Software Testing and Quality Assurance";
   const locode    = unitcode.toLowerCase();
 
   const handbook_url      = `https://handbooks.uwa.edu.au/unitdetails?code=${unitcode}`;
-  const unit_outline_url  = `https://lms.uwa.edu.au/bbcswebdav/institution/Unit_Outlines_${year}/${unitcode}_SEM-1_${year}/${unitcode}_SEM-1_${year}_UnitOutline.html`;
+  const unit_outline_url  = `https://lms.uwa.edu.au/bbcswebdav/institution/Unit_Outlines_${year}/${unitcode}_SEM-${semester}_${year}/${unitcode}_SEM-${semester}_${year}_UnitOutline.html`;
   const forum_url         = `https://secure.csse.uwa.edu.au/run/help${citscode}`;
   const timetable_url     = 'https://timetable.applications.uwa.edu.au/';
   const csmarks_url       = "https://secure.csse.uwa.edu.au/run/csmarks";
@@ -57,59 +66,69 @@ module.exports = function(configData) {
   const lms               = safe(extLink("LMS",    lms_url));
   const moodle            = safe(extLink("Moodle", moodle_url));
 
+  let semesterStartDateStr = '2024-07-22'
+  let semesterStartDate = new Date(semesterStartDateStr);
+
+  // put in semester week num (from 1), day of week (from Monday as 0)
+  // plus hours (0-23)
+  // to get a specified Date.
+  // Doesn't know about mid-sem break, though, so add 1 to week
+  // for dates past the mid-point of semester
+  function makeDate(weekNum, dayOfWeek, hour, min) {
+    let res = new Date(semesterStartDate);
+    res.setDate(res.getDate() + ((weekNum - 1) * 7) + dayOfWeek);
+    res.setHours(hour);
+    res.setMinutes(min);
+    return res;
+  }
+
   let assessments = {
-      week3_quiz: {
-        name: "[Week 3 quiz](/assessment/#week-3-quiz)",
+      week4_quiz: {
+        name: "[Week 4 online quiz](/assessment/#week-4-quiz)",
         marksPercent: "5",
         dates: {
-          available: new Date(year, 2, 13, 10, 30), // 10.30am Mon 13 Mar, 2023
-          closes:    new Date(year, 2, 16, 17, 0) // 5pm Thu 16 Mar, 2023
+          available: makeDate(/*wk*/ 4, /*wed*/ 2, /* time */ 23, 59),
+          closes:    makeDate(/*wk*/ 4, /*thu*/ 3, /* time */ 23, 59)
         },
         submit: moodle
       },
       week7_ex: {
-        name: "[Week 6 take-home test](/assessment/#week-6-test)",
-        marksPercent: "7.5",
-        //dates: "Due 5pm Thu 14 Apr",
+        name: "[Week 7 mid-semester test](/assessment/#mid-sem-test)",
+        marksPercent: "10",
         dates: {
-          //available: new Date(year, 3, 11, 17, 0), // 5pm Mon 11 Apr
-          available: "TBA",
-          due: new Date(year, 3, 6, 17, 0) // 5pm Thurs 6 Apr, 2023
+          available: makeDate(/*wk 7*/ 8, /*wed*/ 2, /* time */ 23, 59),
+          due:       makeDate(/*wk 7*/ 8, /*thu*/ 3, /* time */ 23, 59)
         },
         submit: moodle
       },
-      week7b_ex: {
-        name: "[Take-home review exercise](/assessment/#week-6-test-review)",
-        marksPercent: "2.5",
-        //dates: "Due 5pm Thu 14 Apr",
-        dates: {
-          //available: new Date(year, 3, 11, 17, 0), // 5pm Mon 11 Apr
-          available: "TBA",
-          due: new Date(year, 3, 13, 17, 0) // 5pm Thurs 13 Apr, 2023
-        },
-        submit: moodle
-      },
+      //week7b_ex: {
+      //  name: "[Take-home review exercise](/assessment/#week-6-test-review)",
+      //  marksPercent: "2.5",
+      //  //dates: "Due 5pm Thu 14 Apr",
+      //  dates: {
+      //    //available: new Date(year, 3, 11, 17, 0), // 5pm Mon 11 Apr
+      //    available: "TBA",
+      //    due: new Date(year, 3, 13, 17, 0) // 5pm Thurs 13 Apr, 2023
+      //  },
+      //  submit: moodle
+      //},
       project: {
         name: "[Project](/assessment/#project)",
         marksPercent: "35",
-        //dates: "Due 5pm Thu 26 May",
         dates: {
-          //available: new Date(year, 4, 5, 17, 0), // 5pm Thu 5 May,
-          available: new Date(year, 4, 5, 17, 0),
-          due: new Date(year, 4, 25, 17, 0) // 5pm Thu 25 May, 2023
+          available: "TBA",
+          due: makeDate(/*wk 11*/ 12, /*thu*/ 3, /* time */ 23, 59)
         },
         //submit: safe(extLink("cssubmit", `${cssubmit_url}?p=np&open=${unitcode}-1`))
         submit: moodle
       },
       exam: {
-        name: "[Face-to-face exam](/assessment/#exam)",
+        name: "[Face-to-face lab-based exam](/assessment/#exam)",
         marksPercent: "50",
-        //dates: "Available 5pm Wed 8 Jun\\\nDue 5pm Fri 10 Jun",
         dates: {
-          available: "UWA exam period", // 5pm Wed 15 Jun
-          due:       "UWA exam period" // 5pm Fri 17 Jun
+          due: "UWA exam period"
         },
-        submit: moodle
+        submit: safe(extLink("Moodle", moodle_url) + ", **using own laptop**, from lab venue published in LMS")
       },
     }
 
@@ -129,6 +148,8 @@ module.exports = function(configData) {
     repository:   `${locode}/${locode}.github.io`,
     site_url:     `https://${locode}.github.io/`,
 
+    unit_outline_url: unit_outline_url,
+
     timezone:     "Australia/Perth",
     language:     "en",
 
@@ -139,7 +160,7 @@ module.exports = function(configData) {
                    "university of western australia", "uwa",
                    "testing", "quality assurance", `${unitcode}`],
 
-    lecture_time: "Tuesday 3 p.m.",
+    lecture_time: "Tuesday 11 a.m.",
 
     lecture_venue: safe(extLink("the Robert Street Lecture Theatre (Robert Street Building, room G.16)", "https://link.mazemap.com/UOjeeiDP")),
 
@@ -213,7 +234,7 @@ module.exports = function(configData) {
 
     assessment_table: {
       header: ["Assessment", "% of final mark", "Assessment dates", "Where to submit"],
-      body: ["week3_quiz", "week7_ex", "week7b_ex", "project", "exam"].map( (key) => {
+      body: ["week4_quiz", "week7_ex", /*"week7b_ex",*/ "project", "exam"].map( (key) => {
         let the_assessment = assessments[key];
         return [
           the_assessment.name,

@@ -60,6 +60,20 @@ worksheets) for this unit will be **published on these pages, and not on
 the UWA Blackboard LMS**{ class="hi-pri" }; but refer to the {{ siteinfo.lms }}
 for recorded lectures and the unit outline.
 
+**Do not** rely on the [Unit Outline]({{outline_url}}) for exact
+assessment due dates: dates for assessments are listed on this site on the
+unit [**Schedule**](/schedule){ class="hi-pri" }
+(as well as on the [**Assessments page**](/assessment){ class="hi-pri" }),
+and any changes will be published here, as well as being announced
+on the unit [**discussion forum**]({{forum_url}}){ target="_blank" }.
+
+{#
+
+_x
+
+#}
+
+
 ## On this page:
 
 - [Unit overview](#unit-overview)
@@ -74,11 +88,11 @@ for recorded lectures and the unit outline.
 
 ```{list-table}
 - - - Want to know [**what we'll be doing**](#weekly-activities){ class="hi-pri" } and
-      [**when**](schedule){ class="hi-pri" }?
+      [**when**](/schedule){ class="hi-pri" }?
   - <i class="fa fa-arrow-circle-right"></i>
   - See below for quick details of the [**weekly
     activities**](#weekly-activities){ class="hi-pri" } for the unit,
-    and see the [**Schedule**](schedule){ class="hi-pri" } for a guide
+    and see the [**Schedule**](/schedule){ class="hi-pri" } for a guide
     to what will be covered in what week. (There's also a link to the
     schedule at the top of every page.)
 - - - Want to know [**if the lectures are recorded**](/faq#are-lecturers-recorded){ class="hi-pri" }?
@@ -92,12 +106,12 @@ for recorded lectures and the unit outline.
   - <i class="fa fa-arrow-circle-right"></i>
   - See the "[**Examinable topics**](/faq#examinable-material){ class="hi-pri" }"
     section of the [**Frequently Asked Questions page**](/faq){ class="hi-pri" }.
-- - - Looking for [**lecture slides**](resources/#lectures){ class="hi-pri" }
-      or [**lab exercise sheets**](resources/#labworkshops)?
+- - - Looking for [**lecture slides**](/resources/#lectures){ class="hi-pri" }
+      or [**lab exercise sheets**](/resources/#labworkshops)?
   - <i class="fa fa-arrow-circle-right"></i>
-  - You can find them on the [**Resources page**](resources){ class="hi-pri" }.
+  - You can find them on the [**Resources page**](/resources){ class="hi-pri" }.
     (There's also a link to it at the top of every page.)
-- - - Want to [ask a question](questions){ class="hi-pri" } about the unit?
+- - - Want to [ask a question]{ class="hi-pri" } about the unit?
   - <i class="fa fa-arrow-circle-right"></i>
   - Check the [**Frequently Asked Questions list**](/faq), and if your question
     isn't answered there, make a post on the [**discussion forum**]({{forum_url}}){ target="_blank" }
@@ -115,6 +129,10 @@ for recorded lectures and the unit outline.
 ```
 
 :::
+
+<!--
+x**
+-->
 
 
 [help]: https://secure.csse.uwa.edu.au/run/help{{ siteinfo.citscode }}
@@ -142,17 +160,18 @@ This unit covers testing and quality assurance topics including:
 
 ```{list-table}
 - - **Office**
-  - {{ coordinator.room }}
+  - <address>{{ coordinator.room }}</address>
 - - **Email**
-  - {% email_el_spannized coordinator.email %}
+  - <address>{% email_el_spannized coordinator.email %}</address>
 - - **Availability**
-  - I work half-time at UWA, and am normally only on campus on Mondays
-    and Tuesdays.
+  - I work half-time at UWA, and am normally only on campus on Tuesdays,
+    Thursdays, and Friday afternoon.
 - - **Consultation**
-  - Email {% email_el_spannized coordinator.email %} for an appointment,
-    or visit my office between 3--5pm Mondays. Students are also
+  - <!--!<address>!-->Email {% email_el_spannized coordinator.email %} for an appointment,
+    or visit my office between 4--5pm Thursday. Students are also
     welcome to speak to me after the lectures. At busy times of semester,
     I may need one or two business days' notice to schedule an appointment.
+    <!--!</address>!-->
 ```
 
 :::
@@ -164,7 +183,7 @@ This unit covers testing and quality assurance topics including:
 
 ## Weekly activities
 
-*(Note that there are no labs in week 1;
+*(Note that there are no labs in week 1, beginning {{ siteinfo.semesterStartDate | dateWithDay }};
 labs don't start until week 2)*{ class="hi-pri" }
 
 **Lecture** { #lecture }
@@ -173,10 +192,14 @@ labs don't start until week 2)*{ class="hi-pri" }
     (starting in week ***one***{ class="hi-pri" }), at
     {{ siteinfo.lecture_time }} in {{ siteinfo.lecture_venue }}.
 
-    It's recommended you attend in person, if possible, but lectures
-    will normally be recorded, so you can also watch the recorded lecture
+    I strongly recommend you attend lectures in person -- they
+    provide the best forum for asking questions
+    about the unit content and clarifying your understanding.
+    Lectures are recorded, so if you cannot attend, you can also watch the recorded lecture
     ([accessible via](/faq/#accessing-lecture-recordings)
     the UWA Blackboard {{ siteinfo.lms }}).
+
+    Lecture slides are published [here](/resources/#lectures) on this website.
 
 **Labs**  { #labs }
 
@@ -185,19 +208,39 @@ labs don't start until week 2)*{ class="hi-pri" }
     However, as long as there is room available for you, you are welcome to attend other
     sessions as well.
 
-    One of the lab facilitators (Abdullah and James) will be available
+    One of the lab facilitators will be available
     to assist you with the lab material and answer questions.
 
-There are currently three face-to-face lab sessions:
+    Please make use of the lab facilitators! One of the best ways to
+    gauge how well you understand a topic, or to find out if you are
+    "on the right track" for a project, is to discuss them with the lab
+    facilitators.
 
-- Monday, 9 am--11 am, in CSSE lab 2.05
-- Wednesday, 4 pm--6 pm, in CSSE lab 2.05
-- Friday, 12 noon--2 pm, in CSSE lab 2.05
+    **Laptop requirement**{ class="hi-pri" }: You will
+    need to use **your own laptop**{ class="hi-pri" } when attending
+    labs. The exact software you will need
+    is discussed in more detail in the
+    first lab (held in week *2*).
+
+    Lab worksheets are published [here](/resources/#labs) on this website.
+
+**Moodle exercises** { #moodle-exercises }
+
+:   Periodically, I'll post (unassessed) exercises on the school's
+    {{ siteinfo.moodle }}{{blank}} server. You can complete these in your own time, and
+    they will help you improve your understanding of secure coding concepts.
+    (All assessments will be completed using the Moodle server, too.) More
+    information about these will be available in the first lab.
 
 You can always get full details of lecture and lab times and venues by
 visiting UWA's **[Timetable site][timetable-site]{ target="_blank" }**{ class="hi-pri" }.
 (If the information for {{ siteinfo.unitcode }} is not visible, then enter "{{ siteinfo.unitcode }}" in the
 box labelled "Unit search", and then click "Show timetable".)
+
+(Note, however, that in addition to all the labs that *are* running,
+the Timetable site may also show some lab sessions which are not yet
+running, due to insufficient demand -- check with the Unit Coordinator
+if you want to be sure whether a session is running.)
 
 [timetable-site]: https://timetable.applications.uwa.edu.au/?selectunits={{ siteinfo.unitcode }}
 
@@ -224,11 +267,12 @@ attempting exercises and working on assignment tasks.
 
 ### Preparing for lectures
 
-The [**schedule**](schedule){ class="hi-pri" }
+The [**schedule**](/schedule){ class="hi-pri" }
 contains the list of **recommended readings**{ class="hi-pri" } for each
 topic. To gain maximum benefit from the lectures, I
-recommend you at least review these *before* attending class.
+recommend you review these *before* attending class.
 
+{#
 
 ### Who'll be helping in labs { #facilitators }
 
@@ -248,7 +292,7 @@ Our facilitators for labs are:
 {% endfor %}
 </div>
 
-
+#}
 
 -----
 
@@ -256,8 +300,8 @@ Our facilitators for labs are:
 
 Completion of 12 points of programming-based units is a prerequisite
 for enrolling in {{ siteinfo.unitcode }}. In particular, it's assumed that you are
-familiar with programming in at least one object-oriented (OO) language
-(typically either Python or Java). Please let the Unit Coordinator
+familiar with programming in at least one statically type-checked language
+(typically either C or Java). Please let the Unit Coordinator
 know as soon as possible if this is not the case.
 
 Advisable prior study for the unit is: familiarity with a
@@ -363,8 +407,9 @@ to this unit:
 
 
 [charter]: https://www.uwa.edu.au/policy/-/media/Project/UWA/UWA/Policy-Library/Policy/Student-Administration/Student-Right-and-Responsibilities/Student-Rights-and-Responsibilities.doc
-[assessment-policy]: https://www.uwa.edu.au/policy/-/media/Policy/Policy/Teaching-and-Research-Training/Learning-and-Teaching/Assessment/Assessment-Policy.doc
+[assessment-policy]: https://www.uwa.edu.au/policy/home#f04e905d-06fd-4c3b-944e-c8cc1c5bd829=null&policy-search_q=assessment&policy-search_e=0
 [academic-conduct]: https://www.uwa.edu.au/policy#faq-c3b2aea7-22c7-4991-81b5-4bf2698aa83e
+
 
 <!--
   vim: tw=72

@@ -15,6 +15,11 @@ html, body {
   height: 100%
 }
 
+
+html {
+  scroll-behavior: smooth;
+}
+
 /* small */
 @media (max-width: 767px) {
 }
@@ -28,17 +33,17 @@ html, body {
 
 /* stop targets scrolling to top
    of viewport */
-main :target::before {
-    content:    '';
-    display:    block;
-    height:     85px;
-    margin-top: -85px;
+
+:target {
+  scroll-margin-top: 85px;
 }
 
 /* layout */
 
 /* we have: nav, main, footer
  */
+
+/* todo: could replace 750px with 47rem */
 
 .page {
   padding: 25px;
@@ -129,6 +134,20 @@ main a:hover  {
   color: #071cc8;
 }
 
+/* more space */
+
+.spacey {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+/* smallish breaks */
+
+.br {
+    display: block;
+    margin-bottom: 0.4rem;
+}
+
 /* em-dash lists */
 
 main ul {
@@ -144,6 +163,16 @@ main ul > li:before {
   content: '\2012';
   width: 0.5em;
   text-indent: -0.5em;
+}
+
+/* loose lists */
+
+.medium-list li {
+  margin-bottom: 0.2rem;
+}
+
+.loose-list li {
+  margin-bottom: 1rem;
 }
 
 /* semantic */
@@ -196,6 +225,11 @@ p.code {
 .text-muted {
   color: #666666;
   font-size: 75%;
+}
+
+/* no italics for contact details */
+address {
+  font-style: normal;
 }
 
 
@@ -265,6 +299,18 @@ pre code {
   }
 }
 
+/* the max-width and s-m-t figures seem to be roughly right on chrome,
+   but looks like there is no good way of calculating height
+   of header
+*/
+@media (max-width: 950px) {
+  :target {
+    scroll-margin-top: 105px;
+  }
+}
+
+
+
 /* small */
 @media (max-width: 767px) {
   /* content made initially 'invisible' (height 0) on eXtra-Small width screens*/
@@ -297,6 +343,114 @@ pre code {
   .github-corner {
     display: none;
   }
+}
+
+/* tooltips */
+
+/* indicate hoverable */
+.tooltip {
+  position:relative;
+  border-bottom: dotted 1px #A1A3A1;
+}
+
+/* tooltip content */
+.tooltip:before {
+  content: attr(data-tooltip-text);
+  position:absolute;
+
+  top:50%;
+  transform: translateY(-50%) scale(0.0);
+
+  left:100%;
+  margin-left:15px;
+
+  color: black;
+  text-align: left;
+  font-size: smaller;
+  text-decoration: #A1A3A1 dotted underline;
+
+  width: max-content;
+  max-width: 20rem;
+  padding: 10px;
+  border-radius: 10px;
+  background-color: hsl(0 0% 98%);
+  border: 3px outset hsl(0 0% 78%);
+
+  display: block;
+
+  transition-property: all;
+  /* or transform ?*/
+  transition-duration: 0.1s;
+  /* or 0.15s ?*/
+  transition-timing: linear;
+  /* ease-in;  */
+
+  opacity: 1;
+}
+
+/* show tooltip when hovering */
+.tooltip:hover:before {
+  display: block;
+  transform: translateY(-50%) scale(1);
+  z-index: 100;
+}
+
+/* footnote yellow flash
+
+   hsl(60 100% 50% / 0.7) = yellow, 70% opacity
+
+*/
+
+/* arrived at bottom of page - fade out background */
+
+.footnotes .footnote-item:target {
+  animation: yellowflash-bg 1.2s;
+}
+
+@keyframes yellowflash-bg {
+  from { background: hsl(60 100% 50% / 0.7); }
+  to   { background: transparent; }
+}
+
+/* returned to top - fade out background *plus* outline */
+
+.footnote-ref a:target {
+  animation: yellowflash-outline 1.2s;
+}
+
+@keyframes yellowflash-outline {
+  from {
+    outline: 10px solid hsl(60 100% 50% / 0.7);
+    background: hsl(60 100% 50% / 0.7);
+  }
+
+  to {
+    outline: 10px solid transparent;
+    background: transparent;
+  }
+}
+
+
+/* general (e.g. toc) link blue flash
+   hsl(183 100% 75% / 0.7) = electric blue, 70% opacity
+*/
+
+/* arrived at target */
+
+h2:target, h3:target, h4:target
+{
+  animation: blueflash-bg 1.6s;
+}
+
+
+@keyframes blueflash-bg {
+  from { background: hsl(183 100% 75% / 0.7); }
+  to   { background: transparent; }
+}
+
+/* avoid ugly default black outline style in chrome */
+* {
+  outline-color: DodgerBlue;
 }
 
 

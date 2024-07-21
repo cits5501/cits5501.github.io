@@ -90,9 +90,12 @@ customStyle: |
 {% set help_forum = siteinfo.help_forum %}
 {% set forum_url  = siteinfo.forum_url %}
 
+## About the unit assessments
+
+### What are the assessment items, when are they due, and what are they worth?
 
 The assessment for {{ siteinfo.unitcode }} consists of
-several short assessments (online or take-home quiz or test), a project,
+an online quiz, a mid-semester take-home test, a project,
 and a final examination.
 
 
@@ -112,68 +115,135 @@ and a final examination.
 
 :::
 
-## Week 3 quiz
+Assessments will be due at **11:59 pm**{ class="hi-pri" } on
+<span
+ class="tooltip"
+ data-tooltip-text="Then if submission fails, there's a weekday left to contact the UC and fix it.">
+**Thursdays**{ class="hi-pri" }</span>.
+Any changes to the due date will be announced in the
+[**{{help_forum}}**]({{forum_url}}){ class="hi-pri" target="_blank" }
+help forum,
+as well being noted on this website.
 
-- This quiz will be available on {{ siteinfo.moodle }}. For more
-  information, see the list of [**Frequently Asked
-  Questions**](/faq#are-lecturers-recorded){ class="hi-pri" }
-  and await further announcements.
+<!--
 
-{#
+_x
+
+-->
+
+**Do not**{ class="hi-pri" } rely on the [Unit Outline]({{outline_url}})
+for exact
+assessment due dates -- the software used to generate the unit outlines
+is known to be buggy, and may insert incorrect due dates.
+Instead, use the assessment dates published here (also available from
+the [**Schedule**](/schedule){ class="hi-pri" }).
+Any changes will be published here, as well as being announced
+on the unit [**discussion forum**]({{forum_url}}){ target="_blank" }.
+
+<!--
+
+x_
+
+-->
+
+Online quizzes, tests and exams **must**{ class="hi-pri" } be submitted by the
+due date and time – this will be enforced strictly (just as it is for
+face-to-face tests and exams), and late submissions will receive a mark
+of 0. It is your responsibility to ensure you submit by the due date and
+time -- even if you think a website such as Moodle will not stop you
+from making a late submission.
+
+[No extensions are permitted](/faq#extensions){ class="hi-pri" }
+for quizzes and tests: they must be
+done on the dates specified (just as for face-to-face tests and exams).
+For more details, see [**"Can I get an extension on the deadline for an
+assessment?"**](/faq#extensions){ class="hi-pri" } in the unit FAQ.
+
+Your submitted work or answers for any assessment item
+[may be submitted](/faq#plagiarism-checks) to plagiarism detectors
+such as `JPlag`, `moss` or `turnitin` to detect plagiarism.
+
+The quizzes, tests and exam do contain theoretical questions, but are
+also intended to assess *practical* skills and knowledge.
+They're not completed on paper, but instead on your own computer,
+and they may ask you to write compileable and executable code.
+
+### Common questions about assessments { #assessment-faqs # }
+
+Several common questions about assessment are answered on the
+unit [**FAQ**](/faq){ class="hi-pri" } (Frequently Asked Questions) page.
+
+These include the following:
+
+- [What material is examinable/testable?](/faq#examinable-material)
+- [What are the expectations regarding citation of sources/academic
+  conduct?](/faq#source-citation-conduct-expectations)<br>
+  (In brief: abide by UWA's academic conduct policy; be careful not to
+  plagiarize.)
+- [What is the marking rubric for assessments?](/faq#marking-rubric)
+- [Are the quizzes/tests/exams open book?](/faq#test-conduct)
+
+
+## Assessment item details
+
+
+### Week 4 quiz
+
+- This quiz will be available on {{ siteinfo.moodle }}.
 
 <!--!
 <details>
-<summary>Test details (click to expand)</summary>
+<summary>Quiz details (click to expand)</summary>
 <div style="border: inset 5pt var(--accent-v-light); margin: 2em; padding: 1em; border-radius: 5pt;">
 !-->
 
 
 - Ensure you leave at least 1-2 hours available in which to complete it.
   If you wait until 2 hours before the due time, and
-  don't complete it, you will be awarded 0 marks.
-- The quiz is not timed, and there is no time limit, but it will need to
+  don't complete it, you will be awarded 0 marks for incomplete
+  questions.
+- The quiz will need to
   be completed in one sitting, and students are allowed only one attempt
-  at it.
+  at it. There is a time limit of 2 hours (though the quiz should take
+  less than that).
 - Once you've started the quiz, it's best not to leave your browser
   or computer unattended -- the quiz may time out, or the browser
-  may refresh, and LMS will record you as not having completed
+  may refresh, and Moodle may record you as not having completed
   the quiz.
-- You will not be able to correct your answer to a question once you
-  have answered it.
-- The quiz is open-book; you can make use of any book, website or
-  software you like, but the answers must be your own work (not that
-  of anyone else), and you must not distribute your answers to other
+- The quiz is open-book; you can ***look at*** any book, website or
+  software you like. However, the answers must be your own work (not that
+  of anyone else) and in your own words, and you must not distribute your answers to other
   people.
-- Questions may be drawn from any content contained in lectures, lecture
-  slides, lab exercises or assigned readings up until the end
-  of week 2, or may require
-  you to make reasonable inferences from that material or to investigate
-  questions arising from that material.
 - Ensure you have a good Internet connection when sitting the quiz -- you
   should sit it either on a UWA lab computer, or at home, but not using
   WiFi or a mobile device, as these could drop out part-way through.
 - If you use a WiFi or mobile connection and it fails, you won't be
   given extra time to complete the quiz.
-  If for some reason you can't access the quiz on the LMS, email me
+  If for some reason you can't access the quiz on {{ siteinfo.moodle }}, email me
   immediately from your University email account with a screenshot or
   photo showing the problem.
+- Once you've finished the quiz, **take and keep** a
+  **screenshot** of your completed attempt.
 
 <!--!
 </div>
 </details>
 !-->
 
-#}
 
-## Week 6 test
+### Mid-semester test { #mid-sem-test }
 
-The week 6 take-home test will be made available
-early in week 6.
+The week 7 mid-semester test will be made available
+in week 7 on
+{{ siteinfo.moodle }}, under "Week 7 mid-semester test". You will have 24
+hours to complete the test
+{#
+(which should only take about an hour)
+#}, and
+should submit it via {{ siteinfo.moodle }}.
 
-For more
-information, see the list of [**Frequently Asked
-Questions**](/faq#are-lecturers-recorded){ class="hi-pri" }
-and await further announcements.
+The same instructions apply to the mid-semester test as for the week 4
+quiz.
 
 {#
 
@@ -193,17 +263,20 @@ Marks are now available on csmarks, and sample solutions
 are available [as a PDF][ex-sol].
 
 
-[ex-sol]: {{ "/assignments/exercise-solutions.pdf" | url }} 
+[ex-sol]: {{ "/assignments/exercise-solutions.pdf" | url }}
 
 #}
 
-## Project
+### Project
 
 The project for the unit, worth
 {{ siteinfo.assessments.project.marksPercent }}%
-of the unit's marks is due on
+of the unit's marks, is due on
 {{ siteinfo.assessments.project.dates.due | dateFormat("dddd D MMM") }}.
 
+It is to be completed individually.
+
+{#
 It includes both programming work and written work. Students may make
 look at any texts or online materials they wish, but any work must
 be their own.
@@ -224,6 +297,7 @@ The following project materials are available for you:
 [proj-javadoc]: {{ "/project/project/doc" | url }}
 [proj-code]: {{ "/project/gladius-source.zip" | url }}
 [proj-iata-codes]: {{ "/project/iata_codes.zip" | url }}
+#}
 
 {#
 
@@ -246,9 +320,9 @@ version. Announcements about revisions were posted in the
 
 #}
 
-## Exam
+### Exam
 
-Unlike last year's (2022) exam, this year's
+The
 exam is a practical, [**face-to-face**]{ class="hi-pri" } exam, held in
 a computer lab during
 the UWA examination period. For the exact time and venue, consult
@@ -266,7 +340,7 @@ The exam venues are available by looking in the "CITS5501" area of
 the LMS, under "Exam 2023". The exact venue you're in will depend on
 your surname.
 
-### Exam materials
+#### Exam materials
 
 Besides your page of notes, the lectures and lab sheets, you can
 make use of the following:
@@ -277,14 +351,18 @@ make use of the following:
 - [JUnit 5 cheat sheet][junit-cheat]  (PDF)
 
 [java-cheat]:   {{ "/exam/java_quickref.pdf"    | url }}
-[dafny-cheat]:  {{ "/exam/DafnyCheatsheet.pdf"  | url }} 
-[alloy-cheat]:  {{ "/exam/alloy-cheatsheet.pdf" | url }} 
-[junit-cheat]:  {{ "/exam/junit-5.pdf"          | url }} 
- 
+[dafny-cheat]:  {{ "/exam/DafnyCheatsheet.pdf"  | url }}
+[alloy-cheat]:  {{ "/exam/alloy-cheatsheet.pdf" | url }}
+[junit-cheat]:  {{ "/exam/junit-5.pdf"          | url }}
 
-### Past exam papers
 
-Exam papers from several previous years are available
+#### Past exam papers
+
+Because the exam is conducted using Moodle, previous years' papers
+in the current format are not available.
+
+However, for revision purposes you may find it useful to look at
+some older, paper-based exams, which are available
 via the {{ siteinfo.lms }} -- look under "Previous exams".
 These exam papers are provided only to CITS5501 students for study
 purposes, and may not be published or distributed elsewhere.
@@ -314,12 +392,10 @@ for two reasons:
   an answer yourself.
 
 However, if you have attempted
-a previous year's exam, I encourage you to drop in
-during my
-[**consultation time**]({{ "/#unit-coordinator" | url }})
-(or make an appointment with me)
-during weeks 11--13,
-and I can provide feedback on your answers.
+a previous year's exam, I encourage you to discuss your
+answers with me in order to get feedback.
+See ["Are past exams available?"](/faq#past-exams-availability) in the
+unit FAQ.
 
 [onesearch]: https://onesearch.library.uwa.edu.au/
 
