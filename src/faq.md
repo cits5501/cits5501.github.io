@@ -171,16 +171,15 @@ You might also find the following resources helpful:
 ### Do I need a laptop in order to complete CITS5501? { #laptops }
 
 You will need a laptop when attending lab classes, as
-well as when **sitting the final exam**.
-
-A laptop is also strongly recommended for completing the unit project
-(though a desktop computer running Linux, or capable of running
-Oracle VirtualBox, may also be used).
+well as when [**sitting the final exam**](/assessment/#exam) (which is a face-to-face, lab-based,
+practical exam conducted using [Moodle]({{moodle_url}}){{blank}}).
 
 UWA provides [financial support][fin-supp] via the "SOS IT Equipment
 Scheme" to students who are unable to purchase a laptop due to financial
-hardship.
+hardship, and also provides [short-term loans][laptop-loans] of laptops.
 
+[laptop-loans]: https://ipoint.uwa.edu.au/app/answers/detail/a_id/3583/~/short-term-laptop-loans
+[fin-supp]: https://www.uwa.edu.au/students/Support-services/Financial-assistance#:~:text=SOS%20IT%20Equipment%20Scheme
 
 -----
 

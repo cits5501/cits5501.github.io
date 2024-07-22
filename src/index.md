@@ -218,9 +218,11 @@ labs don't start until week 2)*{ class="hi-pri" }
 
     **Laptop requirement**{ class="hi-pri" }: You will
     need to use **your own laptop**{ class="hi-pri" } when attending
-    labs. The exact software you will need
-    is discussed in more detail in the
-    first lab (held in week *2*).
+    labs (as well as for the [final exam](/assessment/#exam)). The exact
+    software you should install is discussed in more detail in the
+    first lab (held in week *2*) – but in general, it is possible to
+    access all the languages and frameworks we will look at using only a
+    web browser.
 
     Lab worksheets are published [here](/resources/#labs) on this website.
 
