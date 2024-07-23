@@ -19,13 +19,15 @@ the semester. (It's also possible to access
 [previous years' content](/faq/#previous-content) if you'd
 like to get an idea in advance of what will be covered.)
 
-{#
 
 ::: { .resource-list }
 
 - Week 1
   - Lecture 1 -- introduction {% resourceList "lect01--intro", ["pdf", "md"] %}
   - Lecture 2 -- testing concepts {% resourceList "lect02--testing", ["pdf", "md"] %}
+
+{#
+
 - Week 2
   - Lecture 3 -- test automation {% resourceList "lect03--autom", ["pdf", "md"] %}
   - Lecture 3b -- exceptions {% resourceList "lect03b--exceptions", ["pdf", "md"] %}
@@ -79,11 +81,9 @@ like to get an idea in advance of what will be covered.)
 {% resourceList "lect07a--system", ["pdf", "md"] %}
 #}
 
-{#
 
 :::
 
-#}
 
 ## Labs { #labs }
 

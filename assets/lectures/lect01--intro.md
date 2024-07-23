@@ -7,6 +7,19 @@ author: "Unit coordinator: Arran Stewart"
 
 # Introduction
 
+### Overview
+
+- Goals
+  - What is this course about?
+  - What do we cover, and why?
+- Admin
+  - Unit website & announcements
+  - Teaching activities
+  - Assessment & feedback
+  - Prerequisites
+- Assessment tips
+- Testing and QA introduction
+
 ### Highlights
 
 This lecture gives a big picture view of what we will cover and why.
@@ -26,6 +39,7 @@ The big questions --
 
 ### Examples
 
+- Software applications can be complex
 - Just the `--help` message alone, for a medium-complexity program
   like those used to manage Amazon or Google or Azure cloud virtual
   machines, will typically show dozens or even hundreds of
@@ -80,13 +94,26 @@ complex (formal methods and software modelling).
 
 Some examples of these sorts of techniques in use:
 
--   Data-driven testing (used in JUnit and many other testing
-    frameworks)
--   Property-based testing (first introduced in the Haskell
-    language)
--   Verification of software properties (e.g. the provably secure
-    [seL4 Microkernel](https://sel4.systems/))
--   Model checking – Microsoft uses model checking techniques
+Data-driven testing
+
+:   \
+    used in JUnit and many other testing frameworks
+
+Property-based testing
+
+:   \
+    first introduced in the Haskell language, and adopted
+    in many others
+
+Verification of software properties
+
+:   \
+    e.g. the provably secure [seL4 Microkernel](https://sel4.systems/)
+
+Model checking
+
+:   \
+    Used e.g. by Microsoft
     to test that driver code (which runs with high privileges)
     is using the API correctly
 
@@ -102,30 +129,61 @@ testing and quality assurance plan.
 
 # Admin
 
-### Unit coordinator
+### Unit coordinator  {.fragile}
 
+```{=latex}
 \begin{center}
-\bgroup
-\def\arraystretch{1.2}
+% give the table a bit more vertical space, but only *this* table --
+% so, alter arraystretch, but within a brace group
+{
+\renewcommand{\arraystretch}{1.2}
 \begin{tabular}{@{}l>{\raggedright\arraybackslash}p{7cm}@{}}
 Unit Coordinator: & Arran Stewart \\
 Email:            & cits5501-pmc@uwa.edu.au \\
 Office:           & Room G.08 CSSE Building \\
-Consultation:     & Drop in from 3--5pm Mondays, or email for an appointment.\\
+Consultation:     & Between 2--4pm Thursdays, or email for an appointment.\\
 Unit website:     & accessible via GitHub, at \url{https://github.com/cits5501/}
 \end{tabular}
-\egroup
+}
 \end{center}
+```
 
 ### Announcements
 
-Announcements will be made in lectures, and on the unit
-help forum, [`help5501`][help5501].
 
-It's important to check the forum regularly -- at least twice
-a week.
 
 [help5501]: https://secure.csse.uwa.edu.au/run/help5501
+
+```{=latex}
+\begin{columns}[t]
+\begin{column}{0.45\textwidth}
+```
+
+\small
+
+- Announcements will be made in lectures, and on the unit
+  help forum, [`help5501`][help5501].
+- It's important to check the forum regularly -- at least twice a week.
+- If you log in and visit the forum site, you can set it
+  to alert you via email when new postings are made.
+
+```{=latex}
+\end{column}
+\begin{column}{0.55\textwidth}
+```
+
+
+`\begin{center}`{=latex}
+![](lect01-images/help5501.png){ width=100% }
+`\end{center}`{=latex}
+
+```{=latex}
+\end{column}
+\end{columns}
+```
+
+
+
 
 ### Unit contact hours – details
 
@@ -134,19 +192,25 @@ Lectures:
 - You should attend one lecture per week -- you should either attend in
   person
   <!-- , attend online (we will use MS Teams), -->
-  or watch the recorded lecture.
+  or watch the recorded lecture.   
   (Recorded lectures are available via the university's
   Blackboard LMS, at <https://lms.uwa.edu.au/>.)
 
+### Unit contact hours – details
+
 Labs:
 
-- You should attend one lab each week, starting in week
-  *two*.\
-  If there is room available for you, you are welcome to attend other
-  lab sessions as well.
-- In the labs, we will work through practical exercises
-  related to the unit material. If you have a laptop, it may
-  be useful to bring it, but you can use lab computers if not.
+- Labs are run on a "drop-in" basis.
+- Each week, a lab worksheet will be available which you can work through at your own pace
+  from home or on campus
+  - (Plus, in some weeks, unassessed exercises on the CSSE [Moodle] server at
+    <https://quiz.jinhong.org>)
+- If you encounter any issues or have questions, feel free to drop in to one of
+  the lab sessions to ask them (on a first-come, first-served basis)
+- All timetabled lab sessions can be viewed via the UWA Timetable site --
+  see <https://cits5501.github.io/#weekly-activities>
+
+[moodle]: https://quiz.jinhong.org
 
 ### Non-timetabled hours
 
@@ -157,7 +221,7 @@ per week to the unit, averaged over the entire semester.
 Outside of the
 contact hours (3 hours per week) for the unit, the remainder of your
 time should be spent reading the recommended reading, attempting
-exercises and working on assignment tasks.
+exercises and working on project tasks.
 
 ### Textbooks
 
@@ -166,23 +230,20 @@ you will need access to:
 
 &nbsp; &nbsp; <https://cits5501.github.io/schedule/#recommended-readings>
 
-(Or just go to <https://cits5501.github.io/faq> and search for "textbook".) 
+(Or just go to <https://cits5501.github.io/faq> and search for "textbook".)
 
 ### Assessment
 
-The assessment for CITS5501 consists of three short assessments (online
-quiz, test or exercise), a project, and a final examination:
+The assessment for CITS5501 consists of an online quiz,
+a mid-semester test, a project, and a final examination:
 see the Assessment page at
 
 - <https://cits5501.github.io/assessment/>
 
-In general, the short assessments should be
-do-able in a matter of hours -- but we allow most of a week in which
-students can arrange for themselves a suitable time to do them.
+All assessments are to be done individually -- there is no group or
+pair work -- and are submitted using [Moodle][moodle].
 
-The project will be done individually, and
-involves designing and executing a testing and validation strategy for
-some hypothetical software.
+
 
 ### Schedule
 
@@ -205,16 +266,16 @@ some hypothetical software.
 
 The prerequisites for this unit are 12 points of programming units.
 At UWA, that should mean you're familiar with at least one
-object-oriented programming language (Java or Python).
+statically type-checked programming language (usually Java or C).
 
-If you aren't -- let me know.
+If you aren't -- let me know ASAP.
 
 ### Programming languages
 
 We will mostly be using the Java programming language.
 
 A *detailed* knowledge of Java is not essential -- if you have
-a good knowledge of Python, instead, it should be straightforward
+a good knowledge of C, instead, it should be straightforward
 to pick up the parts of the language you need.
 
 I will review some of the basics of the language in class; you
@@ -223,13 +284,13 @@ should make sure you have access to a textbook on Java
 
 ### Programming languages
 
-For one lecture, at the end of semester, we'll be using
+At the end of semester, we'll spend a week or two using
 a language created by Microsoft Research for proving
 program correctness, [Dafny][dafny].
 
 [dafny]: https://rise4fun.com/Dafny/tutorial/guide
 
-It's more similar to the `C#` language than Java, but
+It's more similar to the `\texttt{C\#}`{=latex} language than Java, but
 shouldn't be hard to pick up.
 
 ### Programming languages
@@ -251,128 +312,294 @@ It too has a syntax somewhat similar to Java.
 
 ### Ensuring quality software
 
--   There are multiple aspects to building quality software:
+There are multiple aspects to building quality software:
 
-    - Organisational Processes – How does the software team operate?
-    - Process and Software Standards – Are particular standards used?
-    - Process Improvement – How is success in building quality software
-      measured and improved?
-    - Requirements Specification – How do we work out what software
-      we should be building? And how do we work out whether we
-      built the right software?
-    - Formal Methods – Ways of proving that software is correct
-    - Testing, Testing, Testing – Identifying and correcting bugs
+Organisational processes
+
+:   \
+    How does the software team operate?
+
+Process and software standards
+
+:   \
+    Are particular standards used?
+
+Process improvement
+
+:   \
+    How is success in building quality software measured and improved?
+
+### Ensuring quality software, cont'd
+
+Requirements specification
+
+:   \
+    How do we work out what software we should be building? And how do we work out whether
+    we built the right software?
+
+Formal methods
+
+:   \
+    Ways of proving that software is correct
+
+Testing
+
+:   \
+    Identifying and correcting bugs
 
 ### The software "illities"
 
 There are many features that contribute to the success of software,
-besides just it's "correctness":
+besides just its "correctness" -- for example:
 
-- Usability
-- Maintainability
-- Scalability
-- Reliability/Availability
-- Extensibility
-- Securitability [sic]
-- Portability
+- usability
+- maintainability
+- scalability
+- reliability/availability
+- extensibility
+- securitability [sic]
+- portability
+
+### The software "illities"
+
+::: block
+
+\small
+
+####
+
+- usability
+- maintainability
+- scalability
+- reliability/availability
+- extensibility
+- securitability [sic]
+- portability
+
+
+:::
+
+
+You should know from previous units that these are called \alert{non-functional system
+properties}.
+
+- They describe not what a system (or program, or module, or other unit of software)
+  does, in terms of inputs and outputs --   
+  (i.e., its behaviour, when modelled \alert{as a function})  
+- -- but rather, the manner in which it does it (securely, portably, etc.)
 
 ### Types of testing
 
 Testing is used in several ways in modern software development:
 
-- Unit tests – Ensuring functional units are correct
-- Integration testing  –  Ensuring  components work together
-- Acceptance testing –  Getting paid at the end of the day
-- Regression Testing – Don’t break the build!
-- Test Driven Design – "Test-first" software process
-- Tests as documentation – Complete test suites are often the most accurate documentation a project has.
+Unit tests \hfill
+
+:   \
+    Ensuring functional units are correct
+
+Integration testing
+
+:   \
+    Ensuring  components work together
+
+End-to-end testing
+
+:   \
+    Ensuring user stories about the system work as expected,
+    in a particular environment
+
+Acceptance testing
+
+:   \
+    Ensuring contractual obligations are met
+
+
+### Types of testing, cont'd
+
+
+Regression testing
+
+:   \
+    Running test suites to ensure old bugs are re-introduced
+
+System testing
+
+:   \
+    Ensuring the system as a whole works, and performs as expected
+    under particular workloads
+
+Test driven design
+
+:   \
+    Improving test quality by adopting "test-first" software processes
+
+Tests as documentation
+
+:   \
+    Complete test suites are often the most accurate documentation a project has.
 
 # Testing concepts
 
-### Software Faults, Errors & Failures
+### Faults and failures
 
-- Software fault: A static defect in the software
-- Software failure: External, incorrect behavior with respect to the
-  **requirements** (or other description of the expected behavior)
-- Software error: An incorrect internal state that is the manifestation of some fault
+```{=latex}
+\begin{description}[]
+  \item[Software bug (aka \emph{fault} or \emph{defect})] \hfill
+```
 
-### Software Faults, Errors & Failures
+A defect in a system's *static artifacts* -- usually source code --
+which at runtime will (if executed or encountered) cause the system to behave
+\alert{incorrectly}.
+
+Example: at a particular line in our program, a `for` loop accesses elements of an array
+`arr` from index position 0,
+through to index position `arr.length`. This will go out of bounds, and (in Java)
+throw an exception, which is almost never the intended behaviour.
+
+Often, the static artifact will be a file of source code, but could be a configuration
+file, a build file (e.g. `Makefile`), or similar.
+
+
+```{=latex}
+\end{description}
+```
+
+### Faults and failures, cont'd
+
+```{=latex}
+\begin{description}[]
+  \item[Software failure] \hfill
+```
+
+Externally observable incorrect behavior with respect to the
+\alert{requirements} (or other description of the expected behavior)
+of some software system, module or other unit.
+
+Example: Instead of operating as expected (say, sorting a file), a program when run
+displays a stack-trace and crashes.
+
+A \alert{defect} exists in the source code (or other static artifact)
+even when the system is not running; we can point it out, and (usually)
+predict what *will* happen at run-time when it is encountered.
+
+In contrast, a \alert{failure} is a type of behaviour that we observe at run-time;
+if the system is not currently executing, then by definition, it's not
+exhibiting any failures.
+
+
+```{=latex}
+\end{description}
+```
+
+### Faults and failures, cont'd
+
+```{=latex}
+\begin{description}[]
+  \item[Invariants] \hfill
+```
+
+\footnotesize
+
+We will see that failures are usually the results of a violation of
+a system's \alert{invariants} -- facts that the developers expect to be
+true, at various points in the program.
+
+Example: Amara *expects* that an array index in the loop they are writing
+will always be within bounds of the array.
+
+Example: Bernardo writes a [binary search][bsearch] routine, and expects it
+will only ever be passed a *sorted* array. But in the current project, Carla has passed an unsorted array.
+As a consequence, Carla will likely observe failures when the code is run.
+
+[bsearch]: https://en.wikipedia.org/wiki/Binary_search
+
+Types of invariants include [loop invariants][loop-inv], [class invariants][class-inv],
+and [preconditions][precondition].
+
+[loop-inv]: https://en.wikipedia.org/wiki/Loop_invariant
+[class-inv]: https://en.wikipedia.org/wiki/Class_invariant
+[precondition]: https://en.wikipedia.org/wiki/Precondition
+
+Once an invariant is violated, the system is no longer in a sensible state -- 
+assumptions under which developers wrote their code are no longer true -- and
+(for many systems) it's unsafe for the program to continue running.   
+(Continuing to run could do more harm than good.)
+
+```{=latex}
+\end{description}
+```
+
+### Faults and failures, cont'd
+
+\small
+
+So, what exactly happens if an invariant is violated?
+
+If we are lucky, the violation might cause the program to quickly terminate
+ 
+- (e.g. If Amara's loop is Java or Python code, an out-of-bounds exception will
+   be thrown, and the program will likely terminate.)
+
+If we are unlucky, the program will continue, but is likely to produce incorrect
+results later, or to corrupt in-memory data
+
+- (e.g. If Amara's loop is written in C, no bounds checking occurs, but data will
+  likely be silently corrupted.)
+- (e.g. Carla's code that called Bernardo's binary-search will likely give incorrect
+  results, but probably will not result in an exception.)
+
+Sometimes a running system in which an invariant has been violated is said to be
+in an *erroneous* or *inconsistent* state.
+
+
+### Failures -- incorrect behaviour
+
+\small
+
+We said a failure is when some software does not behave in accordance with
+its *requirements*.
 
 What are requirements?
 
 Kinds of requirement or specification:
 
-- Business needs ("why?")
-- Requirements ("what?")
-- System specifications ("how?")
+- Business needs ("why is this needed? what value does it have for the business?")
+- Requirements ("what should the system do? and what performance criteria must it meet?")
+- System specifications ("the requirements will be met by constructing subsystems and
+  modules that satisfy criteria A, B, C, etc")
 
-In this unit, we will usually care less about what sort of requirement of
+In this unit, we will usually care less about what sort of requirement or
 specification
 something is, and more about the fact that we have to
 satisfy it.
 
-### Fault and Failure Example
+### Fault and failure scenarios
 
--   A patient gives a doctor a list of symptoms\
-    (Failures)
--   The doctor tries to diagnose the root cause, the ailment\
-    (Fault)
--   The doctor may look for anomalous internal conditions (high blood pressure,
-    irregular heartbeat, bacteria in the blood stream)\
-    (Errors – incorrect internal state)
+What are the following -- faults or failures?
+
+::: incremental
+
+- Daniel is writing his project report for CITS5501. He attempts to save the report,
+  but instead, the report contents is corrupted.
+
+- In code she is writing, Elise calls the `Thread.sleep()` method in Java, which is used
+  to suspend execution of a program thread of control.  
+  The method is supposed to be passed a number of milliseconds to sleep for,
+  but Elise inadvertently passes the number of *micro*seconds.
+
+:::
 
 ### Goals of testing
 
-Based on process maturity:
+Some conceptions of the goals of testing -- which do you think
+are correct?
 
--   Level 0: There’s no difference between testing and debugging
--   Level 1: The purpose of testing is to show correctness
--   Level 2: The purpose of testing is to show that the software doesn’t work
--   Level 3: The purpose of testing is not to prove anything specific, but to reduce the risk of using the software
--   Level 4: Testing is a mental discipline that helps all IT professionals develop higher quality software
+- The purpose of testing is to show correctness of software
+- The purpose of testing is to identify defects in the software
+- The purpose of testing is not to prove anything specific, but to reduce the risk of using the software
+- Testing is a mental discipline that helps all IT professionals develop higher quality software
+
 
 <!--
-
-### Level 0 Thinking
-
--   Testing is the same as debugging
--   Does not distinguish between incorrect behavior and mistakes in the program
--   Does not help develop software that is reliable or safe
-
-### Level 1 Thinking
-
--   Purpose is to show correctness
--   Correctness is impossible to achieve
--   What do we know if no failures?
-    -   Good software, or bad tests?
--   Test engineers have no:
-    -   Strict goal
-    -   Real stopping rule
-    -   Formal test technique
-    -   Test managers are powerless
-
-### Level 2 Thinking
-
--   Purpose is to show failures
--   Looking for failures is a negative activity
--   Puts testers and developers into an adversarial relationship
--   What if there are no failures?
-
-### Level 3 Thinking
-
--   Testing can only show the presence of failures
--   Whenever we use software, we incur some risk
--   Risk may be small and consequences unimportant
--   Risk may be great and consequences catastrophic
--   Testers and developers cooperate to reduce risk
-
-### Level 4 Thinking
-
-A mental discipline that increases quality
-
--   Testing is only one way to increase quality
--   Test engineers can become technical leaders of the project
--   Primary responsibility to measure and improve software quality
--   Their expertise should help the developers
-
+  vim: tw=90 :
 -->

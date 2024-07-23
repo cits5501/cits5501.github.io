@@ -24,10 +24,10 @@ author: "Unit coordinator: Arran Stewart"
 
 # Testing concepts (cont'd)
 
-### Faults, failures and errors
+### Faults and failures
 
-Last lecture, we were talking about *faults*,
-*failures* and *erroneous states*.
+Last lecture, we were talking about *faults*
+and *failures* (and *erroneous* or *inconsistent states*).
 
 In normal English, we might not make much
 distinction between them.
@@ -45,7 +45,7 @@ we're talking about
 
 ### (Aside: terminology)
 
-Note that we will use terminology that's consistent with:
+We will use terminology that's roughly consistent with:
 
 - Ammann & Offutt,[^ammann] and
 - Bruegge & Dutoit[^bruegge]
@@ -80,6 +80,9 @@ a failure.
 
 - The program would be failing to meet a *functional* requirement
 
+### Failure examples, cont'd
+
+
 If a program should always respond to user input within 0.1 seconds,
 but instead starts "lagging" when more than 5 documents are open --
 that's also a failure.
@@ -88,17 +91,27 @@ that's also a failure.
   requirement, that the system meet particular standards for
   *responsiveness*.
 
+### Failure examples, cont'd
+
+
 If an electronic voting booth should accurately record votes
 cast, but due to a cosmic ray flipping a bit in memory, 4096
 additional votes are counted for one candidate -- that's also
 a failure.
+
+Some questions:
+
+- In this case -- what sort of requirement has the system likely failed to meet: functional or
+  non-functional?
+- Is there any corresponding defect?
+- And is there any reasonable way of preventing or avoiding the failure?
 
 ### Faults
 
 Also called *bugs* or *defects*.
 
 - A *fault* is something in the static artifacts
-  of a system that causes a failure.
+  of a system that (when executed or otherwise encountered) will cause a failure.
 
 \pause
 
@@ -150,7 +163,8 @@ are global properties of the system artifacts.
 
 ### Erroneous state
 
-By "error" or "erroneous state", the textbook authors mean
+In the textbooks I've mentioned, when the authors use the phrase
+"error" or "erroneous state", they mean
 the situation at runtime, where some fault has become reflected
 in the system's runtime state.
 
@@ -161,9 +175,18 @@ in the system's runtime state.
 
 ### Invariants
 
-We will mostly be interested in erroneous states that happen
-because some *class* or *program invariant* has been
+In many cases (for failures of functional requirements, at least),
+the failure arises
+because some *invariant* (e.g. a *class* or *program invariant*) has been
 violated.
+
+An invariant is just a statement -- a proposition -- which can be true or
+false about the runtime state.
+
+E.g.: "The value of `i` is always greater than or equal to zero, and less than
+`book_titles.length`" (and thus is a valid index into the array).
+
+Let's see an example of a class invariant.
 
 ### Class invariant example -- a stack  {.fragile}
 
@@ -206,11 +229,11 @@ class ArrayStack implements Stack {
 ### System invariant example -- databases
 
 Suppose our system has a database, with records representing
-*students*, *units*, and *enrollments*.
+*students*, *units*, and *enrolments*.
 
-An enrollment is a `(studentId, unitId)` pair, e.g.: `(23456789, CITS5501)`.
+An enrolment is a `(studentId, unitId)` pair, e.g.: `(23456789, CITS5501)`.
 
-It's a (plainly sensible) rule of our system that an enrollment record
+It's a (plainly sensible) rule of our system that an enrolment record
 must not contain a student ID for a student that doesn't exist,
 nor a unit ID for a unit that doesn't exist.
 
@@ -549,6 +572,11 @@ is to be implemented -- just what its return value and effects are.
 This means that if the library developer decides to reimplement the
 function in another way (for instance, to improve efficiency), they can,
 without changing the API.
+
+(Functions are a form of [abstraction][abs]. They allow a developer to
+call the function, without knowing how it is implemented.)
+
+[abs]: https://en.wikipedia.org/wiki/Abstraction_(computer_science) 
 
 ### Specification vs implementation example
 
@@ -901,7 +929,7 @@ Java `CalculatorTest` from the previous slides:
 
 ```{=latex}
 \begin{center}
-\bgroup
+{
 \def\arraystretch{1.4}
 \begin{tabular}{@{}lp{7cm}@{}}
 \toprule
@@ -918,7 +946,7 @@ Expected output                   & The \lstinline!evaluate()! method should ret
                                      value \lstinline!6!.  \\
 \bottomrule
 \end{tabular}
-\egroup
+}
 \end{center}
 ```
 
