@@ -328,9 +328,8 @@ a computer lab during
 the UWA examination period. For the exact time and venue, consult
 your exam timetable using StudentConnect.
 
-The exam is *not* open book, but you will have access to copies of
-the unit materials (lecture slides and lab worksheets).
-You can additionally bring into the exam one A4, double-sided page of handwritten notes.
+The exam is *not* open book.
+You are permitted to bring into the exam one A4, double-sided page of handwritten notes.
 The exam will be held in a computer lab, and the exam will be completed
 in Moodle.
 
@@ -339,21 +338,6 @@ siteinfo.lms }}.
 The exam venues are available by looking in the "CITS5501" area of
 the LMS, under "Exam 2023". The exact venue you're in will depend on
 your surname.
-
-#### Exam materials
-
-Besides your page of notes, the lectures and lab sheets, you can
-make use of the following:
-
-- [Java cheat sheet][java-cheat]      (PDF)
-- [Dafny cheat sheet][dafny-cheat]    (PDF)
-- [Alloy cheat sheet][alloy-cheat]    (PDF)
-- [JUnit 5 cheat sheet][junit-cheat]  (PDF)
-
-[java-cheat]:   {{ "/exam/java_quickref.pdf"    | url }}
-[dafny-cheat]:  {{ "/exam/DafnyCheatsheet.pdf"  | url }}
-[alloy-cheat]:  {{ "/exam/alloy-cheatsheet.pdf" | url }}
-[junit-cheat]:  {{ "/exam/junit-5.pdf"          | url }}
 
 
 #### Past exam papers

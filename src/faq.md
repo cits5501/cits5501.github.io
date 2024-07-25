@@ -816,7 +816,7 @@ to (orally)
 answers.
 
 The **exam is *not* open-book**{ class="hi-pri" }, and is invigilated, but you are permitted
-access to some materials and tools -- refer to the [Assessment
+access to some materials -- refer to the [Assessment
 page][ass-exam]{ class="hi-pri" } for more details.
 
 [ass-exam]: /assessment#exam

@@ -209,6 +209,23 @@ material will be greatly enhanced if you work through these readings
 
 [unit-readings]: https://www.unitreadings.library.uwa.edu.au/leganto/readinglist/lists/13685908730002101
 
+### Java resources
+
+The unit assumes you are familiar with at least one statically type-checked
+language (e.g. Java or C). If you are not already familiar with Java,
+you should make sure you have access to a Java textbook which covers the
+language.
+
+One recommended textbook is:
+
+- Barnes and Kölling, [Objects First with Java: A Practical
+  Introduction using BlueJ][barnes-java] (6th edn, Pearson 2016).
+
+[barnes-java]: https://www.bluej.org/objects-first/
+
+It not only introduces the the Java language and object-oriented programming, but also
+explains the basics of design, testing and debugging in Java (see ch. 9, "Well-behaved
+Objects").
 
 <!--!
 </div>
@@ -283,5 +300,5 @@ material will be greatly enhanced if you work through these readings
 </main>
 !-->
 
-{# vim: tw=72
+{# vim: tw=92
 #}

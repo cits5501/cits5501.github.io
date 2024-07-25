@@ -230,7 +230,8 @@ labs don't start until week 2)*{ class="hi-pri" }
 
 :   Periodically, I'll post (unassessed) exercises on the school's
     {{ siteinfo.moodle }}{{blank}} server. You can complete these in your own time, and
-    they will help you improve your understanding of secure coding concepts.
+    they will help you improve your understanding of testing and quality
+assurance concepts.
     (All assessments will be completed using the Moodle server, too.) More
     information about these will be available in the first lab.
 
