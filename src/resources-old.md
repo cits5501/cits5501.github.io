@@ -1,5 +1,5 @@
 ---
-title: "Resources"
+title: "Resources (archived from 2023)"
 tags: ['toppage']
 layout: page-toc-layout.njk
 customStyle: |
@@ -29,9 +29,6 @@ like to get an idea in advance of what will be covered.)
 - Week 1
   - Lecture 1 -- introduction {% resourceList "lect01--intro", ["pdf", "md"] %}
   - Lecture 2 -- testing concepts {% resourceList "lect02--testing", ["pdf", "md"] %}
-
-{#
-
 - Week 2
   - Lecture 3 -- test automation {% resourceList "lect03--autom", ["pdf", "md"] %}
   - Lecture 3b -- exceptions {% resourceList "lect03b--exceptions", ["pdf", "md"] %}
@@ -62,29 +59,6 @@ like to get an idea in advance of what will be covered.)
   - Lecture 10, Program specification -- alloy {% resourceList "lect10--alloy", ["pdf", "md"] %}
   - Lecture 11, Program specification -- alloy, continued {% resourceList "lect11--alloy", ["pdf", "md"] %}
 
-#}
-
-{#
-- Week 9
-  - Lecture 8A, Risk                  {% resourceList "lect08a--risk", ["pdf", "md"] %}
-  - Lecture 8A, Formal methods intro  {% resourceList "lect08b--formal", ["pdf", "md"] %}
-  - Case study -- Knight Capital trading loss {% resourceList "lect08c--knight", ["pdf", "md"] %}
-- Week 10
-- Week 11
-  - Lecture 10, Program specification -- alloy {% resourceList "lect10--alloy", ["pdf", "md"] %}
-- Week 12
-  - Lecture 11, Program specification -- alloy, continued {% resourceList "lect11--alloy", ["pdf", "md"] %}
-
-#}
-{#
-- Week 11
-  Lecture 11, Program specification -- alloy ([pdf]({{ "/lectures/lect11.pdf" | url }}))
-  Lecture 12, Standards ([pdf]({{ "/lectures/lect12.pdf" | url }}))
-
-{% resourceList "lect07a--system", ["pdf", "md"] %}
-#}
-
-
 
 :::
 
@@ -105,9 +79,6 @@ the semester.
   NBB: there must be **NO BLANK LINEs** between list items here -- else
        ugly extra para elements will appear
 #}
-
-
-{#
 
 ::: { .resource-list }
 
@@ -149,20 +120,9 @@ the semester.
   - Sample worksheet solutions  {% resourceList "workshop10-solutions", ["html", "md"] %}
 
 
-- Week 9 -- risk
-  - Lab worksheet               {% resourceList "workshop08", ["html", "md"] %}
-  - Sample worksheet solutions  {% resourceList "workshop08-solutions", ["html", "md"] %}
-- Week 11 -- specification languages
-  - Lab worksheet               {% resourceList "workshop10", ["html", "md"] %}
-  - Sample worksheet solutions  {% resourceList "workshop10-solutions", ["html", "md"] %}
-- Week 12 -- system testing
-  - Lab worksheet {% resourceList "workshop11", ["html", "md"] %}
-
-
 
 :::
 
-#}
 
 <!--
   vim: tw=72

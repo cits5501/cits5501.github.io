@@ -234,7 +234,7 @@ module.exports = function(configData) {
 
     assessment_table: {
       header: ["Assessment", "% of final mark", "Assessment dates", "Where to submit"],
-      body: ["week4_quiz", "week7_ex", /*"week7b_ex",*/ "project", "exam"].map( (key) => {
+      body: ["week4_quiz", "week7_ex", "project", "exam"].map( (key) => {
         let the_assessment = assessments[key];
         return [
           the_assessment.name,
