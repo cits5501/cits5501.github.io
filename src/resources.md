@@ -107,7 +107,6 @@ the semester.
 #}
 
 
-{#
 
 ::: { .resource-list }
 
@@ -117,6 +116,7 @@ the semester.
   - Source code ([zip]({{ "/workshops/workshop-01-code.zip" | url }}))
   - A (very brief) revision document on important concepts from the Java language is
     available ([PDF]({{ "/workshops/java-revision.pdf" | url }})), should you need it.
+{#
   - Sample worksheet solutions {% resourceList "workshop01-solutions", ["html", "md"] %}
 - Week 3 -- data-driven tests
   - Lab worksheet {% resourceList "workshop02", ["html", "md"] %}
@@ -147,22 +147,11 @@ the semester.
 - Week 11 -- specification languages
   - Lab worksheet               {% resourceList "workshop10", ["html", "md"] %}
   - Sample worksheet solutions  {% resourceList "workshop10-solutions", ["html", "md"] %}
-
-
-- Week 9 -- risk
-  - Lab worksheet               {% resourceList "workshop08", ["html", "md"] %}
-  - Sample worksheet solutions  {% resourceList "workshop08-solutions", ["html", "md"] %}
-- Week 11 -- specification languages
-  - Lab worksheet               {% resourceList "workshop10", ["html", "md"] %}
-  - Sample worksheet solutions  {% resourceList "workshop10-solutions", ["html", "md"] %}
-- Week 12 -- system testing
-  - Lab worksheet {% resourceList "workshop11", ["html", "md"] %}
-
+#}
 
 
 :::
 
-#}
 
 <!--
   vim: tw=72

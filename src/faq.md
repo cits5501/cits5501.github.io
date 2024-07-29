@@ -355,6 +355,14 @@ name. (All other details are optional.)
 
 [moodle-signup]: https://quiz.jinhong.org/login/signup.php
 
+### How do I register as a participant on Moodle? { #moodle-registration }
+
+Visit <https://quiz.jinhong.org> and sign up
+using your UWA email address.
+
+Note that you need to register on Moodle **before the week of the [first assessment](/assessment/)** – only enrolled CITS5501
+students are permitted to take the assessments, so early in that week, any unenrolled
+Moodle participants will be removed, and self-registration will be locked.
 
 ### Can I get an extension on the deadline for an assessment? { #extensions }
 
@@ -706,7 +714,7 @@ the workshops entitled "Critical thinking & academic culture" and
 
 [academic-skills-workshops]: https://www.uwa.edu.au/students/Support-services/Academic-support#workshops
 
-## Can I use ChatGPT, or other AI tools, when completing an assessment?
+### Can I use ChatGPT, or other AI tools, when completing an assessment?
 
 No, you are not permitted to use AI tools when completing an assessment. Here is a
 [description of the University's policy][ai-policy] on the use of AI tools:
@@ -729,7 +737,7 @@ feedback on your own competencies and abilities. In the final exam for the unit,
 browser, so you will have to know how to write code or English answers yourself – using AI
 tools for previous assessments may result in your having a lack of practice at doing so.
 
-## Wouldn't the use of ChatGPT or similar AI tools help ensure the accuracy of code or English answers?
+### Wouldn't the use of ChatGPT or similar AI tools help ensure the accuracy of code or English answers?
 
 No, it would not. It's true that students sometimes mistakenly think that using ChatGPT or
 similar AI tools can help "ensure accuracy" in their code or English answers. But that idea
@@ -860,6 +868,16 @@ page][ass-exam]{ class="hi-pri" } for more details.
 No, we generally will remove access to previous online tests while a test is in progress.
 If you want to make use of feedback you were given on a previous test, you should compile
 your own notes incorporating this feedback.
+
+### If I obtain Moodle feedback on a code question multiple times, will I be penalized? { #moodle-penalties }
+
+In an assessed quiz, test or exam, there is no penalty for requesting feedback (via the
+"check" button in Moodle) as many times as you like. This is part of the University's
+assessment policy.
+
+*Unassessed* quizzes and exercises may behave differently – their aim is to help you gauge
+how well you understood concepts and techniques at the time you started the quiz, and might
+reduce marks awarded for a question if you need to check or submit it multiple times.
 
 ### What if a network infrastructure outage occurs during a test? { #test-outages }
 

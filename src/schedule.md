@@ -227,6 +227,11 @@ It not only introduces the the Java language and object-oriented programming, bu
 explains the basics of design, testing and debugging in Java (see ch. 9, "Well-behaved
 Objects").
 
+You may also want to take a look at
+the following (very brief) revision document on Java language concepts, available
+[here]({{ "/workshops/java-revision.pdf" | url }}) (PDF). In addition to basic language
+concepts, it provides references to books and resources that may be useful.
+
 <!--!
 </div>
 !-->

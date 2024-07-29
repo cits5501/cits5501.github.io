@@ -1,6 +1,6 @@
 ---
 title: |
-  CITS5501 lab 1&nbsp;--&nbsp;Testing introduction&nbsp;--&nbsp;solutions
+  CITS5501 lab 1 (week 2)&nbsp;--&nbsp;Testing introduction&nbsp;--&nbsp;solutions
 reference-section-title: "References"
 link-citations: true
 
@@ -71,21 +71,55 @@ references:
 
 `~\vspace{-5em}`{=latex}
 
+<div style="border: solid 2pt orange; border-radius: 5pt; background-color: hsl(22.35, 100%, 85%, 1); padding: 1em;">
+
+::: block-caption
+
+Laptop requirement
+
+:::
+
+When attending lab classes, you will need access to a laptop.
+Your laptop will also be used when sitting the final exam (which is a lab-based,
+face-to-face, practical exam).
+
+Note that UWA provides [financial support][fin-supp] via the "SOS IT Equipment Scheme" to students who
+are unable to purchase a laptop due to financial hardship.
+
+[fin-supp]: https://www.uwa.edu.au/students/Support-services/Financial-assistance#:~:text=SOS%20IT%20Equipment%20Scheme
+
+</div>
+
+
 
 ## 1. Accessing required software
 
 We will be using the Java language for the bulk of the labs,
-so you should make sure you have access to a platform where
-the Java Development Kit (JDK) is installed, and you can make
+so you will need access to a platform where
+the Java Development Kit (JDK) is installed, and where you can make
 use of a good Java IDE (Integrated Development Environment) or editor.
 
-**Microsoft VS Code**
+There are several options available:
+
+- You can install Microsoft Visual Studio Code on your laptop or other personal computer
+  (it is available for all common operating systems, such as Windows, Linux and Mac
+  OS)
+- You can access a Visual Studio Code–like environment on the web, using the
+  [GitPod][gitpod] cloud-based service
+- You are also welcome to install any other editor or IDE of your choice (although
+  our lab facilitators won't be able to assist you in troubleshooting it, should you
+  encounter problems).
+
+[gitpod]: https://www.gitpod.io
+
+We describe these options in the following sections.
+
+**Microsoft Visual Studio Code**
 
 :   One recommended editor is [Microsoft Visual Studio Code][vs-code] ("VS
     Code", for short) --
     it is available on all common operating systems (Windows, Linux and Mac
     OS), so you should be able to install it on a laptop or home PC.
-    (It should also be available in the UWA computer labs.)
 
     [vs-code]: https://code.visualstudio.com/download
 
@@ -114,12 +148,13 @@ use of a good Java IDE (Integrated Development Environment) or editor.
     "agree to trust" the authors of the code, if a message about that
     pops up.)
 
-    Then open one of the `.java` files in the `src` subdirectory.
+    Then open one of the `.java` files in the `src` subdirectory,
+    and go to ["Common steps in VS Code or GitPod"](#common-steps).
 
 **GitPod**
 
 :   It's possible to access a VS Code–like environment on the web, without
-    needing to install any software. You'll first need to create a
+    needing to install any software, via [GitPod][gitpod]. You'll first need to create a
     [GitHub][github] account, so do so. Once that's done, ensure you're
     logged in to GitHub.
 
@@ -133,44 +168,58 @@ use of a good Java IDE (Integrated Development Environment) or editor.
     Close any message that pops up asking "Do you want to open this workspace
     in VS Code Desktop?".
 
-    Then open one of the `.java` files in the `src` subdirectory.
+    Note that the editor initially shows the files for the GitHub project you
+    opened, <https://github.com/cits5501/lab01>. But within GitPod, you have full
+    access to a virtual Linux environment, and can download files
+    (e.g. using `wget`), clone Git projects, and push them. See the unit
+    [FAQ](https://cits5501.github.io/faq/#version-control) page if you are not familiar
+    with Git.
+
+    Then open one of the `.java` files in the `src` subdirectory,
+    and continue with ["Common steps in VS Code or GitPod"](#common-steps).
 
 [github]: https://github.com/
 
-Using either VS Code on the desktop, or the VS Code–like environment,
-you should see a message about "Java projects being opened". Wait for
-that to pass, and there'll now be a "Testing" icon on the left sidebar,
-in the shape
-of a conical lab flask (like this: ![](vs-code-testing-icon.png){ width="0.7cm" }).
+[**Common steps in VS Code or GitPod**]{ #common-steps }
 
-Click on the testing icon, and then on the button "Enable Java Tests".
-Select "JUnit Jupyter" tests from the options that pop up, and you
-should see a message saying that "Test libraries have been downloaded
-into 'lib/'".
+:   Once either VS Code or GitPod is set up as an editor, we can run
+    some (already written) unit tests.
 
-If you open the `CalculatorSimpleTest.java` file, then after a short
-while, a green triangle icon should appear to the left of the line
-"`public class CalculatorSimpleTest`". Clicking it will run all `@Test`
-methods in the class.
+    When the editors open,
+    you should see a message about "Java projects being opened". Wait for
+    that to pass, and there'll now be a "Testing" icon on the left sidebar,
+    in the shape
+    of a conical lab flask (like this: ![](vs-code-testing-icon.png){ width="0.7cm" }).
 
-(If the icon doesn't appear: select "View" / "Problems" from the menu,
-and see if there have been any compilation problems. If there have:
-select "Java Projects" from the left sidebar, "Reference Libraries",
-and then the "+" (add) button. Add the
-`lib/junit-platform-console-standalone-1.9.2.jar` file that should be in
-the `lib` directory, then hit the "refresh" icon under "Referenced
-Libraries". Ideally, the "Problems" should now disappear and the green
-triangle icon appear. If it doesn't: click somewhere in the
-`CalculatorSimpleTest.java` source code, hit the `ctrl-shift-P` key
-combination, and type "java: run tests".)
+    Click on the testing icon, and then on the button "Enable Java Tests".
+    Select "JUnit Jupyter" tests from the options that pop up, and you
+    should see a message saying that "Test libraries have been downloaded
+    into 'lib/'".
 
-If you are able to run the tests, you should see some tests pass (for instance, `testAdd`),
-but most tests fail. This is expected!
+    If you open the `CalculatorSimpleTest.java` file, then after a short
+    while, a green triangle icon should appear to the left of the line
+    "`public class CalculatorSimpleTest`". Clicking it will run all `@Test`
+    methods in the class.
+
+    (If the icon doesn't appear: select "View" / "Problems" from the menu,
+    and see if there have been any compilation problems. If there have:
+    select "Java Projects" from the left sidebar, "Reference Libraries",
+    and then the "+" (add) button. Add the
+    `lib/junit-platform-console-standalone-1.9.2.jar` file that should be in
+    the `lib` directory, then hit the "refresh" icon under "Referenced
+    Libraries". Ideally, the "Problems" should now disappear and the green
+    triangle icon appear. If it doesn't: click somewhere in the
+    `CalculatorSimpleTest.java` source code, hit the `ctrl-shift-P` key
+    combination, and type "java: run tests".)
+
+    If you are able to run the tests, you should see some tests pass (for instance, `testAdd`),
+    but most tests fail. This is expected!
 
 
 **Other IDEs**
 
-Some other freely available IDEs are:
+You may already have some other IDE or editor you prefer to work in besides VS Code. If that
+is the case, you are welcome to use it for your CITS5501 work. Some other freely available IDEs are:
 
 - Netbeans, downloadable from <https://netbeans.org>
 - Eclipse IDE for Java Developers, downloadable from
@@ -178,15 +227,12 @@ Some other freely available IDEs are:
 - IntelliJ IDEA Community, downloadable from
   <https://www.jetbrains.com/idea/download/>
 
-As a first step for today's lab, ensure you can install and/or
-access at least one of these.
+As a first step for today's lab, ensure you have access to your preferred IDE or editor.
 
 After downloading and opening the lab code from
 <https://cits5501.github.io/resources/#lab-labs>,
-you may need to
-instruct your IDE to add the "JUnit 5" libraries to the project;
-typically, viewing the project *properties* in your IDE will
-reveal some way of doing this.
+you may need to instruct your IDE to add the "JUnit 5" libraries to the project; typically,
+viewing the project *properties* in your IDE will reveal some way of doing this.
 
 
 ## 2. JUnit tests
@@ -327,15 +373,37 @@ the menu.
 Type `javadoc -help` to ensure you can invoke the command, and to see
 what the options for it are.
 
-To generate documentation for the `.java` files in the `src` directory,
-and put that documentation in a directory `doc`, run:
+To generate documentation for the `Calculator.java` file,
+with the documentation being generated in a directory `doc`, first change into the
+same directory where the `Calculator.java` file is, and run:
 
 ```bash
-$ javadoc -d doc -sourcepath src -subpackages
+$ javadoc -d doc -sourcepath . Calculator.java
 ```
 
 You can then open the generated HTML web pages in a browser to view
 them.
+
+<div style="border: solid 2pt blue; background-color: hsla(241, 100%,50%, 0.1); padding: 1em; border-radius: 5pt; margin-top: 1em;">
+
+**Running Javadoc on a directory**
+
+In general, if you have a directory (e.g. "`src`") containing Java
+source files, then if you `cd` to the parent directory, you can get
+Javadoc to process *all* the files in that directory with a command
+like the following:
+
+```
+$ javadoc -d doc -sourcepath src -subpackages ''
+```
+
+This assumes your Java code does not have any dependencies on external
+libraries (`.jar` files), however. If it does, then you'll need to
+specify a *classpath* when invoking `javadoc`. You should refer to
+a Java textbook for details on how to do so.
+
+</div>
+
 
 **Javadoc exercises**
 
@@ -572,20 +640,69 @@ c.  When Mila's method returns the result "`INFINITY`", we'd need to
 
 
 
-## 6. Moodle sign up
+## 6. Moodle activities
 
-There are two Moodle quizzes (not assessed, but it's recommended you
-attempt them) available for you to test your
+All assessments for CITS5501 are submitted via the CSSE department [Moodle][moodle]
+server, which can be found at <https://quiz.jinhong.org>.
+
+[moodle]: https://quiz.jinhong.org
+[moodle-howto]: https://docs.moodle.org/404/en/Using_Quiz#How_students_take_a_quiz
+
+In addition to the assessments, in some weeks *unassessed* exercises and quizzes
+may be available on Moodle.
+
+This week, there are two unassessed Moodle quizzes available for you to test your
 understanding of prerequisite knowledge and week 1 topics
 in CITS5501:
 
 - Java revision quiz, and
 - Testing concepts review quiz
 
-Visit <https://quiz.jinhong.org> and sign up
-with your UWA email address, then attempt the quizzes
-(in your own time, if you don't finish them in the lab).
+**Registering**
+
+:   Visit <https://quiz.jinhong.org> and sign up
+    with your UWA email address, then attempt the quizzes
+    (in your own time, if you don't finish them in the lab).
+
+**Assessed vs unassessed Moodle activities**
+
+:   It's recommended you complete all Moodle activities, even unassessed
+    ones, because firstly, they help you gauge how well you understand the material,
+    and secondly, the questions and answers are considered to be part of
+    the examinable content for the unit.
+
+    *Unassessed* quizzes aim to help you gauge your initial understanding of concepts,
+    and may apply a penalty for re-taking code-based questions -- the penalties indicate that your initial
+    understanding might not have been as thorough as you thought.
+    However, in any *assessed* quiz, test or exam, this is not the case -- if a code-based
+    question provides feedback (using the "check" button), you can request feedback as many
+    times as you like, and no penalty will be applied.
+
+    Make sure you're familiar with how Moodle quizzes and tests work so you'll be prepared
+    when the first *assessed* quiz is given (in week 4). One useful feature to be aware of is
+    that when completing a quiz or test, you have access to a "pop out" panel showing the "table
+    of contents" for a quiz or test (which provides the names of all headings and sub-headings,
+    a view of which questions have been answered and which not, and a way of quickly navigating
+    to a particular question).
+
+**Rubric**
+
+:   Assessed activities will be marked based on the [standard CITS5501 rubric][rubric] --
+    you can read more about it at <https://cits5501.github.io/faq/#marking-rubric>.
+    For long English or code-based questions, the markers will have a model solution
+    and guidelines which helps them apply the rubric.
+
+**Other questions about Moodle and assessments**
+
+:   The unit [FAQ page][faq] has more information on how assessments are conducted, and
+    on [tests and quizzes][moodle-tests] in particular. You may find that information useful
+    to review some time between now and the first assessment (in week 4).
 
 
-<!-- vim: syntax=markdown tw=72 :
+[rubric]: https://cits5501.github.io/faq/#marking-rubric
+[faq]: https://cits5501.github.io/faq
+[moodle-tests]: https://cits5501.github.io/faq/#tests-quizzes-and-exams
+
+
+<!-- vim: syntax=markdown tw=92 :
 -->
