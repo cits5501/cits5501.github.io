@@ -168,7 +168,7 @@ This unit covers testing and quality assurance topics including:
     Thursdays, and Friday afternoon.
 - - **Consultation**
   - <!--!<address>!-->Email {% email_el_spannized coordinator.email %} for an appointment,
-    or visit my office between 4--5pm Thursday. Students are also
+    or visit my office between 2--4pm Thursday. Students are also
     welcome to speak to me after the lectures. At busy times of semester,
     I may need one or two business days' notice to schedule an appointment.
     <!--!</address>!-->

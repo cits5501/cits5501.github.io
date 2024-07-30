@@ -8,7 +8,7 @@ author: 'Unit coordinator: Arran Stewart'
 ### Re-cap
 
 -   We looked at testing concepts -- failures, faults/defects,
-    and erroneous states
+    invariants, and erroneous/inconsistent runtime states
 -   We looked at specifications and APIs -- these help
     us answer the question, "How do we know what to
     test against?"\
@@ -262,6 +262,7 @@ of system use.
 
 ### Questions
 
+\vspace{-0.1em}
 \scriptsize
 
 ::: block
@@ -279,14 +280,7 @@ of system use.
 A common way of thinking about the way tests relate
 is to think of them as forming a "test pyramid":[^pyramid]
 
-<!--
-`\begin{center}`{=latex}
-![](lect03-images/test-levels.eps){ width=80% }
-`\end{center}`{=latex}
--->
-
-
-`\begin{center}~\\[0.3em]`{=latex}
+`\vspace{-0.5em}\begin{center}~\\[0.3em]`{=latex}
 ![](lect03-images/test-pyramid.eps){ width=80% }
 `~\\[2.7em]\end{center}`{=latex}
 
@@ -388,7 +382,7 @@ and spitting something *out* (toast).
 But we also might have some kind of *use-case* for how the toaster should
 be used:
 
-`~\\[-0.5em]~\hrule`{=latex}
+`\vspace{-0.5em}~\hrule`{=latex}
 
 Scenario: User is in the toaster's physical location
 
@@ -402,7 +396,7 @@ Scenario: User is in the toaster's physical location
 #. When system detects the desired toastiness level has
    been achieved, heat is turned off and a klaxon is sounded.
 
-`\hrule`{=latex}
+`\vspace{1em}\hrule`{=latex}
 
 ### Coming up with tests
 
@@ -610,22 +604,22 @@ OLD, removed:
 
 ### Test fixtures
 
--   Recall that test fixtures are things we
-    need in order to get the system into a known state,
-    ready for a test
--   Often, multiple tests will share some requirements
-    for what environment needs to be set up
--   A typical approach in object-oriented languages
-    is to group tests with shared fixture requirements
-    into the same class
--   And then to specify "setup" and "tear-down" methods
-    for the class, which will be run before and after
-    each test, respectively. 
--   Shared objects will be declared as *instance variables*
+- Recall that test fixtures are things we
+  need in order to get the system into a known state,
+  ready for a test
+- Often, multiple tests will share some requirements
+  for what environment needs to be set up
+- A typical approach in \alert{object-oriented languages}
+  is to group tests with shared fixture requirements
+  into the same class
+  -   And then to specify "setup" and "tear-down" methods
+      for the class, which will be run before and after
+      each test, respectively. 
+  -   Shared objects will be declared as *instance variables*
 
 ### Test fixtures
 
-\vspace{-1em}
+\vspace{-0.2em}
 \footnotesize
 
 ```java
