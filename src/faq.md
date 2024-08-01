@@ -771,7 +771,7 @@ examinable:
 - the spoken content of the lectures
 - any recommended reading for the lecture
 - any reading linked to from the lecture slides
-- the lab sheets
+- the published lab sheets and any unassessed Moodle exercises
 - any recommended reading for the labs
 - material contained in the solutions or model answers
   for lab worksheets or assessments

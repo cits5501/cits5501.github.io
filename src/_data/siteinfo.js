@@ -67,7 +67,7 @@ module.exports = function(configData) {
   const moodle            = safe(extLink("Moodle", moodle_url));
 
   let semesterStartDateStr = '2024-07-22'
-  let semesterStartDate = new Date(semesterStartDateStr);
+  let semesterStartDate    = new Date(semesterStartDateStr);
 
   // put in semester week num (from 1), day of week (from Monday as 0)
   // plus hours (0-23)
@@ -141,6 +141,7 @@ module.exports = function(configData) {
     unitname:     unitname,
     locode:       locode,
 
+    semesterStartDate:  semesterStartDate,
 
     title:        `${unitcode} ${unitname}`,
     subtitle:     `${unitcode} in ${year}`,

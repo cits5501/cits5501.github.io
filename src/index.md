@@ -203,18 +203,46 @@ labs don't start until week 2)*{ class="hi-pri" }
 
 **Labs**  { #labs }
 
-:   You should attend one lab each week, starting in week
-    ***two***{ class="hi-pri" }.\
-    However, as long as there is room available for you, you are welcome to attend other
-    sessions as well.
+:   Lab worksheets are published on the [resources page](/resources/#lectures) on this
+    website, and there will be a worksheet available for each week from week 2 through
+    to week 11. (Week 12 is reserved for your personal revision; no lab worksheet is
+    published that week.)
 
-    One of the lab facilitators will be available
-    to assist you with the lab material and answer questions.
+    You should attempt all exercises and activities in the worksheets; you can work through them
+    from home or on campus in your own time. Some weeks, the activities will include
+    unassessed quizzes or lessons on the CSSE department's [Moodle]({{moodle_url}}){{blank}}
+    server. You should ensure you complete these, as they do form part of the
+    [examinable material](/faq/#examinable-material).
 
+    Timetabled lab sessions are run on a *drop-in* basis. This means that:
+
+    - Once a worksheet for the lab has been released, you can work through it at your own pace, either at home or on campus.
+    - If you run into difficulties or have questions, you are welcome to visit *any*
+      timetabled lab session to get them resolved – you do not need to be allocated to a
+      particular lab on CAS (UWA's [Class Allocation System][cas]) in order to show up and
+      ask questions.
+    - You can drop in on [any timetabled lab][lab-room] – for a link to the timetable,
+      see [below](#timetable) – from week 2 through to week 11.
+    - No attendance is taken at timetabled lab sessions, and attendance is not compulsory.
+
+    Model answers to exercises are normally provided the following week so you can gauge your progress.
+
+
+    In later weeks, there may be topics where it's useful to have group discussions or get
+    feedback from other students. Before we get to those labs, I'll assign groups and make
+    the group details available on the CSSE department's [Moodle]({{moodle_url}}){{blank}}.
+    Those groups can then arrange to meet online (e.g. via MS Teams) or in person at any
+    time and place convenient to them – there is no need to physically meet on campus
+    (unless you wish to).
+
+    It's important to keep up with the lab material, so ensure you do some work on the lab materials every week (from week 2 onwards).
+
+    {#
     Please make use of the lab facilitators! One of the best ways to
     gauge how well you understand a topic, or to find out if you are
     "on the right track" for a project, is to discuss them with the lab
     facilitators.
+    #}
 
     **Laptop requirement**{ class="hi-pri" }: You will
     need to use **your own laptop**{ class="hi-pri" } when attending
@@ -224,7 +252,8 @@ labs don't start until week 2)*{ class="hi-pri" }
     access all the languages and frameworks we will look at using only a
     web browser.
 
-    Lab worksheets are published [here](/resources/#labs) on this website.
+[lab-room]: https://cits5501.github.io/faq/#attending-labs
+[cas]: https://ipoint.uwa.edu.au/app/answers/detail/a_id/752/~/class-allocation-system-%28cas%29-explained
 
 **Moodle exercises** { #moodle-exercises }
 
@@ -235,15 +264,22 @@ assurance concepts.
     (All assessments will be completed using the Moodle server, too.) More
     information about these will be available in the first lab.
 
-You can always get full details of lecture and lab times and venues by
-visiting UWA's **[Timetable site][timetable-site]{ target="_blank" }**{ class="hi-pri" }.
-(If the information for {{ siteinfo.unitcode }} is not visible, then enter "{{ siteinfo.unitcode }}" in the
-box labelled "Unit search", and then click "Show timetable".)
+    You need to ensure you're [registered on Moodle](/faq/#moodle-registration) by the end
+    of week 3, in order to complete the week 4 [assessment](/assessment/).
 
-(Note, however, that in addition to all the labs that *are* running,
-the Timetable site may also show some lab sessions which are not yet
-running, due to insufficient demand -- check with the Unit Coordinator
-if you want to be sure whether a session is running.)
+**List of timetabled sessions** { #timetable }
+
+:   You can always get full details of lecture and lab times and venues by
+    visiting UWA's **[Timetable site][timetable-site]{ target="_blank" }**{ class="hi-pri" }.
+    (If the information for {{ siteinfo.unitcode }} is not visible, then enter "{{ siteinfo.unitcode }}" in the
+    box labelled "Unit search", and then click "Show timetable".)
+
+    {# x_ #}
+
+    (Note, however, that in addition to all the labs that *are* running,
+    the Timetable site may also show some lab sessions which are not yet
+    running, due to insufficient demand -- check with the Unit Coordinator
+    if you want to be sure whether a session is running.)
 
 [timetable-site]: https://timetable.applications.uwa.edu.au/?selectunits={{ siteinfo.unitcode }}
 
@@ -415,5 +451,5 @@ to this unit:
 
 
 <!--
-  vim: tw=72
+  vim: tw=92
 -->
