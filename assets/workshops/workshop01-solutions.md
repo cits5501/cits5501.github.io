@@ -197,8 +197,10 @@ We describe these options in the following sections.
     into 'lib/'".
 
     If you open the `CalculatorSimpleTest.java` file, then after a short
-    while, a green triangle icon should appear to the left of the line
-    "`public class CalculatorSimpleTest`". Clicking it will run all `@Test`
+    while, a small icon should appear to the left of the line
+    "`public class CalculatorSimpleTest`". (Depending on your version of VS Code
+    and the state of the tests, it may show up as a green triangle, a red cross,
+    or a green tick.) Clicking it will run all `@Test`
     methods in the class.
 
     (If the icon doesn't appear: select "View" / "Problems" from the menu,
@@ -663,6 +665,10 @@ in CITS5501:
 :   Visit <https://quiz.jinhong.org> and sign up
     with your UWA email address, then attempt the quizzes
     (in your own time, if you don't finish them in the lab).
+
+    Note that you need to register on Moodle **before week 4** – only enrolled CITS5501
+    students are permitted to take the assessments, so early in week 4, any unenrolled
+    Moodle participants will be removed, and self-registration will be locked.
 
 **Assessed vs unassessed Moodle activities**
 
