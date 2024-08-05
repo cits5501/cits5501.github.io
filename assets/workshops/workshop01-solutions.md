@@ -132,7 +132,7 @@ We describe these options in the following sections.
 
     - you have the JDK installed (see the [Oracle website][jdk] for
       downloads)
-    - you've installed the [Extension Pack for Java][java-ext] as a VS Code.
+    - you've installed the [Extension Pack for Java][java-ext] within VS Code.
       Click the "extensions" icon in the left sidebar of VS Code (looks like
       this: ![](VSCode-Extension-Icon.png){ width="0.7cm" }), search for "Extension Pack for
       Java" in the search bar at top, and click "install".

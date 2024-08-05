@@ -1,6 +1,6 @@
 ---
 title: |
-  CITS5501 lab 2&nbsp;--&nbsp;Data-driven tests and test design&nbsp;--&nbsp;solutions
+  CITS5501 lab 2 (week 3)&nbsp;--&nbsp;Data-driven tests and test design&nbsp;--&nbsp;solutions
 ---
 
 `~\vspace{-5em}`{=latex}
@@ -326,10 +326,9 @@ lab.)
 
 ## 2. Preconditions and postconditions
 
-Work through and discuss the following scenario and exercises
-in pairs or groups of three
-if there is sufficient time. If there is not, work through
-these in your own time.
+Work through following scenario and exercises. After you've done so, it's suggested you drop
+in to a timetabled lab sessions to discuss and compare your answers with other students,
+and/or obtain feedback from the lab facilitator.
 
 Consider the following scenario:
 
@@ -587,11 +586,12 @@ Bruegge and Dutoit, *Object-Oriented Software Engineering Using UML, Patterns, a
 
 ## 3. Testability
 
-Consider the following, each of which is
-supposed to be a requirement or specification. Discuss with a partner --
-do you think it would be
-straightforward to write tests for them?
-If not, why not?
+Consider the following, each of which is supposed to be a requirement or specification.
+Do you think it would be straightforward to write tests for them?  If not, why not?
+After answering these questions, you might like to drop in to a timetabled lab session to
+compare your answers with other students. Although model solutions will be provided, there
+is often no single definitive answers to software engineering questions such as these --
+different students may come up with slightly different answers.
 
 a.  The flight booking system should be easy for travel agents to use.
 #.  The `int String.indexOf(char ch)` method should return a -1 if `ch`
@@ -608,7 +608,11 @@ a.  The flight booking system should be easy for travel agents to use.
 
 **Sample solutions**:
 
-\(a) This would be difficult to test.
+System requirements:
+
+***a\. "Easiness of use" requirement***
+
+This would be difficult to test.
 
 - "Easy to use" is not a very *precise* requirement.
   It is the opposite of precise -- it is *vague* or *fuzzy*;
@@ -633,6 +637,13 @@ a.  The flight booking system should be easy for travel agents to use.
   might test it on non-technical staff in their own
   organisation, for instance.
 
+  (The staff in their own organisation are acting as
+  a sort of *test double* or *mock*, here -- we will see more
+  about these later. When we write unit tests,
+  a "mock" is some sort of object that "stands in for"
+  a real object that for some reason is difficult or inappropriate
+  to use.)
+
 \orangealert If you are not clear about what makes a good requirement,
 you might want to review the chapter from the *Pressman* textbook
 on "Understanding Requirements" (in the 9th edition)
@@ -651,5 +662,5 @@ for an IBM requirements management product) available
 
 
 
-<!-- vim: syntax=markdown tw=72 :
+<!-- vim: syntax=markdown tw=92 :
 -->

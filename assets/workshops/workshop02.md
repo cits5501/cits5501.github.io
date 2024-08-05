@@ -1,6 +1,6 @@
 ---
 title: |
-  CITS5501 lab 2&nbsp;--&nbsp;Data-driven tests and test design
+  CITS5501 lab 2 (week 3)&nbsp;--&nbsp;Data-driven tests and test design
 ---
 
 `~\vspace{-5em}`{=latex}
@@ -266,10 +266,9 @@ lab.)
 
 ## 2. Preconditions and postconditions
 
-Work through and discuss the following scenario and exercises
-in pairs or groups of three
-if there is sufficient time. If there is not, work through
-these in your own time.
+Work through following scenario and exercises. After you've done so, it's suggested you drop
+in to a timetabled lab sessions to discuss and compare your answers with other students,
+and/or obtain feedback from the lab facilitator.
 
 Consider the following scenario:
 
@@ -341,11 +340,12 @@ invariants are, you might wish to review the week 1 readings.
 
 ## 3. Testability
 
-Consider the following, each of which is
-supposed to be a requirement or specification. Discuss with a partner --
-do you think it would be
-straightforward to write tests for them?
-If not, why not?
+Consider the following, each of which is supposed to be a requirement or specification.
+Do you think it would be straightforward to write tests for them?  If not, why not?
+After answering these questions, you might like to drop in to a timetabled lab session to
+compare your answers with other students. Although model solutions will be provided, there
+is often no single definitive answers to software engineering questions such as these --
+different students may come up with slightly different answers.
 
 a.  The flight booking system should be easy for travel agents to use.
 #.  The `int String.indexOf(char ch)` method should return a -1 if `ch`
@@ -360,5 +360,5 @@ a.  The flight booking system should be easy for travel agents to use.
 
 
 
-<!-- vim: syntax=markdown tw=72 :
+<!-- vim: syntax=markdown tw=92 :
 -->
