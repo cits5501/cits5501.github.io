@@ -84,12 +84,19 @@ other problem with the calling code.
 under the hood, Python excepts the list to throw a `StopIteration`
 exception when the end of the list is reached.)
 
-Those exceptions and when they
+### Off the "happy path"
+
+\small
+
+When we throw exceptions to inform the caller about some circumstance,
+those exceptions and the exact situations in which they
 will be thrown \alert{should}  be properly documented, so the caller
 knows what
 kind of situations can occur and handle them all.
 
 ::: block
+
+\small 
 
 #### Easily predictable situations that are off the "happy path"
 
@@ -110,7 +117,8 @@ kind of situations can occur and handle them all.
 Sometimes, situations will arise where a system cannot continue normal
 operation, and also can't reasonably do anything to fix the situation.
 
-In Java, these situations are indicated using the [`Error` class][error-class]`:\\[1em]`{=latex}
+In Java, these situations are indicated using the [`Error` class][error-class]. As per that
+class's [documentation][error-class]`:\\[1.5em]`{=latex}
 
 > An `Error` is a subclass of `Throwable` that indicates serious problems
 > that a reasonable application should not try to catch. Most such
@@ -138,6 +146,8 @@ they might arise. (We certainly shouldn't *throw* them ourselves; that's
 the JVM's job.)
 
 ::: block
+
+\small
 
 #### Unfixable situations
 
