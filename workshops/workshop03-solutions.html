@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang xml:lang>
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>CITS5501 lab 3 (week 4) – ISP  – solutions</title>
+  <style>
+    html {
+      line-height: 1.5;
+      font-family: sans serif;
+      font-size: 12pt;
+      color: black;
+      background-color: white;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 50em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 1em;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    img {
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, 'Lucida Console', Consolas, monospace;
+      background-color: hsl(0, 0%, 98%);
+      padding: .2em .4em;
+      font-size: 85%;
+      margin: 0;
+    }
+    pre {
+      margin: 1em 0;
+      background-color: hsl(0, 0%, 98%);
+      padding: 1em;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    /* Inline code */
+    :not(pre) > code {
+      padding: 2px 4px;
+      font-size: 90%;
+      word-break: normal !important;
+      white-space: nowrap;
+      color: hsl(344.8,69%,10%);
+      background-color: hsl(342.9,37%,96%);
+      border-radius: 4px;
+    }
+    .sourceCode {
+     background-color: hsl(0, 0%, 98%);
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid black;
+      border-bottom: 1px solid black;
+    }
+    th {
+      border-top: 1px solid black;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      {   }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #7d9029; } /* Attribute */
+    code span.bn { color: #40a070; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4070a0; } /* Char */
+    code span.cn { color: #880000; } /* Constant */
+    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+    code span.dt { color: #902000; } /* DataType */
+    code span.dv { color: #40a070; } /* DecVal */
+    code span.er { color: #ff0000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #40a070; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { } /* Import */
+    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+    code span.op { color: #666666; } /* Operator */
+    code span.ot { color: #007020; } /* Other */
+    code span.pp { color: #bc7a00; } /* Preprocessor */
+    code span.sc { color: #4070a0; } /* SpecialChar */
+    code span.ss { color: #bb6688; } /* SpecialString */
+    code span.st { color: #4070a0; } /* String */
+    code span.va { color: #19177c; } /* Variable */
+    code span.vs { color: #4070a0; } /* VerbatimString */
+    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+  <style>
+    div.solutions {
+      border: solid 2pt hsla(120, 100%, 35%, 1);
+      border-radius: 5pt;
+      background-color: hsla(120, 100%, 50%, 0.1);
+      padding: 1em;
+    }
+  </style>
+<script data-external="1" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript">
+</script>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">CITS5501 lab 3 (week 4) – ISP  – solutions</h1>
+</header>
+<nav id="TOC" role="doc-toc">
+<h2 id="toc-title">Contents</h2>
+<ul>
+<li><a href="#binary-search">1. Binary search</a></li>
+<li><a href="#stack-class">2. Stack class</a></li>
+<li><a href="#discussion-questions">3. Discussion questions</a></li>
+</ul>
+</nav>
+<p></p>
+<h2 id="binary-search">1. Binary search</h2>
+<p>Consider the Javadoc documentation and signature for the following
+Java method, which searches inside an array of <code>char</code>s for a
+particular value.</p>
+<p>(Adapted from the Android version of the Java standard library.)</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource java numberLines"><code class="sourceCode java"><span id="cb1-1"><a href="#cb1-1"></a><span class="co">/**</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a> <span class="co">*</span> Performs a binary search for <span class="co">@</span>code value in the ascending sorted</span>
+<span id="cb1-3"><a href="#cb1-3"></a> <span class="co">*</span> array <span class="co">@</span>code array<span class="co">,</span> in the range specified by fromIndex <span class="co">(</span>inclusive<span class="co">)</span></span>
+<span id="cb1-4"><a href="#cb1-4"></a> <span class="co">*</span> and toIndex <span class="co">(</span>exclusive<span class="co">). </span> Searching in an unsorted array has an</span>
+<span id="cb1-5"><a href="#cb1-5"></a> <span class="co">*</span> undefined result<span class="co">.</span> It<span class="co">&#39;</span>s also undefined which element is found if there</span>
+<span id="cb1-6"><a href="#cb1-6"></a> <span class="co">*</span> are multiple occurrences of the same element<span class="co">.</span></span>
+<span id="cb1-7"><a href="#cb1-7"></a> <span class="co">*</span></span>
+<span id="cb1-8"><a href="#cb1-8"></a> <span class="co">*</span> <span class="co">@</span>param array the sorted array to search<span class="co">.</span></span>
+<span id="cb1-9"><a href="#cb1-9"></a> <span class="co">*</span> <span class="co">@</span>param startIndex the inclusive start index<span class="co">.</span></span>
+<span id="cb1-10"><a href="#cb1-10"></a> <span class="co">*</span> <span class="co">@</span>param endIndex the exclusive start index<span class="co">.</span></span>
+<span id="cb1-11"><a href="#cb1-11"></a> <span class="co">*</span> <span class="co">@</span>param value the element to find<span class="co">.</span></span>
+<span id="cb1-12"><a href="#cb1-12"></a> <span class="co">*</span> <span class="co">@</span>return the non<span class="co">-</span>negative index of the element<span class="co">,</span> or a negative index</span>
+<span id="cb1-13"><a href="#cb1-13"></a> <span class="co">*</span>         which is <span class="kw">&lt;code&gt;</span><span class="co">-</span>index <span class="co">-</span> <span class="co">1</span><span class="kw">&lt;/code&gt;</span> where the element would be</span>
+<span id="cb1-14"><a href="#cb1-14"></a> <span class="co">*</span>         inserted<span class="co">.</span></span>
+<span id="cb1-15"><a href="#cb1-15"></a> <span class="co">*</span> <span class="co">@</span>throws IllegalArgumentException if <span class="kw">&lt;code&gt;</span>startIndex <span class="co">&gt;</span> endIndex<span class="kw">&lt;/code&gt;</span></span>
+<span id="cb1-16"><a href="#cb1-16"></a> <span class="co">*</span> <span class="co">@</span>throws ArrayIndexOutOfBoundsException if</span>
+<span id="cb1-17"><a href="#cb1-17"></a> <span class="co">*</span>         <span class="kw">&lt;code&gt;</span>startIndex <span class="er">&lt;</span> <span class="co">0</span> <span class="co">||</span> endIndex <span class="co">&gt;</span> array<span class="co">.</span>length<span class="kw">&lt;/code&gt;</span></span>
+<span id="cb1-18"><a href="#cb1-18"></a> <span class="co">*</span> <span class="co">@</span>since <span class="co">1.6</span></span>
+<span id="cb1-19"><a href="#cb1-19"></a> <span class="co">*/</span></span>
+<span id="cb1-20"><a href="#cb1-20"></a><span class="kw">public</span> <span class="dt">static</span> <span class="dt">int</span> <span class="fu">binarySearch</span><span class="op">(</span><span class="dt">char</span><span class="op">[]</span> array<span class="op">,</span> <span class="dt">int</span> startIndex<span class="op">,</span> <span class="dt">int</span> endIndex<span class="op">,</span> <span class="dt">char</span> value<span class="op">)</span></span></code></pre></div>
+<p>Based on what you have seen in lectures and the prescribed reading,
+discuss how you would go about creating tests using Input Space
+Partitioning.</p>
+<ol type="a">
+<li>What steps are involved in doing ISP?</li>
+<li>What is the input domain here?</li>
+<li>What are some characteristics you could use? Check with a partner
+(or small group), and make sure each characteristic does give you a
+partitioning.</li>
+</ol>
+
+<div class="solutions">
+<p><strong>Sample solutions</strong>:</p>
+<p><strong><em>a. Steps involved are:</em></strong></p>
+<ol type="1">
+<li>Identify functions</li>
+<li>Identify parameters</li>
+<li>Model the input domain (partitioning it using characteristics)</li>
+<li>Choose partitions, and values within them</li>
+<li>Refine these into tests</li>
+<li>Review</li>
+</ol>
+<p><strong><em>b. input domain</em></strong></p>
+<p>The input domain consists of:</p>
+<ul>
+<li>the set of all possible <em>arrays</em> of <code>char</code>s (for
+all practical purposes, we can consider this domain as being infinite in
+size)</li>
+<li>the set of all possible <code>int</code>s (2 parameters of this
+sort)</li>
+<li>the set of all possible <code>char</code>s (there are 256 of
+them)</li>
+</ul>
+<p>Technically, the input domain consists of a 4-tuple made up of
+<em>(arrays-of-chars, ints, ints, chars)</em>. (We could, if needed,
+make the sets here a little more mathematically precise, but it’s not
+needed for our purposes.)</p>
+<p><strong><em>c. Characteristics and partitions:</em></strong></p>
+<p>Some characteristics we could use for our <code>int</code>s are:</p>
+<ol type="i">
+<li>Are they less than, greater than, or equal to zero?</li>
+<li>Do one (or both) of them represent positions at the start of the
+array (i.e. are they zero)?</li>
+<li>Do one (or both) of them represent positions at the end of the array
+(i.e. are they <code>array.length - 1</code>)?</li>
+<li>Is the first parameter greater than, equal to, or less than the
+second?<br />
+(this gives us 3 partitions)</li>
+</ol>
+<p>Some comments on these:</p>
+<p>Characteristic (i) is acceptable, but not a particularly useful
+characteristic in this case. Ask yourself: is it especially likely that
+the sorting routine would treat positive and negative values
+differently? If not, then what is the point of dividing an
+<code>int</code> up in this way? Recall that the purpose of partitioning
+is to divide a domain up into equivalence classes – values where any one
+value is likely to be as good as any other. For a sorting routine,
+that’s <em>already</em> true of an <code>int</code> – there is little
+value to be got from splitting it up further (though you might do so for
+completeness, once other, more useful characteristics have been
+applied).</p>
+<p>In fact, this characteristic is something a machine might come up
+with (interface-based), as opposed to a person thinking about the
+intended behaviour of the method.</p>
+<p>Characteristic (iii) is a characteristic of <em>two</em> parameters
+combined (which is fine).</p>
+<p>For characteristic (iv) - all of these partitions <em>are</em>
+sensible, and are worth testing for. When the first parameter is greater
+than the second, then the method documentation says an
+<code>IllegalArgumentException</code> should be thrown – so we should
+test for that and make sure that it is.</p>
+<p>(You might ask: why should we write a test just to make sure some
+exception is thrown? The answer is that this is part of the “contract”
+of the method, and <em>is</em> important. In practice, software
+developers <em>do</em> want to know what exceptions a method can throw,
+and do rely on methods throwing what they say they will.)</p>
+<p>Some characteristics we could use for our array are:</p>
+<ul>
+<li>Is it of size zero, one, or is it larger than one?<br />
+(Note that if it is of zero, our int parameters will necessarily be
+outside it, and exceptions will be thrown.)</li>
+</ul>
+<p>Note that a characteristic like “is the array in ascending sorted
+order?” is <em>not</em> a useful characteristic here. The array
+<em>must</em> be in ascending sorted order; that’s a precondition of
+calling the method, and if it’s not true, the behaviour is undefined, so
+what “expected behaviour” could we possibly test for?</p>
+<p>Some characteristics we could use for our char are:</p>
+<ul>
+<li>Is it equal to 0?</li>
+<li>Is it equal to 255?</li>
+</ul>
+<p>(These are boundary values for the <code>char</code> type.)</p>
+<p> </p>
+</div>
+<p></p>
+<h2 id="stack-class">2. Stack class</h2>
+<p>Suppose we have a Stack class that stores <code>int</code>s, with the
+following method signatures:</p>
+<ul>
+<li><code>public IntStack ();</code></li>
+<li><code>public void push (int i);</code></li>
+<li><code>public int pop (); /** Throws an exception if empty */</code></li>
+<li><code>public boolean isEmpty()</code></li>
+</ul>
+<p>Assume the object state consists of an <code>int</code> array.</p>
+<ol type="a">
+<li>If we wanted to model <code>push</code> as a function, what sort of
+function would we use? How about <code>pop</code>?</li>
+<li>Identify all the parameters for the <code>pop</code> method, and
+suggest some characteristics that can be used to partition the input
+space.</li>
+</ol>
+
+<div class="solutions">
+<p><strong>Sample solutions</strong>:</p>
+<p>a. We would model the <code>push</code> Java method as a mathematical
+function that maps from “the old state” and an integer, to a new
+state:</p>
+<p><span class="math display">\[
+push : ([\mathbb{Z}], \mathbb{Z}) \rightarrow [\mathbb{Z}]
+\]</span></p>
+<p>(We use <span class="math inline">\([\mathbb{Z}]\)</span> here to
+indicate an array of integers.)</p>
+<p>If we wanted our mathematical notation to be a little more
+informative to a reader, we could say:</p>
+<ul>
+<li>Let <span class="math inline">\(StateOfStack =
+[\mathbb{Z}]\)</span></li>
+<li>Let <code>push</code> be a function with signature: <span class="math inline">\(push : (StateOfStack, \mathbb{Z}) \rightarrow
+StateOfStack\)</span></li>
+</ul>
+<p>Basically, the function is treating the method as if it were
+something more like a <code>static</code> Java method with the signature
+<code>static [int] push( int oldState[], int i)</code>, which takes
+<em>in</em> a state, and returns a new state.</p>
+<p>For <code>pop</code>, we would model it as <span class="math inline">\(pop : [\mathbb{Z}] \rightarrow (\mathbb{Z},
+[\mathbb{Z}])\)</span> – a function that takes in the state of the
+stack, and returns a result and a new state. That is, it’s as if the
+method instead of having signature <code>public int pop ()</code> had
+instead a signature something like
+<code>static Pair&lt;int, [int]&gt; pop()</code>.</p>
+<p>(See <a href="https://docs.oracle.com/javase/9/docs/api/javafx/util/Pair.html" class="uri">https://docs.oracle.com/javase/9/docs/api/javafx/util/Pair.html</a>
+for the <code>Pair</code> type.)</p>
+<p>b. Pop has effectively one parameter, the object state.</p>
+<p>Some possible characteristics:</p>
+<ul>
+<li>Does the array have zero elements in it, or one, or more?<br />
+(This partitions the domain into 3.)</li>
+</ul>
+<p>Note that it doesn’t make sense to have “nullness” as a
+characteristic. If the array were null, the object would be in an
+invalid state, and what “expected behaviour” could we possibly test
+for?</p>
+</div>
+<p></p>
+<h2 id="discussion-questions">3. Discussion questions</h2>
+<p>Discuss the following questions about ISP in pairs or a small group,
+and come up with answers:</p>
+<ol type="a">
+<li><p>Suppose we need to test some method (let’s suppose it is a static
+method <code>myMethod</code> that takes one <code>int</code> for the
+sake of argument, and that it’s sensible to partition it into positive,
+negative and 0-valued <code>int</code>s. i.e. the signature is
+<code>static myMethod(int i)</code>).</p>
+<p>Suppose you’ve already written three tests for the function; each of
+your 3 tests uses a test value from one partition.</p>
+<p>Your supervisor says three tests is not enough, and you should write
+more. What do you think? Would more tests be better? Could more tests be
+<em>worse</em>?</p></li>
+<li><p>Research suggests that the later in the development life cycle a
+fault is discovered, the more expensive it is to fix. Why do you think
+this is so?</p></li>
+</ol>
+<div class="solutions">
+<p><strong><em>a. Number of tests</em></strong></p>
+<p>The idea behind partitioning is that we’ve split the domain up into
+what are called equivalence classes, where any one value from each
+partition is “as good as any other” (so far as the behaviour of the
+method is concerned).</p>
+<p>If that really is the case, then once we have three tests for
+<code>myMethod</code>, writing more tests adds nothing of value. In
+fact, excessive tests could make things worse: more tests means
+regression tests become slower to run, and we have more code to
+maintain. Every test you write should “carry its weight” – it should
+serve some useful purpose, and add more value than it costs to
+maintain.</p>
+<p>So – if these really are equivalence classes, then writing more tests
+adds nothing of value. But in fact, we know that programmers tend to
+make mistakes around boundaries, so it’s not <em>quite</em> true that
+every value from each partition is “as good as” any other.</p>
+<p>We could add in tests that use -1 and 1 as test values (or maybe even
+the maximum and minimum values of an <code>int</code>), and still have
+tests that “carry their weight”.</p>
+<p><strong><em>b. Costs of fixing defects</em></strong></p>
+<p>The main reason is that the compnent which contains the fault becomes
+a more and more integral part of the system, and affects more components
+– the fault has become “built in” to the documentation, larger
+components, other tests, etc.</p>
+<p>This means that <em>fixing</em> the fault is (a) likely to take more
+effort, because we have to consider all the other
+components/documentation/tests that it affects, and (b) can have
+unexpected consequences – our components may interact in complex
+ways.</p>
+</div>
+<!-- vim: syntax=markdown tw=72 :
+-->
+</body>
+</html>
