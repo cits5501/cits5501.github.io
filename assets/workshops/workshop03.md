@@ -1,15 +1,20 @@
 ---
-title: CITS5501 lab 3 (week 4)&nbsp;--&nbsp;ISP 
+title: |
+  CITS5501 lab 3 (week 4)&nbsp;--&nbsp;ISP
 ---
 
 
 `~\vspace{-5em}`{=latex}
 
+## 0. Recommended reading
+
+Before attempting the exercises in this lab, it's recommended you complete the recommended
+reading for week 4, and review the lecture slides on Input Space Partitioning.
+
 ## 1. Binary search
 
-Consider the Javadoc documentation and signature for
-the following Java method, which searches inside
-an array of `char`s for a particular value.
+Consider the Javadoc documentation and signature for the following Java method, which
+searches inside an array of `char`s for a particular value.
 
 (Adapted from the Android version of the Java standard library.)
 
@@ -40,7 +45,7 @@ an array of `char`s for a particular value.
 public static int binarySearch(char[] array, int startIndex, int endIndex, char value)
 ```
 
-Based on what you have seen in lectures and the prescribed reading,
+Based on the prescribed reading,
 discuss how you would go about creating tests using Input Space
 Partitioning. 
 
@@ -98,5 +103,5 @@ b.  Research suggests that the later in the development life cycle a
 
 
 
-<!-- vim: syntax=markdown tw=72 :
+<!-- vim: syntax=markdown tw=92 :
 -->
