@@ -473,6 +473,32 @@ may very well depend on other things; so when we're coming up with \alert{test
 values},
 we have to include those "other things" in our test values.
 
+### Further examples
+
+Suppose we have a static method `divide`, with the signature:
+
+::: block
+
+####
+
+```java
+  int divide(int m, int n);
+```
+
+:::
+
+It returns the value of `m` divided by `n`, but with the *precondition*
+that `n` can't be zero.
+
+::: incremental
+
+- How would we model this as a function?
+- Suppose instead that we specify that in most cases, `divide` returns
+  the value of `m` divided by `n`, *unless* `n` equals zero; in that
+  case, it throws a `DivisionByZeroException`. How does our model
+  change?
+
+:::
 
 <!-- vim: tw=72
 -->
