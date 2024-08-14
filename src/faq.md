@@ -430,8 +430,8 @@ Wherever possible, we adopt a rubric based on the following scheme:
 
 **Multiple choice/multiple selection/numeric answer/short answer question**{ class="hi-pri" }
 
-:   These will normally be worth only a small amount each (e.g. 5 or 10
-    marks out of a 100-mark quiz or test), and are typically
+:   These will normally be worth only a small amount each (e.g. 1 or 2
+    marks out of a 50-mark quiz or test), and are typically
     marked automatically.
     100% is awarded for a correct answer, and 0% for an incorrect
     answer.
