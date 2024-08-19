@@ -4,252 +4,273 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title> CITS5501 Software Testing and Quality Assurance  Semester 1, 2022  Workshop 4 (week 5) – graphs – solutions </title>
+  <title>CITS5501 lab 4 (week 5) – ISP and graphs – solutions</title>
   <style>
-    html {
-      line-height: 1.5;
-      font-family: sans serif;
-      font-size: 12pt;
-      color: black;
-      background-color: white;
-    }
-    body {
-      margin: 0 auto;
-      max-width: 50em;
-      padding-left: 50px;
-      padding-right: 50px;
-      padding-top: 50px;
-      padding-bottom: 50px;
-      hyphens: auto;
-      overflow-wrap: break-word;
-      text-rendering: optimizeLegibility;
-      font-kerning: normal;
-    }
-    @media (max-width: 600px) {
-      body {
-        font-size: 0.9em;
-        padding: 1em;
-      }
-      h1 {
-        font-size: 1.8em;
-      }
-    }
-    @media print {
-      body {
-        background-color: transparent;
-        color: black;
-        font-size: 12pt;
-      }
-      p, h2, h3 {
-        orphans: 3;
-        widows: 3;
-      }
-      h2, h3, h4 {
-        page-break-after: avoid;
-      }
-    }
-    p {
-      margin: 1em 0;
-    }
-    img {
-      max-width: 100%;
-    }
-    h1, h2, h3, h4, h5, h6 {
-      margin-top: 1.4em;
-    }
-    h5, h6 {
-      font-size: 1em;
-      font-style: italic;
-    }
-    h6 {
-      font-weight: normal;
-    }
-    ol, ul {
-      padding-left: 1.7em;
-      margin-top: 1em;
-    }
-    li > ol, li > ul {
-      margin-top: 0;
-    }
-    blockquote {
-      margin: 1em 0 1em 1.7em;
-      padding-left: 1em;
-      border-left: 2px solid #e6e6e6;
-      color: #606060;
-    }
-    code {
-      font-family: Menlo, Monaco, 'Lucida Console', Consolas, monospace;
-      background-color: hsl(0, 0%, 98%);
-      padding: .2em .4em;
-      font-size: 85%;
-      margin: 0;
-    }
-    pre {
-      margin: 1em 0;
-      background-color: hsl(0, 0%, 98%);
-      padding: 1em;
-      overflow: auto;
-    }
-    pre code {
-      padding: 0;
-      overflow: visible;
-      overflow-wrap: normal;
-    }
-    /* Inline code */
-    :not(pre) > code {
-      padding: 2px 4px;
-      font-size: 90%;
-      word-break: normal !important;
-      white-space: nowrap;
-      color: hsl(344.8,69%,10%);
-      background-color: hsl(342.9,37%,96%);
-      border-radius: 4px;
-    }
-    .sourceCode {
-     background-color: hsl(0, 0%, 98%);
-     overflow: visible;
-    }
-    hr {
-      background-color: #1a1a1a;
-      border: none;
-      height: 1px;
-      margin: 1em 0;
-    }
-    table {
-      margin: 1em 0;
-      border-collapse: collapse;
-      width: 100%;
-      overflow-x: auto;
-      display: block;
-      font-variant-numeric: lining-nums tabular-nums;
-    }
-    table caption {
-      margin-bottom: 0.75em;
-    }
-    tbody {
-      margin-top: 0.5em;
-      border-top: 1px solid black;
-      border-bottom: 1px solid black;
-    }
-    th {
-      border-top: 1px solid black;
-      padding: 0.25em 0.5em 0.25em 0.5em;
-    }
-    td {
-      padding: 0.125em 0.5em 0.25em 0.5em;
-    }
-    header {
-      margin-bottom: 4em;
-      text-align: center;
-    }
-    #TOC li {
-      list-style: none;
-    }
-    #TOC ul {
-      padding-left: 1.3em;
-    }
-    #TOC > ul {
-      padding-left: 0;
-    }
-    #TOC a:not(:hover) {
-      text-decoration: none;
-    }
-    span.smallcaps{font-variant: small-caps;}
-    span.underline{text-decoration: underline;}
-    div.column{display: inline-block; vertical-align: top; width: 50%;}
-    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-    ul.task-list{list-style: none;}
-    pre > code.sourceCode { white-space: pre; position: relative; }
-    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-    pre > code.sourceCode > span:empty { height: 1.2em; }
-    .sourceCode { overflow: visible; }
-    code.sourceCode > span { color: inherit; text-decoration: inherit; }
-    div.sourceCode { margin: 1em 0; }
-    pre.sourceCode { margin: 0; }
-    @media screen {
-    div.sourceCode { overflow: auto; }
-    }
-    @media print {
-    pre > code.sourceCode { white-space: pre-wrap; }
-    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-    }
-    pre.numberSource code
-      { counter-reset: source-line 0; }
-    pre.numberSource code > span
-      { position: relative; left: -4em; counter-increment: source-line; }
-    pre.numberSource code > span > a:first-child::before
-      { content: counter(source-line);
-        position: relative; left: -1em; text-align: right; vertical-align: baseline;
-        border: none; display: inline-block;
-        -webkit-touch-callout: none; -webkit-user-select: none;
-        -khtml-user-select: none; -moz-user-select: none;
-        -ms-user-select: none; user-select: none;
-        padding: 0 4px; width: 4em;
-        color: #aaaaaa;
-      }
-    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
-    div.sourceCode
-      {   }
-    @media screen {
-    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-    }
-    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-    code span.at { color: #7d9029; } /* Attribute */
-    code span.bn { color: #40a070; } /* BaseN */
-    code span.bu { } /* BuiltIn */
-    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-    code span.ch { color: #4070a0; } /* Char */
-    code span.cn { color: #880000; } /* Constant */
-    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-    code span.dt { color: #902000; } /* DataType */
-    code span.dv { color: #40a070; } /* DecVal */
-    code span.er { color: #ff0000; font-weight: bold; } /* Error */
-    code span.ex { } /* Extension */
-    code span.fl { color: #40a070; } /* Float */
-    code span.fu { color: #06287e; } /* Function */
-    code span.im { } /* Import */
-    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-    code span.op { color: #666666; } /* Operator */
-    code span.ot { color: #007020; } /* Other */
-    code span.pp { color: #bc7a00; } /* Preprocessor */
-    code span.sc { color: #4070a0; } /* SpecialChar */
-    code span.ss { color: #bb6688; } /* SpecialString */
-    code span.st { color: #4070a0; } /* String */
-    code span.va { color: #19177c; } /* Variable */
-    code span.vs { color: #4070a0; } /* VerbatimString */
-    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-  </style>
+html {
+line-height: 1.5;
+font-family: sans-serif;
+font-size: 12pt;
+color: black;
+background-color: white;
+}
+body {
+margin: 0 auto;
+max-width: 50em;
+padding-left: 50px;
+padding-right: 50px;
+padding-top: 50px;
+padding-bottom: 50px;
+hyphens: auto;
+overflow-wrap: break-word;
+text-rendering: optimizeLegibility;
+font-kerning: normal;
+}
+@media (max-width: 600px) {
+body {
+font-size: 0.9em;
+padding: 1em;
+}
+h1 {
+font-size: 1.8em;
+}
+}
+@media print {
+body {
+background-color: transparent;
+color: black;
+font-size: 12pt;
+}
+p, h2, h3 {
+orphans: 3;
+widows: 3;
+}
+h2, h3, h4 {
+page-break-after: avoid;
+}
+}
+p {
+margin: 1em 0;
+}
+img {
+max-width: 100%;
+}
+h1, h2, h3, h4, h5, h6 {
+margin-top: 1.4em;
+}
+h5, h6 {
+font-size: 1em;
+font-style: italic;
+}
+h6 {
+font-weight: normal;
+}
+ol, ul {
+padding-left: 1.7em;
+margin-top: 1em;
+}
+li > ol, li > ul {
+margin-top: 0;
+}
+blockquote {
+margin: 1em 0 1em 1.7em;
+padding-left: 1em;
+border-left: 2px solid #e6e6e6;
+color: #606060;
+}
+code {
+font-family: Menlo, Monaco, 'Lucida Console', Consolas, monospace;
+background-color: hsl(0, 0%, 98%);
+padding: .2em .4em;
+font-size: 85%;
+margin: 0;
+}
+pre {
+margin: 1em 0;
+background-color: hsl(0, 0%, 98%);
+padding: 1em;
+overflow: auto;
+}
+pre code {
+padding: 0;
+overflow: visible;
+overflow-wrap: normal;
+}
+
+:not(pre) > code {
+padding: 2px 4px;
+font-size: 90%;
+word-break: normal !important;
+white-space: nowrap;
+color: hsl(344.8,69%,10%);
+background-color: hsl(342.9,37%,96%);
+border-radius: 4px;
+}
+.sourceCode {
+background-color: hsl(0, 0%, 98%);
+overflow: visible;
+}
+hr {
+background-color: #1a1a1a;
+border: none;
+height: 1px;
+margin: 1em 0;
+}
+table {
+margin: 1em 0;
+border-collapse: collapse;
+width: 100%;
+overflow-x: auto;
+display: block;
+font-variant-numeric: lining-nums tabular-nums;
+}
+table caption {
+margin-bottom: 0.75em;
+}
+tbody {
+margin-top: 0.5em;
+border-top: 1px solid black;
+border-bottom: 1px solid black;
+}
+th {
+border-top: 1px solid black;
+padding: 0.25em 0.5em 0.25em 0.5em;
+}
+td {
+padding: 0.125em 0.5em 0.25em 0.5em;
+}
+header {
+margin-bottom: 4em;
+text-align: center;
+}
+#TOC li {
+list-style: none;
+}
+#TOC ul {
+padding-left: 1.3em;
+}
+#TOC > ul {
+padding-left: 0;
+}
+#TOC a:not(:hover) {
+text-decoration: none;
+}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+{ counter-reset: source-line 0; }
+pre.numberSource code > span
+{ position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+{ content: counter(source-line);
+position: relative; left: -1em; text-align: right; vertical-align: baseline;
+border: none; display: inline-block;
+-webkit-touch-callout: none; -webkit-user-select: none;
+-khtml-user-select: none; -moz-user-select: none;
+-ms-user-select: none; user-select: none;
+padding: 0 4px; width: 4em;
+color: #aaaaaa;
+}
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa; padding-left: 4px; }
+div.sourceCode
+{ }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } 
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.at { color: #7d9029; } 
+code span.bn { color: #40a070; } 
+code span.bu { color: #008000; } 
+code span.cf { color: #007020; font-weight: bold; } 
+code span.ch { color: #4070a0; } 
+code span.cn { color: #880000; } 
+code span.co { color: #60a0b0; font-style: italic; } 
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.do { color: #ba2121; font-style: italic; } 
+code span.dt { color: #902000; } 
+code span.dv { color: #40a070; } 
+code span.er { color: #ff0000; font-weight: bold; } 
+code span.ex { } 
+code span.fl { color: #40a070; } 
+code span.fu { color: #06287e; } 
+code span.im { color: #008000; font-weight: bold; } 
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.kw { color: #007020; font-weight: bold; } 
+code span.op { color: #666666; } 
+code span.ot { color: #007020; } 
+code span.pp { color: #bc7a00; } 
+code span.sc { color: #4070a0; } 
+code span.ss { color: #bb6688; } 
+code span.st { color: #4070a0; } 
+code span.va { color: #19177c; } 
+code span.vs { color: #4070a0; } 
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } 
+</style>
   <style>
-    div.solutions {
-      border: solid 2pt hsla(120, 100%, 35%, 1);
-      border-radius: 5pt;
-      background-color: hsla(120, 100%, 50%, 0.1);
-      padding: 1em;
-    }
-  </style>
-<script data-external="1" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript">
-</script>
+div.solutions {
+border: solid 2pt hsla(120, 100%, 35%, 1);
+border-radius: 5pt;
+background-color: hsla(120, 100%, 50%, 0.1);
+padding: 1em;
+}
+.block-caption {
+display: block;
+font-family: sans-serif;
+font-weight: bold;
+margin-bottom: 1.5rem;
+text-align: center;
+}
+details[open] summary *.only-open {
+opacity: 0.1;
+}
+</style>
   <!--[if lt IE 9]>
     <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
   <![endif]-->
 </head>
 <body>
 <header id="title-block-header">
-<h1 class="title"><p> CITS5501 Software Testing and Quality Assurance
-Semester 1, 2022 Workshop 4 (week 5) – graphs – solutions </p></h1>
+<h1 class="title"><p>CITS5501 lab 4 (week 5) – ISP and
+graphs – solutions</p></h1>
 </header>
 <nav id="TOC" role="doc-toc">
 <h2 id="toc-title">Contents</h2>
 <ul>
-<li><a href="#isp-graphs-and-control-flow">1. ISP, graphs and control
+<li><a href="#recommended-reading" id="toc-recommended-reading">0.
+Recommended reading</a></li>
+<li><a href="#isp-graphs-and-control-flow" id="toc-isp-graphs-and-control-flow">1. ISP, graphs and control
 flow</a></li>
-<li><a href="#test-fixtures">2. Test fixtures</a></li>
+<li><a href="#test-fixtures" id="toc-test-fixtures">2. Test
+fixtures</a></li>
+<li><a href="#class-design-invariants-and-testability" id="toc-class-design-invariants-and-testability">3. Class design,
+invariants, and testability</a></li>
 </ul>
 </nav>
+<h2 id="recommended-reading">0. Recommended reading</h2>
+<p>Before attempting the exercises in this worksheet, it’s recommended
+you complete the recommended reading for week 5, and ensure you’ve
+reviewed the lecture slides on Input Space Partitioning and graph-based
+testing.</p>
+<p>It should be possible to attempt the exercises even without having
+attended the lectures on graph-based testing, but you might want to
+revisit your answers after you have attended those lectures.</p>
 <h2 id="isp-graphs-and-control-flow">1. ISP, graphs and control
 flow</h2>
 <p>Consider the following Java method for collapsing sequences of
@@ -257,10 +278,10 @@ blanks, taken from the <code>StringUtils</code> class of Apache Velocity
 (<a href="http://velocity.apache.org/" class="uri">http://velocity.apache.org/</a>), version 1.3.1:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode numberSource java numberLines"><code class="sourceCode java"><span id="cb1-1"><a href="#cb1-1"></a></span>
 <span id="cb1-2"><a href="#cb1-2"></a><span class="co">/**</span></span>
-<span id="cb1-3"><a href="#cb1-3"></a><span class="co">*</span> Remove<span class="co">/</span>collapse multiple spaces<span class="co">.</span></span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="co">* Remove/collapse multiple spaces.</span></span>
 <span id="cb1-4"><a href="#cb1-4"></a><span class="co">*</span></span>
-<span id="cb1-5"><a href="#cb1-5"></a><span class="co">*</span> <span class="co">@</span>param String string to remove multiple spaces from<span class="co">.</span></span>
-<span id="cb1-6"><a href="#cb1-6"></a><span class="co">*</span> <span class="co">@</span>return String</span>
+<span id="cb1-5"><a href="#cb1-5"></a><span class="co">* @param String string to remove multiple spaces from.</span></span>
+<span id="cb1-6"><a href="#cb1-6"></a><span class="co">* @return String</span></span>
 <span id="cb1-7"><a href="#cb1-7"></a><span class="co">*/</span></span>
 <span id="cb1-8"><a href="#cb1-8"></a></span>
 <span id="cb1-9"><a href="#cb1-9"></a><span class="kw">public</span> <span class="dt">static</span> <span class="bu">String</span> <span class="fu">collapseSpaces</span><span class="op">(</span><span class="bu">String</span> argStr<span class="op">)</span> <span class="op">{</span></span>
@@ -284,22 +305,26 @@ blanks, taken from the <code>StringUtils</code> class of Apache Velocity
 combinations of partitions from them. A recommended approach is to aim
 for “Base Choice” coverage:</p>
 <ol type="i">
-<li>For each characteristic, pick a “base choice” (and explain the
-reasoning behind that choice)</li>
+<li>For each characteristic, pick a <em>base choice</em> (and explain
+the reasoning behind that choice). Usually, the base choice will be one
+that is simpler, smaller, or more likely to occur than the other
+possibilities.</li>
 <li>Select test values for a “base choice” test.</li>
 <li>Go through and derive test values for the “non-base”
 partitions.</li>
 </ol>
-<p>Try writing JUnit tests for some of your test values. Compare the
-characteristics and test values you derived with those of someone else
-in the same lab. Are your solutions the same?</p></li>
-<li><p>Using the techniques outlined in the last lecture, try to
-construct a <em>control flow graph</em> of the method.</p>
+<p>Try writing JUnit tests for some of your test values.</p>
+<p>After you have finished the lab exercises, you might like to drop
+into one of the timetabled lab sessions and compare the characteristics
+and test values you derived with those of another student. Are your
+solutions the same? If not, how do they differ? Do either of your
+solutions have an advantage over the other?</p></li>
+<li><p>Using the techniques outlined in lecture slides and readings on
+graph-based testing, try to construct a <em>control flow graph</em> of
+the method.</p>
 <p>How many nodes do you end up with?<br />
 How many edges?</p></li>
 </ol>
-<p>You may wish to work with a partner for these exercises, and compare
-your answers.</p>
 <p>For the purposes of this exercise, we’ll take a simplified approach:
 you may ignore calls to other methods, such as <code>.charAt()</code>,
 and need only model the control flow <em>within</em> the method. (What
@@ -394,7 +419,206 @@ of the characteristics listed above <em>sub-</em>partitions of the
 <p><strong>Sample solutions</strong>:</p>
 <p><strong>b. control flow graph</strong></p>
 <p>Here is one possible control flow graph:</p>
-<p> <!-- ![](images/controlflow-solution.eps){ width=70% } --> <img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9Im5vIj8+CjxzdmcKICAgeG1sbnM6eGh0bWw9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGh0bWwiCiAgIHhtbG5zOmRjPSJodHRwOi8vcHVybC5vcmcvZGMvZWxlbWVudHMvMS4xLyIKICAgeG1sbnM6Y2M9Imh0dHA6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL25zIyIKICAgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIgogICB4bWxuczpzdmc9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIgogICB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciCiAgIHhtbG5zOnNvZGlwb2RpPSJodHRwOi8vc29kaXBvZGkuc291cmNlZm9yZ2UubmV0L0RURC9zb2RpcG9kaS0wLmR0ZCIKICAgeG1sbnM6aW5rc2NhcGU9Imh0dHA6Ly93d3cuaW5rc2NhcGUub3JnL25hbWVzcGFjZXMvaW5rc2NhcGUiCiAgIHdpZHRoPSI1MzkuNTM2NzQiCiAgIGhlaWdodD0iNTExIgogICB2ZXJzaW9uPSIxLjEiCiAgIGNvbnRlbnQ9IiZsdDtteGZpbGUgdXNlckFnZW50PSZxdW90O01vemlsbGEvNS4wIChYMTE7IExpbnV4IHg4Nl82NCkgQXBwbGVXZWJLaXQvNTM3LjM2IChLSFRNTCwgbGlrZSBHZWNrbykgQ2hyb21lLzY2LjAuMzM1OS4xODEgU2FmYXJpLzUzNy4zNiZxdW90OyB2ZXJzaW9uPSZxdW90OzguNy42JnF1b3Q7IGVkaXRvcj0mcXVvdDt3d3cuZHJhdy5pbyZxdW90OyZndDsmbHQ7ZGlhZ3JhbSBpZD0mcXVvdDs3NDVmNjUzNS0yM2MzLThjNjItYzM0My0wZjAwOGQwMjEwOWImcXVvdDsgbmFtZT0mcXVvdDtQYWdlLTEmcXVvdDsmZ3Q7N1ZwZmIrTW9FUDhzKzJEdDNVTk94dGhKL05pbTdkN0RuYlJTVjdyYlIySlRtMXRpTEV5YVpELzlnZzJ4Q1U2VmJSMWZHbTNWcGpBTTRKbmYvSUZ4UExoWWJUOXhWT1ovc3hSVEwvRFRyUWZ2dkNDWVI1SDhWSVJkUTRobW1wQnhrallrMEJJZXlYZXNpYjZtcmttS0s0dFJNRVlGS1cxaXdvb0NKOEtpSWM3WnhtWjdZdFRldFVRWmRnaVBDYUl1OVIrU2lseUxGY3hhK3ArWVpMblpHVXpqWm1TSmttOFpaK3RDNytjRjhLbithWVpYeUt5bEJhMXlsTEpOaHdUdlBiamdqSW1tdGRvdU1GV3FOV3ByNWowY0dkMC9OOGVGT0dVQzFETXFzVE95NDFTcVFuY0xWc2gvdDhtYVAyTTFBOGhPTGxaVU4vR1dpSDlsMi84ajByMnZlcVFTaUlzYmhVUzdTazE3SUZUTjloVi9rUnFPSldYSnR5ODVLUnF5WmxJTC9ZZUYyR2tEUVd2QkpJbHhrYk9NRllqK3hWaHBIcVVRZk5kNUZ0WDlxamRxUkZSeUhkV1NVUU5iODBSekJkcnVFTSt3NW9KN2hLVGhZN2JDY2hQSndqRkZnanpicXlOdGd0bWViei8xTXlOeTM4RGZHZ3kwTWV5TUUvajJFczBqNkZrdG1MTFJlWXlXVkVQY0Q3ZVc2Um5SdFg3YUd4ZC9TcVdiS2NBMk9SSDRzVVMxUmpiUzBXMzBVVlUydnZkRXRzbzZ0SjZmTVJkNCs3S21YUjBhWFVTMkxrTGQzYlJlQ0RVcDd6Z2c5SThyM1ZMWFM3cUI1M0dGbHl4emREZDVuU3RBMXhYaU43ckN5YWlFZzZEU3dhUUR3MzVvajBrOTluNVJBZEVRRVVvS2huWWRobEpGbnVwNEFKdUEyUGJhWU80ZllOd3MrZHF3Qloyd2RYdlpZUXNFMFdoeEszS1VFMDlVUnBFVHAyaWxoQytXVlZuTE9hVkNtWEtKQ3RuT1ZCdW9CT0JQMUhJRkVRUlJhYXpjTU1xZHU3eUd2T1F0NVFBRXFVRmhhNXZqaW54SHk1cEIrWTIySmNrZDNYclJuY0pET2tiVitFZ05EeVdaOUtRN2lwL1VVZ29XSWc5bU41b3NsTk1vRVJKU1pGOXFENXFFQTRFNG4xc2dSaTZHSU9nQk1SZ0F4TGtESWxBMlhpTkRWYUNvejdxcGhJZ1YxNmIxMEhZZE9LTGF6WUgrVjg1M3NrdmNrMTJPSURsNDBvOGRiMWhjZHJ5WEZqcGF2RGUzaFc2c2NJK3U3endtUkxaNmc5UFVPMGhJbVA4S0NVZENBakNsbUc1TWVPdWQrRlJjVEZwNEd5N0FPM29SQU41N3ZRajA0ZkxtQzlxcmJnTFJ3VVVBem9hOUNCaEpPN0h2N3JJekEvVEQ4VEtEVzk0Qjd2WDV1akpEZkpwNmg4Z01jSmhTeEZWbWhwNWF4R2dsSXVDV0IrNHZQQ2pNcCtNRmhkQU5DdEVFVEs4dExnQmJ3N0dyNGVoTWNRRzRGWmhQbDIxL2tSRjdEUHR6TDNPS2RPMmxKTHVvRWZVVU5jNldwb2E1d0RnSDVmL3hsVjQzSzc0K1NmV1ZOTTcwUnUrd0hCd2U0SHJramQ3UEhyZmhRVm9CdzU2MmUrb3dENWNkMk1Kd3ZMbzdkSThkUU5XcHVqVmJVaVFjcjdCRytZckNtMTBwRDZkdVBnRm5pMjlUUis5Skx2c2Y2cmIvVWY5NXM0WDZsVkNnU2pqRDE0UkdNTFdUemQ0cHVtaUFjNkV4YzlBb21QanQ4TjNUenlQay8zNWRLSVh4d1FsMTFvTlNPQXhLc3R0K2hhZ0ovTzNYdE9EOUR3PT0mbHQ7L2RpYWdyYW0mZ3Q7Jmx0Oy9teGZpbGUmZ3Q7IgogICBpZD0ic3ZnMiIKICAgaW5rc2NhcGU6dmVyc2lvbj0iMC45MSByMTM3MjUiCiAgIHNvZGlwb2RpOmRvY25hbWU9ImNvbnRyb2xmbG93LXNvbHV0aW9uLnN2ZyI+CiAgPG1ldGFkYXRhCiAgICAgaWQ9Im1ldGFkYXRhMTUyIj4KICAgIDxyZGY6UkRGPgogICAgICA8Y2M6V29yawogICAgICAgICByZGY6YWJvdXQ9IiI+CiAgICAgICAgPGRjOmZvcm1hdD5pbWFnZS9zdmcreG1sPC9kYzpmb3JtYXQ+CiAgICAgICAgPGRjOnR5cGUKICAgICAgICAgICByZGY6cmVzb3VyY2U9Imh0dHA6Ly9wdXJsLm9yZy9kYy9kY21pdHlwZS9TdGlsbEltYWdlIiAvPgogICAgICAgIDxkYzp0aXRsZT48L2RjOnRpdGxlPgogICAgICA8L2NjOldvcms+CiAgICA8L3JkZjpSREY+CiAgPC9tZXRhZGF0YT4KICA8c29kaXBvZGk6bmFtZWR2aWV3CiAgICAgcGFnZWNvbG9yPSIjZmZmZmZmIgogICAgIGJvcmRlcmNvbG9yPSIjNjY2NjY2IgogICAgIGJvcmRlcm9wYWNpdHk9IjEiCiAgICAgb2JqZWN0dG9sZXJhbmNlPSIxMCIKICAgICBncmlkdG9sZXJhbmNlPSIxMCIKICAgICBndWlkZXRvbGVyYW5jZT0iMTAiCiAgICAgaW5rc2NhcGU6cGFnZW9wYWNpdHk9IjAiCiAgICAgaW5rc2NhcGU6cGFnZXNoYWRvdz0iMiIKICAgICBpbmtzY2FwZTp3aW5kb3ctd2lkdGg9IjE0MjQiCiAgICAgaW5rc2NhcGU6d2luZG93LWhlaWdodD0iNzYwIgogICAgIGlkPSJuYW1lZHZpZXcxNTAiCiAgICAgc2hvd2dyaWQ9ImZhbHNlIgogICAgIGlua3NjYXBlOnpvb209IjEuMDY1MTI0OCIKICAgICBpbmtzY2FwZTpjeD0iMjY5Ljc2ODM4IgogICAgIGlua3NjYXBlOmN5PSIyNTQuNjkyIgogICAgIGlua3NjYXBlOndpbmRvdy14PSIyOTUiCiAgICAgaW5rc2NhcGU6d2luZG93LXk9IjE3OSIKICAgICBpbmtzY2FwZTp3aW5kb3ctbWF4aW1pemVkPSIwIgogICAgIGlua3NjYXBlOmN1cnJlbnQtbGF5ZXI9InN3aXRjaDEzNC02IgogICAgIGZpdC1tYXJnaW4tdG9wPSIwIgogICAgIGZpdC1tYXJnaW4tbGVmdD0iMCIKICAgICBmaXQtbWFyZ2luLXJpZ2h0PSIwIgogICAgIGZpdC1tYXJnaW4tYm90dG9tPSIwIiAvPgogIDxkZWZzCiAgICAgaWQ9ImRlZnM0IiAvPgogIDxnCiAgICAgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMC4zNDc1NzIyLDAuNSkiCiAgICAgaWQ9Imc2Ij4KICAgIDxwYXRoCiAgICAgICBkPSJtIDI4NywzMCBxIDAsMCAwLDQ2Ljg4IgogICAgICAgc3Ryb2tlLW1pdGVybGltaXQ9IjEwIgogICAgICAgcG9pbnRlci1ldmVudHM9Im5vbmUiCiAgICAgICBpZD0icGF0aDgiCiAgICAgICBpbmtzY2FwZTpjb25uZWN0b3ItY3VydmF0dXJlPSIwIgogICAgICAgc3R5bGU9ImZpbGw6bm9uZTtzdHJva2U6IzAwMDAwMDtzdHJva2UtbWl0ZXJsaW1pdDoxMCIgLz4KICAgIDxwYXRoCiAgICAgICBkPSJtIDI4Nyw4My44OCAtMi4zMywtNyA0LjY2LDAgeiIKICAgICAgIHN0cm9rZS1taXRlcmxpbWl0PSIxMCIKICAgICAgIHBvaW50ZXItZXZlbnRzPSJub25lIgogICAgICAgaWQ9InBhdGgxMCIKICAgICAgIGlua3NjYXBlOmNvbm5lY3Rvci1jdXJ2YXR1cmU9IjAiCiAgICAgICBzdHlsZT0iZmlsbDojMDAwMDAwO3N0cm9rZTojMDAwMDAwO3N0cm9rZS1taXRlcmxpbWl0OjEwIiAvPgogICAgPGNpcmNsZQogICAgICAgY3g9IjI4NyIKICAgICAgIGN5PSIxNSIKICAgICAgIHBvaW50ZXItZXZlbnRzPSJub25lIgogICAgICAgaWQ9ImVsbGlwc2UxMiIKICAgICAgIHI9IjE1IgogICAgICAgc3R5bGU9ImZpbGw6I2ZmZmZmZjtzdHJva2U6IzAwMDAwMCIgLz4KICAgIDxnCiAgICAgICB0cmFuc2Zvcm09InRyYW5zbGF0ZSgyODIuNSw4LjUpIgogICAgICAgaWQ9ImcxNCI+CiAgICAgIDxzd2l0Y2gKICAgICAgICAgaWQ9InN3aXRjaDE2Ij4KICAgICAgICA8Zm9yZWlnbk9iamVjdAogICAgICAgICAgIHN0eWxlPSJvdmVyZmxvdzp2aXNpYmxlOyIKICAgICAgICAgICBwb2ludGVyLWV2ZW50cz0iYWxsIgogICAgICAgICAgIHdpZHRoPSI4IgogICAgICAgICAgIGhlaWdodD0iMTIiCiAgICAgICAgICAgcmVxdWlyZWRGZWF0dXJlcz0iaHR0cDovL3d3dy53My5vcmcvVFIvU1ZHMTEvZmVhdHVyZSNFeHRlbnNpYmlsaXR5Ij4KICAgICAgICAgIDx4aHRtbDpkaXYKICAgICAgICAgICAgIHN0eWxlPSJkaXNwbGF5OiBpbmxpbmUtYmxvY2s7IGZvbnQtc2l6ZTogMTJweDsgZm9udC1mYW1pbHk6IEhlbHZldGljYTsgY29sb3I6IHJnYigwLCAwLCAwKTsgbGluZS1oZWlnaHQ6IDEuMjsgdmVydGljYWwtYWxpZ246IHRvcDsgd2lkdGg6IDEwcHg7IHdoaXRlLXNwYWNlOiBub3dyYXA7IHdvcmQtd3JhcDogbm9ybWFsOyB0ZXh0LWFsaWduOiBjZW50ZXI7Ij4KICAgICAgICAgICAgPHhodG1sOmRpdgogICAgICAgICAgICAgICBzdHlsZT0iZGlzcGxheTppbmxpbmUtYmxvY2s7dGV4dC1hbGlnbjppbmhlcml0O3RleHQtZGVjb3JhdGlvbjppbmhlcml0OyI+QTwveGh0bWw6ZGl2PgogICAgICAgICAgPC94aHRtbDpkaXY+CiAgICAgICAgPC9mb3JlaWduT2JqZWN0PgogICAgICAgIDx0ZXh0CiAgICAgICAgICAgeD0iNCIKICAgICAgICAgICB5PSIxMiIKICAgICAgICAgICBmb250LXNpemU9IjEycHgiCiAgICAgICAgICAgaWQ9InRleHQxOCIKICAgICAgICAgICBzdHlsZT0iZm9udC1zaXplOjEycHg7Zm9udC1mYW1pbHk6SGVsdmV0aWNhO3RleHQtYW5jaG9yOm1pZGRsZTtmaWxsOiMwMDAwMDAiPkE8L3RleHQ+CiAgICAgIDwvc3dpdGNoPgogICAgPC9nPgogICAgPHBhdGgKICAgICAgIGQ9Im0gMjg3LDExNSBxIDAsMCAwLDQ4Ljg4IgogICAgICAgc3Ryb2tlLW1pdGVybGltaXQ9IjEwIgogICAgICAgcG9pbnRlci1ldmVudHM9Im5vbmUiCiAgICAgICBpZD0icGF0aDIwIgogICAgICAgaW5rc2NhcGU6Y29ubmVjdG9yLWN1cnZhdHVyZT0iMCIKICAgICAgIHN0eWxlPSJmaWxsOm5vbmU7c3Ryb2tlOiMwMDAwMDA7c3Ryb2tlLW1pdGVybGltaXQ6MTAiIC8+CiAgICA8cGF0aAogICAgICAgZD0ibSAyODcsMTcwLjg4IC0yLjMzLC03IDQuNjYsMCB6IgogICAgICAgc3Ryb2tlLW1pdGVybGltaXQ9IjEwIgogICAgICAgcG9pbnRlci1ldmVudHM9Im5vbmUiCiAgICAgICBpZD0icGF0aDIyIgogICAgICAgaW5rc2NhcGU6Y29ubmVjdG9yLWN1cnZhdHVyZT0iMCIKICAgICAgIHN0eWxlPSJmaWxsOiMwMDAwMDA7c3Ryb2tlOiMwMDAwMDA7c3Ryb2tlLW1pdGVybGltaXQ6MTAiIC8+CiAgICA8cGF0aAogICAgICAgZD0ibSAyNzIsMTAwIHEgLTU0MCwxNDAgLTcuMzQsMzkxLjUzIgogICAgICAgc3Ryb2tlLW1pdGVybGltaXQ9IjEwIgogICAgICAgcG9pbnRlci1ldmVudHM9Im5vbmUiCiAgICAgICBpZD0icGF0aDI0IgogICAgICAgaW5rc2NhcGU6Y29ubmVjdG9yLWN1cnZhdHVyZT0iMCIKICAgICAgIHN0eWxlPSJmaWxsOm5vbmU7c3Ryb2tlOiMwMDAwMDA7c3Ryb2tlLW1pdGVybGltaXQ6MTAiIC8+CiAgICA8cGF0aAogICAgICAgZD0ibSAyNzAuOTksNDk0LjUyIC03LjMzLC0wLjg4IDIsLTQuMjIgeiIKICAgICAgIHN0cm9rZS1taXRlcmxpbWl0PSIxMCIKICAgICAgIHBvaW50ZXItZXZlbnRzPSJub25lIgogICAgICAgaWQ9InBhdGgyNiIKICAgICAgIGlua3NjYXBlOmNvbm5lY3Rvci1jdXJ2YXR1cmU9IjAiCiAgICAgICBzdHlsZT0iZmlsbDojMDAwMDAwO3N0cm9rZTojMDAwMDAwO3N0cm9rZS1taXRlcmxpbWl0OjEwIiAvPgogICAgPGNpcmNsZQogICAgICAgY3g9IjI4NyIKICAgICAgIGN5PSIxMDAiCiAgICAgICBwb2ludGVyLWV2ZW50cz0ibm9uZSIKICAgICAgIGlkPSJlbGxpcHNlMjgiCiAgICAgICByPSIxNSIKICAgICAgIHN0eWxlPSJmaWxsOiNmZmZmZmY7c3Ryb2tlOiMwMDAwMDAiIC8+CiAgICA8ZwogICAgICAgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMjgyLjUsOTMuNSkiCiAgICAgICBpZD0iZzMwIj4KICAgICAgPHN3aXRjaAogICAgICAgICBpZD0ic3dpdGNoMzIiPgogICAgICAgIDxmb3JlaWduT2JqZWN0CiAgICAgICAgICAgc3R5bGU9Im92ZXJmbG93OnZpc2libGU7IgogICAgICAgICAgIHBvaW50ZXItZXZlbnRzPSJhbGwiCiAgICAgICAgICAgd2lkdGg9IjgiCiAgICAgICAgICAgaGVpZ2h0PSIxMiIKICAgICAgICAgICByZXF1aXJlZEZlYXR1cmVzPSJodHRwOi8vd3d3LnczLm9yZy9UUi9TVkcxMS9mZWF0dXJlI0V4dGVuc2liaWxpdHkiPgogICAgICAgICAgPHhodG1sOmRpdgogICAgICAgICAgICAgc3R5bGU9ImRpc3BsYXk6IGlubGluZS1ibG9jazsgZm9udC1zaXplOiAxMnB4OyBmb250LWZhbWlseTogSGVsdmV0aWNhOyBjb2xvcjogcmdiKDAsIDAsIDApOyBsaW5lLWhlaWdodDogMS4yOyB2ZXJ0aWNhbC1hbGlnbjogdG9wOyB3aWR0aDogMTBweDsgd2hpdGUtc3BhY2U6IG5vd3JhcDsgd29yZC13cmFwOiBub3JtYWw7IHRleHQtYWxpZ246IGNlbnRlcjsiPgogICAgICAgICAgICA8eGh0bWw6ZGl2CiAgICAgICAgICAgICAgIHN0eWxlPSJkaXNwbGF5OmlubGluZS1ibG9jazt0ZXh0LWFsaWduOmluaGVyaXQ7dGV4dC1kZWNvcmF0aW9uOmluaGVyaXQ7Ij5CPC94aHRtbDpkaXY+CiAgICAgICAgICA8L3hodG1sOmRpdj4KICAgICAgICA8L2ZvcmVpZ25PYmplY3Q+CiAgICAgICAgPHRleHQKICAgICAgICAgICB4PSI0IgogICAgICAgICAgIHk9IjEyIgogICAgICAgICAgIGZvbnQtc2l6ZT0iMTJweCIKICAgICAgICAgICBpZD0idGV4dDM0IgogICAgICAgICAgIHN0eWxlPSJmb250LXNpemU6MTJweDtmb250LWZhbWlseTpIZWx2ZXRpY2E7dGV4dC1hbmNob3I6bWlkZGxlO2ZpbGw6IzAwMDAwMCI+QjwvdGV4dD4KICAgICAgPC9zd2l0Y2g+CiAgICA8L2c+CiAgICA8ZwogICAgICAgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMzExLjUsMTcuNSkiCiAgICAgICBpZD0iZzM2Ij4KICAgICAgPHN3aXRjaAogICAgICAgICBpZD0ic3dpdGNoMzgiPgogICAgICAgIDxmb3JlaWduT2JqZWN0CiAgICAgICAgICAgc3R5bGU9Im92ZXJmbG93OnZpc2libGU7IgogICAgICAgICAgIHBvaW50ZXItZXZlbnRzPSJhbGwiCiAgICAgICAgICAgd2lkdGg9IjEwOSIKICAgICAgICAgICBoZWlnaHQ9IjEyIgogICAgICAgICAgIHJlcXVpcmVkRmVhdHVyZXM9Imh0dHA6Ly93d3cudzMub3JnL1RSL1NWRzExL2ZlYXR1cmUjRXh0ZW5zaWJpbGl0eSI+CiAgICAgICAgICA8eGh0bWw6ZGl2CiAgICAgICAgICAgICBzdHlsZT0iZGlzcGxheTogaW5saW5lLWJsb2NrOyBmb250LXNpemU6IDEycHg7IGZvbnQtZmFtaWx5OiBIZWx2ZXRpY2E7IGNvbG9yOiByZ2IoMCwgMCwgMCk7IGxpbmUtaGVpZ2h0OiAxLjI7IHZlcnRpY2FsLWFsaWduOiB0b3A7IHdoaXRlLXNwYWNlOiBub3dyYXA7Ij4KICAgICAgICAgICAgPHhodG1sOmRpdgogICAgICAgICAgICAgICBzdHlsZT0iZGlzcGxheTppbmxpbmUtYmxvY2s7dGV4dC1hbGlnbjppbmhlcml0O3RleHQtZGVjb3JhdGlvbjppbmhlcml0OyI+OS0xMCzCoDx4aHRtbDpzcGFuPjEyQSAtIGluaXRpYWxpemVyPC94aHRtbDpzcGFuPgo8eGh0bWw6YnIgLz4KPC94aHRtbDpkaXY+CiAgICAgICAgICA8L3hodG1sOmRpdj4KICAgICAgICA8L2ZvcmVpZ25PYmplY3Q+CiAgICAgICAgPHRleHQKICAgICAgICAgICB4PSI0OC40MjgwMDEiCiAgICAgICAgICAgeT0iMTEuMDYxMTQzIgogICAgICAgICAgIGZvbnQtc2l6ZT0iMTJweCIKICAgICAgICAgICBpZD0idGV4dDQwIgogICAgICAgICAgIHN0eWxlPSJmb250LXNpemU6MTJweDtmb250LWZhbWlseTpIZWx2ZXRpY2E7dGV4dC1hbmNob3I6bWlkZGxlO2ZpbGw6IzAwMDAwMCI+OS0xMCzCoDEyQSAtIGluaXRpYWxpemVyPC90ZXh0PgogICAgICA8L3N3aXRjaD4KICAgIDwvZz4KICAgIDxnCiAgICAgICB0cmFuc2Zvcm09InRyYW5zbGF0ZSgzMDcuNSw5Ny41KSIKICAgICAgIGlkPSJnNDIiPgogICAgICA8c3dpdGNoCiAgICAgICAgIGlkPSJzd2l0Y2g0NCI+CiAgICAgICAgPGZvcmVpZ25PYmplY3QKICAgICAgICAgICBzdHlsZT0ib3ZlcmZsb3c6dmlzaWJsZTsiCiAgICAgICAgICAgcG9pbnRlci1ldmVudHM9ImFsbCIKICAgICAgICAgICB3aWR0aD0iMTA2IgogICAgICAgICAgIGhlaWdodD0iMTIiCiAgICAgICAgICAgcmVxdWlyZWRGZWF0dXJlcz0iaHR0cDovL3d3dy53My5vcmcvVFIvU1ZHMTEvZmVhdHVyZSNFeHRlbnNpYmlsaXR5Ij4KICAgICAgICAgIDx4aHRtbDpkaXYKICAgICAgICAgICAgIHN0eWxlPSJkaXNwbGF5OiBpbmxpbmUtYmxvY2s7IGZvbnQtc2l6ZTogMTJweDsgZm9udC1mYW1pbHk6IEhlbHZldGljYTsgY29sb3I6IHJnYigwLCAwLCAwKTsgbGluZS1oZWlnaHQ6IDEuMjsgdmVydGljYWwtYWxpZ246IHRvcDsgd2hpdGUtc3BhY2U6IG5vd3JhcDsiPgogICAgICAgICAgICA8eGh0bWw6ZGl2CiAgICAgICAgICAgICAgIHN0eWxlPSJkaXNwbGF5OmlubGluZS1ibG9jazt0ZXh0LWFsaWduOmluaGVyaXQ7dGV4dC1kZWNvcmF0aW9uOmluaGVyaXQ7Ij4xMkIgLSBsb29wIGNvbmRpdGlvbjwveGh0bWw6ZGl2PgogICAgICAgICAgPC94aHRtbDpkaXY+CiAgICAgICAgPC9mb3JlaWduT2JqZWN0PgogICAgICAgIDx0ZXh0CiAgICAgICAgICAgeD0iNTMiCiAgICAgICAgICAgeT0iMTIiCiAgICAgICAgICAgZm9udC1zaXplPSIxMnB4IgogICAgICAgICAgIGlkPSJ0ZXh0NDYiCiAgICAgICAgICAgc3R5bGU9ImZvbnQtc2l6ZToxMnB4O2ZvbnQtZmFtaWx5OkhlbHZldGljYTt0ZXh0LWFuY2hvcjptaWRkbGU7ZmlsbDojMDAwMDAwIj4xMkIgLSBsb29wIGNvbmRpdGlvbjwvdGV4dD4KICAgICAgPC9zd2l0Y2g+CiAgICA8L2c+CiAgICA8cGF0aAogICAgICAgZD0ibSAyODcsMjAyIHEgMCwwIDAsNTMuODgiCiAgICAgICBzdHJva2UtbWl0ZXJsaW1pdD0iMTAiCiAgICAgICBwb2ludGVyLWV2ZW50cz0ibm9uZSIKICAgICAgIGlkPSJwYXRoNDgiCiAgICAgICBpbmtzY2FwZTpjb25uZWN0b3ItY3VydmF0dXJlPSIwIgogICAgICAgc3R5bGU9ImZpbGw6bm9uZTtzdHJva2U6IzAwMDAwMDtzdHJva2UtbWl0ZXJsaW1pdDoxMCIgLz4KICAgIDxwYXRoCiAgICAgICBkPSJtIDI4NywyNjIuODggLTIuMzMsLTcgNC42NiwwIHoiCiAgICAgICBzdHJva2UtbWl0ZXJsaW1pdD0iMTAiCiAgICAgICBwb2ludGVyLWV2ZW50cz0ibm9uZSIKICAgICAgIGlkPSJwYXRoNTAiCiAgICAgICBpbmtzY2FwZTpjb25uZWN0b3ItY3VydmF0dXJlPSIwIgogICAgICAgc3R5bGU9ImZpbGw6IzAwMDAwMDtzdHJva2U6IzAwMDAwMDtzdHJva2UtbWl0ZXJsaW1pdDoxMCIgLz4KICAgIDxjaXJjbGUKICAgICAgIGN4PSIyODciCiAgICAgICBjeT0iMTg3IgogICAgICAgcG9pbnRlci1ldmVudHM9Im5vbmUiCiAgICAgICBpZD0iZWxsaXBzZTUyIgogICAgICAgcj0iMTUiCiAgICAgICBzdHlsZT0iZmlsbDojZmZmZmZmO3N0cm9rZTojMDAwMDAwIiAvPgogICAgPGcKICAgICAgIHRyYW5zZm9ybT0idHJhbnNsYXRlKDI4Mi41LDE4MC41KSIKICAgICAgIGlkPSJnNTQiPgogICAgICA8c3dpdGNoCiAgICAgICAgIGlkPSJzd2l0Y2g1NiI+CiAgICAgICAgPGZvcmVpZ25PYmplY3QKICAgICAgICAgICBzdHlsZT0ib3ZlcmZsb3c6dmlzaWJsZTsiCiAgICAgICAgICAgcG9pbnRlci1ldmVudHM9ImFsbCIKICAgICAgICAgICB3aWR0aD0iOCIKICAgICAgICAgICBoZWlnaHQ9IjEyIgogICAgICAgICAgIHJlcXVpcmVkRmVhdHVyZXM9Imh0dHA6Ly93d3cudzMub3JnL1RSL1NWRzExL2ZlYXR1cmUjRXh0ZW5zaWJpbGl0eSI+CiAgICAgICAgICA8eGh0bWw6ZGl2CiAgICAgICAgICAgICBzdHlsZT0iZGlzcGxheTogaW5saW5lLWJsb2NrOyBmb250LXNpemU6IDEycHg7IGZvbnQtZmFtaWx5OiBIZWx2ZXRpY2E7IGNvbG9yOiByZ2IoMCwgMCwgMCk7IGxpbmUtaGVpZ2h0OiAxLjI7IHZlcnRpY2FsLWFsaWduOiB0b3A7IHdpZHRoOiAxMHB4OyB3aGl0ZS1zcGFjZTogbm93cmFwOyB3b3JkLXdyYXA6IG5vcm1hbDsgdGV4dC1hbGlnbjogY2VudGVyOyI+CiAgICAgICAgICAgIDx4aHRtbDpkaXYKICAgICAgICAgICAgICAgc3R5bGU9ImRpc3BsYXk6aW5saW5lLWJsb2NrO3RleHQtYWxpZ246aW5oZXJpdDt0ZXh0LWRlY29yYXRpb246aW5oZXJpdDsiPkM8L3hodG1sOmRpdj4KICAgICAgICAgIDwveGh0bWw6ZGl2PgogICAgICAgIDwvZm9yZWlnbk9iamVjdD4KICAgICAgICA8dGV4dAogICAgICAgICAgIHg9IjQiCiAgICAgICAgICAgeT0iMTIiCiAgICAgICAgICAgZm9udC1zaXplPSIxMnB4IgogICAgICAgICAgIGlkPSJ0ZXh0NTgiCiAgICAgICAgICAgc3R5bGU9ImZvbnQtc2l6ZToxMnB4O2ZvbnQtZmFtaWx5OkhlbHZldGljYTt0ZXh0LWFuY2hvcjptaWRkbGU7ZmlsbDojMDAwMDAwIj5DPC90ZXh0PgogICAgICA8L3N3aXRjaD4KICAgIDwvZz4KICAgIDxnCiAgICAgICB0cmFuc2Zvcm09InRyYW5zbGF0ZSgzMDguNSwxODQuNSkiCiAgICAgICBpZD0iZzYwIj4KICAgICAgPHN3aXRjaAogICAgICAgICBpZD0ic3dpdGNoNjIiPgogICAgICAgIDxmb3JlaWduT2JqZWN0CiAgICAgICAgICAgc3R5bGU9Im92ZXJmbG93OnZpc2libGU7IgogICAgICAgICAgIHBvaW50ZXItZXZlbnRzPSJhbGwiCiAgICAgICAgICAgd2lkdGg9IjEzIgogICAgICAgICAgIGhlaWdodD0iMTIiCiAgICAgICAgICAgcmVxdWlyZWRGZWF0dXJlcz0iaHR0cDovL3d3dy53My5vcmcvVFIvU1ZHMTEvZmVhdHVyZSNFeHRlbnNpYmlsaXR5Ij4KICAgICAgICAgIDx4aHRtbDpkaXYKICAgICAgICAgICAgIHN0eWxlPSJkaXNwbGF5OiBpbmxpbmUtYmxvY2s7IGZvbnQtc2l6ZTogMTJweDsgZm9udC1mYW1pbHk6IEhlbHZldGljYTsgY29sb3I6IHJnYigwLCAwLCAwKTsgbGluZS1oZWlnaHQ6IDEuMjsgdmVydGljYWwtYWxpZ246IHRvcDsgd2hpdGUtc3BhY2U6IG5vd3JhcDsiPgogICAgICAgICAgICA8eGh0bWw6ZGl2CiAgICAgICAgICAgICAgIHN0eWxlPSJkaXNwbGF5OmlubGluZS1ibG9jazt0ZXh0LWFsaWduOmluaGVyaXQ7dGV4dC1kZWNvcmF0aW9uOmluaGVyaXQ7Ij4xMzwveGh0bWw6ZGl2PgogICAgICAgICAgPC94aHRtbDpkaXY+CiAgICAgICAgPC9mb3JlaWduT2JqZWN0PgogICAgICAgIDx0ZXh0CiAgICAgICAgICAgeD0iNyIKICAgICAgICAgICB5PSIxMiIKICAgICAgICAgICBmb250LXNpemU9IjEycHgiCiAgICAgICAgICAgaWQ9InRleHQ2NCIKICAgICAgICAgICBzdHlsZT0iZm9udC1zaXplOjEycHg7Zm9udC1mYW1pbHk6SGVsdmV0aWNhO3RleHQtYW5jaG9yOm1pZGRsZTtmaWxsOiMwMDAwMDAiPjEzPC90ZXh0PgogICAgICA8L3N3aXRjaD4KICAgIDwvZz4KICAgIDxwYXRoCiAgICAgICBkPSJtIDI4NywyOTQgcSAwLDAgMCw0My44OCIKICAgICAgIHN0cm9rZS1taXRlcmxpbWl0PSIxMCIKICAgICAgIHBvaW50ZXItZXZlbnRzPSJub25lIgogICAgICAgaWQ9InBhdGg2NiIKICAgICAgIGlua3NjYXBlOmNvbm5lY3Rvci1jdXJ2YXR1cmU9IjAiCiAgICAgICBzdHlsZT0iZmlsbDpub25lO3N0cm9rZTojMDAwMDAwO3N0cm9rZS1taXRlcmxpbWl0OjEwIiAvPgogICAgPHBhdGgKICAgICAgIGQ9Im0gMjg3LDM0NC44OCAtMi4zMywtNyA0LjY2LDAgeiIKICAgICAgIHN0cm9rZS1taXRlcmxpbWl0PSIxMCIKICAgICAgIHBvaW50ZXItZXZlbnRzPSJub25lIgogICAgICAgaWQ9InBhdGg2OCIKICAgICAgIGlua3NjYXBlOmNvbm5lY3Rvci1jdXJ2YXR1cmU9IjAiCiAgICAgICBzdHlsZT0iZmlsbDojMDAwMDAwO3N0cm9rZTojMDAwMDAwO3N0cm9rZS1taXRlcmxpbWl0OjEwIiAvPgogICAgPHBhdGgKICAgICAgIGQ9Im0gMzAyLDI3OSBxIDIxMCw1MSA3LjQ2LDEzNy44IgogICAgICAgc3Ryb2tlLW1pdGVybGltaXQ9IjEwIgogICAgICAgcG9pbnRlci1ldmVudHM9Im5vbmUiCiAgICAgICBpZD0icGF0aDcwIgogICAgICAgaW5rc2NhcGU6Y29ubmVjdG9yLWN1cnZhdHVyZT0iMCIKICAgICAgIHN0eWxlPSJmaWxsOm5vbmU7c3Ryb2tlOiMwMDAwMDA7c3Ryb2tlLW1pdGVybGltaXQ6MTAiIC8+CiAgICA8cGF0aAogICAgICAgZD0ibSAzMDMuMDMsNDE5LjU2IDUuNTEsLTQuOSAxLjg0LDQuMjkgeiIKICAgICAgIHN0cm9rZS1taXRlcmxpbWl0PSIxMCIKICAgICAgIHBvaW50ZXItZXZlbnRzPSJub25lIgogICAgICAgaWQ9InBhdGg3MiIKICAgICAgIGlua3NjYXBlOmNvbm5lY3Rvci1jdXJ2YXR1cmU9IjAiCiAgICAgICBzdHlsZT0iZmlsbDojMDAwMDAwO3N0cm9rZTojMDAwMDAwO3N0cm9rZS1taXRlcmxpbWl0OjEwIiAvPgogICAgPGNpcmNsZQogICAgICAgY3g9IjI4NyIKICAgICAgIGN5PSIyNzkiCiAgICAgICBwb2ludGVyLWV2ZW50cz0ibm9uZSIKICAgICAgIGlkPSJlbGxpcHNlNzQiCiAgICAgICByPSIxNSIKICAgICAgIHN0eWxlPSJmaWxsOiNmZmZmZmY7c3Ryb2tlOiMwMDAwMDAiIC8+CiAgICA8ZwogICAgICAgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMjgyLjUsMjcyLjUpIgogICAgICAgaWQ9Imc3NiI+CiAgICAgIDxzd2l0Y2gKICAgICAgICAgaWQ9InN3aXRjaDc4Ij4KICAgICAgICA8Zm9yZWlnbk9iamVjdAogICAgICAgICAgIHN0eWxlPSJvdmVyZmxvdzp2aXNpYmxlOyIKICAgICAgICAgICBwb2ludGVyLWV2ZW50cz0iYWxsIgogICAgICAgICAgIHdpZHRoPSI4IgogICAgICAgICAgIGhlaWdodD0iMTIiCiAgICAgICAgICAgcmVxdWlyZWRGZWF0dXJlcz0iaHR0cDovL3d3dy53My5vcmcvVFIvU1ZHMTEvZmVhdHVyZSNFeHRlbnNpYmlsaXR5Ij4KICAgICAgICAgIDx4aHRtbDpkaXYKICAgICAgICAgICAgIHN0eWxlPSJkaXNwbGF5OiBpbmxpbmUtYmxvY2s7IGZvbnQtc2l6ZTogMTJweDsgZm9udC1mYW1pbHk6IEhlbHZldGljYTsgY29sb3I6IHJnYigwLCAwLCAwKTsgbGluZS1oZWlnaHQ6IDEuMjsgdmVydGljYWwtYWxpZ246IHRvcDsgd2lkdGg6IDEwcHg7IHdoaXRlLXNwYWNlOiBub3dyYXA7IHdvcmQtd3JhcDogbm9ybWFsOyB0ZXh0LWFsaWduOiBjZW50ZXI7Ij4KICAgICAgICAgICAgPHhodG1sOmRpdgogICAgICAgICAgICAgICBzdHlsZT0iZGlzcGxheTppbmxpbmUtYmxvY2s7dGV4dC1hbGlnbjppbmhlcml0O3RleHQtZGVjb3JhdGlvbjppbmhlcml0OyI+RDwveGh0bWw6ZGl2PgogICAgICAgICAgPC94aHRtbDpkaXY+CiAgICAgICAgPC9mb3JlaWduT2JqZWN0PgogICAgICAgIDx0ZXh0CiAgICAgICAgICAgeD0iNCIKICAgICAgICAgICB5PSIxMiIKICAgICAgICAgICBmb250LXNpemU9IjEycHgiCiAgICAgICAgICAgaWQ9InRleHQ4MCIKICAgICAgICAgICBzdHlsZT0iZm9udC1zaXplOjEycHg7Zm9udC1mYW1pbHk6SGVsdmV0aWNhO3RleHQtYW5jaG9yOm1pZGRsZTtmaWxsOiMwMDAwMDAiPkQ8L3RleHQ+CiAgICAgIDwvc3dpdGNoPgogICAgPC9nPgogICAgPGcKICAgICAgIHRyYW5zZm9ybT0idHJhbnNsYXRlKDMwOC41LDI1Ni41KSIKICAgICAgIGlkPSJnODIiPgogICAgICA8c3dpdGNoCiAgICAgICAgIGlkPSJzd2l0Y2g4NCI+CiAgICAgICAgPGZvcmVpZ25PYmplY3QKICAgICAgICAgICBzdHlsZT0ib3ZlcmZsb3c6dmlzaWJsZTsiCiAgICAgICAgICAgcG9pbnRlci1ldmVudHM9ImFsbCIKICAgICAgICAgICB3aWR0aD0iMTMiCiAgICAgICAgICAgaGVpZ2h0PSIxMiIKICAgICAgICAgICByZXF1aXJlZEZlYXR1cmVzPSJodHRwOi8vd3d3LnczLm9yZy9UUi9TVkcxMS9mZWF0dXJlI0V4dGVuc2liaWxpdHkiPgogICAgICAgICAgPHhodG1sOmRpdgogICAgICAgICAgICAgc3R5bGU9ImRpc3BsYXk6IGlubGluZS1ibG9jazsgZm9udC1zaXplOiAxMnB4OyBmb250LWZhbWlseTogSGVsdmV0aWNhOyBjb2xvcjogcmdiKDAsIDAsIDApOyBsaW5lLWhlaWdodDogMS4yOyB2ZXJ0aWNhbC1hbGlnbjogdG9wOyB3aGl0ZS1zcGFjZTogbm93cmFwOyI+CiAgICAgICAgICAgIDx4aHRtbDpkaXYKICAgICAgICAgICAgICAgc3R5bGU9ImRpc3BsYXk6aW5saW5lLWJsb2NrO3RleHQtYWxpZ246aW5oZXJpdDt0ZXh0LWRlY29yYXRpb246aW5oZXJpdDsiPjE0PC94aHRtbDpkaXY+CiAgICAgICAgICA8L3hodG1sOmRpdj4KICAgICAgICA8L2ZvcmVpZ25PYmplY3Q+CiAgICAgICAgPHRleHQKICAgICAgICAgICB4PSI3IgogICAgICAgICAgIHk9IjEyIgogICAgICAgICAgIGZvbnQtc2l6ZT0iMTJweCIKICAgICAgICAgICBpZD0idGV4dDg2IgogICAgICAgICAgIHN0eWxlPSJmb250LXNpemU6MTJweDtmb250LWZhbWlseTpIZWx2ZXRpY2E7dGV4dC1hbmNob3I6bWlkZGxlO2ZpbGw6IzAwMDAwMCI+MTQ8L3RleHQ+CiAgICAgIDwvc3dpdGNoPgogICAgPC9nPgogICAgPHBhdGgKICAgICAgIGQ9Im0gMjg3LDM3NiBxIDAsMCAwLDIwLjg4IgogICAgICAgc3Ryb2tlLW1pdGVybGltaXQ9IjEwIgogICAgICAgcG9pbnRlci1ldmVudHM9Im5vbmUiCiAgICAgICBpZD0icGF0aDg4IgogICAgICAgaW5rc2NhcGU6Y29ubmVjdG9yLWN1cnZhdHVyZT0iMCIKICAgICAgIHN0eWxlPSJmaWxsOm5vbmU7c3Ryb2tlOiMwMDAwMDA7c3Ryb2tlLW1pdGVybGltaXQ6MTAiIC8+CiAgICA8cGF0aAogICAgICAgZD0ibSAyODcsNDAzLjg4IC0yLjMzLC03IDQuNjYsMCB6IgogICAgICAgc3Ryb2tlLW1pdGVybGltaXQ9IjEwIgogICAgICAgcG9pbnRlci1ldmVudHM9Im5vbmUiCiAgICAgICBpZD0icGF0aDkwIgogICAgICAgaW5rc2NhcGU6Y29ubmVjdG9yLWN1cnZhdHVyZT0iMCIKICAgICAgIHN0eWxlPSJmaWxsOiMwMDAwMDA7c3Ryb2tlOiMwMDAwMDA7c3Ryb2tlLW1pdGVybGltaXQ6MTAiIC8+CiAgICA8Y2lyY2xlCiAgICAgICBjeD0iMjg3IgogICAgICAgY3k9IjM2MSIKICAgICAgIHBvaW50ZXItZXZlbnRzPSJub25lIgogICAgICAgaWQ9ImVsbGlwc2U5MiIKICAgICAgIHI9IjE1IgogICAgICAgc3R5bGU9ImZpbGw6I2ZmZmZmZjtzdHJva2U6IzAwMDAwMCIgLz4KICAgIDxnCiAgICAgICB0cmFuc2Zvcm09InRyYW5zbGF0ZSgyODIuNSwzNTQuNSkiCiAgICAgICBpZD0iZzk0Ij4KICAgICAgPHN3aXRjaAogICAgICAgICBpZD0ic3dpdGNoOTYiPgogICAgICAgIDxmb3JlaWduT2JqZWN0CiAgICAgICAgICAgc3R5bGU9Im92ZXJmbG93OnZpc2libGU7IgogICAgICAgICAgIHBvaW50ZXItZXZlbnRzPSJhbGwiCiAgICAgICAgICAgd2lkdGg9IjgiCiAgICAgICAgICAgaGVpZ2h0PSIxMiIKICAgICAgICAgICByZXF1aXJlZEZlYXR1cmVzPSJodHRwOi8vd3d3LnczLm9yZy9UUi9TVkcxMS9mZWF0dXJlI0V4dGVuc2liaWxpdHkiPgogICAgICAgICAgPHhodG1sOmRpdgogICAgICAgICAgICAgc3R5bGU9ImRpc3BsYXk6IGlubGluZS1ibG9jazsgZm9udC1zaXplOiAxMnB4OyBmb250LWZhbWlseTogSGVsdmV0aWNhOyBjb2xvcjogcmdiKDAsIDAsIDApOyBsaW5lLWhlaWdodDogMS4yOyB2ZXJ0aWNhbC1hbGlnbjogdG9wOyB3aWR0aDogMTBweDsgd2hpdGUtc3BhY2U6IG5vd3JhcDsgd29yZC13cmFwOiBub3JtYWw7IHRleHQtYWxpZ246IGNlbnRlcjsiPgogICAgICAgICAgICA8eGh0bWw6ZGl2CiAgICAgICAgICAgICAgIHN0eWxlPSJkaXNwbGF5OmlubGluZS1ibG9jazt0ZXh0LWFsaWduOmluaGVyaXQ7dGV4dC1kZWNvcmF0aW9uOmluaGVyaXQ7Ij5FPC94aHRtbDpkaXY+CiAgICAgICAgICA8L3hodG1sOmRpdj4KICAgICAgICA8L2ZvcmVpZ25PYmplY3Q+CiAgICAgICAgPHRleHQKICAgICAgICAgICB4PSI0IgogICAgICAgICAgIHk9IjEyIgogICAgICAgICAgIGZvbnQtc2l6ZT0iMTJweCIKICAgICAgICAgICBpZD0idGV4dDk4IgogICAgICAgICAgIHN0eWxlPSJmb250LXNpemU6MTJweDtmb250LWZhbWlseTpIZWx2ZXRpY2E7dGV4dC1hbmNob3I6bWlkZGxlO2ZpbGw6IzAwMDAwMCI+RTwvdGV4dD4KICAgICAgPC9zd2l0Y2g+CiAgICA8L2c+CiAgICA8ZwogICAgICAgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMzA0LjUsMzU4LjUpIgogICAgICAgaWQ9ImcxMDAiPgogICAgICA8c3dpdGNoCiAgICAgICAgIGlkPSJzd2l0Y2gxMDIiPgogICAgICAgIDxmb3JlaWduT2JqZWN0CiAgICAgICAgICAgc3R5bGU9Im92ZXJmbG93OnZpc2libGU7IgogICAgICAgICAgIHBvaW50ZXItZXZlbnRzPSJhbGwiCiAgICAgICAgICAgd2lkdGg9IjMxIgogICAgICAgICAgIGhlaWdodD0iMTIiCiAgICAgICAgICAgcmVxdWlyZWRGZWF0dXJlcz0iaHR0cDovL3d3dy53My5vcmcvVFIvU1ZHMTEvZmVhdHVyZSNFeHRlbnNpYmlsaXR5Ij4KICAgICAgICAgIDx4aHRtbDpkaXYKICAgICAgICAgICAgIHN0eWxlPSJkaXNwbGF5OiBpbmxpbmUtYmxvY2s7IGZvbnQtc2l6ZTogMTJweDsgZm9udC1mYW1pbHk6IEhlbHZldGljYTsgY29sb3I6IHJnYigwLCAwLCAwKTsgbGluZS1oZWlnaHQ6IDEuMjsgdmVydGljYWwtYWxpZ246IHRvcDsgd2hpdGUtc3BhY2U6IG5vd3JhcDsiPgogICAgICAgICAgICA8eGh0bWw6ZGl2CiAgICAgICAgICAgICAgIHN0eWxlPSJkaXNwbGF5OmlubGluZS1ibG9jazt0ZXh0LWFsaWduOmluaGVyaXQ7dGV4dC1kZWNvcmF0aW9uOmluaGVyaXQ7Ij4xNS0xNjwveGh0bWw6ZGl2PgogICAgICAgICAgPC94aHRtbDpkaXY+CiAgICAgICAgPC9mb3JlaWduT2JqZWN0PgogICAgICAgIDx0ZXh0CiAgICAgICAgICAgeD0iMTYiCiAgICAgICAgICAgeT0iMTIiCiAgICAgICAgICAgZm9udC1zaXplPSIxMnB4IgogICAgICAgICAgIGlkPSJ0ZXh0MTA0IgogICAgICAgICAgIHN0eWxlPSJmb250LXNpemU6MTJweDtmb250LWZhbWlseTpIZWx2ZXRpY2E7dGV4dC1hbmNob3I6bWlkZGxlO2ZpbGw6IzAwMDAwMCI+MTUtMTY8L3RleHQ+CiAgICAgIDwvc3dpdGNoPgogICAgPC9nPgogICAgPGNpcmNsZQogICAgICAgY3g9IjI4NyIKICAgICAgIGN5PSI0OTUiCiAgICAgICBwb2ludGVyLWV2ZW50cz0ibm9uZSIKICAgICAgIGlkPSJlbGxpcHNlMTA2IgogICAgICAgcj0iMTUiCiAgICAgICBzdHlsZT0iZmlsbDojZmZmZmZmO3N0cm9rZTojMDAwMDAwIiAvPgogICAgPGcKICAgICAgIHRyYW5zZm9ybT0idHJhbnNsYXRlKDI4MS41LDQ4OC41KSIKICAgICAgIGlkPSJnMTA4Ij4KICAgICAgPHN3aXRjaAogICAgICAgICBpZD0ic3dpdGNoMTEwIj4KICAgICAgICA8Zm9yZWlnbk9iamVjdAogICAgICAgICAgIHN0eWxlPSJvdmVyZmxvdzp2aXNpYmxlOyIKICAgICAgICAgICBwb2ludGVyLWV2ZW50cz0iYWxsIgogICAgICAgICAgIHdpZHRoPSIxMCIKICAgICAgICAgICBoZWlnaHQ9IjEyIgogICAgICAgICAgIHJlcXVpcmVkRmVhdHVyZXM9Imh0dHA6Ly93d3cudzMub3JnL1RSL1NWRzExL2ZlYXR1cmUjRXh0ZW5zaWJpbGl0eSI+CiAgICAgICAgICA8eGh0bWw6ZGl2CiAgICAgICAgICAgICBzdHlsZT0iZGlzcGxheTogaW5saW5lLWJsb2NrOyBmb250LXNpemU6IDEycHg7IGZvbnQtZmFtaWx5OiBIZWx2ZXRpY2E7IGNvbG9yOiByZ2IoMCwgMCwgMCk7IGxpbmUtaGVpZ2h0OiAxLjI7IHZlcnRpY2FsLWFsaWduOiB0b3A7IHdpZHRoOiAxMHB4OyB3aGl0ZS1zcGFjZTogbm93cmFwOyB3b3JkLXdyYXA6IG5vcm1hbDsgdGV4dC1hbGlnbjogY2VudGVyOyI+CiAgICAgICAgICAgIDx4aHRtbDpkaXYKICAgICAgICAgICAgICAgc3R5bGU9ImRpc3BsYXk6aW5saW5lLWJsb2NrO3RleHQtYWxpZ246aW5oZXJpdDt0ZXh0LWRlY29yYXRpb246aW5oZXJpdDsiPkc8L3hodG1sOmRpdj4KICAgICAgICAgIDwveGh0bWw6ZGl2PgogICAgICAgIDwvZm9yZWlnbk9iamVjdD4KICAgICAgICA8dGV4dAogICAgICAgICAgIHg9IjUiCiAgICAgICAgICAgeT0iMTIiCiAgICAgICAgICAgZm9udC1zaXplPSIxMnB4IgogICAgICAgICAgIGlkPSJ0ZXh0MTEyIgogICAgICAgICAgIHN0eWxlPSJmb250LXNpemU6MTJweDtmb250LWZhbWlseTpIZWx2ZXRpY2E7dGV4dC1hbmNob3I6bWlkZGxlO2ZpbGw6IzAwMDAwMCI+RzwvdGV4dD4KICAgICAgPC9zd2l0Y2g+CiAgICA8L2c+CiAgICA8cGF0aAogICAgICAgZD0iTSAyNzIsNDIwIFEgLTQ4LDI3MCAyNjguNzEsMTE0LjU4IgogICAgICAgc3Ryb2tlLW1pdGVybGltaXQ9IjEwIgogICAgICAgcG9pbnRlci1ldmVudHM9Im5vbmUiCiAgICAgICBpZD0icGF0aDEyMCIKICAgICAgIGlua3NjYXBlOmNvbm5lY3Rvci1jdXJ2YXR1cmU9IjAiCiAgICAgICBzdHlsZT0iZmlsbDpub25lO3N0cm9rZTojMDAwMDAwO3N0cm9rZS1taXRlcmxpbWl0OjEwIiAvPgogICAgPHBhdGgKICAgICAgIGQ9Im0gMjc1LDExMS40OSAtNS4yNiw1LjE4IC0yLjA2LC00LjE5IHoiCiAgICAgICBzdHJva2UtbWl0ZXJsaW1pdD0iMTAiCiAgICAgICBwb2ludGVyLWV2ZW50cz0ibm9uZSIKICAgICAgIGlkPSJwYXRoMTIyIgogICAgICAgaW5rc2NhcGU6Y29ubmVjdG9yLWN1cnZhdHVyZT0iMCIKICAgICAgIHN0eWxlPSJmaWxsOiMwMDAwMDA7c3Ryb2tlOiMwMDAwMDA7c3Ryb2tlLW1pdGVybGltaXQ6MTAiIC8+CiAgICA8Y2lyY2xlCiAgICAgICBjeD0iMjg3IgogICAgICAgY3k9IjQyMCIKICAgICAgIHBvaW50ZXItZXZlbnRzPSJub25lIgogICAgICAgaWQ9ImVsbGlwc2UxMjQiCiAgICAgICByPSIxNSIKICAgICAgIHN0eWxlPSJmaWxsOiNmZmZmZmY7c3Ryb2tlOiMwMDAwMDAiIC8+CiAgICA8ZwogICAgICAgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMjgyLjUsNDEzLjUpIgogICAgICAgaWQ9ImcxMjYiPgogICAgICA8c3dpdGNoCiAgICAgICAgIGlkPSJzd2l0Y2gxMjgiPgogICAgICAgIDxmb3JlaWduT2JqZWN0CiAgICAgICAgICAgc3R5bGU9Im92ZXJmbG93OnZpc2libGU7IgogICAgICAgICAgIHBvaW50ZXItZXZlbnRzPSJhbGwiCiAgICAgICAgICAgd2lkdGg9IjgiCiAgICAgICAgICAgaGVpZ2h0PSIxMiIKICAgICAgICAgICByZXF1aXJlZEZlYXR1cmVzPSJodHRwOi8vd3d3LnczLm9yZy9UUi9TVkcxMS9mZWF0dXJlI0V4dGVuc2liaWxpdHkiPgogICAgICAgICAgPHhodG1sOmRpdgogICAgICAgICAgICAgc3R5bGU9ImRpc3BsYXk6IGlubGluZS1ibG9jazsgZm9udC1zaXplOiAxMnB4OyBmb250LWZhbWlseTogSGVsdmV0aWNhOyBjb2xvcjogcmdiKDAsIDAsIDApOyBsaW5lLWhlaWdodDogMS4yOyB2ZXJ0aWNhbC1hbGlnbjogdG9wOyB3aWR0aDogOHB4OyB3aGl0ZS1zcGFjZTogbm93cmFwOyB3b3JkLXdyYXA6IG5vcm1hbDsgdGV4dC1hbGlnbjogY2VudGVyOyI+CiAgICAgICAgICAgIDx4aHRtbDpkaXYKICAgICAgICAgICAgICAgc3R5bGU9ImRpc3BsYXk6aW5saW5lLWJsb2NrO3RleHQtYWxpZ246aW5oZXJpdDt0ZXh0LWRlY29yYXRpb246aW5oZXJpdDsiPkY8L3hodG1sOmRpdj4KICAgICAgICAgIDwveGh0bWw6ZGl2PgogICAgICAgIDwvZm9yZWlnbk9iamVjdD4KICAgICAgICA8dGV4dAogICAgICAgICAgIHg9IjQiCiAgICAgICAgICAgeT0iMTIiCiAgICAgICAgICAgZm9udC1zaXplPSIxMnB4IgogICAgICAgICAgIGlkPSJ0ZXh0MTMwIgogICAgICAgICAgIHN0eWxlPSJmb250LXNpemU6MTJweDtmb250LWZhbWlseTpIZWx2ZXRpY2E7dGV4dC1hbmNob3I6bWlkZGxlO2ZpbGw6IzAwMDAwMCI+RjwvdGV4dD4KICAgICAgPC9zd2l0Y2g+CiAgICA8L2c+CiAgICA8ZwogICAgICAgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMzExLjUsNDIyLjUpIgogICAgICAgaWQ9ImcxMzIiPgogICAgICA8c3dpdGNoCiAgICAgICAgIGlkPSJzd2l0Y2gxMzQiPgogICAgICAgIDxmb3JlaWduT2JqZWN0CiAgICAgICAgICAgc3R5bGU9Im92ZXJmbG93OnZpc2libGU7IgogICAgICAgICAgIHBvaW50ZXItZXZlbnRzPSJhbGwiCiAgICAgICAgICAgd2lkdGg9IjExMSIKICAgICAgICAgICBoZWlnaHQ9IjEyIgogICAgICAgICAgIHJlcXVpcmVkRmVhdHVyZXM9Imh0dHA6Ly93d3cudzMub3JnL1RSL1NWRzExL2ZlYXR1cmUjRXh0ZW5zaWJpbGl0eSI+CiAgICAgICAgICA8eGh0bWw6ZGl2CiAgICAgICAgICAgICBzdHlsZT0iZGlzcGxheTogaW5saW5lLWJsb2NrOyBmb250LXNpemU6IDEycHg7IGZvbnQtZmFtaWx5OiBIZWx2ZXRpY2E7IGNvbG9yOiByZ2IoMCwgMCwgMCk7IGxpbmUtaGVpZ2h0OiAxLjI7IHZlcnRpY2FsLWFsaWduOiB0b3A7IHdoaXRlLXNwYWNlOiBub3dyYXA7Ij4KICAgICAgICAgICAgPHhodG1sOmRpdgogICAgICAgICAgICAgICBzdHlsZT0iZGlzcGxheTppbmxpbmUtYmxvY2s7dGV4dC1hbGlnbjppbmhlcml0O3RleHQtZGVjb3JhdGlvbjppbmhlcml0OyI+MTJDIC0gbG9vcCBpbmNyZW1lbnQ8L3hodG1sOmRpdj4KICAgICAgICAgIDwveGh0bWw6ZGl2PgogICAgICAgIDwvZm9yZWlnbk9iamVjdD4KICAgICAgICA8dGV4dAogICAgICAgICAgIHg9IjU2IgogICAgICAgICAgIHk9IjEyIgogICAgICAgICAgIGZvbnQtc2l6ZT0iMTJweCIKICAgICAgICAgICBpZD0idGV4dDEzNiIKICAgICAgICAgICBzdHlsZT0iZm9udC1zaXplOjEycHg7Zm9udC1mYW1pbHk6SGVsdmV0aWNhO3RleHQtYW5jaG9yOm1pZGRsZTtmaWxsOiMwMDAwMDAiPjEyQyAtIGxvb3AgaW5jcmVtZW50PC90ZXh0PgogICAgICA8L3N3aXRjaD4KICAgIDwvZz4KICAgIDxnCiAgICAgICB0cmFuc2Zvcm09InRyYW5zbGF0ZSgxODcuNSwzMTIuNSkiCiAgICAgICBpZD0iZzEzOCI+CiAgICAgIDxzd2l0Y2gKICAgICAgICAgaWQ9InN3aXRjaDE0MCI+CiAgICAgICAgPGZvcmVpZ25PYmplY3QKICAgICAgICAgICBzdHlsZT0ib3ZlcmZsb3c6dmlzaWJsZTsiCiAgICAgICAgICAgcG9pbnRlci1ldmVudHM9ImFsbCIKICAgICAgICAgICB3aWR0aD0iOTQiCiAgICAgICAgICAgaGVpZ2h0PSIxMiIKICAgICAgICAgICByZXF1aXJlZEZlYXR1cmVzPSJodHRwOi8vd3d3LnczLm9yZy9UUi9TVkcxMS9mZWF0dXJlI0V4dGVuc2liaWxpdHkiPgogICAgICAgICAgPHhodG1sOmRpdgogICAgICAgICAgICAgc3R5bGU9ImRpc3BsYXk6IGlubGluZS1ibG9jazsgZm9udC1zaXplOiAxMnB4OyBmb250LWZhbWlseTogSGVsdmV0aWNhOyBjb2xvcjogcmdiKDAsIDAsIDApOyBsaW5lLWhlaWdodDogMS4yOyB2ZXJ0aWNhbC1hbGlnbjogdG9wOyB3aGl0ZS1zcGFjZTogbm93cmFwOyI+CiAgICAgICAgICAgIDx4aHRtbDpkaXYKICAgICAgICAgICAgICAgc3R5bGU9ImRpc3BsYXk6aW5saW5lLWJsb2NrO3RleHQtYWxpZ246aW5oZXJpdDt0ZXh0LWRlY29yYXRpb246aW5oZXJpdDsiPmNoICE9ICcgJyB8fCBsYXN0ICE9ICcgJzwveGh0bWw6ZGl2PgogICAgICAgICAgPC94aHRtbDpkaXY+CiAgICAgICAgPC9mb3JlaWduT2JqZWN0PgogICAgICAgIDx0ZXh0CiAgICAgICAgICAgeD0iNDciCiAgICAgICAgICAgeT0iMTIiCiAgICAgICAgICAgZm9udC1zaXplPSIxMnB4IgogICAgICAgICAgIGlkPSJ0ZXh0MTQyIgogICAgICAgICAgIHN0eWxlPSJmb250LXNpemU6MTJweDtmb250LWZhbWlseTpIZWx2ZXRpY2E7dGV4dC1hbmNob3I6bWlkZGxlO2ZpbGw6IzAwMDAwMCI+Y2ggIT0gJyAnIHx8IGxhc3QgIT0gJyAnPC90ZXh0PgogICAgICA8L3N3aXRjaD4KICAgIDwvZz4KICAgIDxnCiAgICAgICB0cmFuc2Zvcm09InRyYW5zbGF0ZSg0MTQuNSwzMzIuNSkiCiAgICAgICBpZD0iZzE0NCI+CiAgICAgIDxzd2l0Y2gKICAgICAgICAgaWQ9InN3aXRjaDE0NiI+CiAgICAgICAgPGZvcmVpZ25PYmplY3QKICAgICAgICAgICBzdHlsZT0ib3ZlcmZsb3c6dmlzaWJsZTsiCiAgICAgICAgICAgcG9pbnRlci1ldmVudHM9ImFsbCIKICAgICAgICAgICB3aWR0aD0iMTI1IgogICAgICAgICAgIGhlaWdodD0iMTIiCiAgICAgICAgICAgcmVxdWlyZWRGZWF0dXJlcz0iaHR0cDovL3d3dy53My5vcmcvVFIvU1ZHMTEvZmVhdHVyZSNFeHRlbnNpYmlsaXR5Ij4KICAgICAgICAgIDx4aHRtbDpkaXYKICAgICAgICAgICAgIHN0eWxlPSJkaXNwbGF5OiBpbmxpbmUtYmxvY2s7IGZvbnQtc2l6ZTogMTJweDsgZm9udC1mYW1pbHk6IEhlbHZldGljYTsgY29sb3I6IHJnYigwLCAwLCAwKTsgbGluZS1oZWlnaHQ6IDEuMjsgdmVydGljYWwtYWxpZ246IHRvcDsgd2hpdGUtc3BhY2U6IG5vd3JhcDsiPgogICAgICAgICAgICA8eGh0bWw6ZGl2CiAgICAgICAgICAgICAgIHN0eWxlPSJkaXNwbGF5OmlubGluZS1ibG9jazt0ZXh0LWFsaWduOmluaGVyaXQ7dGV4dC1kZWNvcmF0aW9uOmluaGVyaXQ7Ij5ub3QowqBjaCAhPSAnICcgfHwgbGFzdCAhPSAnICcgKTwveGh0bWw6ZGl2PgogICAgICAgICAgPC94aHRtbDpkaXY+CiAgICAgICAgPC9mb3JlaWduT2JqZWN0PgogICAgICAgIDx0ZXh0CiAgICAgICAgICAgeD0iNjMiCiAgICAgICAgICAgeT0iMTIiCiAgICAgICAgICAgZm9udC1zaXplPSIxMnB4IgogICAgICAgICAgIGlkPSJ0ZXh0MTQ4IgogICAgICAgICAgIHN0eWxlPSJmb250LXNpemU6MTJweDtmb250LWZhbWlseTpIZWx2ZXRpY2E7dGV4dC1hbmNob3I6bWlkZGxlO2ZpbGw6IzAwMDAwMCI+bm90KMKgY2ggIT0gJyAnIHx8IGxhc3QgIT0gJyAnICk8L3RleHQ+CiAgICAgIDwvc3dpdGNoPgogICAgPC9nPgogICAgPGcKICAgICAgIHRyYW5zZm9ybT0idHJhbnNsYXRlKDMwOS4xODIzNCw0ODYuOTU4KSIKICAgICAgIGlkPSJnMTMyLTMiPgogICAgICA8c3dpdGNoCiAgICAgICAgIGlkPSJzd2l0Y2gxMzQtNiI+CiAgICAgICAgPGZvcmVpZ25PYmplY3QKICAgICAgICAgICBzdHlsZT0ib3ZlcmZsb3c6dmlzaWJsZTsiCiAgICAgICAgICAgcG9pbnRlci1ldmVudHM9ImFsbCIKICAgICAgICAgICB3aWR0aD0iMTExIgogICAgICAgICAgIGhlaWdodD0iMTIiCiAgICAgICAgICAgcmVxdWlyZWRGZWF0dXJlcz0iaHR0cDovL3d3dy53My5vcmcvVFIvU1ZHMTEvZmVhdHVyZSNFeHRlbnNpYmlsaXR5Ij4KICAgICAgICAgIDx4aHRtbDpkaXYKICAgICAgICAgICAgIHN0eWxlPSJkaXNwbGF5OiBpbmxpbmUtYmxvY2s7IGZvbnQtc2l6ZTogMTJweDsgZm9udC1mYW1pbHk6IEhlbHZldGljYTsgY29sb3I6IHJnYigwLCAwLCAwKTsgbGluZS1oZWlnaHQ6IDEuMjsgdmVydGljYWwtYWxpZ246IHRvcDsgd2hpdGUtc3BhY2U6IG5vd3JhcDsiPgogICAgICAgICAgICA8eGh0bWw6ZGl2CiAgICAgICAgICAgICAgIHN0eWxlPSJkaXNwbGF5OmlubGluZS1ibG9jazt0ZXh0LWFsaWduOmluaGVyaXQ7dGV4dC1kZWNvcmF0aW9uOmluaGVyaXQ7Ij4xMkMgLSBsb29wIGluY3JlbWVudDwveGh0bWw6ZGl2PgogICAgICAgICAgPC94aHRtbDpkaXY+CiAgICAgICAgPC9mb3JlaWduT2JqZWN0PgogICAgICAgIDx0ZXh0CiAgICAgICAgICAgc3R5bGU9ImZvbnQtc2l6ZToxMnB4O2ZvbnQtZmFtaWx5OkhlbHZldGljYTt0ZXh0LWFuY2hvcjptaWRkbGU7ZmlsbDojMDAwMDAwIgogICAgICAgICAgIHg9IjAuNjA3NDI4NTUiCiAgICAgICAgICAgeT0iNC40ODkxNDI5IgogICAgICAgICAgIGZvbnQtc2l6ZT0iMTJweCIKICAgICAgICAgICBpZD0idGV4dDEzNi03Ij4xOTwvdGV4dD4KICAgICAgPC9zd2l0Y2g+CiAgICA8L2c+CiAgPC9nPgo8L3N2Zz4K" style="width:70.0%" /> </p>
+<p> <!-- ![](images/controlflow-solution.eps){ width=70% } --> <svg style="width:70.0%" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:svg="http://www.w3.org/2000/svg" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" width="539.53674" height="511" content="&lt;mxfile userAgent=&quot;Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/66.0.3359.181 Safari/537.36&quot; version=&quot;8.7.6&quot; editor=&quot;www.draw.io&quot;&gt;&lt;diagram id=&quot;745f6535-23c3-8c62-c343-0f008d02109b&quot; name=&quot;Page-1&quot;&gt;7Vpfb+MoEP8s+2Dt3UNOxthJ/Nim7d7DnbRSV7rbR2JTm1tiLEyaZD/9gg2xCU6VbR1fGm3VpjAM4Jnf/IFxPLhYbT9xVOZ/sxRTL/DTrQfvvCCYR5H8VIRdQ4hmmpBxkjYk0BIeyXesib6mrkmKK4tRMEYFKW1iwooCJ8KiIc7ZxmZ7YtTetUQZdgiPCaIu9R+SilyLFcxa+p+YZLnZGUzjZmSJkm8ZZ+tC7+cF8Kn+aYZXyKylBa1ylLJNhwTvPbjgjImmtdouMFWqNWpr5j0cGd0/N8eFOGUC1DMqsTOy41SqQncLVsh/t8maP2M1A8hOLlZUN/GWiH9l2/8j0r2veqQSiIsbhUS7Sk17IFTN9hV/kRqOJWXJty85KRqyZlIL/YeF2GkDQWvBJIlxkbOMFYj+xVhpHqUQfNd5FtX9qjdqRFRyHdWSUQNb80RzBdruEM+w5oJ7hKThY7bCchPJwjFFgjzbqyNtgtmebz/1MyNy38DfGgy0MeyME/j2Es0j6FktmLLReYyWVEPcD7eW6RnRtX7aGxd/SqWbKcA2ORH4sUS1RjbS0W30UVU2vvdEtso6tJ6fMRd4+7KmXR0aXUS2LkLd3bReCDUp7zgg9I8r3VLXS7qB53GFlyxzdDd5nStA1xXiN7rCyaiEg6DSwaQDw35oj0k99n5RAdEQEUoKhnYdhlJFnup4AJuA2PbaYO4fYNws+dqwBZ2wdXvZYQsE0WhxK3KUE09URpETp2ilhC+WVVnLOaVCmXKJCtnOVBuoBOBP1HIFEQRRaazcMMqdu7yGvOQt5QAEqUFha5vjinxHy5pB+Y22Jckd3XrRncJDOkbV+EgNDyWZ9KQ7ip/UUgoWIg9mN5oslNMoERJSZF9qD5qEA4E4n1sgRi6GIOgBMRgAxLkDIlA2XiNDVaCoz7qphIgV16b10HYdOKLazYH+V853skvck12OIDl40o8db1hcdryXFjpavDe3hW6scI+u7zwmRLZ6g9PUO0hImP8KCUdCAjClmG5MeOud+FRcTFp4Gy7AO3oRAN57vQj04fLmC9qrbgLRwUUAzoa9CBhJO7Hv7rIzA/TD8TKDW94B7vX5ujJDfJp6h8gMcJhSxFVmhp5axGglIuCWB+4vPCjMp+MFhdANCtEETK8tLgBbw7Gr4ehMcQG4FZhPl21/kRF7DPtzL3OKdO2lJLuoEfUUNc6Wpoa5wDgH5f/xlV43K74+SfWVNM70Ru+wHBwe4Hrkjd7PHrfhQVoBw562e+owD5cd2MJwvLo7dI8dQNWpujVbUiQcr7BG+YrCm10pD6duPgFni29TR+9JLvsf6rb/Uf95s4X6lVCgSjjD14RGMLWTzd4pumiAc6Exc9AomPjt8N3TzyPk/35dKIXxwQl11oNSOAxKstt+hagJ/O3XtOD9Dw==&lt;/diagram&gt;&lt;/mxfile&gt;" inkscape:version="0.91 r13725" sodipodi:docname="controlflow-solution.svg">
+  <metadata id="metadata152">
+    <rdf:RDF>
+      <cc:Work rdf:about>
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"></dc:type>
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <sodipodi:namedview pagecolor="#ffffff" bordercolor="#666666" borderopacity="1" objecttolerance="10" gridtolerance="10" guidetolerance="10" inkscape:pageopacity="0" inkscape:pageshadow="2" inkscape:window-width="1424" inkscape:window-height="760" id="namedview150" showgrid="false" inkscape:zoom="1.0651248" inkscape:cx="269.76838" inkscape:cy="254.692" inkscape:window-x="295" inkscape:window-y="179" inkscape:window-maximized="0" inkscape:current-layer="switch134-6" fit-margin-top="0" fit-margin-left="0" fit-margin-right="0" fit-margin-bottom="0"></sodipodi:namedview>
+  <defs id="defs4"></defs>
+  <g transform="translate(0.3475722,0.5)" id="g6">
+    <path d="m 287,30 q 0,0 0,46.88" stroke-miterlimit="10" pointer-events="none" id="path8" inkscape:connector-curvature="0" style="fill:none;stroke:#000000;stroke-miterlimit:10"></path>
+    <path d="m 287,83.88 -2.33,-7 4.66,0 z" stroke-miterlimit="10" pointer-events="none" id="path10" inkscape:connector-curvature="0" style="fill:#000000;stroke:#000000;stroke-miterlimit:10"></path>
+    <circle cx="287" cy="15" pointer-events="none" id="ellipse12" r="15" style="fill:#ffffff;stroke:#000000"></circle>
+    <g transform="translate(282.5,8.5)" id="g14">
+      <switch id="switch16">
+        <foreignObject style="overflow:visible;" pointer-events="all" width="8" height="12" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility">
+          <xhtml:div style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; vertical-align: top; width: 10px; white-space: nowrap; word-wrap: normal; text-align: center;">
+            <xhtml:div style="display:inline-block;text-align:inherit;text-decoration:inherit;">A</xhtml:div>
+          </xhtml:div>
+        </foreignObject>
+        <text x="4" y="12" font-size="12px" id="text18" style="font-size:12px;font-family:Helvetica;text-anchor:middle;fill:#000000">A</text>
+      </switch>
+    </g>
+    <path d="m 287,115 q 0,0 0,48.88" stroke-miterlimit="10" pointer-events="none" id="path20" inkscape:connector-curvature="0" style="fill:none;stroke:#000000;stroke-miterlimit:10"></path>
+    <path d="m 287,170.88 -2.33,-7 4.66,0 z" stroke-miterlimit="10" pointer-events="none" id="path22" inkscape:connector-curvature="0" style="fill:#000000;stroke:#000000;stroke-miterlimit:10"></path>
+    <path d="m 272,100 q -540,140 -7.34,391.53" stroke-miterlimit="10" pointer-events="none" id="path24" inkscape:connector-curvature="0" style="fill:none;stroke:#000000;stroke-miterlimit:10"></path>
+    <path d="m 270.99,494.52 -7.33,-0.88 2,-4.22 z" stroke-miterlimit="10" pointer-events="none" id="path26" inkscape:connector-curvature="0" style="fill:#000000;stroke:#000000;stroke-miterlimit:10"></path>
+    <circle cx="287" cy="100" pointer-events="none" id="ellipse28" r="15" style="fill:#ffffff;stroke:#000000"></circle>
+    <g transform="translate(282.5,93.5)" id="g30">
+      <switch id="switch32">
+        <foreignObject style="overflow:visible;" pointer-events="all" width="8" height="12" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility">
+          <xhtml:div style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; vertical-align: top; width: 10px; white-space: nowrap; word-wrap: normal; text-align: center;">
+            <xhtml:div style="display:inline-block;text-align:inherit;text-decoration:inherit;">B</xhtml:div>
+          </xhtml:div>
+        </foreignObject>
+        <text x="4" y="12" font-size="12px" id="text34" style="font-size:12px;font-family:Helvetica;text-anchor:middle;fill:#000000">B</text>
+      </switch>
+    </g>
+    <g transform="translate(311.5,17.5)" id="g36">
+      <switch id="switch38">
+        <foreignObject style="overflow:visible;" pointer-events="all" width="109" height="12" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility">
+          <xhtml:div style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; vertical-align: top; white-space: nowrap;">
+            <xhtml:div style="display:inline-block;text-align:inherit;text-decoration:inherit;">9-10, <xhtml:span>12A - initializer</xhtml:span>
+<xhtml:br></xhtml:br>
+</xhtml:div>
+          </xhtml:div>
+        </foreignObject>
+        <text x="48.428001" y="11.061143" font-size="12px" id="text40" style="font-size:12px;font-family:Helvetica;text-anchor:middle;fill:#000000">9-10, 12A - initializer</text>
+      </switch>
+    </g>
+    <g transform="translate(307.5,97.5)" id="g42">
+      <switch id="switch44">
+        <foreignObject style="overflow:visible;" pointer-events="all" width="106" height="12" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility">
+          <xhtml:div style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; vertical-align: top; white-space: nowrap;">
+            <xhtml:div style="display:inline-block;text-align:inherit;text-decoration:inherit;">12B - loop condition</xhtml:div>
+          </xhtml:div>
+        </foreignObject>
+        <text x="53" y="12" font-size="12px" id="text46" style="font-size:12px;font-family:Helvetica;text-anchor:middle;fill:#000000">12B - loop condition</text>
+      </switch>
+    </g>
+    <path d="m 287,202 q 0,0 0,53.88" stroke-miterlimit="10" pointer-events="none" id="path48" inkscape:connector-curvature="0" style="fill:none;stroke:#000000;stroke-miterlimit:10"></path>
+    <path d="m 287,262.88 -2.33,-7 4.66,0 z" stroke-miterlimit="10" pointer-events="none" id="path50" inkscape:connector-curvature="0" style="fill:#000000;stroke:#000000;stroke-miterlimit:10"></path>
+    <circle cx="287" cy="187" pointer-events="none" id="ellipse52" r="15" style="fill:#ffffff;stroke:#000000"></circle>
+    <g transform="translate(282.5,180.5)" id="g54">
+      <switch id="switch56">
+        <foreignObject style="overflow:visible;" pointer-events="all" width="8" height="12" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility">
+          <xhtml:div style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; vertical-align: top; width: 10px; white-space: nowrap; word-wrap: normal; text-align: center;">
+            <xhtml:div style="display:inline-block;text-align:inherit;text-decoration:inherit;">C</xhtml:div>
+          </xhtml:div>
+        </foreignObject>
+        <text x="4" y="12" font-size="12px" id="text58" style="font-size:12px;font-family:Helvetica;text-anchor:middle;fill:#000000">C</text>
+      </switch>
+    </g>
+    <g transform="translate(308.5,184.5)" id="g60">
+      <switch id="switch62">
+        <foreignObject style="overflow:visible;" pointer-events="all" width="13" height="12" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility">
+          <xhtml:div style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; vertical-align: top; white-space: nowrap;">
+            <xhtml:div style="display:inline-block;text-align:inherit;text-decoration:inherit;">13</xhtml:div>
+          </xhtml:div>
+        </foreignObject>
+        <text x="7" y="12" font-size="12px" id="text64" style="font-size:12px;font-family:Helvetica;text-anchor:middle;fill:#000000">13</text>
+      </switch>
+    </g>
+    <path d="m 287,294 q 0,0 0,43.88" stroke-miterlimit="10" pointer-events="none" id="path66" inkscape:connector-curvature="0" style="fill:none;stroke:#000000;stroke-miterlimit:10"></path>
+    <path d="m 287,344.88 -2.33,-7 4.66,0 z" stroke-miterlimit="10" pointer-events="none" id="path68" inkscape:connector-curvature="0" style="fill:#000000;stroke:#000000;stroke-miterlimit:10"></path>
+    <path d="m 302,279 q 210,51 7.46,137.8" stroke-miterlimit="10" pointer-events="none" id="path70" inkscape:connector-curvature="0" style="fill:none;stroke:#000000;stroke-miterlimit:10"></path>
+    <path d="m 303.03,419.56 5.51,-4.9 1.84,4.29 z" stroke-miterlimit="10" pointer-events="none" id="path72" inkscape:connector-curvature="0" style="fill:#000000;stroke:#000000;stroke-miterlimit:10"></path>
+    <circle cx="287" cy="279" pointer-events="none" id="ellipse74" r="15" style="fill:#ffffff;stroke:#000000"></circle>
+    <g transform="translate(282.5,272.5)" id="g76">
+      <switch id="switch78">
+        <foreignObject style="overflow:visible;" pointer-events="all" width="8" height="12" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility">
+          <xhtml:div style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; vertical-align: top; width: 10px; white-space: nowrap; word-wrap: normal; text-align: center;">
+            <xhtml:div style="display:inline-block;text-align:inherit;text-decoration:inherit;">D</xhtml:div>
+          </xhtml:div>
+        </foreignObject>
+        <text x="4" y="12" font-size="12px" id="text80" style="font-size:12px;font-family:Helvetica;text-anchor:middle;fill:#000000">D</text>
+      </switch>
+    </g>
+    <g transform="translate(308.5,256.5)" id="g82">
+      <switch id="switch84">
+        <foreignObject style="overflow:visible;" pointer-events="all" width="13" height="12" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility">
+          <xhtml:div style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; vertical-align: top; white-space: nowrap;">
+            <xhtml:div style="display:inline-block;text-align:inherit;text-decoration:inherit;">14</xhtml:div>
+          </xhtml:div>
+        </foreignObject>
+        <text x="7" y="12" font-size="12px" id="text86" style="font-size:12px;font-family:Helvetica;text-anchor:middle;fill:#000000">14</text>
+      </switch>
+    </g>
+    <path d="m 287,376 q 0,0 0,20.88" stroke-miterlimit="10" pointer-events="none" id="path88" inkscape:connector-curvature="0" style="fill:none;stroke:#000000;stroke-miterlimit:10"></path>
+    <path d="m 287,403.88 -2.33,-7 4.66,0 z" stroke-miterlimit="10" pointer-events="none" id="path90" inkscape:connector-curvature="0" style="fill:#000000;stroke:#000000;stroke-miterlimit:10"></path>
+    <circle cx="287" cy="361" pointer-events="none" id="ellipse92" r="15" style="fill:#ffffff;stroke:#000000"></circle>
+    <g transform="translate(282.5,354.5)" id="g94">
+      <switch id="switch96">
+        <foreignObject style="overflow:visible;" pointer-events="all" width="8" height="12" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility">
+          <xhtml:div style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; vertical-align: top; width: 10px; white-space: nowrap; word-wrap: normal; text-align: center;">
+            <xhtml:div style="display:inline-block;text-align:inherit;text-decoration:inherit;">E</xhtml:div>
+          </xhtml:div>
+        </foreignObject>
+        <text x="4" y="12" font-size="12px" id="text98" style="font-size:12px;font-family:Helvetica;text-anchor:middle;fill:#000000">E</text>
+      </switch>
+    </g>
+    <g transform="translate(304.5,358.5)" id="g100">
+      <switch id="switch102">
+        <foreignObject style="overflow:visible;" pointer-events="all" width="31" height="12" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility">
+          <xhtml:div style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; vertical-align: top; white-space: nowrap;">
+            <xhtml:div style="display:inline-block;text-align:inherit;text-decoration:inherit;">15-16</xhtml:div>
+          </xhtml:div>
+        </foreignObject>
+        <text x="16" y="12" font-size="12px" id="text104" style="font-size:12px;font-family:Helvetica;text-anchor:middle;fill:#000000">15-16</text>
+      </switch>
+    </g>
+    <circle cx="287" cy="495" pointer-events="none" id="ellipse106" r="15" style="fill:#ffffff;stroke:#000000"></circle>
+    <g transform="translate(281.5,488.5)" id="g108">
+      <switch id="switch110">
+        <foreignObject style="overflow:visible;" pointer-events="all" width="10" height="12" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility">
+          <xhtml:div style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; vertical-align: top; width: 10px; white-space: nowrap; word-wrap: normal; text-align: center;">
+            <xhtml:div style="display:inline-block;text-align:inherit;text-decoration:inherit;">G</xhtml:div>
+          </xhtml:div>
+        </foreignObject>
+        <text x="5" y="12" font-size="12px" id="text112" style="font-size:12px;font-family:Helvetica;text-anchor:middle;fill:#000000">G</text>
+      </switch>
+    </g>
+    <path d="M 272,420 Q -48,270 268.71,114.58" stroke-miterlimit="10" pointer-events="none" id="path120" inkscape:connector-curvature="0" style="fill:none;stroke:#000000;stroke-miterlimit:10"></path>
+    <path d="m 275,111.49 -5.26,5.18 -2.06,-4.19 z" stroke-miterlimit="10" pointer-events="none" id="path122" inkscape:connector-curvature="0" style="fill:#000000;stroke:#000000;stroke-miterlimit:10"></path>
+    <circle cx="287" cy="420" pointer-events="none" id="ellipse124" r="15" style="fill:#ffffff;stroke:#000000"></circle>
+    <g transform="translate(282.5,413.5)" id="g126">
+      <switch id="switch128">
+        <foreignObject style="overflow:visible;" pointer-events="all" width="8" height="12" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility">
+          <xhtml:div style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; vertical-align: top; width: 8px; white-space: nowrap; word-wrap: normal; text-align: center;">
+            <xhtml:div style="display:inline-block;text-align:inherit;text-decoration:inherit;">F</xhtml:div>
+          </xhtml:div>
+        </foreignObject>
+        <text x="4" y="12" font-size="12px" id="text130" style="font-size:12px;font-family:Helvetica;text-anchor:middle;fill:#000000">F</text>
+      </switch>
+    </g>
+    <g transform="translate(311.5,422.5)" id="g132">
+      <switch id="switch134">
+        <foreignObject style="overflow:visible;" pointer-events="all" width="111" height="12" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility">
+          <xhtml:div style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; vertical-align: top; white-space: nowrap;">
+            <xhtml:div style="display:inline-block;text-align:inherit;text-decoration:inherit;">12C - loop increment</xhtml:div>
+          </xhtml:div>
+        </foreignObject>
+        <text x="56" y="12" font-size="12px" id="text136" style="font-size:12px;font-family:Helvetica;text-anchor:middle;fill:#000000">12C - loop increment</text>
+      </switch>
+    </g>
+    <g transform="translate(187.5,312.5)" id="g138">
+      <switch id="switch140">
+        <foreignObject style="overflow:visible;" pointer-events="all" width="94" height="12" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility">
+          <xhtml:div style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; vertical-align: top; white-space: nowrap;">
+            <xhtml:div style="display:inline-block;text-align:inherit;text-decoration:inherit;">ch != &#39; &#39; || last != &#39; &#39;</xhtml:div>
+          </xhtml:div>
+        </foreignObject>
+        <text x="47" y="12" font-size="12px" id="text142" style="font-size:12px;font-family:Helvetica;text-anchor:middle;fill:#000000">ch != &#39; &#39; || last != &#39; &#39;</text>
+      </switch>
+    </g>
+    <g transform="translate(414.5,332.5)" id="g144">
+      <switch id="switch146">
+        <foreignObject style="overflow:visible;" pointer-events="all" width="125" height="12" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility">
+          <xhtml:div style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; vertical-align: top; white-space: nowrap;">
+            <xhtml:div style="display:inline-block;text-align:inherit;text-decoration:inherit;">not( ch != &#39; &#39; || last != &#39; &#39; )</xhtml:div>
+          </xhtml:div>
+        </foreignObject>
+        <text x="63" y="12" font-size="12px" id="text148" style="font-size:12px;font-family:Helvetica;text-anchor:middle;fill:#000000">not( ch != &#39; &#39; || last != &#39; &#39; )</text>
+      </switch>
+    </g>
+    <g transform="translate(309.18234,486.958)" id="g132-3">
+      <switch id="switch134-6">
+        <foreignObject style="overflow:visible;" pointer-events="all" width="111" height="12" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility">
+          <xhtml:div style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; vertical-align: top; white-space: nowrap;">
+            <xhtml:div style="display:inline-block;text-align:inherit;text-decoration:inherit;">12C - loop increment</xhtml:div>
+          </xhtml:div>
+        </foreignObject>
+        <text style="font-size:12px;font-family:Helvetica;text-anchor:middle;fill:#000000" x="0.60742855" y="4.4891429" font-size="12px" id="text136-7">19</text>
+      </switch>
+    </g>
+  </g>
+</svg> </p>
 <p>Here, the nodes are labelled with the section of code they represent.
 Contiguous lines of code (e.g. lines 9–10 and the start of 12) are
 “collapsed” together to save space – since they must <em>always</em> be
@@ -514,36 +738,36 @@ containing the code above, and check that it compiles.</p>
 <p><strong>A test class</strong></p>
 <p>Suppose we use the following test code for our <code>MyClass</code>
 class:</p>
-<pre><code>import static org.junit.jupiter.api.Assertions.*;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
-public class MyClassTest {
-   private MyClass mc1;
-   private MyClass mc2;
-   private MyClass mc3;
-
-   @BeforeEach
-   public void setUp() {
-     mc1 = new MyClass(3);
-     mc2 = new MyClass(5);
-     mc3 = new MyClass(3);
-   }
-
-   @Test
-   /* Test the case when, for two objects, the second is null */
-   public void equalsWhenNullRef() { fail(&quot;incomplete&quot;); }
-
-   @Test
-   /* Test the case when, for two objects, they are not equal */
-   public void equalsWhenNotEq() {/*...*/}
-
-   @Test
-   /* Test the case when, for two objects, they are equall */
-   public void equalsWhenEq() {/*...*/}
-
-}</code></pre>
+<div class="sourceCode" id="cb3"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">import</span> <span class="kw">static</span><span class="im"> org</span><span class="op">.</span><span class="im">junit</span><span class="op">.</span><span class="im">jupiter</span><span class="op">.</span><span class="im">api</span><span class="op">.</span><span class="im">Assertions</span><span class="op">.*;</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="kw">import</span> <span class="im">org</span><span class="op">.</span><span class="im">junit</span><span class="op">.</span><span class="im">jupiter</span><span class="op">.</span><span class="im">api</span><span class="op">.</span><span class="im">AfterEach</span><span class="op">;</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="kw">import</span> <span class="im">org</span><span class="op">.</span><span class="im">junit</span><span class="op">.</span><span class="im">jupiter</span><span class="op">.</span><span class="im">api</span><span class="op">.</span><span class="im">BeforeEach</span><span class="op">;</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="kw">import</span> <span class="im">org</span><span class="op">.</span><span class="im">junit</span><span class="op">.</span><span class="im">jupiter</span><span class="op">.</span><span class="im">api</span><span class="op">.</span><span class="im">Test</span><span class="op">;</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span> <span class="kw">class</span> MyClassTest <span class="op">{</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>   <span class="kw">private</span> MyClass mc1<span class="op">;</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>   <span class="kw">private</span> MyClass mc2<span class="op">;</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>   <span class="kw">private</span> MyClass mc3<span class="op">;</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>   <span class="at">@BeforeEach</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>   <span class="kw">public</span> <span class="dt">void</span> <span class="fu">setUp</span><span class="op">()</span> <span class="op">{</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>     mc1 <span class="op">=</span> <span class="kw">new</span> <span class="fu">MyClass</span><span class="op">(</span><span class="dv">3</span><span class="op">);</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>     mc2 <span class="op">=</span> <span class="kw">new</span> <span class="fu">MyClass</span><span class="op">(</span><span class="dv">5</span><span class="op">);</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>     mc3 <span class="op">=</span> <span class="kw">new</span> <span class="fu">MyClass</span><span class="op">(</span><span class="dv">3</span><span class="op">);</span></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>   <span class="op">}</span></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>   <span class="at">@Test</span></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>   <span class="co">/* Test the case when, for two objects, the second is null */</span></span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>   <span class="kw">public</span> <span class="dt">void</span> <span class="fu">equalsWhenNullRef</span><span class="op">()</span> <span class="op">{</span> <span class="fu">fail</span><span class="op">(</span><span class="st">&quot;incomplete&quot;</span><span class="op">);</span> <span class="op">}</span></span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>   <span class="at">@Test</span></span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>   <span class="co">/* Test the case when, for two objects, they are not equal */</span></span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>   <span class="kw">public</span> <span class="dt">void</span> <span class="fu">equalsWhenNotEq</span><span class="op">()</span> <span class="op">{</span><span class="co">/*...*/</span><span class="op">}</span></span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>   <span class="at">@Test</span></span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a>   <span class="co">/* Test the case when, for two objects, they are equall */</span></span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a>   <span class="kw">public</span> <span class="dt">void</span> <span class="fu">equalsWhenEq</span><span class="op">()</span> <span class="op">{</span><span class="co">/*...*/</span><span class="op">}</span></span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 <p>In this case, the instance variables <code>mc1</code>,
 <code>mc2</code> and <code>mc3</code> are potential <em>fixtures</em>
 for any test.</p>
@@ -565,8 +789,9 @@ fails?</p></li>
 <li><p>Are there any other tests you think we should add in order to
 thoroughly test our class? What are they?</p></li>
 <li><p>Using the material from lectures, and the JUnit user guide, write
-a “teardown” method. What code should go in it? Is it necessary in this
-case? Why or why not?</p></li>
+a “teardown” method. What code should go in it? Based on your
+understanding of the Java language, is a “teardown” method necessary in
+this case? Why or why not?</p></li>
 </ol>
 
 <div class="solutions">
@@ -618,7 +843,7 @@ each test, the JVM will</p>
 </ul>
 <p>and sometime after this, the instance of <code>MyClassTest</code>
 will get garbage-collected and any memory associated with it will be
-freed.</p>
+freed. Since the Java</p>
 <p>We only need to write a <code>tearDown</code> method when there are
 resources (e.g. files on disk, database tables) that are <em>not</em>
 cleaned up by the JVM. In that case, we would write a
@@ -626,7 +851,357 @@ cleaned up by the JVM. In that case, we would write a
 files.</p>
 </div>
 <p></p>
-<!-- vim: syntax=markdown tw=72 :
+<h2 id="class-design-invariants-and-testability">3. Class design,
+invariants, and testability</h2>
+<p>Suppose we are writing a <code>DigitalTimer</code> class representing
+24-hour times – it could be used, for example, in simulation programs.
+Rather than measuring “real” time, it measures simulated time, where
+every call to the <code>tick()</code> method causes one second to
+“elapse”. Other objects in the simulation could then query a
+<code>DigitalTimer</code> object to find out what the current time is.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
+<p>A colleague has suggested the following method signatures and
+documentation for the class:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co">/** Represents a simulated time, where the &quot;tick&quot; method causes the time to be incremented</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="co">  * by one second.</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co">  */</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span> <span class="kw">class</span> DigitalTimer <span class="op">{</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="co">/** Construct a new DigitalTimer, initialized to time zero.</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="co">   */</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>  <span class="kw">public</span> <span class="fu">DigitalTimer</span><span class="op">();</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>  <span class="co">/** Get the &quot;hours&quot; component of the time elapsed since</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="co">   * the timer was started.</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="co">   */</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>  <span class="kw">public</span> <span class="dt">int</span> <span class="fu">getHours</span><span class="op">();</span></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>  <span class="co">/** Get the &quot;minutes&quot; component of the time elapsed since</span></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a><span class="co">   * the timer was started.</span></span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a><span class="co">   */</span></span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>  <span class="kw">public</span> <span class="dt">int</span> <span class="fu">getMinutes</span><span class="op">();</span></span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>  <span class="co">/** Get the &quot;seconds&quot; component of the time elapsed since</span></span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a><span class="co">   * the timer was started.</span></span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a><span class="co">   */</span></span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>  <span class="kw">public</span> <span class="dt">int</span> <span class="fu">getSeconds</span><span class="op">();</span></span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a>  <span class="co">/** Cause one simulated second to elapse. Once the timer reaches</span></span>
+<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a><span class="co">   * 23 hours, 59 minutes, and 59 seconds, further calls to tick will</span></span>
+<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a><span class="co">   * have no effect.</span></span>
+<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a><span class="co">   */</span></span>
+<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a>  <span class="kw">public</span> <span class="dt">void</span> <span class="fu">tick</span><span class="op">();</span></span>
+<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p>The method signatures your colleague has written represent the public
+API for the class; they don’t show the implementation.</p>
+<dl>
+<dt><strong>Question 3.1:</strong></dt>
+<dd>
+<p>Before going on – what might be useful attributes (fields) for the
+class? These will be part of the implementation. Can you think of
+multiple different alternatives? Should they be added to the API? Why,
+or why not?</p>
+</dd>
+<dt><strong>Question 3.2:</strong></dt>
+<dd>
+<p>Consider whether there are any <em>invariants</em> that govern the
+values of these attributes. Class invariants are constraints on what
+values the attributes of the class can take. They do <em>not</em> form
+part of the public API: they are an implementation detail, for use by
+the developer of the class (and any other developers maintaining the
+code).</p>
+</dd>
+</dl>
+<p>For this lab, it’s suggested you use three <code>int</code>
+attributes, <code>hours</code>, <code>minutes</code> and
+<code>seconds</code>. Using your colleague’s API sketch as a starting
+point, add in the attributes and add “skeleton” method bodies to the
+code – e.g., for <code>getSeconds()</code>, you might start with</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>  <span class="kw">public</span> <span class="dt">int</span> <span class="fu">getSeconds</span><span class="op">()</span> <span class="op">{</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="op">-</span><span class="dv">1</span><span class="op">;</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span></code></pre></div>
+<p>The aim is to write code that will compile (but isn’t yet a correct
+implementation).</p>
+<p>You should be able to come up with a number of class invariants
+relating these attributes. Write them down as inline comments
+(<em>not</em> as Javadoc comments) in the body of the class. If you drop
+in on a timetabled lab session, compare the invariants you have proposed
+with those of other students (or with the lab facilitator).</p>
+
+<div class="solutions">
+<p><strong>Question 3.1:</strong></p>
+<p>There should be two obvious possibilities for an implementation:</p>
+<ol type="a">
+<li><p>We could add <code>int</code> attributes <code>hours</code>,
+<code>minutes</code> and <code>seconds</code>. In this case, the
+implementations of <code>getHour</code>, <code>getMinute</code> and
+<code>getSecond</code> will be very simple; but the <code>tick</code>
+implentation will need to ensure values are properly “carried” when, for
+instance, <code>seconds</code> equals 59 and <code>tick</code> is
+invoked.</p></li>
+<li><p>We could add a single <code>second</code> attribute, and no
+others. In this case, the <code>tick</code> implementation will be very
+simple (we simply increment our <code>seconds</code> attribute), but the
+<code>getHour</code>, <code>getMinute</code> and <code>getSecond</code>
+will be more complex.</p></li>
+</ol>
+<p>In either case, there are some obvious invariants that apply to the
+class. For instance, assuming we have chosen implementation (b):</p>
+<ul>
+<li><code>seconds</code>, <code>hours</code> and <code>minutes</code>
+should always be greater than or equal to 0.</li>
+<li>Attributes will have a maximum value they can never exceed – 23 for
+hours, 59 for seconds, and 59 for seconds.</li>
+</ul>
+<p>The fields should be kept private, because otherwise, any user of the
+class can alter them, and we have no ability to maintain the invariants
+– and thus, no way of ensuring our objects are still in a sensible,
+consistent state.</p>
+</div>
+<p></p>
+<p><em>Before</em> writing a constructor and filling in the method
+bodies, write a <code>DigitalTimerTest</code> class:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">import</span> <span class="kw">static</span><span class="im"> org</span><span class="op">.</span><span class="im">junit</span><span class="op">.</span><span class="im">jupiter</span><span class="op">.</span><span class="im">api</span><span class="op">.</span><span class="im">Assertions</span><span class="op">.*;</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="kw">import</span> <span class="im">org</span><span class="op">.</span><span class="im">junit</span><span class="op">.</span><span class="im">jupiter</span><span class="op">.</span><span class="im">api</span><span class="op">.</span><span class="im">Test</span><span class="op">;</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span> <span class="kw">class</span> DigitalTimerTest <span class="op">{</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">@Test</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>  <span class="kw">public</span> <span class="dt">void</span> <span class="fu">testConstructor</span><span class="op">()</span> <span class="op">{</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">@Test</span></span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>  <span class="kw">public</span> <span class="dt">void</span> <span class="fu">testTick</span><span class="op">()</span> <span class="op">{</span></span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p>See if you can suggest some possible test cases for this JUnit class,
+and try implementing them. Obviously, they will fail at first; but since
+your tests should rely only on the documented behaviour of the class,
+it’s quite possible to write them before the class has been implemented.
+This approach is used in the <a href="https://en.wikipedia.org/wiki/Test-driven_development">test-driven
+development methodology</a> (TDD).</p>
+<p>Lastly, try filling in the method bodies for
+<code>DigitalTimerTest</code>. Some notes to bear in mind:</p>
+<ul>
+<li>The job of a <em>constructor</em> is to initialize a new class
+object, ensuring (by the time the constructor has finished) that the
+object is in a sensible state and all the invariants hold.</li>
+<li>The job of any mutator method is to alter the state of an object in
+some way. Assuming the class invariants hold before the mutator is
+called, the mutator might break them temporarily (say, temporarily
+setting “<code>seconds</code>” to 60); but it should ensure the
+invariants hold again by the time it finishes executing.</li>
+</ul>
+<p>You could find it useful, while testing, to write a
+<code>private</code> “<code>checkInvariants</code>” method, which tests
+whether the invariants hold, and throws an <a href="https://docs.oracle.com/en%2Fjava%2Fjavase%2F11%2Fdocs%2Fapi%2F%2F/java.base/java/lang/IllegalStateException.html"><code>IllegalStateException</code></a>
+if not. Such an exception typically signals a logic error in the
+program, so generally shouldn’t be caught.</p>
+
+<div class="solutions">
+<p>Sample solution code (not including the Javadoc):</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span> <span class="kw">class</span> DigitalTimer <span class="op">{</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">private</span> <span class="dt">int</span> hours<span class="op">;</span> <span class="co">// invariant: 0 &lt;= hours &lt;= 23</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="kw">private</span> <span class="dt">int</span> minutes<span class="op">;</span> <span class="co">// invariant: 0 &lt;= minutes &lt;= 59</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">private</span> <span class="dt">int</span> seconds<span class="op">;</span> <span class="co">// invariant: 0 &lt;= seconds &lt;= 59</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>  <span class="kw">public</span> <span class="fu">DigitalTimer</span><span class="op">()</span> <span class="op">{</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>    <span class="kw">this</span><span class="op">.</span><span class="fu">hours</span> <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>    <span class="kw">this</span><span class="op">.</span><span class="fu">minutes</span> <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>    <span class="kw">this</span><span class="op">.</span><span class="fu">seconds</span> <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>  <span class="kw">public</span> <span class="dt">int</span> <span class="fu">getHours</span><span class="op">()</span> <span class="op">{</span></span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> hours<span class="op">;</span></span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>  <span class="kw">public</span> <span class="dt">int</span> <span class="fu">getMinutes</span><span class="op">()</span> <span class="op">{</span></span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> minutes<span class="op">;</span></span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a>  <span class="kw">public</span> <span class="dt">int</span> <span class="fu">getSeconds</span><span class="op">()</span> <span class="op">{</span></span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> seconds<span class="op">;</span></span>
+<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a>  <span class="kw">public</span> <span class="dt">void</span> <span class="fu">tick</span><span class="op">()</span> <span class="op">{</span></span>
+<span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>hours <span class="op">==</span> <span class="dv">23</span> <span class="op">&amp;&amp;</span> minutes <span class="op">==</span> <span class="dv">59</span> <span class="op">&amp;&amp;</span> seconds <span class="op">==</span> <span class="dv">59</span><span class="op">)</span></span>
+<span id="cb10-26"><a href="#cb10-26" aria-hidden="true" tabindex="-1"></a>      <span class="cf">return</span><span class="op">;</span></span>
+<span id="cb10-27"><a href="#cb10-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-28"><a href="#cb10-28" aria-hidden="true" tabindex="-1"></a>    seconds<span class="op">++;</span></span>
+<span id="cb10-29"><a href="#cb10-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-30"><a href="#cb10-30" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>seconds <span class="op">==</span> <span class="dv">60</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb10-31"><a href="#cb10-31" aria-hidden="true" tabindex="-1"></a>      seconds <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb10-32"><a href="#cb10-32" aria-hidden="true" tabindex="-1"></a>      minutes<span class="op">++;</span></span>
+<span id="cb10-33"><a href="#cb10-33" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb10-34"><a href="#cb10-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-35"><a href="#cb10-35" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>minutes <span class="op">==</span> <span class="dv">60</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb10-36"><a href="#cb10-36" aria-hidden="true" tabindex="-1"></a>      minutes <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb10-37"><a href="#cb10-37" aria-hidden="true" tabindex="-1"></a>      hours<span class="op">++;</span></span>
+<span id="cb10-38"><a href="#cb10-38" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb10-39"><a href="#cb10-39" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb10-40"><a href="#cb10-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-41"><a href="#cb10-41" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p>Note that the <code>tick</code> method sometimes breaks the
+invariants (for instance, <code>seconds</code> might temporarily be set
+to 60), but they are restored again by the time the method ends.</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="kw">import</span> <span class="im">org</span><span class="op">.</span><span class="im">junit</span><span class="op">.</span><span class="im">jupiter</span><span class="op">.</span><span class="im">api</span><span class="op">.</span><span class="im">Test</span><span class="op">;</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="kw">import</span> <span class="kw">static</span><span class="im"> org</span><span class="op">.</span><span class="im">junit</span><span class="op">.</span><span class="im">jupiter</span><span class="op">.</span><span class="im">api</span><span class="op">.</span><span class="im">Assertions</span><span class="op">.*;</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span> <span class="kw">class</span> DigitalTimerTest <span class="op">{</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">@Test</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>  <span class="kw">public</span> <span class="dt">void</span> <span class="fu">testConstructor_initialValues</span><span class="op">()</span> <span class="op">{</span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>    DigitalTimer timer <span class="op">=</span> <span class="kw">new</span> <span class="fu">DigitalTimer</span><span class="op">();</span></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">assertEquals</span><span class="op">(</span><span class="dv">0</span><span class="op">,</span> timer<span class="op">.</span><span class="fu">getHours</span><span class="op">(),</span> <span class="st">&quot;Initial hours should be 0&quot;</span><span class="op">);</span></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">assertEquals</span><span class="op">(</span><span class="dv">0</span><span class="op">,</span> timer<span class="op">.</span><span class="fu">getMinutes</span><span class="op">(),</span> <span class="st">&quot;Initial minutes should be 0&quot;</span><span class="op">);</span></span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">assertEquals</span><span class="op">(</span><span class="dv">0</span><span class="op">,</span> timer<span class="op">.</span><span class="fu">getSeconds</span><span class="op">(),</span> <span class="st">&quot;Initial seconds should be 0&quot;</span><span class="op">);</span></span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">@Test</span></span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>  <span class="kw">public</span> <span class="dt">void</span> <span class="fu">testTick_incrementSeconds</span><span class="op">()</span> <span class="op">{</span></span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>    DigitalTimer timer <span class="op">=</span> <span class="kw">new</span> <span class="fu">DigitalTimer</span><span class="op">();</span></span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a>    timer<span class="op">.</span><span class="fu">tick</span><span class="op">();</span></span>
+<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a>    <span class="fu">assertEquals</span><span class="op">(</span><span class="dv">0</span><span class="op">,</span> timer<span class="op">.</span><span class="fu">getHours</span><span class="op">(),</span> <span class="st">&quot;Hours should still be 0 after 1 tick&quot;</span><span class="op">);</span></span>
+<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a>    <span class="fu">assertEquals</span><span class="op">(</span><span class="dv">0</span><span class="op">,</span> timer<span class="op">.</span><span class="fu">getMinutes</span><span class="op">(),</span> <span class="st">&quot;Minutes should still be 0 after 1 tick&quot;</span><span class="op">);</span></span>
+<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a>    <span class="fu">assertEquals</span><span class="op">(</span><span class="dv">1</span><span class="op">,</span> timer<span class="op">.</span><span class="fu">getSeconds</span><span class="op">(),</span> <span class="st">&quot;Seconds should be incremented by 1&quot;</span><span class="op">);</span></span>
+<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-23"><a href="#cb11-23" aria-hidden="true" tabindex="-1"></a>  <span class="at">@Test</span></span>
+<span id="cb11-24"><a href="#cb11-24" aria-hidden="true" tabindex="-1"></a>  <span class="kw">public</span> <span class="dt">void</span> <span class="fu">testTick_incrementMinutes</span><span class="op">()</span> <span class="op">{</span></span>
+<span id="cb11-25"><a href="#cb11-25" aria-hidden="true" tabindex="-1"></a>    DigitalTimer timer <span class="op">=</span> <span class="kw">new</span> <span class="fu">DigitalTimer</span><span class="op">();</span></span>
+<span id="cb11-26"><a href="#cb11-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-27"><a href="#cb11-27" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> <span class="dv">60</span><span class="op">;</span> i<span class="op">++)</span> <span class="op">{</span></span>
+<span id="cb11-28"><a href="#cb11-28" aria-hidden="true" tabindex="-1"></a>      timer<span class="op">.</span><span class="fu">tick</span><span class="op">();</span></span>
+<span id="cb11-29"><a href="#cb11-29" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb11-30"><a href="#cb11-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-31"><a href="#cb11-31" aria-hidden="true" tabindex="-1"></a>    <span class="fu">assertEquals</span><span class="op">(</span><span class="dv">0</span><span class="op">,</span> timer<span class="op">.</span><span class="fu">getHours</span><span class="op">(),</span> <span class="st">&quot;Hours should still be 0 after 60 ticks&quot;</span><span class="op">);</span></span>
+<span id="cb11-32"><a href="#cb11-32" aria-hidden="true" tabindex="-1"></a>    <span class="fu">assertEquals</span><span class="op">(</span><span class="dv">1</span><span class="op">,</span> timer<span class="op">.</span><span class="fu">getMinutes</span><span class="op">(),</span> <span class="st">&quot;Minutes should be incremented by 1 after 60 ticks&quot;</span><span class="op">);</span></span>
+<span id="cb11-33"><a href="#cb11-33" aria-hidden="true" tabindex="-1"></a>    <span class="fu">assertEquals</span><span class="op">(</span><span class="dv">0</span><span class="op">,</span> timer<span class="op">.</span><span class="fu">getSeconds</span><span class="op">(),</span> <span class="st">&quot;Seconds should reset to 0 after 60 ticks&quot;</span><span class="op">);</span></span>
+<span id="cb11-34"><a href="#cb11-34" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb11-35"><a href="#cb11-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-36"><a href="#cb11-36" aria-hidden="true" tabindex="-1"></a>  <span class="at">@Test</span></span>
+<span id="cb11-37"><a href="#cb11-37" aria-hidden="true" tabindex="-1"></a>  <span class="kw">public</span> <span class="dt">void</span> <span class="fu">testTick_incrementHours</span><span class="op">()</span> <span class="op">{</span></span>
+<span id="cb11-38"><a href="#cb11-38" aria-hidden="true" tabindex="-1"></a>    DigitalTimer timer <span class="op">=</span> <span class="kw">new</span> <span class="fu">DigitalTimer</span><span class="op">();</span></span>
+<span id="cb11-39"><a href="#cb11-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-40"><a href="#cb11-40" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> <span class="dv">3600</span><span class="op">;</span> i<span class="op">++)</span> <span class="op">{</span></span>
+<span id="cb11-41"><a href="#cb11-41" aria-hidden="true" tabindex="-1"></a>      timer<span class="op">.</span><span class="fu">tick</span><span class="op">();</span></span>
+<span id="cb11-42"><a href="#cb11-42" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb11-43"><a href="#cb11-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-44"><a href="#cb11-44" aria-hidden="true" tabindex="-1"></a>    <span class="fu">assertEquals</span><span class="op">(</span><span class="dv">1</span><span class="op">,</span> timer<span class="op">.</span><span class="fu">getHours</span><span class="op">(),</span> <span class="st">&quot;Hours should be incremented by 1 after 3600 ticks&quot;</span><span class="op">);</span></span>
+<span id="cb11-45"><a href="#cb11-45" aria-hidden="true" tabindex="-1"></a>    <span class="fu">assertEquals</span><span class="op">(</span><span class="dv">0</span><span class="op">,</span> timer<span class="op">.</span><span class="fu">getMinutes</span><span class="op">(),</span> <span class="st">&quot;Minutes should reset to 0 after 3600 ticks&quot;</span><span class="op">);</span></span>
+<span id="cb11-46"><a href="#cb11-46" aria-hidden="true" tabindex="-1"></a>    <span class="fu">assertEquals</span><span class="op">(</span><span class="dv">0</span><span class="op">,</span> timer<span class="op">.</span><span class="fu">getSeconds</span><span class="op">(),</span> <span class="st">&quot;Seconds should reset to 0 after 3600 ticks&quot;</span><span class="op">);</span></span>
+<span id="cb11-47"><a href="#cb11-47" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb11-48"><a href="#cb11-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-49"><a href="#cb11-49" aria-hidden="true" tabindex="-1"></a>  <span class="at">@Test</span></span>
+<span id="cb11-50"><a href="#cb11-50" aria-hidden="true" tabindex="-1"></a>  <span class="kw">public</span> <span class="dt">void</span> <span class="fu">testTick_maxTimeReached</span><span class="op">()</span> <span class="op">{</span></span>
+<span id="cb11-51"><a href="#cb11-51" aria-hidden="true" tabindex="-1"></a>    DigitalTimer timer <span class="op">=</span> <span class="kw">new</span> <span class="fu">DigitalTimer</span><span class="op">();</span></span>
+<span id="cb11-52"><a href="#cb11-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-53"><a href="#cb11-53" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Set the timer to 23:59:59</span></span>
+<span id="cb11-54"><a href="#cb11-54" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> <span class="op">(</span><span class="dv">23</span> <span class="op">*</span> <span class="dv">3600</span> <span class="op">+</span> <span class="dv">59</span> <span class="op">*</span> <span class="dv">60</span> <span class="op">+</span> <span class="dv">59</span><span class="op">);</span> i<span class="op">++)</span> <span class="op">{</span></span>
+<span id="cb11-55"><a href="#cb11-55" aria-hidden="true" tabindex="-1"></a>      timer<span class="op">.</span><span class="fu">tick</span><span class="op">();</span></span>
+<span id="cb11-56"><a href="#cb11-56" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb11-57"><a href="#cb11-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-58"><a href="#cb11-58" aria-hidden="true" tabindex="-1"></a>    <span class="fu">assertEquals</span><span class="op">(</span><span class="dv">23</span><span class="op">,</span> timer<span class="op">.</span><span class="fu">getHours</span><span class="op">(),</span> <span class="st">&quot;Hours should be 23 after 86399 ticks&quot;</span><span class="op">);</span></span>
+<span id="cb11-59"><a href="#cb11-59" aria-hidden="true" tabindex="-1"></a>    <span class="fu">assertEquals</span><span class="op">(</span><span class="dv">59</span><span class="op">,</span> timer<span class="op">.</span><span class="fu">getMinutes</span><span class="op">(),</span> <span class="st">&quot;Minutes should be 59 after 86399 ticks&quot;</span><span class="op">);</span></span>
+<span id="cb11-60"><a href="#cb11-60" aria-hidden="true" tabindex="-1"></a>    <span class="fu">assertEquals</span><span class="op">(</span><span class="dv">59</span><span class="op">,</span> timer<span class="op">.</span><span class="fu">getSeconds</span><span class="op">(),</span> <span class="st">&quot;Seconds should be 59 after 86399 ticks&quot;</span><span class="op">);</span></span>
+<span id="cb11-61"><a href="#cb11-61" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-62"><a href="#cb11-62" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Tick once more, timer should remain at 23:59:59</span></span>
+<span id="cb11-63"><a href="#cb11-63" aria-hidden="true" tabindex="-1"></a>    timer<span class="op">.</span><span class="fu">tick</span><span class="op">();</span></span>
+<span id="cb11-64"><a href="#cb11-64" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-65"><a href="#cb11-65" aria-hidden="true" tabindex="-1"></a>    <span class="fu">assertEquals</span><span class="op">(</span><span class="dv">23</span><span class="op">,</span> timer<span class="op">.</span><span class="fu">getHours</span><span class="op">(),</span> <span class="st">&quot;Hours should remain 23 after max time is reached&quot;</span><span class="op">);</span></span>
+<span id="cb11-66"><a href="#cb11-66" aria-hidden="true" tabindex="-1"></a>    <span class="fu">assertEquals</span><span class="op">(</span><span class="dv">59</span><span class="op">,</span> timer<span class="op">.</span><span class="fu">getMinutes</span><span class="op">(),</span> <span class="st">&quot;Minutes should remain 59 after max time is reached&quot;</span><span class="op">);</span></span>
+<span id="cb11-67"><a href="#cb11-67" aria-hidden="true" tabindex="-1"></a>    <span class="fu">assertEquals</span><span class="op">(</span><span class="dv">59</span><span class="op">,</span> timer<span class="op">.</span><span class="fu">getSeconds</span><span class="op">(),</span> <span class="st">&quot;Seconds should remain 59 after max time is reached&quot;</span><span class="op">);</span></span>
+<span id="cb11-68"><a href="#cb11-68" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb11-69"><a href="#cb11-69" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+</div>
+<p></p>
+<p>How will you test that <code>tick</code> operates correctly after,
+say, 59 seconds, or once the time reaches 23:59:59?</p>
+<p>There are a few different options here:</p>
+<dl>
+<dt><strong>Test through public API</strong></dt>
+<dd>
+<p>If possible, it’s usually preferable to test a class solely through
+its public methods and constructors, treating the implementation of the
+class as a “black box”. The reason this is preferred is because it
+ensures the class behaves correctly when its behaviour is invoked via
+the API – which is, after all, how we expect it to be used.</p>
+<p>However, it might prove challenging to test the class thoroughly when
+some behaviours are difficult to trigger. If this is the case, we might
+consider using another method (see below), or we might consider
+redesigning the API to make the class more testable.</p>
+</dd>
+<dt><strong>Use reflection</strong></dt>
+<dd>
+<p>Ideally, our classes should be designed with testability in mind. But
+if necessary, it’s possible to use Java’s <a href="https://docs.oracle.com/javase/7/docs/api/java/lang/reflect/package-summary.html">reflection
+API</a>. This allows us to obtain information about the methods and
+fields of an object at runtime, and to alter their visibility.</p>
+<p>You can see an example of how to access private field information <a href="https://www.geeksforgeeks.org/how-to-access-private-field-and-method-using-reflection-in-java/">here</a>,
+and read more about the reflection API in Oracle’s technical article on
+the topic <a href="https://www.oracle.com/technical-resources/articles/java/javareflection.html">here</a>.</p>
+<p>This allows us to directly set particular internal states, which can
+be convenient for testing. But a disadvantage is that the tests are now
+tightly coupled to the class’s implementation, and will likely break if
+that implementation is altered. By setting the state directly, we’re
+also bypassing the publicly documented API – we need to make sure that
+the state we set <em>is</em> one that could still be achieved directly
+through the API (otherwise, we’re testing something that couldn’t
+actually happen). Finally, use of reflection tends to make tests more
+complex and harder to maintain.</p>
+</dd>
+</dl>
+<dl>
+<dt><strong>Use protected, “package-private” setter methods, and/or
+inheritance</strong></dt>
+<dd>
+<p>An alternative to using the reflection API is to write protected or
+“package-private” methods that set the state directly.</p>
+<p>Protected methods of some class can be invoked by other classes in
+the same package, or by subclasses; they’re indicated by writing
+“<code>protected</code>” as a method modifier. “Package-private” methods
+can be accessed by other classes in the same package, and are indicated
+by not writing any method modifier – for instance:</p>
+<pre><code>  public setMinutes(int minutes) {
+    this.minutes = minutes;
+  }</code></pre>
+<p>Our test classes can then use these methods to directly set the state
+of the class under test. This is simpler than using the reflection API,
+but other than that, has much the same drawbacks: we’re subverting the
+public API, and our tests are now more tightly coupled to the
+implementation.</p>
+<p>One variant of this is to <em>subclass</em> our original
+class-under-test, and add mutators to the subclass. Technically, if we
+haven’t made our class under test <code>final</code>, this
+<em>isn’t</em> subverting the API (as long as our subclass maintains all
+the invariants of the original class), since inheritance is an allowable
+way of using a class.</p>
+<p>But in general, it’s better to only allow classes to be inherited
+from if they’ve been designed with that in mind – it’s better practice
+to make classes <code>final</code>, preventing inheritance.</p>
+</dd>
+</dl>
+<p>In the present case, it should be possible to test the class entirely
+through its public API (though it might seem a little awkward).</p>
+<!-- vim: syntax=markdown tw=92 :
 -->
+<aside id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr />
+<ol>
+<li id="fn1"><p>This is a very simplified representation of how a
+simulated timer might work. In a real simulation, rather than other
+objects having to actively query a <code>DigitalTimer</code> object to
+find out its state, we would want to give them the ability to be
+<em>alerted</em> whenever a “tick” occurs. A typical approach is to use
+the <a href="https://en.wikipedia.org/wiki/Observer_pattern">“Observer”</a> or
+<a href="https://en.wikipedia.org/wiki/Publish%E2%80%93subscribe_pattern">“Publish-subscribe”</a>
+software patterns. You can see example of “timer” classes which use the
+“Observer” pattern <a href="https://users.cs.jmu.edu/foxcj/Public/ISED/aqualush/src/simulation/SimTime.java">here</a>
+and <a href="https://gist.github.com/vilmaralmeida/1514576">here</a>,
+and read more about how the pattern is implemented in Java <a href="https://www.baeldung.com/java-observer-pattern">here</a>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</aside>
 </body>
 </html>
