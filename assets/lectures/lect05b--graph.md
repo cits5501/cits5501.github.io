@@ -177,6 +177,8 @@ Can be written as nested `if-else`
     -   Ideally, we want tests to be small and independent, so that when
         something goes wrong, we can localize the fault.
 
+<!--
+
 ### Example -- sorting algorithm
 
 ::: code
@@ -195,13 +197,21 @@ S6      j = j-1
 S7    i = i + 1
 ```
 
-:::       
+:::
+
+::: notes
+
+- insertion sort
+- 
+
+:::
 
 ### Example -- sorting algorithm (2)
 
 `\begin{center}`{=latex}
 ![](images/sorting_fg.png){ width=60% }
 `\end{center}`{=latex}
+
 
 
 ### Example -- binary search
@@ -251,6 +261,9 @@ if not found:
 :::
 
 
+-->
+
+
 ## Graph-based testing criteria
 
 ### Graph-based testing criteria
@@ -270,7 +283,7 @@ if not found:
 
 Definitions:
 
--   \alert{Simple path}: A path from node ni to nj is simple if no node appears
+-   \alert{Simple path}: A path from node $n_i$ to $n_j$ is **simple** if no node appears
     more than once, except possibly the first and last nodes are the
     same
 
@@ -288,9 +301,9 @@ Definitions:
     visited.
 
 -   It subsumes node and edge coverage
--   But not edge-pair coverage -- we code have nodes (m,n),
-    where m loops to itself, and edge pair coverage requires the
-    path (m,m,n) to be exercised.
+-   But not edge-pair coverage -- we could have nodes ($m$,$n$),
+    where $m$ loops to itself, and edge pair coverage requires the
+    path ($m$,$m$,$n$) to be exercised.
 -   when it comes to devising *tests*, some tests may end up
     exercising multiple prime paths. But that's okay --
     as long as all prime paths are visited, we've satisfied the
