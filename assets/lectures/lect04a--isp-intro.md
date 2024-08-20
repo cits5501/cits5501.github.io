@@ -431,10 +431,13 @@ screen -- how do we model that?
 Well it "mutates" the state of the screen (and possibly our eyes?), so we could
 model it as
 
+::: diagram
+
 ```{=latex}
 \vspace{1cm}
+\footnotesize
 \[
-println : \tikzmark{foo}SetOfPossibleScreenStates\rightarrow SetOfPossibleScreenStates\tikzmark{bar}
+println : (String, \tikzmark{foo}SetOfPossibleScreenStates)\rightarrow SetOfPossibleScreenStates\tikzmark{bar}
 \]
 
 \begin{tikzpicture}[
@@ -449,6 +452,8 @@ println : \tikzmark{foo}SetOfPossibleScreenStates\rightarrow SetOfPossibleScreen
 
 \end{tikzpicture}
 ```
+
+:::
 
 ### Mutating other state
 

@@ -932,7 +932,7 @@ public Triangle triType (int side1, int side2, int side3)
     us much help.
 -   We might come up with a characteristic for each, namely,
     "How does it compare with 0?", and partition the domain
-    by asking "Is the parameter less tham, equal to, or great than 0?"
+    by asking "Is the parameter less than, equal to, or great than 0?"
 
 
 ### ISP criteria -- functionality-based approach
