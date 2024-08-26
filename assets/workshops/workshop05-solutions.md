@@ -1,5 +1,6 @@
 ---
-title: CITS5501 lab 5 (week 6)&nbsp;--&nbsp;logic-based testing &nbsp;--&nbsp;solutions
+title: |
+  CITS5501 lab 5 (week 6)&nbsp;--&nbsp;logic-based testing &nbsp;--&nbsp;solutions
 include-before: |
   ```{=html}
   <style>
@@ -20,12 +21,16 @@ include-before: |
 
 ## 0. Notation
 
-When writing logic expressions, we will normally use
+When writing logic expressions, we will often use
 mathematical notation for "and", "or", and "not":
 
 - $\wedge$ -- "and"
 - $\vee$ -- "or"
 - $\neg$ -- "not"
+
+This notation is independent of any language; it could be turned into Java, or C, or Python -- each
+of which uses different logical operators -- depending on what language our system and our
+tests are implemented in.
 
 If writing actual Java code, however, we use the normal
 Java logical operators:
@@ -41,7 +46,7 @@ Java logical operators:
 Java also has non–short-circuiting logic operators, `|` and `&`.
 
 We won't be using any Python in this unit -- but for reference,
-in Python, the logic operators are all spelled out: "and", "or" and
+in Python, the logic operators are all spelled out as English words: "and", "or" and
 "not".
 
 </div>
@@ -722,10 +727,39 @@ the requirement.)
 \endsolbox
 
 
+## 4. Tips and tricks
+
+When solving problems that involve logic-based testing, make sure you understand the
+difference between *expressions* and *statements* in the programming language or languages
+that you're using.
+
+For instance, simple Java `if` statements [are of the form][java-if]:
+
+&nbsp;&nbsp;  `if (` **`Expression`** `) {` **`Statements`** `}`
+
+Statements are parts of the language that *do* things; we usually execute them in order to
+achieve some side effect. Expressions evaluate
+to a Java `boolean`, and we typically intend that they should *not* have side effects --
+they just evaluate to `true` or `false`.
+
+When we do logic-based testing, we're focusing on the collection of logic *expressions* of a program or system that
+control program flow, and working out how to write tests that thoroughly exercise the
+component parts (the clauses) of those expressions.
+
+<!--
+ (unless they happen to have more logic expressions within them); we're just
+working out how to get the correct clauses to be evaluated. If using the "Arrange, Act, Assert"
+pattern, we're focusing on the "Act" portion -- what parameters etc. we need to supply in
+order for the correct clauses to be evaluated.
+-->
+
+Confusing expressions with statements, or vice versa, is a common reason for students to do poorly in test or
+exam questions involving logic-based testing.
+
+
+[java-if]: https://docs.oracle.com/javase/specs/jls/se22/html/jls-14.html#jls-14.9 
 
 
 
-
-
-<!-- vim: syntax=markdown tw=72 :
+<!-- vim: syntax=markdown tw=92 :
 -->

@@ -22,6 +22,14 @@ like to get an idea in advance of what will be covered.)
 {#
   NBB: there must be **NO BLANK LINEs** between list items here -- else
        ugly extra para elements will appear
+
+ 
+ if you have commented out text mid-list, you probably want to use
+
+  <hyphen><end-comment> to strip out whitespace after
+
+  i.e. -# but with a brace at the end.
+
 #}
 
 ::: { .resource-list }
@@ -41,12 +49,12 @@ like to get an idea in advance of what will be covered.)
   - Lecture 5a -- graph-based testing {% resourceList "lect05b--graph", ["pdf", "md"] %}
   - Lecture 5b -- logic-based testing {% resourceList "lect05c--logic", ["pdf", "md"] %}
 {#
-  - Lecture 5a -- model-based testing {% resourceList "lect05a--intro", ["pdf", "md"] %}
-#} 
-{#
+- Lecture 5a -- model-based testing {% resourceList "lect05a--intro", ["pdf", "md"] %}
+-#}
 - Week 6--7
   - Lecture 6a -- syntax-based testing {% resourceList "lect06a--syntax", ["pdf", "md"] %}
   - Lecture 6b -- random testing       {% resourceList "lect06b--random", ["pdf", "md"] %}
+{#
 - Week 8-9
   - Lecture 7a, integration and system testing {% resourceList "lect07a--system", ["pdf", "md"] %}
   - Lecture 7b, reviews and quality assurance  {% resourceList "lect07b--reviews", ["pdf", "md"] %}
@@ -63,7 +71,6 @@ like to get an idea in advance of what will be covered.)
   - Lecture 11, Program specification -- alloy, continued {% resourceList "lect11--alloy", ["pdf", "md"] %}
 
 #}
-
 {#
 - Week 9
   - Lecture 8A, Risk                  {% resourceList "lect08a--risk", ["pdf", "md"] %}
@@ -126,10 +133,10 @@ the semester.
   - Sample worksheet solutions {% resourceList "workshop03-solutions", ["html", "md"] %}
 - Week 5 -- ISP, graphs and fixtures
   - Lab worksheet {% resourceList "workshop04", ["html", "md"] %}
-{#
   - Sample worksheet solutions {% resourceList "workshop04-solutions", ["html", "md"] %}
 - Week 6 -- logic
   - Lab worksheet {% resourceList "workshop05", ["html", "md"] %}
+{#
   - Sample worksheet solutions {% resourceList "workshop05-solutions", ["html", "md"] %}
 - Week 7 -- syntax
   - Lab worksheet {% resourceList "workshop06", ["html", "md"] %}

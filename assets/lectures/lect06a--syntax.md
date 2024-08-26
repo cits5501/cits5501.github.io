@@ -413,7 +413,7 @@ compiler tells us we've committed a "syntax error".
   languages}.
 
   (Why "context-free"? Because we can't have rules like the one just
-  descibed, that say "*If* the previous item was '1', then *this*
+  described, that say "*If* the previous item was '1', then *this*
   item can only be '0' or '1' or '2' -- the grammars we use never
   require us to supply *contextual* information of this sort.)
 
@@ -942,16 +942,16 @@ technique for evaluating the quality of a suite of software tests.
 ### Mutation example
 
 -   A sample method to test (in a Java-like language):\
-    `int mult(int a, int b) { return a * b; }`{.java}
+    &nbsp;&nbsp; `int mult(int a, int b) { return a * b; }`{.java}
 -   A possible test:\
-    `assertEquals( 1, mult(1,1) );`
+    &nbsp;&nbsp; `assertEquals( 1, mult(1,1) );`
 -   Is this a useful test?
 
 ### Mutation example (2)
 
 -   ans.: No, it's terrible.
 -   Consider the following mutation:\
-    `int mult(int a, int b) { return a * b; }`{.java} \
+    &nbsp;&nbsp;&nbsp; `int mult(int a, int b) { return a * b; }`{.java} \
     \
     $\Rightarrow$ `int mult(int a, int b) { return a ** b; }`{.java} \
     \
@@ -1034,7 +1034,11 @@ Mutation Operator Coverage (MOC)
     contains exactly one requirement, to create a mutated string $m$ that is
     derived using the mutation operator.
 
+<!--
+see
+
 https://opensource.com/article/19/9/mutation-testing-example-execute-test
+-->
 
 ### Mutation testing example[^alexb] -- IOT cat door
 
