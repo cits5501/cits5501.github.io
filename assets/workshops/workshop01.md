@@ -115,6 +115,18 @@ We describe these options in the following sections.
     Then open one of the `.java` files in the `src` subdirectory,
     and continue with ["Common steps in VS Code or GitPod"](#common-steps).
 
+    <div style="border: solid 2pt orange; border-radius: 5pt; background-color: hsl(22.35, 100%, 85%, 1); padding: 1em;">
+
+    Note that if you use GitPod, your work is stored on a temporary, cloud-based virtual
+    machine (VM), and will disappear once the VM is no longer in use. If you want to
+    store your work more permanently, it's up to you transfer it to some other storage
+    location, such as student network storage (see [here][storage] for links to more
+    information on student network storage).
+
+    [storage]: https://cits5501.github.io/faq/#backups
+
+    </div>
+
 [github]: https://github.com/
 
 [**Common steps in VS Code or GitPod**]{ #common-steps }
