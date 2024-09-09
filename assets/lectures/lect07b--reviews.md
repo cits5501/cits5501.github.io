@@ -226,34 +226,89 @@ In ascending level of formality/preparation required:
 -->
 
 
+### Review best practices
+
+\small
+
+For an exhaustive discussion of best practices, the book by Cohen et al
+*Best Kept Secrets of Peer Code Review* is a good guide.
+
+But we outline several best practices here.
+
+```{=latex}
+\begin{description}[]
+  \item[\textbf{Don't} waste reviewers' time] \hfill
+```
+
+- Don't waste reviewers' time doing things that could have been done
+  by the original developer or automated software
+- Original developer should have already ensured their
+  code meets organizational standards, has been formatted for
+  readability -- reviewers shouldn't be doing the developers' job for them
+- It's a waste of time for reveiwers to detect bugs or code formatting issues
+  that could've been picked up automatically -- code beautifiers/formatters
+  and linters/static analyses should already have been run over the code
+
+```{=latex}    
+\end{description}
+```
+
 
 ### Review best practices
 
-- Don't waste reviewers' time doing things that could have been done
-  by the developer or automated software
+\small
 
-  &nbsp;
+```{=latex}
+\begin{description}[]
+  \item[\textbf{Do} provide reviewer instructions and/or checklists] \hfill
+```
 
-  - The original developer should already have attempted to ensure their
-    code meets organizational standards, has been formatted for
-    readability -- reviewers shouldn't be doing the developers' job for them
-  - It's a waste of time for reveiwers to detect bugs or code formatting issues
-    that could've been picked up automatically -- code beautifiers/formatters
-    and linters/static analyses should already have been run over the code
+- Empirical research suggests[^checklists] that reviews are more effective when reviewers are provided
+  with checklists *or* other guides to what sort of problems they should be looking for
+  or how the new code will be used.
+- A checklist might feature such problems as e.g. code not organised logically,
+  insufficient documentation, lack of tests, poor readability of code, repetitive code
+
+`\item[\textbf{Do} ensure review requests include context] \hfill`{=latex}
+
+- Requests for review should clearly explain to the reviewer what has changed
+  in the code, for what reason (e.g. provide a link to the relevant bug
+  reports), and whether the new code poses increased risks.
+
+```{=latex}    
+\end{description}
+```
+
+[^checklists]: See e.g. Dunsmore et al (2000), cited in Cohen et al (2013).
+
 
 ### Review best practices, cont'd
-    
-- Capture issues that can't be corrected immediately
-  - Reviewers may pick up issues or make suggestions that can't be
-    fixed/implemented for the current release -- but they should be
-    captured for future use.
-  - (An easy way to do this is to add them to the organization's issue-tracking
-    system.)    
-- Document the results of reviews
-  - All comments made, defects identified, etc should be documented --
-    for instance via email or in an issue tracking system.
+
+\small
+
+```{=latex}
+\begin{description}[]
+  \item[\textbf{Do} capture issues that can't be corrected immediately] \hfill
+```
+
+- Reviewers may pick up issues or make suggestions that can't be
+  fixed/implemented for the current release -- but they should be
+  captured for future use.
+- (An easy way to do this is to add them to the organization's issue-tracking
+  system.)
 
 
+`\item[\textbf{Do} document the results of reviews] \hfill`{=latex}
+
+- All comments made, defects identified, etc should be recorded
+- For instance via email (acceptable but not ideal for searching)
+  or in an issue tracking system (much more useful)
+- If it turns out reviewers are consistently identifying the same
+  sorts of problems -- can those problems be detected automatically?
+
+```{=latex}    
+\end{description}
+```
 
 ### Example -- getNumOfDays
 
@@ -284,12 +339,8 @@ if (month==1 || month==3 || month==5 || month=7 || month==10
 } else if (month==2) {
   if (isLeapYear(year)) { numDays = 29;
   }
-  else { numDays = 28;
-  }
-} else {
-  throw new MonthOutOfBounds(month);
-}
-return numDays;
+// ...
+
 ```
 
 :::
@@ -384,15 +435,26 @@ Normally, we'd prefer to err on the side of having false positives.
 
 ### Types of static analysis program
 
-- Compilers
-  - Amongst other things, aim to detect violations of type safety rules
-- Style checkers/linters
-  - Check conformance with style rules
-- Bug finders
-  - Look for known bugs, and/or code practices that are known to be
+Compilers \hfill
+
+:   \
+    Amongst other things, aim to detect violations of type safety rules
+
+Style checkers/linters \hfill
+ 
+:   \
+    Check conformance with style rules
+
+Bug finders \hfill
+
+:   \
+    Look for known bugs, and/or code practices that are known to be
     unsafe
-- Verifiers
-  - Prove the absence of runtime errors of various sorts
+
+Verifiers \hfill
+
+:   \
+    Prove the absence of runtime errors of various sorts
 
 ### Style checkers
 
@@ -480,12 +542,23 @@ Analysis based on a model of the meaning (i.e. semantics) of a program
 
 ### References
 
-
-
+- Cohen, J., Brown, E., DuRette, B., & Teleki, S. *Best Kept Secrets of Peer
+  Code Review*. Austin, Tex.: Smart Bear, 2013.
+- Dunsmore, A., Roper, M., & Wood, M. "Object-Oriented Inspection in the Face
+  of Delocalisation." In *Proceedings of the 22nd International Conference on
+  Software Engineering* (ICSE '00), 467--476. Limerick, Ireland: ACM Press, 2000.
+  Available at <https://doi.org/10.1145/337180.337343>.
 - Jorgensen, Paul C. *Software Testing: A Craftsman's Approach*. 4th edition.
   Boca Raton, Florida: Auerbach Publications, 2013.
 - McConnell, Steve. *Code Complete*. 2nd edition. Redmond, Washington:
   Microsoft Press, 2004.
+
+
+
+
+  
+
+
 
 
 
