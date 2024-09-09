@@ -1,16 +1,19 @@
 ---
-title: CITS5501 lab 6 (week 7)&nbsp;--&nbsp;grammars and syntax-based testing 
+title: |
+  CITS5501 lab 6 (week 7)&nbsp;--&nbsp;grammars and syntax-based testing 
 include-before: |
-  ```{=latex}
-  \lstdefinestyle{vsmalllistingstyle}{
-    breaklines=true,
-    numbers=none,
-    frame=none,
-    showstringspaces=true,
-    columns=fullflexible,
-    keepspaces=true,
-    basicstyle={\ttfamily\scriptsize},
+  ```{=html}
+  <style>
+  .pre-like {
+    margin: 0;
+    background-color: hsl(0, 0%, 98%);
+    padding: 0 0.5em;
+    overflow: auto;
+    white-space: pre;
+    font-family: Menlo, Monaco, 'Lucida Console', Consolas, monospace;
+    overflow: auto !important;
   }
+  </style>
   ```
 ---
 
@@ -38,8 +41,9 @@ virtual environment which mimics the Fedora distribution.
 
 Take a look at the documentation page for Docker which
 explains the command-line arguments that can be given to the [Docker][docker]
-executable:\
-<https://docs.docker.com/engine/reference/commandline/cli/>
+executable:
+
+- <https://docs.docker.com/engine/reference/commandline/cli/>
 
 [docker]: https://docs.docker.com/engine/reference/commandline/cli/
 
@@ -47,8 +51,8 @@ The page shows a typical way of documenting a
 command-line program:
 
 
-\begin{genericbox}[innertopmargin=-1em]
-\begin{lstlisting}[style=vsmalllistingstyle]
+<div class="pre-like">
+<pre style="margin:0; padding: 0; overflow: visible;">
 Usage:  docker [OPTIONS] COMMAND [ARG...]
 
 A self-sufficient runtime for containers.
@@ -60,10 +64,10 @@ Options:
   -D, --debug              Enable debug mode
       --help               Print usage
   -H, --host value         Daemon socket(s) to connect to (default [])
+</pre>
 
-[... remaining documentation snipped ...]
-\end{lstlisting}
-\end{genericbox}
+*[\... remaining documentation snipped \...]*
+</div>
 
 
 The syntax used is a little like EBNF, with a few changes:[^man-syntax]
@@ -91,7 +95,7 @@ The following grammar represents a simplified, very small subset
 of these command-line arguments:
 
 ```
-<invocation> ::= "docker " ( "--verbose " )? <subcommand> <image> 
+<invocation> ::= "docker " ( "--verbose " )? <subcommand> <image>
 <subcommand> ::= "pull " | "run " | "build "
 <image>      ::= "debian" | "ubuntu" | "fedora"
 ```
@@ -114,65 +118,59 @@ a.  *recognizers* (programs which check a string, and see if it
 b.  *generators* (programs which produce random strings
     belonging to the language).
 
-In the box labelled "Test a string here!", type (don't paste!):
+In the box labelled "Test a string here!", *type* (don't paste!):
 
 ```
 docker pull debian
 ```
 
-You'll see that the box is initially red (indicating
-the string is *not* recognized as being in the
-language we have defined), and then
-turns green (once it *is* recognized).
+You'll see that the box is initially red (indicating the string is *not*
+recognized as being in the language we have defined), and then turns green
+(once it *is* recognized).
 
 **Exercise**:
 
-- Try the string "docker pull alpine", and note
-  that it is not recognized.
+- Try the string "docker pull alpine", and note that it is not recognized.
 - Amend the grammar so it *is* recognized.\
-  (You might want to clear the "Test a string here!" box
-  first -- otherwise, when you make changes to the grammar,
-  it may show up as invalid and display errors. Once you've
-  amended the grammar, you need to re-compile.)
+  (You might want to clear the "Test a string here!" box first -- otherwise,
+  when you make changes to the grammar, it may show up as invalid and display
+  errors. Once you've amended the grammar, you need to re-compile.)
 
 
 
 ### Generators
 
-Now try hitting the button labelled
-"Generate random `<invocation>`" several times,
-and see what strings are produced.
+Now try hitting the button labelled "Generate random `<invocation>`" several
+times, and see what strings are produced.
 
-Note that the BNF differs slightly from the less formal version
-we have seen in class, in that it requires spaces
-be explicitly inserted.
+Note that the BNF differs slightly from the less formal version we have seen in
+class, in that it requires spaces be explicitly inserted.
 
 **Exercise**:
 
 - Remove the spaces after "pull", "run" and "build", and try
   generating random strings -- are they what you would expect?
 
-Now put the original grammar back in and compile it
-again.
+Now put the original grammar back in and compile it again.
 
 **Exercise**:
 
-- When selecting which of several alternatives to use, the generator
-  chooses one randomly.
-  How would you alter the grammar so that the image "`ubuntu`" is
-chosen twice as often as the others?
+- When selecting which of several alternatives to use, the generator chooses
+  one randomly.
+  How would you alter the grammar so that the image "`ubuntu`" is chosen twice
+  as often as the others?
 
 
 
 ## B. Hand-written parsers
 
-Suppose we wanted to parse a grammar like this for ourselves.
+Suppose we wanted to write code ourselves to parse the command-line arguments of a program
+according to a grammar like this.
 
-For small programs, the simplest way is usally is to implement a
-**hand-written parser**.
-For an example of what this looks like, take a look at the `parseArgs()`
-method of the `MyDockerLiteProgram` class in the code for this
-workshop.
+For small programs, the simplest way is usally is to implement a **hand-written
+parser**.
+For an example of what this looks like, take a look at the `parseArgs()` method
+of the `MyDockerLiteProgram` class in the code for this workshop.
 
 In the `parseArgs()` method,
 we manually work our way through the `ArrayList` of arguments;
@@ -262,7 +260,7 @@ a.  Suppose you wanted to write a test ensuring
   ```
   <list> ::= "1" | "0" <list>
   ```
-  
+
   Try entering it into the BNF playground, generating
   some random strings, and seeing what strings it recognizes.
 
@@ -271,10 +269,17 @@ a.  Suppose you wanted to write a test ensuring
       by the grammar.
   b.  Can the grammar be tested exhaustively? Explain why
       or why not.
-      
+  c.  The grammar relies on recursion -- the body of the `<list>` non-terminal
+      itself refers to the `<list>` non-terminal. Can you think
+      of an equivalent grammar -- that is, one that defines exactly the
+      same language -- which instead uses asterisks?\
+      (In general, using EBNF syntactic sugar like asterisks is much
+      easier to read than using recursion, but both have exactly
+      equivalent power.)
 
 
 
-<!-- vim: syntax=markdown
+<!--
+  vim: syntax=markdown tw=92 :
 -->
 

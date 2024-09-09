@@ -6,195 +6,212 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
   <title>CITS5501 lab 6 (week 7) – grammars and syntax-based testing  – solutions</title>
   <style>
-    html {
-      line-height: 1.5;
-      font-family: sans serif;
-      font-size: 12pt;
-      color: black;
-      background-color: white;
-    }
-    body {
-      margin: 0 auto;
-      max-width: 50em;
-      padding-left: 50px;
-      padding-right: 50px;
-      padding-top: 50px;
-      padding-bottom: 50px;
-      hyphens: auto;
-      overflow-wrap: break-word;
-      text-rendering: optimizeLegibility;
-      font-kerning: normal;
-    }
-    @media (max-width: 600px) {
-      body {
-        font-size: 0.9em;
-        padding: 1em;
-      }
-      h1 {
-        font-size: 1.8em;
-      }
-    }
-    @media print {
-      body {
-        background-color: transparent;
-        color: black;
-        font-size: 12pt;
-      }
-      p, h2, h3 {
-        orphans: 3;
-        widows: 3;
-      }
-      h2, h3, h4 {
-        page-break-after: avoid;
-      }
-    }
-    p {
-      margin: 1em 0;
-    }
-    img {
-      max-width: 100%;
-    }
-    h1, h2, h3, h4, h5, h6 {
-      margin-top: 1.4em;
-    }
-    h5, h6 {
-      font-size: 1em;
-      font-style: italic;
-    }
-    h6 {
-      font-weight: normal;
-    }
-    ol, ul {
-      padding-left: 1.7em;
-      margin-top: 1em;
-    }
-    li > ol, li > ul {
-      margin-top: 0;
-    }
-    blockquote {
-      margin: 1em 0 1em 1.7em;
-      padding-left: 1em;
-      border-left: 2px solid #e6e6e6;
-      color: #606060;
-    }
-    code {
-      font-family: Menlo, Monaco, 'Lucida Console', Consolas, monospace;
-      background-color: hsl(0, 0%, 98%);
-      padding: .2em .4em;
-      font-size: 85%;
-      margin: 0;
-    }
-    pre {
-      margin: 1em 0;
-      background-color: hsl(0, 0%, 98%);
-      padding: 1em;
-      overflow: auto;
-    }
-    pre code {
-      padding: 0;
-      overflow: visible;
-      overflow-wrap: normal;
-    }
-    /* Inline code */
-    :not(pre) > code {
-      padding: 2px 4px;
-      font-size: 90%;
-      word-break: normal !important;
-      white-space: nowrap;
-      color: hsl(344.8,69%,10%);
-      background-color: hsl(342.9,37%,96%);
-      border-radius: 4px;
-    }
-    .sourceCode {
-     background-color: hsl(0, 0%, 98%);
-     overflow: visible;
-    }
-    hr {
-      background-color: #1a1a1a;
-      border: none;
-      height: 1px;
-      margin: 1em 0;
-    }
-    table {
-      margin: 1em 0;
-      border-collapse: collapse;
-      width: 100%;
-      overflow-x: auto;
-      display: block;
-      font-variant-numeric: lining-nums tabular-nums;
-    }
-    table caption {
-      margin-bottom: 0.75em;
-    }
-    tbody {
-      margin-top: 0.5em;
-      border-top: 1px solid black;
-      border-bottom: 1px solid black;
-    }
-    th {
-      border-top: 1px solid black;
-      padding: 0.25em 0.5em 0.25em 0.5em;
-    }
-    td {
-      padding: 0.125em 0.5em 0.25em 0.5em;
-    }
-    header {
-      margin-bottom: 4em;
-      text-align: center;
-    }
-    #TOC li {
-      list-style: none;
-    }
-    #TOC ul {
-      padding-left: 1.3em;
-    }
-    #TOC > ul {
-      padding-left: 0;
-    }
-    #TOC a:not(:hover) {
-      text-decoration: none;
-    }
-    span.smallcaps{font-variant: small-caps;}
-    span.underline{text-decoration: underline;}
-    div.column{display: inline-block; vertical-align: top; width: 50%;}
-    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-    ul.task-list{list-style: none;}
-  </style>
+html {
+line-height: 1.5;
+font-family: sans-serif;
+font-size: 12pt;
+color: black;
+background-color: white;
+}
+body {
+margin: 0 auto;
+max-width: 50em;
+padding-left: 50px;
+padding-right: 50px;
+padding-top: 50px;
+padding-bottom: 50px;
+hyphens: auto;
+overflow-wrap: break-word;
+text-rendering: optimizeLegibility;
+font-kerning: normal;
+}
+@media (max-width: 600px) {
+body {
+font-size: 0.9em;
+padding: 1em;
+}
+h1 {
+font-size: 1.8em;
+}
+}
+@media print {
+body {
+background-color: transparent;
+color: black;
+font-size: 12pt;
+}
+p, h2, h3 {
+orphans: 3;
+widows: 3;
+}
+h2, h3, h4 {
+page-break-after: avoid;
+}
+}
+p {
+margin: 1em 0;
+}
+img {
+max-width: 100%;
+}
+h1, h2, h3, h4, h5, h6 {
+margin-top: 1.4em;
+}
+h5, h6 {
+font-size: 1em;
+font-style: italic;
+}
+h6 {
+font-weight: normal;
+}
+ol, ul {
+padding-left: 1.7em;
+margin-top: 1em;
+}
+li > ol, li > ul {
+margin-top: 0;
+}
+blockquote {
+margin: 1em 0 1em 1.7em;
+padding-left: 1em;
+border-left: 2px solid #e6e6e6;
+color: #606060;
+}
+code {
+font-family: Menlo, Monaco, 'Lucida Console', Consolas, monospace;
+background-color: hsl(0, 0%, 98%);
+padding: .2em .4em;
+font-size: 85%;
+margin: 0;
+}
+pre {
+margin: 1em 0;
+background-color: hsl(0, 0%, 98%);
+padding: 1em;
+overflow: auto;
+}
+pre code {
+padding: 0;
+overflow: visible;
+overflow-wrap: normal;
+}
+
+:not(pre) > code {
+padding: 2px 4px;
+font-size: 90%;
+word-break: normal !important;
+white-space: nowrap;
+color: hsl(344.8,69%,10%);
+background-color: hsl(342.9,37%,96%);
+border-radius: 4px;
+}
+.sourceCode {
+background-color: hsl(0, 0%, 98%);
+overflow: visible;
+}
+hr {
+background-color: #1a1a1a;
+border: none;
+height: 1px;
+margin: 1em 0;
+}
+table {
+margin: 1em 0;
+border-collapse: collapse;
+width: 100%;
+overflow-x: auto;
+display: block;
+font-variant-numeric: lining-nums tabular-nums;
+}
+table caption {
+margin-bottom: 0.75em;
+}
+tbody {
+margin-top: 0.5em;
+border-top: 1px solid black;
+border-bottom: 1px solid black;
+}
+th {
+border-top: 1px solid black;
+padding: 0.25em 0.5em 0.25em 0.5em;
+}
+td {
+padding: 0.125em 0.5em 0.25em 0.5em;
+}
+header {
+margin-bottom: 4em;
+text-align: center;
+}
+#TOC li {
+list-style: none;
+}
+#TOC ul {
+padding-left: 1.3em;
+}
+#TOC > ul {
+padding-left: 0;
+}
+#TOC a:not(:hover) {
+text-decoration: none;
+}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+</style>
   <style>
-    div.solutions {
-      border: solid 2pt hsla(120, 100%, 35%, 1);
-      border-radius: 5pt;
-      background-color: hsla(120, 100%, 50%, 0.1);
-      padding: 1em;
-    }
-  </style>
+div.solutions {
+border: solid 2pt hsla(120, 100%, 35%, 1);
+border-radius: 5pt;
+background-color: hsla(120, 100%, 50%, 0.1);
+padding: 1em;
+}
+.block-caption {
+display: block;
+font-family: sans-serif;
+font-weight: bold;
+margin-bottom: 1.5rem;
+text-align: center;
+}
+details[open] summary *.only-open {
+opacity: 0.1;
+}
+</style>
 <script data-external="1" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript">
 </script>
-  <!--[if lt IE 9]>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
-  <![endif]-->
 </head>
 <body>
-
+<style>
+.pre-like {
+margin: 0;
+background-color: hsl(0, 0%, 98%);
+padding: 0 0.5em;
+overflow: auto;
+white-space: pre;
+font-family: Menlo, Monaco, 'Lucida Console', Consolas, monospace;
+overflow: auto !important;
+}
+</style>
 <header id="title-block-header">
-<h1 class="title">CITS5501 lab 6 (week 7) – grammars and syntax-based
-testing  – solutions</h1>
+<h1 class="title"><p>CITS5501 lab 6 (week 7) – grammars and syntax-based
+testing  – solutions</p></h1>
 </header>
 <nav id="TOC" role="doc-toc">
 <h2 id="toc-title">Contents</h2>
 <ul>
-<li><a href="#reading">Reading</a></li>
-<li><a href="#a.-command-line-argument-parsing">A. Command-line argument
+<li><a href="#reading" id="toc-reading">Reading</a></li>
+<li><a href="#a.-command-line-argument-parsing" id="toc-a.-command-line-argument-parsing">A. Command-line argument
 parsing</a>
 <ul>
-<li><a href="#documenting-command-line-arguments">Documenting
-command-line arguments</a></li>
-<li><a href="#a-mini-docker-command-line-argument-syntax">A mini-Docker
+<li><a href="#documenting-command-line-arguments" id="toc-documenting-command-line-arguments">Documenting command-line
+arguments</a></li>
+<li><a href="#a-mini-docker-command-line-argument-syntax" id="toc-a-mini-docker-command-line-argument-syntax">A mini-Docker
 command-line argument syntax</a></li>
-<li><a href="#generators">Generators</a></li>
+<li><a href="#generators" id="toc-generators">Generators</a></li>
 </ul></li>
-<li><a href="#b.-hand-written-parsers">B. Hand-written parsers</a></li>
-<li><a href="#c.-testing-grammars-coverage">C. Testing grammars –
+<li><a href="#b.-hand-written-parsers" id="toc-b.-hand-written-parsers">B. Hand-written parsers</a></li>
+<li><a href="#c.-testing-grammars-coverage" id="toc-c.-testing-grammars-coverage">C. Testing grammars –
 coverage</a></li>
 </ul>
 </nav>
@@ -218,10 +235,28 @@ environment which mimics the Fedora distribution.</p>
 arguments</h3>
 <p>Take a look at the documentation page for Docker which explains the
 command-line arguments that can be given to the <a href="https://docs.docker.com/engine/reference/commandline/cli/">Docker</a>
-executable:<br />
-<a href="https://docs.docker.com/engine/reference/commandline/cli/" class="uri">https://docs.docker.com/engine/reference/commandline/cli/</a></p>
+executable:</p>
+<ul>
+<li><a href="https://docs.docker.com/engine/reference/commandline/cli/" class="uri">https://docs.docker.com/engine/reference/commandline/cli/</a></li>
+</ul>
 <p>The page shows a typical way of documenting a command-line
 program:</p>
+<div class="pre-like">
+<pre style="margin:0; padding: 0; overflow: visible;">
+Usage:  docker [OPTIONS] COMMAND [ARG...]
+
+A self-sufficient runtime for containers.
+
+Options:
+      --config string      Location of client config files (default &quot;/root/.docker&quot;)
+  -c, --context string     Name of the context to use to connect to the daemon (overrides
+                           DOCKER_HOST env var and default context set with &quot;docker context use&quot;)
+  -D, --debug              Enable debug mode
+      --help               Print usage
+  -H, --host value         Daemon socket(s) to connect to (default [])
+</pre>
+<p><em>[... remaining documentation snipped ...]</em></p>
+</div>
 <p>The syntax used is a little like EBNF, with a few changes:<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
 <ul>
 <li>Non-terminals are usually written in ALL CAPS</li>
@@ -240,7 +275,7 @@ window.</p>
 command-line argument syntax</h3>
 <p>The following grammar represents a simplified, very small subset of
 these command-line arguments:</p>
-<pre><code>&lt;invocation&gt; ::= &quot;docker &quot; ( &quot;--verbose &quot; )? &lt;subcommand&gt; &lt;image&gt; 
+<pre><code>&lt;invocation&gt; ::= &quot;docker &quot; ( &quot;--verbose &quot; )? &lt;subcommand&gt; &lt;image&gt;
 &lt;subcommand&gt; ::= &quot;pull &quot; | &quot;run &quot; | &quot;build &quot;
 &lt;image&gt;      ::= &quot;debian&quot; | &quot;ubuntu&quot; | &quot;fedora&quot;</code></pre>
 <p>The question mark indicates an optional element.</p>
@@ -256,7 +291,8 @@ belongs to the language defined by the grammar), and</li>
 <li><em>generators</em> (programs which produce random strings belonging
 to the language).</li>
 </ol>
-<p>In the box labelled “Test a string here!”, type (don’t paste!):</p>
+<p>In the box labelled “Test a string here!”, <em>type</em> (don’t
+paste!):</p>
 <pre><code>docker pull debian</code></pre>
 <p>You’ll see that the box is initially red (indicating the string is
 <em>not</em> recognized as being in the language we have defined), and
@@ -297,7 +333,7 @@ chooses one randomly. How would you alter the grammar so that the image
 </ul>
 <div class="solutions">
 <p>Alter the last line of the original grammar, which was:</p>
-<pre><code>&lt;image&gt;      ::= &quot;debian&quot; | &quot;ubuntu&quot; | &quot;fedora&quot; </code></pre>
+<pre><code>&lt;image&gt;      ::= &quot;debian&quot; | &quot;ubuntu&quot; | &quot;fedora&quot;</code></pre>
 <p>Currently, “<code>debian</code>” and “<code>fedora</code>” occur once
 each; if we want “<code>ubuntu</code>” to be selected twice as often
 (i.e. two-thirds of the time), we should replace “<code>ubuntu</code>”
@@ -308,7 +344,8 @@ with:</p>
                 | &quot;ubuntu&quot; | &quot;fedora&quot;</code></pre>
 </div>
 <h2 id="b.-hand-written-parsers">B. Hand-written parsers</h2>
-<p>Suppose we wanted to parse a grammar like this for ourselves.</p>
+<p>Suppose we wanted to write code ourselves to parse the command-line
+arguments of a program according to a grammar like this.</p>
 <p>For small programs, the simplest way is usally is to implement a
 <strong>hand-written parser</strong>. For an example of what this looks
 like, take a look at the <code>parseArgs()</code> method of the
@@ -365,7 +402,12 @@ number of strings.</p>
 <p>For instance</p>
 <pre><code>&lt;list&gt; ::= &quot;END&quot; | &quot;0&quot; &lt;list&gt;</code></pre>
 <p>defines an infinitely large language, consisting of any number (zero
-or more) of instances of the string “0”, then the string “END”.</p></li>
+or more) of instances of the string “0”, then the string “END”.</p>
+<p>It uses recursion – the <code>&lt;list&gt;</code> rule refers to
+itself. Instead of recursion, we could alternatively write the grammar
+as</p>
+<pre><code>&lt;list&gt; ::= &quot;0&quot;* &quot;END&quot;</code></pre>
+<p>Both grammars define exactly the same language.</p></li>
 </ol>
 </div>
 <p><strong>Exercise</strong>:</p>
@@ -409,7 +451,7 @@ test suite.</p></li>
 <p>(An optional element counts as two alternatives – it’s either present
 or not.)</p>
 <p>We can just count the number of alternatives in each rule:</p>
-<pre><code>&lt;invocation&gt; ::= &quot;docker &quot; ( &quot;--verbose &quot; )? &lt;subcommand&gt; &lt;image&gt; </code></pre>
+<pre><code>&lt;invocation&gt; ::= &quot;docker &quot; ( &quot;--verbose &quot; )? &lt;subcommand&gt; &lt;image&gt;</code></pre>
 <ul>
 <li>two alternatives (verbose is present or not)</li>
 </ul>
@@ -424,8 +466,10 @@ or not.)</p>
 <p>So there are <span class="math inline">\(2 + 3 + 3\)</span>
 productions, and we should need at most 8 tests to cover them all. But
 in this case, we could get by with the same 3 tests as in the last
-question, and we would have covered all the different
-productions.</p></li>
+question, and we would have covered all the different productions.</p>
+<p>Counting productions becomes trickier if we have asterisks (“*“) in
+our rules – so in this unit, we won’t ask you to work out production
+coverage for any grammars that contain asterisks.</p></li>
 </ol>
 </div>
 <p><strong>Exercise</strong>:</p>
@@ -458,23 +502,35 @@ strings, and seeing what strings it recognizes.</p>
 <li>Give an example of a string containing just zeroes and ones which is
 <em>not</em> in the language defined by the grammar.</li>
 <li>Can the grammar be tested exhaustively? Explain why or why not.</li>
+<li>The grammar relies on recursion – the body of the
+<code>&lt;list&gt;</code> non-terminal itself refers to the
+<code>&lt;list&gt;</code> non-terminal. Can you think of an equivalent
+grammar – that is, one that defines exactly the same language – which
+instead uses asterisks?<br />
+(In general, using EBNF syntactic sugar like asterisks is much easier to
+read than using recursion, but both have exactly equivalent power.)</li>
 </ol></li>
 </ul>
 <div class="solutions">
 <ol type="a">
-<li>The string “<code>10</code>” is not in the language – all strings in
-the language <em>end</em> with 1.</li>
-<li>It cannot – it represents all strings consisting of one or more
-zeroes, then a 1. It is infinite in size.</li>
+<li><p>The string “<code>10</code>” is not in the language – all strings
+in the language <em>end</em> with 1.</p></li>
+<li><p>It cannot – it represents all strings consisting of one or more
+zeroes, then a 1. It is infinite in size.</p></li>
+<li><p>The grammar shown is exactly equivalent to</p>
+<pre><code>&lt;list&gt; ::= &quot;0&quot; &quot;0&quot;* &quot;1&quot;</code></pre>
+<p>We could also write this as</p>
+<pre><code>&lt;list&gt; ::= &quot;0&quot;+ &quot;1&quot;</code></pre></li>
 </ol>
 </div>
-<!-- vim: syntax=markdown
+<!--
+  vim: syntax=markdown tw=92 :
 -->
-<section class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
 <hr />
 <ol>
-<li id="fn1" role="doc-endnote"><p>There is no formal name for this
-syntax, but it is documented at <a href="https://man7.org/linux/man-pages/man7/man-pages.7.html" class="uri">https://man7.org/linux/man-pages/man7/man-pages.7.html</a>
+<li id="fn1"><p>There is no formal name for this syntax, but it is
+documented at <a href="https://man7.org/linux/man-pages/man7/man-pages.7.html" class="uri">https://man7.org/linux/man-pages/man7/man-pages.7.html</a>
 if you are interested (look under “Sections within a manual page” /
 “Synopsis”) and at <a href="https://pubs.opengroup.org/onlinepubs/9699919799/basedefs/V1_chap12.html" class="uri">https://pubs.opengroup.org/onlinepubs/9699919799/basedefs/V1_chap12.html</a>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>

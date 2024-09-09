@@ -209,7 +209,7 @@ Note that strictly speaking, we don't need the parentheses in
 $A \vee (B \wedge \neg C)$, since "$\wedge$" is considered to bind
 more tightly than "$\vee$", but we add them for clarity.
 (This is reflected in most programming languages, where
-"`\&\&`" has higher precedence than "`||`".)
+"`&&`" has higher precedence than "`||`".)
 
 
 i.  ***To make $A$ active:***

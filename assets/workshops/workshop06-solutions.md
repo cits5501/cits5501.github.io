@@ -1,16 +1,19 @@
 ---
-title: CITS5501 lab 6 (week 7)&nbsp;--&nbsp;grammars and syntax-based testing &nbsp;--&nbsp;solutions
+title: |
+  CITS5501 lab 6 (week 7)&nbsp;--&nbsp;grammars and syntax-based testing &nbsp;--&nbsp;solutions
 include-before: |
-  ```{=latex}
-  \lstdefinestyle{vsmalllistingstyle}{
-    breaklines=true,
-    numbers=none,
-    frame=none,
-    showstringspaces=true,
-    columns=fullflexible,
-    keepspaces=true,
-    basicstyle={\ttfamily\scriptsize},
+  ```{=html}
+  <style>
+  .pre-like {
+    margin: 0;
+    background-color: hsl(0, 0%, 98%);
+    padding: 0 0.5em;
+    overflow: auto;
+    white-space: pre;
+    font-family: Menlo, Monaco, 'Lucida Console', Consolas, monospace;
+    overflow: auto !important;
   }
+  </style>
   ```
 ---
 
@@ -38,8 +41,9 @@ virtual environment which mimics the Fedora distribution.
 
 Take a look at the documentation page for Docker which
 explains the command-line arguments that can be given to the [Docker][docker]
-executable:\
-<https://docs.docker.com/engine/reference/commandline/cli/>
+executable:
+
+- <https://docs.docker.com/engine/reference/commandline/cli/>
 
 [docker]: https://docs.docker.com/engine/reference/commandline/cli/
 
@@ -47,8 +51,8 @@ The page shows a typical way of documenting a
 command-line program:
 
 
-\begin{genericbox}[innertopmargin=-1em]
-\begin{lstlisting}[style=vsmalllistingstyle]
+<div class="pre-like">
+<pre style="margin:0; padding: 0; overflow: visible;">
 Usage:  docker [OPTIONS] COMMAND [ARG...]
 
 A self-sufficient runtime for containers.
@@ -60,10 +64,10 @@ Options:
   -D, --debug              Enable debug mode
       --help               Print usage
   -H, --host value         Daemon socket(s) to connect to (default [])
+</pre>
 
-[... remaining documentation snipped ...]
-\end{lstlisting}
-\end{genericbox}
+*[\... remaining documentation snipped \...]*
+</div>
 
 
 The syntax used is a little like EBNF, with a few changes:[^man-syntax]
@@ -91,7 +95,7 @@ The following grammar represents a simplified, very small subset
 of these command-line arguments:
 
 ```
-<invocation> ::= "docker " ( "--verbose " )? <subcommand> <image> 
+<invocation> ::= "docker " ( "--verbose " )? <subcommand> <image>
 <subcommand> ::= "pull " | "run " | "build "
 <image>      ::= "debian" | "ubuntu" | "fedora"
 ```
@@ -114,26 +118,23 @@ a.  *recognizers* (programs which check a string, and see if it
 b.  *generators* (programs which produce random strings
     belonging to the language).
 
-In the box labelled "Test a string here!", type (don't paste!):
+In the box labelled "Test a string here!", *type* (don't paste!):
 
 ```
 docker pull debian
 ```
 
-You'll see that the box is initially red (indicating
-the string is *not* recognized as being in the
-language we have defined), and then
-turns green (once it *is* recognized).
+You'll see that the box is initially red (indicating the string is *not*
+recognized as being in the language we have defined), and then turns green
+(once it *is* recognized).
 
 **Exercise**:
 
-- Try the string "docker pull alpine", and note
-  that it is not recognized.
+- Try the string "docker pull alpine", and note that it is not recognized.
 - Amend the grammar so it *is* recognized.\
-  (You might want to clear the "Test a string here!" box
-  first -- otherwise, when you make changes to the grammar,
-  it may show up as invalid and display errors. Once you've
-  amended the grammar, you need to re-compile.)
+  (You might want to clear the "Test a string here!" box first -- otherwise,
+  when you make changes to the grammar, it may show up as invalid and display
+  errors. Once you've amended the grammar, you need to re-compile.)
 
 
 \solbox
@@ -153,28 +154,25 @@ Amend the last line of the grammar so it reads:
 
 ### Generators
 
-Now try hitting the button labelled
-"Generate random `<invocation>`" several times,
-and see what strings are produced.
+Now try hitting the button labelled "Generate random `<invocation>`" several
+times, and see what strings are produced.
 
-Note that the BNF differs slightly from the less formal version
-we have seen in class, in that it requires spaces
-be explicitly inserted.
+Note that the BNF differs slightly from the less formal version we have seen in
+class, in that it requires spaces be explicitly inserted.
 
 **Exercise**:
 
 - Remove the spaces after "pull", "run" and "build", and try
   generating random strings -- are they what you would expect?
 
-Now put the original grammar back in and compile it
-again.
+Now put the original grammar back in and compile it again.
 
 **Exercise**:
 
-- When selecting which of several alternatives to use, the generator
-  chooses one randomly.
-  How would you alter the grammar so that the image "`ubuntu`" is
-chosen twice as often as the others?
+- When selecting which of several alternatives to use, the generator chooses
+  one randomly.
+  How would you alter the grammar so that the image "`ubuntu`" is chosen twice
+  as often as the others?
 
 
 \solbox
@@ -184,7 +182,7 @@ Alter the last line of the original grammar,
 which was:
 
 ```
-<image>      ::= "debian" | "ubuntu" | "fedora" 
+<image>      ::= "debian" | "ubuntu" | "fedora"
 ```
 
 Currently, "`debian`" and "`fedora`" occur once each;
@@ -209,13 +207,13 @@ to get
 
 ## B. Hand-written parsers
 
-Suppose we wanted to parse a grammar like this for ourselves.
+Suppose we wanted to write code ourselves to parse the command-line arguments of a program
+according to a grammar like this.
 
-For small programs, the simplest way is usally is to implement a
-**hand-written parser**.
-For an example of what this looks like, take a look at the `parseArgs()`
-method of the `MyDockerLiteProgram` class in the code for this
-workshop.
+For small programs, the simplest way is usally is to implement a **hand-written
+parser**.
+For an example of what this looks like, take a look at the `parseArgs()` method
+of the `MyDockerLiteProgram` class in the code for this workshop.
 
 In the `parseArgs()` method,
 we manually work our way through the `ArrayList` of arguments;
@@ -294,6 +292,14 @@ b.  No, they cannot. Some grammars define languages
     of any number (zero or more) of instances of the
     string "0", then the string "END".
 
+    It uses recursion -- the `<list>` rule refers to itself.
+    Instead of recursion, we could alternatively write the grammar as
+
+    ```
+    <list> ::= "0"* "END"
+    ```
+
+    Both grammars define exactly the same language.
 
 </div>
 \endsolbox
@@ -319,7 +325,7 @@ b.  No, they cannot. Some grammars define languages
 
 a.  The number of terminals is the number of "raw" strings
     in the grammar (i.e. things that aren't non-terminals). They are:
-    
+
     - `"docker "`
     - `"--verbose "`
     - `"pull "`
@@ -338,8 +344,8 @@ a.  The number of terminals is the number of "raw" strings
     - `docker build fedora`
 
     And in this case, using more tests probably wouldn't add much to our test
-    suite. 
- 
+    suite.
+
 
 
 b.  A *production*, as we define it in class, is one of
@@ -352,7 +358,7 @@ b.  A *production*, as we define it in class, is one of
     rule:
 
     ```
-    <invocation> ::= "docker " ( "--verbose " )? <subcommand> <image> 
+    <invocation> ::= "docker " ( "--verbose " )? <subcommand> <image>
     ```
 
     - two alternatives (verbose is present or not)
@@ -374,7 +380,9 @@ b.  A *production*, as we define it in class, is one of
     But in this case, we could get by with the same 3 tests as in the
     last question, and we would have covered all the different productions.
 
-
+    Counting productions becomes trickier if we have asterisks ("*")
+    in our rules -- so in this unit, we won't ask you to work out production
+    coverage for any grammars that contain asterisks.
 </div>
 \endsolbox
 
@@ -414,7 +422,7 @@ We might define the test case as follows:
   ```
   <list> ::= "1" | "0" <list>
   ```
-  
+
   Try entering it into the BNF playground, generating
   some random strings, and seeing what strings it recognizes.
 
@@ -423,7 +431,13 @@ We might define the test case as follows:
       by the grammar.
   b.  Can the grammar be tested exhaustively? Explain why
       or why not.
-      
+  c.  The grammar relies on recursion -- the body of the `<list>` non-terminal
+      itself refers to the `<list>` non-terminal. Can you think
+      of an equivalent grammar -- that is, one that defines exactly the
+      same language -- which instead uses asterisks?\
+      (In general, using EBNF syntactic sugar like asterisks is much
+      easier to read than using recursion, but both have exactly
+      equivalent power.)
 
 
 \solbox
@@ -433,12 +447,25 @@ We might define the test case as follows:
 a.  The string "`10`" is not in the language --
     all strings in the language *end* with 1.
 b.  It cannot -- it represents all strings consisting of
-    one or more zeroes, then a 1. It is infinite in size.    
+    one or more zeroes, then a 1. It is infinite in size.
+c.  The grammar shown is exactly equivalent to
+
+    ```
+    <list> ::= "0" "0"* "1"
+    ```
+
+    We could also write this as
+
+    ```
+    <list> ::= "0"+ "1"
+    ```
+
 
 </div>
 \endsolbox
 
 
-<!-- vim: syntax=markdown
+<!--
+  vim: syntax=markdown tw=92 :
 -->
 
