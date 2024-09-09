@@ -123,12 +123,12 @@ module.exports = function(configData) {
         submit: moodle
       },
       exam: {
-        name: "[Face-to-face lab-based exam](/assessment/#exam)",
+        name: "[Face-to-face paper-based exam](/assessment/#exam)",
         marksPercent: "50",
         dates: {
           due: "UWA exam period"
         },
-        submit: safe(extLink("Moodle", moodle_url) + ", **using own laptop**, from lab venue published in LMS")
+        submit: "Completed on paper"
       },
     }
 

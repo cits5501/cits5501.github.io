@@ -170,9 +170,7 @@ You might also find the following resources helpful:
 
 ### Do I need a laptop in order to complete CITS5501? { #laptops }
 
-You will need a laptop when attending lab classes, as
-well as when [**sitting the final exam**](/assessment/#exam) (which is a face-to-face, lab-based,
-practical exam conducted using [Moodle]({{moodle_url}}){{blank}}).
+You will need a laptop when attending lab classes.
 
 UWA provides [financial support][fin-supp] via the "SOS IT Equipment
 Scheme" to students who are unable to purchase a laptop due to financial
@@ -392,7 +390,7 @@ For **quizzes and tests**{ class="hi-pri" }:
 
   For the purpose of "reasonable adjustments" made for students who
   require them: quizzes, tests and exams count as "timed assessments"
-  (although the time limit is generous).
+  (although the time limit is typically generous).
   If you have an Academic Adjust Plan in place from UniAccess (UAAP), you may be
   entitled to extra time for online assessments -- email the
   [Unit Coordinator](/#unit-coordinator) in accordance with your UAAP to
@@ -606,10 +604,6 @@ you need to contact the Unit Coordinator at least 2-3 weeks prior to the
 date of the assessment to request that these arrangements be put in
 place. Please do so by [emailing the Unit Coordinator](/#unit-coordinator).
 
-The exam for {{ siteinfo.unitcode }} is School-run, rather than organised by the Exams
-Office, so you *will* need to email the Unit Coordinator to request that
-alternative exam arrangements be put in place.
-
 If your UniAccess accommodation plan states that you require flexibility
 with submission deadlines, then it will also state that you should
 "contact the Unit Coordinator in a timely manner, i.e. no later than
@@ -733,8 +727,7 @@ not use them as part of an assessment.
 In addition to constituting academic misconduct, using ChatGPT in assessments does yourself
 a disservice. Using ChatGPT in a test or project is depriving yourself of the opportunity to get honest
 feedback on your own competencies and abilities. In the final exam for the unit, you will
-*not* have access to any other tools besides [Moodle]({{moodle_url}}){{blank}} in the web
-browser, so you will have to know how to write code or English answers yourself – using AI
+*not* have access to AI tools, so you will have to know how to write code or English answers yourself – using AI
 tools for previous assessments may result in your having a lack of practice at doing so.
 
 ### Wouldn't the use of ChatGPT or similar AI tools help ensure the accuracy of code or English answers?
@@ -907,9 +900,6 @@ readings.
 For questions requiring you to write a long English answer or to submit code, you may also
 receive individual feedback from the marker.
 
-Note that a marks breakdown is not provided on Moodle for the exam. If you want to
-obtain feedback on your exam performace, you should email the [unit coordinator](/#unit-coordinator)
-and make an appointment to discuss the exam.
 
 ### How can I seek clarification on the marks I achieved for a test question? { #test-marks-query }
 
@@ -1044,14 +1034,7 @@ See also:
 
 ### Are past exams available? { #past-exams-availability }
 
-Because the exam is completed using Moodle, past exam papers in the current
-format are not
-available via the UWA Library, as they are for some other units.
-
-However, the labs and earlier quizzes and tests provide a good guide
-to the sort of questions you may be asked.
-
-See the [Assessment](/assessment/) page from more details.
+Yes -- see the [Assessment](/assessment/) page for more details.
 
 [past-papers]: /assessment/#past-exam-papers
 

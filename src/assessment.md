@@ -236,36 +236,11 @@ These include the following:
 The week 7 mid-semester test will be made available
 in week 7 on
 {{ siteinfo.moodle }}, under "Week 7 mid-semester test". You will have 24
-hours to complete the test
-{#
-(which should only take about an hour)
-#}, and
+hours to complete the test, and
 should submit it via {{ siteinfo.moodle }}.
 
 The same instructions apply to the mid-semester test as for the week 4
 quiz.
-
-{#
-
-The exercise should not take long to do -- it should be possible to
-answer each question in a few paragraphs. It is to
-be done individually, but you may make use of any
-textbooks, slides or similar resources you like.
-
-The questions contained in the exercise should be
-good practice for the [exam](#exam).
-
-The marking rubric is available [here][exercise-rubric] (PDF).
-
-[exercise-rubric]: {{ "/assignments/exercise-rubric.pdf" | url }}
-
-Marks are now available on csmarks, and sample solutions
-are available [as a PDF][ex-sol].
-
-
-[ex-sol]: {{ "/assignments/exercise-solutions.pdf" | url }}
-
-#}
 
 ### Project
 
@@ -323,45 +298,28 @@ version. Announcements about revisions were posted in the
 ### Exam
 
 The
-exam is a practical, [**face-to-face**]{ class="hi-pri" } exam, held in
-a computer lab during
+exam is a [**face-to-face**]{ class="hi-pri" }, paper-based exam, held during
 the UWA examination period. For the exact time and venue, consult
 your exam timetable using StudentConnect.
 
 The exam is *not* open book.
 You are permitted to bring into the exam one A4, double-sided page of handwritten notes.
-The exam will be held in a computer lab, and the exam will be completed
-in Moodle.
-
-The date for the final exam should be accessible from the {{
-siteinfo.lms }}.
-The exam venues are available by looking in the "CITS5501" area of
-the LMS, under "Exam 2023". The exact venue you're in will depend on
-your surname.
 
 
 #### Past exam papers
 
-Because the exam is conducted using Moodle, previous years' papers
-in the current format are not available.
+For revision purposes, you may find it useful to look at some older paper-based exams, which
+are available via the {{ siteinfo.lms }} -- look under "Previous exams".
+These exam papers are provided only to CITS5501 students for study purposes, and may not be
+published or distributed elsewhere.
 
-However, for revision purposes you may find it useful to look at
-some older, paper-based exams, which are available
-via the {{ siteinfo.lms }} -- look under "Previous exams".
-These exam papers are provided only to CITS5501 students for study
-purposes, and may not be published or distributed elsewhere.
+(Note that although the UWA Library's ["OneSearch" search][onesearch] facility lists some
+past exams as being available via OneSearch when "CITS5501" is entered as a query, the
+content of the unit has changed significantly since they were released, and they are no
+longer a good guide to what you can expect.)
 
-(Note that although the UWA Library's ["OneSearch" search][onesearch]
-facility lists some past exams as being available via OneSearch
-when "CITS5501" is entered as a query, the content
-of the unit has changed significantly since they were
-released, and they are no longer a good guide to what you can
-expect.)
-
-The best use of past exams is for your practice purposes --
-if possible, try writing answers and timing how long you
-take. I do *not* publish answers to past exams
-for two reasons:
+The best use of past exams is for your practice purposes -- if possible, try writing answers
+and timing how long you take. I do *not* publish answers to past exams for two reasons:
 
 - For many of the questions, there *is* no one correct answer.
   The exam questions often require you to analyse a scenario and argue
@@ -375,14 +333,12 @@ for two reasons:
   You need to actually go through the process of writing
   an answer yourself.
 
-However, if you have attempted
-a previous year's exam, I encourage you to discuss your
+However, if you have attempted a previous year's exam, I encourage you to discuss your
 answers with me in order to get feedback.
-See ["Are past exams available?"](/faq#past-exams-availability) in the
-unit FAQ.
+See ["Are past exams available?"](/faq#past-exams-availability) in the unit FAQ.
 
 [onesearch]: https://onesearch.library.uwa.edu.au/
 
 <!--
-  vim: tw=72
+  vim: tw=92
 -->
