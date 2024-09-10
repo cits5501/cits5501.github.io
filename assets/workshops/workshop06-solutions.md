@@ -451,14 +451,9 @@ b.  It cannot -- it represents all strings consisting of
 c.  The grammar shown is exactly equivalent to
 
     ```
-    <list> ::= "0" "0"* "1"
+    <list> ::= "0"* "1"
     ```
 
-    We could also write this as
-
-    ```
-    <list> ::= "0"+ "1"
-    ```
 
 
 </div>
