@@ -270,7 +270,7 @@ For the graph solution shown earlier, the prime paths are
 prefix, or represent paths through the same loop):
 
 - ABG, ABCDEF, ABCDF
-- BCDEFB, CDEFBC, DEFBCD, EFBCDEF, FBCDEF *(these all execute the left-hand 'if' branch)*
+- BCDEFB, CDEFBC, DEFBCD, EFBCDE, FBCDEF *(these all execute the left-hand 'if' branch)*
 - BCDFB, CDFBC, DFBCD *(these all execute the right-hand 'if' branch)*
 - EFBCDF *(this takes one left and one right branch)*
 - CDEFBG *(takes left branch)*
@@ -525,7 +525,7 @@ simulation could then query a `DigitalTimer` object to find out what the current
 is.[^simplified]
 
 [^simplified]: This is a very simplified representation of how a simulated timer might work.
-  In a real simulation, rather than other objects having to actively query a `DigitalTimer`
+  In an actual simulation, rather than other objects having to actively query a `DigitalTimer`
   object to find out its state, we would want to give them the ability to be *alerted* whenever
   a "tick" occurs. A typical approach is to use the ["Observer"][observer] or
   ["Publish-subscribe"][pubsub] software patterns. You can see example of "timer"
