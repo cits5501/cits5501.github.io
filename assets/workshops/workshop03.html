@@ -160,7 +160,7 @@ div.column{display: inline-block; vertical-align: top; width: 50%;}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -171,7 +171,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
 { counter-reset: source-line 0; }
@@ -241,9 +241,8 @@ details[open] summary *.only-open {
 opacity: 0.1;
 }
 </style>
-  <!--[if lt IE 9]>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
-  <![endif]-->
+<script data-external="1" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript">
+</script>
 </head>
 <body>
 <header id="title-block-header">
@@ -257,14 +256,14 @@ Recommended reading</a></li>
 <li><a href="#binary-search" id="toc-binary-search">1. Binary
 search</a></li>
 <li><a href="#stack-class" id="toc-stack-class">2. Stack class</a></li>
-<li><a href="#discussion-questions" id="toc-discussion-questions">3.
-Discussion questions</a></li>
+<li><a href="#further-questions" id="toc-further-questions">3. Further
+questions</a></li>
 </ul>
 </nav>
 <p></p>
 <h2 id="recommended-reading">0. Recommended reading</h2>
-<p>Before attempting the exercises in this lab, it’s recommended you
-complete the recommended reading for week 4, and review the lecture
+<p>Before attempting the exercises in this worksheet, it’s recommended
+you complete the recommended reading for week 4, and review the lecture
 slides on Input Space Partitioning.</p>
 <h2 id="binary-search">1. Binary search</h2>
 <p>Consider the Javadoc documentation and signature for the following
@@ -272,37 +271,43 @@ Java method, which searches inside an array of <code>char</code>s for a
 particular value.</p>
 <p>(Adapted from the Android version of the Java standard library.)</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode numberSource java numberLines"><code class="sourceCode java"><span id="cb1-1"><a href="#cb1-1"></a><span class="co">/**</span></span>
-<span id="cb1-2"><a href="#cb1-2"></a> <span class="co">*</span> Performs a binary search for <span class="co">@</span>code value in the ascending sorted</span>
-<span id="cb1-3"><a href="#cb1-3"></a> <span class="co">*</span> array <span class="co">@</span>code array<span class="co">,</span> in the range specified by fromIndex <span class="co">(</span>inclusive<span class="co">)</span></span>
-<span id="cb1-4"><a href="#cb1-4"></a> <span class="co">*</span> and toIndex <span class="co">(</span>exclusive<span class="co">). </span> Searching in an unsorted array has an</span>
-<span id="cb1-5"><a href="#cb1-5"></a> <span class="co">*</span> undefined result<span class="co">.</span> It<span class="co">&#39;</span>s also undefined which element is found if there</span>
-<span id="cb1-6"><a href="#cb1-6"></a> <span class="co">*</span> are multiple occurrences of the same element<span class="co">.</span></span>
-<span id="cb1-7"><a href="#cb1-7"></a> <span class="co">*</span></span>
-<span id="cb1-8"><a href="#cb1-8"></a> <span class="co">*</span> <span class="co">@</span>param array the sorted array to search<span class="co">.</span></span>
-<span id="cb1-9"><a href="#cb1-9"></a> <span class="co">*</span> <span class="co">@</span>param startIndex the inclusive start index<span class="co">.</span></span>
-<span id="cb1-10"><a href="#cb1-10"></a> <span class="co">*</span> <span class="co">@</span>param endIndex the exclusive start index<span class="co">.</span></span>
-<span id="cb1-11"><a href="#cb1-11"></a> <span class="co">*</span> <span class="co">@</span>param value the element to find<span class="co">.</span></span>
-<span id="cb1-12"><a href="#cb1-12"></a> <span class="co">*</span> <span class="co">@</span>return the non<span class="co">-</span>negative index of the element<span class="co">,</span> or a negative index</span>
-<span id="cb1-13"><a href="#cb1-13"></a> <span class="co">*</span>         which is <span class="kw">&lt;code&gt;</span><span class="co">-</span>index <span class="co">-</span> <span class="co">1</span><span class="kw">&lt;/code&gt;</span> where the element would be</span>
-<span id="cb1-14"><a href="#cb1-14"></a> <span class="co">*</span>         inserted<span class="co">.</span></span>
-<span id="cb1-15"><a href="#cb1-15"></a> <span class="co">*</span> <span class="co">@</span>throws IllegalArgumentException if <span class="kw">&lt;code&gt;</span>startIndex <span class="co">&gt;</span> endIndex<span class="kw">&lt;/code&gt;</span></span>
-<span id="cb1-16"><a href="#cb1-16"></a> <span class="co">*</span> <span class="co">@</span>throws ArrayIndexOutOfBoundsException if</span>
-<span id="cb1-17"><a href="#cb1-17"></a> <span class="co">*</span>         <span class="kw">&lt;code&gt;</span>startIndex <span class="er">&lt;</span> <span class="co">0</span> <span class="co">||</span> endIndex <span class="co">&gt;</span> array<span class="co">.</span>length<span class="kw">&lt;/code&gt;</span></span>
-<span id="cb1-18"><a href="#cb1-18"></a> <span class="co">*</span> <span class="co">@</span>since <span class="co">1.6</span></span>
-<span id="cb1-19"><a href="#cb1-19"></a> <span class="co">*/</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="co"> * Performs a binary search for @code value in the ascending sorted</span></span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="co"> * array @code array, in the range specified by fromIndex (inclusive)</span></span>
+<span id="cb1-4"><a href="#cb1-4"></a><span class="co"> * and toIndex (exclusive).  Searching in an unsorted array has an</span></span>
+<span id="cb1-5"><a href="#cb1-5"></a><span class="co"> * undefined result. It&#39;s also undefined which element is found if there</span></span>
+<span id="cb1-6"><a href="#cb1-6"></a><span class="co"> * are multiple occurrences of the same element.</span></span>
+<span id="cb1-7"><a href="#cb1-7"></a><span class="co"> *</span></span>
+<span id="cb1-8"><a href="#cb1-8"></a><span class="co"> * @param array the sorted array to search.</span></span>
+<span id="cb1-9"><a href="#cb1-9"></a><span class="co"> * @param startIndex the inclusive start index.</span></span>
+<span id="cb1-10"><a href="#cb1-10"></a><span class="co"> * @param endIndex the exclusive start index.</span></span>
+<span id="cb1-11"><a href="#cb1-11"></a><span class="co"> * @param value the element to find.</span></span>
+<span id="cb1-12"><a href="#cb1-12"></a><span class="co"> * @return the non-negative index of the element, or a negative index</span></span>
+<span id="cb1-13"><a href="#cb1-13"></a><span class="co"> *         which is &lt;code&gt;-index - 1&lt;/code&gt; where the element would be</span></span>
+<span id="cb1-14"><a href="#cb1-14"></a><span class="co"> *         inserted.</span></span>
+<span id="cb1-15"><a href="#cb1-15"></a><span class="co"> * @throws IllegalArgumentException if &lt;code&gt;startIndex &gt; endIndex&lt;/code&gt;</span></span>
+<span id="cb1-16"><a href="#cb1-16"></a><span class="co"> * @throws ArrayIndexOutOfBoundsException if</span></span>
+<span id="cb1-17"><a href="#cb1-17"></a><span class="co"> *         &lt;code&gt;startIndex &lt; 0 || endIndex &gt; array.length&lt;/code&gt;</span></span>
+<span id="cb1-18"><a href="#cb1-18"></a><span class="co"> * @since 1.6</span></span>
+<span id="cb1-19"><a href="#cb1-19"></a><span class="co"> */</span></span>
 <span id="cb1-20"><a href="#cb1-20"></a><span class="kw">public</span> <span class="dt">static</span> <span class="dt">int</span> <span class="fu">binarySearch</span><span class="op">(</span><span class="dt">char</span><span class="op">[]</span> array<span class="op">,</span> <span class="dt">int</span> startIndex<span class="op">,</span> <span class="dt">int</span> endIndex<span class="op">,</span> <span class="dt">char</span> value<span class="op">)</span></span></code></pre></div>
 <p>Based on the prescribed reading, discuss how you would go about
 creating tests using Input Space Partitioning.</p>
 <ol type="a">
 <li>What steps are involved in doing ISP?</li>
 <li>What is the input domain here?</li>
-<li>What are some characteristics you could use? Check with a partner
-(or small group), and make sure each characteristic does give you a
-partitioning.</li>
+<li>What are some characteristics you could use? (You may wish to drop
+in on a timetabled lab session and compare with another student to see
+what characteristics they have come up with. Remember to make sure each
+characteristic does in fact give you a partitioning.)</li>
 </ol>
+<p>Once you’ve answered these questions, you might like to try
+implementing some of your tests in Java using JUnit.</p>
 <h2 id="stack-class">2. Stack class</h2>
-<p>Suppose we have a Stack class that stores <code>int</code>s, with the
-following method signatures:</p>
+<p>Suppose we have a Stack class that is intended to implement the <a href="https://en.wikipedia.org/wiki/Stack_(abstract_data_type)">stack
+abstract data type</a>. The class stores <code>int</code>s, and provides
+methods for observing the state of the stack, and for performing the
+“push” and “pop” operations. The method signatures for the class are as
+follows:</p>
 <ul>
 <li><code>public IntStack ();</code></li>
 <li><code>public void push (int i);</code></li>
@@ -317,9 +322,16 @@ function would we use? How about <code>pop</code>?</li>
 suggest some characteristics that can be used to partition the input
 space.</li>
 </ol>
-<h2 id="discussion-questions">3. Discussion questions</h2>
-<p>Discuss the following questions about ISP in pairs or a small group,
-and come up with answers:</p>
+<h2 id="further-questions">3. Further questions</h2>
+<p>Consider the following questions about ISP and try writing an answer
+to each. (Questions like this are typical of ones you might be asked in
+the mid-semester test or final exam.) Once you’ve made an attempt, you
+might like to drop in on a timetabled lab session to compare your
+answers with other students’.</p>
+<p>There is not necessarily any single correct answer to such questions;
+students are expected to base their answers on the information covered
+in class and in previous units, and on reasonable deductions they can
+make from those.</p>
 <ol type="a">
 <li><p>Suppose we need to test some method (let’s suppose it is a static
 method <code>myMethod</code> that takes one <code>int</code> for the

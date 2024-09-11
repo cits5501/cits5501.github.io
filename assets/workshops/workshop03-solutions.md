@@ -8,7 +8,7 @@ title: |
 
 ## 0. Recommended reading
 
-Before attempting the exercises in this lab, it's recommended you complete the recommended
+Before attempting the exercises in this worksheet, it's recommended you complete the recommended
 reading for week 4, and review the lecture slides on Input Space Partitioning.
 
 ## 1. Binary search
@@ -51,9 +51,14 @@ Partitioning.
 
 a.  What steps are involved in doing ISP?
 b.  What is the input domain here?
-c.  What are some characteristics you could use? Check with a partner
-    (or small group), and make sure each characteristic does give you
-    a partitioning.
+c.  What are some characteristics you could use? (You may wish to drop in on a timetabled
+    lab session and compare with another student to see what characteristics they have
+    come up with.
+    Remember to make sure each characteristic does in fact give you
+    a partitioning.)
+
+Once you've answered these questions, you might like to try implementing some of your
+tests in Java using JUnit.
 
 
 
@@ -79,7 +84,44 @@ The input domain consists of:
 - the set of all possible *arrays* of `char`s (for all practical
   purposes, we can consider this domain as being infinite in size)
 - the set of all possible `int`s (2 parameters of this sort)
-- the set of all possible `char`s (there are 256 of them)
+- the set of all possible `char`s (if we assume for simplicity
+  that only ASCII characters are used,[^unicode] there are 256 of them)
+
+[^unicode]: In actuality, Java `char`s are 2 bytes in size and can
+  hold 65,536 distinct values, representing a subset of [Unicode code points][unicode] --
+  see e.g. the documentation for the [`Character` class][jchar] for the version
+  of Java you're interested in.\
+  &nbsp; &nbsp; In Java, methods that need to take a "character" (in the broad
+  sense) as an argument can do so in two ways: they can take a `char`, or they can
+  take an `int`.\
+  &nbsp; &nbsp; If they take a `char`, they'll be limited to the 65,536 possible values of a `char`.
+  If they take an `int`, then they can represent all possible code points (there are
+  1,114,112 of them), but also will have to deal with values outside that range
+  (e.g. by throwing an exception, or having undefined behaviour). Assuming the `int`
+  does represent a possible code point, it may or may not be assigned to some
+  actual character -- in [Unicode version 16.0][unicode16], only 154,998 characters are
+  assigned so far -- so again may need some way of handling invalid values.
+  Different versions of Java will implement different versions of the Unicode standard,
+  so the exact number of assigned code points will vary
+  from version to version.\
+  &nbsp; &nbsp; An example of a method taking an `int` is the [`indexOf` method](https://docs.oracle.com/javase/8/docs/api/java/lang/String.html#indexOf-int-) of
+  the [`java.lang.String`
+  class](https://docs.oracle.com/javase/8/docs/api/java/lang/String.html). That method says
+  what the behaviour of the function will be if an `int` is passed that falls in the U+0000
+  to U+10FFFF range (1,114,112 values), but doesn't say what the behaviour will be if an
+  `int` outside that range is passed; so we must take the behaviour to be undefined. \
+  &nbsp; &nbsp; When answering questions in tests or exams, you're welcome to make
+  simplifying assumptions, if needed; since you probably won't have access
+  to the Unicode standard, you can make the simplifying assumption that
+  we're only considering ASCII characters. (You should clearly state
+  that you're making this assumption, however, and that the actual number of
+  characters is larger.) Markers are generally more interested in your *reasoning* than
+  in whether you can recall exactly the size of a `char` or how many Unicode characters
+  there are, so this sort of simplifying assumption is fine.
+
+[unicode]: https://en.wikipedia.org/wiki/Unicode
+[jchar]: https://docs.oracle.com/javase/8/docs/api/java/lang/Character.html 
+[unicode16]: https://www.unicode.org/versions/Unicode16.0.0/
 
 Technically, the input domain consists of a 4-tuple made up of
 *(arrays-of-chars, ints, ints, chars)*. (We could, if needed, make
@@ -160,8 +202,13 @@ Some characteristics we could use for our char are:
 
 ## 2. Stack class
 
-Suppose we have a Stack class that stores `int`s, with the following
-method signatures:
+Suppose we have a Stack class that is intended to implement the
+[stack abstract data type][stack-type]. The class stores `int`s, and provides methods for
+observing the state of the stack, and for performing the "push" and "pop" operations.
+The method signatures for the class are as follows:
+
+[stack-type]: https://en.wikipedia.org/wiki/Stack_(abstract_data_type)
+
 
 - `public IntStack ();`
 - `public void push (int i);`
@@ -232,10 +279,17 @@ and what "expected behaviour" could we possibly test for?
 
 
 
-## 3. Discussion questions
+## 3. Further questions
 
-Discuss the following questions about ISP in pairs or a small group, and
-come up with answers:
+Consider the following questions about ISP and try writing an answer to each.
+(Questions like this are typical of ones you might be asked in the mid-semester test or
+final exam.)
+Once you've made an attempt, you might like to drop in on a timetabled lab session to
+compare your answers with other students'.
+
+There is not necessarily any single correct answer to such questions; students are expected
+to base their answers on the information covered in class and in previous units, and on
+reasonable deductions they can make from those.
 
 a.  Suppose we need to test some method (let's suppose it is a static
     method `myMethod` that takes one

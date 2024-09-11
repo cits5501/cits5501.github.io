@@ -8,7 +8,7 @@ title: |
 
 ## 0. Recommended reading
 
-Before attempting the exercises in this lab, it's recommended you complete the recommended
+Before attempting the exercises in this worksheet, it's recommended you complete the recommended
 reading for week 4, and review the lecture slides on Input Space Partitioning.
 
 ## 1. Binary search
@@ -51,16 +51,26 @@ Partitioning.
 
 a.  What steps are involved in doing ISP?
 b.  What is the input domain here?
-c.  What are some characteristics you could use? Check with a partner
-    (or small group), and make sure each characteristic does give you
-    a partitioning.
+c.  What are some characteristics you could use? (You may wish to drop in on a timetabled
+    lab session and compare with another student to see what characteristics they have
+    come up with.
+    Remember to make sure each characteristic does in fact give you
+    a partitioning.)
+
+Once you've answered these questions, you might like to try implementing some of your
+tests in Java using JUnit.
 
 
 
 ## 2. Stack class
 
-Suppose we have a Stack class that stores `int`s, with the following
-method signatures:
+Suppose we have a Stack class that is intended to implement the
+[stack abstract data type][stack-type]. The class stores `int`s, and provides methods for
+observing the state of the stack, and for performing the "push" and "pop" operations.
+The method signatures for the class are as follows:
+
+[stack-type]: https://en.wikipedia.org/wiki/Stack_(abstract_data_type)
+
 
 - `public IntStack ();`
 - `public void push (int i);`
@@ -76,10 +86,17 @@ b.  Identify all the parameters for the `pop` method, and suggest
 
 
 
-## 3. Discussion questions
+## 3. Further questions
 
-Discuss the following questions about ISP in pairs or a small group, and
-come up with answers:
+Consider the following questions about ISP and try writing an answer to each.
+(Questions like this are typical of ones you might be asked in the mid-semester test or
+final exam.)
+Once you've made an attempt, you might like to drop in on a timetabled lab session to
+compare your answers with other students'.
+
+There is not necessarily any single correct answer to such questions; students are expected
+to base their answers on the information covered in class and in previous units, and on
+reasonable deductions they can make from those.
 
 a.  Suppose we need to test some method (let's suppose it is a static
     method `myMethod` that takes one
