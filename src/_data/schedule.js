@@ -139,9 +139,7 @@ module.exports = function(configData) {
     {weekNum: 8,
       lectureTopic:
         `Risk management\\
-        software metrics
-
-        *Tue 25 Apr: ANZAC day public holiday -- recorded lecture*`,
+        software metrics`,
       workshopTopic:
         `Systems and standards`,
       reading:
