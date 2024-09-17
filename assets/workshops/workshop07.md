@@ -1,5 +1,6 @@
 ---
-title: CITS5501 lab 7 (week 8)&nbsp;--&nbsp;reviews 
+title: |
+  CITS5501 lab 7 (week 8)&nbsp;--&nbsp;reviews 
 ---
 
 ## Reading
@@ -10,7 +11,7 @@ It is strongly suggested you complete the recommended readings for weeks 1-7
 ## A. Code review
 
 *Code review* is careful, systematic study of source code by people who are not
-the original author of the code. It’s analogous to having someone proofread
+the original author of the code. It's analogous to having someone proofread
 a written essay or assignment before you submit it.
 
 It has two main purposes:
@@ -47,10 +48,10 @@ to code review.
 
 ## B. Exercise
 
-For this exercise you
-should split up into small groups of 2-3 people.
 
 <!--
+For this exercise you
+should split up into small groups of 2-3 people.
 If you are attending online via Teams, your facilitator should  be able to
 create "breakout rooms" for you, by following the [MS Teams
 instructions][ms-teams-breakout]; but failing that, instead do a solo review of the
@@ -59,17 +60,15 @@ code, and report back to the class as a whole with your findings.
 [ms-teams-breakout]: https://support.microsoft.com/en-us/office/use-breakout-rooms-in-teams-meetings-7de1f48a-da07-466c-a5ab-4ebace28e461#bkmk_create-breakout-rooms
 -->
 
-For each of the following code samples, each person in a pair or group
-should take the time
+For each of the following code samples, take the time
 to read through the code carefully,
 bearing in mind the "Code review instructions" at the end of this sheet
 and recording problems they find (and possibly suggesting
-concrete improvements). Spend about 5 minutes on this.
-Then with your partner or group, discuss what problems you have found,
-and see if you agree or disagree on what they are (5--10 mins).
+concrete improvements).
 
-Then share this with the class as a whole; your facilitator
-may suggest some more.
+After you've attempted the exercises, it's recommended you drop in on
+one of the timetabled labs, to compare your answers with other students
+(or to discuss them with one of the lab facilitors.
 
 ### Code sample 1 -- `dayOfYear`
 
@@ -119,9 +118,8 @@ it gives the wrong answer, when the year is a leap year!
 
 So suppose a colleague writes the following method, intended to determine
 whether a year is a leap year. Again,
-look for problems in and potential improvements to this code (5
-mins),
-then discuss these with your partner(s) (5--10 mins).
+look for problems in and potential improvements to this code, and
+drop in on one of the labs to compare solutions.
 
 
 ```java
@@ -241,10 +239,11 @@ You can view this by clicking "Go Live" in the VS Code taskbar (towards
 the right). This serves up the contents of the repository directory via
 HTTP, so it can be viewed in the browser. Click "report", and by
 clicking through, you should be able to see a coverage report for our
-tests:
+tests.
 
 
-![](jacoco.png){ width="20cm" }
+![](jacoco-coverage-rep.png){ width="20cm" }
+
 
 Read the JaCoco documentation on "Coverage Counters", [here][cov],
 for more information about exactly what is being measured.

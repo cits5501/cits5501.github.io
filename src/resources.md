@@ -58,19 +58,17 @@ like to get an idea in advance of what will be covered.)
   - Lecture 7a, integration and system testing {% resourceList "lect07a--system", ["pdf", "md"] %}
   - Lecture 7b, reviews and quality assurance  {% resourceList "lect07b--reviews", ["pdf", "md"] %}
   - Lecture 7c, quality assurance  {% resourceList "lect07c--quality", ["pdf", "md"] %}
-{#
+  - Other material -- "[Mocks, stubs and spies with Mockito](https://youtu.be/xXO8ft-tsrY)" (YouTube) \
+    (see also ch 12 of the textbook)
 - Week 10
   - Lecture 8a, Risk                  {% resourceList "lect08a--risk", ["pdf", "md"] %}
   - Lecture 8b, Formal methods intro  {% resourceList "lect08b--formal", ["pdf", "md"] %}
   - Case study -- Knight Capital trading loss {% resourceList "lect08c--knight", ["pdf", "md"] %}
   - Lecture 9, Program verification {% resourceList "lect09--verification", ["pdf", "md"] %}
-  - Other material -- "[Mocks, stubs and spies with Mockito](https://youtu.be/xXO8ft-tsrY)" (YouTube) \
-    (see also ch 12 of the textbook)
 - Week 11
   - Lecture 10, Program specification -- alloy {% resourceList "lect10--alloy", ["pdf", "md"] %}
   - Lecture 11, Program specification -- alloy, continued {% resourceList "lect11--alloy", ["pdf", "md"] %}
 
-#}
 {#
 - Week 9
   - Lecture 8A, Risk                  {% resourceList "lect08a--risk", ["pdf", "md"] %}
@@ -140,10 +138,10 @@ the semester.
 - Week 7 -- syntax
   - Lab worksheet {% resourceList "workshop06", ["html", "md"] %}
   - Source code ([zip]({{ "/workshops/workshop-06-code.zip" | url }}))
-{#
   - Sample worksheet solutions {% resourceList "workshop06-solutions", ["html", "md"] %}
 - Week 8 -- code reviews
   - Lab worksheet               {% resourceList "workshop07", ["html", "md"] %}
+{#
   - Sample worksheet solutions  {% resourceList "workshop07-solutions", ["html", "md"] %}
 - Week 9 -- system testing
   - Lab worksheet               {% resourceList "workshop08", ["html", "md"] %}
