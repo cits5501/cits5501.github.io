@@ -141,10 +141,10 @@ the semester.
   - Sample worksheet solutions {% resourceList "workshop06-solutions", ["html", "md"] %}
 - Week 8 -- code reviews
   - Lab worksheet               {% resourceList "workshop07", ["html", "md"] %}
-{#
   - Sample worksheet solutions  {% resourceList "workshop07-solutions", ["html", "md"] %}
 - Week 9 -- system testing
   - Lab worksheet               {% resourceList "workshop08", ["html", "md"] %}
+{#
   - Sample worksheet solutions  {% resourceList "workshop08-solutions", ["html", "md"] %}
 - Week 10 -- program verification
   - Lab worksheet               {% resourceList "workshop09", ["html", "md"] %}

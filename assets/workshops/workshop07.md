@@ -68,7 +68,7 @@ concrete improvements).
 
 After you've attempted the exercises, it's recommended you drop in on
 one of the timetabled labs, to compare your answers with other students
-(or to discuss them with one of the lab facilitors.
+(or to discuss them with one of the lab facilitors).
 
 ### Code sample 1 -- `dayOfYear`
 
@@ -263,7 +263,7 @@ for more information about exactly what is being measured.
 - Comment out all but one of the tests. Again, does the coverage report
   change?
 
-- Applying the idea from ISP (but without necessarily doing a detailed
+- Applying the ideas from ISP (but without necessarily doing a detailed
   analysis) -- can you spot any test cases that are missing from the
   test suite?
 
@@ -278,7 +278,7 @@ for more information about exactly what is being measured.
 
 Code review is a widely-used technique for improving software quality by
 human inspection. Code review can detect many kinds of problems in code,
-but in this workshop we looked at code samples which highlightede
+but in this workshop we looked at code samples which highlighted
 the following general principles:
 
 -   Don't Repeat Yourself (DRY)

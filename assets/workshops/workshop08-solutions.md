@@ -1,5 +1,6 @@
 ---
-title: CITS5501 lab 8 (week 9)&nbsp;--&nbsp;system testing &nbsp;--&nbsp;solutions
+title: |
+  CITS5501 lab 8 (week 9)&nbsp;--&nbsp;system testing &nbsp;--&nbsp;solutions
 ---
 
 `~\vspace{-5em}`{=latex}
@@ -14,12 +15,19 @@ It is strongly suggested you complete the recommended readings for previous week
 ## A. Sample web app
 
 The Git repository at <https://github.com/cits5501/week-9-lab-system-testing>
-contains a very simple sample web application.
+contains a very simple sample web application. If you're not familiar with how web servers
+and web apps work, [this article][web-apps] provides a brief guide.
+
+[web-apps]: https://www.geeksforgeeks.org/what-is-web-app/
 
 You can use [GitPod](https://www.gitpod.io) to work with this code online. You will need a GitHub account; once you
 have one set up, follow the link below:
 
 &nbsp; <https://gitpod.io/new/#https://github.com/cits5501/week-9-lab-system-testing>
+
+You can find further information on working with GitPod in the [lab 1 worksheet][lab1].
+
+[lab1]: https://cits5501.github.io/workshops/workshop01.html#accessing-required-software
 
 Alternatively, if you're familiar with using Git and Java from the command line, you
 can download a copy of the source code using the command
@@ -186,9 +194,11 @@ Suppose we want to perform load testing of our web app -- ensuring
 that it can handle the expected load of web requests. How can we do this?
 
 It's possible to access our web app from the command line, using Unix
-utilities such as cURL. In VS Code, with the server still running,
+utilities such as [cURL][curl]. In VS Code, with the server still running,
 open a new Bash terminal, by clicking on
 the "+" sign at the lower right of the window, and selecting "Bash".
+
+[curl]: https://en.wikipedia.org/wiki/CURL
 
 Within the terminal, type
 
@@ -223,7 +233,7 @@ other sorts of test:
 
 :   Assert that the time taken meets whatever criterion we have specified.
 
-We could write our tests using JUnit if we wishes
+We could write our tests using JUnit if we wished
 (perhaps using the [java.lang.Process][process] API to launch cURL,
 or perhaps making and timing web requests using Java libraries),
 or we could write our tests in a scripting language such as Bash or Python.
@@ -232,7 +242,7 @@ or we could write our tests in a scripting language such as Bash or Python.
 
 More typically, however, we would use dedicated load-testing software.
 An example of this is [Apache JMeter][jmeter], which can be used to test the
-perform of a wide range of systems -- not just web applications, but also
+performance of a wide range of systems -- not just web applications, but also
 systems that act as (for instance) mail servers or authentication servers.
 As an exercise in your own time, you might like to try using JMeter to record and run
 load tests (see <https://jmeter.apache.org/usermanual/get-started.html>),
