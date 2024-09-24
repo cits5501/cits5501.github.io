@@ -15,7 +15,7 @@ author: 'Unit coordinator: Arran Stewart'
 
 \alert{Program verification} (also called "formal verification")
 is the process of \alert{proving} that a program satisfies a formal
-specification of its behavior.
+specification of its behaviour.
 
 ### Motivation
 
@@ -319,7 +319,7 @@ method Abs(x: int) returns (y: int)
 
 -   Multiple "ensures" specifications can be
     added
--   "ensures" specifications can make use of the ususal
+-   "ensures" specifications can make use of the usual
     logical connectives (e.g. "`&&`", "`||`")
 -   The suggested style is for distinct "properties"
     to be given their own "ensures" specification
