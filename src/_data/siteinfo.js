@@ -117,7 +117,7 @@ module.exports = function(configData) {
         marksPercent: "35",
         dates: {
           available: "TBA",
-          due: makeDate(/*wk 11*/ 12, /*thu*/ 3, /* time */ 23, 59)
+          due: makeDate(/*wk 12*/ 13, /*thu*/ 3, /* time */ 23, 59)
         },
         //submit: safe(extLink("cssubmit", `${cssubmit_url}?p=np&open=${unitcode}-1`))
         submit: moodle
