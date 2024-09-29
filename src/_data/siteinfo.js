@@ -116,7 +116,7 @@ module.exports = function(configData) {
         name: "[Project](/assessment/#project)",
         marksPercent: "35",
         dates: {
-          available: "TBA",
+          available: makeDate(/*wk 9*/ 10, /*thu*/ 3, /* time */ 17, 00),
           due: makeDate(/*wk 12*/ 13, /*thu*/ 3, /* time */ 23, 59)
         },
         //submit: safe(extLink("cssubmit", `${cssubmit_url}?p=np&open=${unitcode}-1`))
