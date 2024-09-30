@@ -1,10 +1,6 @@
 ---
 title: |
-  `\LARGE\textmd{`{=latex}
-  CITS5501 Software Testing and Quality Assurance `\\`{=latex}
-  Semester 1, 2022 `\\`{=latex}
-   Workshop 9 (week 10) -- Formal methods 
-  `}`{=latex}
+  CITS5501 lab 9 (week 10)&nbsp;--&nbsp;Formal methods 
 include-before: |
   ```{=latex}
   \lstdefinestyle{vsmalllistingstyle}{
@@ -24,36 +20,27 @@ include-before: |
 
 ## Reading
 
-It is strongly suggested you complete the recommended readings for weeks 1-9
-*before* attempting this lab/workshop.
-
-
+It is strongly suggested you complete the recommended readings for weeks 1-9 *before*
+attempting this lab/workshop.
 
 ## A. Applicability of formal methods
 
-Discuss the following scenarios. Would you use formal methods for any of
-the following systems? If so, which systems, and why? Do you think the
-enterprise developing the system would share your view?
+Discuss the following scenarios. Would you use formal methods for any of the following
+systems? If so, which systems, and why? Do you think the enterprise developing the system
+would share your view?
 
-a.    The next version of *Confectionery Crush Story*, a web--
-      and mobile-app--based puzzle video game your company
-      develops. The game is available for both Android and
-      iOS mobile devices, and the previous version
-      grossed over $US 1 billion in revenue.
-#.    *Exemplarex*, software produced for Windows and MacOS
-      operating
-      systems and licensed to educational institutions.
-      The software semi-automatically invigilates exams set by the
-      institutions: machine-learning techniques are used
-      to analyse audio and video of exam candidates to identify
-      possible academic misconduct.
-#.    The online banking website provided by a major Australian
-      bank, EastPac. Over 5 million customers use the
-      website to perform banking transactions on
-      personal or business bank accounts.
-#.    A radiation therapy system
-      used to treat cancer patients. The system has two principal
-      components:
+a.    The next version of *Confectionery Crush Story*, a web-- and mobile-app--based
+      puzzle video game your company develops. The game is available for both Android and
+      iOS mobile devices, and the previous version grossed over $US 1 billion in revenue.
+#.    *Exemplarex*, software produced for Windows and MacOS operating systems and licensed
+      to educational institutions.  The software semi-automatically invigilates exams set
+      by the institutions: machine-learning techniques are used to analyse audio and video
+      of exam candidates to identify possible academic misconduct.
+#.    The online banking website provided by a major Australian bank, EastPac. Over 5
+      million customers use the website to perform banking transactions on personal or
+      business bank accounts.
+#.    A radiation therapy system used to treat cancer patients. The system has two
+      principal components:
 
       - A radiation therapy machine that delivers controlled doses of
         radiation to tumour sites, controlled by an embedded software
@@ -78,17 +65,27 @@ have written can be proved correct, and flags any errors.
 
 ### Gitpod
 
-
-You can also compile (as well as run) Dafny programs using
-[Gitpod][gitpod], which provides you with an online
-development environment based on [Microsoft VS Code][vs-code].
+You can compile (as well as run) Dafny programs using [Gitpod][gitpod], which provides you
+with an online development environment based on [Microsoft VS Code][vs-code]. (Other
+installation options are also available, but using Gitpod is normally the easiest
+way.[^dafny-install]) 
 
 [vs-code]: https://code.visualstudio.com 
 [gitpod]: https://www.gitpod.io/
 
-Visit <https://gitpod.io/#https://github.com/arranstewart-dev/dafny-gitpod> in your browser.
-Gitpod will download a Docker image containing the Dafny compiler, and create
-an online IDE environment (this may take a couple of minutes).
+[^dafny-install]: Dafny can be installed as a VS Code plugin, on several platforms:
+  see [here](https://dafny.org/dafny/Installation#Visual-Studio-Code) for instructions.
+  This requires you to first install libraries and runtime for Microsoft's .NET platform,
+  however. \
+  &nbsp; &nbsp; Several Linux distributions also make Dafny available in their default
+  repositories. On Ubuntu 20.04 and later, for instance, you can install Dafny with the
+  command `sudo apt-get install dafny`. \
+  &nbsp; &nbsp; Details of other possible installation options are provided on the Dafny
+  [installation page](https://dafny.org/dafny/Installation).
+
+Visit <https://gitpod.io/#https://github.com/arranstewart-dev/dafny-gitpod> in your
+browser.  Gitpod will download a Docker image containing the Dafny compiler, and create an
+online IDE environment (this may take a couple of minutes).
 
 \newpage
 
@@ -126,7 +123,7 @@ In case you are interested, the paper introducing Dafny is available [here][dafn
 Documentation for the language (including detailed tutorials
 and reference material) is available at:
 
-<https://dafny-lang.github.io/dafny/>
+- <https://dafny-lang.github.io/dafny/>
 
 </div>
 
@@ -137,7 +134,7 @@ and reference material) is available at:
 
 #### Dafny assertions
 
-Take a look at the sample source file open in VS Code:
+Take a look at the sample source file in VS Code:
 
 
 ```c#
@@ -150,27 +147,30 @@ method Main() {
 You should see that the Dafny compiler reports an
 *assertion violation*	in line 3; the assertion "$10 < 2$"
 is not true.
-
 Now comment out the assertion (using double forward-slashes -- "`//`" --
 the same as Java.) The code should now compile.
+
+In Dafny, assertions are checked not at run-time (as they are in many languages), but at
+compile time: if the Dafny compiler cannot *prove* to its satisfaction that an assertion
+holds, it will refuse to compile the source code.
 
 #### Command line compiler
 
 In the "Terminal" tab, you should be able to invoke the `dafny` command, which
 lets you compile code to different targets (such as Java, C# and Go) and run the program.
+The command
 
 ```bash
 $ dafny /version
 ```
 
-should print the Dafny version and verify the command works.
+should print the Dafny version and verify the command works. And the command
 
 ```bash
 $ dafny sample.dfy
 ```
 
-will verify and compile the `sample.dfy` -- it
-is actually short for the command:
+will verify and compile the `sample.dfy` -- it is actually short for the command:
 
 ```bash
 $ dafny /compile:1 hello.dfy
@@ -187,7 +187,7 @@ By default, Dafny compiles programs into libraries for use on Windows
 (`.dll` files). If you list the directory contents, you will see `sample.dll`,
 and a file `sample.runtimeconfig.json` which the compiler creates.
 
-The following command verifies, compiles, *and* runs you program:
+The following command verifies, compiles, *and* runs your program:
 
 ```bash
 $ dafny /compile:3 sample.dfy
@@ -226,8 +226,7 @@ method PrintInt(x : int)
 }
 ```
 
-The int -1 should be printed with a message. Now
-add a precondition to PrintInt, "`requires x >= 0`":
+The int -1 should be printed with a message. Now add a precondition to PrintInt, "`requires x >= 0`":
 
 ```
 method Main() {
@@ -242,9 +241,8 @@ method PrintInt(x : int)
 }
 ```
 
-If you try compiling again, you will see that Dafny won't
-permit you to call the `PrintInt` method, unless it can
-verify all the preconditions hold. Change the `int` being
+If you try compiling again, you will see that Dafny won't permit you to call the
+`PrintInt` method, unless it can verify all the preconditions hold. Change the `int` being
 passed from -1 to 1, and you should see the code now compiles.
 
 Create a new file `square.dfy` consisting of the following code.
@@ -364,16 +362,33 @@ if necessary.
 
 
 
-## F. Project submission sandbox
+## F. Project work
 
-A Moodle submission sandbox is available for the CITS5501
-[project][project] on the CSSE Moodle server. If you haven't yet attempted
-any of the project questions, now would be a good opportunity to do so.
+If you haven't yet started on the CITS5501 unit [project][project], now would be a good
+time to read through the specification.
 
+For project questions requiring *code*: a Moodle "test area" will be available soon on the
+CSSE Moodle server which will allow you to run some basic tests of your code. The test
+area won't include space for "long-form" English answers, though, since those don't admit
+of automated testing.
+
+For project questions requiring *long-form answers in English*: a final submission area will
+be made available on Moodle a week before the submission date, where you can submit both
+code and long English answers to questions. Long-form English answers are written using
+Moodle's [**text editor plugins**][moodle-editor], of which there are several available.
+The default editor is called **Atto**, but you might find others more to your taste. The
+**TinyMCE** editor provides finer-grained control over the formatting of your answers,
+and it's also possible to write your answers in a markup language such as
+[Markdown][markdown].
+You can read [here][moodle-editors] about the different editors available, and how to
+select them in your Moodle preferences.
 
 [project]: https://cits5501.github.io/assessment/#project 
+[moodle-editor]: https://docs.moodle.org/27/en/Text_editor
+[moodle-editors]: https://cits5501.github.io/workshops/moodle-editors.html
+[markdown]: https://missing.csail.mit.edu/2020/potpourri/#markdown
 
+<br><br>
 
-
-<!-- vim: syntax=markdown
+<!-- vim: syntax=markdown tw=90 :
 -->

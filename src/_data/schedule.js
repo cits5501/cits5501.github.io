@@ -163,7 +163,9 @@ module.exports = function(configData) {
       workshopTopic:
           'Simple specifications',
       reading:
-        `- [Dafny language tutorial](https://dafny.org/dafny/OnlineTutorial/guide.html)`,
+        `- [Dafny language tutorial](https://dafny.org/dafny/OnlineTutorial/guide.html)
+        - Writing English answers using Moodle editors ([html](/workshops/moodle-editors.html)) ([md](/workshops/moodle-editors.md))
+        `,
       assessmentDetails: ' ',
     },
 
