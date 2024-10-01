@@ -68,7 +68,7 @@ and how they hang together.
 Alloy has some similarities with UML --
 
 - It has a graphical notation
-- It is somewhat similar to the *Objects Constraint Language* use by UML[^ocl]
+- It is somewhat similar to the *Objects Constraint Language* used by UML[^ocl]
 
 And several differences:
 
