@@ -1,10 +1,6 @@
 ---
 title: |
-  `\LARGE\textmd{`{=latex}
-  CITS5501 Software Testing and Quality Assurance `\\`{=latex}
-  Semester 1, 2022 `\\`{=latex}
-   Workshop 10 (week 11) -- Formal methods 
-  `}`{=latex}
+  CITS5501 lab 10 (week 11)&nbsp;--&nbsp;Modelling with Alloy
 include-before: |
   ```{=latex}
   \lstdefinestyle{vsmalllistingstyle}{
@@ -25,16 +21,14 @@ include-before: |
 ## Reading
 
 It is strongly suggested you complete the recommended readings for weeks 1--10
-*before* attempting this lab/workshop.
+*before* attempting this lab.
 
-## Acessing the Alloy Analyser
+## A. Accessing the Alloy Analyser
 
-The Alloy Analyzer is a tool used for
-checking Alloy models.
+The Alloy Analyzer is a tool used for checking Alloy models.
 
-You can download the analyzer to run on your own
-computer (or a lab computer) -- it should run on (at least)
-Windows, MacOS X and Linux, as long as you have a [Java runtime][java]
+You can download the analyzer to run on your own computer (or a lab computer) -- it should
+run on (at least) Windows, MacOS X and Linux, as long as you have a [Java runtime][java]
 installed.
 
 [java]: https://www.java.com/en/download/
@@ -45,12 +39,11 @@ You can download the analyzer from the web page here:
 
 - <https://github.com/AlloyTools/org.alloytools.alloy/releases/tag/v6.0.0>
 
-Use the `alloy.dmg` file if you are on a Mac, and the
-`org.alloytools.alloy.dist.jar` file if you are on Windows or Linux.
+Use the `alloy.dmg` file if you are on a Mac, and the `org.alloytools.alloy.dist.jar` file
+if you are on Windows or Linux.
 
-On many systems, to run the analyzer, you simply need to
-double-click on the `.jar` file. If this doesn't work, then
-it can be run from the command line:
+On many systems, to run the analyzer, you simply need to double-click on the `.jar` file.
+If this doesn't work, then it can be run from the command line:
 
 ```
 $ java -jar org.alloytools.alloy.dist.jar
@@ -65,26 +58,24 @@ The running analyser should look something like this:
 `\end{center}`{=latex}
 
 
-
-If the *fonts* displayed look odd -- from the "Options" / "Font" menu,
-select "Courier" or "Courier New", and a reasonable font size (12pt or
-14pt), then restart the analyser.
+If the *fonts* displayed look odd -- from the "Options" / "Font" menu, select "Courier" or
+"Courier New", and a reasonable font size (12pt or 14pt), then restart the analyser.
 
 ### Accessing via Gitpod
 
-You can access a [GitHub repository][alloy-analyser-gitpod] which lets you use
-the Alloy analyser from within an online IDE using [Gitpod][gitpod] by 
-visiting <https://github.com/arranstewart-dev/alloy-analyser-gitpod/>
-and following the instructions there.
+You can access a [GitHub repository][alloy-analyser-gitpod] which lets you use the Alloy
+analyser from within an online IDE using [Gitpod][gitpod] by visiting
+<https://github.com/arranstewart-dev/alloy-analyser-gitpod/> and following the
+instructions there.
 
 [gitpod]: https://gitpod.io
 
 [alloy-analyser-gitpod]: https://github.com/arranstewart-dev/alloy-analyser-gitpod 
 
-A limitation of Gitpod is that you can't copy and paste between the *Alloy analyser* window
-and the clipboard of the computer you're using. However, you *can* copy and paste to the
-tab in which Microsoft VS Code is open. So if you want to paste code into an Alloy `.als`
-file, one way to do it is:
+A limitation of Gitpod is that you can't copy and paste between the *Alloy analyser*
+window and the clipboard of the computer you're using. However, you *can* copy and paste
+to the tab in which Microsoft VS Code is open. So if you want to paste code into an Alloy
+`.als` file, one way to do it is:
 
 - Create the `.als` file using VS Code, using "File" / "New file" from the menus.
 - *Also* open the `.als` file in the Alloy Analyser. \
@@ -95,25 +86,25 @@ file, one way to do it is:
 
 Downloading and running the `.jar` file for Alloy avoids this limitation. 
 
-## More information on Alloy
+### More information on Alloy
 
 Note that an "Alloy syntax cheat sheet" is available at
-<https://esb-dev.github.io/mat/alloy-cheatsheet.pdf>, but
-we will be covering only a small fraction of the Alloy syntax.
+<https://esb-dev.github.io/mat/alloy-cheatsheet.pdf>, but we will be covering only a small
+fraction of the Alloy syntax.
 
 For your reference, a tutorial for using the Alloy Analyzer is available here:
 
 - <https://alloytools.org/tutorials/online/index.html>
 
-An online book that shows in more detail how to create and analyse software
-specifications with Alloy is available here:
+An online book that shows in more detail how to create and analyse software specifications
+with Alloy is available here:
 
 - <https://haslab.github.io/formal-software-design/>
 
-## A. Sigs and properties
+## B. Sigs and properties
 
-We will start with Alloy by investigating how to model entities ("sigs", in Alloy)
-and their properties.
+We will start with Alloy by investigating how to model entities ("sigs", in Alloy) and
+their properties.
 
 How would you translate the following into Alloy syntax? All of these can be done by declaring *sigs* and *properties*.
 
@@ -127,7 +118,7 @@ a.  There exist such things as chessboards.
 
 
 
-## B. Viewing "possible universes"
+### Viewing "possible universes"
 
 Alloy has two *commands*, "`run`" and "`check`". We'll consider "`run`" first.
 We can ask Alloy to generate sample "universes" which meet the
@@ -148,7 +139,7 @@ pred example() {
 run example for exactly 2 House, 2 Door
 ```
 
-Save the file, and under the "Execute" menu, you should now see a menu itme
+Save the file, and under the "Execute" menu, you should now see a menu item
 "Run example for exactly 2 House, 2 Door" -- select that menu item. (Or,
 press the "Execute" button.)
 
@@ -327,7 +318,7 @@ a.  Assume we have a sig `LectureTheatre{}` and a sig `Venue{}`.
 
 
 
-## D. Facts with quantifiers
+### Facts with quantifiers
 
 The facts in the previous section constrain sets
 (e.g. the set of lecture theatres, or the set of omnivores).
@@ -354,7 +345,7 @@ hobbies:"
 
 The hash symbol operator ("`#`") gives us the *cardinality* or size
 of a set. `cs` is a bit like a "loop variable" in a Java "`for ... each`"
-loop: it gives us a way of refering to individuals in the set we're considering
+loop: it gives us a way of referring to individuals in the set we're considering
 (in this case, computer scientists). 
 The pipe symbol can be read as "such that" or "it is the case that".
 
@@ -426,5 +417,6 @@ solution) in [chapter
 </div>
 
 
-<!-- vim: syntax=markdown
+
+<!-- vim: syntax=markdown tw=90 :
 -->
