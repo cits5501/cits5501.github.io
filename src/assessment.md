@@ -82,6 +82,13 @@ customStyle: |
     padding-left: 3em;
     width: 18%;
   }
+
+  .resource-list > ul > li {
+    padding-top: 0.2ex;
+    padding-bottom: 0.5ex;
+  }
+
+
 ---
 
 {% set csmarks_url = siteinfo.csmarks_url %}
@@ -260,14 +267,29 @@ to (orally)
 [explain their thought process]{ class="hi-pri" } in coming up with their
 answers.
 
-The following project materials are available for you:
+The following project resources are available for you:
+
+::: { .resource-list }
 
 - The [project description (PDF)][proj-pdf]
 - [Source code for the project][proj-code]
+- A testing area on {{ siteinfo.moodle }}, where you can run several (very basic)
+  tests on your submitted project answers. Note that passing these tests is no guarantee of
+  a good mark -- they verify only that your project meets minimum standards for
+  a submission.
+- An EBNF parsing command-line tool for Linux:
+  <a href="{{ "/project/ebnf-parse.tgz" | url }}" onclick="ga('send', 'event', 'download', 'download_clicked', 'ebnf-parse_tgz');">ebnf-parse.tgz</a> \
+  This should run on almost any x86-64 Linux system. Un-tar the executable
+  and run `./ebnf-parse -h` for options. A `man` page (in `man` and Markdown
+  formats) explaining the use is contained in the tar file.
+
+:::
 
 [proj-md]: {{ "/project/project-spec.md" | url }}
 [proj-pdf]: {{ "/project/project-spec.pdf" | url }}
 [proj-code]: {{ "/project/system-code.zip" | url }}
+[proj-tgz]: {{ "/project/ebnf-parse.tgz" | url }}
+
 
 {#
 
