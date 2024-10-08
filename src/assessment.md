@@ -298,7 +298,8 @@ the UWA examination period. For the exact time and venue, consult
 your exam timetable using StudentConnect.
 
 The exam is *not* open book.
-You are permitted to bring into the exam one A4, double-sided page of handwritten notes.
+You are permitted to bring into the exam one A4, double-sided page of notes (handwritten or
+typed).
 
 
 #### Past exam papers
