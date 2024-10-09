@@ -28,7 +28,7 @@ linkcolor: blue
 
 - Corrected question numbering
 - Clarified use of whitespace in grammar
-- Include a `<number>` non-terminal in Domolect 1.7
+- Included a `<number>` non-terminal in Domolect 1.7
 
 To view an exact list of changes, follow this link to the CITS5501 [GitHub
 repository][diffs].

@@ -271,7 +271,7 @@ The following project resources are available for you:
 
 ::: { .resource-list }
 
-- The [project description (PDF)][proj-pdf]
+- The project description [(PDF)][proj-pdf] [(markdown)][proj-md] (**Revised 9 Oct 2024**)
 - [Source code for the project][proj-code]
 - A testing area on {{ siteinfo.moodle }}, where you can run several (very basic)
   tests on your submitted project answers. Note that passing these tests is no guarantee of
