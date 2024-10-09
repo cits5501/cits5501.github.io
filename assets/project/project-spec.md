@@ -8,7 +8,7 @@ documentclass:  scrartcl
 classoption:    oneside
 papersize:      a4
 fontsize:       12pt
-geometry:       
+geometry:
 - top=1in
 - bottom=1in
 - left=0.75in
@@ -19,9 +19,21 @@ linkcolor: blue
 
 \vspace{-3em}
 
-| **Version:** | 0.1          |
+| **Version:** | 0.2          |
 |--------------|--------------|
-| **Date:**    | 26 Sep, 2024 |
+| **Date:**    | 9 Oct, 2024  |
+
+
+**Changes in version 0.2**
+
+- Corrected question numbering
+- Clarified use of whitespace in grammar
+- Include a `<number>` non-terminal in Domolect 1.7
+
+To view an exact list of changes, follow this link to the CITS5501 [GitHub
+repository][diffs].
+
+[diffs]: https://github.com/cits5501/cits5501.github.io/compare/bdbd6b496258889b6813e84eee3ab74870646adc..HEAD
 
 \def\totalmarks{55}
 
@@ -31,7 +43,7 @@ linkcolor: blue
 
 -   This project contributes **35%** towards your final mark this semester, and is to be
     completed as individual work.
--   The project is marked out of \totalmarks{}.    
+-   The project is marked out of \totalmarks{}.
 -   The deadline for this assignment is **11:59 pm Thu 17 October**
 -   You are expected to have read and understood the University [academic integrity
     guidelines](https://www.uwa.edu.au/students/getting-started/student-conduct).  In
@@ -56,16 +68,17 @@ the Help5501 forum.
 
 # Format and submission of your work
 
-All code and answers to questions should be submitted by making a Moodle submission.
+All code and answers to questions should be submitted by making a submission on the CSSE
+department [Moodle server][moodle].
 
-[moodle]: https://quiz.jinhong.org 
+[moodle]: https://quiz.jinhong.org
 
 For any long English answers:
 
 - Please structure your answers using numbered headings where appropriate.
 - You can use any of the available Moodle editors ([Atto][atto], [TinyMCE][tinymce] or
   [marked up plain text][markup]) by setting your Moodle preferences -- more information
-  about this will be provided together with the Week 10 labsheet.
+  is available in the week 10 lab material on the CITS5501 [resources page](https://cits5501.github.io/resources/#worksheets).
 - If you include any diagrams, charts or tables, they must be clear, legible and large
   enough to read when viewed on-screen at 100% magnification.
 - If you give scholarly references, you may use any standard citation style you wish, as
@@ -110,7 +123,7 @@ number of marks (and in any case, will likely result in your code
 failing any checks or tests applied by Moodle).
 
 [atto]: https://docs.moodle.org/404/en/Atto_editor
-[tinymce]: https://docs.moodle.org/404/en/TinyMCE_editor 
+[tinymce]: https://docs.moodle.org/404/en/TinyMCE_editor
 [markup]: https://docs.moodle.org/404/en/Formatting_text#Formatting_text_options
 
 ## Documenting assumptions
@@ -138,9 +151,7 @@ systems tailored for high-end and niche customers.
 
 Your current project involves extending the **`\domo`{=latex}** software system. \domo is designed
 to streamline the control and integration of various smart devices and appliances within a
-home. At the heart of this system is a specialized command and query language (Domolect),
-that allows
-users to interact seamlessly with their devices.
+home or business premises. At the heart of this system is a specialized command and query language (Domolect), that allows users to interact seamlessly with their devices.
 
 ## Domolect language { #domolect-17 }
 
@@ -159,26 +170,51 @@ of thermal device, and can be controlled with a command like
 and precisely specify a wide range of temperatures.)
 
 Commands can optionally start with a *location*, which isn't defined in the grammar,
-but will be specific to each customer (e.g. `main-bedroom`, `kitchen`, `laboratory`,
-`armory`, etc.). If a command is unambiguous, it will not need a location (e.g. if just one
+but will be specific to each customer (it might include, for example, such locations
+as `main-bedroom`, `kitchen`, `laboratory`,
+`armory`, etc.). If a command is unambiguous, it will not need a location (for example if just one
 thermostat controls the entire premises).
 
 [kelvin]: https://en.wikipedia.org/wiki/Kelvin
 
-Words in the commands are separated by whitespace (any non-zero-length sequence of
-whitespace characters). To simplify our grammar, this whitespace isn't included in the
-EBNF, and we also don't include the rules for constructing decimal numbers. 
-(If you need to represent those in a grammar for any reason, you can just assume that
-the non-terminal `<number>` is available, which for testing purposes is
-considered to have just one production.)
+Words in the commands are separated by whitespace (any non-zero-length sequence of whitespace
+characters). To simplify our grammar, this whitespace isn't included in the EBNF.
+
+```{=latex}
+\begin{genericbox}[nobreak=false]
+```
+
+`\begin{center}`{=latex}
+**Testing and whitespace**
+`\end{center}`{=latex}
+
+`\small`{=latex}
+
+When writing test cases for Domolect grammars, you may assume
+that the EBNF expression `' '?` is automatically
+inserted after every terminal, allowing an optional space to appear.
+This makes your tests more readable (and readability is a marking criterion for tests, as
+it is for any code).
+
+The testing tools accessible via [Moodle][moodle] and the CITS5501
+[assessment page][ass] automatically insert this EBNF expression after the terminals in your grammar.
+
+If you are prototyping or testing your grammar using the BNF Playground and you wish to
+insert spaces for readability, you will need to do this manually (for instance, by adding
+a space at the end of every terminal).
+
+[ass]: https://cits5501.github.io/assessment/#project
+
+```{=latex}
+\end{genericbox}
+```
+
 Locations must *not* contain whitespace. If a location consists of multiple words (e.g.
 "master bedroom"), then in Domolect the words have to be separated by hyphens
 ("`master-bedroom`").
 
-\newpage
-
 ```{=latex}
-\begin{genericbox}
+\begin{genericbox}[nobreak=false]
 \begin{center}
 ```
 
@@ -213,6 +249,7 @@ Locations must *not* contain whitespace. If a location consists of multiple word
 <appliance> ::= "coffee-maker" | "oven" | "air-conditioner" | "centrifuge"
                 "synchrotron" | "laser-cannon"
 
+<number> ::= ([1-9] [0-9]*) | [0-9]
 ```
 
 
@@ -236,7 +273,7 @@ A new version of \domo is being developed, version 2.0, which extends the langua
 commands to be augmented with conditions that specify when the command will come into
 effect ("when" conditions), and conditions that specify when the command will stop being in effect
 ("until" conditions). Conditions can involve times or temperatures.
- 
+
 As an example, version 2.0 of the language would allow a user to write
 
 ```
@@ -249,7 +286,9 @@ command contains a normal command (as defined in version 1.7 of the language, in
 \ref{domolect-17}), followed by
 an optional "when" condition and an optional "until" condition (in that order).
 
-Conditions are either temperature conditions or time conditions. A temperature condition
+Conditions are either temperature conditions or time conditions.
+
+A temperature condition
 starts with the word "`current-temperature`", is followed by a comparator (either "`less-than`",
 "`greater-than`", or "`equal-to`"), and then a  target temperature in Kelvin (as defined by
 version 1.7 of the language, in section \ref{domolect-17}). (The implemented system will monitor its
@@ -268,7 +307,7 @@ Time conditions consist of 2 digits, a colon, 2 digits, and then the words "`am`
 You are supplied with Java code representing the Domotopia
 system -- see the `system-code.zip` file.
 
-This code should compile with any current recent Java compiler or IDE
+This code should compile with any recent Java compiler or IDE
 (such as BlueJ, Eclipse or IntelliJ IDEA).
 
 A brief description of some of the classes in the Java code is given
@@ -334,9 +373,9 @@ others require you to write code.
     Give a BNF or EBNF grammar that will parse (or generate) valid Domolect 2.0 augmented commands,
     including "when" conditions and "until" conditions.
 
-    You do *not* need to (and should not) define non-terminals that already exist in
-    version 1.7 of the language, as defined in section \ref{domolect-17}, but can make
-    use of them if you wish.
+    You *only* need to define the "augmented" part of such commands.
+    When assessed, all the non-terminals from version 1.7 of the language (as defined in
+    section \ref{domolect-17}) will be inserted into your grammar automatically.
 
     You *do* need to define an `augmented_command` non-terminal, and it should correctly
     include "when" conditions and "until" conditions, as defined in section
@@ -346,11 +385,6 @@ others require you to write code.
     [BNF playground][bnf-playground]. It must be in plain text
     which could be pasted into the BNF playground and compiled without
     error.
-
-    (If using the BNF playground to experiment with a grammar, you may find it useful
-    to temporarily put spaces at the end of each word -- e.g. `"oven "` instead of
-    `"oven"` -- to make commands more readable, but your submitted grammar should
-    not include these spaces.)
 
 **Question 2 [4 marks]**
 
@@ -373,15 +407,15 @@ others require you to write code.
 
 :   \
 
-    Explain the reasoning behind your choice of tests in question 3, and why it is that 
+    Explain the reasoning behind your choice of tests in question 2, and why it is that
     those test cases have production coverage. Explain also: are there semantic
     constraints not covered by your grammar, that would need to be tested before
-    the new Domolect was used in a production system?\
+    the new version of Domolect was used in a production system?\
 
     max 1000 words
 
 
-**Question 3 [4 marks]**
+**Question 4 [4 marks]**
 
 :   \
 
@@ -391,7 +425,7 @@ others require you to write code.
     (Maximum 500 word answer.)\
 
 
-**Question 4 [4 marks]**
+**Question 5 [4 marks]**
 
 :   \
 
@@ -400,7 +434,7 @@ others require you to write code.
     answer. (Max 500 words)\
 
 
-**Question 5 [4 marks]**
+**Question 6 [4 marks]**
 
 :   \
 
@@ -413,7 +447,7 @@ others require you to write code.
     (Max 500 words)\
 
 
-**Question 6 [10 marks]**
+**Question 7 [10 marks]**
 
 :   \
 
@@ -429,7 +463,7 @@ others require you to write code.
 
     (Max 1000 words)\
 
-**Question 7 [15 marks]**
+**Question 8 [15 marks]**
 
 :   \
 
@@ -467,7 +501,7 @@ coherence and quality of the answer. These 3 bonus marks cannot take your
 final mark higher than \totalmarks{}.
 
 [repl]: https://en.wikipedia.org/wiki/Read%E2%80%93eval%E2%80%93print_loop
-[docker-hub]: https://hub.docker.com 
+[docker-hub]: https://hub.docker.com
 
 -   How could mutation testing be used to evaluate the quality of
     your team's tests, and what empirical evidence exists that
@@ -494,7 +528,7 @@ final mark higher than \totalmarks{}.
     source code repository private until the marker requests access,
     as this is an individual project.)
 
-
+If you wish to submit an extension task, you must do so via email to the unit coordinator.
 
 <!--
   vim: tw=90
