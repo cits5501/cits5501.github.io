@@ -19,9 +19,9 @@ linkcolor: blue
 
 \vspace{-3em}
 
-| **Version:** | 0.2          |
+| **Version:** | 0.3          |
 |--------------|--------------|
-| **Date:**    | 9 Oct, 2024  |
+| **Date:**    | 14 Oct, 2024  |
 
 
 **Changes in version 0.2**
@@ -30,10 +30,16 @@ linkcolor: blue
 - Clarified use of whitespace in grammar
 - Included a `<number>` non-terminal in Domolect 1.7
 
-To view an exact list of changes, follow this link to the CITS5501 [GitHub
+**Changes in version 0.3**
+
+- Simpler version of question 7 - 1 characteristic and 2 tests.
+
+To view an exact list of changes from the original, follow this link to the CITS5501 [GitHub
 repository][diffs].
 
 [diffs]: https://github.com/cits5501/cits5501.github.io/compare/bdbd6b496258889b6813e84eee3ab74870646adc..HEAD
+
+
 
 \def\totalmarks{55}
 
@@ -455,9 +461,9 @@ others require you to write code.
     `LightingCommand` class, explaining
     the steps you take and what characteristics and partitions you would use.
 
-    You should describe at least 3 characteristics.
+    You should describe at least 1 characteristic.
 
-    Describe three test cases in detail, including all fixtures, test values and
+    Describe two test cases in detail, including all fixtures, test values and
     expected values. Include a test ID for each test case, so you can
     refer to it in question 7.
 
@@ -493,9 +499,9 @@ others require you to write code.
     marks being awarded.
 
 
-## Extension tasks
+## Challenge tasks
 
-You may submit an answer to either of the following questions for 3 bonus
+You may submit an answer to either of the following questions for up to 3 bonus
 marks, awarded at the discretion of the unit coordinator based on the
 coherence and quality of the answer. These 3 bonus marks cannot take your
 final mark higher than \totalmarks{}.
