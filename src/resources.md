@@ -68,6 +68,10 @@ like to get an idea in advance of what will be covered.)
 - Week 11
   - Lecture 10, Program specification -- alloy {% resourceList "lect10--alloy", ["pdf", "md"] %}
   - Lecture 11, Program specification -- alloy, continued {% resourceList "lect11--alloy", ["pdf", "md"] %}
+- Week 12
+  - Sample exam questions [(pdf)][sample-pdf]
+
+[sample-pdf]: {{ "/lectures/sample.pdf" | url }}
 
 {#
 - Week 9
