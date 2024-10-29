@@ -155,8 +155,9 @@ the semester.
   - Sample worksheet solutions  {% resourceList "workshop09-solutions", ["html", "md"] %}
 - Week 11 -- specification languages
   - Lab worksheet               {% resourceList "workshop10", ["html", "md"] %}
-{#
   - Sample worksheet solutions  {% resourceList "workshop10-solutions", ["html", "md"] %}
+
+{#
 #}
 
 
