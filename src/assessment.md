@@ -357,6 +357,24 @@ See ["Are past exams available?"](/faq#past-exams-availability) in the unit FAQ.
 
 [onesearch]: https://onesearch.library.uwa.edu.au/
 
+#### Peer review exercise
+
+You might like to try the following exercise (taken from the 2022 version of the course)
+as exam practice with other students. First, read through the rubric, so you know how
+questions like this are assessed. Then, attempt to answer the questions under exam
+conditions. Finally, swap answers with other students, read through the solutions, and
+assign a mark and comments. This exercise should provide helpful insight into what sort
+of answers can be expected to achieve low, high or moderate marks in exam questions.
+
+- [Exercise questions][peer-questions] (PDF)
+- [Exercise rubric][peer-rubric] (PDF)
+- [Exercise solutions][peer-solutions] (PDF)
+
+
+[peer-questions]: {{ "/exam/exercise.pdf" | url }}
+[peer-rubric]: {{ "/exam/exercise-rubric.pdf" | url }}
+[peer-solutions]: {{ "/exam/exercise-solutions.pdf" | url }}
+
 <!--
   vim: tw=92
 -->
