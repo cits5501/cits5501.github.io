@@ -147,7 +147,7 @@ module.exports = function(configData) {
     subtitle:     `${unitcode} in ${year}`,
     description:  `${unitcode} ${unitname} unit @uwa`,
     repository:   `${locode}/${locode}.github.io`,
-    site_url:     `https://${locode}.github.io/`,
+    site_url:     `https://${locode}.arranstewart.io/`,
 
     unit_outline_url: unit_outline_url,
 

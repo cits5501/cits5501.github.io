@@ -55,7 +55,7 @@ module.exports = function(configData) {
     reading:
       `- Amman & Offutt, ch 3
       - Pressman, ch 23 ("Testing conventional applications")`,
-    assessmentDetails: "[Week 3 quiz](https://cits5501.github.io/assessment/#week-3-quiz) (deadline Sun 11:59pm)"
+    assessmentDetails: "[Week 3 quiz](https://cits5501.arranstewart.io/assessment/#week-3-quiz) (deadline Sun 11:59pm)"
     },
 
 

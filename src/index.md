@@ -252,7 +252,9 @@ labs don't start until week 2)*{ class="hi-pri" }
     access all the languages and frameworks we will look at using only a
     web browser.
 
-[lab-room]: https://cits5501.github.io/faq/#attending-labs
+
+
+[lab-room]: {{ '/faq/#attending-labs'  | url }}
 [cas]: https://ipoint.uwa.edu.au/app/answers/detail/a_id/752/~/class-allocation-system-%28cas%29-explained
 
 **Moodle exercises** { #moodle-exercises }

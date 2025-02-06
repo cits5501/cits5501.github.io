@@ -423,6 +423,12 @@ module.exports = function(eleventyConfig) {
 
   eleventyConfig.addPassthroughCopy( copy_config );
 
+  // copy CNAME
+  let cname_copy = { "/assets/CNAME": "CNAME" };
+  console.log("adding CNAME");
+  eleventyConfig.addPassthroughCopy( cname_copy );
+
+
   ////
   // post-processing:
   // - validate HTML using html tidy

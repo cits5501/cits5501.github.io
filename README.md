@@ -1,7 +1,7 @@
 
-# [cits5501.github.io][site]
+# [cits5501.arranstewart.io][site]
 
-[site]: https://cits5501.github.io/
+[site]: https://cits5501.arranstewart.io/
 
 This is the Git repository for the CITS5501 "Software Testing and Quality Assurance"
 website, which is built with [eleventy][eleventy] and published using
@@ -10,7 +10,7 @@ website, which is built with [eleventy][eleventy] and published using
 
 [gh-pages]: https://pages.github.com
 
-The website is available at **<https://cits5501.github.io/>**.
+The website is available at **<https://cits5501.arranstewart.io/>**.
 
 Content on the website is copyright, but may be used pursuant to the
 <a rel='license' href='https://creativecommons.org/licenses/by/4.0/'>Creative Commons Attribution 4.0 International License</a>.

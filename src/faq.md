@@ -332,7 +332,7 @@ A list of all assessments (and their due dates) is given on the
 also shown on the [**Schedule**](/schedule){ class="hi-pri" }.
 
 (The content for both is generated from a
-[JavaScript source file](https://github.com/cits5501/cits5501.github.io/blob/master/src/_data/siteinfo.js)
+[JavaScript source file](https://github.com/{{ siteinfo.repository }}/blob/master/src/_data/siteinfo.js)
 contained in the GitHub repository.)
 
 ### Do any of the assessments require (or permit) group work?
@@ -548,7 +548,7 @@ Wherever possible, we adopt a rubric based on the following scheme:
     component; and a *not yet satisfactory* answer will be awarded 0–49%
     of the mark for that component.
 
-    ![](https://cits3007.github.io/images/rubric-table.png)
+    ![]({{ '/images/rubric-table.png'  | url }})
 
 ### What should I do if a question or task in an assessment is ambiguous or contains an error? { #errors-in-questions }
 
