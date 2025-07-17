@@ -42,12 +42,15 @@ docker_args = \
 	    -v $(ASSETS_DIR):/assets \
 	    -v $(OUT_DIR):/out \
 	    $(MOUNT_PACKAGE) \
+	    --name $(CTR_NAME) \
 	    --workdir $(PACKAGE_DIR) \
 	    --entrypoint sh
 
 docker-build:
-	docker build -f Dockerfile \
+	docker build --progress=plain -f Dockerfile \
+	  --cache-from cits5501-website:latest \
 	  --cache-from $(IMAGE_NAME):latest \
+	  --cache-from $(IMG) \
 	  -t $(IMG) -t $(IMAGE_NAME):latest .
 
 # real kill target
@@ -81,7 +84,7 @@ build: kill
 
 docker-shell: kill
 	$(pullfirst)
-	echo make Docker shell && set -x && $(DOCKER) run --rm -it \
+	echo make Docker shell && set -x && $(DOCKER) run --pull --rm -it \
 	    $(docker_args) \
 	    -p 8080:8080 \
 	    $(IMG)

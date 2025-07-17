@@ -53,7 +53,7 @@ English workshops (such as "Critical thinking & academic culture" and
 "Writing justifications") may prove especially useful.
 
 [study-smarter]: https://www.uwa.edu.au/students/Support-services/Academic-support
-[work-effectively]: https://teaching.csse.uwa.edu.au/units/unitinfo/workingeffectively.php
+[work-effectively]: https://secure.csse.uwa.edu.au/run/unitinfo?year=2025&opt=Fworkingeffectively
 [csse-teaching-server]: https://teaching.csse.uwa.edu.au/units/unitinfo/
 [study-support]: https://www.uwa.edu.au/library/Help-and-support/Study-support
 
@@ -1076,7 +1076,7 @@ You can use the Wayback Machine interface to view previous versions
 of the lectures and labs.
 
 The source code for the unit website is also versioned on GitHub
-at <https://github.com/cits5501/cits5501.github.io/>, so you can use
+at <https://github.com/{{ siteinfo.repository }}/>, so you can use
 GitHub's interface to look through older versions of the material as
 well. The directories you want are probably `assets/lectures` and
 `assets/workshops`.

@@ -10,14 +10,16 @@ website, which is built with [eleventy][eleventy] and published using
 
 [gh-pages]: https://pages.github.com
 
-The website is available at **<https://cits5501.arranstewart.io/>**.
+The website is available at:
+
+&nbsp; &nbsp; **<https://cits5501.arranstewart.io/>**
 
 Content on the website is copyright, but may be used pursuant to the
 <a rel='license' href='https://creativecommons.org/licenses/by/4.0/'>Creative Commons Attribution 4.0 International License</a>.
-
-[eleventy]: https://www.11ty.dev
 
 [GitHub corner SVG][github-corner] is copyright (c) 2016 Tim Holman (http://tholman.com) and
 licensed under the MIT License.
 
 [github-corner]: https://github.com/tholman/github-corners
+[eleventy]: https://www.11ty.dev
+

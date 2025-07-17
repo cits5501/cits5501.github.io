@@ -18,10 +18,12 @@ env:
 
 jobs:
   docker_build:
-    runs-on: ubuntu-20.04
+    name: docker build
+    runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
+        name: Check out code
 
       - uses: dorny/paths-filter@v2
         id: docker_img_changes
@@ -31,8 +33,28 @@ jobs:
               - 'Dockerfile'
               - 'build.py'
 
+      - name: Log in to github Container registry
+        if: github.event_name != 'pull_request'
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      # not sure this is actually needed
+      # but note that to use cache later, we always must use "docker buildx build" -
+      # not "docker build"
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+        # docker-container is actually the default, so
+        # shouldn't need this. But we _do_ need to build
+        # using `docker buildx build`.
+        with:
+          driver: docker-container
+
+
       - name: set docker image info from Makefile
-        if: steps.docker_img_changes.outputs.src == 'true'
+        #if: steps.docker_img_changes.outputs.src == 'true'
         id: info
         shell: bash
         run: |
@@ -43,7 +65,7 @@ jobs:
           echo "::set-output name=IMAGE_VERSION::${IMAGE_VERSION}"
 
       - name: check info ok
-        if: steps.docker_img_changes.outputs.src == 'true'
+        #if: steps.docker_img_changes.outputs.src == 'true'
         run: |
           IMAGE_NAME="${{ steps.info.outputs.IMAGE_NAME }}"
           printf 'IMAGE_NAME is: <<%s>>\n' "${IMAGE_NAME}"
@@ -57,27 +79,15 @@ jobs:
             false
           fi
 
-      - name: Log in to github Container registry
-        if: steps.docker_img_changes.outputs.src == 'true' && github.event_name != 'pull_request'
-        uses: docker/login-action@f054a8b539a109f9f41c372932f1ae047eff08c9
-        with:
-          registry: ${{ env.REGISTRY }}
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Set up Docker Buildx
-        if: steps.docker_img_changes.outputs.src == 'true'
-        uses: docker/setup-buildx-action@v1
-
       - name: Extract metadata (tags, labels) for Docker
-        if: steps.docker_img_changes.outputs.src == 'true'
+        #if: steps.docker_img_changes.outputs.src == 'true'
         id: meta
         uses: docker/metadata-action@98669ae865ea3cffbcbaa878cf57c20bbf1c6c38
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
 
       - name: debug - dump metadata
-        if: steps.docker_img_changes.outputs.src == 'true'
+        #if: steps.docker_img_changes.outputs.src == 'true'
         shell: bash
         run: |
           printf 'tags are: <<%s>>\n' "${{ steps.meta.outputs.tags }}"
@@ -85,7 +95,7 @@ jobs:
           printf 'repos is: <<%s>>\n' "${{ github.repository }}"
 
       - name: Build Docker image
-        if: steps.docker_img_changes.outputs.src == 'true'
+        #if: steps.docker_img_changes.outputs.src == 'true'
         shell: bash
         run: |
           set -x
@@ -101,7 +111,7 @@ jobs:
           python3 ./build.py
 
       - name: push to github registry
-        if: github.event_name != 'pull_request' && steps.docker_img_changes.outputs.src == 'true'
+        #if: github.event_name != 'pull_request' && steps.docker_img_changes.outputs.src == 'true'
         shell: bash
         run: |
           set -x
@@ -115,8 +125,7 @@ jobs:
           docker push ${GH_IMAGE_ID}:latest
 
   publish:
-    runs-on: ubuntu-20.04
-
+    runs-on: ubuntu-latest
     needs: docker_build
 
     steps:
@@ -129,21 +138,9 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: set docker image info from Makefile
-        id: info
-        shell: bash
-        run: |
-          set -x
-          IMAGE_NAME=$(make print-image-name)
-          IMAGE_VERSION=$(make print-image-version)
-          echo "::set-output name=IMAGE_NAME::${IMAGE_NAME}"
-          echo "::set-output name=IMAGE_VERSION::${IMAGE_VERSION}"
-
       - name: build site
         shell: bash
         run: |
-          #GH_IMAGE_ID=${{ env.REGISTRY }}/${{ github.repository }}/${{ steps.info.outputs.IMAGE_NAME }}
-
           set -x
           make IMG=${{ env.REGISTRY }}/${{ github.repository }}/cits5501-website:latest \
             build

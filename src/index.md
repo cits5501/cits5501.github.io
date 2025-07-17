@@ -154,29 +154,28 @@ This unit covers testing and quality assurance topics including:
 
 ## Unit Coordinator { #unit-coordinator }
 
-[**{{ coordinator.name }}**][coordinator-dir]{ target="_blank" }
+**{{ coordinator.name }}**
 
 ::: { class="inline-table-ctr" }
+
+<!--
+  UNIT COORDINATOR:
+
+  You can add further table rows by mimicking the form of the previous ones.
+
+  `-` at the start of a line starts a new row, and further `-` within
+  that creates cells.
+
+-->
 
 ```{list-table}
 - - **Office**
   - <address>{{ coordinator.room }}</address>
 - - **Email**
   - <address>{% email_el_spannized coordinator.email %}</address>
-- - **Availability**
-  - I work half-time at UWA, and am normally only on campus on Tuesdays,
-    Thursdays, and Friday afternoon.
-- - **Consultation**
-  - <!--!<address>!-->Email {% email_el_spannized coordinator.email %} for an appointment,
-    or visit my office between 2--4pm Thursday. Students are also
-    welcome to speak to me after the lectures. At busy times of semester,
-    I may need one or two business days' notice to schedule an appointment.
-    <!--!</address>!-->
 ```
 
 :::
-
-[coordinator-dir]: {{ coordinator.directory }}
 
 
 ------

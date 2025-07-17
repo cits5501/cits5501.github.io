@@ -10,6 +10,12 @@ eleventyExcludeFromCollections: true
         <lastmod>{{ date | dateIso }}</lastmod>
     </url>
   {%- endfor -%}
+  {# Manually add lab pages #}
+  {%- for i in range(1, 10) %}
+    <url>
+        <loc>{{ siteinfo.site_url }}workshops/workshop{{ i | string | leftpad('0', 2) }}.html</loc>
+    </url>
+  {%- endfor -%}
 </urlset>
 {#- vim: syntax=xml :
 -#}

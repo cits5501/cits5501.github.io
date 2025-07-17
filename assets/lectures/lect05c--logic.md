@@ -144,9 +144,8 @@ $(i < j) \wedge isAlpha(c) \vee b \vee (m \geq n*o)$
 \end{center}
 ```
 
--   A *predicate* is an expression that evaluates to a boolean value.\
-    (So the expression as a whole is a predicate, as are
-    some of its parts -- e.g. $i < j$)
+-   In the terminology used by the Ammann and Offutt textbook, a
+    *predicate* is a "top-level" logic expression[^top] that evaluates to a boolean value.
 
 -   Predicates can contain
     -   boolean variables (e.g. $b$)
@@ -155,12 +154,19 @@ $(i < j) \wedge isAlpha(c) \vee b \vee (m \geq n*o)$
         "`==`", "`>=`",
         "`!=`" all can operate on non-boolean variables)
     -   function or method calls that return a boolean
+    -   any combination of the above, joined by logical connectives
+
+-   We call the lowest level of expressions -- ones which aren't joined
+    by any logical connectives -- *clauses*.
+
+[^top]: That is, it isn't pat of any larger expression.
+
 
 ### Connectives
 
 \def\somespace{\hspace{1em}}
 
--   Predicates can be joined by connectives -- logical operators.
+-   Boolean expressions can be joined by connectives -- logical operators.
 -   Common programming connectives:
 
     $\lnot$, `!` \hspace{4em} -- \somespace logical not\

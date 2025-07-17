@@ -17,9 +17,15 @@ import os
 import subprocess
 import sys
 
-repo_owner = os.environ["REPO_OWNER"]
+try:
+  repo_owner = os.environ["REPO_OWNER"]
+except KeyError:
+  repo_owner = "arranstewart"
 
-image_name = os.environ["IMAGE_NAME"]
+try:
+  image_name = os.environ["IMAGE_NAME"]
+except KeyError as ex:
+  raise Exception("expected env var IMAGE_NAME to be defined") from ex
 
 version = os.environ["IMAGE_VERSION"]
 gh_image_id = os.environ["GH_IMAGE_ID"]
@@ -27,7 +33,7 @@ gh_image_id = os.environ["GH_IMAGE_ID"]
 # org.opencontainers.image metadata
 oc_labels = {}
 
-with open("oc_labels") as infile:
+with open("oc_labels", encoding="utf8") as infile:
   for line in infile.readlines():
     k, v = line.strip().split(sep="=", maxsplit=1)
     oc_labels[k] = v
@@ -51,6 +57,9 @@ def verbose_run(cmd, **kwargs):
   subprocess.run(cmd, **kwargs)
 
 # pull existing images if there
+
+print("[-] pull current images if they exist", file=sys.stderr)
+
 cmd = ["docker", "pull", f"{gh_image_id}:{version}"]
 verbose_run(cmd, check=False)
 
@@ -58,11 +67,17 @@ verbose_run(cmd, check=False)
 cmd = ["docker", "pull", f"{gh_image_id}:latest"]
 verbose_run(cmd, check=False)
 
+dockerfile="Dockerfile"
+
+print("[-] build image", file=sys.stderr)
+
 # main image
-cmd = f"""docker build --pull -f Dockerfile
+cmd = f"""docker buildx build --pull -f {dockerfile}
   --cache-from {gh_image_id}:{version}-builder
   --cache-from {gh_image_id}:{version}
+  --cache-from=type=registry,ref={gh_image_id}:buildcache
   --cache-from {gh_image_id}:latest
+  --cache-to=type=registry,ref={gh_image_id}:buildcache,mode=max --load
   -t {gh_image_id}:{version}""".split()
 
 # build up --label args
@@ -77,3 +92,4 @@ for k in ls_labels:
 cmd += ["."]
 
 verbose_run(cmd, check=True)
+

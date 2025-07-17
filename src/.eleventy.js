@@ -14,7 +14,6 @@ const fs          = require('fs');
 // TOCs
 const pluginTOC   = require('eleventy-plugin-toc')
 
-
 // nice formatting of dates and times
 const moment      = require('moment');
 moment.locale('en-GB');
@@ -243,6 +242,27 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.addShortcode("excerpt", (article) => extractExcerpt(article));
 
   ////
+  // formatting
+
+  // recall that the piped value is actually the _first_ arg.
+  eleventyConfig.addFilter("format", function(value, formatString) {
+    return util.format(formatString, value);
+  });
+
+  // ridiculous. what kind of format function doesn't support printf-style
+  // padding? ugh.
+  eleventyConfig.addFilter("leftpad", function(value, padChar, maxLength) {
+    // ^ recall that the piped value is actually the _first_ arg.
+    let str = String(value);
+    if (str.length >= maxLength) {
+      return str; // No padding needed
+    }
+    return padChar.repeat(maxLength - str.length) + str;
+  });
+
+
+
+  ////
   // debugging
 
   eleventyConfig.addFilter("stringify", function(value) {
@@ -395,8 +415,8 @@ module.exports = function(eleventyConfig) {
 
   /////
   // add RSS plugin
-  //let rssPlugin = require("@11ty/eleventy-plugin-rss");
-  //eleventyConfig.addPlugin(rssPlugin);
+  let rssPlugin = require("@11ty/eleventy-plugin-rss");
+  eleventyConfig.addPlugin(rssPlugin);
 
   ////
   // Allow YAML data files
