@@ -32,6 +32,8 @@ like to get an idea in advance of what will be covered.)
 
 #}
 
+{#
+
 ::: { .resource-list }
 
 - Week 1
@@ -48,9 +50,7 @@ like to get an idea in advance of what will be covered.)
 - Week 5
   - Lecture 5a -- graph-based testing {% resourceList "lect05b--graph", ["pdf", "md"] %}
   - Lecture 5b -- logic-based testing {% resourceList "lect05c--logic", ["pdf", "md"] %}
-{#
 - Lecture 5a -- model-based testing {% resourceList "lect05a--intro", ["pdf", "md"] %}
--#}
 - Week 6--7
   - Lecture 6a -- syntax-based testing {% resourceList "lect06a--syntax", ["pdf", "md"] %}
   - Lecture 6b -- random testing       {% resourceList "lect06b--random", ["pdf", "md"] %}
@@ -73,7 +73,7 @@ like to get an idea in advance of what will be covered.)
 
 [sample-pdf]: {{ "/lectures/sample.pdf" | url }}
 
-{#
+
 - Week 9
   - Lecture 8A, Risk                  {% resourceList "lect08a--risk", ["pdf", "md"] %}
   - Lecture 8A, Formal methods intro  {% resourceList "lect08b--formal", ["pdf", "md"] %}
@@ -119,7 +119,7 @@ the semester.
 
 ::: { .resource-list }
 
-
+{#
 - Week 2 -- testing intro
   - Lab worksheet {% resourceList "workshop01", ["html", "md"] %}
   - Source code ([zip]({{ "/workshops/workshop-01-code.zip" | url }}))
@@ -157,7 +157,7 @@ the semester.
   - Lab worksheet               {% resourceList "workshop10", ["html", "md"] %}
   - Sample worksheet solutions  {% resourceList "workshop10-solutions", ["html", "md"] %}
 
-{#
+
 #}
 
 
@@ -165,5 +165,5 @@ the semester.
 
 
 <!--
-  vim: tw=72
+  vim: tw=92
 -->

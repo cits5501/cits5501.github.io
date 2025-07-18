@@ -16,8 +16,7 @@ module.exports = function(configData) {
     {weekNum: 1,
     lectureTopic:
         `
-- Unit info
-- testing and QA concepts
+Introduction
         `,
     workshopTopic: "*No labs this week*",
     reading:
@@ -34,42 +33,39 @@ module.exports = function(configData) {
 //    workshopTopic: |
 //      [Testing in Python](/Workshops/workshop01.pdf)
     lectureTopic:
-      "Introduction to testing",
+      "Software quality plans",
     workshopTopic:
       `Introduction to testing
       `
       ,
     reading:
-      `- Pressman, ch 14 ("Component-level design"), ch 22 ("Software Testing Strategies"), ch 28 ("Formal modeling and verification")
-      - Horstmann, *Object-Oriented Design and Patterns* (2nd edn), ch 3 "Guidelines for Class Design" (extract available [here](http://www.unitreadings.library.uwa.edu.au/leganto/public/61UWA_INST/lists/11016332940002101?auth=SAML&section=11308340080002101))
-      - Barnes and Kölling, *Objects First With Java: A Practical Introduction Using BlueJ* (5th edn), ch 7 "Well-behaved objects" (extract available [here](http://www.unitreadings.library.uwa.edu.au/leganto/public/61UWA_INST/lists/11016332940002101?auth=SAML&section=11308340080002101))`,
+      `TBA`,
     assessmentDetails: ' ',
     },
 
 
     {weekNum: 3,
     lectureTopic:
-        "Test automation",
+        "Testing 1",
     workshopTopic:
         "Test case selection",
     reading:
       `- Amman & Offutt, ch 3
       - Pressman, ch 23 ("Testing conventional applications")`,
-    assessmentDetails: "[Week 3 quiz](https://cits5501.arranstewart.io/assessment/#week-3-quiz) (deadline Sun 11:59pm)"
+    assessmentDetails: ' ',
     },
 
 
     {weekNum: 4,
     lectureTopic:
       `
-- Input space partitioning
-- Graph testing
+Testing 2 (ISP, graph testing)
       `,
     workshopTopic: 'Test automation',
     reading:
       `- Amman & Offutt, chs 6-7
       - Pressman, ch 23 ("Testing conventional applications")`,
-    assessmentDetails: ' ',
+    assessmentDetails: "Online quiz 1"
     },
 
     {weekNum: 5,
@@ -83,36 +79,36 @@ module.exports = function(configData) {
 //      <a href="http://teaching.csse.uwa.edu.au/units/CITS5501/Workshops/workshop4Notes.pdf">Notes</a></span>
     lectureTopic:
       `
-- Logic testing
-- Mutation testing
-- Property-based testing
+Testing 3 (logic testing)
       `,
     workshopTopic:
       "Graph-based testing",
     reading:
       `- Amman & Offutt, chs 8--9
-      <!--
-      - TODO http://marvin.cs.uidaho.edu/Handouts/grammar.pdf
-      -->
-      - [Beginner's Guide to Fuzzing](https://fuzzing-project.org/tutorials.html)
-      - [Hypothesis Quick Start Guide](https://hypothesis.readthedocs.io/en/latest/quickstart.html)
-      - [QuickTheories README](https://github.com/quicktheories/QuickTheories)`,
+      `,
+      //<!--
+
+      //- TODO http://marvin.cs.uidaho.edu/Handouts/grammar.pdf
+      //-->
+      //- [Beginner's Guide to Fuzzing](https://fuzzing-project.org/tutorials.html)
+      //- [Hypothesis Quick Start Guide](https://hypothesis.readthedocs.io/en/latest/quickstart.html)
+      //- [QuickTheories README](https://github.com/quicktheories/QuickTheories)`,
       // <!-- wld be nice:
       //   Jorgensen, *Software Testing: A Craftsman's Approach*, 4th edn, ch 21
       // -->
-    assessmentDetails: ' ',
+    assessmentDetails: 'Project phase 1 published',
     },
 
     {weekNum: 6,
     lectureTopic:
-      "Quality assurance, software reviews, performance testing",
+      "Testing 4",
     workshopTopic:
       `Property-based testing and mutation testing
       `
       ,
     reading:
       `- Pressman, ch 20 ("Review techniques"), ch 22 ("Software testing strategies")`,
-    assessmentDetails: 'Test design exercise, due Sun 11:59 pm',
+    assessmentDetails: 'Project phase 1 due',
     },
 
     {weekNum: null,
@@ -126,66 +122,63 @@ module.exports = function(configData) {
 
     {weekNum: 7,
       lectureTopic:
-          'Systems and standards, risk management',
+          'Testing 5 (syntax testing)',
       workshopTopic:
         'Software reviews',
       reading:
         `- Amman & Offutt, chs 10-12
         - Pressman ch 19 ("Quality concepts"), ch 21 ("Software quality assurance")`,
-      assessmentDetails: '',
+      assessmentDetails: 'Online quiz 2',
     },
 
 
     {weekNum: 8,
       lectureTopic:
-        `Risk management\\
-        software metrics`,
+        `Reviews, integration`,
       workshopTopic:
         `Systems and standards`,
       reading:
-        `- Pressman, ch 30 ("product metrics"), ch 32 ("process and project metrics"), ch 35 ("Risk management")`,
+        `TBA`,
       assessmentDetails: ' ',
     },
 
     {weekNum: 9,
       lectureTopic:
-          'Formal methods & program verification',
+          'Risk management',
       workshopTopic:
         'Risk management and QA strategies',
       reading:
-        '- Pressman, ch 28 ("Formal modeling and verification")',
+        'TBA',
       assessmentDetails: 'TBA',
     },
 
     {weekNum: 10,
       lectureTopic:
-          'Formal specifications',
+          'Standards',
       workshopTopic:
           'Simple specifications',
       reading:
-        `- [Dafny language tutorial](https://dafny.org/dafny/OnlineTutorial/guide.html)
-        - Writing English answers using Moodle editors ([html](/workshops/moodle-editors.html)) ([md](/workshops/moodle-editors.md))
-        `,
+        `TBA`,
       assessmentDetails: ' ',
     },
 
     {weekNum: 11,
       lectureTopic:
-          'Specifications in Alloy',
+          'Formal methods',
       workshopTopic:
           'Specifications in Alloy',
       reading:
-        `- [Alloy Analyzer tutorial](http://alloytools.org/tutorials/online/)`,
-      assessmentDetails: '',
+        `TBA`,
+      assessmentDetails: 'Project phase 2 due',
     },
 
     {weekNum: 12,
       lectureTopic:
-          "revision",
+          "Revision",
       workshopTopic:
           "no workshop",
       reading: ' ',
-      assessmentDetails: "Project due",
+      assessmentDetails: "Project peer evaluations",
     },
 
   ]

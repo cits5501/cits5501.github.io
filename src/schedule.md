@@ -161,7 +161,7 @@
 
 {% set help_forum = siteinfo.help_forum %}
 {% set forum_url  = siteinfo.forum_url %}
-{% set help_forum_safe   = help_forum | extLink(forum_url) | safe %}
+{% set helpforum   = help_forum | extLink(forum_url) | safe %}
 
 {% set weeks   = schedule.weeks %}
 
@@ -282,11 +282,7 @@ concepts, it provides references to books and resources that may be useful.
   </td>
   <td>{{ stripIndent(week.workshopTopic) | mdBlock | safe }}</td>
   <td>{{ stripIndent(week.reading)  | mdBlock | safe }}</td>
-  <td>
-    {%- set weekStartDate = week.date %}
-    {%- set stuff = datesForWeek(weekStartDate, assessmentDates_) %}
-    {{- stripNewlines( stuff | mdBlock ) | safe  }}
-  </td>
+  <td>{{ stripIndent(week.assessmentDetails)  | mdBlock | safe }}</td>
 </tr>
 {%- endfor %}
 

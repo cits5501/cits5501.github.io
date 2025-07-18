@@ -54,11 +54,25 @@ customStyle: |
 
 ## Welcome to {{ siteinfo.unitcode }}  {{ siteinfo.unitname }}
 
-Welcome to the website for CITS5501/3501
+Welcome to the website for {{ siteinfo.unitcode }}
 in {{ siteinfo.year }}. Unit material (lecture slides and lab
 worksheets) for this unit will be **published on these pages, and not on
 the UWA Blackboard LMS**{ class="hi-pri" }; but refer to the {{ siteinfo.lms }}
 for recorded lectures and the unit outline.
+
+**Do not** rely on the [Unit Outline]({{outline_url}}) for exact
+assessment due dates: dates for assessments are listed on this site on the
+unit [**Schedule**](/schedule){ class="hi-pri" }
+(as well as on the [**Assessments page**](/assessment){ class="hi-pri" }),
+and any changes will be published here, as well as being announced
+on the unit [**discussion forum**]({{forum_url}}){ target="_blank" }.
+
+{#
+
+_x
+
+#}
+
 
 ## On this page:
 
@@ -140,28 +154,29 @@ This unit covers testing and quality assurance topics including:
 
 ## Unit Coordinator { #unit-coordinator }
 
-**{{ coordinator.name }}**
+[**{{ coordinator.name }}**][coordinator-dir]{ target="_blank" }
 
 ::: { class="inline-table-ctr" }
-
-<!--
-  UNIT COORDINATOR:
-
-  You can add further table rows by mimicking the form of the previous ones.
-
-  `-` at the start of a line starts a new row, and further `-` within
-  that creates cells.
-
--->
 
 ```{list-table}
 - - **Office**
   - <address>{{ coordinator.room }}</address>
 - - **Email**
   - <address>{% email_el_spannized coordinator.email %}</address>
+- - **Availability**
+  - I work half-time at UWA, and am normally only on campus on Tuesdays,
+    Thursdays, and Friday afternoon.
+- - **Consultation**
+  - <!--!<address>!-->Email {% email_el_spannized coordinator.email %} for an appointment,
+    or visit my office between 2--4pm Thursday. Students are also
+    welcome to speak to me after the lectures. At busy times of semester,
+    I may need one or two business days' notice to schedule an appointment.
+    <!--!</address>!-->
 ```
 
 :::
+
+[coordinator-dir]: {{ coordinator.directory }}
 
 
 ------
@@ -211,6 +226,14 @@ labs don't start until week 2)*{ class="hi-pri" }
     - No attendance is taken at timetabled lab sessions, and attendance is not compulsory.
 
     Model answers to exercises are normally provided the following week so you can gauge your progress.
+
+
+    In later weeks, there may be topics where it's useful to have group discussions or get
+    feedback from other students. Before we get to those labs, I'll assign groups and make
+    the group details available on the CSSE department's [Moodle]({{moodle_url}}){{blank}}.
+    Those groups can then arrange to meet online (e.g. via MS Teams) or in person at any
+    time and place convenient to them – there is no need to physically meet on campus
+    (unless you wish to).
 
     It's important to keep up with the lab material, so ensure you do some work on the lab materials every week (from week 2 onwards).
 
@@ -322,9 +345,29 @@ familiar with programming in at least one statically type-checked language
 (typically either C or Java). Please let the Unit Coordinator
 know as soon as possible if this is not the case.
 
-Advisable prior study for the unit is: familiarity with a
-statically-typed language (e.g. Java, C), and
+We assume you are familiar with
+
+- the difference between compile-time and run-time errors
+- protections provided by a type system
+- the difference between *interface* and *implementation* (abstraction,
+  or information hiding)
+
+Some revision information is available [here](/prior-study){ class="hi-pri" },
+but we do not teach the topics "from scratch" -- it's your responsibility to
+ensure you're familiar with them.
+
+Advisable prior study for the unit is:
 CITS3301/CITS4401 Software Requirements and Design.
+
+We assume you are already familiar with
+
+- what a software requirement is and how to express one
+- the difference between functional and non-functional requirements
+- what makes for good or bad software requirements
+
+If not, you will need to familiarize yourself with the basic concepts.
+We provide some brief revision materials [here](https://cits5501.arranstewart.io/prior-study),
+but it's your responsibility to make sure you know and understand the material.
 
 Some basic familiarity with testing frameworks for an OO language will be
 helpful, but are not required:
@@ -352,6 +395,26 @@ helpful, but are not required:
 -----
 
 
+{#
+
+## Feedback survey
+
+We want to ensure everyone enrolled in the unit is able to access
+lectures, lab, and a suitable development environment in which to
+complete exercises and assignments. We also want to find out what you're
+finding useful (or not) about the unit.
+
+So there is a survey for CITS2003/CITS4407 students available on the MS
+Teams page for the unit -- you can also reach it by clicking
+[**here**][survey-link]{ target="_blank" class="hi-pri" }. If you can
+assist us by completing the survey before the end of **week 4**{:
+class="hi-pri" :} (i.e., 5 pm Friday, 19 March) that would be greatly
+appreciated.
+
+[survey-link]: https://teams.microsoft.com/l/entity/81fef3a6-72aa-4648-a763-de824aeafb7d/_djb2_msteams_prefix_225387803?context=%7B%22subEntityId%22%3Anull%2C%22channelId%22%3A%2219%3A9a6540f366aa438c8fe185aadb8cb33a%40thread.tacv2%22%7D&groupId=8c2d8b6e-4af0-457b-8094-32e95c4d6107&tenantId=05894af0-cb28-46d8-8716-74cdb46e2226
+
+#}
+
 ## Expectations
 
 
@@ -372,8 +435,14 @@ conduct.
 It is expected that you regularly (at least twice a week) check
 the [**discussion forum**]({{forum_url}}){ target="_blank" }
 for the unit
-({{help_forum}})
-for announcements.
+([**{{help_forum}}**]({{forum_url}}){ class="hi-pri" target="_blank" })
+for announcements. {#
+  x**
+#}
+(You can also [set up an email subscription][subscription] to the discussion forum
+as follows -- see the [FAQ page][subscription] for details.)
+
+[subscription]: /faq/#forum-subscriptions
 
 It is expected that you keep [reliable backups][backups] of your work,
 as computer and/or IT failures are [not grounds][no-it-failures] for special

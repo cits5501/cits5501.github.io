@@ -23,10 +23,10 @@ customStyle: |
 {% set year         = siteinfo.year %}
 {% set help_forum   = siteinfo.help_forum %}
 {% set forum_url    = siteinfo.forum_url %}
-{% set help5501     = help_forum | extLink(forum_url) | safe %}
+{% set helpforum     = help_forum | extLink(forum_url) | safe %}
 {% set outline_url  = siteinfo.unit_outline_url %}
 {% set moodle_url   = siteinfo.moodle_url %}
-{% set quiz_percent  = siteinfo.assessments["week4_quiz"]["marksPercent"] %}
+{% set quiz_percent  = siteinfo.assessments["quiz1"]["marksPercent"] %}
 
 {% set blank  = "{ target=\"_blank\" }" %}
 
@@ -273,23 +273,6 @@ the labs provide the best opportunity for getting feedback and
 assistance from teaching staff, as a lab [facilitator](/#facilitators)
 is available at each lab. It's therefore strongly recommended that you do attend.
 
-### Are there online labs? { #are-there-online-labs }
-
-There are currently no online labs:
-all labs will be delivered face-to-face.
-
-In the event of Covid 19 restrictions, lectures and labs will be
-conducted completely online (accessible via MS Teams), and any student
-oral presentations will be done via MS Teams.
-
-### Are online labs recorded?
-
-At present, there [are no online labs](#are-there-online-labs), so the
-question is moot. In the event that we do hold online labs, by default
-they are **not** recorded; the aim is that all lab participants should
-feel free to ask questions and speak freely, which they may not do if
-they are being recorded. If all participants in an online lab have
-agreed beforehand, then the lab facilitator may record the lab.
 
 ### Can I attend lab sessions other than the one I'm allocated to? { #attending-labs }
 
@@ -297,12 +280,6 @@ Yes -- as long as there is room available for you, you are welcome to attend oth
 lab sessions. See [under "labs"][labs], on the site home page, for details.
 
 [labs]: /#labs
-
-### Can I email questions to the lab facilitators?
-
-No -- facilitators are not paid to provide student instruction outside
-of the timetabled labs.
-
 
 
 ----
@@ -325,19 +302,9 @@ box labelled "Unit search", and then click "Show timetable".)
 
 ## Assessments
 
-### When are the assessments due?
-
-A list of all assessments (and their due dates) is given on the
-[**Assessments page**](/assessment){ class="hi-pri" }, and due dates are
-also shown on the [**Schedule**](/schedule){ class="hi-pri" }.
-
-(The content for both is generated from a
-[JavaScript source file](https://github.com/{{ siteinfo.repository }}/blob/master/src/_data/siteinfo.js)
-contained in the GitHub repository.)
-
 ### Do any of the assessments require (or permit) group work?
 
-No -- all assessments are to be completed individually.
+Yes -- the project is a group project. All other assessments are to be completed individually.
 See also [Academic conduct and source citation](#academic-conduct-source-citation).
 
 ### How do I submit an assessment? { #assessment-submission }
@@ -358,64 +325,7 @@ name. (All other details are optional.)
 Visit <https://quiz.jinhong.org> and sign up
 using your UWA email address.
 
-Note that you need to register on Moodle **before the week of the [first assessment](/assessment/)** – only enrolled CITS5501
-students are permitted to take the assessments, so early in that week, any unenrolled
-Moodle participants will be removed, and self-registration will be locked.
-
-### Can I get an extension on the deadline for an assessment? { #extensions }
-
-For **quizzes and tests**{ class="hi-pri" }:
-
-: No, in general it's not possible to
-  get an extension. Even if conducted online, and even if generous
-  time-limits are permitted, these should still be treated much like face-to-face tests:
-  you need to complete them at the specified date and time.
-
-  If you're
-  unable to complete a quiz or test due to illness or for some other valid
-  reason, you should apply for
-  [special consideration][special-consideration] (see the UWA [page on
-  special consideration][special-consideration] for details).
-  If you are granted special consideration, then you will be exempted
-  from that assessment, and
-  the remaining components of the unit will be re-weighted to make up
-  100%. For instance, if you are unable to complete the week 4 quiz
-  (worth {{ quiz_percent }}%), then the weights of
-  all the *other* components will be multiplied by $\frac{100.0}{100.0 - {{ quiz_percent }} }$.
-
-  If you are granted special consideration, it's helpful if you can email
-  the [Unit Coordinator](/#unit-coordinator) to let them know -- Unit
-  Coordinators aren't automatically notified when special consideration
-  is granted.
-
-  For the purpose of "reasonable adjustments" made for students who
-  require them: quizzes, tests and exams count as "timed assessments"
-  (although the time limit is typically generous).
-  If you have an Academic Adjust Plan in place from UniAccess (UAAP), you may be
-  entitled to extra time for online assessments -- email the
-  [Unit Coordinator](/#unit-coordinator) in accordance with your UAAP to
-  let them know.
-
-  (See also: ["I have a UniAccess accommodation plan, do I need to let
-  you know about this?"](#accommodations).)
-
-
-For **projects**{ class="hi-pri" }:
-
-: If you need an extension due to illness or for some other valid reason,
-  you should apply for
-  [special consideration][special-consideration] (see the UWA [page on
-  special consideration][special-consideration] for details).
-
-  If you are granted special consideration, it's helpful if you can email
-  the [Unit Coordinator](/#unit-coordinator) to let them know -- Unit
-  Coordinators aren't automatically informed when special consideration is granted.
-
-  It's also possible to submit your assessment late, subject to the
-  standard [penalties for late submission][late-submission].
-
-[special-consideration]: https://www.uwa.edu.au/students/My-course/Exams-assessments-and-results/Special-consideration
-[late-submission]: https://ipoint.uwa.edu.au/app/answers/detail/a_id/2711/~/consequences-for-late-assignment-submission
+You should register on Moodle as early as possible so that your Moodle user ID properly reflects the project group you are in, and well before the week of the [first assessment](/assessment/).
 
 
 ### What is the marking rubric for the assessment items? { #marking-rubric }
@@ -613,6 +523,59 @@ that you'll be submitting late, but staff understand that this is not
 always feasible. Note that adjustments to submission deadlines do not
 apply to quizzes, tests or exams for {{ siteinfo.unitcode }}.
 
+## Group assessments
+
+### Are project groups self-selected or allocated? Why?
+
+Project groups are randomly allocated. This method simulates real-world working
+environments where you'll often collaborate with colleagues and clients you haven't chosen.
+Random allocation also promotes fairness by ensuring that students who might struggle to form a group independently are included.
+Our aim is to foster diverse and inclusive teams, as working with diverse perspectives tends
+to lead to more nuanced understanding of the unit material.
+
+{#
+
+on group assessment, see
+<https://teaching.cornell.edu/teaching-resources/active-collaborative-learning/collaborative-learning/how-evaluate-group-work>
+
+#}
+
+When students choose their own groups, they often select friends or close acquaintances.
+While this can create a [comfortable working environment][groupthink],
+learning to communicate effectively with different working styles is crucial in real-world
+teams,
+and research shows that personal growth is best fostered when students go [outside their comfort zone][comfort].
+
+{#
+comment:
+also - some evidence suggests students have more creative ideas
+when groups _don't_ self-select.
+https://pubsonline.informs.org/doi/10.1287/orsc.2021.1520
+#}
+
+[groupthink]: https://www.bbcdigital.com.au/breaking-the-consensus-trap-how-to-avoid-groupthink-in-the-workplace/
+[comfort]: https://news.cornell.edu/stories/2022/03/leaving-your-comfort-zone-inspires-motivation-growth
+
+### My team and I are unable to find a time when we can all meet (face-to-face or online) – what can we do?
+
+If your team is struggling to find a suitable meeting time, there is an opportunity to swap
+team members during the first two weeks after groups are announced (and before the project
+specification is released). You can post on the
+forum explaining your reason for wanting to swap, or, if your reasons are more personal and
+should remain private, you can contact the Unit Coordinator directly.
+Normally, swaps must be agreed upon by all parties involved.
+
+### Is individual contribution taken into account?
+
+Yes, individual contributions are taken into account. Students are asked to quantify the
+contributions made by each team member, including themselves. A Contribution Factor (ranging
+from 0.0 to 1.2) is calculated based on these assessments and is used to adjust the final
+project grade accordingly (with a maximum possible final grade of 100%).
+It is highly recommended that students keep a spreadsheet (updated weekly) tracking each
+member's allocated tasks and contributions, and/or use a private GitHub repository to track version control.
+While these records are not submitted with the project, the Unit Coordinator may request to see
+them if any discrepancies arise during the grading process.
+
 
 ## Academic conduct and source citation { #academic-conduct-source-citation }
 
@@ -631,12 +594,12 @@ answers.
 
 ### What are the expectations regarding citation of sources/academic conduct? { #source-citation-conduct-expectations }
 
-You **must**{ class="hi-pri" } act in accordance with
+You must act in accordance with
 UWA's [academic conduct policy][acad-policy].
 See the STUDYSmarter team's [Guide to Avoiding Academic
 Misconduct][misconduct-guide]{{blank}} (PDF) for additional details.
 
-In particular, you **must not**{ class="hi-pri" } plagiarize any
+In particular, you must not plagiarize any
 work. Plagiarism is the unattributed use of
 someone else's words, creations, ideas or
 arguments as one's own. At UWA, it is extended to include paraphrasing
@@ -673,7 +636,7 @@ The penalties for misconduct in an exam are *very* severe. So don't do
 it.
 
 [acad-policy]: https://www.uwa.edu.au/students/Getting-started/Student-conduct
-[misconduct-guide]: https://www.student.uwa.edu.au/__data/assets/pdf_file/0007/2748139/R3-Avoiding-Academic-Misconduct.pdf
+[misconduct-guide]: https://www.uwa.edu.au/students/-/media/project/uwa/uwa/students/docs/studysmarter/r3-avoiding-academic-misconduct.pdf
 
 ### What referencing/citation style should I use? { #citation-style }
 
@@ -708,9 +671,9 @@ the workshops entitled "Critical thinking & academic culture" and
 
 [academic-skills-workshops]: https://www.uwa.edu.au/students/Support-services/Academic-support#workshops
 
-### Can I use ChatGPT, or other AI tools, when completing an assessment?
+## Can I use ChatGPT, or other AI tools, when completing an assessment?
 
-No, you are not permitted to use AI tools when completing an assessment. Here is a
+In general, you are not permitted to use AI tools to complete an assessment, unless the assessment specifically provides for that. Here is a
 [description of the University's policy][ai-policy] on the use of AI tools:
 
 [ai-policy]: https://ipoint.uwa.edu.au/app/answers/detail/a_id/3432/~/using-chatgpt-and-other-ai-tools-in-your-assessments
@@ -730,7 +693,7 @@ feedback on your own competencies and abilities. In the final exam for the unit,
 *not* have access to AI tools, so you will have to know how to write code or English answers yourself – using AI
 tools for previous assessments may result in your having a lack of practice at doing so.
 
-### Wouldn't the use of ChatGPT or similar AI tools help ensure the accuracy of code or English answers?
+## Wouldn't the use of ChatGPT or similar AI tools help ensure the accuracy of code or English answers?
 
 No, it would not. It's true that students sometimes mistakenly think that using ChatGPT or
 similar AI tools can help "ensure accuracy" in their code or English answers. But that idea
@@ -783,7 +746,7 @@ Online quizzes, tests and exams **must**{ class="hi-pri" } be submitted by the
 due date and time -- this will be enforced strictly (just as it is for
 face-to-face tests and exams), and late submissions will receive a mark
 of 0. It is your responsibility to ensure you submit by the due date and
-time -- even if you think a website such as Moodle or the LMS might
+time -- even if you think a website such as Moodle or the Blackboard LMS might
 permit you to make a late submission.
 
 ### What if I think there's a mistake in a test, quiz or exam question? { #test-errors }
@@ -799,7 +762,7 @@ is running -- see ["Test conduct"](#test-conduct).
 
 ### Are the quizzes/tests/exams open book? (Test conduct) { #test-conduct }
 
-Unless specified otherwise, all quizzes and tests (but **not** the final
+Unless specified otherwise, all quizzes (but **not** the final
 exam) are "take-home"
 and open-book. You **may**{ class="hi-pri" } ***look at***{ class="hi-pri" }
 any book,
@@ -925,17 +888,17 @@ You should email the [unit coordinator](/#unit-coordinator). Before emailing, ma
 ### How are problems with the project specification resolved?
 
 An initial specification for the unit project will be published via this
-website, and an announcement of this made on the discussion
+website, and an announcement of this made on the {{helpforum}} discussion
 forum.
 
 Students should aim to read through the specification as early as
 possible, and clarify any ambiguities, apparent contradictions, or
-missing information by posting in the discussion
+missing information by posting in the {{helpforum}} discussion
 forum.
 
 After initial clarifications have been made -- usually after about a week -- a revised
 specification will be released, consolidating any changes or answers
-made by the unit coordinator in the discussion
+made by the unit coordinator in the {{helpforum}} discussion
 forum.
 
 After a revised specification has been published:
@@ -944,7 +907,7 @@ After a revised specification has been published:
 
 - If there is anything in the specification that appears to be contradictory,
   ambiguous, or under-determined, then students should post to the
-  forum to clarify their interpretation of the
+  {{helpforum}} forum to clarify their interpretation of the
   specification.<span class="br"></span>
   The unit coordinator may clarify the specification further, or they may decide
   that the specification is now sufficiently clear, and that it's up to
@@ -952,7 +915,7 @@ After a revised specification has been published:
   and ability.
 - Unless serious problems with the specification are identified, no further
   revision of the specification will be published -- students should instead
-  make sure to check the forum for subsequent corrections or
+  make sure to check the {{helpforum}} forum for subsequent corrections or
   clarifications (if any).
 
 </div>
@@ -973,8 +936,7 @@ The project specification will explain how this is to be submitted.
 Usually, the written component will be submitted as either:
 
 - a PDF (or at your option, a [Markdown][markdown] file), or
-- a text input field, available on the Blackboard {{ siteinfo.lms }} or
-  {{ siteinfo.moodle }}
+- a text input field, available on {{ siteinfo.moodle }}
 
 [markdown]: https://en.wikipedia.org/wiki/Markdown
 
@@ -1038,29 +1000,6 @@ Yes -- see the [Assessment](/assessment/) page for more details.
 
 [past-papers]: /assessment/#past-exam-papers
 
-### Are solutions to past exams available? { #past-exams-solutions }
-
-No -- see the [Assessment](/assessment/) page.
-The main reason for this is that providing students with exam
-solutions usually does *not* lead to them studying effectively for the exam.
-Studying effectively requires [active
-learning](#how-can-I-do-well-in-CITS5501),
-but students who have access to past exam solutions often simply
-passively read those solutions and believe they have studied
-effectively.
-
-A better approach is to attempt the questions, under
-close-to-exam-conditions (for instance, timing yourself), and to compare
-your answers with those of a fellow student. If you've done so and
-still have queries, you can also [make an appointment](/#unit-coordinator)
-with me to discuss your answers and remaining questions.
-
-Be sure to start your revision and formulate your questions *early*!
-If you try to make an appointment to discuss the exam less than
-three working days before the exam, I may be either
-not at UWA or busy with exam
-preparations myself, and unable to schedule an appointment
-for you.
 
 
 -----
@@ -1075,7 +1014,7 @@ by the Internet Archive's [Wayback Machine](https://archive.org/web/) at
 You can use the Wayback Machine interface to view previous versions
 of the lectures and labs.
 
-The source code for the unit website is also versioned on GitHub
+The source code for this website is also versioned on GitHub
 at <https://github.com/{{ siteinfo.repository }}/>, so you can use
 GitHub's interface to look through older versions of the material as
 well. The directories you want are probably `assets/lectures` and
@@ -1104,7 +1043,7 @@ In addition
 
 ------
 
-## Discussion forum (help5501) { #help5501 }
+## Discussion forum { #help-forum }
 
 ### Can I post questions about the unit content to the discussion forum? { #posting-questions }
 
@@ -1125,6 +1064,8 @@ Note that any posts on the discussion forum need to comply with UWA's
 - not post your solutions to an assessment (as this can breach the
   policy against collusion).
 
+<!--
+
 ### How do I subscribe to posts from the discussion forum? { #forum-subscriptions }
 
 You can set up an email subscription to the discussion forum
@@ -1140,6 +1081,8 @@ as follows:
 
 You should now receive regular updates by email when new posts are
 made on the forum.
+
+-->
 
 ------
 

@@ -102,8 +102,7 @@ customStyle: |
 ### What are the assessment items, when are they due, and what are they worth?
 
 The assessment for {{ siteinfo.unitcode }} consists of
-an online quiz, a mid-semester take-home test, a project,
-and a final examination.
+two online quizzes, a group project, and a final examination.
 
 
 ::: { class="assessment-table-ctr" }
@@ -122,15 +121,7 @@ and a final examination.
 
 :::
 
-Assessments will be due at **11:59 pm**{ class="hi-pri" } on
-<span
- class="tooltip"
- data-tooltip-text="Then if submission fails, there's a weekday left to contact the UC and fix it.">
-**Thursdays**{ class="hi-pri" }</span>.
-Any changes to the due date will be announced in the
-[**{{help_forum}}**]({{forum_url}}){ class="hi-pri" target="_blank" }
-help forum,
-as well being noted on this website.
+
 
 <!--
 
@@ -138,14 +129,6 @@ _x
 
 -->
 
-**Do not**{ class="hi-pri" } rely on the [Unit Outline]({{outline_url}})
-for exact
-assessment due dates -- the software used to generate the unit outlines
-is known to be buggy, and may insert incorrect due dates.
-Instead, use the assessment dates published here (also available from
-the [**Schedule**](/schedule){ class="hi-pri" }).
-Any changes will be published here, as well as being announced
-on the unit [**discussion forum**]({{forum_url}}){ target="_blank" }.
 
 <!--
 
@@ -153,27 +136,10 @@ x_
 
 -->
 
-Online quizzes, tests and exams **must**{ class="hi-pri" } be submitted by the
-due date and time – this will be enforced strictly (just as it is for
-face-to-face tests and exams), and late submissions will receive a mark
-of 0. It is your responsibility to ensure you submit by the due date and
-time -- even if you think a website such as Moodle will not stop you
-from making a late submission.
-
-[No extensions are permitted](/faq#extensions){ class="hi-pri" }
-for quizzes and tests: they must be
-done on the dates specified (just as for face-to-face tests and exams).
-For more details, see [**"Can I get an extension on the deadline for an
-assessment?"**](/faq#extensions){ class="hi-pri" } in the unit FAQ.
 
 Your submitted work or answers for any assessment item
 [may be submitted](/faq#plagiarism-checks) to plagiarism detectors
 such as `JPlag`, `moss` or `turnitin` to detect plagiarism.
-
-The quizzes, tests and exam do contain theoretical questions, but are
-also intended to assess *practical* skills and knowledge.
-They're not completed on paper, but instead on your own computer,
-and they may ask you to write compileable and executable code.
 
 ### Common questions about assessments { #assessment-faqs # }
 
@@ -191,10 +157,15 @@ These include the following:
 - [Are the quizzes/tests/exams open book?](/faq#test-conduct)
 
 
+
 ## Assessment item details
 
+Additional details of assessments will be published here throughout the course
+of the semester.
 
-### Week 4 quiz
+{# 
+
+### Quiz 1
 
 - This quiz will be available on {{ siteinfo.moodle }}.
 
@@ -238,7 +209,7 @@ These include the following:
 !-->
 
 
-### Mid-semester test { #mid-sem-test }
+### Quiz 2
 
 The week 7 mid-semester test will be made available
 in week 7 on
@@ -267,50 +238,7 @@ to (orally)
 [explain their thought process]{ class="hi-pri" } in coming up with their
 answers.
 
-The following project resources are available for you:
 
-::: { .resource-list }
-
-- The project description [(PDF)][proj-pdf] [(markdown)][proj-md] (**Revised 9 Oct 2024, 14 Oct 2024**)
-- [Source code for the project][proj-code]
-- A testing area on {{ siteinfo.moodle }}, where you can run several (very basic)
-  tests on your submitted project answers. Note that passing these tests is no guarantee of
-  a good mark -- they verify only that your project meets minimum standards for
-  a submission.
-- An EBNF parsing command-line tool for Linux:
-  <a href="{{ "/project/ebnf-parse.tgz" | url }}" onclick="ga('send', 'event', 'download', 'download_clicked', 'ebnf-parse_tgz');">ebnf-parse.tgz</a> \
-  This should run on almost any x86-64 Linux system. Un-tar the executable
-  and run `./ebnf-parse -h` for options. A `man` page (in `man` and Markdown
-  formats) explaining the use is contained in the tar file.
-
-:::
-
-[proj-md]: {{ "/project/project-spec.md" | url }}
-[proj-pdf]: {{ "/project/project-spec.pdf" | url }}
-[proj-code]: {{ "/project/system-code.zip" | url }}
-[proj-tgz]: {{ "/project/ebnf-parse.tgz" | url }}
-
-
-{#
-
-Please note that [revisions were
-made]{ style="color: #B72240;" }  to the project on 9th May
-and 12th May -- make sure you're working from the most up-to-date
-version. Announcements about revisions were posted in the
-[Help5501][help5501] forum.
-
-[help5501]: {{ forum_url }}
-
-### Model solutions
-
-**Update**{ style="color: #B72240;" }: Sample solutions are available
-[**here**][project-solutions]{: class="hi-pri" :} (PDF file).
-
-[project-solutions]: {{ "/assignments/project-solutions.pdf" | url }}
-
-[csmarks]: https://secure.csse.uwa.edu.au/run/csmarks
-
-#}
 
 ### Exam
 
@@ -320,8 +248,7 @@ the UWA examination period. For the exact time and venue, consult
 your exam timetable using StudentConnect.
 
 The exam is *not* open book.
-You are permitted to bring into the exam one A4, double-sided page of notes (handwritten or
-typed).
+You are permitted to bring into the exam one A4, double-sided page of notes (handwritten or typed).
 
 
 #### Past exam papers
@@ -336,44 +263,12 @@ past exams as being available via OneSearch when "CITS5501" is entered as a quer
 content of the unit has changed significantly since they were released, and they are no
 longer a good guide to what you can expect.)
 
-The best use of past exams is for your practice purposes -- if possible, try writing answers
-and timing how long you take. I do *not* publish answers to past exams for two reasons:
-
-- For many of the questions, there *is* no one correct answer.
-  The exam questions often require you to analyse a scenario and argue
-  in favour of a particular decision or test design. Questions
-  like this are assessed on your ability to identify relevant
-  factors and justify a decision/conclusion, and not on whether you
-  have mentioned particular things in your answer.
-- Providing an "answer" often encourages students to
-  think that if they have read through the answers and understood it,
-  they have revised well for the exam. This is not correct!
-  You need to actually go through the process of writing
-  an answer yourself.
-
-However, if you have attempted a previous year's exam, I encourage you to discuss your
-answers with me in order to get feedback.
-See ["Are past exams available?"](/faq#past-exams-availability) in the unit FAQ.
+The best use of past exams is for your practice purposes -- if possible, try writing answers,
+ timing how long you take, and working with a study partner to compare answers.
 
 [onesearch]: https://onesearch.library.uwa.edu.au/
 
-#### Peer review exercise
-
-You might like to try the following exercise (taken from the 2022 version of the course)
-as exam practice with other students. First, read through the rubric, so you know how
-questions like this are assessed. Then, attempt to answer the questions under exam
-conditions. Finally, swap answers with other students, read through the solutions, and
-assign a mark and comments. This exercise should provide helpful insight into what sort
-of answers can be expected to achieve low, high or moderate marks in exam questions.
-
-- [Exercise questions][peer-questions] (PDF)
-- [Exercise rubric][peer-rubric] (PDF)
-- [Exercise solutions][peer-solutions] (PDF)
-
-
-[peer-questions]: {{ "/exam/exercise.pdf" | url }}
-[peer-rubric]: {{ "/exam/exercise-rubric.pdf" | url }}
-[peer-solutions]: {{ "/exam/exercise-solutions.pdf" | url }}
+#}
 
 <!--
   vim: tw=92
