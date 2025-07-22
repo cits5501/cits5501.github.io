@@ -49,7 +49,6 @@ customStyle: |
 
 {% set help_forum = siteinfo.help_forum %}
 {% set forum_url  = siteinfo.forum_url %}
-{% set help5501   = help_forum | extLink(forum_url) | safe %}
 {% set outline_url  = siteinfo.unit_outline_url %}
 
 ## Welcome to {{ siteinfo.unitcode }}  {{ siteinfo.unitname }}

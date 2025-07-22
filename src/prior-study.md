@@ -102,11 +102,11 @@ see ~/cits5501/third-party-slides/blekinge-inst-daniel-mendez/slides-downloaded
 
 for slides downloaded from figshare
 
-#}
 
 Requirements engineering textbooks
 
 :   ;
+#}
 
 
 <!--

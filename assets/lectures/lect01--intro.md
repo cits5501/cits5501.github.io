@@ -2,7 +2,7 @@
 title: |
   CITS5501	Software Testing and Quality Assurance\
   Introduction
-author: "Unit coordinator: Arran Stewart"
+author: "Lecturer: Arran Stewart"
 ---
 
 # Introduction
@@ -138,49 +138,38 @@ testing and quality assurance plan.
 {
 \renewcommand{\arraystretch}{1.2}
 \begin{tabular}{@{}l>{\raggedright\arraybackslash}p{7cm}@{}}
-Unit Coordinator: & Arran Stewart \\
+Unit Coordinator: & Rachel Cardell-Oliver \\
 Email:            & cits5501-pmc@uwa.edu.au \\
-Office:           & Room G.08 CSSE Building \\
-Consultation:     & Between 2--4pm Thursdays, or email for an appointment.\\
-Unit website:     & accessible via GitHub, at \url{https://github.com/cits5501/}
+Office:           & Level 1 CSSE Building \\
 \end{tabular}
 }
 \end{center}
 ```
 
-### Announcements
+### Lecture slides, lab material, etc.
+
+Unit content will largely be available via the unit website:
+
+&nbsp; <https://cits5501.arranstewart.io/>
+
+### Announcements and discussion
+
+A forum for announcements and discussion is hosted on the CSSE **Moodle** server, at <https://quiz.jinhong.org>.
+
+You should
+
+* Sign up with your UWA email address at the Moodle server
+* Then self-enrol into the CIT5501 unit section
 
 
+&nbsp;
 
-[help5501]: https://secure.csse.uwa.edu.au/run/help5501
-
-```{=latex}
-\begin{columns}[t]
-\begin{column}{0.45\textwidth}
-```
-
-\small
-
-- Announcements will be made in lectures, and on the unit
-  help forum, [`help5501`][help5501].
-- It's important to check the forum regularly -- at least twice a week.
-- If you log in and visit the forum site, you can set it
-  to alert you via email when new postings are made.
-
-```{=latex}
-\end{column}
-\begin{column}{0.55\textwidth}
-```
+- Announcements will be made in lectures, and on the Moodle announcements and discussion forum.
+- It's important to check the forum regularly -- at least twice a week is advisable.
+- By adjusting your Moodle preferences, you can set the forum
+  to alert you either every time a new post is made, or with a digest of new posts sent at most once per day.
 
 
-`\begin{center}`{=latex}
-![](lect01-images/help5501.png){ width=100% }
-`\end{center}`{=latex}
-
-```{=latex}
-\end{column}
-\end{columns}
-```
 
 
 
@@ -208,7 +197,7 @@ Labs:
 - If you encounter any issues or have questions, feel free to drop in to one of
   the lab sessions to ask them (on a first-come, first-served basis)
 - All timetabled lab sessions can be viewed via the UWA Timetable site --
-  see <https://cits5501.github.io/#weekly-activities>
+  see <https://cits5501.arranstewart.io/#weekly-activities>
 
 [moodle]: https://quiz.jinhong.org
 
@@ -223,25 +212,28 @@ contact hours (3 hours per week) for the unit, the remainder of your
 time should be spent reading the recommended reading, attempting
 exercises and working on project tasks.
 
-### Textbooks
+### Textbooks { .fragile }
 
 See the unit website for details of the textbooks
 you will need access to:
 
-&nbsp; &nbsp; <https://cits5501.github.io/schedule/#recommended-readings>
+`\begin{small}`{=latex}
 
-(Or just go to <https://cits5501.github.io/faq> and search for "textbook".)
+&nbsp; <https://cits5501.arranstewart.io/schedule/#recommended-readings>
+
+`\end{small}`{=latex}
+
+(Or just go to <https://cits5501.arranstewart.io/faq> and search for "textbook".)
 
 ### Assessment
 
-The assessment for CITS5501 consists of an online quiz,
-a mid-semester test, a project, and a final examination:
+The assessment for CITS5501 consists of two online quizzes,
+a group project, and a final examination:
 see the Assessment page at
 
-- <https://cits5501.github.io/assessment/>
+- <https://cits5501.arranstewart.io/assessment/>
 
-All assessments are to be done individually -- there is no group or
-pair work -- and are submitted using [Moodle][moodle].
+All assessments are submitted using [Moodle][moodle].
 
 
 
@@ -255,7 +247,7 @@ pair work -- and are submitted using [Moodle][moodle].
 
 - The current unit schedule is available on the unit website:
 
-  &nbsp; &nbsp; <https://cits5501.github.io/schedule/>
+  &nbsp; &nbsp; <https://cits5501.arranstewart.io/schedule/>
 
 - The schedule gives recommended readings for each topic: either
   chapters from the recommended texts, or extracts. Your understanding
@@ -268,7 +260,18 @@ The prerequisites for this unit are 12 points of programming units.
 At UWA, that should mean you're familiar with at least one
 statically type-checked programming language (usually Java or C).
 
-If you aren't -- let me know ASAP.
+If you aren't -- let the Unit Coordinator know ASAP.
+
+We assume you are familiar with
+
+- the difference between compile-time and run-time errors
+- protections provided by a type system
+- the difference between *interface* and *implementation* (abstraction,
+  or information hiding)
+
+If not, you will need to familiarize yourself with the basic concepts.
+We provide some brief revision materials [here](https://cits5501.arranstewart.io/prior-study),
+but it's your responsibility to make sure you know and understand the material.
 
 ### Programming languages
 
@@ -278,29 +281,31 @@ A *detailed* knowledge of Java is not essential -- if you have
 a good knowledge of C, instead, it should be straightforward
 to pick up the parts of the language you need.
 
-I will review some of the basics of the language in class; you
+We will review some of the basics of the language in class; you
 should make sure you have access to a textbook on Java
 (almost any will do) to bring yourself up to speed.
 
 ### Programming languages
 
-At the end of semester, we'll spend a week or two using
-a language created by Microsoft Research for proving
-program correctness, [Dafny][dafny].
+At the end of semester, we may look at languages used for
+formal methods, but you'll be provided with any information
+you need on them.
 
-[dafny]: https://rise4fun.com/Dafny/tutorial/guide
+### Advisable prior study -- requirements and design
 
-It's more similar to the `\texttt{C\#}`{=latex} language than Java, but
-shouldn't be hard to pick up.
+Advisable prior study for this unit is:
 
-### Programming languages
+- CITS3301/CITS4401 Software Requirements and Design
 
-We'll also be using a modelling language called [*Alloy*][alloy]
-(again, towards the end of semester).
+We assume you are already familiar with
 
-[alloy]: http://alloytools.org/tutorials/online/
+- what a software requirement is and how to express one
+- the difference between functional and non-functional requirements
+- what makes for good or bad software requirements
 
-It too has a syntax somewhat similar to Java.
+If not, you will need to familiarize yourself with the basic concepts.
+We provide some brief revision materials [here](https://cits5501.arranstewart.io/prior-study),
+but it's your responsibility to make sure you know and understand the material.
 
 
 # Software quality
@@ -386,7 +391,8 @@ properties}.
 - They describe not what a system (or program, or module, or other unit of software)
   does, in terms of inputs and outputs --   
   (i.e., its behaviour, when modelled \alert{as a function})  
-- -- but rather, the manner in which it does it (securely, portably, etc.)
+- Rather, they describe constraints on, or the manner in which, the system provides some
+  service (securely, portably, etc.)
 
 ### Types of testing
 
@@ -599,6 +605,32 @@ are correct?
 - The purpose of testing is not to prove anything specific, but to reduce the risk of using the software
 - Testing is a mental discipline that helps all IT professionals develop higher quality software
 
+# Java basics
+
+### Java self-study
+
+For those students who need it, we briefly mention some distinctive aspects of the Java
+language.
+
+A recommended textbook is listed on the CITS5501 website
+[here](https://cits5501.arranstewart.io/schedule/#java-resources), together with a revision PDF
+on the Java language.
+
+### Java features
+
+Memory safety
+
+:   Unlike C, but like Python, Java is [memory safe][memsafe]: the language runtime
+    protects you from ever accessing uninitialized or invalid memory, or accessing memory
+    outside the bounds of an array.
+
+Statically type-checked
+
+:   Java is [statically type-checked][static-types].
+
+
+[memsafe]: https://en.wikipedia.org/wiki/Memory_safety 
+[static-types]: https://en.wikipedia.org/w/index.php?title=Type_system&useskin=vector#Static_type_checking 
 
 <!--
   vim: tw=90 :
