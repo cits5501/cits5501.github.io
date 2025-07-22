@@ -2,7 +2,7 @@
 title: |
   CITS5501	Software Testing and Quality Assurance\
   Introduction to testing; unit testing
-author: "Unit coordinator: Arran Stewart"
+author: "Lecturer: Arran Stewart"
 ---
 
 ### Highlights
@@ -306,6 +306,97 @@ We can also classify them by the purpose of the test, or when in the software de
     instance, in
     Java -- it is usually good practice to document those as well.)
 
+# Requirements
+
+### Concept revision
+
+Recommended prior study for this unit is CITS4401 Software Requirements and Design,
+from which you should already be familiar with different ways of expressing
+clients' expectations of a system, and the distinction between *functional*
+and *non-functional* requirements.
+
+By way of revision, we look a little at these concepts now.
+
+For more information, it's recommended you review the Pressman text.
+
+### Requirements
+
+For our purposes, we will assume that requirements are statements in natural language which describe the services a
+system (or some part of it) provides, and any constraints it should satisfy.
+
+If we don't have requirements, then ultimately it is not possible to write tests, because tests are intended
+to tell us whether the subject under test satisfies required behaviour.
+
+### Functional vs non-functional requirements
+
+Functional requirements:
+
+-   Statements of services the system should provide, how the system should react to particular inputs and how the system should behave in particular situations.
+-   May state what the system should *not* do
+
+Non-functional requirements:
+
+-   *Constraints* on the services or functions offered by the system such as
+    timing constraints, constraints on the development process, standards, etc.
+-   Often apply to the system as a whole rather than individual features or
+    services.
+
+### Functional requirement example
+
+::: boxed
+
+#### Example 
+
+The system shall allow users to search for books by an author's surname.
+
+Details:
+
+- Input: The user selects the "Author Query" option and enters an author's surname (e.g., "Lawrence").
+- Output: The system displays a list of all books by authors with that surname, including the book title and publication year. \
+  If no books are found for the specified surname, the system shall display the message: "No books found for this author."
+
+:::
+
+This requirement describes particular functionality of a library catalog system.
+
+### Stating functional requirements
+
+- Functional requirements are natural language sentences; they typically will start with
+  "The system shall ..." or "The system must ...".
+- They will typically contain verbs like "allow," "enable," "provide," "calculate," "store," "retrieve," "validate," "display", "generate", etc.
+  which clearly describe what the system must do.
+- Usually, they will mention clear inputs, outputs, and conditions under which particular
+  behaviour will occur.
+
+### Properties of good functional requirements
+
+Software engineering texts will provide you with details of the properties a
+good requirement should have.
+
+Some of the most important properties for our purposes are that a requirement should be
+
+- **Verifiable** - it should be possible to objectively measure whether
+  the requirement has been satisfied or not
+- **Unambiguous** - someone reading the requirement should be able to interpret it
+  unambiguously -- it should not be capable of multiple interpretations
+- **Consistent** - the requirement should not conflict with other requirements
+- **Complete** - the requirement should not leave "gaps", where it is unclear
+  what will happen in particular circumstances
+
+<!-- see e.g.
+
+### Non-functional requirements
+
+https://sparxsystems.com/enterprise_architect_user_guide/17.0/modeling_domains/characteristics_of_good_requirements.html
+
+https://www.geeksforgeeks.org/functional-vs-non-functional-requirements/
+
+https://enkonix.com/blog/functional-requirements-vs-non-functional/
+
+https://stackoverflow.com/questions/16475979/what-is-the-difference-between-functional-and-non-functional-requirements
+
+-->
+
 
 # Documenting code
 
@@ -420,85 +511,6 @@ it documents, and begins with a double asterisk ("`/**`")
 -   It uses the `@param` markup to describe each parameter.
 -   It uses the `@return` markup to describe the return value.
 
-### Pydoc
-
-In Python, the nearest equivalent method to Java's `indexOf`
-would be `String.index`, which
-searches for a substring within another string.
-
-It does not actually have Pydoc documentation, but if it did, it would
-look like this:
-
-\small
-
-``` {.python}
-  # ...
-
-  def index(self, substr):
-    """
-    Returns the index of the first occurrence of substr in
-    the string.
-
-    If substr does not occur within the string, raises a
-    ValueError exception.
-    """
-    # ...
-```
-
-### Pydoc
-
-Points to note:
-
--   Instead of returning -1 when the string does not occur,
-    Python throws an exception.
--   In Python, this is a typical idiom: exceptions are
-    often thrown to indicate the absence of something.
--   More on exceptions later.
-
-### Python docstrings
-
--   The Pydoc tool makes use of Python *docstrings*.
--   If the first expression within a module, class, function
-    or method is a *string*, then that is used as the *docstring*
-    for that module (or class or function or method).
--   Unlike Javadoc, Pydoc does not have special markup for documenting
-    parameters or return values -- but more comprehensive
-    documentation tools exist (the chief
-    one being [Sphinx](http://www.sphinx-doc.org/)) which do.
-
-### Documenting a Python function
-
--   So you can document a *function* by making the first expression
-    in the function a string:
-
-    \small
-
-    ``` {.python showstringspaces=false}
-      # ...
-
-      def myFunction(myArg):
-        """
-        This function frobnicates the argument "myArg"
-        """
-        # ...
-    ```
-
-### Documenting a Python class
-
--   And you can document a *class* by making the first expression
-    in the class a string:
-
-    \small
-
-    ``` {.python showstringspaces=false}
-      # ...
-      class MyClass:
-
-        "The MyClass class provides a frobnication service"
-
-        # ...
-    ```
--   Similarly for Python modules.
 
 ### APIs
 
@@ -576,33 +588,14 @@ without changing the API.
 (Functions are a form of [abstraction][abs]. They allow a developer to
 call the function, without knowing how it is implemented.)
 
-[abs]: https://en.wikipedia.org/wiki/Abstraction_(computer_science) 
+[abs]: https://en.wikipedia.org/wiki/Abstraction_(computer_science)
 
-### Specification vs implementation example
+### APIs -- specification vs implementation
 
-In fact, you can have multiple implementations of the same
-API by different developers.
+- This means that, as a user of an API, you can think of the API as a "black box" --
+  - You don't know (nor do you need to know) *how* it works -- just that it
+    will do the job its documentation describes
 
-Example:
-
--   Oracle corporation provides an implementation of the Java
-    standard libraries (as well as of the Java compiler,
-    `javac`, and the Java Virtual Machine or JVM).
--   But there are other implementations -- for instance, OpenJDK,
-    an open-source version of the standard libraries.
--   These adhere to exactly the same specifications as the
-    Oracle versions.
--   (In fact, since Java version 7, the OpenJDK version
-    has been the [reference implementation][ref-impl]
-
-[ref-impl]: https://en.wikipedia.org/wiki/Reference_implementation
-
-### Specification vs implementation -- other examples
-
--   The POSIX standard specifies an API for Unix-like systems,
-    and has been implemented multiple times in different ways by different
-    operating systems. (In fact, even Windows, at various
-    times, has met the POSIX standards.)
 
 ### Specification vs implementation in Java
 
@@ -709,454 +702,6 @@ we can write tests for it.
 (They needn't be spelled out formally or mathematically --
 but it is best if they are clear, consistent and unambiguous.)
 
-# Unit tests
-
-### Unit tests
-
-Unit tests should focus on one tiny bit of functionality,
-and attempt to find any deviations from expected behaviour.
-
-### Desirable properties of unit tests
-
-Ideally, unit tests should be -
-
-- quick to run. We want developers to run tests whenever changes are made to the code, or at least when they are committed to version control.
-- independent of other tests. Tests should not rely on other, particular tests having been run before them.
-- run frequently. We want to identify faults as early as possible!
-
-  - Most version control systems make it possible to perform particular tasks whenever code is committed, using "hooks"
-  - It's therefore possible to run tests every time code is committed.\
-    (But if tests aren't quick to run, developers may avoid committing code regularly.)
-
-<div class="notes">
-- other features -
-
-  - a small unit test makes it easier to identify *where* the failure has occurred
-  - self-documenting - small unit tests are easier to read and understand.
-
-</div>
-
-
-### JUnit and xUnit
-
-> -   One of the best-known testing frameworks -- originally
->     written just for running unit tests, but now used for
->     all sorts of other tests, as well -- is JUnit.
-> -   JUnit derives from a similar framework developed for Smalltalk by Kent Beck, named SUnit.
-> -   The same general framework has been implemented in a huge array of other languages:
-
-### JUnit and xUnit
-
--   One of the best-known testing frameworks is JUnit.
--   JUnit derives from a similar framework developed for Smalltalk by Kent Beck, named SUnit.
--   The same general framework has been implemented in a huge array of other languages:
-
-    - C# (e.g. NUnit)
-    - Python (e.g. unittest, sometimes called "PyUnit")
-    - Go (go2xunit)
-    - Haskell (e.g. HUnit)
-    - Lua (e.g. LuaUnit)
-- Collectively, these frameworks are sometimes referred to as "xUnit"
-
-### Unit testing -- Java example
-
-::: code
-
-####
-
-``` {.java}
-import static org.junit.Assert.assertEquals;
-import org.junit.Test;
-// ...
-
-public class CalculatorTest {
-  @Test
-  public void evaluatesExpression() {
-    Calculator calculator = new Calculator();
-    int sum = calculator.evaluate("1+2+3");
-    assertEquals(6, sum);
-  }
-}
-```
-
-:::
-
-### Unit testing -- Java example
-
-- In Java, methods which are intended to be run as tests are
-  labelled with the *annotation* `org.junit.Test`.
-- The test framework can then be used to run a test.\
-  e.g.
-
-```bash
-$ java -cp .:junit-4.01.jar org.junit.runner.JUnitCore
-CalculatorTest
-```
-
-### Unit testing -- Python example
-
-- Using `unittest`, classes containing tests inherit from `unittest.TestCase`, and methods constituting tests begin with the letters "test":
-
-::: block
-
-####
-
-``` {.python}
-import unittest
-
-def fun(x):
-    return x + 1
-
-class MyTest(unittest.TestCase):
-    def test(self):
-        self.assertEqual(fun(3), 4)
-```
-
-:::
-
-### Testing terminology
-
-\alert{test case}
-
-:   the basic unit of testing, which checks the observable behaviour 
-    or characteristics of a
-    component or system
-    in response to a particular set of inputs.\
-    It consists of one particular set of input data, and the expected output (behaviour).
-
-\alert{system under test}
-
-:   the component or system being tested, whose behaviour we want to observe.\
-    Sometime also called the *unit under test/UUT* (if we're doing unit testing),
-    or *application under test/AUT*
-    (if we're doing system-level testing). We'll use "subject under test" to
-    refer to any or all of these. More rarely, you might see
-    it called the "test object".
-
-### Testing terminology
-
-\alert{test suite}
-
-:   a collection of test cases (or other test suites)
-
-\alert{test runner}
-
-:   a software tool which manages the execution of tests,
-    and reports their outcome
-
-\alert{test fixture}
-
-:   the preparation needed to perform one or more tests
-
-### Test case
-
-::: block
-
-#### Test case
-
-The basic unit of testing, which checks the observable behaviour 
-or characteristics of a
-component or system
-in response to a particular set of inputs.\
-It consists of one particular set of input data, and the expected output (behaviour).
-
-:::
-
-A test case could be testing:
-
-- How a method or function behaves when invoked
-- How two classes interoperate
-- How an entire system -- say, a command-line program -- behaves
-  when run from the command-line
-- Whether a system meets some criterion for usability.
-
-For each of these -- what label might you use to
-refer to such a test?
-
-### Test cases
-
-::: block
-
-#### Test case
-
-The basic unit of testing, which checks the observable behaviour 
-or characteristics of a
-component or system
-in response to a particular set of inputs.\
-It consists of one particular set of input data, and the expected output (behaviour).
-
-:::
-
-Some questions:
-
-- If you're asked to suggest a *test case* -- are you being asked to
-  write code?
-- If some Python programmer has written a class which inherits from `unittest.TestCase` --
-  does that mean the class represents exactly one test case?
-
-### Test cases vs code
-
-A *test case* is \alert{\textbf{not}} code.
-
-If you're asked to suggest a *test case*, you're being asked to
-describe (and usually, justify)
-
-- a set of inputs which can be supplied to a component or system, and
-- the expected output.
-
-### Describing test cases
-
-A good way to describe a test case (especially if there are several test
-cases you'll need to describe) is to put it in a table. At a minimum,
-you'll want to write out
-
-- SUT: What the system under test (SUT) is[^obviousness]
-- Input values: What values you supply in order to put the SUT into an appropriate state, and
-  invoke the desired behaviour
-- Expected output: What expected behaviour or characteristics you expect to see
-  (and possibly, what actions and/or measurements you'll take in order to
-  observe them).
-
-[^obviousness]: Unless there's only one possible system under test,
-  and/or it's obvious from the question
-
-### Describing test cases { .fragile }
-
-You'll see more examples of test case descriptions in the labs.
-
-But by way of example, here's a test case written out for the
-Java `CalculatorTest` from the previous slides:
-
-```{=latex}
-\begin{center}
-{
-\def\arraystretch{1.4}
-\begin{tabular}{@{}lp{7cm}@{}}
-\toprule
-\multicolumn{1}{c}{\textbf{Item}} & \multicolumn{1}{c}{\textbf{Details}}     \\ \midrule
-%SUT                                & \begin{tabular}[c]{@{}l@{}}wibble wobble\\ laaaap mamama\end{tabular} \\
-System under test                  & \lstinline!Calculator! class \\
-Input values                       & 
-      Construct a \lstinline!Calculator! object by invoking
-      the class constructor with no arguments. Invoke the
-      \lstinline!evaluate()! method of the constructed object with the
-      \lstinline!String! argument \lstinline!"1+2+3"!.
-      \\
-Expected output                   & The \lstinline!evaluate()! method should return the \lstinline!int!
-                                     value \lstinline!6!.  \\
-\bottomrule
-\end{tabular}
-}
-\end{center}
-```
-
-### Describing test cases
-
-A test case description like the one shown will be sufficient for most
-purposes in this unit.
-
-If you have many tests and want to be able to easily refer to them, it
-can also be handy to add a \alert{test identifier} (a unique ID for each test) --
-perhaps something like T001, T002, T003 and so on.
-
-Should you ever need to write up a test plan more formally, then
-chapter 11 of the Ammann & Offutt text provides suggestions on how you might do so.
-
-### Test cases vs code
-
-\small
-Consider: if some Python programmer has written a class which inherits from `unittest.TestCase` --
-does that mean the class represents exactly one test case?
-
-No. The programmer could write the following:
-
-::: block
-
-\footnotesize
-
-####
-
-\vspace{-1em}
-
-``` {.python}
-import unittest
-
-def fun(x):
-    return x + 1
-
-class MyTest(unittest.TestCase):
-    def test1(self):
-        self.assertEqual(fun(3), 4)
-    def test2(self):
-        self.assertEqual(fun(3), 4)
-```
-
-:::
-
-\small\vspace{-1em}
-and that would constitute two test cases (why?).
-
-### Test cases vs code
-
-Or they could write this:
-
-::: block
-
-####
-
-``` {.python}
-import unittest
-
-def fun(x):
-    return x + 1
-
-class MyTest(unittest.TestCase):
-    def test(self):
-        self.assertEqual(fun(3), 4)
-        self.assertEqual(fun(4), 5)
-```
-
-:::
-
-### Test cases vs code
-
-Or this:
-
-::: block
-
-####
-
-``` {.python}
-import unittest
-
-def fun(x):
-    return x + 1
-
-class MyTest(unittest.TestCase):
-    def test(self):
-        self.assertEqual(fun(3), 4)
-        self.assertEqual(fun(4), 5)
-
-        # (... hundreds of other assertions follow)
-```
-
-:::
-
-### Test cases vs code
-
-Or this:
-
-::: block
-
-####
-
-\small
-
-``` {.python}
-import unittest
-
-def fun(x):
-    return x + 1
-
-class MyTest(unittest.TestCase):
-    def test(self):
-        for i in range(0, 100):
-          self.assertEqual(fun(i), i+1)
-```
-
-:::
-
-\small
-(How many test cases are there in each of these examples?
-Which of the examples will be easiest to deal with
-if an assertion fails? Which will be easiest to maintain? Why?\
-We'll talk more about well- and poorly-written tests later.)
-
-### Test fixtures
-
-::: block
-
-#### Test fixture
-
-The preparation needed to perform one or more tests.
-
-:::
-
-The idea of a "fixture" comes from testing of hardware --
-a "fixture" is everything that holds the piece of hardware
-in place, and provides you with known environment and conditions it
-can be tested in.
-
-Suppose you wanted to test the behaviour of (say) a pressure sensor.
-If the air pressure and temperature of your lab were constantly
-changing, how would you ever know if the sensor were working correctly?
-
-### Test fixtures
-
--   For software, we likewise may need to get the environment and
-    conditions into a known state for testing.
--   Things we might need to do:
-
-    -   Prepare input data (it may not be just simple numbers or
-        strings -- it could be an MS Word document, say, or
-        some complex data structure)
-    -   Create fake or mock objects (used to deal with dependencies --
-        more on these later)
-    -   Load a database with a specific, known set of data
-    -   Create files with known contents
-    -   ... etc.
-
-### Test fixtures -- example
-
-Suppose we're doing performance testing of a web site - we
-start a server instances going, and send automated requests to
-it to see how it performs.
-
-In this situation, the "fixtures" are everything needed
-so that we can get the server to respond to the requests.
-
-They could include --
-the configuration for the server, the commands to run the server,
-configuration of a request-sending program, commands needed to
-run that program, etc.
-
-### Framework features
-
-Most testing frameworks provide the ability to -
-
-- collect related tests together (e.g. into suites)
-- identify and run all unit tests (or suites) in a module, or the whole
-  system
-- produce output in different forms (e.g. human-readable text, XML, HTML)
-
-### Expected behaviour
-
-> -   What sort of behaviours might we expect from code under test?
->
->     - return of a value
->     - alteration of state
->     - throwing of an exception
->
-> -   Basically, the same things that we would document as
->     *postconditions*.
->
-> -   Unit testing frameworks will typically provide ways of detecting all
->     of these, and comparing them with expected results.
-
-
-
-### Indicating what the tests are
-
-We need to indicate to the test runner that something is intended to be a test. Typical ways are:
-
-- annotations (example -- JUnit 4.x)
-- inheritance (example -- Python unittest)
-- naming conventions (example -- Python unittest, cppunit)
-
-<!--
-
-
--->
 
 ### References
 
