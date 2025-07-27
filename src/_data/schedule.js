@@ -27,17 +27,12 @@ Introduction
     },
 
     {weekNum: 2,
-//    lectureTopic: |
-//      [Introduction to testing](/Lectures/lect02.pdf)\
-//      [Testing in Python](http://docs.python-guide.org/en/latest/writing/tests/)
-//    workshopTopic: |
-//      [Testing in Python](/Workshops/workshop01.pdf)
-    lectureTopic:
-      "Software quality plans",
-    workshopTopic:
-      `Introduction to testing
-      `
-      ,
+    lectureTopic: |
+      [Introduction to testing](/Lectures/lect02.pdf)\
+      [Testing in Python](http://docs.python-guide.org/en/latest/writing/tests/)
+    workshopTopic: |
+      [Testing in Python](/Workshops/workshop01.pdf),
+
     reading:
       `TBA`,
     assessmentDetails: ' ',
@@ -69,6 +64,16 @@ Testing 2 (ISP, graph testing)
     },
 
     {weekNum: 5,
+      lectureTopic:
+     "Software quality plans",
+    workshopTopic:
+     `Project Quality and Management in Github`,
+      reading:
+        `TBA`,
+      assessmentDetails: 'Project phase 1 published',
+    },
+    
+    {weekNum: 6,
 //    lectureTopic: |
 //      [Mutation testing](../Lectures/lect05--mutation.pdf)\
 //      [old slides](http://teaching.csse.uwa.edu.au/units/CITS5501/Lectures/Mutants.pdf)\
@@ -99,7 +104,15 @@ Testing 3 (logic testing)
     assessmentDetails: 'Project phase 1 published',
     },
 
-    {weekNum: 6,
+    {weekNum: null,
+    lectureTopic:
+      `<span style="color: #696969;">***no class -- non-teaching week***</span>`,
+    workshopTopic: "",
+    reading: "",
+    assessmentDetails: '',
+    },
+    
+    {weekNum: 7,
     lectureTopic:
       "Testing 4",
     workshopTopic:
@@ -111,16 +124,10 @@ Testing 3 (logic testing)
     assessmentDetails: 'Project phase 1 due',
     },
 
-    {weekNum: null,
-    lectureTopic:
-      `<span style="color: #696969;">***no class -- non-teaching week***</span>`,
-    workshopTopic: "",
-    reading: "",
-    assessmentDetails: '',
-    },
 
 
-    {weekNum: 7,
+
+    {weekNum: 8,
       lectureTopic:
           'Testing 5 (syntax testing)',
       workshopTopic:
@@ -132,7 +139,7 @@ Testing 3 (logic testing)
     },
 
 
-    {weekNum: 8,
+    {weekNum: 9,
       lectureTopic:
         `Reviews, integration`,
       workshopTopic:
@@ -142,7 +149,7 @@ Testing 3 (logic testing)
       assessmentDetails: ' ',
     },
 
-    {weekNum: 9,
+    {weekNum: 10,
       lectureTopic:
           'Risk management',
       workshopTopic:
@@ -152,15 +159,7 @@ Testing 3 (logic testing)
       assessmentDetails: 'TBA',
     },
 
-    {weekNum: 10,
-      lectureTopic:
-          'Standards',
-      workshopTopic:
-          'Simple specifications',
-      reading:
-        `TBA`,
-      assessmentDetails: ' ',
-    },
+
 
     {weekNum: 11,
       lectureTopic:
