@@ -171,7 +171,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
 { counter-reset: source-line 0; }
@@ -241,9 +241,8 @@ details[open] summary *.only-open {
 opacity: 0.1;
 }
 </style>
-  <!--[if lt IE 9]>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
-  <![endif]-->
+<script data-external="1" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript">
+</script>
 </head>
 <body>
 <header id="title-block-header">
@@ -267,8 +266,10 @@ JUnit tests</a></li>
 documentation</a></li>
 <li><a href="#fix-the-code" id="toc-fix-the-code">4. Fix the
 code</a></li>
-<li><a href="#concepts-review-questions" id="toc-concepts-review-questions">5. Concepts review questions</a></li>
-<li><a href="#moodle-activities" id="toc-moodle-activities">6. Moodle
+<li><a href="#requirements-revision" id="toc-requirements-revision">5.
+Requirements revision</a></li>
+<li><a href="#concepts-review-questions" id="toc-concepts-review-questions">6. Concepts review questions</a></li>
+<li><a href="#moodle-activities" id="toc-moodle-activities">7. Moodle
 activities</a></li>
 </ul>
 </nav>
@@ -277,10 +278,8 @@ activities</a></li>
 <div class="block-caption">
 <p>Laptop requirement</p>
 </div>
-<p>When attending lab classes, you will need access to a laptop. Your
-laptop will also be used when sitting the final exam (which is a
-lab-based, face-to-face, practical exam).</p>
-<p>Note that UWA provides <a href="https://www.uwa.edu.au/students/Support-services/Financial-assistance#:~:text=SOS%20IT%20Equipment%20Scheme">financial
+<p>When attending lab classes, you will need access to a laptop.</p>
+<p>UWA provides <a href="https://www.uwa.edu.au/students/Support-services/Financial-assistance#:~:text=SOS%20IT%20Equipment%20Scheme">financial
 support</a> via the “SOS IT Equipment Scheme” to students who are unable
 to purchase a laptop due to financial hardship.</p>
 </div>
@@ -318,7 +317,7 @@ the VS Code website</a>.</p>
 website</a> for downloads)</li>
 <li>you’ve installed the <a href="https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-java-pack">Extension
 Pack for Java</a> within VS Code. Click the “extensions” icon in the
-left sidebar of VS Code (looks like this: <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALgAAAC+BAMAAAB0RNjpAAAALVBMVEUzMzP///8lJSbMzMxmZmY3Nzdqamo0NDSVlZXu7u5GRkba2tq7u7tTU1Nubm7lZVtfAAAB+ElEQVR42u3ZP2vCQBgG8AwNBcHh6BTc+g2Ki8UMDraUTi76CWxxzCA4dbJkEiF07eDg6lD6EZykHdwK3fs9mgppc96/3N0rWHhenA758UKSe/NcguBAdZ5XABw4cODAgQMHDhw4cODAgQMHXlS46vL12aPDa6N1s1zxfEGGh8tpxsoVtW57VHhtdMn4elK3bokLjWtbt8TFxlmkbt0Sr0+z6HUdN/9+b1nU2tLgJxvWeOTuxJsX9twhwi/YWcewAhz4v8EnfJHip32+EkI8XF3fl2tYjBsKXDluCHD1uCHA1ePGH9eMG39cMm6K1v3x3bjhLmg7HzcfNPjPuEmFcXOV0OD5/+8S6Qpw4MCPGX/wfhHV4PWZbE/b0uDS3Thd0ODhcuYZWzS42HqkbtwaF1q3jYo6fPfWUQ5F76ldyNXivvFci/seLAAHfkw4F4nGwsrEB//iItFAWOkn7nhjzmWifNzsrQw1T70JF8bN/oruUM6EG0u303rjukM5f7xK6854ldZdL+hvSnK5FYVMpEpJh3j8K20IwIEDBw4cOHDgwD0y0dgHN2WigTO+MWci5xdR2REc2Su07AiOWRzKaXHJERxdbKnUeoXGVZ/PjK07R0Xxw59YcYXGlZ8su6ZyjedkBRw4cODAgQMHDhw4cODAgQMHfrz4N0IIXmUl8meGAAAAAElFTkSuQmCC" style="width:0.7cm" />), search for
+left sidebar of VS Code (looks like this: <img role="img" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALgAAAC+BAMAAAB0RNjpAAAALVBMVEUzMzP///8lJSbMzMxmZmY3Nzdqamo0NDSVlZXu7u5GRkba2tq7u7tTU1Nubm7lZVtfAAAB+ElEQVR42u3ZP2vCQBgG8AwNBcHh6BTc+g2Ki8UMDraUTi76CWxxzCA4dbJkEiF07eDg6lD6EZykHdwK3fs9mgppc96/3N0rWHhenA758UKSe/NcguBAdZ5XABw4cODAgQMHDhw4cODAgQMHXlS46vL12aPDa6N1s1zxfEGGh8tpxsoVtW57VHhtdMn4elK3bokLjWtbt8TFxlmkbt0Sr0+z6HUdN/9+b1nU2tLgJxvWeOTuxJsX9twhwi/YWcewAhz4v8EnfJHip32+EkI8XF3fl2tYjBsKXDluCHD1uCHA1ePGH9eMG39cMm6K1v3x3bjhLmg7HzcfNPjPuEmFcXOV0OD5/+8S6Qpw4MCPGX/wfhHV4PWZbE/b0uDS3Thd0ODhcuYZWzS42HqkbtwaF1q3jYo6fPfWUQ5F76ldyNXivvFci/seLAAHfkw4F4nGwsrEB//iItFAWOkn7nhjzmWifNzsrQw1T70JF8bN/oruUM6EG0u303rjukM5f7xK6854ldZdL+hvSnK5FYVMpEpJh3j8K20IwIEDBw4cOHDgwD0y0dgHN2WigTO+MWci5xdR2REc2Su07AiOWRzKaXHJERxdbKnUeoXGVZ/PjK07R0Xxw59YcYXGlZ8su6ZyjedkBRw4cODAgQMHDhw4cODAgQMHfrz4N0IIXmUl8meGAAAAAElFTkSuQmCC" style="width:0.7cm" />), search for
 “Extension Pack for Java” in the search bar at top, and click
 “install”.</li>
 </ul>
@@ -331,28 +330,37 @@ up.)</p>
 subdirectory, and go to <a href="#common-steps">“Common steps in VS Code
 or GitPod”</a>.</p>
 </dd>
-<dt><strong>GitPod</strong></dt>
+<dt><strong>GitHub CodeSpaces</strong></dt>
 <dd>
 <p>It’s possible to access a VS Code–like environment on the web,
-without needing to install any software, via <a href="https://www.gitpod.io">GitPod</a>. You’ll first need to create a
-<a href="https://github.com/">GitHub</a> account, so do so. Once that’s
-done, ensure you’re logged in to GitHub.</p>
-<p>Then, paste into your web browser the address <a href="https://gitpod.io#" class="uri">https://gitpod.io#</a>, followed
-by the address of some GitHub repository – for this lab, you can use <a href="https://github.com/cits5501/lab01" class="uri">https://github.com/cits5501/lab01</a>. (So the full address
-in your browser should be <a href="https://gitpod.io#https://github.com/cits5501/lab01" class="uri">https://gitpod.io#https://github.com/cits5501/lab01</a>.)
-Agree to let GitPod access your GitHub account, and you should see the
-message “Starting …” come up, and then a VS Code–like environment. Close
-any message that pops up asking “Do you want to open this workspace in
-VS Code Desktop?”.</p>
-<p>Note that the editor initially shows the files for the GitHub project
-you opened, <a href="https://github.com/cits5501/lab01" class="uri">https://github.com/cits5501/lab01</a>. But within GitPod,
-you have full access to a virtual Linux environment, and can download
-files (e.g. using <code>wget</code>), clone Git projects, and push them.
-See the unit <a href="https://cits5501.github.io/faq/#version-control">FAQ</a> page if
-you are not familiar with Git.</p>
-<p>Then open one of the <code>.java</code> files in the <code>src</code>
-subdirectory, and continue with <a href="#common-steps">“Common steps in
-VS Code or GitPod”</a>.</p>
+without needing to install any software, via [GitHub
+Codespaces][codespaces]. Codespaces provides web-based access to
+development environments hosted in the cloud, and provides a quota of
+free hours each month (which most students will probably not
+exceed).</p>
+<p>To use CodeSpaces, you’ll need to have a GitHub account, so if you
+don’t have one already, visit <a href="https://github.com/" class="uri">https://github.com/</a> and create one. Once that’s done,
+ensure you’re logged in to GitHub.</p>
+<p>Once you’re logged in, you can visit any GitHub-hosted repository and
+will be able to open the code using CodeSpaces. The repository could be
+owned by someone else, or could be one you’ve created yourself. For this
+lab, visit<br />
+<a href="https://github.com/cits5501/lab01" class="uri">https://github.com/cits5501/lab01</a>. Click the green
+“Code” button to get a drop-down menu with tabs; select the “codespaces”
+tab, then “Create codespace on master”.</p>
+<p>GitHub Codespaces will start a cloud-based virtual machine in which
+<a href="https://code.visualstudio.com/download">Visual Studio Code</a>
+(VS Code) is running. We don’t provide detailed instructions on how to
+use CodeSpaces with Java project – you can find those <a href="https://docs.github.com/en/codespaces/setting-up-your-project-for-codespaces/adding-a-dev-container-configuration/setting-up-your-java-project-for-codespaces">here</a>
+– but in general, you’ll want to</p>
+<ul>
+<li>install the “Extension Pack for Java” (a prompt should appear, lower
+right, after you open the project)</li>
+<li>accept offers to “import Java projects” (lower left of the screen,
+under “Java Projects”</li>
+<li>click the “flask” icon, enable Java tests, and specifically enable
+“Jupyter” tests.</li>
+</ul>
 <div style="border: solid 2pt orange; border-radius: 5pt; background-color: hsl(22.35, 100%, 85%, 1); padding: 1em;">
 <p>Note that if you use GitPod, your work is stored on a temporary,
 cloud-based virtual machine (VM), and will disappear once the VM is no
@@ -372,7 +380,7 @@ GitPod</strong></span></dt>
 <p>When the editors open, you should see a message about “Java projects
 being opened”. Wait for that to pass, and there’ll now be a “Testing”
 icon on the left sidebar, in the shape of a conical lab flask (like
-this: <img src="data:image/png;base64,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" style="width:0.7cm" />).</p>
+this: <img role="img" src="data:image/png;base64,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" style="width:0.7cm" />).</p>
 <p>Click on the testing icon, and then on the button “Enable Java
 Tests”. Select “JUnit Jupyter” tests from the options that pop up, and
 you should see a message saying that “Test libraries have been
@@ -550,7 +558,26 @@ following:</p>
 class, there should be an option to create a test class. Use the
 existing tests as an example – can you think of other tests we might
 add?</p>
-<h2 id="concepts-review-questions">5. Concepts review questions</h2>
+<h2 id="requirements-revision">5. Requirements revision</h2>
+<p>Recommended prior study for this unit is CITS4401/3301 Software
+Requirements and Design, which explores ways we can express clients’
+expectations for a system, and ensure they can be met once the system is
+designed and implemented.</p>
+<p>See if you can come up with examples of requirements which exhibit
+the following characteristics, and explain you reasoning. If you’re not
+clear on these concepts, then it’s recommended you refer to the textbook
+by Pressman, <a href="https://www.amazon.com.au/ISE-Software-Engineering-Practitioners-Approach/dp/1260548007/"><em>Software
+Engineering: A Practitioner’s Approach</em></a>. You should be able to
+access the textbook via UWA’s “Unit Readings” site – see <a href="https://cits5501.arranstewart.io/schedule/#recommended-readings">here</a>
+for more details.</p>
+<ul>
+<li>Give an example of a requirement that is <em>ambiguous</em>.</li>
+<li>Give an example of a requirement that is <em>vague</em>.</li>
+<li>Give an example of a requirement that is <em>functional</em>.</li>
+<li>Give an example of a requirement that is
+<em>non-functional</em>.</li>
+</ul>
+<h2 id="concepts-review-questions">6. Concepts review questions</h2>
 <p>Answer the following questions to test your understanding of concepts
 introduced in the lectures and prescribed reading.</p>
 <p>For each of the following scenarios, explain whether you think a
@@ -575,7 +602,7 @@ arithmetic mean of numbers in a list:</p>
 <p>However, when the list is of length 0, this code returns the result
 “<code>INFINITY</code>”.</p></li>
 </ol>
-<h2 id="moodle-activities">6. Moodle activities</h2>
+<h2 id="moodle-activities">7. Moodle activities</h2>
 <p>All assessments for CITS5501 are submitted via the CSSE department <a href="https://quiz.jinhong.org">Moodle</a> server, which can be found at
 <a href="https://quiz.jinhong.org" class="uri">https://quiz.jinhong.org</a>.</p>
 <p>In addition to the assessments, in some weeks <em>unassessed</em>
@@ -591,12 +618,11 @@ in CITS5501:</p>
 <dt><strong>Registering</strong></dt>
 <dd>
 <p>Visit <a href="https://quiz.jinhong.org" class="uri">https://quiz.jinhong.org</a> and sign up with your UWA email
-address, then attempt the quizzes (in your own time, if you don’t finish
-them in the lab).</p>
-<p>Note that you need to register on Moodle <strong>before week
-4</strong> – only enrolled CITS5501 students are permitted to take the
-assessments, so early in week 4, any unenrolled Moodle participants will
-be removed, and self-registration will be locked.</p>
+address, self-enrol into CITS5501, then attempt the quizzes (in your own
+time, if you don’t finish them in the lab).</p>
+<p>Note that it’s <strong>important to self-enrol</strong> on Moodle, so
+you can access the announcements and discussion forum, and submit future
+assessments.</p>
 </dd>
 <dt><strong>Assessed vs unassessed Moodle activities</strong></dt>
 <dd>

@@ -121,12 +121,12 @@ the semester.
 
 ::: { .resource-list }
 
-{#
 - Week 2 -- testing intro
   - Lab worksheet {% resourceList "workshop01", ["html", "md"] %}
   - Source code ([zip]({{ "/workshops/workshop-01-code.zip" | url }}))
   - A (very brief) revision document on important concepts from the Java language is
     available ([PDF]({{ "/workshops/java-revision.pdf" | url }})), should you need it.
+{#
   - Sample worksheet solutions {% resourceList "workshop01-solutions", ["html", "md"] %}
 - Week 3 -- data-driven tests
   - Lab worksheet {% resourceList "workshop02", ["html", "md"] %}

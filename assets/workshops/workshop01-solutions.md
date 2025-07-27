@@ -80,10 +80,8 @@ Laptop requirement
 :::
 
 When attending lab classes, you will need access to a laptop.
-Your laptop will also be used when sitting the final exam (which is a lab-based,
-face-to-face, practical exam).
 
-Note that UWA provides [financial support][fin-supp] via the "SOS IT Equipment Scheme" to students who
+UWA provides [financial support][fin-supp] via the "SOS IT Equipment Scheme" to students who
 are unable to purchase a laptop due to financial hardship.
 
 [fin-supp]: https://www.uwa.edu.au/students/Support-services/Financial-assistance#:~:text=SOS%20IT%20Equipment%20Scheme
@@ -151,32 +149,36 @@ We describe these options in the following sections.
     Then open one of the `.java` files in the `src` subdirectory,
     and go to ["Common steps in VS Code or GitPod"](#common-steps).
 
-**GitPod**
+**GitHub CodeSpaces**
 
 :   It's possible to access a VS Code–like environment on the web, without
-    needing to install any software, via [GitPod][gitpod]. You'll first need to create a
-    [GitHub][github] account, so do so. Once that's done, ensure you're
+    needing to install any software, via [GitHub Codespaces][codespaces].
+    Codespaces provides web-based access to development environments
+    hosted in the cloud, and provides a quota of free hours each month (which most students
+    will probably not exceed).
+
+    To use CodeSpaces, you'll need to have a GitHub account, so if you don't have
+    one already, visit <https://github.com/> and create one. Once that's done, ensure you're
     logged in to GitHub.
 
-    Then, paste into your web browser the address
-    <https://gitpod.io#>, followed by the address of some GitHub repository --
-    for this lab, you can use <https://github.com/cits5501/lab01>.
-    (So the full address in your browser should be
-    <https://gitpod.io#https://github.com/cits5501/lab01>.)
-    Agree to let GitPod access your GitHub account, and you should see the
-    message "Starting ..." come up, and then a VS Code–like environment.
-    Close any message that pops up asking "Do you want to open this workspace
-    in VS Code Desktop?".
+    Once you're logged in, you can visit any GitHub-hosted repository and will be able
+    to open the code using CodeSpaces. The repository could be owned by someone else,
+    or could be one you've created yourself. For this lab, visit    
+    <https://github.com/cits5501/lab01>. Click the green "Code" button to get a drop-down menu with tabs; select the
+    "codespaces" tab, then "Create codespace on master".
 
-    Note that the editor initially shows the files for the GitHub project you
-    opened, <https://github.com/cits5501/lab01>. But within GitPod, you have full
-    access to a virtual Linux environment, and can download files
-    (e.g. using `wget`), clone Git projects, and push them. See the unit
-    [FAQ](https://cits5501.github.io/faq/#version-control) page if you are not familiar
-    with Git.
+    GitHub Codespaces will start a cloud-based virtual machine in which
+    [Visual Studio Code][vs-code] (VS Code) is running. We don't provide detailed
+    instructions on how to use CodeSpaces with Java project – you can find those
+    [here][codespaces-java] – but in general, you'll want to
 
-    Then open one of the `.java` files in the `src` subdirectory,
-    and continue with ["Common steps in VS Code or GitPod"](#common-steps).
+    - install the "Extension Pack for Java" (a prompt should appear, lower right, after you
+      open the project)
+    - accept offers to "import Java projects" (lower left of the screen, under "Java
+      Projects"
+    - click the "flask" icon, enable Java tests, and specifically enable "Jupyter" tests. 
+
+    [codespaces-java]: https://docs.github.com/en/codespaces/setting-up-your-project-for-codespaces/adding-a-dev-container-configuration/setting-up-your-java-project-for-codespaces
 
     <div style="border: solid 2pt orange; border-radius: 5pt; background-color: hsl(22.35, 100%, 85%, 1); padding: 1em;">
 
@@ -187,6 +189,7 @@ We describe these options in the following sections.
     information on student network storage).
 
     [storage]: https://cits5501.github.io/faq/#backups
+    
 
     </div>
 
@@ -483,7 +486,70 @@ e.g.
 
 
 
-## 5. Concepts review questions
+## 5. Requirements revision
+
+Recommended prior study for this unit is CITS4401/3301 Software Requirements and Design, which
+explores ways we can express clients' expectations for a system, and ensure they can
+be met once the system is designed and implemented.
+
+See if you can come up with examples of requirements which exhibit the following characteristics, and explain you reasoning.
+If you're not clear on these concepts, then it's recommended you refer to the textbook
+by Pressman, [*Software Engineering: A Practitioner's Approach*][pressman]. You should be able to access the textbook via UWA's "Unit Readings" site – see [here][readings] for more details.
+
+[pressman]: https://www.amazon.com.au/ISE-Software-Engineering-Practitioners-Approach/dp/1260548007/
+
+[readings]: https://cits5501.arranstewart.io/schedule/#recommended-readings
+
+- Give an example of a requirement that is _ambiguous_.
+- Give an example of a requirement that is _vague_.
+- Give an example of a requirement that is _functional_.
+- Give an example of a requirement that is _non-functional_.
+
+
+
+<div class="solutions">
+
+
+**Sample solutions**:
+
+- *Ambiguity*. Concept recap: An *ambiguous* requirement can be interpreted in multiple valid but conflicting ways.
+
+  Example:
+  "The operator identity consists of the operator name and password;
+  the password consists of six digits. It should be displayed on the
+  security screen and deposited in the login file when an operator
+  logs into the system."
+
+  Here, does "it" refer to the identity, or the password? Both are valid interpretations, but we don't know which was intended, so this is ambiguous.
+
+- *Vagueness*. Concept recap: a *vague* requirement is one which is underspecified, and where we often can't draw a sharp dividing line between systems which would meet the requirements, and systems which wouldn't.
+
+  Example: "The system shall permit users to download high-resolution images for each frame of a stored video."
+
+  What qualifies as “high-resolution”? 1080p? 4K? Something else?
+
+  You can find many other examples of vague requirements in the Pressman text and/or the CITS4401/3301 materials – for instance, one which require a system to be "easy to use"
+  (this varies by user experience, cultural expectations, and task complexity, and there’s no precise measurable standard or criteria for success; a requirement like this generally needs to be rephrased or supported with usability metrics.)
+
+- *Functional Requirement*. Concept Recap: a *functional* requirement specifies what the system should do – specific behaviours, inputs, and outputs.
+
+  Example: "The system shall send a confirmation email to the user after successful registration."
+
+  This clearly describes a specific action the system must perform. Additionally, it can be directly implemented and tested (e.g. checking email delivery after registration).
+
+
+- *Non-Functional Requirement*. Concept recap: *non-functional* requirements describe *how* the system performs its functions, or constraints on the way those functions are performed — for instance, requirements related to performance, security, usability, reliability, and so on.
+
+  Example: "The system shall respond to all user actions within 1 second under normal operating conditions."
+
+  This is requirement doesn't describe a system function in terms of inputs and outputs – rather, it imposes a constraint on system behaviour, saying it must happen within specified time limits. This requirement is definitely measurable and testable, but it doesn’t itself describe an actual feature or functionality - if we were testing this, we'd instead look at all the functional requirements that describe responses to user actions, and check whether they meet the constraint that responses happen within 1 second.
+
+</div>
+
+
+
+
+## 6. Concepts review questions
 
 Answer the following questions to test your understanding of
 concepts introduced in the lectures and prescribed reading.
@@ -654,7 +720,7 @@ c.  When Mila's method returns the result "`INFINITY`", we'd need to
 
 
 
-## 6. Moodle activities
+## 7. Moodle activities
 
 All assessments for CITS5501 are submitted via the CSSE department [Moodle][moodle]
 server, which can be found at <https://quiz.jinhong.org>.
@@ -675,12 +741,11 @@ in CITS5501:
 **Registering**
 
 :   Visit <https://quiz.jinhong.org> and sign up
-    with your UWA email address, then attempt the quizzes
+    with your UWA email address, self-enrol into CITS5501, then attempt the quizzes
     (in your own time, if you don't finish them in the lab).
 
-    Note that you need to register on Moodle **before week 4** – only enrolled CITS5501
-    students are permitted to take the assessments, so early in week 4, any unenrolled
-    Moodle participants will be removed, and self-registration will be locked.
+    Note that it's **important to self-enrol** on Moodle, so you can access the
+    announcements and discussion forum, and submit future assessments.
 
 **Assessed vs unassessed Moodle activities**
 
