@@ -133,85 +133,15 @@ public class CalculatorTest {
 - We \alert{assert} in line 6 -- we check that result we got
   (`sum`) equals the result we expected (`6`).
 
-### More complex "assertions"
-
-In the code examples we've seen, it's very simple
-to check whether the observed behaviour matches the
-expected behaviour.
-
-All we expected the method under test to do was
-return a value -- and it's very simple to check
-whether that value is what we expected.
-
-But what if the specification for the `evaluate()` method
-said that the result shouldn't be returned, but rather
-written to a file called "`myresult.txt`"?
-
-How can we tell if the test passed or failed?
-
-We'd need to run extra methods to open that file,
-read its contents, and check that the contents was
-what we expected. All this would be part of the
-"assertion" stage.
-
 
 ### Ammann and Offutt textbook terminology
 
-The Ammann and Offutt textbook divides the structure
-of tests up a bit differently.
-
-For reference, it considers a test to consist of:
-
--   Test values: anything required to set up a system or component,
-    "ask it do" something, observe the result, and
-    clean up the system so as to put it back in a stable state.
--   Expected values: what the system is expected to do.
-
-"Values" is being used in a very broad sense. Suppose we are designing
-system tests for a phone -- then the "test values" might include,
-in some cases, physical actions to be done by a tester to put the
-phone in a particular state (e.g. powered on and with the "Contacts"
-list displayed).
-
-### Ammann and Offutt textbook terminology
-
-The textbook goes into quite a bit of detail about particular sorts
-of test values.
-
-For instance:
-
-- "prefix values" (which largely correspond to things
-  we do in the "Arrange" part of a test to set up test
-  fixtures)
-- "verification values" (things we need to do in order
-  to observe or measure the behaviour of a system or component --
-  running a database query, perhaps)
-- "exit values" (things we need to do in order to reset or
-  "tear down" our fixtures, and put the system back into
-  a stable state again).
-
-For the most part, we will not need to make use of this
+The textbook goes into detail about particular sorts
+of test values -- "prefix values", "verification values", "exit values" --
+we will generally not need to make use of this
 terminology.
 
-### Cleaning up/"teardown" methods
-
-Ammann and Offutt's "exit values" don't really correspond
-to anything in the "Arrange--Act--Assert" pattern.
-
-If we need to do any sort of "cleanup" after a test,
-we would just do it after the "Assert" stage.
-
-If we have multiple tests that all require the *same*
-cleanup steps (deleting files or resetting a database
-to a known state),
-it would be poor programming style to copy and paste the same cleanup code
-again and again. (Why?)
-
-Instead, most test frameworks give us a way of specifying
-bits of code -- often called "teardown methods" -- that should
-be run after each test in some test suite.
-
-We'll see examples of these later.
+But some reading on this will be provided on Moodle next week.
 
 
 ### Test structure -- example 2
@@ -323,7 +253,7 @@ or manually run tests.)
 
   They focus on the flow of data and/or control between components,
   and often will test for properties implied by the system *design*.
-  
+
   They often are run less frequently than unit tests -- e.g. if a unit
   is being changed, we might run integration tests once the unit tests
   are passing.
@@ -538,7 +468,7 @@ sources:
 
 - real answers to "why automate?":
 
-- makes it more likely tests will be run; 
+- makes it more likely tests will be run;
 - the fewer manual handling steps, the less chance for human error
 </div>
 
@@ -614,7 +544,7 @@ OLD, removed:
   into the same class
   -   And then to specify "setup" and "tear-down" methods
       for the class, which will be run before and after
-      each test, respectively. 
+      each test, respectively.
   -   Shared objects will be declared as *instance variables*
 
 ### Test fixtures
@@ -631,7 +561,7 @@ class TestArithmeticOperations {
     System.out.println("Setting things up!");
     myCalculator = new Calculator();
   }
-        
+
   @Override // This is run after each test method
   protected void tearDown() throws Exception {
     System.out.println("Running tearDown");
@@ -683,7 +613,7 @@ class FixturesTest(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
-~~~    
+~~~
 
 ### Some assertion methods { .fragile }
 
@@ -691,13 +621,13 @@ if __name__ == '__main__':
 
 \begin{tabular}{@{}l@{}}
 \toprule
-Common assertions 
+Common assertions
   % & Other assertions
   \\
 \toprule
 \ttt{assertTrue(x, msg=None)}
   % & \ttt{assertAlmostEqual(a, b, places=7, msg=None, delta=None)}
-  \\ 
+  \\
 \ttt{assertFalse(x, msg=None)}
   % & \ttt{assertNotAlmostEqual(a, b, places=7, msg=None, delta=None)}
   \\
@@ -709,7 +639,7 @@ Common assertions
   \\
 \tt{assertEqual(a, b, msg=None)}
  %  & \tt{assertLess(a, b, msg=None)}
-  \\ 
+  \\
 \tt{assertNotEqual(a, b, msg=None)}
  %  & \tt{assertLessEqual(a, b, msg=None)}
   \\
@@ -733,7 +663,7 @@ Common assertions
   \\
  %  & \tt{assertTupleEqual(a, b, msg=None)}
   \\
- %  & assertDictEqual(a, b, msg=None) \\ 
+ %  & assertDictEqual(a, b, msg=None) \\
 %\bottomrule
 \end{tabular}
 
@@ -744,13 +674,13 @@ Common assertions
 
 \begin{tabular}{@{}l@{}}
 \toprule
-%Common assertions 
+%Common assertions
   Other assertions
   \\
 \toprule
 % assertTrue(x, msg=None)
   assertAlmostEqual(a, b, places=7, msg=None, delta=None)
-  \\ 
+  \\
 %\ttt{assertFalse(x, msg=None)}
   \ttt{assertNotAlmostEqual(a, b, places=7, msg=None, delta=None)}
   \\
@@ -762,7 +692,7 @@ Common assertions
   \\
 % \tt{assertEqual(a, b, msg=None)}
   \tt{assertLess(a, b, msg=None)}
-  \\ 
+  \\
 % \tt{assertNotEqual(a, b, msg=None)}
   \tt{assertLessEqual(a, b, msg=None)}
   \\
@@ -786,7 +716,7 @@ Common assertions
   \\
  \tt{assertTupleEqual(a, b, msg=None)}
   \\
- assertDictEqual(a, b, msg=None) \\ 
+ assertDictEqual(a, b, msg=None) \\
 %\bottomrule
 \end{tabular}
 
@@ -814,14 +744,14 @@ Common assertions
 
     ~~~ { .python }
     import unittest
-    
+
     class SimplisticTest(unittest.TestCase):
         def test(self):
             self.assertTrue(True)
-    
+
     if __name__ == '__main__':
         unittest.main()
-    ~~~          
+    ~~~
 
 ### Running Tests
 
@@ -829,11 +759,11 @@ Common assertions
 
     ~~~ {.python}
     $ python3 test_simple.py
-    
+
     .
     -|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|-
     Ran 1 test in 0.000s
-    
+
     OK
     ~~~
 
@@ -842,7 +772,7 @@ Common assertions
 ### Structuring test code
 
 -   As with any software system, we want to factor out common code --\
-    an example: 
+    an example:
 
     ~~~ { .python }
     knownValues = (('lego', False),('radar', True)
@@ -872,7 +802,7 @@ Common assertions
 ### Structuring test code
 
 - More broadly, how test cases are structured will depend somewhat
-  on the conventions of the language and the framework being used. 
+  on the conventions of the language and the framework being used.
   - in Java, typical to put source code in a directory called "`src`",
     and have a separate directory (e.g "`test`") for unit tests,
     with structure mirroring the main code.
@@ -947,7 +877,7 @@ functionality to be used during testing
 ### Stubs
 
 -   Stubs (often, "stub methods") provide canned answers to calls made during the test -- \
-    i.e., the answers are usually fixed, and don't change in response to the parameters passed  
+    i.e., the answers are usually fixed, and don't change in response to the parameters passed
 
 
 ### Spies
@@ -969,7 +899,7 @@ functionality to be used during testing
 > -   *Mock* object are pre-programmed to expect particular calls, and respond with particular behaviour.
 > -   Unlike the other types of test double, mock objects can verify things about the *behaviour* of a class.
 > -   For instance:
-> 
+>
 >     - Suppose our code uses a database; we know that to work correctly, it must call the `connect()` method of a database object, and can then call the `query()` method;\
 >       but it is an error to call `query()` before `connect()`.
 >     - Our mock object can contain code that checks whether `query()` has been called before `connect()`.
@@ -1047,7 +977,7 @@ if __name__ == '__main__':
 > -   Like xUnit, doctest has been ported to a great many other languages.\
 >     (An encouraging feature of testing techniques is that they tend
 >     to be widely adopted if they work well.)
-> 
+>
 >     - Java has JDoctest
 >     - Haskell has a package simply called `doctest`
 >     - Ruby has rdoctest
@@ -1057,7 +987,7 @@ if __name__ == '__main__':
 > -   This sort of testing originates from the Haskell testing framework
 >     QuickCheck, and is sometimes called *generative testing*
 > -   Our tests are of the form:
-> 
+>
 >     for all data or parameters that are generated in a particular way,\
 >     the function or method should produce the following results.
 
@@ -1112,7 +1042,7 @@ to any *invariants* we think should hold about a software component.
   - Fault avoidance -- try to prevent faults from ever being introduced into the
     system
   - Fault detection -- try to *detect* faults that *have* found their way into
-    the system 
+    the system
   - Fault tolerance -- incorporate ways of recovering from faults in the system at runtime.
 
 ### Examples of improving reliability

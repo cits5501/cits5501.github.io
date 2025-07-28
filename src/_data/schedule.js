@@ -27,26 +27,23 @@ Introduction
     },
 
     {weekNum: 2,
-    lectureTopic: |
-      [Introduction to testing](/Lectures/lect02.pdf)\
-      [Testing in Python](http://docs.python-guide.org/en/latest/writing/tests/)
-    workshopTopic: |
-      [Testing in Python](/Workshops/workshop01.pdf),
-
+    lectureTopic: "Testing automation",
+    workshopTopic: "Testing introduction",
     reading:
-      `TBA`,
+      `- Pressman, ch 23 ("Testing conventional applications")
+       - Amman & Offut, ch 3 ("Test automation")`,
     assessmentDetails: ' ',
     },
 
 
     {weekNum: 3,
     lectureTopic:
-        "Testing 1",
+        "Testing 1 (Input Space Partitioning)",
     workshopTopic:
-        "Test case selection",
+        "Data-driven tests and test design",
     reading:
-      `- Amman & Offutt, ch 3
-      - Pressman, ch 23 ("Testing conventional applications")`,
+      `- Amman & Offutt, ch 6 (ISP)
+      `,
     assessmentDetails: ' ',
     },
 
@@ -54,12 +51,11 @@ Introduction
     {weekNum: 4,
     lectureTopic:
       `
-Testing 2 (ISP, graph testing)
+Testing 2 (graph testing)
       `,
-    workshopTopic: 'Test automation',
+    workshopTopic: 'ISP',
     reading:
-      `- Amman & Offutt, chs 6-7
-      - Pressman, ch 23 ("Testing conventional applications")`,
+      `- Amman & Offutt, ch 7 (graph)`,
     assessmentDetails: "Online quiz 1"
     },
 
@@ -123,8 +119,6 @@ Testing 3 (logic testing)
       `- Pressman, ch 20 ("Review techniques"), ch 22 ("Software testing strategies")`,
     assessmentDetails: 'Project phase 1 due',
     },
-
-
 
 
     {weekNum: 8,

@@ -70,6 +70,8 @@ The ISP technique has some useful advantages:
     -   just the input space
 -->
 
+<!--
+
 ### Relationship to other techniques
 
 ISP subsumes several other techniques you might see mentioned
@@ -86,6 +88,8 @@ These techniques are collectively referred to as "partition testing".
 ISP ignores a distinction you might see made between what is
 called "white box testing" and "black box testing" -- more on this
 later.
+
+-->
 
 ### Steps in ISP
 
@@ -134,134 +138,6 @@ Is the following a valid partitioning of the integers?
 It is not -- it leaves out 0, so the proposed
 partitioning doesn't *cover* the domain.
 
-### Partitions
-
-Is the following a valid partitioning of the integers?
-
-- $p_1 = \{ \text{ numbers } \leq 0 \}$
-- $p_2 = \{ \text{ numbers } \geq 0 \}$
-
-\pause
-
-It is not -- the sets $p_1$ and $p_2$ overlap (they both
-include 0) -- so they are not *disjoint*, and can't
-be valid partitions.
-
-### Partitions
-
-Is the following a valid partitioning of the integers?
-
-- $p_1 = \{ \text{ numbers } < 0 \}$
-- $p_2 = \{ 0 \}$
-- $p_3 = \{ \text{ numbers } > 0 \}$
-
-\pause
-
-It is -- the sets $p_1$, $p_2$ and $p_3$ cover the domain
-(nothing is left out), and none of them overlap each other.
-
-### Partitions
-
-Suppose we have some parameter `Integer n` that we're
-trying to partition.
-
-We divide the domain of `n` up into positive numbers, negative numbers,
-and 0. Is that a partition?
-
-\pause
-
-It is not. `Integer` is what's called a *reference type* in Java.
-Whereas an `int` represents a concrete 4 bytes of memory,
-an `Integer` is a "pointer" to some bytes of memory residing ...
-"elsewhere". (Technically, on the *heap*.)
-
-It can be positive, negative, or zero, but it can also take on
-the value `null`{ .java }.
-
-### Partitions
-
-- $p_1 = \{ \text{ null } \}$
-- $p_2 =$ not null; the union of
-  - $r_1 = \{ \text{ numbers } < 0 \}$
-  - $r_2 = \{ 0 \}$
-  - $r_3 = \{ \text{ numbers } > 0 \}$
-
-
-Do we need to remember to include the possibility of `null`{ .java }
-values when testing Java systems?
-
-\pause
-
-It depends.
-
-In *most* cases, we can assume that a `null`{ .java } shouldn't be
-passed as a parameter, and that if it *is* passed, the JVM will
-simply throw a `NullPointerException` at some point.
-
-### nulls -- the usual case
-
-If that's the case:
-
-- we *don't* bother mentioning this in the method documentation -- it's
-  taken as read that `null`{ .java }s are invalid
-- we *don't* bother testing this -- why would we bother? We wouldn't
-  be testing *our* software, we'd be effectively testing the JVM's
-  ability to detect nulls and throw exceptions. And it's unlikely
-  we have time for that.
-- you *shouldn't*, if asked to come up with a useful test case, or a
-  characteristic for partitioning, mention "null-ness" and expect to
-  get marks for it. We will not be impressed.
-  - You may wish to mention it *for completeness* -- to cover all
-    possibilities. But on its own, we won't consider it a useful
-    partitioning or characteristic.
-
-### nulls -- unusual cases
-
-Occasionally in Java methods -- we probably won't see many of them --
-`null`{ .java } has a special meaning.
-
-- e.g. the `java.util.TreeMap<K,V>` class allows you to store and look
-  up values of type `V` using "keys" of type `K`.
-  (You might for instance store student's marks in a
-  `TreeMap<Student,Double`.)
-
-- The documentation for `java.util.TreeMap.get` says:
-
-  \footnotesize
-
-  ```java
-    /** Returns the value to which this TreeMap maps the
-      * specified key. Returns null if the TreeMap contains
-      * no mapping for this key.
-      */
-    public V get(K key);
-  ```
-
-### nulls -- unusual cases
-
-::: block
-
-####
-
-\footnotesize
-
-```java
-  /** Returns the value to which this TreeMap maps the
-    * specified key. Returns null if the TreeMap contains
-    * no mapping for this key.
-    */
-  public V get(K key);
-```
-
-:::
-
-So in this case, `null`{ .java } is a value that is intentionally
-returned, and some of the other `TreeMap` methods intentionally
-take it as an argument value.
-
-(As it happens, that was probably a poor choice on the part of the
-Java library designers, and languages like Python and C`++` and
-Rust do things differently, but that's by the by.)
 
 ### Characteristics
 
@@ -784,127 +660,6 @@ should we do?\
 Answer: Enough to bring the risks to a tolerable level.)
 
 
-### Test coverage
-
--   Sometimes test plans will specify that tests ought to have some
-    specified level of *coverage* of the code.
--   *Test coverage* is some measure of the extent to which the
-    source code of a program has been executed when a particular
-    test suite runs.
--   Coverage is often measured using *test coverage tools*.
-
-
-### Test coverage tools
-
--   How do test coverage tools work?
--   Typically, they do what is called *instrumenting* the code in
-    some way -- adding extra instructions which record how
-    many times some piece of code has been executed.
--   This might be done at the source code level, but more
-    often is done at the byte-code or machine-code level.
-
-### Java test coverage tools
-
-Some common test coverage tools for Java include:
-
--   JCov
--   Cobertura
--   OpenClover
-
-### Java test coverage example
-
-Suppose we want to record test coverage using JCov. The steps
-are:
-
--   Compile code as normal (e.g. using `javac`, an IDE, or a build
-    tool such as `ant`)
--   "Instrument" the compiled bytecode:
-
-    `\begin{small}`{=latex}
-
-    ```bash
-    $ java -jar jcov.jar Instr [class1.class class2.class ...]
-    ```
-
-    `\end{small}`{=latex}
-
--   Run our program (or, some test suite). This produces a `result.xml` file.
-
-    `\begin{small}`{=latex}
-
-    ```bash
-    $ java -classpath jcov_file_saver.jar:. MyProg
-    ```
-
-    `\end{small}`{=latex}
-
-### Java test coverage example, cont'd
-
--   Generate a report from the XML file
-
-    ```bash
-    $ java -jar jcov.jar RepGen result.xml
-    ```
-
-### Code coverage reports
-
-Code coverage results are often produced in HTML format,
-or displayed in the IDE. Fragment of a sample report from Cobertura:
-
-`\makebox[\textwidth][c]{`{=latex} ![](lect04-images/cobertura-report.png){ width=120% }
-`}`{=latex}
-
-
-### Code coverage reports
-
-Typical measures of coverage given by code coverage tools
-are:
-
--   Line coverage (% of lines executed)
--   Branch coverage (% of branches taken)
--   Method coverage (% of methods executed)
--   Condition or predicate coverage (% of boolean conditions
-    evaluated to both true and false)
-
-### Custom code coverage
-
-What if we want to calculate some code coverage measure
-which our tool doesn't supply by default?\
-For instance, "prime path coverage" (which we will see in the
-lecture on graph-based testing) is not usually one of them.
-
-\pause
-
-Some tools provide an API which lets us write our own
-custom measures of coverage -- for instance, JCov does this.
-
-### Limits of code coverage tools
-
--   Code coverage tools give us measures of coverage
-    based on *source code*.
--   But sometimes our tests aren't based on source code as a model
--   For instance, we might be writing tests based on a state
-    chart or activity diagram of the system.
--   And Input Space Partitioning isn't based on *source code*, exactly --
-    it's based on *specifications* for some view of the system (or
-    a part of it) as a *function*. Knowing how many functions
-    or methods were executed as a result of our ISP-based tests
-    isn't a great measure of what degree of coverage the tests provide
-    of the input domain.
-
-
-### General coverage criteria
-
--   Therefore, we want more general measures of coverage,
-    which can be applied to things other than source code.
--   For each of the types of model-based testing covered
-    in this course (ISP, graph-based, logic-based, syntax-based)
-    we will also look at coverage criteria which let us
-    estimate how throrough our tests are.
--   Our coverage calculations will largely be manual,
-    in this case, since we have no equivalent of a
-    "code coverage" tool to tell us (say) when paths through an activity
-    diagram have been thoroughly executed.
 
 # ISP criteria
 
