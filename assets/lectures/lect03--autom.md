@@ -2,7 +2,7 @@
 title: |
   CITS5501 Software Testing and Quality Assurance\
   Test Automation
-author: 'Unit coordinator: Arran Stewart'
+author: 'Lecturer: Arran Stewart'
 ---
 
 ### Re-cap
@@ -44,16 +44,26 @@ does its actual behaviour match the expected behaviour?"
 
 ### Test structure
 
-Drilling down a little more into what this means, a test case
-needs to do the following three things:
+*Abstractly*, a test consists of things:
+
+1.  The subject under test (a class, method, system etc)
+2.  Inputs to that subject
+3.  The expected behaviour we expect to see
+
+### Test structure
+
+When it comes to actually implementing a test as code, we
+can generally divide our code up into the following stages:
 
 1.  Prepare the system (and/or an appropriate environment)
     so that it's in a suitable state for us to invoke some behaviour.
 2.  Invoke the desired behaviour.
 3.  Work out whether the system did what we expected it to.
 
-Sometimes each of these will be very simple; sometimes they're
-very complex.
+And sometimes:
+
+4.  Clean up (delete files, put resources like databases back into their
+    initial state) 
 
 ### Test structure
 
@@ -148,47 +158,35 @@ But some reading on this will be provided on Moodle next week.
 
 \small
 
-Tests need not always be implemented as code.
+Tests might not be implemented as code.
 
-For instance, we might want to test whether a whole travel booking
+Example: we want to test whether a whole travel booking
 system is "easily usable" (perhaps as part of an
-acceptance test).
-
-Let's suppose the relevant system requirement is:
+acceptance test):
 
 > "Travel agents shall be able to use all the system functions after
 > successful completion of a training course designed by the software
 > provider. After this training, the average number of errors made by
 > experienced users shall not exceed two per hour of system use."
 
-When we document our test, our "input values" might be everything
-we need to do to get trial versions of the system set up on the
-customer's premises, and have the system up and available for trial
-use by a selection of travel agents.
+- "input values" are everything
+  we need to do to get trial versions of the system set up on the
+  customer's premises, and have the system up and available for trial
+  use by a selection of travel agents.
+- "expected outputs" are the measures of number of errors
 
 ### Test structure -- example 2
 
-In how much detail do we document these "input values"? It depends
-on the situation. If a lot is at stake, we might document
-all the actions/inputs, and what preparation is needed, and what things the
-customer
-needs to be provide, in great detail. For a small system,
-if less is at stake, less detail as needed.
+How much detail is required?
+
+- If a lot is at stake, we might document
+  all the actions/inputs, and what preparation is needed, and what things the
+  customer needs to be provide, in great detail.
+- For a small system, if less is at stake, less detail is needed.
 
 (We give sufficient detail to reduce the *risk* of things going
 wrong to an acceptable level -- more on this in the lecture
 on risk.)
-
-### Test structure -- example 2
-
-What are the "expected values" in this scenario?
-
-It's the number of errors per user not exceeding two per hour
-of system use.
-
-
-
-
 
 ### Questions
 
@@ -238,30 +236,31 @@ or manually run tests.)
 
 ### How tests relate
 
-- *Unit tests* are at the bottom of the hierarchy, and
-  directly test small parts of the system created during
-  *system implementation*.
+\alert{Unit tests}
 
-  They should have the properties we said all good unit tests
-  should have (independent, quick to run), and should be run frequently
+- Directly test small parts of the system created during
+  system implementation.
+- Should have properties we said all good unit tests
+  should have (independent, quick to run)
+- Should be run frequently
   as a project progresses. (e.g. for every change we make to a class)
 
 ### How tests relate
 
-- *Integration tests* are in the middle of the hierarchy.
-  They test whether two or more components interoperate properly.
+\alert{Integration tests}
 
-  They focus on the flow of data and/or control between components,
-  and often will test for properties implied by the system *design*.
-
-  They often are run less frequently than unit tests -- e.g. if a unit
+- Test whether two or more components interoperate properly.
+- Focus on the flow of data and/or control between components.
+- Often will test for properties implied by the system *design*.
+- Run less frequently than unit tests -- e.g. if a unit
   is being changed, we might run integration tests once the unit tests
   are passing.
 
+\alert{Higher-level tests}
 
-
-- Higher-level tests -- system tests and subsystem tests of various
-  sorts, perhaps including acceptance tests -- usually take more
+- System tests and subsystem tests of various
+  sorts, perhaps including acceptance tests 
+- Usually take more
   effort to set up, and are run fewer times (perhaps just once,
   in the case of acceptance tests).
 
@@ -278,38 +277,34 @@ or manually run tests.)
 
 :::
 
-Both of these are covered in the next few lectures. We look at
-ways of grouping together different sorts of input so that
-we don't need to test exhaustively, and at ways of working
-out how much of the system we have tested (and ought to test).
-
+- Covered in the next few lectures.
 
 ### Coming up with tests
 
-In brief, we come up with tests by looking at *requirements and
-specifications*, and thinking about the system -- modelling it -- in different
+We come up with tests by looking at *requirements and
+specifications*, and thinking about the system -- modelling it -- in multiple
 ways.
 
 ### Coming up with tests
 
 Consider an Internet-connected toaster.
 
-At a high level, the *system* level, we can look at the system
-in a few different ways, depending on what part of the
-system requirements and specification we're trying to test.
+- At a high *system* level -- we can look at the system
+  in different ways
+- Sometimes, it's useful to think of the system as a *function* --
+  something that takes stuff *in* (parameters and state) and
+  spits something *out* (a return value, and/or a new state).
+- e.g. We can think of a toaster as taking bread (or crumpets,
+  or muffins, or other bread products) and control settings *in*,
+  and spitting something *out* (toast).
 
-Sometimes, it'll be useful to think of the system as a *function* --
-something that takes stuff *in* (parameters and state) and
-spits something *out* (a return value, and/or a new state).
-
-e.g. We can think of a toaster as taking bread (or crumpets,
-or muffins, or other bread products) and control settings *in*,
-and spitting something *out* (toast).
-
+*Input Space Partitioning* provides us with ways of coming up
+with tests for things that look like functions, and measuring
+the *coverage* we have.
 
 ### Coming up with tests
 
-But we also might have some kind of *use-case* for how the toaster should
+We also might have some kind of *use-case* for how the toaster should
 be used:
 
 `\vspace{-0.5em}~\hrule`{=latex}
@@ -330,16 +325,16 @@ Scenario: User is in the toaster's physical location
 
 ### Coming up with tests
 
-Use cases can be thought of as *graphs* -- steps, and
-links between steps -- and this way of thinking can help
-us come up with tests (and decide if we've tested enough).
-
-Other aspects of the system can be thought of as *logic expressions*
-and as *grammars* or *syntaxes*.
-
-Pretty much any aspect of the system we're interested in can be
-thought of in one of these ways (as a function, a graph, a
-[set of] logic expressions, or a grammar).
+- Use cases can be thought of as *graphs* -- steps, and
+  links between steps -- and this way of thinking can help
+  us come up with tests (and decide if we've tested enough).
+- *Graph-based testing* tells us if our tests have good
+  coverage, based on a model of our system as a graph
+- Other aspects of the system can be thought of as *logic expressions*
+  and as *grammars* or *syntaxes*.
+- Almost any aspect of the system we're interested in can be
+  thought of in one of these ways (as a function, a graph, a
+  [set of] logic expressions, or a grammar).
 
 More on this in later lectures.
 
@@ -585,6 +580,9 @@ class TestArithmeticOperations {
     variables
 -->
 
+
+<!--
+
 ### Fixtures in Python
 
 <div class="notes">
@@ -720,7 +718,23 @@ Common assertions
 %\bottomrule
 \end{tabular}
 
-### How to use assertion methods -- some tips
+-->
+
+### Assertions
+
+Testing frameworks will have some way of doing the "Assertion"
+part of the "Arrange, Act, Assert" pattern.
+
+JUnit relies on assertion methods - e.g.
+
+```java
+import static org.junit.jupiter.api.Assertions.*;
+// ...
+int result = addNumbers(2,3);
+assertEquals(5, result, "2 + 3 should equal 5");
+```
+
+### Assertion methods -- some tips
 
 - In JUnit, the parameter order for assertions is: expected value, then
   actual value, then message. (Hover over the assertion method in your IDE
