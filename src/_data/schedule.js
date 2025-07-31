@@ -97,7 +97,7 @@ Testing 3 (logic testing)
       // <!-- wld be nice:
       //   Jorgensen, *Software Testing: A Craftsman's Approach*, 4th edn, ch 21
       // -->
-    assessmentDetails: 'Project phase 1 published',
+    assessmentDetails: 'Project phase 1 due',
     },
 
     {weekNum: null,
@@ -117,7 +117,7 @@ Testing 3 (logic testing)
       ,
     reading:
       `- Pressman, ch 20 ("Review techniques"), ch 22 ("Software testing strategies")`,
-    assessmentDetails: 'Project phase 1 due',
+    assessmentDetails: 'Project phase 2 release',
     },
 
 
