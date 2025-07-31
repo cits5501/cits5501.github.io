@@ -426,7 +426,7 @@ Acceptance testing
 Regression testing
 
 :   \
-    Running test suites to ensure old bugs are re-introduced
+    Running test suites to ensure old bugs are not re-introduced
 
 System testing
 
