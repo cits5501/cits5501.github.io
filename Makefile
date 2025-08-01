@@ -8,9 +8,21 @@ SHELL=bash
 
 # docker
 
+UNAME := $(shell uname)
+
+ifndef DOCKER_PLATFORM
+  ifeq ($(UNAME),Darwin)
+    DOCKER_PLATFORM := linux/arm64
+  else
+    DOCKER_PLATFORM := linux/amd64
+  endif
+endif
+
+IMAGE_NAMESPACE=adstewart
+
 IMAGE_NAME=cits5501-website
 
-IMAGE_VERSION=0.1.1
+IMAGE_VERSION=0.1.2
 
 print-image-name:
 	@echo $(IMAGE_NAME)
@@ -20,7 +32,7 @@ print-image-version:
 
 # eleventy
 
-IMG=$(IMAGE_NAME):$(IMAGE_VERSION)
+IMG=$(IMAGE_NAMESPACE)/$(IMAGE_NAME):$(IMAGE_VERSION)
 PACKAGE_DIR=/opt/site
 ELEVENTY_JS_FILE=/src/.eleventy.js
 IN_DIR = $$PWD/src
@@ -42,16 +54,30 @@ docker_args = \
 	    -v $(ASSETS_DIR):/assets \
 	    -v $(OUT_DIR):/out \
 	    $(MOUNT_PACKAGE) \
+			--platform $(DOCKER_PLATFORM) \
 	    --name $(CTR_NAME) \
 	    --workdir $(PACKAGE_DIR) \
 	    --entrypoint sh
 
+# quick and dirty build
+
+TARGET_PLATFORMS = linux/amd64,linux/arm64
+#TARGET_PLATFORMS = linux/amd64
+
+# uses the builder `multiarch-builder` - we assume
+# it's been created as per the developer notes in HACKING.md.
 docker-build:
-	docker build --progress=plain -f Dockerfile \
-	  --cache-from cits5501-website:latest \
-	  --cache-from $(IMAGE_NAME):latest \
-	  --cache-from $(IMG) \
-	  -t $(IMG) -t $(IMAGE_NAME):latest .
+	docker buildx build \
+		--progress=plain \
+		--builder=multiarch-builder \
+		--cache-from $(IMAGE_NAMESPACE)/$(IMAGE_NAME):$(IMAGE_VERSION) \
+		--cache-from $(IMAGE_NAMESPACE)/$(IMAGE_NAME):latest \
+		--platform $(TARGET_PLATFORMS) \
+		-f Dockerfile \
+		-t $(IMAGE_NAMESPACE)/$(IMAGE_NAME):$(IMAGE_VERSION) \
+		-t $(IMAGE_NAMESPACE)/$(IMAGE_NAME):latest \
+		--push \
+		.
 
 # real kill target
 kill_:
@@ -61,8 +87,6 @@ kill_:
 # silent wrapper of kill_
 kill:
 	make kill_ 2>/dev/null>/dev/null
-
-pullfirst = -$(DOCKER) pull $(IMG)
 
 # quick-and-dirty serve, for local use
 # We use the dev environment
@@ -76,15 +100,13 @@ serve: kill
 
 # build static site
 build: kill
-	$(pullfirst)
-	echo make build && $(DOCKER) run  --rm \
+	$(DOCKER) run --rm \
 	    $(docker_args) \
 	    $(IMG) \
 	    -c "$(DEBUG_FLAGS) $(ENVIRO_FLAGS) eleventy.sh $(PACKAGE_DIR) $(ELEVENTY_JS_FILE)"
 
 docker-shell: kill
-	$(pullfirst)
-	echo make Docker shell && set -x && $(DOCKER) run --pull --rm -it \
+	set -x && $(DOCKER) run --pull --rm -it \
 	    $(docker_args) \
 	    -p 8080:8080 \
 	    $(IMG)
