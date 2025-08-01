@@ -68,6 +68,7 @@ TARGET_PLATFORMS = linux/amd64,linux/arm64
 # it's been created as per the developer notes in HACKING.md.
 docker-build:
 	docker buildx build \
+		--pull \
 		--progress=plain \
 		--builder=multiarch-builder \
 		--cache-from $(IMAGE_NAMESPACE)/$(IMAGE_NAME):$(IMAGE_VERSION) \
