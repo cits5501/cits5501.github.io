@@ -1,4 +1,4 @@
-FROM adstewart/eleventy:1.0.0
+FROM adstewart/eleventy:1.0.1
 
 WORKDIR /opt/site
 
