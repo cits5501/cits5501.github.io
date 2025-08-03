@@ -5,7 +5,13 @@ title: |
 
 `~\vspace{-5em}`{=latex}
 
-## 1. Parameterized tests
+## 1. Data-driven tests
+
+In this lab, we examine a testing pattern commonly referred to as ["data-driven
+testing"][ddt].
+The JUnit documentation calls tests created with this pattern "parameterised tests".
+
+[ddt]: https://en.wikipedia.org/wiki/Data-driven_testing
 
 Normal test methods in JUnit don't take any parameters at all --
 for instance, the `testAdd` method from last week's code:
@@ -79,22 +85,16 @@ The code for this week's lab is the same as last week's,
 but with some new test methods, so you can try out the
 `addZeroHasNoEffect` test if you haven't already:
 
-`\genericbox`{=latex}
-<div style="border: solid 2pt blue; background-color: hsla(241, 100%,50%, 0.1); padding: 1em; border-radius: 5pt; margin-top: 1em;">
-
-
 **Exercises**
 
-a.  Run the tests in your IDE or editor to confirm that all those ints are
-    used -- how can you tell?
-#.  Try changing them and/or adding to the list.
-#.  `addZeroHasNoEffect` is a single method. But (based on the material
-    from lectures and the textbooks) is it also a single *test case*?
-    If not, how many test cases does it comprise?
+:   a.  Run the tests in your IDE or editor to confirm that all those ints are
+        used -- how can you tell?
+    #.  Try changing them and/or adding to the list.
+    #.  `addZeroHasNoEffect` is a single method. But (based on the material
+        from lectures and the textbooks) is it also a single *test case*?
+        If not, how many test cases does it comprise?
 
 
-</div>
-`\endgenericbox`{=latex}
 
 
 
@@ -209,56 +209,56 @@ in a list-like object (of type `Stream<Arguments>`):
 
 
 
-`\genericbox`{=latex}
-<div style="border: solid 2pt blue; background-color: hsla(241, 100%,50%, 0.1); padding: 1em; border-radius: 5pt; margin-top: 1em;">
-
 **Exercises**
 
-a.  How many *test cases* would you say `tableOfTests` and
-    `additionTestCasesProvider` comprise?
-#.  Read through the JUnit documentation on writing parameterized tests.
-    (You might find the [baeldung.com](https://www.baeldung.com/)
-    ["Guide to JUnit 5 Parameterized Tests"][baeldung-guide] by
-    [Ali Dehghani](https://www.baeldung.com/author/ali-dehghani)
-    helpful as well.) If you have time, try experimenting
-    with the different features it describes.
-#.  In Java, `enum` types are used to represent types that can
-    take on values from only a distinct set. By convention, the values
-    are given names in ALL CAPS with underscores to separate
-    words (also called ["SCREAMING_SNAKE_CASE"][snake-case]).
+:   a.  How many *test cases* would you say `tableOfTests` and
+        `additionTestCasesProvider` comprise?
+    #.  Read through the JUnit documentation on writing parameterized tests.
+        (You might find the [baeldung.com](https://www.baeldung.com/)
+        ["Guide to JUnit 5 Parameterized Tests"][baeldung-guide] by
+        [Ali Dehghani](https://www.baeldung.com/author/ali-dehghani)
+        helpful as well.) If you have time, try experimenting
+        with the different features it describes.
+    #.  In Java, `enum` types are used to represent types that can
+        take on values from only a distinct set. By convention, the values
+        are given names in ALL CAPS with underscores to separate
+        words (also called ["SCREAMING_SNAKE_CASE"][snake-case]).
+    
+        For instance,
+    
+        ```java
+        public enum Weekday {
+          MON, TUE, WED, THU, FRI, SAT, SUN
+        }
+        ```
+    
+        or
+    
+        ```java
+        public enum Color {
+          RED, ORANGE, YELLOW, BLUE, GREEN, INDIGO, VIOLET
+        }
+        ```
+    
+        (For more on Java enums, including how to create
+        enums with constructors and fields,
+        see the Java documentation on [enum types][enum-types].)
+    
+        Suppose we need to run a test which should be passed each `Weekday`
+        in turn. Which JUnit annotation should we use for this?
+    #.  See what you can find out about data-driven testing on the web.
+        (You could also try using an LLM or other AI tool, but it's useful
+        to know what sources it's using -- so enable that, if it's an option.)
 
-    For instance,
-
-    ```java
-    public enum Weekday {
-      MON, TUE, WED, THU, FRI, SAT, SUN
-    }
-    ```
-
-    or
-
-    ```java
-    public enum Color {
-      RED, ORANGE, YELLOW, BLUE, GREEN, INDIGO, VIOLET
-    }
-    ```
-
-    (For more on Java enums, including how to create
-    enums with constructors and fields,
-    see the Java documentation on [enum types][enum-types].)
-
-    Suppose we need to run a test which should be passed each `Weekday`
-    in turn. Which JUnit annotation should we use for this?
-#.  If you have used testing frameworks in languages other than Java --
-    how do they compare with JUnit? Do they offer facilities for
-    creating data-driven tests? Are these more or less convenient
-    than the way things are done with JUnit?
+        Why is it useful? When should it be used? When shouldn't it be used?
+    #.  If you have used testing frameworks in languages other than Java --
+        how do they compare with JUnit? Do they offer facilities for
+        creating data-driven tests? Are these more or less convenient
+        than the way things are done with JUnit?
 
 [snake-case]: https://en.wikipedia.org/wiki/Snake_case#:~:text=SCREAMING_SNAKE_CASE&text=uses-,SCREAMING_SNAKE_CASE 
 [enum-types]: https://docs.oracle.com/javase/tutorial/java/javaOO/enum.html
 
-</div>
-`\endgenericbox`{=latex}
 
 
 
@@ -276,6 +276,34 @@ c.  The JUnit documentation explains how the `@EnumSource` annotation
     can be used with enum types. By default, an `@EnumSource` will
     iterate over all the possible values of an enum type,
     calling the test method once with each value.
+d.  Data-driven testing is helpful to reduce duplication, express
+    intent more clearly, and make tests easier to maintain.
+  
+    If we have a large number of test cases which differ only
+    in the test values used, then the data-driven testing pattern
+    is a convenient and helpful way of writing them. It also
+    makes new test cases much easier to add -- often, that will
+    involve just adding a single row or line to a data source,
+    rather than writing a whole JUnit method -- which encourages
+    testers to be comprehensive.
+
+    It's also much easier for someone reading the source code to
+    see if any edge cases may have been left off.
+
+    Data-driven testing _isn't_ appropriate where different test
+    cases need different setup, or have very different types of expected
+    value (e.g. in one test case we expect an int to be returned, but in
+    another we expect an exception to be thrown). It's also not appropriate
+    if different test cases require different control flow, or different
+    ways of verifying that the test past. If you are applying the data-driven
+    testing pattern, and are trying to do something more complex than just
+    creating a "table" of
+    test values and expected results -- then data-driven testing is probably
+    not the right approach.
+
+    A good rule of thumb is: if _what_ you're testing and _how_ you're
+    testing it remains the same, but the _data_ changes -- then data-driven
+    testing is probably a good fit. 
 #.  Writing data-driven tests tends to be more convenient (and less
     verbose) in languages which either are not statically type-checked
     (for instance, JavaScript, Python and Ruby and Lisp-family
