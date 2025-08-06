@@ -36,8 +36,6 @@ customStyle: |
 
 -----
 
-*Version August 2025*
-
 ## Study practices
 
 ### How can I do well in CITS5501? { #how-can-I-do-well-in-CITS5501 }
@@ -158,10 +156,10 @@ nor, really, the best in any way at all, except that it *is* used almost everywh
 software development industry, so you might as well get familiar with
 it.
 
-You will be using [GitHub](https://github.com/) for the project.  
+You will be using [GitHub](https://github.com/) for the project.
 GitHub is a very widely used web-based service for hosting Git repositories.
 A workshop on the basics of using GitHub  for group-based software development
-will be held in the [week 5 lecture](https://cits5501.arranstewart.io/schedule/)
+will be held in the [week 5 lecture](https://cits5501.arranstewart.io/schedule/).
 
 MIT University provides an [introduction to Git][mit-git] and an
 explanation of why you should use a version-control system.
@@ -468,7 +466,6 @@ Wherever possible, we adopt a rubric based on the following scheme:
     ![]({{ '/images/rubric-table.png'  | url }})
 
 
-
 ### What should I do if a question or task in an assessment is ambiguous or contains an error? { #errors-in-questions }
 
 For **projects**{ class="hi-pri" }:
@@ -536,12 +533,12 @@ apply to quizzes, tests or exams for {{ siteinfo.unitcode }}.
 
 ### Are project groups self-selected or allocated? Why?
 
-Students will be **allocated** to a group of (apx) 5 students for the project.
+Students will be **allocated** to a group of (approx.) 5 students for the project.
 Each group is assigned a lab facilitator who will meet with the group fortnightly to support team forming and project matters, and
 who will mark the project and moderate the team professional contribution mark.
-The group list will be published in the CITS5501/3501 ms-teams and announced in the discussion forum.
+The group list will be published in the CITS5501/3501 MS Teams area and announced in the discussion forum.
 
-See the [Project Teams](https://teams.microsoft.com/l/channel/19%3Aec632d098f164f5a8fefc272e14ae398%40thread.tacv2/Project%20Teams?groupId=daaeb288-ca0c-4b3f-824b-60462e4a2e3d&tenantId=05894af0-cb28-46d8-8716-74cdb46e2226) link in ms-teams for more resources on getting the most out of team work.
+See the [Project Teams](https://teams.microsoft.com/l/channel/19%3Aec632d098f164f5a8fefc272e14ae398%40thread.tacv2/Project%20Teams?groupId=daaeb288-ca0c-4b3f-824b-60462e4a2e3d&tenantId=05894af0-cb28-46d8-8716-74cdb46e2226) link in MS Teams for more resources on getting the most out of team work.
 
 Project groups are randomly allocated. This method simulates real-world working
 environments where you'll often collaborate with colleagues and clients you haven't chosen.
@@ -577,7 +574,7 @@ https://pubsonline.informs.org/doi/10.1287/orsc.2021.1520
 [comfort]: https://news.cornell.edu/stories/2022/03/leaving-your-comfort-zone-inspires-motivation-growth
 
 
-### My team and I are unable to find a time when we can all meet  – what can we do?
+### My team and I are unable to find a time when we can all meet – what can we do?
 
 Groups are allocated based on the lab session you selected in CAS.  Groups can meet online or face to face, although at least some face to face meetings should be arranged.   Any problems with group attendance should be raised in the first instance with your assigned facilitator, or with the unit coordinator by making an Office Hours appointment or by emailing <cits5501-pmc@uwa.edu.au>.
 
@@ -594,7 +591,7 @@ Normally, swaps must be agreed upon by all parties involved.
 #}
 -->
 
-### Is individual contribution taken into account ?
+### Is individual contribution taken into account?
 
 Yes, individual contributions are taken into account. Students are asked to quantify the
 contributions made by each team member, including themselves. A Contribution Factor (ranging
@@ -609,7 +606,7 @@ In the project, your facilitator meetings will be used for formative discussions
 to help you get the best out of group work.
 
 
-### What are the rules for Late Submissions and Special Considerations for the Group Project { #late-project }
+### What are the rules for late submissions and special considerations for the group project? { #late-project }
 
 Groups must submit the project deliverables by their due date.  Penalties will be applied to late submissions according to UWA policy.
 UWA's assessment policy states that 
@@ -617,7 +614,7 @@ UWA's assessment policy states that
 For this project, in accordance with UWA's assessment policy, the 
 unit coordinator will "provide an alternative assessment for the individual student" if required; and 
 mark to "a reduced assessment task for the group".
-Any questions about EVA or UAAPs can be discussed with the unit coordinator at consultation times or email to <cits5501-pmc@uwa.edu.au>.
+Any questions about EVA or UAAPs can be discussed with the unit coordinator at consultation times or email to {% email_el_spannized coordinator.email %}.
 
 <!--
 COMMENT: Note that UWA's sem 2 2025 EAV policy DOES allow extensions for group submissions at the discretion of the UC
@@ -753,18 +750,12 @@ you are not permitted to use AI tools to complete an assessment, unless the asse
 For CITS5501/CITS3501 learning activities the following Unit Coordinator permissions apply for the use of AI tools:
 
 - **Online tests:** You **may not use AI tools** in the tests.  Using AI tools in a test or project is depriving yourself of the opportunity to get honest feedback on your own competencies and abilities. In the final exam for the unit, you will not have access to AI tools, so you will have to know how to write code or English answers yourself.  Using AI tools for previous assessments may result in your having a lack of practice at doing so.
-
 - **Group Project:** You **may use AI tools** to generate **up to 25%** of the code for your project.   You **must include a human evaluation** (code review and tests) for any AI-generated code you use.  AI-generated code must also be **acknowledged with an in-code comment**.   Note that almost all of the marks in the project are for your ability to design and evaluate of software quality rather than
 generate code (AI generated or not).
-
-- **Labs:** You are strongly recommended to try to do the lab exercises **without AI-assistance**.   Sitting with a problem that you can't solve immediately is a very important step for learning.
-Use your lecture notes, work with a partner, walk through the problem with your facilitator.  
-You **may use AI tools** to check or explain your answers later.
-
+- **Labs:** You are strongly recommended to try to do the lab exercises **without AI-assistance**. Sitting with a problem that you can't solve immediately is a very important step for learning. Use your lecture notes, work with a partner, walk through the problem with your facilitator. You **may use AI tools** to check or explain your answers later.
 - **Self-study:** You **are encouraged to use AI tools** to help you review and study Software Testing and Quality Assurance topics.
-See [Sydney AI for Learners[(https://canvas.sydney.edu.au/courses/51655) for some excellent resources on learning with AI.
-
-- **Exam:**  Paper-based written exam.  **No AI tools permitted**.  See the Assessment page for more details.
+See [Sydney AI for Learners](https://canvas.sydney.edu.au/courses/51655) for some excellent resources on learning with AI.
+- **Exam:**  Paper-based written exam.  **No AI tools are permitted**.  See the [Assessment](/assessment) page for more details.
 
 ### Wouldn't the use of ChatGPT or similar AI tools help ensure the accuracy of code or English answers?
 
@@ -773,15 +764,10 @@ similar AI tools can help "ensure accuracy" in their code or English answers. Bu
 is mistaken: large language models (LLMs), the class of tools ChatGPT belongs to, do not
 have any ability to distinguish correct from incorrect facts, and their sole guide to what
 sort of answers they produce is statistical likelihood of particular words appearing. LLM
-tools can frequently [hallucinate][hallicination] incorrect answers, and, due to their
+tools can frequently [hallucinate][hallucination] incorrect answers, and, due to their
 design, are incapable of dealing with certain sorts of questions.
 
-[hallicination]: https://www.iguazio.com/glossary/llm-hallucination/
-
-<!-- BROKEN LINK
-An interactive website [here](https://quiz.cord.com) highlights some of the limitations
-get a better idea of their limitations.
--->
+[hallucination]: https://www.iguazio.com/glossary/llm-hallucination/
 
 <!--
 TODO: mention pig latin, caesar, morse code
@@ -958,12 +944,13 @@ You should email the [unit coordinator](/#unit-coordinator). Before emailing, ma
 
 ## Projects
 
-### Late Project Submissions
+### Late project submissions
+
 Please see
-[What are the rules for Late Submissions and Special Considerations for the Group Project](#late-project)
+[What are the rules for Late Submissions and Special Considerations for the Group Project?](#late-project)
 
 
-### Complex Computing Problems
+### Complex computing problems
 
 CITS5501 and CITS3501 are  defined as **advanced units** for the Australian Computer Society (ACS) Accreditation of 
 the Master of IT and Bachelor of Engineering (Software Systems) programs.
@@ -974,25 +961,14 @@ You should keep these requirements in mind when completing the project, and more
 The criteria for complex computing are:
 
 1. involves wide-ranging or conflicting technical, computing, and other issues; 
-
 2. has no obvious solution, and requires conceptual thinking and innovative analysis to formulate suitable abstract models; 
-
 3. a solution requires the use of in-depth computing or domain knowledge and an analytical approach that is based on well-founded principles; 
-
 4.  involves infrequently encountered issues; 
-
 5. is outside problems encompassed by standards and standard practice for professional computing;
-
-6.  involves diverse groups of stakeholders with widely varying needs; 
-
+6. involves diverse groups of stakeholders with widely varying needs; 
 7. has significant consequences in a range of contexts; 
-
 8. is a high-level problem possibly including many component parts or sub-problems; 
-
 9. identification of a requirement or the cause of a problem is ill defined or unknown. 
-
-
-
 
 ### How are problems with the project specification resolved?
 
