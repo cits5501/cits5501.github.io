@@ -156,6 +156,11 @@ nor, really, the best in any way at all, except that it *is* used almost everywh
 software development industry, so you might as well get familiar with
 it.
 
+You will be using [GitHub](https://github.com/) for the project.
+GitHub is a very widely used web-based service for hosting Git repositories.
+A workshop on the basics of using GitHub  for group-based software development
+will be held in the [week 5 lecture](https://cits5501.arranstewart.io/schedule/).
+
 MIT University provides an [introduction to Git][mit-git] and an
 explanation of why you should use a version-control system.
 
@@ -460,6 +465,7 @@ Wherever possible, we adopt a rubric based on the following scheme:
 
     ![]({{ '/images/rubric-table.png'  | url }})
 
+
 ### What should I do if a question or task in an assessment is ambiguous or contains an error? { #errors-in-questions }
 
 For **projects**{ class="hi-pri" }:
@@ -523,9 +529,16 @@ that you'll be submitting late, but staff understand that this is not
 always feasible. Note that adjustments to submission deadlines do not
 apply to quizzes, tests or exams for {{ siteinfo.unitcode }}.
 
-## Group assessments
+## Group assessment
 
 ### Are project groups self-selected or allocated? Why?
+
+Students will be **allocated** to a group of (approx.) 5 students for the project.
+Each group is assigned a lab facilitator who will meet with the group fortnightly to support team forming and project matters, and
+who will mark the project and moderate the team professional contribution mark.
+The group list will be published in the CITS5501/3501 MS Teams area and announced in the discussion forum.
+
+See the [Project Teams](https://teams.microsoft.com/l/channel/19%3Aec632d098f164f5a8fefc272e14ae398%40thread.tacv2/Project%20Teams?groupId=daaeb288-ca0c-4b3f-824b-60462e4a2e3d&tenantId=05894af0-cb28-46d8-8716-74cdb46e2226) link in MS Teams for more resources on getting the most out of team work.
 
 Project groups are randomly allocated. This method simulates real-world working
 environments where you'll often collaborate with colleagues and clients you haven't chosen.
@@ -533,12 +546,14 @@ Random allocation also promotes fairness by ensuring that students who might str
 Our aim is to foster diverse and inclusive teams, as working with diverse perspectives tends
 to lead to more nuanced understanding of the unit material.
 
+<!--
 {#
 
 on group assessment, see
 <https://teaching.cornell.edu/teaching-resources/active-collaborative-learning/collaborative-learning/how-evaluate-group-work>
 
 #}
+-->
 
 When students choose their own groups, they often select friends or close acquaintances.
 While this can create a [comfortable working environment][groupthink],
@@ -546,24 +561,35 @@ learning to communicate effectively with different working styles is crucial in 
 teams,
 and research shows that personal growth is best fostered when students go [outside their comfort zone][comfort].
 
+<!--
 {#
 comment:
 also - some evidence suggests students have more creative ideas
 when groups _don't_ self-select.
 https://pubsonline.informs.org/doi/10.1287/orsc.2021.1520
 #}
+-->
 
 [groupthink]: https://www.bbcdigital.com.au/breaking-the-consensus-trap-how-to-avoid-groupthink-in-the-workplace/
 [comfort]: https://news.cornell.edu/stories/2022/03/leaving-your-comfort-zone-inspires-motivation-growth
 
-### My team and I are unable to find a time when we can all meet (face-to-face or online) – what can we do?
 
+### My team and I are unable to find a time when we can all meet – what can we do?
+
+Groups are allocated based on the lab session you selected in CAS.  Groups can meet online or face to face, although at least some face to face meetings should be arranged.   Any problems with group attendance should be raised in the first instance with your assigned facilitator, or with the unit coordinator by making an Office Hours appointment or by emailing <cits5501-pmc@uwa.edu.au>.
+
+
+<!--
+{#
+comment: NO SWAPS
 If your team is struggling to find a suitable meeting time, there is an opportunity to swap
 team members during the first two weeks after groups are announced (and before the project
 specification is released). You can post on the
 forum explaining your reason for wanting to swap, or, if your reasons are more personal and
 should remain private, you can contact the Unit Coordinator directly.
 Normally, swaps must be agreed upon by all parties involved.
+#}
+-->
 
 ### Is individual contribution taken into account?
 
@@ -576,6 +602,31 @@ member's allocated tasks and contributions, and/or use a private GitHub reposito
 While these records are not submitted with the project, the Unit Coordinator may request to see
 them if any discrepancies arise during the grading process.
 
+In the project, your facilitator meetings will be used for formative discussions and evaluation of professional behaviour
+to help you get the best out of group work.
+
+
+### What are the rules for late submissions and special considerations for the group project? { #late-project }
+
+Groups must submit the project deliverables by their due date.  Penalties will be applied to late submissions according to UWA policy.
+UWA's assessment policy states that 
+"In cases where a student who is part of a group assessment receives approval for an EVA application, the outcome must be considered in consultation with the Unit Coordinator."
+For this project, in accordance with UWA's assessment policy, the 
+unit coordinator will "provide an alternative assessment for the individual student" if required; and 
+mark to "a reduced assessment task for the group".
+Any questions about EVA or UAAPs can be discussed with the unit coordinator at consultation times or email to {% email_el_spannized coordinator.email %}.
+
+<!--
+COMMENT: Note that UWA's sem 2 2025 EAV policy DOES allow extensions for group submissions at the discretion of the UC
+
+5.6	In cases where a student who is part of a group assessment receives approval for an EVA application, the outcome must be considered in consultation with the Unit Coordinator. The possible outcomes include:
+(a)	extension to an assessment deadline for the whole group;
+(b)	provision of alternative assessment for the individual student; and 
+i.	redistribution of the assigned work to the rest of the group members with the possibility of an extension to the assessment deadline; and/or
+ii.	a reduced assessment task for the group
+(c)	Reassignment of group mark to other assessments if assessment task/item is weighted 10 per cent or less. This may be relevant for in-class group activities such as group presentations.
+(d)	Where a group member has a UAAP in place, any approved adjustment may be extended to the whole group within reason at the discretion of the UC.
+-->
 
 ## Academic conduct and source citation { #academic-conduct-source-citation }
 
@@ -599,7 +650,7 @@ UWA's [academic conduct policy][acad-policy].
 See the STUDYSmarter team's [Guide to Avoiding Academic
 Misconduct][misconduct-guide]{{blank}} (PDF) for additional details.
 
-In particular, you must not plagiarize any
+In particular, you must not plagiarise any
 work. Plagiarism is the unattributed use of
 someone else's words, creations, ideas or
 arguments as one's own. At UWA, it is extended to include paraphrasing
@@ -671,9 +722,19 @@ the workshops entitled "Critical thinking & academic culture" and
 
 [academic-skills-workshops]: https://www.uwa.edu.au/students/Support-services/Academic-support#workshops
 
-## Can I use ChatGPT, or other AI tools, when completing an assessment?
+-------
 
-In general, you are not permitted to use AI tools to complete an assessment, unless the assessment specifically provides for that. Here is a
+## Can I use ChatGPT, or other AI tools, when completing an assessment? { #AI-tools }
+
+AI tools such as Copilot and ChatGPT can generate test cases and other code automatically given simple prompts.
+Using AI tools effectively for coding tasks will be an important **part of your professional toolkit** as a software developer.
+In CITS5501/3501 we will help you learn how to use AI tools effectively for such tasks.
+However, AI tools do make mistakes, particularly since they may generate code with limited knowledge of its context.
+Therefore, a critical skill for graduates is the **ability to evaluate and critique code generated by AI tools**.
+Designing software tests on your own (independently of AI tools) is an important way for you to learn to do this.
+
+UWA's general guidance for the use of AI tools in assessment is that
+you are not permitted to use AI tools to complete an assessment, unless the assessment specifically provides for that. Here is a
 [description of the University's policy][ai-policy] on the use of AI tools:
 
 [ai-policy]: https://ipoint.uwa.edu.au/app/answers/detail/a_id/3432/~/using-chatgpt-and-other-ai-tools-in-your-assessments
@@ -684,34 +745,32 @@ In general, you are not permitted to use AI tools to complete an assessment, unl
 > AI, you must always cite and reference your uses of it. You cannot submit for assessment
 > any work that is not your own.
 
-You can certainly use AI tools as part of your own *self-study* for the unit, but you may
-not use them as part of an assessment.
+### Unit coordinator permissions for AI tools in CITS5501/3501 assessments { #AI-tools-in-cits5501 }
 
-In addition to constituting academic misconduct, using ChatGPT in assessments does yourself
-a disservice. Using ChatGPT in a test or project is depriving yourself of the opportunity to get honest
-feedback on your own competencies and abilities. In the final exam for the unit, you will
-*not* have access to AI tools, so you will have to know how to write code or English answers yourself – using AI
-tools for previous assessments may result in your having a lack of practice at doing so.
+For CITS5501/CITS3501 learning activities the following Unit Coordinator permissions apply for the use of AI tools:
 
-## Wouldn't the use of ChatGPT or similar AI tools help ensure the accuracy of code or English answers?
+- **Online tests:** You **may not use AI tools** in the tests.  Using AI tools in a test or project is depriving yourself of the opportunity to get honest feedback on your own competencies and abilities. In the final exam for the unit, you will not have access to AI tools, so you will have to know how to write code or English answers yourself.  Using AI tools for previous assessments may result in your having a lack of practice at doing so.
+- **Group Project:** You **may use AI tools** to generate **up to 25%** of the code for your project.   You **must include a human evaluation** (code review and tests) for any AI-generated code you use.  AI-generated code must also be **acknowledged with an in-code comment**.   Note that almost all of the marks in the project are for your ability to design and evaluate of software quality rather than
+generate code (AI generated or not).
+- **Labs:** You are strongly recommended to try to do the lab exercises **without AI-assistance**. Sitting with a problem that you can't solve immediately is a very important step for learning. Use your lecture notes, work with a partner, walk through the problem with your facilitator. You **may use AI tools** to check or explain your answers later.
+- **Self-study:** You **are encouraged to use AI tools** to help you review and study Software Testing and Quality Assurance topics.
+See [Sydney AI for Learners](https://canvas.sydney.edu.au/courses/51655) for some excellent resources on learning with AI.
+- **Exam:**  Paper-based written exam.  **No AI tools are permitted**.  See the [Assessment](/assessment) page for more details.
+
+### Wouldn't the use of ChatGPT or similar AI tools help ensure the accuracy of code or English answers?
 
 No, it would not. It's true that students sometimes mistakenly think that using ChatGPT or
 similar AI tools can help "ensure accuracy" in their code or English answers. But that idea
 is mistaken: large language models (LLMs), the class of tools ChatGPT belongs to, do not
 have any ability to distinguish correct from incorrect facts, and their sole guide to what
 sort of answers they produce is statistical likelihood of particular words appearing. LLM
-tools can frequently [hallucinate][hallicination] incorrect answers, and, due to their
+tools can frequently [hallucinate][hallucination] incorrect answers, and, due to their
 design, are incapable of dealing with certain sorts of questions.
 
-An interactive website [here](https://quiz.cord.com) highlights some of the limitations
-get a better idea of their limitations.
-
-[hallicination]: https://www.iguazio.com/glossary/llm-hallucination/
+[hallucination]: https://www.iguazio.com/glossary/llm-hallucination/
 
 <!--
-
 TODO: mention pig latin, caesar, morse code
-
 -->
 
 -------
@@ -884,6 +943,32 @@ You should email the [unit coordinator](/#unit-coordinator). Before emailing, ma
 -----
 
 ## Projects
+
+### Late project submissions
+
+Please see
+[What are the rules for Late Submissions and Special Considerations for the Group Project?](#late-project)
+
+
+### Complex computing problems
+
+CITS5501 and CITS3501 are  defined as **advanced units** for the Australian Computer Society (ACS) Accreditation of 
+the Master of IT and Bachelor of Engineering (Software Systems) programs.
+One of the criteria for advanced units, is that the unit includes project work that assesses
+**Complex Computing Criteria** as defined by the international 
+[Seoul Accord](https://www.seoulaccord.org/document.php?id=79) agreement for professional computing degrees.
+You should keep these requirements in mind when completing the project, and more generally for your studies in this unit.
+The criteria for complex computing are:
+
+1. involves wide-ranging or conflicting technical, computing, and other issues; 
+2. has no obvious solution, and requires conceptual thinking and innovative analysis to formulate suitable abstract models; 
+3. a solution requires the use of in-depth computing or domain knowledge and an analytical approach that is based on well-founded principles; 
+4.  involves infrequently encountered issues; 
+5. is outside problems encompassed by standards and standard practice for professional computing;
+6. involves diverse groups of stakeholders with widely varying needs; 
+7. has significant consequences in a range of contexts; 
+8. is a high-level problem possibly including many component parts or sub-problems; 
+9. identification of a requirement or the cause of a problem is ill defined or unknown. 
 
 ### How are problems with the project specification resolved?
 
