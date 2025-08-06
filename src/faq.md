@@ -609,6 +609,18 @@ In the project, your facilitator meetings will be used for formative discussions
 to help you get the best out of group work.
 
 
+### What are the rules for Late Submissions and Special Considerations for the Group Project { #late-project }
+
+Groups must submit the project deliverables by their due date.  Penalties will be applied to late submissions according to UWA policy.
+UWA's assessment policy states that 
+"In cases where a student who is part of a group assessment receives approval for an EVA application, the outcome must be considered in consultation with the Unit Coordinator."
+For this project, in accordance with UWA's assessment policy, the 
+unit coordinator will "provide an alternative assessment for the individual student" if required; and 
+mark to "a reduced assessment task for the group".
+Any questions about EVA or UAAPs can be discussed with the unit coordinator at consultation times or email to <cits5501-pmc@uwa.edu.au>.
+
+
+
 ## Academic conduct and source citation { #academic-conduct-source-citation }
 
 ### Are assessment submissions checked for plagiarism? { #plagiarism-checks }
@@ -935,6 +947,10 @@ You should email the [unit coordinator](/#unit-coordinator). Before emailing, ma
 -----
 
 ## Projects
+
+### Late Project Submissions
+Please see
+[What are the rules for Late Submissions and Special Considerations for the Group Project](#late-project)
 
 
 ### Complex Computing Problems
