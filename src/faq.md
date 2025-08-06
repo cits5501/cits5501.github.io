@@ -619,7 +619,17 @@ unit coordinator will "provide an alternative assessment for the individual stud
 mark to "a reduced assessment task for the group".
 Any questions about EVA or UAAPs can be discussed with the unit coordinator at consultation times or email to <cits5501-pmc@uwa.edu.au>.
 
+<!--
+COMMENT: Note that UWA's sem 2 2025 EAV policy DOES allow extensions for group submissions at the discretion of the UC
 
+5.6	In cases where a student who is part of a group assessment receives approval for an EVA application, the outcome must be considered in consultation with the Unit Coordinator. The possible outcomes include:
+(a)	extension to an assessment deadline for the whole group;
+(b)	provision of alternative assessment for the individual student; and 
+i.	redistribution of the assigned work to the rest of the group members with the possibility of an extension to the assessment deadline; and/or
+ii.	a reduced assessment task for the group
+(c)	Reassignment of group mark to other assessments if assessment task/item is weighted 10 per cent or less. This may be relevant for in-class group activities such as group presentations.
+(d)	Where a group member has a UAAP in place, any approved adjustment may be extended to the whole group within reason at the discretion of the UC.
+-->
 
 ## Academic conduct and source citation { #academic-conduct-source-citation }
 
