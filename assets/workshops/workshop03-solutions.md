@@ -6,12 +6,195 @@ title: |
 
 `~\vspace{-5em}`{=latex}
 
-## 0. Recommended reading
 
-Before attempting the exercises in this worksheet, it's recommended you complete the recommended
-reading for week 4, and review the lecture slides on Input Space Partitioning.
+## 1. Test coverage concepts
 
-## 1. Binary search
+Suppose you are asked to write tests for a Java method in the `AgePricing` class, whose Javadoc and signature are
+as follows:
+
+```java
+/** Returns true if age is eligible for adult ticket price.
+ *
+ * @arg age The age of the customer
+ * @return true if someone of that age is eligible for the adult ticket price,
+ *         false otherwise.
+ */
+public static boolean isAdult(int age);
+```
+
+Elsewhere in the API documentation, you're told that any person who is 18 or over
+is considered an adult.
+
+Suppose also you're given the following JUnit test for this method. (There's no need to
+compile and run it, but you're welcome to do so if you want.)
+
+
+```java
+import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
+
+class AgePricingTest {
+
+  @Test
+  void adultAgeShouldReturnTrue() {
+    assertTrue(AgePricing.isAdult(30));
+  }
+}
+```
+
+The above test is the *only* test currently in place, and we aren't given access to the
+implementation.
+
+**Question**
+
+:   Is this one test enough to be confident that the method works? If not, come up with additional *test cases*.[^test-cases] Think about:
+
+    - What are all the different "kinds" of ages we might need to check?
+    - Are there any special or edge values?
+    - What's just inside or just outside the adult cut-off?
+    - Are there unusual but possible inputs?
+
+[^test-cases]: As a reminder -- when being asked to come up with *test cases*, you just
+  need to come up with descriptions of tests; you're *not* being asked to write code (refer
+  to the week 1 lectures) -- if an assessment is asking you to write code, it will say
+  so (e.g. "Write JUnit 5-based tests for your test cases"). \
+  &nbsp; Each *test case* must specify (i) the inputs to the thing being
+  tested, and (ii) the expected outputs or results. The "thing being tested" is sometimes
+  referred to as *the subject under test*.
+
+
+
+
+<div class="solutions">
+
+**Sample solutions**:
+
+This one test is _not_ enough to be confident the method works. The method implementation
+ought to be extremely simple -- just return `age >= 18` -- but if we want have high
+confidence that the method is implemented correctly, we should probably check, in addition
+to the "30" case:
+
+2. The boundary at the minimum adult age (18)
+#. One below that boundary (17)
+#. Zero and/or or negative ages
+
+Once those tests are in place, we still don't _know_ for sure that the method is correct
+in all cases -- the only way of knowing that would be to test every single `int` value -- but our confidence in it should be much higher. It's _possible_ that the
+implementer of the method has written it as
+
+```java
+public static boolean isAdult(int age) {
+  if (age == 999)
+    return false;
+  else
+    return age >= 18;
+}
+```
+
+But unless the implementer is trying to be deliberately unhelpful, that seems unlikely. 
+More realistically, if there is a mistake, it would be
+
+- A mis-typed comparator (e.g. `<=` or `>` instead of `>=`), or (less likely)
+- An incorrect age (some number other than 18).
+
+Given the sorts of mistake an implementer is _likely_ to make, the four tests above
+(including the original test) should give us a high confidence the method works. 
+
+Beyond that, any additional tests reach a point of diminishing returns -- they don't
+increase our confidence much, and the extra tests constitute additional code that needs to be
+maintained. (You might like to think about: _why_ don't the additional tests increase our
+confidence? Then read the material in the textbook about Input Space Partitioning and see if
+that helps you formulate your answer.) 
+
+</div>
+
+
+
+In lectures, we've mentioned that Java code can be [instrumented][instrum] so that, after your tests
+run, a coverage tool can report which lines of implementation code were executed.
+One such tool is JaCoCo (Java Code Coverage), which integrates with build systems and IDEs to produce coverage reports:
+<https://www.jacoco.org/jacoco/>.
+
+[instrum]: https://en.wikipedia.org/wiki/Instrumentation_(computer_programming)
+
+Suppose we now are given access to the implementation of the `isAdult(int age)` method
+(feel free to suggest a plausible one). We
+instrument the method, and run the original single-test suite,
+then later your improved multi-test suite.
+
+**Question**
+
+:   Do you think the reported line coverage will change between the two suites? Why or why
+    not?
+    If the reported coverage doesn't change, what does that tell you about the limitations
+    of line coverage as a measure of how thoroughly a method has been tested?
+
+
+
+<div class="solutions">
+
+**Sample solutions**:
+
+The line coverage will almost certainly _not_ change --
+it will likely be exactly the same for both test suites.
+
+As we've noted, the implementation is likely to be (assuming it is correctly written):
+
+```java
+public static boolean isAdult(int age) {
+  return age >= 18;
+}
+```
+
+So there _is_ only one line in the body -- and all possible execution paths are short and
+go through the same single statement.
+Even with just the first test (age = 30), that line is executed.
+Adding more tests (e.g. boundary values) executes the same set of lines — so the line
+coverage number doesn't increase. (It's possible, though not likely, that a naive
+implementer might write the method using an `if ... else` statement -- but even then,
+one "false" and one "true" test case suffice to exercise all the lines in it.)
+
+What does this tell us about the limitations of line coverage?
+
+Line coverage measures whether a line was executed at least once, not how thoroughly its
+behaviour was tested.
+In our example, we can have 100% line coverage while missing critical behaviours at
+boundaries (e.g., age == 18) or in invalid input cases. For a boolean expression (`age >=
+18`) with only one variable in it, there will likely not be too many boundaries (just one in
+fact) -- but
+hopefully you can see that more complex expressions would give rise to more complex
+boundaries.
+Good testing needs to explore different conditions and [equivalence classes][equiv], not just "touch
+every line". In the material from this week and the following weeks, we'll look at ways of
+assessing coverage which go beyond simple metrics of "number of lines executed". ISP,
+graph-based testing, logic-based testing, and syntax-based testing all do the following:
+
+1. Suggest a model or possible way of viewing the subject under test -- e.g. as a mathematical
+   function (ISP), or as a set of logic expressions (logic-based testing).
+2. Once we've modeled the subject under test in a particular way, they give us ways of assessing
+   the thoroughness of a test suite.
+
+[equiv]: https://en.wikipedia.org/wiki/Equivalence_partitioning
+
+</div>
+
+
+
+<div style="border: solid 2pt blue; background-color: hsla(241, 100%,50%, 0.1); padding: 1em; border-radius: 5pt; margin-top: 1em;">
+
+::: block-caption
+
+Pre-reading for remaining exercises
+
+:::
+
+The remaining exercises in this worksheet assume general familiarity with the steps of Input Space
+Partitioning, so it's recommended you complete the recommended
+reading for week 4 from the textbook before attempting them.
+
+</div>
+
+## 2. Binary search
 
 Consider the Javadoc documentation and signature for the following Java method, which
 searches inside an array of `char`s for a particular value.
@@ -200,7 +383,7 @@ Some characteristics we could use for our char are:
 
 
 
-## 2. Stack class
+## 3. Stack class
 
 Suppose we have a Stack class that is intended to implement the
 [stack abstract data type][stack-type]. The class stores `int`s, and provides methods for
@@ -279,7 +462,7 @@ and what "expected behaviour" could we possibly test for?
 
 
 
-## 3. Further questions
+## 4. Further questions
 
 Consider the following questions about ISP and try writing an answer to each.
 (Questions like this are typical of ones you might be asked in the mid-semester test or
@@ -338,7 +521,7 @@ the maximum and minimum values of an `int`), and still have tests that
 
 ***b\. Costs of fixing defects***
 
-The main reason is that the compnent which contains the fault
+The main reason is that the component which contains the fault
 becomes a more and more integral part of the system, and affects more
 components -- the fault has become "built in" to the documentation,
 larger components, other tests, etc.

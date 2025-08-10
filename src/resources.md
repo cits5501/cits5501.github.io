@@ -10,8 +10,6 @@ customStyle: |
 
 ---
 
-
-
 ## Lecture slides
 
 Lecture slides will be published here progressively throughout
@@ -43,6 +41,8 @@ like to get an idea in advance of what will be covered.)
 - Week 3
   - Lecture 4a -- input space partitioning intro {% resourceList "lect04a--isp-intro", ["pdf", "md"] %}
   - Lecture 4b -- input space partitioning {% resourceList "lect04b--isp", ["pdf", "md"] %}
+- Week 4
+  - ISP continued; TBA
 {#
 - Week 5
   - Lecture 5a -- graph-based testing {% resourceList "lect05b--graph", ["pdf", "md"] %}
@@ -125,10 +125,10 @@ the semester.
 - Week 3 -- data-driven tests
   - Lab worksheet {% resourceList "workshop02", ["html", "md"] %}
   - Source code ([zip]({{ "/workshops/workshop-02-code.zip" | url }}))
-{#
   - Sample worksheet solutions {% resourceList "workshop02-solutions", ["html", "md"] %}
 - Week 4 -- ISP
   - Lab worksheet {% resourceList "workshop03", ["html", "md"] %}
+{#
   - Sample worksheet solutions {% resourceList "workshop03-solutions", ["html", "md"] %}
 - Week 5 -- ISP, graphs and fixtures
   - Lab worksheet {% resourceList "workshop04", ["html", "md"] %}

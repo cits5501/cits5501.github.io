@@ -251,45 +251,191 @@ opacity: 0.1;
 <nav id="TOC" role="doc-toc">
 <h2 id="toc-title">Contents</h2>
 <ul>
-<li><a href="#recommended-reading" id="toc-recommended-reading">0.
-Recommended reading</a></li>
-<li><a href="#binary-search" id="toc-binary-search">1. Binary
+<li><a href="#test-coverage-concepts" id="toc-test-coverage-concepts">1.
+Test coverage concepts</a></li>
+<li><a href="#binary-search" id="toc-binary-search">2. Binary
 search</a></li>
-<li><a href="#stack-class" id="toc-stack-class">2. Stack class</a></li>
-<li><a href="#further-questions" id="toc-further-questions">3. Further
+<li><a href="#stack-class" id="toc-stack-class">3. Stack class</a></li>
+<li><a href="#further-questions" id="toc-further-questions">4. Further
 questions</a></li>
 </ul>
 </nav>
 <p></p>
-<h2 id="recommended-reading">0. Recommended reading</h2>
-<p>Before attempting the exercises in this worksheet, it’s recommended
-you complete the recommended reading for week 4, and review the lecture
-slides on Input Space Partitioning.</p>
-<h2 id="binary-search">1. Binary search</h2>
+<h2 id="test-coverage-concepts">1. Test coverage concepts</h2>
+<p>Suppose you are asked to write tests for a Java method in the
+<code>AgePricing</code> class, whose Javadoc and signature are as
+follows:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">/** Returns true if age is eligible for adult ticket price.</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co"> *</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"> * @arg age The age of the customer</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"> * @return true if someone of that age is eligible for the adult ticket price,</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co"> *         false otherwise.</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co"> */</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span> <span class="dt">static</span> <span class="dt">boolean</span> <span class="fu">isAdult</span><span class="op">(</span><span class="dt">int</span> age<span class="op">);</span></span></code></pre></div>
+<p>Elsewhere in the API documentation, you’re told that any person who
+is 18 or over is considered an adult.</p>
+<p>Suppose also you’re given the following JUnit test for this method.
+(There’s no need to compile and run it, but you’re welcome to do so if
+you want.)</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">import</span> <span class="kw">static</span><span class="im"> org</span><span class="op">.</span><span class="im">junit</span><span class="op">.</span><span class="im">jupiter</span><span class="op">.</span><span class="im">api</span><span class="op">.</span><span class="im">Assertions</span><span class="op">.*;</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="kw">import</span> <span class="im">org</span><span class="op">.</span><span class="im">junit</span><span class="op">.</span><span class="im">jupiter</span><span class="op">.</span><span class="im">api</span><span class="op">.</span><span class="im">Test</span><span class="op">;</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> AgePricingTest <span class="op">{</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">@Test</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="dt">void</span> <span class="fu">adultAgeShouldReturnTrue</span><span class="op">()</span> <span class="op">{</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">assertTrue</span><span class="op">(</span>AgePricing<span class="op">.</span><span class="fu">isAdult</span><span class="op">(</span><span class="dv">30</span><span class="op">));</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p>The above test is the <em>only</em> test currently in place, and we
+aren’t given access to the implementation.</p>
+<dl>
+<dt><strong>Question</strong></dt>
+<dd>
+<p>Is this one test enough to be confident that the method works? If
+not, come up with additional <em>test cases</em>.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>
+Think about:</p>
+<ul>
+<li>What are all the different “kinds” of ages we might need to
+check?</li>
+<li>Are there any special or edge values?</li>
+<li>What’s just inside or just outside the adult cut-off?</li>
+<li>Are there unusual but possible inputs?</li>
+</ul>
+</dd>
+</dl>
+<div class="solutions">
+<p><strong>Sample solutions</strong>:</p>
+<p>This one test is <em>not</em> enough to be confident the method
+works. The method implementation ought to be extremely simple – just
+return <code>age &gt;= 18</code> – but if we want have high confidence
+that the method is implemented correctly, we should probably check, in
+addition to the “30” case:</p>
+<ol start="2" type="1">
+<li>The boundary at the minimum adult age (18)</li>
+<li>One below that boundary (17)</li>
+<li>Zero and/or or negative ages</li>
+</ol>
+<p>Once those tests are in place, we still don’t <em>know</em> for sure
+that the method is correct in all cases – the only way of knowing that
+would be to test every single <code>int</code> value – but our
+confidence in it should be much higher. It’s <em>possible</em> that the
+implementer of the method has written it as</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span> <span class="dt">static</span> <span class="dt">boolean</span> <span class="fu">isAdult</span><span class="op">(</span><span class="dt">int</span> age<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> <span class="op">(</span>age <span class="op">==</span> <span class="dv">999</span><span class="op">)</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="kw">false</span><span class="op">;</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="cf">else</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> age <span class="op">&gt;=</span> <span class="dv">18</span><span class="op">;</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p>But unless the implementer is trying to be deliberately unhelpful,
+that seems unlikely. More realistically, if there is a mistake, it would
+be</p>
+<ul>
+<li>A mis-typed comparator (e.g. <code>&lt;=</code> or <code>&gt;</code>
+instead of <code>&gt;=</code>), or (less likely)</li>
+<li>An incorrect age (some number other than 18).</li>
+</ul>
+<p>Given the sorts of mistake an implementer is <em>likely</em> to make,
+the four tests above (including the original test) should give us a high
+confidence the method works.</p>
+<p>Beyond that, any additional tests reach a point of diminishing
+returns – they don’t increase our confidence much, and the extra tests
+constitute additional code that needs to be maintained. (You might like
+to think about: <em>why</em> don’t the additional tests increase our
+confidence? Then read the material in the textbook about Input Space
+Partitioning and see if that helps you formulate your answer.)</p>
+</div>
+<p>In lectures, we’ve mentioned that Java code can be <a href="https://en.wikipedia.org/wiki/Instrumentation_(computer_programming)">instrumented</a>
+so that, after your tests run, a coverage tool can report which lines of
+implementation code were executed. One such tool is JaCoCo (Java Code
+Coverage), which integrates with build systems and IDEs to produce
+coverage reports: <a href="https://www.jacoco.org/jacoco/" class="uri">https://www.jacoco.org/jacoco/</a>.</p>
+<p>Suppose we now are given access to the implementation of the
+<code>isAdult(int age)</code> method (feel free to suggest a plausible
+one). We instrument the method, and run the original single-test suite,
+then later your improved multi-test suite.</p>
+<dl>
+<dt><strong>Question</strong></dt>
+<dd>
+<p>Do you think the reported line coverage will change between the two
+suites? Why or why not? If the reported coverage doesn’t change, what
+does that tell you about the limitations of line coverage as a measure
+of how thoroughly a method has been tested?</p>
+</dd>
+</dl>
+<div class="solutions">
+<p><strong>Sample solutions</strong>:</p>
+<p>The line coverage will almost certainly <em>not</em> change – it will
+likely be exactly the same for both test suites.</p>
+<p>As we’ve noted, the implementation is likely to be (assuming it is
+correctly written):</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span> <span class="dt">static</span> <span class="dt">boolean</span> <span class="fu">isAdult</span><span class="op">(</span><span class="dt">int</span> age<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> age <span class="op">&gt;=</span> <span class="dv">18</span><span class="op">;</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p>So there <em>is</em> only one line in the body – and all possible
+execution paths are short and go through the same single statement. Even
+with just the first test (age = 30), that line is executed. Adding more
+tests (e.g. boundary values) executes the same set of lines — so the
+line coverage number doesn’t increase. (It’s possible, though not
+likely, that a naive implementer might write the method using an
+<code>if ... else</code> statement – but even then, one “false” and one
+“true” test case suffice to exercise all the lines in it.)</p>
+<p>What does this tell us about the limitations of line coverage?</p>
+<p>Line coverage measures whether a line was executed at least once, not
+how thoroughly its behaviour was tested. In our example, we can have
+100% line coverage while missing critical behaviours at boundaries
+(e.g., age == 18) or in invalid input cases. For a boolean expression
+(<code>age &gt;= 18</code>) with only one variable in it, there will
+likely not be too many boundaries (just one in fact) – but hopefully you
+can see that more complex expressions would give rise to more complex
+boundaries. Good testing needs to explore different conditions and <a href="https://en.wikipedia.org/wiki/Equivalence_partitioning">equivalence
+classes</a>, not just “touch every line”. In the material from this week
+and the following weeks, we’ll look at ways of assessing coverage which
+go beyond simple metrics of “number of lines executed”. ISP, graph-based
+testing, logic-based testing, and syntax-based testing all do the
+following:</p>
+<ol type="1">
+<li>Suggest a model or possible way of viewing the subject under test –
+e.g. as a mathematical function (ISP), or as a set of logic expressions
+(logic-based testing).</li>
+<li>Once we’ve modeled the subject under test in a particular way, they
+give us ways of assessing the thoroughness of a test suite.</li>
+</ol>
+</div>
+<div style="border: solid 2pt blue; background-color: hsla(241, 100%,50%, 0.1); padding: 1em; border-radius: 5pt; margin-top: 1em;">
+<div class="block-caption">
+<p>Pre-reading for remaining exercises</p>
+</div>
+<p>The remaining exercises in this worksheet assume general familiarity
+with the steps of Input Space Partitioning, so it’s recommended you
+complete the recommended reading for week 4 from the textbook before
+attempting them.</p>
+</div>
+<h2 id="binary-search">2. Binary search</h2>
 <p>Consider the Javadoc documentation and signature for the following
 Java method, which searches inside an array of <code>char</code>s for a
 particular value.</p>
 <p>(Adapted from the Android version of the Java standard library.)</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource java numberLines"><code class="sourceCode java"><span id="cb1-1"><a href="#cb1-1"></a><span class="co">/**</span></span>
-<span id="cb1-2"><a href="#cb1-2"></a><span class="co"> * Performs a binary search for @code value in the ascending sorted</span></span>
-<span id="cb1-3"><a href="#cb1-3"></a><span class="co"> * array @code array, in the range specified by fromIndex (inclusive)</span></span>
-<span id="cb1-4"><a href="#cb1-4"></a><span class="co"> * and toIndex (exclusive).  Searching in an unsorted array has an</span></span>
-<span id="cb1-5"><a href="#cb1-5"></a><span class="co"> * undefined result. It&#39;s also undefined which element is found if there</span></span>
-<span id="cb1-6"><a href="#cb1-6"></a><span class="co"> * are multiple occurrences of the same element.</span></span>
-<span id="cb1-7"><a href="#cb1-7"></a><span class="co"> *</span></span>
-<span id="cb1-8"><a href="#cb1-8"></a><span class="co"> * @param array the sorted array to search.</span></span>
-<span id="cb1-9"><a href="#cb1-9"></a><span class="co"> * @param startIndex the inclusive start index.</span></span>
-<span id="cb1-10"><a href="#cb1-10"></a><span class="co"> * @param endIndex the exclusive start index.</span></span>
-<span id="cb1-11"><a href="#cb1-11"></a><span class="co"> * @param value the element to find.</span></span>
-<span id="cb1-12"><a href="#cb1-12"></a><span class="co"> * @return the non-negative index of the element, or a negative index</span></span>
-<span id="cb1-13"><a href="#cb1-13"></a><span class="co"> *         which is &lt;code&gt;-index - 1&lt;/code&gt; where the element would be</span></span>
-<span id="cb1-14"><a href="#cb1-14"></a><span class="co"> *         inserted.</span></span>
-<span id="cb1-15"><a href="#cb1-15"></a><span class="co"> * @throws IllegalArgumentException if &lt;code&gt;startIndex &gt; endIndex&lt;/code&gt;</span></span>
-<span id="cb1-16"><a href="#cb1-16"></a><span class="co"> * @throws ArrayIndexOutOfBoundsException if</span></span>
-<span id="cb1-17"><a href="#cb1-17"></a><span class="co"> *         &lt;code&gt;startIndex &lt; 0 || endIndex &gt; array.length&lt;/code&gt;</span></span>
-<span id="cb1-18"><a href="#cb1-18"></a><span class="co"> * @since 1.6</span></span>
-<span id="cb1-19"><a href="#cb1-19"></a><span class="co"> */</span></span>
-<span id="cb1-20"><a href="#cb1-20"></a><span class="kw">public</span> <span class="dt">static</span> <span class="dt">int</span> <span class="fu">binarySearch</span><span class="op">(</span><span class="dt">char</span><span class="op">[]</span> array<span class="op">,</span> <span class="dt">int</span> startIndex<span class="op">,</span> <span class="dt">int</span> endIndex<span class="op">,</span> <span class="dt">char</span> value<span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource java numberLines"><code class="sourceCode java"><span id="cb5-1"><a href="#cb5-1"></a><span class="co">/**</span></span>
+<span id="cb5-2"><a href="#cb5-2"></a><span class="co"> * Performs a binary search for @code value in the ascending sorted</span></span>
+<span id="cb5-3"><a href="#cb5-3"></a><span class="co"> * array @code array, in the range specified by fromIndex (inclusive)</span></span>
+<span id="cb5-4"><a href="#cb5-4"></a><span class="co"> * and toIndex (exclusive).  Searching in an unsorted array has an</span></span>
+<span id="cb5-5"><a href="#cb5-5"></a><span class="co"> * undefined result. It&#39;s also undefined which element is found if there</span></span>
+<span id="cb5-6"><a href="#cb5-6"></a><span class="co"> * are multiple occurrences of the same element.</span></span>
+<span id="cb5-7"><a href="#cb5-7"></a><span class="co"> *</span></span>
+<span id="cb5-8"><a href="#cb5-8"></a><span class="co"> * @param array the sorted array to search.</span></span>
+<span id="cb5-9"><a href="#cb5-9"></a><span class="co"> * @param startIndex the inclusive start index.</span></span>
+<span id="cb5-10"><a href="#cb5-10"></a><span class="co"> * @param endIndex the exclusive start index.</span></span>
+<span id="cb5-11"><a href="#cb5-11"></a><span class="co"> * @param value the element to find.</span></span>
+<span id="cb5-12"><a href="#cb5-12"></a><span class="co"> * @return the non-negative index of the element, or a negative index</span></span>
+<span id="cb5-13"><a href="#cb5-13"></a><span class="co"> *         which is &lt;code&gt;-index - 1&lt;/code&gt; where the element would be</span></span>
+<span id="cb5-14"><a href="#cb5-14"></a><span class="co"> *         inserted.</span></span>
+<span id="cb5-15"><a href="#cb5-15"></a><span class="co"> * @throws IllegalArgumentException if &lt;code&gt;startIndex &gt; endIndex&lt;/code&gt;</span></span>
+<span id="cb5-16"><a href="#cb5-16"></a><span class="co"> * @throws ArrayIndexOutOfBoundsException if</span></span>
+<span id="cb5-17"><a href="#cb5-17"></a><span class="co"> *         &lt;code&gt;startIndex &lt; 0 || endIndex &gt; array.length&lt;/code&gt;</span></span>
+<span id="cb5-18"><a href="#cb5-18"></a><span class="co"> * @since 1.6</span></span>
+<span id="cb5-19"><a href="#cb5-19"></a><span class="co"> */</span></span>
+<span id="cb5-20"><a href="#cb5-20"></a><span class="kw">public</span> <span class="dt">static</span> <span class="dt">int</span> <span class="fu">binarySearch</span><span class="op">(</span><span class="dt">char</span><span class="op">[]</span> array<span class="op">,</span> <span class="dt">int</span> startIndex<span class="op">,</span> <span class="dt">int</span> endIndex<span class="op">,</span> <span class="dt">char</span> value<span class="op">)</span></span></code></pre></div>
 <p>Based on the prescribed reading, discuss how you would go about
 creating tests using Input Space Partitioning.</p>
 <ol type="a">
@@ -323,7 +469,7 @@ size)</li>
 <li>the set of all possible <code>int</code>s (2 parameters of this
 sort)</li>
 <li>the set of all possible <code>char</code>s (if we assume for
-simplicity that only ASCII characters are used,<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>
+simplicity that only ASCII characters are used,<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>
 there are 256 of them)</li>
 </ul>
 <p>Technically, the input domain consists of a 4-tuple made up of
@@ -389,7 +535,7 @@ what “expected behaviour” could we possibly test for?</p>
 <p> </p>
 </div>
 <p></p>
-<h2 id="stack-class">2. Stack class</h2>
+<h2 id="stack-class">3. Stack class</h2>
 <p>Suppose we have a Stack class that is intended to implement the <a href="https://en.wikipedia.org/wiki/Stack_(abstract_data_type)">stack
 abstract data type</a>. The class stores <code>int</code>s, and provides
 methods for observing the state of the stack, and for performing the
@@ -452,7 +598,7 @@ invalid state, and what “expected behaviour” could we possibly test
 for?</p>
 </div>
 <p></p>
-<h2 id="further-questions">3. Further questions</h2>
+<h2 id="further-questions">4. Further questions</h2>
 <p>Consider the following questions about ISP and try writing an answer
 to each. (Questions like this are typical of ones you might be asked in
 the mid-semester test or final exam.) Once you’ve made an attempt, you
@@ -498,10 +644,10 @@ every value from each partition is “as good as” any other.</p>
 the maximum and minimum values of an <code>int</code>), and still have
 tests that “carry their weight”.</p>
 <p><strong><em>b. Costs of fixing defects</em></strong></p>
-<p>The main reason is that the compnent which contains the fault becomes
-a more and more integral part of the system, and affects more components
-– the fault has become “built in” to the documentation, larger
-components, other tests, etc.</p>
+<p>The main reason is that the component which contains the fault
+becomes a more and more integral part of the system, and affects more
+components – the fault has become “built in” to the documentation,
+larger components, other tests, etc.</p>
 <p>This means that <em>fixing</em> the fault is (a) likely to take more
 effort, because we have to consider all the other
 components/documentation/tests that it affects, and (b) can have
@@ -513,7 +659,15 @@ ways.</p>
 <section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
 <hr />
 <ol>
-<li id="fn1"><p>In actuality, Java <code>char</code>s are 2 bytes in
+<li id="fn1"><p>As a reminder – when being asked to come up with
+<em>test cases</em>, you just need to come up with descriptions of
+tests; you’re <em>not</em> being asked to write code (refer to the week
+1 lectures) – if an assessment is asking you to write code, it will say
+so (e.g. “Write JUnit 5-based tests for your test cases”).<br />
+  Each <em>test case</em> must specify (i) the inputs to the thing being
+tested, and (ii) the expected outputs or results. The “thing being
+tested” is sometimes referred to as <em>the subject under test</em>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>In actuality, Java <code>char</code>s are 2 bytes in
 size and can hold 65,536 distinct values, representing a subset of <a href="https://en.wikipedia.org/wiki/Unicode">Unicode code points</a> –
 see e.g. the documentation for the <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Character.html"><code>Character</code>
 class</a> for the version of Java you’re interested in.<br />
@@ -546,7 +700,7 @@ you’re making this assumption, however, and that the actual number of
 characters is larger.) Markers are generally more interested in your
 <em>reasoning</em> than in whether you can recall exactly the size of a
 <code>char</code> or how many Unicode characters there are, so this sort
-of simplifying assumption is fine.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+of simplifying assumption is fine.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section>
 </body>

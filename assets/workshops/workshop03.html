@@ -251,45 +251,111 @@ opacity: 0.1;
 <nav id="TOC" role="doc-toc">
 <h2 id="toc-title">Contents</h2>
 <ul>
-<li><a href="#recommended-reading" id="toc-recommended-reading">0.
-Recommended reading</a></li>
-<li><a href="#binary-search" id="toc-binary-search">1. Binary
+<li><a href="#test-coverage-concepts" id="toc-test-coverage-concepts">1.
+Test coverage concepts</a></li>
+<li><a href="#binary-search" id="toc-binary-search">2. Binary
 search</a></li>
-<li><a href="#stack-class" id="toc-stack-class">2. Stack class</a></li>
-<li><a href="#further-questions" id="toc-further-questions">3. Further
+<li><a href="#stack-class" id="toc-stack-class">3. Stack class</a></li>
+<li><a href="#further-questions" id="toc-further-questions">4. Further
 questions</a></li>
 </ul>
 </nav>
 <p></p>
-<h2 id="recommended-reading">0. Recommended reading</h2>
-<p>Before attempting the exercises in this worksheet, it’s recommended
-you complete the recommended reading for week 4, and review the lecture
-slides on Input Space Partitioning.</p>
-<h2 id="binary-search">1. Binary search</h2>
+<h2 id="test-coverage-concepts">1. Test coverage concepts</h2>
+<p>Suppose you are asked to write tests for a Java method in the
+<code>AgePricing</code> class, whose Javadoc and signature are as
+follows:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">/** Returns true if age is eligible for adult ticket price.</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co"> *</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"> * @arg age The age of the customer</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"> * @return true if someone of that age is eligible for the adult ticket price,</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co"> *         false otherwise.</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co"> */</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span> <span class="dt">static</span> <span class="dt">boolean</span> <span class="fu">isAdult</span><span class="op">(</span><span class="dt">int</span> age<span class="op">);</span></span></code></pre></div>
+<p>Elsewhere in the API documentation, you’re told that any person who
+is 18 or over is considered an adult.</p>
+<p>Suppose also you’re given the following JUnit test for this method.
+(There’s no need to compile and run it, but you’re welcome to do so if
+you want.)</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">import</span> <span class="kw">static</span><span class="im"> org</span><span class="op">.</span><span class="im">junit</span><span class="op">.</span><span class="im">jupiter</span><span class="op">.</span><span class="im">api</span><span class="op">.</span><span class="im">Assertions</span><span class="op">.*;</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="kw">import</span> <span class="im">org</span><span class="op">.</span><span class="im">junit</span><span class="op">.</span><span class="im">jupiter</span><span class="op">.</span><span class="im">api</span><span class="op">.</span><span class="im">Test</span><span class="op">;</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> AgePricingTest <span class="op">{</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">@Test</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="dt">void</span> <span class="fu">adultAgeShouldReturnTrue</span><span class="op">()</span> <span class="op">{</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">assertTrue</span><span class="op">(</span>AgePricing<span class="op">.</span><span class="fu">isAdult</span><span class="op">(</span><span class="dv">30</span><span class="op">));</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p>The above test is the <em>only</em> test currently in place, and we
+aren’t given access to the implementation.</p>
+<dl>
+<dt><strong>Question</strong></dt>
+<dd>
+<p>Is this one test enough to be confident that the method works? If
+not, come up with additional <em>test cases</em>.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>
+Think about:</p>
+<ul>
+<li>What are all the different “kinds” of ages we might need to
+check?</li>
+<li>Are there any special or edge values?</li>
+<li>What’s just inside or just outside the adult cut-off?</li>
+<li>Are there unusual but possible inputs?</li>
+</ul>
+</dd>
+</dl>
+<p>In lectures, we’ve mentioned that Java code can be <a href="https://en.wikipedia.org/wiki/Instrumentation_(computer_programming)">instrumented</a>
+so that, after your tests run, a coverage tool can report which lines of
+implementation code were executed. One such tool is JaCoCo (Java Code
+Coverage), which integrates with build systems and IDEs to produce
+coverage reports: <a href="https://www.jacoco.org/jacoco/" class="uri">https://www.jacoco.org/jacoco/</a>.</p>
+<p>Suppose we now are given access to the implementation of the
+<code>isAdult(int age)</code> method (feel free to suggest a plausible
+one). We instrument the method, and run the original single-test suite,
+then later your improved multi-test suite.</p>
+<dl>
+<dt><strong>Question</strong></dt>
+<dd>
+<p>Do you think the reported line coverage will change between the two
+suites? Why or why not? If the reported coverage doesn’t change, what
+does that tell you about the limitations of line coverage as a measure
+of how thoroughly a method has been tested?</p>
+</dd>
+</dl>
+<div style="border: solid 2pt blue; background-color: hsla(241, 100%,50%, 0.1); padding: 1em; border-radius: 5pt; margin-top: 1em;">
+<div class="block-caption">
+<p>Pre-reading for remaining exercises</p>
+</div>
+<p>The remaining exercises in this worksheet assume general familiarity
+with the steps of Input Space Partitioning, so it’s recommended you
+complete the recommended reading for week 4 from the textbook before
+attempting them.</p>
+</div>
+<h2 id="binary-search">2. Binary search</h2>
 <p>Consider the Javadoc documentation and signature for the following
 Java method, which searches inside an array of <code>char</code>s for a
 particular value.</p>
 <p>(Adapted from the Android version of the Java standard library.)</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource java numberLines"><code class="sourceCode java"><span id="cb1-1"><a href="#cb1-1"></a><span class="co">/**</span></span>
-<span id="cb1-2"><a href="#cb1-2"></a><span class="co"> * Performs a binary search for @code value in the ascending sorted</span></span>
-<span id="cb1-3"><a href="#cb1-3"></a><span class="co"> * array @code array, in the range specified by fromIndex (inclusive)</span></span>
-<span id="cb1-4"><a href="#cb1-4"></a><span class="co"> * and toIndex (exclusive).  Searching in an unsorted array has an</span></span>
-<span id="cb1-5"><a href="#cb1-5"></a><span class="co"> * undefined result. It&#39;s also undefined which element is found if there</span></span>
-<span id="cb1-6"><a href="#cb1-6"></a><span class="co"> * are multiple occurrences of the same element.</span></span>
-<span id="cb1-7"><a href="#cb1-7"></a><span class="co"> *</span></span>
-<span id="cb1-8"><a href="#cb1-8"></a><span class="co"> * @param array the sorted array to search.</span></span>
-<span id="cb1-9"><a href="#cb1-9"></a><span class="co"> * @param startIndex the inclusive start index.</span></span>
-<span id="cb1-10"><a href="#cb1-10"></a><span class="co"> * @param endIndex the exclusive start index.</span></span>
-<span id="cb1-11"><a href="#cb1-11"></a><span class="co"> * @param value the element to find.</span></span>
-<span id="cb1-12"><a href="#cb1-12"></a><span class="co"> * @return the non-negative index of the element, or a negative index</span></span>
-<span id="cb1-13"><a href="#cb1-13"></a><span class="co"> *         which is &lt;code&gt;-index - 1&lt;/code&gt; where the element would be</span></span>
-<span id="cb1-14"><a href="#cb1-14"></a><span class="co"> *         inserted.</span></span>
-<span id="cb1-15"><a href="#cb1-15"></a><span class="co"> * @throws IllegalArgumentException if &lt;code&gt;startIndex &gt; endIndex&lt;/code&gt;</span></span>
-<span id="cb1-16"><a href="#cb1-16"></a><span class="co"> * @throws ArrayIndexOutOfBoundsException if</span></span>
-<span id="cb1-17"><a href="#cb1-17"></a><span class="co"> *         &lt;code&gt;startIndex &lt; 0 || endIndex &gt; array.length&lt;/code&gt;</span></span>
-<span id="cb1-18"><a href="#cb1-18"></a><span class="co"> * @since 1.6</span></span>
-<span id="cb1-19"><a href="#cb1-19"></a><span class="co"> */</span></span>
-<span id="cb1-20"><a href="#cb1-20"></a><span class="kw">public</span> <span class="dt">static</span> <span class="dt">int</span> <span class="fu">binarySearch</span><span class="op">(</span><span class="dt">char</span><span class="op">[]</span> array<span class="op">,</span> <span class="dt">int</span> startIndex<span class="op">,</span> <span class="dt">int</span> endIndex<span class="op">,</span> <span class="dt">char</span> value<span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource java numberLines"><code class="sourceCode java"><span id="cb3-1"><a href="#cb3-1"></a><span class="co">/**</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a><span class="co"> * Performs a binary search for @code value in the ascending sorted</span></span>
+<span id="cb3-3"><a href="#cb3-3"></a><span class="co"> * array @code array, in the range specified by fromIndex (inclusive)</span></span>
+<span id="cb3-4"><a href="#cb3-4"></a><span class="co"> * and toIndex (exclusive).  Searching in an unsorted array has an</span></span>
+<span id="cb3-5"><a href="#cb3-5"></a><span class="co"> * undefined result. It&#39;s also undefined which element is found if there</span></span>
+<span id="cb3-6"><a href="#cb3-6"></a><span class="co"> * are multiple occurrences of the same element.</span></span>
+<span id="cb3-7"><a href="#cb3-7"></a><span class="co"> *</span></span>
+<span id="cb3-8"><a href="#cb3-8"></a><span class="co"> * @param array the sorted array to search.</span></span>
+<span id="cb3-9"><a href="#cb3-9"></a><span class="co"> * @param startIndex the inclusive start index.</span></span>
+<span id="cb3-10"><a href="#cb3-10"></a><span class="co"> * @param endIndex the exclusive start index.</span></span>
+<span id="cb3-11"><a href="#cb3-11"></a><span class="co"> * @param value the element to find.</span></span>
+<span id="cb3-12"><a href="#cb3-12"></a><span class="co"> * @return the non-negative index of the element, or a negative index</span></span>
+<span id="cb3-13"><a href="#cb3-13"></a><span class="co"> *         which is &lt;code&gt;-index - 1&lt;/code&gt; where the element would be</span></span>
+<span id="cb3-14"><a href="#cb3-14"></a><span class="co"> *         inserted.</span></span>
+<span id="cb3-15"><a href="#cb3-15"></a><span class="co"> * @throws IllegalArgumentException if &lt;code&gt;startIndex &gt; endIndex&lt;/code&gt;</span></span>
+<span id="cb3-16"><a href="#cb3-16"></a><span class="co"> * @throws ArrayIndexOutOfBoundsException if</span></span>
+<span id="cb3-17"><a href="#cb3-17"></a><span class="co"> *         &lt;code&gt;startIndex &lt; 0 || endIndex &gt; array.length&lt;/code&gt;</span></span>
+<span id="cb3-18"><a href="#cb3-18"></a><span class="co"> * @since 1.6</span></span>
+<span id="cb3-19"><a href="#cb3-19"></a><span class="co"> */</span></span>
+<span id="cb3-20"><a href="#cb3-20"></a><span class="kw">public</span> <span class="dt">static</span> <span class="dt">int</span> <span class="fu">binarySearch</span><span class="op">(</span><span class="dt">char</span><span class="op">[]</span> array<span class="op">,</span> <span class="dt">int</span> startIndex<span class="op">,</span> <span class="dt">int</span> endIndex<span class="op">,</span> <span class="dt">char</span> value<span class="op">)</span></span></code></pre></div>
 <p>Based on the prescribed reading, discuss how you would go about
 creating tests using Input Space Partitioning.</p>
 <ol type="a">
@@ -302,7 +368,7 @@ characteristic does in fact give you a partitioning.)</li>
 </ol>
 <p>Once you’ve answered these questions, you might like to try
 implementing some of your tests in Java using JUnit.</p>
-<h2 id="stack-class">2. Stack class</h2>
+<h2 id="stack-class">3. Stack class</h2>
 <p>Suppose we have a Stack class that is intended to implement the <a href="https://en.wikipedia.org/wiki/Stack_(abstract_data_type)">stack
 abstract data type</a>. The class stores <code>int</code>s, and provides
 methods for observing the state of the stack, and for performing the
@@ -322,7 +388,7 @@ function would we use? How about <code>pop</code>?</li>
 suggest some characteristics that can be used to partition the input
 space.</li>
 </ol>
-<h2 id="further-questions">3. Further questions</h2>
+<h2 id="further-questions">4. Further questions</h2>
 <p>Consider the following questions about ISP and try writing an answer
 to each. (Questions like this are typical of ones you might be asked in
 the mid-semester test or final exam.) Once you’ve made an attempt, you
@@ -349,5 +415,18 @@ this is so?</p></li>
 </ol>
 <!-- vim: syntax=markdown tw=92 :
 -->
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr />
+<ol>
+<li id="fn1"><p>As a reminder – when being asked to come up with
+<em>test cases</em>, you just need to come up with descriptions of
+tests; you’re <em>not</em> being asked to write code (refer to the week
+1 lectures) – if an assessment is asking you to write code, it will say
+so (e.g. “Write JUnit 5-based tests for your test cases”).<br />
+  Each <em>test case</em> must specify (i) the inputs to the thing being
+tested, and (ii) the expected outputs or results. The “thing being
+tested” is sometimes referred to as <em>the subject under test</em>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
 </body>
 </html>
