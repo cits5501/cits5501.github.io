@@ -65,7 +65,7 @@ Testing 2 (graph testing)
     workshopTopic:
      `Project Quality and Management in Github`,
       reading:
-        `TBA`,
+        `- Pressman, ch 15 (Quality Concepts) and Ch 17 (Software Quality Assurance)`,
       assessmentDetails: 'Project phase 1 published',
     },
     
