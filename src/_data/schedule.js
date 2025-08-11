@@ -97,7 +97,7 @@ Testing 3 (logic testing)
       // <!-- wld be nice:
       //   Jorgensen, *Software Testing: A Craftsman's Approach*, 4th edn, ch 21
       // -->
-    assessmentDetails: 'Project phase 1 due',
+    assessmentDetails: '',
     },
 
     {weekNum: null,
@@ -105,7 +105,7 @@ Testing 3 (logic testing)
       `<span style="color: #696969;">***no class -- non-teaching week***</span>`,
     workshopTopic: "",
     reading: "",
-    assessmentDetails: '',
+    assessmentDetails: 'Project phase 1 due',
     },
     
     {weekNum: 7,
