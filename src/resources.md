@@ -128,10 +128,10 @@ the semester.
   - Sample worksheet solutions {% resourceList "workshop02-solutions", ["html", "md"] %}
 - Week 4 -- ISP
   - Lab worksheet {% resourceList "workshop03", ["html", "md"] %}
-{#
   - Sample worksheet solutions {% resourceList "workshop03-solutions", ["html", "md"] %}
-- Week 5 -- ISP, graphs and fixtures
+- Week 5 -- Testability, ISP and control flow
   - Lab worksheet {% resourceList "workshop04", ["html", "md"] %}
+{#
   - Sample worksheet solutions {% resourceList "workshop04-solutions", ["html", "md"] %}
 - Week 6 -- logic
   - Lab worksheet {% resourceList "workshop05", ["html", "md"] %}

@@ -1,304 +1,9 @@
 ---
 title: |
-  CITS5501 lab 4 (week 5)&nbsp;--&nbsp;ISP and graphs&nbsp;--&nbsp;solutions
+  CITS5501 lab 4 (week 5)&nbsp;--&nbsp;Testability, ISP and control flow&nbsp;--&nbsp;solutions
 ---
 
-## 0. Recommended reading
-
-Before attempting the exercises in this worksheet, it's recommended you complete the
-recommended reading for week 5, and ensure you've reviewed the lecture slides on Input Space Partitioning
-and graph-based testing.
-
-It should be possible to attempt the exercises even without having attended the lectures on
-graph-based testing, but you might want to revisit your answers after you have attended
-those lectures.
-
-
-## 1. ISP, graphs and control flow
-
-Consider the following Java method for collapsing sequences of blanks, taken
-from the `StringUtils` class of Apache Velocity
-(<http://velocity.apache.org/>), version 1.3.1:
-
-
-``` { .java .numberLines }
-
-/**
-* Remove/collapse multiple spaces.
-*
-* @param String string to remove multiple spaces from.
-* @return String
-*/
-
-public static String collapseSpaces(String argStr) {
-  char last = argStr.charAt(0);
-  StringBuffer argBuf = new StringBuffer();
-
-  for (int cIdx = 0 ; cIdx < argStr.length(); cIdx++) {
-    char ch = argStr.charAt(cIdx);
-    if (ch != ' ' || last != ' ') {
-      argBuf.append(ch);
-      last = ch;
-    }
-  }
-  return argBuf.toString();
-}
-
-```
-
-a.  Using the ISP principles we have covered in class, suggest
-    some *characteristics* we could use to partition
-    the `argStr` parameter.
-
-    Once you have several characteristics, consider how you might choose
-    combinations of partitions from them. A recommended approach is to aim
-    for "Base Choice" coverage:
-
-    i.  For each characteristic, pick a *base choice* (and explain the
-        reasoning behind that choice). Usually, the base choice will be one that is
-        simpler, smaller, or more likely to occur than the other possibilities.
-    ii. Select test values for a "base choice" test.
-    #.  Go through and derive test values for the "non-base" partitions.
-
-    Try writing JUnit tests for some of your test values.
-
-    After you have finished the lab exercises, you might like to drop into one of the
-    timetabled lab sessions and compare the characteristics and
-    test values you derived with those of another student. Are your solutions
-    the same? If not, how do they differ? Do either of your solutions have an advantage over
-    the other?
-
-b.  Using the techniques outlined in lecture slides and readings on graph-based testing,
-    try to construct a *control flow graph* of the method.
-
-    How many nodes do you end up with? \
-    How many edges?
-
-For the purposes of this exercise, we'll take a simplified approach:
-you may ignore calls
-to other methods, such as `.charAt()`, and need only
-model the control flow *within* the method. (What about possible
-exceptions?  Should they be modelled, or not? Why?)
-
-A typical way of "labelling" your graph nodes needs is to use letters
-("A", "B", "C" and so on),
-and to provide a legend, showing a reader which nodes correspond
-to which lines (or fragments of lines) of code.
-
-Sometimes there may be multiple nodes representing
-fragments of code all within the same line (e.g. line 11).
-As long as you have a clear explanation of what each node
-represents (e.g. "node D: the line 11 loop condition") then
-that's fine.
-
-
-
-`\begin{solbox}`{=latex}
-<div class="solutions">
-
-**Sample solutions**:
-
-**a\. ISP characteristics**
-
-Here are some possible characteristics, and values we might
-select from each partition:
-
-- Is the string empty, or non-empty?
-  - This gives us two partitions.
-  - For the "non-empty" option, we might choose  as test values a
-    "typical" string, say
-    `"too many assessments :/"`,
-    and maybe some less typical options
-    (perhaps very long strings, strings using non-English Unicode
-    characters, or the string
-    `"not nearly enough assessments :/"`)
-
-We can define some *sub*-characteristics for the non-empty option.
-Some sample characteristics follow, all of which assume the string is
-non-empty:
-
-- Does the string contain spaces? (Gives 2 partitions; strings that do,
-  and strings that don't)
-- Does the string contain only spaces? (ditto -- gives 2 partitions)
-- Does the string contain spaces at the start? (gives 2 partitions)
-- Does the string contain spaces at the end? (gives 2 partitions)
-- Does the string contain a run of two or more contiguous spaces? (gives 2 partitions)
-- Does the string contain a run of two or more tab (`\t`) characters? (gives 2 partitions)
-- Does the string contain a run of two or more [zero-width
-  space](https://en.wikipedia.org/wiki/Zero-width_space) (unicode
-  `U+200B`) characters? (gives 2 partitions)
-
-For a *base choice*, we might select the following partitions from
-those:
-
-- Does the string contain spaces? Base choice: yes. (A string containing
-  some spaces would be a typical use case for this method.)
-- Does the string contain only spaces? Base choice: no. (A string with
-  all spaces would be atypical.)
-- Does the string contain spaces at the start? Base choice: no. (We
-  might think that the most common case is where the parameter starts
-  and ends with a letter or punctuation.)
-- Does the string contain spaces at the end? Base choice: no. (See
-  previous point)
-- Does the string contain a run of two or more contiguous spaces? Base
-  choice: we might decide either way, but let's say that we think "Yes"
-  represents a more typical use case here.
-- Does the string contain a run of two or more tab (`\t`) characters?
-  Base choice: we might select "no", on the grounds that spaces are more
-  common than tabs.
-- Does the string contain a run of two or more [zero-width
-  space](https://en.wikipedia.org/wiki/Zero-width_space) (unicode
-  `U+200B`) characters? Base choice: no, again (see previous point).
-
-We can then construct a test *value* which satisfies all those base
-choices -- `"some␣random␣␣string"`, perhaps (here, we've used the
-`␣` character to represent a space -- note the 2 spaces after
-"random").
-
-We would then go through and vary the partitions for different
-characteristics. (This *doesn't* mean we have to use our original test
-*value* as a template, though we could if we want.)
-
-For instance, "Does the string contain spaces at the start?". The base
-choice selects from the "no" partition; we could vary this by using
-`"␣some␣random␣␣string"` as a test value.
-
-There might well be better ways of organizing our characteristics --
-what were yours? (For instance, one other possibility is: partition
-strings into "Strings containing a run of two or more consecutive
-whitespace characters" vs "Strings that don't". We might then make most
-of the characteristics listed above *sub-*partitions of the "Strings that
-do..." partition.)
-
-</div>
-`\end{solbox}`{=latex}
-
-
-
-
-
-`\begin{solbox}`{=latex}
-<div class="solutions">
-
-**Sample solutions**:
-
-**b\. control flow graph**
-
-Here is one possible control flow graph:
-
-`\begin{center}`{=latex}
-<!-- ![](images/controlflow-solution.eps){ width=70% } -->
-![](images/controlflow-solution.svg){ width=70% }
-`\end{center}`{=latex}
-
-Here, the nodes are labelled with the section of code they
-represent. Contiguous lines of code (e.g. lines 9--10 and the
-start of 12) are "collapsed" together to save space --
-since they must *always* be executed together (in our simple
-model of the function), there's no real point in giving
-each line its own node.
-
-</div>
-`\end{solbox}`{=latex}
-
-
-
-
-c.  Given your test cases from part (a), try mentally or on paper
-    "executing" several tests, and see what paths of the graph
-    get exercised by each of your tests.
-
-    How would you subjectively rate the "coverage" of the graph
-    by your tests -- good? reasonable? poor?
-
-
-
-`\begin{solbox}`{=latex}
-<div class="solutions">
-
-**Sample solutions**:
-
-**c\. subjective graph coverage**
-
-The answers here will depend on your suggested tests.
-
-</div>
-`\end{solbox}`{=latex}
-
-
-
-d.  Work out whether your tests give the following sorts
-    of coverage:
-
-    i.  node coverage
-    #.  edge coverage
-
-
-
-`\begin{solbox}`{=latex}
-<div class="solutions">
-
-**Sample solutions**:
-
-**d\. node and edge coverage**
-
-The answers here will depend on your suggested tests.
-
-</div>
-`\end{solbox}`{=latex}
-
-
-
-e.  What are the *prime paths* in your graph?
-    What proportion of the prime paths are exercised by
-    the tests you've given?
-
-    Can you construct some tests which exercise prime paths
-    you haven't already covered?
-
-
-
-`\begin{solbox}`{=latex}
-<div class="solutions">
-
-**Sample solutions**:
-
-**e\. prime paths**
-
-For the graph solution shown earlier, the prime paths are
-(we have grouped related paths together -- e.g. when they have a shared
-prefix, or represent paths through the same loop):
-
-- ABG, ABCDEF, ABCDF
-- BCDEFB, CDEFBC, DEFBCD, EFBCDE, FBCDEF *(these all execute the left-hand 'if' branch)*
-- BCDFB, CDFBC, DFBCD *(these all execute the right-hand 'if' branch)*
-- EFBCDF *(this takes one left and one right branch)*
-- CDEFBG *(takes left branch)*
-- CDFBG *(take rights branch)*
-
-What proportion of the prime paths your tests cover will
-depend on what tests you chose.
-But note that if your tests don't have
-node or statement coverage,
-then they certainly won't have prime path coverage.
-
-One useful path is the path ABG, which will get exercised
-when we pass in the empty string. This is a useful test because
-it reveals a problem with the code -- passing in empty strings
-causes an exception to be thrown when we reach line 9 (the
-`.charAt` call fails).
-
-We might arrive at this test *either* by applying ISP
-techniques, or by looking to see what sort of graph coverage
-we have -- as long as we find the bug, either approach
-is fine!
-
-</div>
-`\end{solbox}`{=latex}
-
-
-
-## 2. Test fixtures
+## 1. Test fixtures
 
 Review the material from the textbook on test automation
 (ch 6), and the JUnit 4 "Text fixtures" documentation
@@ -453,7 +158,7 @@ Some possibilities are:
   ```
 
 - calling the method `fail(String message)` from
-  the `org.junit.jupiter.api.\allowbreak Assertions` class
+  the `org.junit.jupiter.api.Assertions` class
   (or one of several similar overloaded `fail` methods). For
   instance:
 
@@ -474,7 +179,7 @@ but JUnit does not yet have this functionality built into it.
 
 [so-pending]: https://stackoverflow.com/questions/14341277/is-there-a-general-way-to-mark-a-junit-test-as-pending
 
-**3--4 unit test practice**
+**3--4\. unit test practice**
 
 You should gain practise writing tests by doing these exercises
 yourself -- model solutions are not provided. Feel free to show your
@@ -516,7 +221,7 @@ for instance, deletes any created files.
 
 
 
-## 3. Class design, invariants, and testability
+## 2. Class design, invariants, and testability
 
 Suppose we are writing a `DigitalTimer` class representing 24-hour times -- it could be used, for example, in
 simulation programs. Rather than measuring "real" time, it measures simulated time, where
@@ -575,13 +280,43 @@ public class DigitalTimer {
 The method signatures your colleague has written represent the public API for the class;
 they don't show the implementation.
 
-**Question 3.1:**
+**Question:**
 
 :   Before going on -- what might be useful attributes (fields) for the class? These will be part of
     the implementation. Can you think of multiple different alternatives? Should they
     be added to the API? Why, or why not?
 
-**Question 3.2:**
+
+
+
+`\begin{solbox}`{=latex}
+<div class="solutions">
+
+**Solution**
+
+There should be two obvious possibilities for an implementation:
+
+a.  We could add `int` attributes `hours`, `minutes` and `seconds`. In this case, the
+    implementations of `getHour`, `getMinute` and `getSecond` will be very simple;
+    but the `tick` implentation
+    will need to ensure values are properly "carried" when, for instance, `seconds` equals
+    59 and `tick` is invoked.
+
+b.  We could add a single `second` attribute, and no others. In this case, the `tick`
+    implementation will be very simple (we simply increment our `seconds` attribute), but
+    the `getHour`, `getMinute` and `getSecond` will be more complex.
+
+The fields should be kept private, because otherwise, any user of the class can alter them,
+and we have no ability to maintain the invariants (see next question) -- and thus, no way of ensuring our
+objects are still in a sensible, consistent state.
+
+</div>
+`\end{solbox}`{=latex}
+
+
+
+
+**Question:**
 
 :   Consider whether there are any *invariants* that govern the values of these
     attributes. Class invariants are constraints on what values the attributes of the class
@@ -611,30 +346,18 @@ have proposed with those of other students (or with the lab facilitator).
 `\begin{solbox}`{=latex}
 <div class="solutions">
 
-**Question 3.1:**
+**Solutions**
 
-There should be two obvious possibilities for an implementation:
+The invariants will depend on whether we chose implementation (a) or (b).
 
-a.  We could add `int` attributes `hours`, `minutes` and `seconds`. In this case, the
-    implementations of `getHour`, `getMinute` and `getSecond` will be very simple;
-    but the `tick` implentation
-    will need to ensure values are properly "carried" when, for instance, `seconds` equals
-    59 and `tick` is invoked.
-
-b.  We could add a single `second` attribute, and no others. In this case, the `tick`
-    implementation will be very simple (we simply increment our `seconds` attribute), but
-    the `getHour`, `getMinute` and `getSecond` will be more complex.
-
-In either case, there are some obvious invariants that apply to the class. For instance,
+But in either case, there are some obvious invariants that apply to the class. For instance,
 assuming we have chosen implementation (b):
 
 - `seconds`, `hours` and `minutes` should always be greater than or equal to 0.
 - Attributes will have a maximum value they can never exceed -- 23 for hours, 59 for seconds,
   and 59 for seconds.
 
-The fields should be kept private, because otherwise, any user of the class can alter them,
-and we have no ability to maintain the invariants -- and thus, no way of ensuring our
-objects are still in a sensible, consistent state.
+
 
 
 </div>
@@ -894,6 +617,335 @@ There are a few different options here:
 
 In the present case, it should be possible to test the class entirely through its public API
 (though it might seem a little awkward).
+
+<div style="border: solid 2pt blue; background-color: hsla(241, 100%,50%, 0.1); padding: 1em; border-radius: 5pt; margin-top: 1em;">
+
+::: block-caption
+
+Pre-reading
+
+:::
+
+The following exercises in this worksheet assume general familiarity with graph-based
+testing concepts, so it's recommended you work through chapter 7 from the Ammann and Offutt
+textbook before attempting them.
+
+</div>
+
+
+## 3. ISP and control flow
+
+Consider the following Java method for collapsing sequences of blanks, taken
+from the `StringUtils` class of Apache Velocity
+(<http://velocity.apache.org/>), version 1.3.1:
+
+
+``` { .java .numberLines }
+
+/**
+* Remove/collapse multiple spaces.
+*
+* @param String string to remove multiple spaces from.
+* @return String
+*/
+
+public static String collapseSpaces(String argStr) {
+  char last = argStr.charAt(0);
+  StringBuffer argBuf = new StringBuffer();
+
+  for (int cIdx = 0 ; cIdx < argStr.length(); cIdx++) {
+    char ch = argStr.charAt(cIdx);
+    if (ch != ' ' || last != ' ') {
+      argBuf.append(ch);
+      last = ch;
+    }
+  }
+  return argBuf.toString();
+}
+
+```
+
+**Exercise**
+
+:   Using the ISP principles we have covered in class, suggest
+    some *characteristics* we could use to partition
+    the `argStr` parameter.
+
+    Once you have several characteristics, consider how you might choose
+    combinations of partitions from them. A recommended approach is to aim
+    for "Base Choice" coverage:
+
+    i.  For each characteristic, pick a *base choice* (and explain the
+        reasoning behind that choice). Usually, the base choice will be one that is
+        simpler, smaller, or more likely to occur than the other possibilities.
+    ii. Select test values for a "base choice" test.
+    #.  Go through and derive test values for the "non-base" partitions.
+
+    Try writing JUnit tests for some of your test values.
+
+    After you have finished the lab exercises, you might like to drop into one of the
+    timetabled lab sessions and compare the characteristics and
+    test values you derived with those of another student. Are your solutions
+    the same? If not, how do they differ? Do either of your solutions have an advantage over
+    the other?
+
+
+
+`\begin{solbox}`{=latex}
+<div class="solutions">
+
+**Sample solutions**:
+
+**ISP characteristics**
+
+Here are some possible characteristics, and values we might
+select from each partition:
+
+- Is the string empty, or non-empty?
+  - This gives us two partitions.
+  - For the "non-empty" option, we might choose  as test values a
+    "typical" string, say
+    `"too many assessments :/"`,
+    and maybe some less typical options
+    (perhaps very long strings, strings using non-English Unicode
+    characters, or the string
+    `"not nearly enough assessments :/"`)
+
+We can define some *sub*-characteristics for the non-empty option.
+Some sample characteristics follow, all of which assume the string is
+non-empty:
+
+- Does the string contain spaces? (Gives 2 partitions; strings that do,
+  and strings that don't)
+- Does the string contain only spaces? (ditto -- gives 2 partitions)
+- Does the string contain spaces at the start? (gives 2 partitions)
+- Does the string contain spaces at the end? (gives 2 partitions)
+- Does the string contain a run of two or more contiguous spaces? (gives 2 partitions)
+- Does the string contain a run of two or more tab (`\t`) characters? (gives 2 partitions)
+- Does the string contain a run of two or more [zero-width
+  space](https://en.wikipedia.org/wiki/Zero-width_space) (unicode
+  `U+200B`) characters? (gives 2 partitions)
+
+For a *base choice*, we might select the following partitions from
+those:
+
+- Does the string contain spaces? Base choice: yes. (A string containing
+  some spaces would be a typical use case for this method.)
+- Does the string contain only spaces? Base choice: no. (A string with
+  all spaces would be atypical.)
+- Does the string contain spaces at the start? Base choice: no. (We
+  might think that the most common case is where the parameter starts
+  and ends with a letter or punctuation.)
+- Does the string contain spaces at the end? Base choice: no. (See
+  previous point)
+- Does the string contain a run of two or more contiguous spaces? Base
+  choice: we might decide either way, but let's say that we think "Yes"
+  represents a more typical use case here.
+- Does the string contain a run of two or more tab (`\t`) characters?
+  Base choice: we might select "no", on the grounds that spaces are more
+  common than tabs.
+- Does the string contain a run of two or more [zero-width
+  space](https://en.wikipedia.org/wiki/Zero-width_space) (unicode
+  `U+200B`) characters? Base choice: no, again (see previous point).
+
+We can then construct a test *value* which satisfies all those base
+choices -- `"some␣random␣␣string"`, perhaps (here, we've used the
+`␣` character to represent a space -- note the 2 spaces after
+"random").
+
+We would then go through and vary the partitions for different
+characteristics. (This *doesn't* mean we have to use our original test
+*value* as a template, though we could if we want.)
+
+For instance, "Does the string contain spaces at the start?". The base
+choice selects from the "no" partition; we could vary this by using
+`"␣some␣random␣␣string"` as a test value.
+
+There might well be better ways of organizing our characteristics --
+what were yours? (For instance, one other possibility is: partition
+strings into "Strings containing a run of two or more consecutive
+whitespace characters" vs "Strings that don't". We might then make most
+of the characteristics listed above *sub-*partitions of the "Strings that
+do..." partition.)
+
+</div>
+`\end{solbox}`{=latex}
+
+
+
+
+In previous labs, we've seen that attempting to measure test coverage simply
+by recording which lines of code a test suite exercises can mislead us as to
+how thoroughly our tests exercise the code.
+
+One alternative is to construct a *control flow graph* of the code being tested.
+A control flow graph (CFG) is a way of representing all the possible paths that a program's
+execution can take.
+
+- The graph is made up of *nodes*. Each node represents a *basic block* of code: a chunk of
+  instructions that will always run together in sequence. Sometimes, a node corresponds to
+  only *part* of a statement -- for example, in a Java `for` loop like
+
+  ```java
+  for (int i = 0; i < mylist.size(); i++) {
+    // loop body
+  }
+  ```
+
+  there might be a node for the *initialisation* (`int i = 0`), a node for the *condition check* (`i < mylist.size()`), a node for the *update* (`i++`), and nodes for the loop body.
+- The connections between nodes are called *edges* (we can think of them informally as
+  “arrows”). An edge shows that after finishing one node, control may flow to another node.
+- By following the arrows, we can trace out every possible route execution might take through the code.
+
+Take another look at the `collapseSpaces` method. Can we construct a control flow graph for
+the method?
+For the purposes of this lab, we'll take a simplified approach:
+we'll ignore calls to other methods, such as `.charAt()`, and only
+model the control flow *within* the method. (Initially, you may want to
+ignore possible exceptions, too. Once you've completed the exercises, see if you
+can revise your graph to include them -- do they seem useful?)  
+
+A typical way of "labelling" graph nodes needs is to use letters
+("A", "B", "C" and so on),
+and to provide a legend, showing a reader which nodes correspond
+to which lines (or fragments of lines) of code.
+
+Note that sometimes there may be multiple nodes representing
+fragments of code all within the same line (e.g. line 11).
+But as long as we have a clear explanation of what each node
+represents (e.g. "node D: the line 11 loop condition") then
+that's fine.
+
+**Exercise**
+
+:   Try to construct a control flow graph of the `collapseSpaces` method.
+    How many nodes do you end up with? How many edges?
+
+
+
+
+
+`\begin{solbox}`{=latex}
+<div class="solutions">
+
+**Sample solutions**:
+
+**b\. control flow graph**
+
+Here is one possible control flow graph:
+
+`\begin{center}`{=latex}
+<!-- ![](images/controlflow-solution.eps){ width=70% } -->
+![](images/controlflow-solution.svg){ width=70% }
+`\end{center}`{=latex}
+
+Here, the nodes are labelled with the section of code they
+represent. Contiguous lines of code (e.g. lines 9--10 and the
+start of 12) are "collapsed" together to save space --
+since they must *always* be executed together (in our simple
+model of the function), there's no real point in giving
+each line its own node.
+
+</div>
+`\end{solbox}`{=latex}
+
+
+
+
+c.  Given your test cases from part (a), try mentally or on paper
+    "executing" several tests, and see what paths of the graph
+    get exercised by each of your tests.
+
+    How would you subjectively rate the "coverage" of the graph
+    by your tests -- good? reasonable? poor?
+
+
+
+`\begin{solbox}`{=latex}
+<div class="solutions">
+
+**Sample solutions**:
+
+**c\. subjective graph coverage**
+
+The answers here will depend on your suggested tests.
+
+</div>
+`\end{solbox}`{=latex}
+
+
+
+d.  Work out whether your tests give the following sorts
+    of coverage:
+
+    i.  node coverage
+    #.  edge coverage
+
+
+
+`\begin{solbox}`{=latex}
+<div class="solutions">
+
+**Sample solutions**:
+
+**d\. node and edge coverage**
+
+The answers here will depend on your suggested tests.
+
+</div>
+`\end{solbox}`{=latex}
+
+
+
+e.  What are the *prime paths* in your graph?
+    What proportion of the prime paths are exercised by
+    the tests you've given?
+
+    Can you construct some tests which exercise prime paths
+    you haven't already covered?
+
+
+
+`\begin{solbox}`{=latex}
+<div class="solutions">
+
+**Sample solutions**:
+
+**e\. prime paths**
+
+For the graph solution shown earlier, the prime paths are
+(we have grouped related paths together -- e.g. when they have a shared
+prefix, or represent paths through the same loop):
+
+- ABG, ABCDEF, ABCDF
+- BCDEFB, CDEFBC, DEFBCD, EFBCDE, FBCDEF *(these all execute the left-hand 'if' branch)*
+- BCDFB, CDFBC, DFBCD *(these all execute the right-hand 'if' branch)*
+- EFBCDF *(this takes one left and one right branch)*
+- CDEFBG *(takes left branch)*
+- CDFBG *(take rights branch)*
+
+What proportion of the prime paths your tests cover will
+depend on what tests you chose.
+But note that if your tests don't have
+node or statement coverage,
+then they certainly won't have prime path coverage.
+
+One useful path is the path ABG, which will get exercised
+when we pass in the empty string. This is a useful test because
+it reveals a problem with the code -- passing in empty strings
+causes an exception to be thrown when we reach line 9 (the
+`.charAt` call fails).
+
+We might arrive at this test *either* by applying ISP
+techniques, or by looking to see what sort of graph coverage
+we have -- as long as we find the bug, either approach
+is fine!
+
+</div>
+`\end{solbox}`{=latex}
+
+
+
 
 <!-- vim: syntax=markdown tw=92 :
 -->

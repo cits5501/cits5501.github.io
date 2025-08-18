@@ -1,128 +1,9 @@
 ---
 title: |
-  CITS5501 lab 4 (week 5)&nbsp;--&nbsp;ISP and graphs
+  CITS5501 lab 4 (week 5)&nbsp;--&nbsp;Testability, ISP and control flow
 ---
 
-## 0. Recommended reading
-
-Before attempting the exercises in this worksheet, it's recommended you complete the
-recommended reading for week 5, and ensure you've reviewed the lecture slides on Input Space Partitioning
-and graph-based testing.
-
-It should be possible to attempt the exercises even without having attended the lectures on
-graph-based testing, but you might want to revisit your answers after you have attended
-those lectures.
-
-
-## 1. ISP, graphs and control flow
-
-Consider the following Java method for collapsing sequences of blanks, taken
-from the `StringUtils` class of Apache Velocity
-(<http://velocity.apache.org/>), version 1.3.1:
-
-
-``` { .java .numberLines }
-
-/**
-* Remove/collapse multiple spaces.
-*
-* @param String string to remove multiple spaces from.
-* @return String
-*/
-
-public static String collapseSpaces(String argStr) {
-  char last = argStr.charAt(0);
-  StringBuffer argBuf = new StringBuffer();
-
-  for (int cIdx = 0 ; cIdx < argStr.length(); cIdx++) {
-    char ch = argStr.charAt(cIdx);
-    if (ch != ' ' || last != ' ') {
-      argBuf.append(ch);
-      last = ch;
-    }
-  }
-  return argBuf.toString();
-}
-
-```
-
-a.  Using the ISP principles we have covered in class, suggest
-    some *characteristics* we could use to partition
-    the `argStr` parameter.
-
-    Once you have several characteristics, consider how you might choose
-    combinations of partitions from them. A recommended approach is to aim
-    for "Base Choice" coverage:
-
-    i.  For each characteristic, pick a *base choice* (and explain the
-        reasoning behind that choice). Usually, the base choice will be one that is
-        simpler, smaller, or more likely to occur than the other possibilities.
-    ii. Select test values for a "base choice" test.
-    #.  Go through and derive test values for the "non-base" partitions.
-
-    Try writing JUnit tests for some of your test values.
-
-    After you have finished the lab exercises, you might like to drop into one of the
-    timetabled lab sessions and compare the characteristics and
-    test values you derived with those of another student. Are your solutions
-    the same? If not, how do they differ? Do either of your solutions have an advantage over
-    the other?
-
-b.  Using the techniques outlined in lecture slides and readings on graph-based testing,
-    try to construct a *control flow graph* of the method.
-
-    How many nodes do you end up with? \
-    How many edges?
-
-For the purposes of this exercise, we'll take a simplified approach:
-you may ignore calls
-to other methods, such as `.charAt()`, and need only
-model the control flow *within* the method. (What about possible
-exceptions?  Should they be modelled, or not? Why?)
-
-A typical way of "labelling" your graph nodes needs is to use letters
-("A", "B", "C" and so on),
-and to provide a legend, showing a reader which nodes correspond
-to which lines (or fragments of lines) of code.
-
-Sometimes there may be multiple nodes representing
-fragments of code all within the same line (e.g. line 11).
-As long as you have a clear explanation of what each node
-represents (e.g. "node D: the line 11 loop condition") then
-that's fine.
-
-
-
-
-
-
-c.  Given your test cases from part (a), try mentally or on paper
-    "executing" several tests, and see what paths of the graph
-    get exercised by each of your tests.
-
-    How would you subjectively rate the "coverage" of the graph
-    by your tests -- good? reasonable? poor?
-
-
-
-d.  Work out whether your tests give the following sorts
-    of coverage:
-
-    i.  node coverage
-    #.  edge coverage
-
-
-
-e.  What are the *prime paths* in your graph?
-    What proportion of the prime paths are exercised by
-    the tests you've given?
-
-    Can you construct some tests which exercise prime paths
-    you haven't already covered?
-
-
-
-## 2. Test fixtures
+## 1. Test fixtures
 
 Review the material from the textbook on test automation
 (ch 6), and the JUnit 4 "Text fixtures" documentation
@@ -254,7 +135,7 @@ are potential *fixtures* for any test.
 
 
 
-## 3. Class design, invariants, and testability
+## 2. Class design, invariants, and testability
 
 Suppose we are writing a `DigitalTimer` class representing 24-hour times -- it could be used, for example, in
 simulation programs. Rather than measuring "real" time, it measures simulated time, where
@@ -313,13 +194,17 @@ public class DigitalTimer {
 The method signatures your colleague has written represent the public API for the class;
 they don't show the implementation.
 
-**Question 3.1:**
+**Question:**
 
 :   Before going on -- what might be useful attributes (fields) for the class? These will be part of
     the implementation. Can you think of multiple different alternatives? Should they
     be added to the API? Why, or why not?
 
-**Question 3.2:**
+
+
+
+
+**Question:**
 
 :   Consider whether there are any *invariants* that govern the values of these
     attributes. Class invariants are constraints on what values the attributes of the class
@@ -469,6 +354,159 @@ There are a few different options here:
 
 In the present case, it should be possible to test the class entirely through its public API
 (though it might seem a little awkward).
+
+<div style="border: solid 2pt blue; background-color: hsla(241, 100%,50%, 0.1); padding: 1em; border-radius: 5pt; margin-top: 1em;">
+
+::: block-caption
+
+Pre-reading
+
+:::
+
+The following exercises in this worksheet assume general familiarity with graph-based
+testing concepts, so it's recommended you work through chapter 7 from the Ammann and Offutt
+textbook before attempting them.
+
+</div>
+
+
+## 3. ISP and control flow
+
+Consider the following Java method for collapsing sequences of blanks, taken
+from the `StringUtils` class of Apache Velocity
+(<http://velocity.apache.org/>), version 1.3.1:
+
+
+``` { .java .numberLines }
+
+/**
+* Remove/collapse multiple spaces.
+*
+* @param String string to remove multiple spaces from.
+* @return String
+*/
+
+public static String collapseSpaces(String argStr) {
+  char last = argStr.charAt(0);
+  StringBuffer argBuf = new StringBuffer();
+
+  for (int cIdx = 0 ; cIdx < argStr.length(); cIdx++) {
+    char ch = argStr.charAt(cIdx);
+    if (ch != ' ' || last != ' ') {
+      argBuf.append(ch);
+      last = ch;
+    }
+  }
+  return argBuf.toString();
+}
+
+```
+
+**Exercise**
+
+:   Using the ISP principles we have covered in class, suggest
+    some *characteristics* we could use to partition
+    the `argStr` parameter.
+
+    Once you have several characteristics, consider how you might choose
+    combinations of partitions from them. A recommended approach is to aim
+    for "Base Choice" coverage:
+
+    i.  For each characteristic, pick a *base choice* (and explain the
+        reasoning behind that choice). Usually, the base choice will be one that is
+        simpler, smaller, or more likely to occur than the other possibilities.
+    ii. Select test values for a "base choice" test.
+    #.  Go through and derive test values for the "non-base" partitions.
+
+    Try writing JUnit tests for some of your test values.
+
+    After you have finished the lab exercises, you might like to drop into one of the
+    timetabled lab sessions and compare the characteristics and
+    test values you derived with those of another student. Are your solutions
+    the same? If not, how do they differ? Do either of your solutions have an advantage over
+    the other?
+
+
+
+
+In previous labs, we've seen that attempting to measure test coverage simply
+by recording which lines of code a test suite exercises can mislead us as to
+how thoroughly our tests exercise the code.
+
+One alternative is to construct a *control flow graph* of the code being tested.
+A control flow graph (CFG) is a way of representing all the possible paths that a program's
+execution can take.
+
+- The graph is made up of *nodes*. Each node represents a *basic block* of code: a chunk of
+  instructions that will always run together in sequence. Sometimes, a node corresponds to
+  only *part* of a statement -- for example, in a Java `for` loop like
+
+  ```java
+  for (int i = 0; i < mylist.size(); i++) {
+    // loop body
+  }
+  ```
+
+  there might be a node for the *initialisation* (`int i = 0`), a node for the *condition check* (`i < mylist.size()`), a node for the *update* (`i++`), and nodes for the loop body.
+- The connections between nodes are called *edges* (we can think of them informally as
+  “arrows”). An edge shows that after finishing one node, control may flow to another node.
+- By following the arrows, we can trace out every possible route execution might take through the code.
+
+Take another look at the `collapseSpaces` method. Can we construct a control flow graph for
+the method?
+For the purposes of this lab, we'll take a simplified approach:
+we'll ignore calls to other methods, such as `.charAt()`, and only
+model the control flow *within* the method. (Initially, you may want to
+ignore possible exceptions, too. Once you've completed the exercises, see if you
+can revise your graph to include them -- do they seem useful?)  
+
+A typical way of "labelling" graph nodes needs is to use letters
+("A", "B", "C" and so on),
+and to provide a legend, showing a reader which nodes correspond
+to which lines (or fragments of lines) of code.
+
+Note that sometimes there may be multiple nodes representing
+fragments of code all within the same line (e.g. line 11).
+But as long as we have a clear explanation of what each node
+represents (e.g. "node D: the line 11 loop condition") then
+that's fine.
+
+**Exercise**
+
+:   Try to construct a control flow graph of the `collapseSpaces` method.
+    How many nodes do you end up with? How many edges?
+
+
+
+
+
+
+c.  Given your test cases from part (a), try mentally or on paper
+    "executing" several tests, and see what paths of the graph
+    get exercised by each of your tests.
+
+    How would you subjectively rate the "coverage" of the graph
+    by your tests -- good? reasonable? poor?
+
+
+
+d.  Work out whether your tests give the following sorts
+    of coverage:
+
+    i.  node coverage
+    #.  edge coverage
+
+
+
+e.  What are the *prime paths* in your graph?
+    What proportion of the prime paths are exercised by
+    the tests you've given?
+
+    Can you construct some tests which exercise prime paths
+    you haven't already covered?
+
+
+
 
 <!-- vim: syntax=markdown tw=92 :
 -->
