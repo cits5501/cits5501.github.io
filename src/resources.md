@@ -43,8 +43,11 @@ like to get an idea in advance of what will be covered.)
   - Lecture 4b -- input space partitioning {% resourceList "lect04b--isp", ["pdf", "md"] %}
 - Week 4
   - ISP continued; TBA
-{#
 - Week 5
+  - Quality Assurance {% resourceList "lect05a--quality", ["pdf", "md"] %}
+  - Git Hub Workshop {% resourceList "lect05b--github-workshop", ["pdf", "md"] %}
+{#
+- Week 5 OLD
   - Lecture 5a -- graph-based testing {% resourceList "lect05b--graph", ["pdf", "md"] %}
   - Lecture 5b -- logic-based testing {% resourceList "lect05c--logic", ["pdf", "md"] %}
 - Lecture 5a -- model-based testing {% resourceList "lect05a--intro", ["pdf", "md"] %}
