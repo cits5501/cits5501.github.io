@@ -220,25 +220,23 @@ should submit it via {{ siteinfo.moodle }}.
 The same instructions apply to the mid-semester test as for the week 4
 quiz.
 
-### Project
+#}
 
-The project for the unit, worth
-{{ siteinfo.assessments.project.marksPercent }}%
-of the unit's marks, is due on
-{{ siteinfo.assessments.project.dates.due | dateFormat("dddd D MMM") }}.
+### Group project (phase 1)
 
-It is to be completed individually.
+Details of phase 1 of the group project are now available.
 
-It includes both programming work and written work. Students may make
-*look at* any texts or online materials they wish, but any work must
-be their own, and in their own words.
-As with all open assessments – any
-statistical anomalies will be investigated, and anybody may be asked
-to (orally)
-[explain their thought process]{ class="hi-pri" } in coming up with their
-answers.
+Tasks and information about the project are specified in a GitHub repository
+[here](https://github.com/cits5501/Group-Project-Information-2025/). The information
+provided includes the [project specification][project-spec] (PDF) and marks breakdown.
+
+Also provided is a GitHub repository containing [scaffolding code][scaff] for the project.
+
+[project-spec]: https://github.com/cits5501/Group-Project-Information-2025/blob/main/project-spec-2025-phase-1.pdf?raw=true
+[scaff]: https://github.com/cits5501/project-2025-phase-1-scaffolding
 
 
+{#
 
 ### Exam
 
