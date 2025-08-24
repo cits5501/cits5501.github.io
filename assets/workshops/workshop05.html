@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>CITS5501 lab 5 (week 6) – logic-based testing</title>
+  <title>CITS5501 lab 5 (week 6) – version control, logic-based testing</title>
   <style>
 html {
 line-height: 1.5;
@@ -194,26 +194,214 @@ border: solid 1pt black;
 }
 </style>
 <header id="title-block-header">
-<h1 class="title"><p>CITS5501 lab 5 (week 6) – logic-based
-testing</p></h1>
+<h1 class="title"><p>CITS5501 lab 5 (week 6) – version control,
+logic-based testing</p></h1>
 </header>
 <nav id="TOC" role="doc-toc">
 <h2 id="toc-title">Contents</h2>
 <ul>
-<li><a href="#notation" id="toc-notation">0. Notation</a></li>
-<li><a href="#terminology-clauses-and-predicates" id="toc-terminology-clauses-and-predicates">1. Terminology – clauses and
+<li><a href="#project-version-control" id="toc-project-version-control">1. Project version control</a></li>
+<li><a href="#logic-notation" id="toc-logic-notation">2. Logic
+notation</a></li>
+<li><a href="#terminology-clauses-and-predicates" id="toc-terminology-clauses-and-predicates">3. Terminology – clauses and
 predicates</a></li>
-<li><a href="#making-clauses-active" id="toc-making-clauses-active">2.
+<li><a href="#making-clauses-active" id="toc-making-clauses-active">4.
 Making clauses active</a></li>
-<li><a href="#scenario-trap-doors" id="toc-scenario-trap-doors">3.
+<li><a href="#scenario-trap-doors" id="toc-scenario-trap-doors">5.
 Scenario – trap-doors</a></li>
-<li><a href="#scenario-login-page" id="toc-scenario-login-page">4.
+<li><a href="#scenario-login-page" id="toc-scenario-login-page">6.
 Scenario – login page</a></li>
-<li><a href="#tips-and-tricks" id="toc-tips-and-tricks">4. Tips and
+<li><a href="#tips-and-tricks" id="toc-tips-and-tricks">7. Tips and
 tricks</a></li>
 </ul>
 </nav>
-<h2 id="notation">0. Notation</h2>
+<h2 id="project-version-control">1. Project version control</h2>
+<p>The week 5 lectures include a workshop on using Git and GitHub for <a href="https://en.wikipedia.org/wiki/Version_control">version
+control</a>.</p>
+<p>If this is the first time you have used Git and GitHub, you should
+work through the resources included there, including the <a href="https://docs.github.com/en/get-started/start-your-journey/hello-world">Github
+Hello World Step by Step</a> tutorial.</p>
+<p>If you <em>have</em> used Git and GitHub before, you might like to
+think in more depth about how version control can contribute to (or pose
+problems for) software quality. The questions below ask you to reflect
+on this.</p>
+<dl>
+<dt><strong>Question</strong></dt>
+<dd>
+<p>What is the basic purpose of version control? How does it differ from
+simply keeping copies of files with different names or dates?</p>
+</dd>
+<dt><strong>Question</strong></dt>
+<dd>
+<p>How might version control make software development easier or harder?
+You may want to check online resources to help you answer these
+questions.</p>
+<ul>
+<li>How can version control make it easier to trace the source of a
+bug?</li>
+<li>In what ways might poor version control practices (e.g. unclear
+commit messages, cluttered history) make testing or debugging
+harder?</li>
+<li>How might including large generated files in a repository affect
+development speed and reliability?<br />
+ </li>
+</ul>
+</dd>
+<dt><strong>Question</strong></dt>
+<dd>
+<p>In group assessments from previous units, has your group adopted any
+conventions or best practices when using version control? If so, do you
+think they were useful – and in what ways? If not, did you encounter any
+problems where adopting a convention might have made things easier?</p>
+<p>Think about the following:</p>
+<ul>
+<li>Why might a team agree on a commit message convention or branching
+strategy?</li>
+<li>What problems can arise if different team members ignore these
+agreements?</li>
+<li>How could poor version control practices create extra work for
+testers or integrators?<br />
+ </li>
+</ul>
+</dd>
+<dt><strong>Question</strong></dt>
+<dd>
+<p>Can you think of any indicators in a version control repository that
+might be a sign of good version control discipline (or conversely, or
+poor version control discipline)? If you were reviewing a peer’s
+repository, what would you look for as signs of good or bad version
+control discipline?</p>
+</dd>
+</dl>
+<p>Version control tools can either support software quality or
+undermine it, depending on how they’re used. Good practices make
+repositories easier to work with, simplify testing, and reduce the risk
+of errors. But poor practices can lead to confusion, wasted time, and
+hidden bugs.</p>
+<p>In a well-managed repository, the version control history should
+clearly show</p>
+<ul>
+<li><em>what</em> changed</li>
+<li><em>when</em> it changed</li>
+<li>and <em>why</em>.</li>
+</ul>
+<p>Information about the first two items comes directly from the version
+control tool – all version control tools will show what content in what
+files was changed, and when a commit occurred. However, providing
+reasons <em>why</em> the change was made can only be done by the
+developer who committed it. In version control systems, <em>commit
+messages</em> are used to explain the reasons for a change. You can read
+more about what makes for good or bad commit messages in Simon Tatham’s
+guide to <a href="https://www.chiark.greenend.org.uk/~sgtatham/quasiblog/commit-messages/">“Writing
+commit messages”</a>.</p>
+<p>When used properly, version control systems make it much easier to
+solve problems like</p>
+<ul>
+<li>Diagnosing when and how a bug was introduced.</li>
+<li>Understanding the reasons for implementation decisions.</li>
+<li>Reverting buggy software to a known good state.</li>
+<li>Letting teams work on multiple features in parallel (using branches
+and merges).</li>
+</ul>
+<h4 id="version-control-best-practices">Version control best
+practices</h4>
+<p>We won’t discuss version control best practices in exhaustive detail
+here, but will highlight a few important ones. For more detail, you can
+read Michael Ernst’s <a href="https://homes.cs.washington.edu/~mernst/advice/version-control.html">“Version
+control concepts and best practices”</a>.</p>
+<ul>
+<li><em>Avoid committing generated files.</em> They add “noise” to the
+version control history, are a common source of merge conflicts, and can
+quickly bloat the repository.
+<!-- see also https://kentcdodds.com/blog/why-i-dont-commit-generated-files-to-master --></li>
+<li><em>Avoid versioning binary files where possible.</em> Instead,
+version the text format or build recipe. If you do need to track binary
+files, consider specialised tools (e.g. Git LFS).</li>
+<li><em>Write informative commit messages.</em> A good message explains
+<em>what</em> changed and <em>why</em>. If your team follows a standard
+(e.g. <a href="https://www.conventionalcommits.org/">Conventional
+Commits</a>), stick to it.</li>
+<li><em>Commit early, commit often</em>. Don’t leave work uncommitted
+for any extended period of time – you lose the advantage of having a
+version control system if you do that.</li>
+<li><em>Create commits at logical points.</em> Each commit should
+represent a coherent change, small enough to review and test in
+isolation. <!--
+- *Use branches for features and fixes.** This keeps experimental work separate from production-ready code and makes integration safer.
+--></li>
+<li><em>Review before merging.</em> Code review not only catches bugs,
+it also enforces quality in commit history and documentation.</li>
+</ul>
+<p>You might notice that some of these practices are in tension – if you
+<em>commit early and commit often</em> to stop work from being lost, how
+can you also ensure that you’ve provided good commit messages, or
+created commits at logical points?</p>
+<p>The answer to this apparent paradox is that it’s possible to
+<em>rewrite the local history</em> of your repository, and in fact it’s
+a good idea to</p>
+<ul>
+<li><em>Tidy history before sharing.</em> Squash or reorganise commits
+so that the branch history tells a clear story.</li>
+</ul>
+<p>Once you’ve pushed your commits to a remote repository, it’s
+generally a bad idea to alter them, since other team-mates’ work may be
+affected by any changes. But <em>before</em> you push your commits, it’s
+perfectly alright – in fact, recommended – to tidy up the history before
+pushing it. Read Carlos Schults’s post <a href="https://carlosschults.net/en/git-beautiful-history/">“Make Your
+Git History Look Beautiful Using Amend and Rebase”</a> for more
+information on how to do this.</p>
+<!--
+https://www.atlassian.com/blog/git/written-unwritten-guide-pull-requests
+-->
+<!--
+
+for another semester - some exercises
+
+1. **Commit Messages and History**
+
+   * Create a small repository and add a simple program (e.g. “Hello world”).
+   * Make three changes to it, but commit with vague messages like “fix”, “update”, or “stuff”.
+   * Now try to identify *why* you made each change.
+   * Redo the exercise with clear, descriptive messages. Compare the difference in traceability.
+
+2. **Generated and Binary Files**
+
+   * Add a large generated file (e.g. a compiled binary, log file, or data export) to the repository and commit it.
+   * Observe how the repo size changes. Then make a trivial edit and commit again—note that the *entire file* is stored again.
+   * Remove the file from version control, add it to `.gitignore`, and discuss why this is a better approach.
+
+3. **Commit Granularity**
+
+   * Make multiple unrelated changes in your code (e.g. fix a bug, add a feature, update documentation). Commit them *all together*.
+   * Now imagine trying to undo just the bug fix—how easy is it?
+   * Redo the exercise, this time committing each change separately. Compare the flexibility.
+
+4. **Branching and Integration**
+
+   * Create a new branch for a “feature” and make a couple of commits.
+   * Switch back to main, make a conflicting change, then try merging the feature branch.
+   * Resolve the conflict, then tidy the history (e.g. squash commits).
+   * Reflect on how branching helps isolate work, and how merge practices affect repository clarity.
+
+5. **Code Review Simulation (Optional, Pair Activity)**
+
+   * Swap repositories with a partner. Review their commit history for clarity, granularity, and adherence to best practices.
+   * Give each other feedback: what would make the history easier to understand or maintain?
+
+-->
+<div style="border: solid 2pt blue; background-color: hsla(241, 100%,50%, 0.1); padding: 1em; border-radius: 5pt; margin-top: 1em;">
+<div class="block-caption">
+<p>Pre-reading</p>
+</div>
+<p>The following exercises in this worksheet assume general familiarity
+with logic-based testing concepts, so if you haven’t already, it’s
+recommended you work through chapter 8 from the Ammann and Offutt
+textbook before attempting them.</p>
+</div>
+<h2 id="logic-notation">2. Logic notation</h2>
+<p>The remaining sections of this lab focus on assessing whether a test
+suite thoroughly exercises (i.e., has good coverage of) the logic
+expressions contained in the component under test.</p>
 <p>When writing logic expressions, we will often use mathematical
 notation for “and”, “or”, and “not”:</p>
 <ul>
@@ -233,14 +421,16 @@ operators:</p>
 <li><code>!</code> – “not”</li>
 </ul>
 <div style="border: solid 2pt blue; background-color: hsla(241, 100%,50%, 0.1); padding: 1em; border-radius: 5pt; margin-top: 1em;">
-<p><strong>Other operators and languages</strong></p>
+<div class="block-caption">
+<p>Other operators and languages</p>
+</div>
 <p>Java also has non–short-circuiting logic operators, <code>|</code>
 and <code>&amp;</code>.</p>
-<p>We won’t be using any Python in this unit – but for reference, in
+<p>We won’t be focusing on Python in this unit – but for reference, in
 Python, the logic operators are all spelled out as English words: “and”,
 “or” and “not”.</p>
 </div>
-<h2 id="terminology-clauses-and-predicates">1. Terminology – clauses and
+<h2 id="terminology-clauses-and-predicates">3. Terminology – clauses and
 predicates</h2>
 <p>If you need to, review the lecture material and recommended readings
 that explain what <em>predicates</em> and <em>clauses</em> are.</p>
@@ -251,7 +441,7 @@ that explain what <em>predicates</em> and <em>clauses</em> are.</p>
 <li><p><span class="math inline">\(G \vee ((m &gt; a) \vee (s \leqslant
 o + n)) \wedge U\)</span></p></li>
 </ol>
-<h2 id="making-clauses-active">2. Making clauses active</h2>
+<h2 id="making-clauses-active">4. Making clauses active</h2>
 <p>To make a particular clause <span class="math inline">\(c\)</span> in
 some predicate <em>active</em> means to assign values to variables so
 that the truth-value of the whole predicate depends on <span class="math inline">\(c\)</span>.</p>
@@ -327,7 +517,7 @@ your reasoning.</p>
 <li><span class="math inline">\(G \vee (m \geqslant a) \vee H \wedge
 U\)</span></li>
 </ol>
-<h2 id="scenario-trap-doors">3. Scenario – trap-doors</h2>
+<h2 id="scenario-trap-doors">5. Scenario – trap-doors</h2>
 <p>Suppose a component under test has the following requirements:</p>
 <div style="border: solid 2pt blue; background-color: hsla(241, 100%,50%, 0.1); padding: 1em; border-radius: 5pt; margin-top: 1em;">
 <p>If the lever is pulled and the chair is occupied, open the
@@ -343,7 +533,7 @@ w)\)</span>.)</p>
 one or more “<code>if</code>” statements, in pseudocode. Then recall
 that the set of all predicates in a system means the set of all logical
 expressions found in things like “<code>if</code>” statements.)</p>
-<h2 id="scenario-login-page">4. Scenario – login page</h2>
+<h2 id="scenario-login-page">6. Scenario – login page</h2>
 <p>Suppose you are part of a team developing a website called
 “RateMyVeterinarian”, where people can log in and provide anonymous
 reviews of the veterinarian services they use.</p>
@@ -365,21 +555,21 @@ feature, this requirement should be thoroughly tested – so you should
 design a test suite that meets RAC (Restricted Active Clause) levels of
 coverage. Do you agree? Why or why not?</p></li>
 </ol>
-<h2 id="tips-and-tricks">4. Tips and tricks</h2>
+<h2 id="tips-and-tricks">7. Tips and tricks</h2>
 <p>When solving problems that involve logic-based testing, make sure you
 understand the difference between <em>expressions</em> and
 <em>statements</em> in the programming language or languages that you’re
 using.</p>
 <p>For instance, simple Java <code>if</code> statements <a href="https://docs.oracle.com/javase/specs/jls/se22/html/jls-14.html#jls-14.9">are
 of the form</a>:</p>
-<p>   <code>if (</code> <strong><code>Expression</code></strong>
+<p>   <code>if (</code> <strong><code>Boolean expression</code></strong>
 <code>) {</code> <strong><code>Statements</code></strong>
 <code>}</code></p>
 <p>Statements are parts of the language that <em>do</em> things; we
-usually execute them in order to achieve some side effect. Expressions
-evaluate to a Java <code>boolean</code>, and we typically intend that
-they should <em>not</em> have side effects – they just evaluate to
-<code>true</code> or <code>false</code>.</p>
+usually execute them in order to achieve some side effect. Boolean
+expressions evaluate to a Java <code>boolean</code> value, and we
+typically intend that they should <em>not</em> have side effects – they
+just evaluate to <code>true</code> or <code>false</code>.</p>
 <p>When we do logic-based testing, we’re focusing on the collection of
 logic <em>expressions</em> of a program or system that control program
 flow, and working out how to write tests that thoroughly exercise the

@@ -42,10 +42,12 @@ like to get an idea in advance of what will be covered.)
   - Lecture 4a -- input space partitioning intro {% resourceList "lect04a--isp-intro", ["pdf", "md"] %}
   - Lecture 4b -- input space partitioning {% resourceList "lect04b--isp", ["pdf", "md"] %}
 - Week 4
-  - ISP continued; TBA
+  - ISP continued
 - Week 5
   - Quality Assurance {% resourceList "lect05a--quality", ["pdf", "md"] %}
   - Git Hub Workshop {% resourceList "lect05b--github-workshop", ["pdf", "md"] %}
+- Week 6
+  - Logic-based testing
 {#
 - Week 5 OLD
   - Lecture 5a -- graph-based testing {% resourceList "lect05b--graph", ["pdf", "md"] %}
@@ -134,10 +136,10 @@ the semester.
   - Sample worksheet solutions {% resourceList "workshop03-solutions", ["html", "md"] %}
 - Week 5 -- Testability, ISP and control flow
   - Lab worksheet {% resourceList "workshop04", ["html", "md"] %}
-{#
   - Sample worksheet solutions {% resourceList "workshop04-solutions", ["html", "md"] %}
 - Week 6 -- logic
   - Lab worksheet {% resourceList "workshop05", ["html", "md"] %}
+{#
   - Sample worksheet solutions {% resourceList "workshop05-solutions", ["html", "md"] %}
 - Week 7 -- syntax
   - Lab worksheet {% resourceList "workshop06", ["html", "md"] %}
