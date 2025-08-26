@@ -8,13 +8,13 @@ author: 'Unit coordinator: Arran Stewart'
 
 ### Logic-based testing
 
--   One simplification we made when looking at source flow control
-    was that a decision point was just treated as a "black box" --
-    it might contain a complex boolean condition, but all we cared
-    about was the fact that graph edges went in, and graph edges
-    came out.
+-   In labs, we've seen that coverage tools can tell us,
+    for instance, which paths of an "if" statement have been
+    exercised in tests
+-   The boolean expression in the "if" is treated as a "black box".
 -   Modeling the internal structure of the boolean conditions
-    leads us to *logic testing* -- modeling the logical
+    leads us to *logic testing*
+-   Modeling the logical
     structure of conditions, and checking how well we have exercised
     different parts of them.
 
@@ -144,8 +144,9 @@ $(i < j) \wedge isAlpha(c) \vee b \vee (m \geq n*o)$
 \end{center}
 ```
 
--   In the terminology used by the Ammann and Offutt textbook, a
-    *predicate* is a "top-level" logic expression[^top] that evaluates to a boolean value.
+-   A *predicate* is an expression that evaluates to a boolean value.\
+    (So the expression as a whole is a predicate, as are
+    some of its parts -- e.g. $i < j$)
 
 -   Predicates can contain
     -   boolean variables (e.g. $b$)
@@ -154,19 +155,12 @@ $(i < j) \wedge isAlpha(c) \vee b \vee (m \geq n*o)$
         "`==`", "`>=`",
         "`!=`" all can operate on non-boolean variables)
     -   function or method calls that return a boolean
-    -   any combination of the above, joined by logical connectives
-
--   We call the lowest level of expressions -- ones which aren't joined
-    by any logical connectives -- *clauses*.
-
-[^top]: That is, it isn't pat of any larger expression.
-
 
 ### Connectives
 
 \def\somespace{\hspace{1em}}
 
--   Boolean expressions can be joined by connectives -- logical operators.
+-   Predicates can be joined by connectives -- logical operators.
 -   Common programming connectives:
 
     $\lnot$, `!` \hspace{4em} -- \somespace logical not\

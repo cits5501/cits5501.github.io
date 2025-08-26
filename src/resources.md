@@ -47,7 +47,8 @@ like to get an idea in advance of what will be covered.)
   - Quality Assurance {% resourceList "lect05a--quality", ["pdf", "md"] %}
   - Git Hub Workshop {% resourceList "lect05b--github-workshop", ["pdf", "md"] %}
 - Week 6
-  - Logic-based testing
+  - Lecture 6a -- logic-based testing {% resourceList "lect06a--logic", ["pdf", "md"] %}
+  - Lecture 6b -- graph-based testing {% resourceList "lect06b--graph", ["pdf", "md"] %}
 {#
 - Week 5 OLD
   - Lecture 5a -- graph-based testing {% resourceList "lect05b--graph", ["pdf", "md"] %}
