@@ -114,7 +114,7 @@ Testing 3 (logic testing)
     workshopTopic:
       `Syntax-based testing and mutation testing`,
     reading:
-       `- Amman & Offutt, ch 9`
+       `- Amman & Offutt, ch 9`,
     
     assessmentDetails: 'Project phase 2 release',
     },
@@ -157,7 +157,7 @@ Testing 3 (logic testing)
       lectureTopic:
           'Formal methods',
       workshopTopic:
-          'Work on Project', <!-- 'Specifications in Alloy', -->
+          'Work on Project',
       reading:
         `TBA`,
       assessmentDetails: 'Project phase 2 due',

@@ -49,7 +49,6 @@ like to get an idea in advance of what will be covered.)
 - Week 6
   - Lecture 6a -- logic-based testing {% resourceList "lect06a--logic", ["pdf", "md"] %}
   - Lecture 6b -- graph-based testing {% resourceList "lect06b--graph", ["pdf", "md"] %}
- 
 - Week 7
   - Lecture 6a -- syntax-based testing {% resourceList "lect07a--syntax-BNF", ["pdf", "md"] %}
   - Lecture 6b -- program-based mutation testing       {% resourceList "lect07b--syntax-mutation", ["pdf", "md"] %}
