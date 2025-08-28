@@ -201,7 +201,7 @@ testing</p></h1>
 <h2 id="toc-title">Contents</h2>
 <ul>
 <li><a href="#reading" id="toc-reading">Reading</a></li>
-<li><a href="#a.-command-line-argument-parsing" id="toc-a.-command-line-argument-parsing">A. Command-line argument
+<li><a href="#command-line-argument-parsing" id="toc-command-line-argument-parsing">1. Command-line argument
 parsing</a>
 <ul>
 <li><a href="#documenting-command-line-arguments" id="toc-documenting-command-line-arguments">Documenting command-line
@@ -210,16 +210,17 @@ arguments</a></li>
 command-line argument syntax</a></li>
 <li><a href="#generators" id="toc-generators">Generators</a></li>
 </ul></li>
-<li><a href="#b.-hand-written-parsers" id="toc-b.-hand-written-parsers">B. Hand-written parsers</a></li>
-<li><a href="#c.-testing-grammars-coverage" id="toc-c.-testing-grammars-coverage">C. Testing grammars –
+<li><a href="#hand-written-parsers" id="toc-hand-written-parsers">2.
+Hand-written parsers</a></li>
+<li><a href="#testing-grammars-coverage" id="toc-testing-grammars-coverage">3. Testing grammars –
 coverage</a></li>
 </ul>
 </nav>
 <p></p>
 <h2 id="reading">Reading</h2>
 <p>It is strongly suggested you complete the recommended readings for
-weeks 1-6 <em>before</em> attempting this lab/workshop.</p>
-<h2 id="a.-command-line-argument-parsing">A. Command-line argument
+weeks 1-7 <em>before</em> attempting this lab/workshop.</p>
+<h2 id="command-line-argument-parsing">1. Command-line argument
 parsing</h2>
 <p>A very common place to use grammars is when parsing <em>command-line
 arguments</em> to applications. As an example, we’ll look at a
@@ -326,7 +327,7 @@ generating random strings – are they what you would expect?</li>
 chooses one randomly. How would you alter the grammar so that the image
 “<code>ubuntu</code>” is chosen twice as often as the others?</li>
 </ul>
-<h2 id="b.-hand-written-parsers">B. Hand-written parsers</h2>
+<h2 id="hand-written-parsers">2. Hand-written parsers</h2>
 <p>Suppose we wanted to write code ourselves to parse the command-line
 arguments of a program according to a grammar like this.</p>
 <p>For small programs, the simplest way is usally is to implement a
@@ -358,8 +359,7 @@ arguments and would like a challenge: read through the documentation for
 either Apache Commons CLI or Picocli, and amend our
 <code>MyDockerLiteProgram</code> class to use one of these libraries to
 parse its command-line arguments.</p>
-<h2 id="c.-testing-grammars-coverage">C. Testing grammars –
-coverage</h2>
+<h2 id="testing-grammars-coverage">3. Testing grammars – coverage</h2>
 <p>Recall that when testing something that can be represented as a
 grammar, there are different levels of <em>coverage</em> we might aim to
 achieve.</p>

@@ -21,10 +21,10 @@ include-before: |
 
 ## Reading
 
-It is strongly suggested you complete the recommended readings for weeks 1-6
+It is strongly suggested you complete the recommended readings for weeks 1-7
 *before* attempting this lab/workshop.
 
-## A. Command-line argument parsing
+## 1. Command-line argument parsing
 
 A very common place to use grammars is when parsing *command-line arguments*
 to applications. As an example, we'll look at a simplified version of the
@@ -205,7 +205,7 @@ to get
 \endsolbox
 
 
-## B. Hand-written parsers
+## 2. Hand-written parsers
 
 Suppose we wanted to write code ourselves to parse the command-line arguments of a program
 according to a grammar like this.
@@ -249,7 +249,7 @@ its command-line arguments.
 \endgenericbox
 
 
-## C. Testing grammars -- coverage
+## 3. Testing grammars -- coverage
 
 Recall that when testing something that can be represented
 as a grammar, there are different levels of *coverage*

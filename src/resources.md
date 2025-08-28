@@ -136,12 +136,13 @@ the semester.
   - Lab worksheet {% resourceList "workshop04", ["html", "md"] %}
   - Sample worksheet solutions {% resourceList "workshop04-solutions", ["html", "md"] %}
 - Week 6 -- logic
-  - Lab worksheet {% resourceList "workshop05", ["html", "md"] %}
-{#
+  - Lab worksheet {% resourceList "workshop05", ["html", "md"] %} {#
   - Sample worksheet solutions {% resourceList "workshop05-solutions", ["html", "md"] %}
+#}
 - Week 7 -- syntax
   - Lab worksheet {% resourceList "workshop06", ["html", "md"] %}
   - Source code ([zip]({{ "/workshops/workshop-06-code.zip" | url }}))
+{#
   - Sample worksheet solutions {% resourceList "workshop06-solutions", ["html", "md"] %}
 - Week 8 -- code reviews
   - Lab worksheet               {% resourceList "workshop07", ["html", "md"] %}
