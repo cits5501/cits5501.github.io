@@ -49,14 +49,12 @@ like to get an idea in advance of what will be covered.)
 - Week 6
   - Lecture 6a -- logic-based testing {% resourceList "lect06a--logic", ["pdf", "md"] %}
   - Lecture 6b -- graph-based testing {% resourceList "lect06b--graph", ["pdf", "md"] %}
+ 
+- Week 7
+  - Lecture 6a -- syntax-based testing {% resourceList "lect07a--syntax-BNF", ["pdf", "md"] %}
+  - Lecture 6b -- program-based mutation testing       {% resourceList "lect07b--syntax-mutation", ["pdf", "md"] %}
 {#
-- Week 5 OLD
-  - Lecture 5a -- graph-based testing {% resourceList "lect05b--graph", ["pdf", "md"] %}
-  - Lecture 5b -- logic-based testing {% resourceList "lect05c--logic", ["pdf", "md"] %}
-- Lecture 5a -- model-based testing {% resourceList "lect05a--intro", ["pdf", "md"] %}
-- Week 6--7
-  - Lecture 6a -- syntax-based testing {% resourceList "lect06a--syntax", ["pdf", "md"] %}
-  - Lecture 6b -- random testing       {% resourceList "lect06b--random", ["pdf", "md"] %}
+
 - Week 8-9
   - Lecture 7a, integration and system testing {% resourceList "lect07a--system", ["pdf", "md"] %}
   - Lecture 7b, reviews and quality assurance  {% resourceList "lect07b--reviews", ["pdf", "md"] %}
