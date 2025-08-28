@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang xml:lang>
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>CITS5501 lab 5 (week 6) – version control, logic-based testing</title>
+  <style>
+html {
+line-height: 1.5;
+font-family: sans-serif;
+font-size: 12pt;
+color: black;
+background-color: white;
+}
+body {
+margin: 0 auto;
+max-width: 50em;
+padding-left: 50px;
+padding-right: 50px;
+padding-top: 50px;
+padding-bottom: 50px;
+hyphens: auto;
+overflow-wrap: break-word;
+text-rendering: optimizeLegibility;
+font-kerning: normal;
+}
+@media (max-width: 600px) {
+body {
+font-size: 0.9em;
+padding: 1em;
+}
+h1 {
+font-size: 1.8em;
+}
+}
+@media print {
+body {
+background-color: transparent;
+color: black;
+font-size: 12pt;
+}
+p, h2, h3 {
+orphans: 3;
+widows: 3;
+}
+h2, h3, h4 {
+page-break-after: avoid;
+}
+}
+p {
+margin: 1em 0;
+}
+img {
+max-width: 100%;
+}
+h1, h2, h3, h4, h5, h6 {
+margin-top: 1.4em;
+}
+h5, h6 {
+font-size: 1em;
+font-style: italic;
+}
+h6 {
+font-weight: normal;
+}
+ol, ul {
+padding-left: 1.7em;
+margin-top: 1em;
+}
+li > ol, li > ul {
+margin-top: 0;
+}
+blockquote {
+margin: 1em 0 1em 1.7em;
+padding-left: 1em;
+border-left: 2px solid #e6e6e6;
+color: #606060;
+}
+code {
+font-family: Menlo, Monaco, 'Lucida Console', Consolas, monospace;
+background-color: hsl(0, 0%, 98%);
+padding: .2em .4em;
+font-size: 85%;
+margin: 0;
+}
+pre {
+margin: 1em 0;
+background-color: hsl(0, 0%, 98%);
+padding: 1em;
+overflow: auto;
+}
+pre code {
+padding: 0;
+overflow: visible;
+overflow-wrap: normal;
+}
+
+:not(pre) > code {
+padding: 2px 4px;
+font-size: 90%;
+word-break: normal !important;
+white-space: nowrap;
+color: hsl(344.8,69%,10%);
+background-color: hsl(342.9,37%,96%);
+border-radius: 4px;
+}
+.sourceCode {
+background-color: hsl(0, 0%, 98%);
+overflow: visible;
+}
+hr {
+background-color: #1a1a1a;
+border: none;
+height: 1px;
+margin: 1em 0;
+}
+table {
+margin: 1em 0;
+border-collapse: collapse;
+width: 100%;
+overflow-x: auto;
+display: block;
+font-variant-numeric: lining-nums tabular-nums;
+}
+table caption {
+margin-bottom: 0.75em;
+}
+tbody {
+margin-top: 0.5em;
+border-top: 1px solid black;
+border-bottom: 1px solid black;
+}
+th {
+border-top: 1px solid black;
+padding: 0.25em 0.5em 0.25em 0.5em;
+}
+td {
+padding: 0.125em 0.5em 0.25em 0.5em;
+}
+header {
+margin-bottom: 4em;
+text-align: center;
+}
+#TOC li {
+list-style: none;
+}
+#TOC ul {
+padding-left: 1.3em;
+}
+#TOC > ul {
+padding-left: 0;
+}
+#TOC a:not(:hover) {
+text-decoration: none;
+}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+</style>
+  <style>
+div.solutions {
+border: solid 2pt hsla(120, 100%, 35%, 1);
+border-radius: 5pt;
+background-color: hsla(120, 100%, 50%, 0.1);
+padding: 1em;
+}
+.block-caption {
+display: block;
+font-family: sans-serif;
+font-weight: bold;
+margin-bottom: 1.5rem;
+text-align: center;
+}
+details[open] summary *.only-open {
+opacity: 0.1;
+}
+</style>
+<script data-external="1" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript">
+</script>
+</head>
+<body>
+<style>
+xtable {
+border: solid 1pt black;
+}
+table tr, table th {
+border: solid 1pt black;
+}
+tr td, th td {
+border: solid 1pt black;
+}
+</style>
+<header id="title-block-header">
+<h1 class="title"><p>CITS5501 lab 5 (week 6) – version control,
+logic-based testing</p></h1>
+</header>
+<nav id="TOC" role="doc-toc">
+<h2 id="toc-title">Contents</h2>
+<ul>
+<li><a href="#project-version-control" id="toc-project-version-control">1. Project version control</a></li>
+<li><a href="#logic-notation" id="toc-logic-notation">2. Logic
+notation</a></li>
+<li><a href="#terminology-clauses-and-predicates" id="toc-terminology-clauses-and-predicates">3. Terminology – clauses and
+predicates</a></li>
+<li><a href="#making-clauses-active" id="toc-making-clauses-active">4.
+Making clauses active</a></li>
+<li><a href="#scenario-trap-doors" id="toc-scenario-trap-doors">5.
+Scenario – trap-doors</a></li>
+<li><a href="#scenario-login-page" id="toc-scenario-login-page">6.
+Scenario – login page</a></li>
+<li><a href="#tips-and-tricks" id="toc-tips-and-tricks">7. Tips and
+tricks</a></li>
+</ul>
+</nav>
+<h2 id="project-version-control">1. Project version control</h2>
+<p>The week 5 lectures include a workshop on using Git and GitHub for <a href="https://en.wikipedia.org/wiki/Version_control">version
+control</a>.</p>
+<p>If this is the first time you have used Git and GitHub, you should
+work through the resources included there, including the <a href="https://docs.github.com/en/get-started/start-your-journey/hello-world">Github
+Hello World Step by Step</a> tutorial.</p>
+<p>If you <em>have</em> used Git and GitHub before, you might like to
+think in more depth about how version control can contribute to (or pose
+problems for) software quality. The questions below ask you to reflect
+on this.</p>
+<dl>
+<dt><strong>Question</strong></dt>
+<dd>
+<p>What is the basic purpose of version control? How does it differ from
+simply keeping copies of files with different names or dates?</p>
+</dd>
+<dt><strong>Question</strong></dt>
+<dd>
+<p>How might version control make software development easier or harder?
+You may want to check online resources to help you answer these
+questions.</p>
+<ul>
+<li>How can version control make it easier to trace the source of a
+bug?</li>
+<li>In what ways might poor version control practices (e.g. unclear
+commit messages, cluttered history) make testing or debugging
+harder?</li>
+<li>How might including large generated files in a repository affect
+development speed and reliability?<br />
+ </li>
+</ul>
+</dd>
+<dt><strong>Question</strong></dt>
+<dd>
+<p>In group assessments from previous units, has your group adopted any
+conventions or best practices when using version control? If so, do you
+think they were useful – and in what ways? If not, did you encounter any
+problems where adopting a convention might have made things easier?</p>
+<p>Think about the following:</p>
+<ul>
+<li>Why might a team agree on a commit message convention or branching
+strategy?</li>
+<li>What problems can arise if different team members ignore these
+agreements?</li>
+<li>How could poor version control practices create extra work for
+testers or integrators?<br />
+ </li>
+</ul>
+</dd>
+<dt><strong>Question</strong></dt>
+<dd>
+<p>Can you think of any indicators in a version control repository that
+might be a sign of good version control discipline (or conversely, or
+poor version control discipline)? If you were reviewing a peer’s
+repository, what would you look for as signs of good or bad version
+control discipline?</p>
+</dd>
+</dl>
+<p>Version control tools can either support software quality or
+undermine it, depending on how they’re used. Good practices make
+repositories easier to work with, simplify testing, and reduce the risk
+of errors. But poor practices can lead to confusion, wasted time, and
+hidden bugs.</p>
+<p>In a well-managed repository, the version control history should
+clearly show</p>
+<ul>
+<li><em>what</em> changed</li>
+<li><em>when</em> it changed</li>
+<li>and <em>why</em>.</li>
+</ul>
+<p>Information about the first two items comes directly from the version
+control tool – all version control tools will show what content in what
+files was changed, and when a commit occurred. However, providing
+reasons <em>why</em> the change was made can only be done by the
+developer who committed it. In version control systems, <em>commit
+messages</em> are used to explain the reasons for a change. You can read
+more about what makes for good or bad commit messages in Simon Tatham’s
+guide to <a href="https://www.chiark.greenend.org.uk/~sgtatham/quasiblog/commit-messages/">“Writing
+commit messages”</a>.</p>
+<p>When used properly, version control systems make it much easier to
+solve problems like</p>
+<ul>
+<li>Diagnosing when and how a bug was introduced.</li>
+<li>Understanding the reasons for implementation decisions.</li>
+<li>Reverting buggy software to a known good state.</li>
+<li>Letting teams work on multiple features in parallel (using branches
+and merges).</li>
+</ul>
+<h4 id="version-control-best-practices">Version control best
+practices</h4>
+<p>We won’t discuss version control best practices in exhaustive detail
+here, but will highlight a few important ones. For more detail, you can
+read Michael Ernst’s <a href="https://homes.cs.washington.edu/~mernst/advice/version-control.html">“Version
+control concepts and best practices”</a>.</p>
+<ul>
+<li><em>Avoid committing generated files.</em> They add “noise” to the
+version control history, are a common source of merge conflicts, and can
+quickly bloat the repository.
+<!-- see also https://kentcdodds.com/blog/why-i-dont-commit-generated-files-to-master --></li>
+<li><em>Avoid versioning binary files where possible.</em> Instead,
+version the text format or build recipe. If you do need to track binary
+files, consider specialised tools (e.g. Git LFS).</li>
+<li><em>Write informative commit messages.</em> A good message explains
+<em>what</em> changed and <em>why</em>. If your team follows a standard
+(e.g. <a href="https://www.conventionalcommits.org/">Conventional
+Commits</a>), stick to it.</li>
+<li><em>Commit early, commit often</em>. Don’t leave work uncommitted
+for any extended period of time – you lose the advantage of having a
+version control system if you do that.</li>
+<li><em>Create commits at logical points.</em> Each commit should
+represent a coherent change, small enough to review and test in
+isolation. <!--
+- *Use branches for features and fixes.** This keeps experimental work separate from production-ready code and makes integration safer.
+--></li>
+<li><em>Review before merging.</em> Code review not only catches bugs,
+it also enforces quality in commit history and documentation.</li>
+</ul>
+<p>You might notice that some of these practices are in tension – if you
+<em>commit early and commit often</em> to stop work from being lost, how
+can you also ensure that you’ve provided good commit messages, or
+created commits at logical points?</p>
+<p>The answer to this apparent paradox is that it’s possible to
+<em>rewrite the local history</em> of your repository, and in fact it’s
+a good idea to</p>
+<ul>
+<li><em>Tidy history before sharing.</em> Squash or reorganise commits
+so that the branch history tells a clear story.</li>
+</ul>
+<p>Once you’ve pushed your commits to a remote repository, it’s
+generally a bad idea to alter them, since other team-mates’ work may be
+affected by any changes. But <em>before</em> you push your commits, it’s
+perfectly alright – in fact, recommended – to tidy up the history before
+pushing it. Read Carlos Schults’s post <a href="https://carlosschults.net/en/git-beautiful-history/">“Make Your
+Git History Look Beautiful Using Amend and Rebase”</a> for more
+information on how to do this.</p>
+<!--
+https://www.atlassian.com/blog/git/written-unwritten-guide-pull-requests
+-->
+<!--
+
+for another semester - some exercises
+
+1. **Commit Messages and History**
+
+   * Create a small repository and add a simple program (e.g. “Hello world”).
+   * Make three changes to it, but commit with vague messages like “fix”, “update”, or “stuff”.
+   * Now try to identify *why* you made each change.
+   * Redo the exercise with clear, descriptive messages. Compare the difference in traceability.
+
+2. **Generated and Binary Files**
+
+   * Add a large generated file (e.g. a compiled binary, log file, or data export) to the repository and commit it.
+   * Observe how the repo size changes. Then make a trivial edit and commit again—note that the *entire file* is stored again.
+   * Remove the file from version control, add it to `.gitignore`, and discuss why this is a better approach.
+
+3. **Commit Granularity**
+
+   * Make multiple unrelated changes in your code (e.g. fix a bug, add a feature, update documentation). Commit them *all together*.
+   * Now imagine trying to undo just the bug fix—how easy is it?
+   * Redo the exercise, this time committing each change separately. Compare the flexibility.
+
+4. **Branching and Integration**
+
+   * Create a new branch for a “feature” and make a couple of commits.
+   * Switch back to main, make a conflicting change, then try merging the feature branch.
+   * Resolve the conflict, then tidy the history (e.g. squash commits).
+   * Reflect on how branching helps isolate work, and how merge practices affect repository clarity.
+
+5. **Code Review Simulation (Optional, Pair Activity)**
+
+   * Swap repositories with a partner. Review their commit history for clarity, granularity, and adherence to best practices.
+   * Give each other feedback: what would make the history easier to understand or maintain?
+
+-->
+<div style="border: solid 2pt blue; background-color: hsla(241, 100%,50%, 0.1); padding: 1em; border-radius: 5pt; margin-top: 1em;">
+<div class="block-caption">
+<p>Pre-reading</p>
+</div>
+<p>The following exercises in this worksheet assume general familiarity
+with logic-based testing concepts, so if you haven’t already, it’s
+recommended you work through chapter 8 from the Ammann and Offutt
+textbook before attempting them.</p>
+</div>
+<h2 id="logic-notation">2. Logic notation</h2>
+<p>The remaining sections of this lab focus on assessing whether a test
+suite thoroughly exercises (i.e., has good coverage of) the logic
+expressions contained in the component under test.</p>
+<p>When writing logic expressions, we will often use mathematical
+notation for “and”, “or”, and “not”:</p>
+<ul>
+<li><span class="math inline">\(\wedge\)</span> – “and”</li>
+<li><span class="math inline">\(\vee\)</span> – “or”</li>
+<li><span class="math inline">\(\neg\)</span> – “not”</li>
+</ul>
+<p>This notation is independent of any language; it could be turned into
+Java, or C, or Python – each of which uses different logical operators –
+depending on what language our system and our tests are implemented
+in.</p>
+<p>If writing actual Java code, however, we use the normal Java logical
+operators:</p>
+<ul>
+<li><code>&amp;&amp;</code> – “and”</li>
+<li><code>||</code> – “or”</li>
+<li><code>!</code> – “not”</li>
+</ul>
+<div style="border: solid 2pt blue; background-color: hsla(241, 100%,50%, 0.1); padding: 1em; border-radius: 5pt; margin-top: 1em;">
+<div class="block-caption">
+<p>Other operators and languages</p>
+</div>
+<p>Java also has non–short-circuiting logic operators, <code>|</code>
+and <code>&amp;</code>.</p>
+<p>We won’t be focusing on Python in this unit – but for reference, in
+Python, the logic operators are all spelled out as English words: “and”,
+“or” and “not”.</p>
+</div>
+<h2 id="terminology-clauses-and-predicates">3. Terminology – clauses and
+predicates</h2>
+<p>If you need to, review the lecture material and recommended readings
+that explain what <em>predicates</em> and <em>clauses</em> are.</p>
+<p>What are the <em>clauses</em> in the predicates below?</p>
+<ol type="a">
+<li><p><span class="math inline">\(((f \leqslant g) \wedge (x &gt; 0))
+\vee (M \wedge (e &lt; d +c))\)</span></p></li>
+<li><p><span class="math inline">\(G \vee ((m &gt; a) \vee (s \leqslant
+o + n)) \wedge U\)</span></p></li>
+</ol>
+<h2 id="making-clauses-active">4. Making clauses active</h2>
+<p>To make a particular clause <span class="math inline">\(c\)</span> in
+some predicate <em>active</em> means to assign values to variables so
+that the truth-value of the whole predicate depends on <span class="math inline">\(c\)</span>.</p>
+<p>When coming up with test values which make clauses active, the
+easiest way of showing your test values is in a table.</p>
+<p>E.g. Suppose we have a predicate <span class="math inline">\(s \wedge
+(m \vee w)\)</span>, where</p>
+<ul>
+<li><span class="math inline">\(m\)</span> = “the moon is full”</li>
+<li><span class="math inline">\(s\)</span> = “the sky is clear”</li>
+<li><span class="math inline">\(w\)</span> = “the wind is calm”</li>
+</ul>
+<p>If asked to come up with test inputs which make each clause active in
+turn, and achieve Restricted Active Clause Coverage, we could show them
+like this:</p>
+<table style="width:99%;">
+<colgroup>
+<col style="width: 29%" />
+<col style="width: 40%" />
+<col style="width: 28%" />
+</colgroup>
+<thead>
+<tr>
+<th><strong>Test description</strong></th>
+<th><strong>Inputs</strong></th>
+<th><strong>Predicate value</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Make s active, and<br>   s = true<br>   s = false</td>
+<td>s = true, m = true, w = false<br> s = false, m = true, w =
+false</td>
+<td>true<br> false</td>
+</tr>
+<tr>
+<td>Make m active, and<br>   m = true<br>   m = false</td>
+<td>s = true, m = true, w = false<br> s = true, m = false, w =
+false</td>
+<td>true<br> false</td>
+</tr>
+<tr>
+<td>Make w active, and<br>   w = true<br>   w = false</td>
+<td>s = true, m = false, w = true<br> s = true, m = false, w =
+false</td>
+<td>true<br> false</td>
+</tr>
+</tbody>
+</table>
+<p>(Here, we aren’t told what the expected outcome is if the predicate
+comes out true or false; if we were, we could add a column “Expected
+outcome” which listed this.)</p>
+<p>If you aren’t told the exact <em>types</em> of variables or methods
+used in a predicate, that means you should be able to work them out from
+context. For example, for the predicate</p>
+<p><span class="math display">\[
+(x &gt; 0) \vee (M \wedge (e &lt; d +c))
+\]</span></p>
+<p>you can assume that <span class="math inline">\(M\)</span> is a
+boolean, and that <span class="math inline">\(x\)</span>, <span class="math inline">\(c\)</span>, <span class="math inline">\(d\)</span>
+and <span class="math inline">\(e\)</span> are some numeric type (such
+as <code>int</code>).</p>
+<p>For each of the clauses in the predicates below, identify test inputs
+which will make the clause <em>active</em> (that is: state what values
+need to be assigned to the variables in the predicate), and vary that
+clause so it takes on both true and false values. (In other words: write
+test values that achieve Restricted Active Clause Coverage.) Explain
+your reasoning.</p>
+<ol type="a">
+<li><span class="math inline">\(A \vee (B \wedge \neg C)\)</span></li>
+<li><span class="math inline">\(x &gt; 0 \; \vee  (M \wedge (e &lt; d
++c))\)</span></li>
+<li><span class="math inline">\(G \vee (m \geqslant a) \vee H \wedge
+U\)</span></li>
+</ol>
+<h2 id="scenario-trap-doors">5. Scenario – trap-doors</h2>
+<p>Suppose a component under test has the following requirements:</p>
+<div style="border: solid 2pt blue; background-color: hsla(241, 100%,50%, 0.1); padding: 1em; border-radius: 5pt; margin-top: 1em;">
+<p>If the lever is pulled and the chair is occupied, open the
+trap-door.</p>
+<p>If the button is pressed, open the trap-door.</p>
+</div>
+<p>Represent the component as a set of logic expressions. You should
+explain what each variable in your expressions means. (For an example,
+look in section 2 at the way we gave definitions for the variables in
+the predicate <span class="math inline">\(s \wedge (m \vee
+w)\)</span>.)</p>
+<p>(Hint: if you’re stuck, try writing out what the component does as
+one or more “<code>if</code>” statements, in pseudocode. Then recall
+that the set of all predicates in a system means the set of all logical
+expressions found in things like “<code>if</code>” statements.)</p>
+<h2 id="scenario-login-page">6. Scenario – login page</h2>
+<p>Suppose you are part of a team developing a website called
+“RateMyVeterinarian”, where people can log in and provide anonymous
+reviews of the veterinarian services they use.</p>
+<p>Requirements for the site are currently being finalised, and one
+requirement is stated as follows:</p>
+<div style="border: solid 2pt blue; background-color: hsla(241, 100%,50%, 0.1); padding: 1em; border-radius: 5pt; margin-top: 1em;">
+<p>When a user enters a user ID and password into the login page and
+hits the “log in” button, then if that user ID is listed in the “users”
+database, and the password matches against the password in the record
+for that user, and the user record does not state that the account has
+been disabled, a “Welcome” page should be displayed.</p>
+</div>
+<ol type="a">
+<li><p>How easy to understand do you think this requirement is? If you
+think it could be made easier to understand, suggest how.</p></li>
+<li><p>One of your colleagues suggests that because correctly
+authenticating users (and keeping their details secure) is an important
+feature, this requirement should be thoroughly tested – so you should
+design a test suite that meets RAC (Restricted Active Clause) levels of
+coverage. Do you agree? Why or why not?</p></li>
+</ol>
+<h2 id="tips-and-tricks">7. Tips and tricks</h2>
+<p>When solving problems that involve logic-based testing, make sure you
+understand the difference between <em>expressions</em> and
+<em>statements</em> in the programming language or languages that you’re
+using.</p>
+<p>For instance, simple Java <code>if</code> statements <a href="https://docs.oracle.com/javase/specs/jls/se22/html/jls-14.html#jls-14.9">are
+of the form</a>:</p>
+<p>   <code>if (</code> <strong><code>Boolean expression</code></strong>
+<code>) {</code> <strong><code>Statements</code></strong>
+<code>}</code></p>
+<p>Statements are parts of the language that <em>do</em> things; we
+usually execute them in order to achieve some side effect. Boolean
+expressions evaluate to a Java <code>boolean</code> value, and we
+typically intend that they should <em>not</em> have side effects – they
+just evaluate to <code>true</code> or <code>false</code>.</p>
+<p>When we do logic-based testing, we’re focusing on the collection of
+logic <em>expressions</em> of a program or system that control program
+flow, and working out how to write tests that thoroughly exercise the
+component parts (the clauses) of those expressions.</p>
+<!--
+ (unless they happen to have more logic expressions within them); we're just
+working out how to get the correct clauses to be evaluated. If using the "Arrange, Act, Assert"
+pattern, we're focusing on the "Act" portion -- what parameters etc. we need to supply in
+order for the correct clauses to be evaluated.
+-->
+<p>Confusing expressions with statements, or vice versa, is a common
+reason for students to do poorly in test or exam questions involving
+logic-based testing.</p>
+<!-- vim: syntax=markdown tw=92 :
+-->
+</body>
+</html>
