@@ -83,9 +83,9 @@ Testing 2 (graph testing)
 Testing 3 (logic testing)
       `,
     workshopTopic:
-      "Graph-based testing",
+      "Logic and Graph-based testing",
     reading:
-      `- Amman & Offutt, chs 8--9
+      `- Amman & Offutt, chs 7 and 8
       `,
       //<!--
 
@@ -112,23 +112,21 @@ Testing 3 (logic testing)
     lectureTopic:
       "Testing 4",
     workshopTopic:
-      `Property-based testing and mutation testing
-      `
-      ,
+      `Syntax-based testing and mutation testing`,
     reading:
-      `- Pressman, ch 20 ("Review techniques"), ch 22 ("Software testing strategies")`,
+       `- Amman & Offutt, ch 9`
+    
     assessmentDetails: 'Project phase 2 release',
     },
 
 
     {weekNum: 8,
       lectureTopic:
-          'Testing 5 (syntax testing)',
+          `Reviews, integration`,
       workshopTopic:
         'Software reviews',
       reading:
-        `- Amman & Offutt, chs 10-12
-        - Pressman ch 19 ("Quality concepts"), ch 21 ("Software quality assurance")`,
+       `- Pressman, ch 20 ("Review techniques"), ch 22 ("Software testing strategies")`,
       assessmentDetails: 'Online quiz 2',
     },
 
@@ -139,7 +137,7 @@ Testing 3 (logic testing)
       workshopTopic:
         `Systems and standards`,
       reading:
-        `TBA`,
+         `- Pressman, ch 20 ("Review techniques"), ch 22 ("Software testing strategies")`,
       assessmentDetails: ' ',
     },
 
@@ -149,8 +147,8 @@ Testing 3 (logic testing)
       workshopTopic:
         'Risk management and QA strategies',
       reading:
-        'TBA',
-      assessmentDetails: 'TBA',
+           `- Pressman, ch 26 ("Risk Management")`,
+      assessmentDetails: '',
     },
 
 
@@ -159,7 +157,7 @@ Testing 3 (logic testing)
       lectureTopic:
           'Formal methods',
       workshopTopic:
-          'Specifications in Alloy',
+          'Work on Project', <!-- 'Specifications in Alloy', -->
       reading:
         `TBA`,
       assessmentDetails: 'Project phase 2 due',
@@ -169,9 +167,9 @@ Testing 3 (logic testing)
       lectureTopic:
           "Revision",
       workshopTopic:
-          "no workshop",
+          "No workshops",
       reading: ' ',
-      assessmentDetails: "Project peer evaluations",
+      assessmentDetails: "Project peer evaluations due",
     },
 
   ]
