@@ -52,8 +52,18 @@ like to get an idea in advance of what will be covered.)
 - Week 7
   - Lecture 6a -- syntax-based testing {% resourceList "lect07a--syntax-BNF", ["pdf", "md"] %}
   - Lecture 6b -- program-based mutation testing       {% resourceList "lect07b--syntax-mutation", ["pdf", "md"] %}
+- Week 8-9
+  - Lecture 8, integration and system testing {% resourceList "lect08--system", ["pdf", "md"] %}
+  - Lecture 9, reviews and quality assurance  {% resourceList "lect09--reviews", ["pdf", "md"] %}
+  - Other material -- "[Mocks, stubs and spies with Mockito](https://youtu.be/xXO8ft-tsrY)" (YouTube) \
+    (see also ch 12 of the textbook)
+- Week 10
+  - Lecture 10 -- Risk    {% resourceList "lect10a--risk", ["pdf", "md"] %}
+-  Week 11
+  - Guest Lecture -- Formal Methods in Industry
+- Week 12
+  - Unit Review and Exam Questions 
 {#
-
 - Week 8-9
   - Lecture 7a, integration and system testing {% resourceList "lect07a--system", ["pdf", "md"] %}
   - Lecture 7b, reviews and quality assurance  {% resourceList "lect07b--reviews", ["pdf", "md"] %}
