@@ -62,49 +62,8 @@ like to get an idea in advance of what will be covered.)
 -  Week 11
   - Guest Lecture -- Formal Methods in Industry
 - Week 12
-  - Unit Review and Exam Questions 
-{#
-- Week 8-9
-  - Lecture 7a, integration and system testing {% resourceList "lect07a--system", ["pdf", "md"] %}
-  - Lecture 7b, reviews and quality assurance  {% resourceList "lect07b--reviews", ["pdf", "md"] %}
-  - Lecture 7c, quality assurance  {% resourceList "lect07c--quality", ["pdf", "md"] %}
-  - Other material -- "[Mocks, stubs and spies with Mockito](https://youtu.be/xXO8ft-tsrY)" (YouTube) \
-    (see also ch 12 of the textbook)
-- Week 10
-  - Lecture 8a, Risk                  {% resourceList "lect08a--risk", ["pdf", "md"] %}
-  - Lecture 8b, Formal methods intro  {% resourceList "lect08b--formal", ["pdf", "md"] %}
-  - Case study -- Knight Capital trading loss {% resourceList "lect08c--knight", ["pdf", "md"] %}
-  - Lecture 9, Program verification {% resourceList "lect09--verification", ["pdf", "md"] %}
-- Week 11
-  - Lecture 10, Program specification -- alloy {% resourceList "lect10--alloy", ["pdf", "md"] %}
-  - Lecture 11, Program specification -- alloy, continued {% resourceList "lect11--alloy", ["pdf", "md"] %}
-- Week 12
-  - Sample exam questions [(pdf)][sample-pdf]
-
+  - Unit Review and Exam Questions  [(pdf)][sample-pdf]
 [sample-pdf]: {{ "/lectures/sample.pdf" | url }}
-
-
-- Week 9
-  - Lecture 8A, Risk                  {% resourceList "lect08a--risk", ["pdf", "md"] %}
-  - Lecture 8A, Formal methods intro  {% resourceList "lect08b--formal", ["pdf", "md"] %}
-  - Case study -- Knight Capital trading loss {% resourceList "lect08c--knight", ["pdf", "md"] %}
-- Week 10
-- Week 11
-  - Lecture 10, Program specification -- alloy {% resourceList "lect10--alloy", ["pdf", "md"] %}
-- Week 12
-  - Lecture 11, Program specification -- alloy, continued {% resourceList "lect11--alloy", ["pdf", "md"] %}
-
-#}
-{#
-- Week 11
-  Lecture 11, Program specification -- alloy ([pdf]({{ "/lectures/lect11.pdf" | url }}))
-  Lecture 12, Standards ([pdf]({{ "/lectures/lect12.pdf" | url }}))
-
-{% resourceList "lect07a--system", ["pdf", "md"] %}
-#}
-
-
-
 :::
 
 
