@@ -106,18 +106,19 @@ the semester.
   - Sample worksheet solutions {% resourceList "workshop04-solutions", ["html", "md"] %}
 - Week 6 -- logic
   - Lab worksheet {% resourceList "workshop05", ["html", "md"] %}
-{#
   - Sample worksheet solutions {% resourceList "workshop05-solutions", ["html", "md"] %}
 - Week 7 -- syntax
-  - Lab worksheet {% resourceList "workshop06", ["html", "md"] %}
-  - Source code ([zip]({{ "/workshops/workshop-06-code.zip" | url }}))
-  - Sample worksheet solutions {% resourceList "workshop06-solutions", ["html", "md"] %}
+  - Lab worksheet {% resourceList "workshop06", ["html", "md"] %} 
+  - Source code ([zip]({{ "/workshops/workshop-06-code.zip" | url }}))  
+ {#  - Sample worksheet solutions {% resourceList "workshop06-solutions", ["html", "md"] %} #}
 - Week 8 -- code reviews
   - Lab worksheet               {% resourceList "workshop07", ["html", "md"] %}
-  - Sample worksheet solutions  {% resourceList "workshop07-solutions", ["html", "md"] %}
+{#   - Sample worksheet solutions  {% resourceList "workshop07-solutions", ["html", "md"] %} #}
 - Week 9 -- system testing
   - Lab worksheet               {% resourceList "workshop08", ["html", "md"] %}
-  - Sample worksheet solutions  {% resourceList "workshop08-solutions", ["html", "md"] %}
+{#   - Sample worksheet solutions  {% resourceList "workshop08-solutions", ["html", "md"] %} #}
+- Week 10 and 11 -- work on project
+{# 2024 workshops
 - Week 10 -- program verification
   - Lab worksheet               {% resourceList "workshop09", ["html", "md"] %}
   - Writing English answers using Moodle editors ([html](/workshops/moodle-editors.html)) ([md](/workshops/moodle-editors.md))
@@ -125,8 +126,6 @@ the semester.
 - Week 11 -- specification languages
   - Lab worksheet               {% resourceList "workshop10", ["html", "md"] %}
   - Sample worksheet solutions  {% resourceList "workshop10-solutions", ["html", "md"] %}
-
-
 #}
 
 
