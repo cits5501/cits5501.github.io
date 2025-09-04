@@ -60,7 +60,7 @@ like to get an idea in advance of what will be covered.)
   - Lecture 9, reviews and metrics  {% resourceList "lect09--reviews", ["pdf", "md"] %}
 - Week 10
   - Lecture 10 -- Risk    {% resourceList "lect10--risk", ["pdf", "md"] %}
--  Week 11
+- Week 11
   - Guest Lecture -- Formal Methods in Industry
 - Week 12
   - Unit Review and Exam Questions  [(pdf)][sample-pdf]
