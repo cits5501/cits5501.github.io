@@ -50,53 +50,24 @@ like to get an idea in advance of what will be covered.)
   - Lecture 6a -- logic-based testing {% resourceList "lect06a--logic", ["pdf", "md"] %}
   - Lecture 6b -- graph-based testing {% resourceList "lect06b--graph", ["pdf", "md"] %}
 - Week 7
-  - Lecture 6a -- syntax-based testing {% resourceList "lect07a--syntax-BNF", ["pdf", "md"] %}
-  - Lecture 6b -- program-based mutation testing       {% resourceList "lect07b--syntax-mutation", ["pdf", "md"] %}
-{#
-
-- Week 8-9
-  - Lecture 7a, integration and system testing {% resourceList "lect07a--system", ["pdf", "md"] %}
-  - Lecture 7b, reviews and quality assurance  {% resourceList "lect07b--reviews", ["pdf", "md"] %}
-  - Lecture 7c, quality assurance  {% resourceList "lect07c--quality", ["pdf", "md"] %}
+  - Lecture 7a -- syntax-based testing {% resourceList "lect07a--syntax-BNF", ["pdf", "md"] %}
+  - Lecture 7b -- program-based mutation testing       {% resourceList "lect07b--syntax-mutation", ["pdf", "md"] %}
+- Week 8
+  - Lecture 8, integration, system and acceptance testing {% resourceList "lect08--system", ["pdf", "md"] %}
   - Other material -- "[Mocks, stubs and spies with Mockito](https://youtu.be/xXO8ft-tsrY)" (YouTube) \
-    (see also ch 12 of the textbook)
-- Week 10
-  - Lecture 8a, Risk                  {% resourceList "lect08a--risk", ["pdf", "md"] %}
-  - Lecture 8b, Formal methods intro  {% resourceList "lect08b--formal", ["pdf", "md"] %}
-  - Case study -- Knight Capital trading loss {% resourceList "lect08c--knight", ["pdf", "md"] %}
-  - Lecture 9, Program verification {% resourceList "lect09--verification", ["pdf", "md"] %}
-- Week 11
-  - Lecture 10, Program specification -- alloy {% resourceList "lect10--alloy", ["pdf", "md"] %}
-  - Lecture 11, Program specification -- alloy, continued {% resourceList "lect11--alloy", ["pdf", "md"] %}
-- Week 12
-  - Sample exam questions [(pdf)][sample-pdf]
-
-[sample-pdf]: {{ "/lectures/sample.pdf" | url }}
-
-
+    (see also ch 12 of Amman & Offutt textbook)
 - Week 9
-  - Lecture 8A, Risk                  {% resourceList "lect08a--risk", ["pdf", "md"] %}
-  - Lecture 8A, Formal methods intro  {% resourceList "lect08b--formal", ["pdf", "md"] %}
-  - Case study -- Knight Capital trading loss {% resourceList "lect08c--knight", ["pdf", "md"] %}
+  - Lecture 9, reviews and metrics  {% resourceList "lect09--reviews", ["pdf", "md"] %}
 - Week 10
-- Week 11
-  - Lecture 10, Program specification -- alloy {% resourceList "lect10--alloy", ["pdf", "md"] %}
+  - Lecture 10 -- Risk    {% resourceList "lect10--risk", ["pdf", "md"] %}
+-  Week 11
+  - Guest Lecture -- Formal Methods in Industry
 - Week 12
-  - Lecture 11, Program specification -- alloy, continued {% resourceList "lect11--alloy", ["pdf", "md"] %}
-
-#}
-{#
-- Week 11
-  Lecture 11, Program specification -- alloy ([pdf]({{ "/lectures/lect11.pdf" | url }}))
-  Lecture 12, Standards ([pdf]({{ "/lectures/lect12.pdf" | url }}))
-
-{% resourceList "lect07a--system", ["pdf", "md"] %}
-#}
-
-
+  - Unit Review and Exam Questions  [(pdf)][sample-pdf]
 
 :::
 
+[sample-pdf]: {{ "/lectures/sample.pdf" | url }}
 
 ## Labs { #labs }
 
@@ -137,18 +108,19 @@ the semester.
   - Sample worksheet solutions {% resourceList "workshop04-solutions", ["html", "md"] %}
 - Week 6 -- logic
   - Lab worksheet {% resourceList "workshop05", ["html", "md"] %}
-{#
   - Sample worksheet solutions {% resourceList "workshop05-solutions", ["html", "md"] %}
 - Week 7 -- syntax
   - Lab worksheet {% resourceList "workshop06", ["html", "md"] %}
   - Source code ([zip]({{ "/workshops/workshop-06-code.zip" | url }}))
-  - Sample worksheet solutions {% resourceList "workshop06-solutions", ["html", "md"] %}
+{#  - Sample worksheet solutions {% resourceList "workshop06-solutions", ["html", "md"] %} -#}
 - Week 8 -- code reviews
   - Lab worksheet               {% resourceList "workshop07", ["html", "md"] %}
-  - Sample worksheet solutions  {% resourceList "workshop07-solutions", ["html", "md"] %}
+{#   - Sample worksheet solutions  {% resourceList "workshop07-solutions", ["html", "md"] %} -#}
 - Week 9 -- system testing
   - Lab worksheet               {% resourceList "workshop08", ["html", "md"] %}
-  - Sample worksheet solutions  {% resourceList "workshop08-solutions", ["html", "md"] %}
+{#   - Sample worksheet solutions  {% resourceList "workshop08-solutions", ["html", "md"] %} -#}
+- Week 10 and 11 -- work on project
+{# 2024 additional workshops
 - Week 10 -- program verification
   - Lab worksheet               {% resourceList "workshop09", ["html", "md"] %}
   - Writing English answers using Moodle editors ([html](/workshops/moodle-editors.html)) ([md](/workshops/moodle-editors.md))
@@ -156,11 +128,7 @@ the semester.
 - Week 11 -- specification languages
   - Lab worksheet               {% resourceList "workshop10", ["html", "md"] %}
   - Sample worksheet solutions  {% resourceList "workshop10-solutions", ["html", "md"] %}
-
-
 #}
-
-
 :::
 
 
