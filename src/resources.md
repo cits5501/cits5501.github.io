@@ -50,15 +50,16 @@ like to get an idea in advance of what will be covered.)
   - Lecture 6a -- logic-based testing {% resourceList "lect06a--logic", ["pdf", "md"] %}
   - Lecture 6b -- graph-based testing {% resourceList "lect06b--graph", ["pdf", "md"] %}
 - Week 7
-  - Lecture 6a -- syntax-based testing {% resourceList "lect07a--syntax-BNF", ["pdf", "md"] %}
-  - Lecture 6b -- program-based mutation testing       {% resourceList "lect07b--syntax-mutation", ["pdf", "md"] %}
-- Week 8-9
-  - Lecture 8, integration and system testing {% resourceList "lect08--system", ["pdf", "md"] %}
-  - Lecture 9, reviews and quality assurance  {% resourceList "lect09--reviews", ["pdf", "md"] %}
+  - Lecture 7a -- syntax-based testing {% resourceList "lect07a--syntax-BNF", ["pdf", "md"] %}
+  - Lecture 7b -- program-based mutation testing       {% resourceList "lect07b--syntax-mutation", ["pdf", "md"] %}
+- Week 8
+  - Lecture 8, integration, system and acceptance testing {% resourceList "lect08--system", ["pdf", "md"] %}
   - Other material -- "[Mocks, stubs and spies with Mockito](https://youtu.be/xXO8ft-tsrY)" (YouTube) \
     (see also ch 12 of the textbook)
+- Week 9
+  - Lecture 9, reviews and metrics  {% resourceList "lect09--reviews", ["pdf", "md"] %}
 - Week 10
-  - Lecture 10 -- Risk    {% resourceList "lect10a--risk", ["pdf", "md"] %}
+  - Lecture 10 -- Risk    {% resourceList "lect10--risk", ["pdf", "md"] %}
 -  Week 11
   - Guest Lecture -- Formal Methods in Industry
 - Week 12
@@ -118,7 +119,7 @@ the semester.
   - Lab worksheet               {% resourceList "workshop08", ["html", "md"] %}
 {#   - Sample worksheet solutions  {% resourceList "workshop08-solutions", ["html", "md"] %} #}
 - Week 10 and 11 -- work on project
-{# 2024 workshops
+{# 2024 additional workshops
 - Week 10 -- program verification
   - Lab worksheet               {% resourceList "workshop09", ["html", "md"] %}
   - Writing English answers using Moodle editors ([html](/workshops/moodle-editors.html)) ([md](/workshops/moodle-editors.md))
@@ -127,8 +128,6 @@ the semester.
   - Lab worksheet               {% resourceList "workshop10", ["html", "md"] %}
   - Sample worksheet solutions  {% resourceList "workshop10-solutions", ["html", "md"] %}
 #}
-
-
 :::
 
 
