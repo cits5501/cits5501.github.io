@@ -8,7 +8,7 @@ title: |
 It is strongly suggested you complete the recommended readings for weeks 1-7
 *before* attempting this lab/workshop.
 
-## A. Code review
+## 1. Code review
 
 *Code review* is careful, systematic study of source code by people who are not
 the original author of the code. It's analogous to having someone proofread
@@ -46,7 +46,7 @@ to code review.
 
 [code-review-stack]: https://codereview.stackexchange.com 
 
-## B. Exercise
+## 2. Exercise
 
 
 <!--
@@ -308,7 +308,7 @@ probably aren't necessary (but Javadoc documentation still is).
 
 
 
-## C. Linters and formatters
+## 3. Linters and formatters
 
 In general, it's expensive to spend the time of humans doing
 something a computer could do equally well -- like formatting code
@@ -350,120 +350,9 @@ problems they can flag.
 
 \newpage
 
-## D. Ant build files and code coverage tools
-
-This exercise is to get you familiar with code coverage tools and some of their weaknesses.
-
-A repository with Java code is provided at 
-<https://github.com/cits5501/week-8-lab-coverage-example> which contains a simple class
-for detecting whether a Java string is a palindrome (`Palindrome.java`), and tests for
-this class using JUnit.
-
-You can use [GitPod](https://www.gitpod.io) to work with this code online. You will need a GitHub account; once you
-have one set up, follow the link below:
-
-&nbsp; <https://gitpod.io/new/#https://github.com/cits5501/week-8-lab-coverage-example>
-
-and select "New workspace".
-
-After a minute or two, you should get access to an online version of the VS Code editor in which
-the source code for the repository is available. Take a look at the `build.xml` file; this file
-is used by the [Apache Ant][ant] build automation tool. It defines
-several "targets" representing tasks that can be run using the build
-file:
-
-[ant]: https://en.wikipedia.org/wiki/Apache_Ant
-
-- init
-- compile
-- compileTest
-- test, and
-- report.
-
-(Some of these tasks you can also do just using VS Code. For instance,
-open `PalindromeTest.java`, expand the "outline" and "java projects"
-panes, and wait for the background tasks to finish.
-A green triangle should appear next to the start of the `PalindromeTest`
-class, indicating that it can be clicked to run the JUnit tests it
-contains.)
-
-Click the "Terminal" pane, and type `ant test` to run the JUnit tests.
-The messages should indicate that four tests were run with no failures.
-
-Now run `ant report`, and not only will the tests be run, but the paths
-they take through the code of `PalindromeTest` will be recorded by a
-tool called [JaCoCo][jacoco], and a report produced.
-
-[jacoco]: https://www.jacoco.org/jacoco/
-
-You can view this by clicking "Go Live" in the VS Code taskbar (towards
-the right). This serves up the contents of the repository directory via
-HTTP, so it can be viewed in the browser. Click "report", and by
-clicking through, you should be able to see a coverage report for our
-tests.
 
 
-![](jacoco-coverage-rep.png){ width="20cm" }
-
-
-Read the JaCoco documentation on "Coverage Counters", [here][cov],
-for more information about exactly what is being measured.
-
-[cov]: https://www.eclemma.org/jacoco/trunk/doc/counters.html
-
-**Exercises**
-
-- Comment out one of the assert statements (e.g. the one containing
-  `p.isPalindrome("redivider")`) and replace it with the bare call to
-  `p.isPalindrome()`.
-
-  Does the coverage report change at all? Try doing the same for all
-  tests, and check again. What weakness of coverage tools does this
-  suggest?
-
-- Comment out all but one of the tests. Again, does the coverage report
-  change?
-
-- Applying the ideas from ISP (but without necessarily doing a detailed
-  analysis) -- can you spot any test cases that are missing from the
-  test suite?
-
-
-<div class="solutions">
-
-\solbox
-
-**Solution**
-
-The coverage report doesn't change in any of the above
-cases.
-
-This suggests we could have a very weak test suite, consisting
-of just one test case -- say, an empty string (`""`) -- and with no
-assertions, and full coverage would still be reported.
-
-If changes are made to the code, we could easily introduce errors that
-aren't picked up by the test suite.
-
-When we look at mutation testing, we will see ways of assessing the
-quality of our tests which do not depend on measuring coverage as
-reported by tools like JaCoCo.
-
-As for a missing test case: an empty string (a degenerate or "border"
-case) would be a good thing to test for, as would single-letter strings,
-but this is not done.
-
-
-</div>
-\endsolbox
-
-
-\newpage
-
-
-
-
-## E. Summary
+## 4. Summary
 
 Code review is a widely-used technique for improving software quality by
 human inspection. Code review can detect many kinds of problems in code,
