@@ -235,6 +235,23 @@ Also provided is a GitHub repository containing [scaffolding code][scaff] for th
 [project-spec]: https://github.com/cits5501/Group-Project-Information-2025/blob/main/project-spec-2025-phase-1.pdf?raw=true
 [scaff]: https://github.com/cits5501/project-2025-phase-1-scaffolding
 
+### Group project (phase 2)
+
+Details of phase 2 of the group project are now available.
+
+You are provided with:
+
+- the project specification (in [PDF][project-spec-2-pdf] and
+  [markdown][project-spec-2-md]); and
+- several JAR files, supplied in a single zip file, containing the
+  compiled bytecode and Javadoc for the Java classes to be tested:
+  [tachi-jar-files.zip][project-jarfiles].
+
+
+
+[project-spec-2-pdf]: {{ "/project/project-spec-2025-phase-2.pdf" | url }}
+[project-spec-2-md]: {{ "/project/project-spec-2025-phase-2.md" | url }}
+[project-jarfiles]: {{ "/project/tachi-jar-files.zip" | url }} 
 
 {#
 
