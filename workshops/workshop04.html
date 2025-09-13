@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang xml:lang>
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>CITS5501 lab 4 (week 5) – Testability, ISP and control flow</title>
+  <style>
+html {
+line-height: 1.5;
+font-family: sans-serif;
+font-size: 12pt;
+color: black;
+background-color: white;
+}
+body {
+margin: 0 auto;
+max-width: 50em;
+padding-left: 50px;
+padding-right: 50px;
+padding-top: 50px;
+padding-bottom: 50px;
+hyphens: auto;
+overflow-wrap: break-word;
+text-rendering: optimizeLegibility;
+font-kerning: normal;
+}
+@media (max-width: 600px) {
+body {
+font-size: 0.9em;
+padding: 1em;
+}
+h1 {
+font-size: 1.8em;
+}
+}
+@media print {
+body {
+background-color: transparent;
+color: black;
+font-size: 12pt;
+}
+p, h2, h3 {
+orphans: 3;
+widows: 3;
+}
+h2, h3, h4 {
+page-break-after: avoid;
+}
+}
+p {
+margin: 1em 0;
+}
+img {
+max-width: 100%;
+}
+h1, h2, h3, h4, h5, h6 {
+margin-top: 1.4em;
+}
+h5, h6 {
+font-size: 1em;
+font-style: italic;
+}
+h6 {
+font-weight: normal;
+}
+ol, ul {
+padding-left: 1.7em;
+margin-top: 1em;
+}
+li > ol, li > ul {
+margin-top: 0;
+}
+blockquote {
+margin: 1em 0 1em 1.7em;
+padding-left: 1em;
+border-left: 2px solid #e6e6e6;
+color: #606060;
+}
+code {
+font-family: Menlo, Monaco, 'Lucida Console', Consolas, monospace;
+background-color: hsl(0, 0%, 98%);
+padding: .2em .4em;
+font-size: 85%;
+margin: 0;
+}
+pre {
+margin: 1em 0;
+background-color: hsl(0, 0%, 98%);
+padding: 1em;
+overflow: auto;
+}
+pre code {
+padding: 0;
+overflow: visible;
+overflow-wrap: normal;
+}
+
+:not(pre) > code {
+padding: 2px 4px;
+font-size: 90%;
+word-break: normal !important;
+white-space: nowrap;
+color: hsl(344.8,69%,10%);
+background-color: hsl(342.9,37%,96%);
+border-radius: 4px;
+}
+.sourceCode {
+background-color: hsl(0, 0%, 98%);
+overflow: visible;
+}
+hr {
+background-color: #1a1a1a;
+border: none;
+height: 1px;
+margin: 1em 0;
+}
+table {
+margin: 1em 0;
+border-collapse: collapse;
+width: 100%;
+overflow-x: auto;
+display: block;
+font-variant-numeric: lining-nums tabular-nums;
+}
+table caption {
+margin-bottom: 0.75em;
+}
+tbody {
+margin-top: 0.5em;
+border-top: 1px solid black;
+border-bottom: 1px solid black;
+}
+th {
+border-top: 1px solid black;
+padding: 0.25em 0.5em 0.25em 0.5em;
+}
+td {
+padding: 0.125em 0.5em 0.25em 0.5em;
+}
+header {
+margin-bottom: 4em;
+text-align: center;
+}
+#TOC li {
+list-style: none;
+}
+#TOC ul {
+padding-left: 1.3em;
+}
+#TOC > ul {
+padding-left: 0;
+}
+#TOC a:not(:hover) {
+text-decoration: none;
+}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+{ counter-reset: source-line 0; }
+pre.numberSource code > span
+{ position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+{ content: counter(source-line);
+position: relative; left: -1em; text-align: right; vertical-align: baseline;
+border: none; display: inline-block;
+-webkit-touch-callout: none; -webkit-user-select: none;
+-khtml-user-select: none; -moz-user-select: none;
+-ms-user-select: none; user-select: none;
+padding: 0 4px; width: 4em;
+color: #aaaaaa;
+}
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa; padding-left: 4px; }
+div.sourceCode
+{ }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } 
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.at { color: #7d9029; } 
+code span.bn { color: #40a070; } 
+code span.bu { color: #008000; } 
+code span.cf { color: #007020; font-weight: bold; } 
+code span.ch { color: #4070a0; } 
+code span.cn { color: #880000; } 
+code span.co { color: #60a0b0; font-style: italic; } 
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.do { color: #ba2121; font-style: italic; } 
+code span.dt { color: #902000; } 
+code span.dv { color: #40a070; } 
+code span.er { color: #ff0000; font-weight: bold; } 
+code span.ex { } 
+code span.fl { color: #40a070; } 
+code span.fu { color: #06287e; } 
+code span.im { color: #008000; font-weight: bold; } 
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.kw { color: #007020; font-weight: bold; } 
+code span.op { color: #666666; } 
+code span.ot { color: #007020; } 
+code span.pp { color: #bc7a00; } 
+code span.sc { color: #4070a0; } 
+code span.ss { color: #bb6688; } 
+code span.st { color: #4070a0; } 
+code span.va { color: #19177c; } 
+code span.vs { color: #4070a0; } 
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } 
+</style>
+  <style>
+div.solutions {
+border: solid 2pt hsla(120, 100%, 35%, 1);
+border-radius: 5pt;
+background-color: hsla(120, 100%, 50%, 0.1);
+padding: 1em;
+}
+.block-caption {
+display: block;
+font-family: sans-serif;
+font-weight: bold;
+margin-bottom: 1.5rem;
+text-align: center;
+}
+details[open] summary *.only-open {
+opacity: 0.1;
+}
+</style>
+<script data-external="1" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript">
+</script>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title"><p>CITS5501 lab 4 (week 5) – Testability, ISP and
+control flow</p></h1>
+</header>
+<nav id="TOC" role="doc-toc">
+<h2 id="toc-title">Contents</h2>
+<ul>
+<li><a href="#test-fixtures" id="toc-test-fixtures">1. Test
+fixtures</a></li>
+<li><a href="#class-design-invariants-and-testability" id="toc-class-design-invariants-and-testability">2. Class design,
+invariants, and testability</a></li>
+<li><a href="#isp-and-control-flow" id="toc-isp-and-control-flow">3. ISP
+and control flow</a></li>
+</ul>
+</nav>
+<h2 id="test-fixtures">1. Test fixtures</h2>
+<p>Review the material from the textbook on test automation (ch 6), and
+the JUnit 4 “Text fixtures” documentation (at <a href="https://github.com/junit-team/junit4/wiki/Test-fixtures" class="uri">https://github.com/junit-team/junit4/wiki/Test-fixtures</a>).</p>
+<p>Consider the following code we wish to test:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> MyClass <span class="op">{</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>   <span class="kw">private</span> <span class="dt">int</span> x<span class="op">;</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>   <span class="kw">public</span> <span class="fu">MyClass</span><span class="op">(</span><span class="dt">int</span> x<span class="op">)</span> <span class="op">{</span> <span class="kw">this</span><span class="op">.</span><span class="fu">x</span> <span class="op">=</span> x<span class="op">;</span> <span class="op">}</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>   <span class="at">@Override</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>   <span class="kw">public</span> <span class="dt">boolean</span> <span class="fu">equals</span><span class="op">(</span><span class="bu">Object</span> obj<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>      <span class="cf">if</span> <span class="op">(!(</span>obj <span class="kw">instanceof</span> MyClass<span class="op">))</span> <span class="cf">return</span> <span class="kw">false</span><span class="op">;</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>      <span class="cf">return</span> <span class="op">((</span>MyClass<span class="op">)</span> obj<span class="op">).</span><span class="fu">x</span> <span class="op">==</span> <span class="kw">this</span><span class="op">.</span><span class="fu">x</span><span class="op">;</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>   <span class="op">}</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p>Find the Java library documentation for the <code>equals()</code>
+method (it’s in the <code>Object</code> class), and read what its
+requirements are.</p>
+<p>In Java, all other classes automatically inherit from the
+<code>Object</code> class, and may also <em>override</em> methods
+provided by the <code>Object</code> class – this is what the
+“<code>@Override</code>” annotation on the <code>equals()</code> method
+means.</p>
+<p>The <code>equals()</code> method should test whether the
+<code>Object</code> “<code>obj</code>” is “equal to” the receiver
+object, <code>this</code>, where what “equal to” means is decided on by
+the implementer of the class. (The <code>equals()</code> method in Java
+serves the same purpose as the <code>__eq__</code> special method in
+Python.) The implementer is free to decide for themselves what “equal
+to” means for their class.</p>
+<p>In order to avoid suprising behaviour for callers of the method, in
+general equality should be an <a href="https://en.wikipedia.org/wiki/Equivalence_relation"><em>equivalence
+relation</em></a>; for instance, an object should always be equal to
+itself, and if <code>a.equals(b)</code> is true and
+<code>b.equals(c)</code> is true, then <code>a.equals(c)</code> should
+also be true.</p>
+<p>The <code>instanceof</code> keyword in Java allows us to check
+whether an object is an instace of some class (or some class that
+inherits from that class, directly or indirectly). Normally,
+implementers of <code>equals</code> will want to return
+“<code>false</code>” whenever we try to compare with objects not of the
+same class.</p>
+<p>Create a new Java project, create a <code>MyClass.java</code> file
+containing the code above, and check that it compiles.</p>
+<p><strong>A test class</strong></p>
+<p>Suppose we use the following test code for our <code>MyClass</code>
+class:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">import</span> <span class="kw">static</span><span class="im"> org</span><span class="op">.</span><span class="im">junit</span><span class="op">.</span><span class="im">jupiter</span><span class="op">.</span><span class="im">api</span><span class="op">.</span><span class="im">Assertions</span><span class="op">.*;</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="kw">import</span> <span class="im">org</span><span class="op">.</span><span class="im">junit</span><span class="op">.</span><span class="im">jupiter</span><span class="op">.</span><span class="im">api</span><span class="op">.</span><span class="im">AfterEach</span><span class="op">;</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="kw">import</span> <span class="im">org</span><span class="op">.</span><span class="im">junit</span><span class="op">.</span><span class="im">jupiter</span><span class="op">.</span><span class="im">api</span><span class="op">.</span><span class="im">BeforeEach</span><span class="op">;</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="kw">import</span> <span class="im">org</span><span class="op">.</span><span class="im">junit</span><span class="op">.</span><span class="im">jupiter</span><span class="op">.</span><span class="im">api</span><span class="op">.</span><span class="im">Test</span><span class="op">;</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span> <span class="kw">class</span> MyClassTest <span class="op">{</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>   <span class="kw">private</span> MyClass mc1<span class="op">;</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>   <span class="kw">private</span> MyClass mc2<span class="op">;</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>   <span class="kw">private</span> MyClass mc3<span class="op">;</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>   <span class="at">@BeforeEach</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>   <span class="kw">public</span> <span class="dt">void</span> <span class="fu">setUp</span><span class="op">()</span> <span class="op">{</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>     mc1 <span class="op">=</span> <span class="kw">new</span> <span class="fu">MyClass</span><span class="op">(</span><span class="dv">3</span><span class="op">);</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>     mc2 <span class="op">=</span> <span class="kw">new</span> <span class="fu">MyClass</span><span class="op">(</span><span class="dv">5</span><span class="op">);</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>     mc3 <span class="op">=</span> <span class="kw">new</span> <span class="fu">MyClass</span><span class="op">(</span><span class="dv">3</span><span class="op">);</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>   <span class="op">}</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>   <span class="at">@Test</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>   <span class="co">/* Test the case when, for two objects, the second is null */</span></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>   <span class="kw">public</span> <span class="dt">void</span> <span class="fu">equalsWhenNullRef</span><span class="op">()</span> <span class="op">{</span> <span class="fu">fail</span><span class="op">(</span><span class="st">&quot;incomplete&quot;</span><span class="op">);</span> <span class="op">}</span></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>   <span class="at">@Test</span></span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>   <span class="co">/* Test the case when, for two objects, they are not equal */</span></span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>   <span class="kw">public</span> <span class="dt">void</span> <span class="fu">equalsWhenNotEq</span><span class="op">()</span> <span class="op">{</span><span class="co">/*...*/</span><span class="op">}</span></span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>   <span class="at">@Test</span></span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>   <span class="co">/* Test the case when, for two objects, they are equall */</span></span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>   <span class="kw">public</span> <span class="dt">void</span> <span class="fu">equalsWhenEq</span><span class="op">()</span> <span class="op">{</span><span class="co">/*...*/</span><span class="op">}</span></span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p>In this case, the instance variables <code>mc1</code>,
+<code>mc2</code> and <code>mc3</code> are potential <em>fixtures</em>
+for any test.</p>
+<ol type="1">
+<li><p>Given the test code above, how many times will the
+<code>setUp()</code> method execute?</p>
+<p>Compile and run the tests and check whether this is the
+case.</p></li>
+<li><p>It is good practice, when writing new tests, to ensure that at
+first they <em>fail</em>. This is useful as a warning, so that you know
+the test is not yet complete. (We don’t want to accidentally give our
+code to other developers when it contains tests that are incomplete, or
+do the wrong thing.)</p>
+<p>Insert code into the test methods that will always fail. What JUnit
+method have you used? Are there any other ways you can think of (or spot
+in the JUnit documentation) for writing a test that always
+fails?</p></li>
+<li><p>Fill in code for the test methods in this class.</p></li>
+<li><p>Are there any other tests you think we should add in order to
+thoroughly test our class? What are they?</p></li>
+<li><p>Using the material from lectures, and the JUnit user guide, write
+a “teardown” method. What code should go in it? Based on your
+understanding of the Java language, is a “teardown” method necessary in
+this case? Why or why not?</p></li>
+</ol>
+<h2 id="class-design-invariants-and-testability">2. Class design,
+invariants, and testability</h2>
+<p>Suppose we are writing a <code>DigitalTimer</code> class representing
+24-hour times – it could be used, for example, in simulation programs.
+Rather than measuring “real” time, it measures simulated time, where
+every call to the <code>tick()</code> method causes one second to
+“elapse”. Other objects in the simulation could then query a
+<code>DigitalTimer</code> object to find out what the current time is.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
+<p>A colleague has suggested the following method signatures and
+documentation for the class:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">/** Represents a simulated time, where the &quot;tick&quot; method causes the time to be incremented</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co">  * by one second.</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co">  */</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span> <span class="kw">class</span> DigitalTimer <span class="op">{</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="co">/** Construct a new DigitalTimer, initialized to time zero.</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="co">   */</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  <span class="kw">public</span> <span class="fu">DigitalTimer</span><span class="op">();</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>  <span class="co">/** Get the &quot;hours&quot; component of the time elapsed since</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="co">   * the timer was started.</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="co">   */</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>  <span class="kw">public</span> <span class="dt">int</span> <span class="fu">getHours</span><span class="op">();</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>  <span class="co">/** Get the &quot;minutes&quot; component of the time elapsed since</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a><span class="co">   * the timer was started.</span></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a><span class="co">   */</span></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>  <span class="kw">public</span> <span class="dt">int</span> <span class="fu">getMinutes</span><span class="op">();</span></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>  <span class="co">/** Get the &quot;seconds&quot; component of the time elapsed since</span></span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a><span class="co">   * the timer was started.</span></span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a><span class="co">   */</span></span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>  <span class="kw">public</span> <span class="dt">int</span> <span class="fu">getSeconds</span><span class="op">();</span></span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>  <span class="co">/** Cause one simulated second to elapse. Once the timer reaches</span></span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a><span class="co">   * 23 hours, 59 minutes, and 59 seconds, further calls to tick will</span></span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a><span class="co">   * have no effect.</span></span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a><span class="co">   */</span></span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a>  <span class="kw">public</span> <span class="dt">void</span> <span class="fu">tick</span><span class="op">();</span></span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p>The method signatures your colleague has written represent the public
+API for the class; they don’t show the implementation.</p>
+<dl>
+<dt><strong>Question:</strong></dt>
+<dd>
+<p>Before going on – what might be useful attributes (fields) for the
+class? These will be part of the implementation. Can you think of
+multiple different alternatives? Should they be added to the API? Why,
+or why not?</p>
+</dd>
+<dt><strong>Question:</strong></dt>
+<dd>
+<p>Consider whether there are any <em>invariants</em> that govern the
+values of these attributes. Class invariants are constraints on what
+values the attributes of the class can take. They do <em>not</em> form
+part of the public API: they are an implementation detail, for use by
+the developer of the class (and any other developers maintaining the
+code).</p>
+</dd>
+</dl>
+<p>For this lab, it’s suggested you use three <code>int</code>
+attributes, <code>hours</code>, <code>minutes</code> and
+<code>seconds</code>. Using your colleague’s API sketch as a starting
+point, add in the attributes and add “skeleton” method bodies to the
+code – e.g., for <code>getSeconds()</code>, you might start with</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>  <span class="kw">public</span> <span class="dt">int</span> <span class="fu">getSeconds</span><span class="op">()</span> <span class="op">{</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="op">-</span><span class="dv">1</span><span class="op">;</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span></code></pre></div>
+<p>The aim is to write code that will compile (but isn’t yet a correct
+implementation).</p>
+<p>You should be able to come up with a number of class invariants
+relating these attributes. Write them down as inline comments
+(<em>not</em> as Javadoc comments) in the body of the class. If you drop
+in on a timetabled lab session, compare the invariants you have proposed
+with those of other students (or with the lab facilitator).</p>
+<p><em>Before</em> writing a constructor and filling in the method
+bodies, write a <code>DigitalTimerTest</code> class:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">import</span> <span class="kw">static</span><span class="im"> org</span><span class="op">.</span><span class="im">junit</span><span class="op">.</span><span class="im">jupiter</span><span class="op">.</span><span class="im">api</span><span class="op">.</span><span class="im">Assertions</span><span class="op">.*;</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="kw">import</span> <span class="im">org</span><span class="op">.</span><span class="im">junit</span><span class="op">.</span><span class="im">jupiter</span><span class="op">.</span><span class="im">api</span><span class="op">.</span><span class="im">Test</span><span class="op">;</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span> <span class="kw">class</span> DigitalTimerTest <span class="op">{</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">@Test</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>  <span class="kw">public</span> <span class="dt">void</span> <span class="fu">testConstructor</span><span class="op">()</span> <span class="op">{</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">@Test</span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>  <span class="kw">public</span> <span class="dt">void</span> <span class="fu">testTick</span><span class="op">()</span> <span class="op">{</span></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p>See if you can suggest some possible test cases for this JUnit class,
+and try implementing them. Obviously, they will fail at first; but since
+your tests should rely only on the documented behaviour of the class,
+it’s quite possible to write them before the class has been implemented.
+This approach is used in the <a href="https://en.wikipedia.org/wiki/Test-driven_development">test-driven
+development methodology</a> (TDD).</p>
+<p>Lastly, try filling in the method bodies for
+<code>DigitalTimerTest</code>. Some notes to bear in mind:</p>
+<ul>
+<li>The job of a <em>constructor</em> is to initialize a new class
+object, ensuring (by the time the constructor has finished) that the
+object is in a sensible state and all the invariants hold.</li>
+<li>The job of any mutator method is to alter the state of an object in
+some way. Assuming the class invariants hold before the mutator is
+called, the mutator might break them temporarily (say, temporarily
+setting “<code>seconds</code>” to 60); but it should ensure the
+invariants hold again by the time it finishes executing.</li>
+</ul>
+<p>You could find it useful, while testing, to write a
+<code>private</code> “<code>checkInvariants</code>” method, which tests
+whether the invariants hold, and throws an <a href="https://docs.oracle.com/en%2Fjava%2Fjavase%2F11%2Fdocs%2Fapi%2F%2F/java.base/java/lang/IllegalStateException.html"><code>IllegalStateException</code></a>
+if not. Such an exception typically signals a logic error in the
+program, so generally shouldn’t be caught.</p>
+<p>How will you test that <code>tick</code> operates correctly after,
+say, 59 seconds, or once the time reaches 23:59:59?</p>
+<p>There are a few different options here:</p>
+<dl>
+<dt><strong>Test through public API</strong></dt>
+<dd>
+<p>If possible, it’s usually preferable to test a class solely through
+its public methods and constructors, treating the implementation of the
+class as a “black box”. The reason this is preferred is because it
+ensures the class behaves correctly when its behaviour is invoked via
+the API – which is, after all, how we expect it to be used.</p>
+<p>However, it might prove challenging to test the class thoroughly when
+some behaviours are difficult to trigger. If this is the case, we might
+consider using another method (see below), or we might consider
+redesigning the API to make the class more testable.</p>
+</dd>
+<dt><strong>Use reflection</strong></dt>
+<dd>
+<p>Ideally, our classes should be designed with testability in mind. But
+if necessary, it’s possible to use Java’s <a href="https://docs.oracle.com/javase/7/docs/api/java/lang/reflect/package-summary.html">reflection
+API</a>. This allows us to obtain information about the methods and
+fields of an object at runtime, and to alter their visibility.</p>
+<p>You can see an example of how to access private field information <a href="https://www.geeksforgeeks.org/how-to-access-private-field-and-method-using-reflection-in-java/">here</a>,
+and read more about the reflection API in Oracle’s technical article on
+the topic <a href="https://www.oracle.com/technical-resources/articles/java/javareflection.html">here</a>.</p>
+<p>This allows us to directly set particular internal states, which can
+be convenient for testing. But a disadvantage is that the tests are now
+tightly coupled to the class’s implementation, and will likely break if
+that implementation is altered. By setting the state directly, we’re
+also bypassing the publicly documented API – we need to make sure that
+the state we set <em>is</em> one that could still be achieved directly
+through the API (otherwise, we’re testing something that couldn’t
+actually happen). Finally, use of reflection tends to make tests more
+complex and harder to maintain.</p>
+</dd>
+</dl>
+<dl>
+<dt><strong>Use protected, “package-private” setter methods, and/or
+inheritance</strong></dt>
+<dd>
+<p>An alternative to using the reflection API is to write protected or
+“package-private” methods that set the state directly.</p>
+<p>Protected methods of some class can be invoked by other classes in
+the same package, or by subclasses; they’re indicated by writing
+“<code>protected</code>” as a method modifier. “Package-private” methods
+can be accessed by other classes in the same package, and are indicated
+by not writing any method modifier – for instance:</p>
+<pre><code>  public setMinutes(int minutes) {
+    this.minutes = minutes;
+  }</code></pre>
+<p>Our test classes can then use these methods to directly set the state
+of the class under test. This is simpler than using the reflection API,
+but other than that, has much the same drawbacks: we’re subverting the
+public API, and our tests are now more tightly coupled to the
+implementation.</p>
+<p>One variant of this is to <em>subclass</em> our original
+class-under-test, and add mutators to the subclass. Technically, if we
+haven’t made our class under test <code>final</code>, this
+<em>isn’t</em> subverting the API (as long as our subclass maintains all
+the invariants of the original class), since inheritance is an allowable
+way of using a class.</p>
+<p>But in general, it’s better to only allow classes to be inherited
+from if they’ve been designed with that in mind – it’s better practice
+to make classes <code>final</code>, preventing inheritance.</p>
+</dd>
+</dl>
+<p>In the present case, it should be possible to test the class entirely
+through its public API (though it might seem a little awkward).</p>
+<div style="border: solid 2pt blue; background-color: hsla(241, 100%,50%, 0.1); padding: 1em; border-radius: 5pt; margin-top: 1em;">
+<div class="block-caption">
+<p>Pre-reading</p>
+</div>
+<p>The following exercises in this worksheet assume general familiarity
+with graph-based testing concepts, so it’s recommended you work through
+chapter 7 from the Ammann and Offutt textbook before attempting
+them.</p>
+</div>
+<h2 id="isp-and-control-flow">3. ISP and control flow</h2>
+<p>Consider the following Java method for collapsing sequences of
+blanks, taken from the <code>StringUtils</code> class of Apache Velocity
+(<a href="http://velocity.apache.org/" class="uri">http://velocity.apache.org/</a>), version 1.3.1:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode numberSource java numberLines"><code class="sourceCode java"><span id="cb7-1"><a href="#cb7-1"></a></span>
+<span id="cb7-2"><a href="#cb7-2"></a><span class="co">/**</span></span>
+<span id="cb7-3"><a href="#cb7-3"></a><span class="co">* Remove/collapse multiple spaces.</span></span>
+<span id="cb7-4"><a href="#cb7-4"></a><span class="co">*</span></span>
+<span id="cb7-5"><a href="#cb7-5"></a><span class="co">* @param String string to remove multiple spaces from.</span></span>
+<span id="cb7-6"><a href="#cb7-6"></a><span class="co">* @return String</span></span>
+<span id="cb7-7"><a href="#cb7-7"></a><span class="co">*/</span></span>
+<span id="cb7-8"><a href="#cb7-8"></a></span>
+<span id="cb7-9"><a href="#cb7-9"></a><span class="kw">public</span> <span class="dt">static</span> <span class="bu">String</span> <span class="fu">collapseSpaces</span><span class="op">(</span><span class="bu">String</span> argStr<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb7-10"><a href="#cb7-10"></a>  <span class="dt">char</span> last <span class="op">=</span> argStr<span class="op">.</span><span class="fu">charAt</span><span class="op">(</span><span class="dv">0</span><span class="op">);</span></span>
+<span id="cb7-11"><a href="#cb7-11"></a>  <span class="bu">StringBuffer</span> argBuf <span class="op">=</span> <span class="kw">new</span> <span class="bu">StringBuffer</span><span class="op">();</span></span>
+<span id="cb7-12"><a href="#cb7-12"></a></span>
+<span id="cb7-13"><a href="#cb7-13"></a>  <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> cIdx <span class="op">=</span> <span class="dv">0</span> <span class="op">;</span> cIdx <span class="op">&lt;</span> argStr<span class="op">.</span><span class="fu">length</span><span class="op">();</span> cIdx<span class="op">++)</span> <span class="op">{</span></span>
+<span id="cb7-14"><a href="#cb7-14"></a>    <span class="dt">char</span> ch <span class="op">=</span> argStr<span class="op">.</span><span class="fu">charAt</span><span class="op">(</span>cIdx<span class="op">);</span></span>
+<span id="cb7-15"><a href="#cb7-15"></a>    <span class="cf">if</span> <span class="op">(</span>ch <span class="op">!=</span> <span class="ch">&#39; &#39;</span> <span class="op">||</span> last <span class="op">!=</span> <span class="ch">&#39; &#39;</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb7-16"><a href="#cb7-16"></a>      argBuf<span class="op">.</span><span class="fu">append</span><span class="op">(</span>ch<span class="op">);</span></span>
+<span id="cb7-17"><a href="#cb7-17"></a>      last <span class="op">=</span> ch<span class="op">;</span></span>
+<span id="cb7-18"><a href="#cb7-18"></a>    <span class="op">}</span></span>
+<span id="cb7-19"><a href="#cb7-19"></a>  <span class="op">}</span></span>
+<span id="cb7-20"><a href="#cb7-20"></a>  <span class="cf">return</span> argBuf<span class="op">.</span><span class="fu">toString</span><span class="op">();</span></span>
+<span id="cb7-21"><a href="#cb7-21"></a><span class="op">}</span></span></code></pre></div>
+<dl>
+<dt><strong>Exercise</strong></dt>
+<dd>
+<p>Using the ISP principles we have covered in class, suggest some
+<em>characteristics</em> we could use to partition the
+<code>argStr</code> parameter.</p>
+<p>Once you have several characteristics, consider how you might choose
+combinations of partitions from them. A recommended approach is to aim
+for “Base Choice” coverage:</p>
+<ol type="i">
+<li>For each characteristic, pick a <em>base choice</em> (and explain
+the reasoning behind that choice). Usually, the base choice will be one
+that is simpler, smaller, or more likely to occur than the other
+possibilities.</li>
+<li>Select test values for a “base choice” test.</li>
+<li>Go through and derive test values for the “non-base”
+partitions.</li>
+</ol>
+<p>Try writing JUnit tests for some of your test values.</p>
+<p>After you have finished the lab exercises, you might like to drop
+into one of the timetabled lab sessions and compare the characteristics
+and test values you derived with those of another student. Are your
+solutions the same? If not, how do they differ? Do either of your
+solutions have an advantage over the other?</p>
+</dd>
+</dl>
+<p>In previous labs, we’ve seen that attempting to measure test coverage
+simply by recording which lines of code a test suite exercises can
+mislead us as to how thoroughly our tests exercise the code.</p>
+<p>One alternative is to construct a <em>control flow graph</em> of the
+code being tested. A control flow graph (CFG) is a way of representing
+all the possible paths that a program’s execution can take.</p>
+<ul>
+<li><p>The graph is made up of <em>nodes</em>. Each node represents a
+<em>basic block</em> of code: a chunk of instructions that will always
+run together in sequence. Sometimes, a node corresponds to only
+<em>part</em> of a statement – for example, in a Java <code>for</code>
+loop like</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> mylist<span class="op">.</span><span class="fu">size</span><span class="op">();</span> i<span class="op">++)</span> <span class="op">{</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="co">// loop body</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p>there might be a node for the <em>initialisation</em>
+(<code>int i = 0</code>), a node for the <em>condition check</em>
+(<code>i &lt; mylist.size()</code>), a node for the <em>update</em>
+(<code>i++</code>), and nodes for the loop body.</p></li>
+<li><p>The connections between nodes are called <em>edges</em> (we can
+think of them informally as “arrows”). An edge shows that after
+finishing one node, control may flow to another node.</p></li>
+<li><p>By following the arrows, we can trace out every possible route
+execution might take through the code.</p></li>
+</ul>
+<p>Take another look at the <code>collapseSpaces</code> method. Can we
+construct a control flow graph for the method? For the purposes of this
+lab, we’ll take a simplified approach: we’ll ignore calls to other
+methods, such as <code>.charAt()</code>, and only model the control flow
+<em>within</em> the method. (Initially, you may want to ignore possible
+exceptions, too. Once you’ve completed the exercises, see if you can
+revise your graph to include them – do they seem useful?)</p>
+<p>A typical way of “labelling” graph nodes needs is to use letters
+(“A”, “B”, “C” and so on), and to provide a legend, showing a reader
+which nodes correspond to which lines (or fragments of lines) of
+code.</p>
+<p>Note that sometimes there may be multiple nodes representing
+fragments of code all within the same line (e.g. line 11). But as long
+as we have a clear explanation of what each node represents (e.g. “node
+D: the line 11 loop condition”) then that’s fine.</p>
+<dl>
+<dt><strong>Exercise</strong></dt>
+<dd>
+<p>Try to construct a control flow graph of the
+<code>collapseSpaces</code> method. How many nodes do you end up with?
+How many edges?</p>
+</dd>
+</dl>
+<ol start="3" type="a">
+<li><p>Given your test cases from part (a), try mentally or on paper
+“executing” several tests, and see what paths of the graph get exercised
+by each of your tests.</p>
+<p>How would you subjectively rate the “coverage” of the graph by your
+tests – good? reasonable? poor?</p></li>
+<li><p>Work out whether your tests give the following sorts of
+coverage:</p>
+<ol type="i">
+<li>node coverage</li>
+<li>edge coverage</li>
+</ol></li>
+<li><p>What are the <em>prime paths</em> in your graph? What proportion
+of the prime paths are exercised by the tests you’ve given?</p>
+<p>Can you construct some tests which exercise prime paths you haven’t
+already covered?</p></li>
+</ol>
+<!-- vim: syntax=markdown tw=92 :
+-->
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr />
+<ol>
+<li id="fn1"><p>This is a very simplified representation of how a
+simulated timer might work. In an actual simulation, rather than other
+objects having to actively query a <code>DigitalTimer</code> object to
+find out its state, we would want to give them the ability to be
+<em>alerted</em> whenever a “tick” occurs. A typical approach is to use
+the <a href="https://en.wikipedia.org/wiki/Observer_pattern">“Observer”</a> or
+<a href="https://en.wikipedia.org/wiki/Publish%E2%80%93subscribe_pattern">“Publish-subscribe”</a>
+software patterns. You can see example of “timer” classes which use the
+“Observer” pattern <a href="https://users.cs.jmu.edu/foxcj/Public/ISED/aqualush/src/simulation/SimTime.java">here</a>
+and <a href="https://gist.github.com/vilmaralmeida/1514576">here</a>,
+and read more about how the pattern is implemented in Java <a href="https://www.baeldung.com/java-observer-pattern">here</a>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
+</body>
+</html>

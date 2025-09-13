@@ -1,0 +1,160 @@
+CITS5501/CITS3501 Project 2025 phase 2
+Version:
+
+0.1
+
+Date:
+
+August, 2025
+
+PROJECT ADMIN
+For project administrative matters and rules, refer to the phase 1 project
+specification.
+
+Tasks for Project Deliverable 2 [ 25 marks ]
+Answes to the following questions should be submitted via Moodle. A more
+detailed marking rubric will also be available on Moodle. Some of the questions
+require you to write English answers; others require you to write code.
+** TODO** 25 marks.
+- continue question numbers from part 1 - are these questions suitable for
+groups? - should we mark based on evidence of quality assurance through
+effective use of issues and pull requests and reviews - possible genAI question
+- get them to use genAI to generate a set of test cases and then critique them
+using their pull request rules (including a review)
+Question 4 [4 marks] YES
+Write a BNF or EBNF grammar that will parse (or generate) valid
+gladius commands. Your grammar should use the notation accepted
+by the BNF playground. Your ansewr must present your grammar in
+plain text which could be pasted into the BNF playground and compiled
+without error.
+The grammar should include a non-terminal <gladius_command> to
+be used as the start symbol for the grammar. The grammar should
+specify any whitespace that needs to appear between other symbols in
+1
+
+the command. (As a simplifying assumption, you may assume that a
+single space character is sufficient as a separator between words.)
+Question X [4 marks] NO
+Write a static Java method, countTerminalSymbols, which counts the
+terminal symbols in a grammar.
+
+The signature for the method should be: static int countTerminalSymbols(List<String
+The input will be a grammar in BNF or EBNF format (specifically, the
+notation accepted by the BNF playground), split into meta-symbols
+– each element of the List<String> will be one meta-symbol. Metasymbols consist of terminal symbols (the double quote marks are included in the meta-symbol), non-terminal symbols (the angle brackets
+are included in the meta-symbol), newlines, and other meta-syntactic
+symbols used by the EBNF playground (such as the “is-defined-as”
+symbol, ::= or the “alternative” or “or” symbol, |.)
+For example, the following List<String> would represent a very small
+grammar consisting of just two strings, sat and sun:
+List<String> myGrammar =
+List.of("<weekendDay>", "::=", "\"sat\"", "|", "\"sun\"");
+The countTerminalSymbols() method would return the int 2 given
+the grammar myGrammar.
+You may assume that java.util.* and java.util.regex.* import
+statements appear at the top of the source file for your code.
+Question X [4 marks] NO
+Would it be possible to exhaustively test the syntax of gladius
+commands (that is, to write tests which have derivation coverage)?
+Why or why not? What about if we restricted ourselves to just the
+shop flight fare command? Give reasons for your conclusions.
+(Maximum 500 word answer.)
+Question X [4 marks] NO
+
+2
+
+Write a static Java method, countProductions, which counts the number of productions in a grammar (see the Amman and Offutt text for a
+definition of “production”).
+The signature for the method should be: static int countProductions(List<String>).
+The input will be a grammar in BNF or EBNF format (specifically, the
+notation accepted by the BNF playground), as detailed in question 2.
+Your may assume that java.util.* and java.util.regex.* import
+statements appear at the top of the source file for your code.
+
+3
+
+Question 5 [4 marks] YES
+Describe in detail the preconditions and postconditions of the
+constructor for the ShopFlightFareCommand class, justifying your
+answer. (Max 500 words)
+Question 6 [10 marks] YES
+Apply Input Space Partitioning (ISP) to the constructor for the
+SegmentSubcommand constructor, explaining in detail the steps you
+take and what characteristics and partitions you would use.
+You should describe:
+• eight characteristics that would be useful for testing the constructor.
+• three test cases in detail, including all fixtures, test values and
+expected values. Include a test ID for each test case, so you can
+refer to it in question 7.
+You need not exhaustively describe all characteristics, partitions, test
+cases and values that would be needed, but should briefly discuss what
+more would be needed – beyond the eight characteristics and three test
+cases you have described – to achieve Base Choice Coverage, and how
+you would know when it was achieved.
+(Max 1000 words)
+Question 7 [12 marks] YES
+Write a test class using JUnit 5 called SegmentSubcommandTest, which
+contains @Test methods which implement the three test cases you
+described in question 6. Skeleton code for this class is provided in the
+supplied Java code, in the “test” directory.
+TODO OR get them to generate test cases with an AI tool and then review
+the test cases. Issues should be use to track problems with the generated test
+cases.
+Your test cases should implement all appropriate best practices for
+unit tests.
+4
+
+Note that to obtain any marks, it is a requirement of the question that:
+- you implement three of your question 6 test cases -- for each test,
+include Javadoc documentation providing the test ID from question 6
+which it corresponds to. If you implement something else instead, no
+marks will be awarded.
+- your tests properly "Arrange, Act and Assert" your test case. Tests that
+(for instance) contain no assertions will not be awarded marks.
+The code checks available via Moodle can be useful to highlight
+possible problems in your code, but passing them is not a guarantee of any
+marks being awarded.
+Question 8 [4 marks] YES
+Describe a set of test cases for the CommandParser.parse() method
+which have production coverage of the grammar you specified as an
+answer to question 1. Explain why it is that your test cases satisfy this
+coverage criterion.
+TODO Should they write these test cases?
+max 1000 words
+Question 10 [4 marks] NO
+Your colleague Oreb has been reading about logic-based testing, and
+wonders whether it would be a good use of time to assess – once an
+initial suite of tests is in place – what level of coverage the tests for the
+gladius system have (e.g. do they have Active Clause Coverage)?
+Answer the following question: Would measuring logic-based coverage
+for the gladius system be a good use of the team’s time? Why or why
+not? Explain your reasoning.
+
+Extension tasks
+You may submit an answer to either of the following questions for 3 bonus
+marks, awarded at the discretion of the unit coordinator based on the coher5
+
+ence and quality of the answer. These 3 bonus marks cannot take your final
+mark higher than 35.
+• How could mutation testing be used to evaluate the quality of your
+team’s tests, and what empirical evidence exists that mutation testing is
+a sound approach to evaluating test quality? If you conclude mutation
+testing is not a sound approach, suggest alternatives, and explain your
+reasoning. Your answer should include appropriate academic references.
+• Write a parser and read–eval–print (REPL) loop for the command
+syntax described in this project specification, in any language of your
+choosing that can be compiled and run on an Ubuntu 20.04 distribution
+running on AMD64 processors. Your REPL loop may return canned
+responses to commands.
+Commands for building and running your program should be uploaded
+as an image to the Docker Hub or any other publicly available Docker
+repository, so that the program can be run using a docker run command.
+Your Moodle answer should explain what testing approaches you adopted
+while writing the program, give a URL on a repository for the source
+code, and include the details of the docker run command needed to
+run it. (Note: ensure you keep your source code repository private until
+the marker requests access, as this is an individual project.)
+
+6
+
+
