@@ -376,7 +376,6 @@ Consider the following Java method for collapsing sequences of blanks, taken
 from the `StringUtils` class of Apache Velocity
 (<http://velocity.apache.org/>), version 1.3.1:
 
-
 ``` { .java .numberLines }
 
 /**

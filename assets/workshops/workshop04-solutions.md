@@ -639,7 +639,6 @@ Consider the following Java method for collapsing sequences of blanks, taken
 from the `StringUtils` class of Apache Velocity
 (<http://velocity.apache.org/>), version 1.3.1:
 
-
 ``` { .java .numberLines }
 
 /**
@@ -920,9 +919,8 @@ prefix, or represent paths through the same loop):
 - ABG, ABCDEF, ABCDF
 - BCDEFB, CDEFBC, DEFBCD, EFBCDE, FBCDEF *(these all execute the left-hand 'if' branch)*
 - BCDFB, CDFBC, DFBCD *(these all execute the right-hand 'if' branch)*
-- EFBCDF *(this takes one left and one right branch)*
 - CDEFBG *(takes left branch)*
-- CDFBG *(take rights branch)*
+- CDFBG *(takes right branch)*
 
 What proportion of the prime paths your tests cover will
 depend on what tests you chose.
