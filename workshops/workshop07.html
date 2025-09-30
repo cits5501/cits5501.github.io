@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang xml:lang>
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>CITS5501 lab 7 (week 8) – reviews</title>
+  <style>
+html {
+line-height: 1.5;
+font-family: sans-serif;
+font-size: 12pt;
+color: black;
+background-color: white;
+}
+body {
+margin: 0 auto;
+max-width: 50em;
+padding-left: 50px;
+padding-right: 50px;
+padding-top: 50px;
+padding-bottom: 50px;
+hyphens: auto;
+overflow-wrap: break-word;
+text-rendering: optimizeLegibility;
+font-kerning: normal;
+}
+@media (max-width: 600px) {
+body {
+font-size: 0.9em;
+padding: 1em;
+}
+h1 {
+font-size: 1.8em;
+}
+}
+@media print {
+body {
+background-color: transparent;
+color: black;
+font-size: 12pt;
+}
+p, h2, h3 {
+orphans: 3;
+widows: 3;
+}
+h2, h3, h4 {
+page-break-after: avoid;
+}
+}
+p {
+margin: 1em 0;
+}
+img {
+max-width: 100%;
+}
+h1, h2, h3, h4, h5, h6 {
+margin-top: 1.4em;
+}
+h5, h6 {
+font-size: 1em;
+font-style: italic;
+}
+h6 {
+font-weight: normal;
+}
+ol, ul {
+padding-left: 1.7em;
+margin-top: 1em;
+}
+li > ol, li > ul {
+margin-top: 0;
+}
+blockquote {
+margin: 1em 0 1em 1.7em;
+padding-left: 1em;
+border-left: 2px solid #e6e6e6;
+color: #606060;
+}
+code {
+font-family: Menlo, Monaco, 'Lucida Console', Consolas, monospace;
+background-color: hsl(0, 0%, 98%);
+padding: .2em .4em;
+font-size: 85%;
+margin: 0;
+}
+pre {
+margin: 1em 0;
+background-color: hsl(0, 0%, 98%);
+padding: 1em;
+overflow: auto;
+}
+pre code {
+padding: 0;
+overflow: visible;
+overflow-wrap: normal;
+}
+
+:not(pre) > code {
+padding: 2px 4px;
+font-size: 90%;
+word-break: normal !important;
+white-space: nowrap;
+color: hsl(344.8,69%,10%);
+background-color: hsl(342.9,37%,96%);
+border-radius: 4px;
+}
+.sourceCode {
+background-color: hsl(0, 0%, 98%);
+overflow: visible;
+}
+hr {
+background-color: #1a1a1a;
+border: none;
+height: 1px;
+margin: 1em 0;
+}
+table {
+margin: 1em 0;
+border-collapse: collapse;
+width: 100%;
+overflow-x: auto;
+display: block;
+font-variant-numeric: lining-nums tabular-nums;
+}
+table caption {
+margin-bottom: 0.75em;
+}
+tbody {
+margin-top: 0.5em;
+border-top: 1px solid black;
+border-bottom: 1px solid black;
+}
+th {
+border-top: 1px solid black;
+padding: 0.25em 0.5em 0.25em 0.5em;
+}
+td {
+padding: 0.125em 0.5em 0.25em 0.5em;
+}
+header {
+margin-bottom: 4em;
+text-align: center;
+}
+#TOC li {
+list-style: none;
+}
+#TOC ul {
+padding-left: 1.3em;
+}
+#TOC > ul {
+padding-left: 0;
+}
+#TOC a:not(:hover) {
+text-decoration: none;
+}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+{ counter-reset: source-line 0; }
+pre.numberSource code > span
+{ position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+{ content: counter(source-line);
+position: relative; left: -1em; text-align: right; vertical-align: baseline;
+border: none; display: inline-block;
+-webkit-touch-callout: none; -webkit-user-select: none;
+-khtml-user-select: none; -moz-user-select: none;
+-ms-user-select: none; user-select: none;
+padding: 0 4px; width: 4em;
+color: #aaaaaa;
+}
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa; padding-left: 4px; }
+div.sourceCode
+{ }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } 
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.at { color: #7d9029; } 
+code span.bn { color: #40a070; } 
+code span.bu { color: #008000; } 
+code span.cf { color: #007020; font-weight: bold; } 
+code span.ch { color: #4070a0; } 
+code span.cn { color: #880000; } 
+code span.co { color: #60a0b0; font-style: italic; } 
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.do { color: #ba2121; font-style: italic; } 
+code span.dt { color: #902000; } 
+code span.dv { color: #40a070; } 
+code span.er { color: #ff0000; font-weight: bold; } 
+code span.ex { } 
+code span.fl { color: #40a070; } 
+code span.fu { color: #06287e; } 
+code span.im { color: #008000; font-weight: bold; } 
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.kw { color: #007020; font-weight: bold; } 
+code span.op { color: #666666; } 
+code span.ot { color: #007020; } 
+code span.pp { color: #bc7a00; } 
+code span.sc { color: #4070a0; } 
+code span.ss { color: #bb6688; } 
+code span.st { color: #4070a0; } 
+code span.va { color: #19177c; } 
+code span.vs { color: #4070a0; } 
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } 
+</style>
+  <style>
+div.solutions {
+border: solid 2pt hsla(120, 100%, 35%, 1);
+border-radius: 5pt;
+background-color: hsla(120, 100%, 50%, 0.1);
+padding: 1em;
+}
+.block-caption {
+display: block;
+font-family: sans-serif;
+font-weight: bold;
+margin-bottom: 1.5rem;
+text-align: center;
+}
+details[open] summary *.only-open {
+opacity: 0.1;
+}
+</style>
+<script data-external="1" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript">
+</script>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title"><p>CITS5501 lab 7 (week 8) – reviews</p></h1>
+</header>
+<nav id="TOC" role="doc-toc">
+<h2 id="toc-title">Contents</h2>
+<ul>
+<li><a href="#reading" id="toc-reading">Reading</a></li>
+<li><a href="#a.-code-review" id="toc-a.-code-review">A. Code
+review</a></li>
+<li><a href="#b.-exercise" id="toc-b.-exercise">B. Exercise</a>
+<ul>
+<li><a href="#code-sample-1-dayofyear" id="toc-code-sample-1-dayofyear">Code sample 1 –
+<code>dayOfYear</code></a></li>
+<li><a href="#code-sample-2-leap" id="toc-code-sample-2-leap">Code
+sample 2 – <code>leap</code></a></li>
+</ul></li>
+<li><a href="#c.-linters-and-formatters" id="toc-c.-linters-and-formatters">C. Linters and formatters</a></li>
+<li><a href="#d.-ant-build-files-and-code-coverage-tools" id="toc-d.-ant-build-files-and-code-coverage-tools">D. Ant build files
+and code coverage tools</a></li>
+<li><a href="#e.-summary" id="toc-e.-summary">E. Summary</a></li>
+<li><a href="#appendix-code-review-instructions" id="toc-appendix-code-review-instructions">Appendix – Code review
+instructions</a>
+<ul>
+<li><a href="#what-to-look-for" id="toc-what-to-look-for">What to look
+for</a></li>
+</ul></li>
+<li><a href="#credits" id="toc-credits">Credits</a></li>
+</ul>
+</nav>
+<h2 id="reading">Reading</h2>
+<p>It is strongly suggested you complete the recommended readings for
+weeks 1-7 <em>before</em> attempting this lab/workshop.</p>
+<h2 id="a.-code-review">A. Code review</h2>
+<p><em>Code review</em> is careful, systematic study of source code by
+people who are not the original author of the code. It’s analogous to
+having someone proofread a written essay or assignment before you submit
+it.</p>
+<p>It has two main purposes:</p>
+<ul>
+<li><strong>Improving the code.</strong> Finding bugs, anticipating
+possible bugs, checking the clarity of the code, and checking for
+consistency with the project’s style standards.</li>
+<li><strong>Improving the programmer.</strong> Code review is an
+important way that programmers learn and teach each other about new
+language features, changes in the design of the project or its coding
+standards, and new techniques. In open source projects, particularly,
+much conversation happens in the context of code reviews.</li>
+</ul>
+<p>Code review is widely practiced in open source projects like Apache
+and <a href="http://blog.humphd.org/vocamus-1569/?p=1569">Mozilla</a>,
+as well as in industry.</p>
+<p>Most companies and large projects have coding style standards (for
+example, the <a href="https://google-styleguide.googlecode.com/svn/trunk/javaguide.html">Google
+Java Style</a>). These can get pretty detailed, even to the point of
+specifying whitespace (how deep to indent) and where curly braces and
+parentheses should go. We won’t get into that much detail, but we stress
+that</p>
+<ul>
+<li>it’s important to be self-consistent</li>
+<li>when working on a team project, it’s <em>very</em> important to
+follow the conventions or style guide adopted by that project.</li>
+</ul>
+<p>If you’re interested in getting more details about how code review
+works, then there is more information available in the <em>Pressman</em>
+textbook, as well as a whole <a href="https://codereview.stackexchange.com">StackExchange site</a>
+dedicated to code review.</p>
+<h2 id="b.-exercise">B. Exercise</h2>
+<!--
+For this exercise you
+should split up into small groups of 2-3 people.
+If you are attending online via Teams, your facilitator should  be able to
+create "breakout rooms" for you, by following the [MS Teams
+instructions][ms-teams-breakout]; but failing that, instead do a solo review of the
+code, and report back to the class as a whole with your findings.
+
+[ms-teams-breakout]: https://support.microsoft.com/en-us/office/use-breakout-rooms-in-teams-meetings-7de1f48a-da07-466c-a5ab-4ebace28e461#bkmk_create-breakout-rooms
+-->
+<p>For each of the following code samples, take the time to read through
+the code carefully, bearing in mind the “Code review instructions” at
+the end of this sheet and recording problems they find (and possibly
+suggesting concrete improvements).</p>
+<p>After you’ve attempted the exercises, it’s recommended you drop in on
+one of the timetabled labs, to compare your answers with other students
+(or to discuss them with one of the lab facilitors).</p>
+<h3 id="code-sample-1-dayofyear">Code sample 1 –
+<code>dayOfYear</code></h3>
+<div class="sourceCode" id="cb1"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span> <span class="dt">static</span> <span class="dt">int</span> <span class="fu">dayOfYear</span><span class="op">(</span><span class="dt">int</span> month<span class="op">,</span> <span class="dt">int</span> dayOfMonth<span class="op">,</span> <span class="dt">int</span> year<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>month <span class="op">==</span> <span class="dv">2</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>        dayOfMonth <span class="op">+=</span> <span class="dv">31</span><span class="op">;</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span> <span class="cf">else</span> <span class="cf">if</span> <span class="op">(</span>month <span class="op">==</span> <span class="dv">3</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>        dayOfMonth <span class="op">+=</span> <span class="dv">59</span><span class="op">;</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span> <span class="cf">else</span> <span class="cf">if</span> <span class="op">(</span>month <span class="op">==</span> <span class="dv">4</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>        dayOfMonth <span class="op">+=</span> <span class="dv">90</span><span class="op">;</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span> <span class="cf">else</span> <span class="cf">if</span> <span class="op">(</span>month <span class="op">==</span> <span class="dv">5</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>        dayOfMonth <span class="op">+=</span> <span class="dv">31</span> <span class="op">+</span> <span class="dv">28</span> <span class="op">+</span> <span class="dv">31</span> <span class="op">+</span> <span class="dv">30</span><span class="op">;</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span> <span class="cf">else</span> <span class="cf">if</span> <span class="op">(</span>month <span class="op">==</span> <span class="dv">6</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>        dayOfMonth <span class="op">+=</span> <span class="dv">31</span> <span class="op">+</span> <span class="dv">28</span> <span class="op">+</span> <span class="dv">31</span> <span class="op">+</span> <span class="dv">30</span> <span class="op">+</span> <span class="dv">31</span><span class="op">;</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span> <span class="cf">else</span> <span class="cf">if</span> <span class="op">(</span>month <span class="op">==</span> <span class="dv">7</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>        dayOfMonth <span class="op">+=</span> <span class="dv">31</span> <span class="op">+</span> <span class="dv">28</span> <span class="op">+</span> <span class="dv">31</span> <span class="op">+</span> <span class="dv">30</span> <span class="op">+</span> <span class="dv">31</span> <span class="op">+</span> <span class="dv">30</span><span class="op">;</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span> <span class="cf">else</span> <span class="cf">if</span> <span class="op">(</span>month <span class="op">==</span> <span class="dv">8</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>        dayOfMonth <span class="op">+=</span> <span class="dv">31</span> <span class="op">+</span> <span class="dv">28</span> <span class="op">+</span> <span class="dv">31</span> <span class="op">+</span> <span class="dv">30</span> <span class="op">+</span> <span class="dv">31</span> <span class="op">+</span> <span class="dv">30</span> <span class="op">+</span> <span class="dv">31</span><span class="op">;</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span> <span class="cf">else</span> <span class="cf">if</span> <span class="op">(</span>month <span class="op">==</span> <span class="dv">9</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>        dayOfMonth <span class="op">+=</span> <span class="dv">31</span> <span class="op">+</span> <span class="dv">28</span> <span class="op">+</span> <span class="dv">31</span> <span class="op">+</span> <span class="dv">30</span> <span class="op">+</span> <span class="dv">31</span> <span class="op">+</span> <span class="dv">30</span> <span class="op">+</span> <span class="dv">31</span> <span class="op">+</span> <span class="dv">31</span><span class="op">;</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span> <span class="cf">else</span> <span class="cf">if</span> <span class="op">(</span>month <span class="op">==</span> <span class="dv">10</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>        dayOfMonth <span class="op">+=</span> <span class="dv">31</span> <span class="op">+</span> <span class="dv">28</span> <span class="op">+</span> <span class="dv">31</span> <span class="op">+</span> <span class="dv">30</span> <span class="op">+</span> <span class="dv">31</span> <span class="op">+</span> <span class="dv">30</span> <span class="op">+</span> <span class="dv">31</span> <span class="op">+</span> <span class="dv">31</span> <span class="op">+</span> <span class="dv">30</span><span class="op">;</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span> <span class="cf">else</span> <span class="cf">if</span> <span class="op">(</span>month <span class="op">==</span> <span class="dv">11</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>        dayOfMonth <span class="op">+=</span> <span class="dv">31</span> <span class="op">+</span> <span class="dv">28</span> <span class="op">+</span> <span class="dv">31</span> <span class="op">+</span> <span class="dv">30</span> <span class="op">+</span> <span class="dv">31</span> <span class="op">+</span> <span class="dv">30</span> <span class="op">+</span> <span class="dv">31</span> <span class="op">+</span> <span class="dv">31</span> <span class="op">+</span> <span class="dv">30</span> <span class="op">+</span> <span class="dv">31</span><span class="op">;</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span> <span class="cf">else</span> <span class="cf">if</span> <span class="op">(</span>month <span class="op">==</span> <span class="dv">12</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>        dayOfMonth <span class="op">+=</span> <span class="dv">31</span> <span class="op">+</span> <span class="dv">28</span> <span class="op">+</span> <span class="dv">31</span> <span class="op">+</span> <span class="dv">30</span> <span class="op">+</span> <span class="dv">31</span> <span class="op">+</span> <span class="dv">30</span> <span class="op">+</span> <span class="dv">31</span> <span class="op">+</span> <span class="dv">31</span> <span class="op">+</span> <span class="dv">30</span> <span class="op">+</span> <span class="dv">31</span> <span class="op">+</span> <span class="dv">31</span><span class="op">;</span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> dayOfMonth<span class="op">;</span></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p>What problems can you see with this code? What improvements would you
+suggest?</p>
+<p>Does it violate any of the guidelines given in the “Code review
+instructions”?</p>
+<h3 id="code-sample-2-leap">Code sample 2 – <code>leap</code></h3>
+<p>Hopefully you spotted one problem with the previous code sample – it
+gives the wrong answer, when the year is a leap year!</p>
+<p>So suppose a colleague writes the following method, intended to
+determine whether a year is a leap year. Again, look for problems in and
+potential improvements to this code, and drop in on one of the labs to
+compare solutions.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span> <span class="dt">static</span> <span class="dt">boolean</span> <span class="fu">leap</span><span class="op">(</span><span class="dt">int</span> y<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">// convert to string so we can access 1st, 2nd digit etc</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">String</span> tmp <span class="op">=</span> <span class="bu">String</span><span class="op">.</span><span class="fu">valueOf</span><span class="op">(</span>y<span class="op">);</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>tmp<span class="op">.</span><span class="fu">charAt</span><span class="op">(</span><span class="dv">2</span><span class="op">)</span> <span class="op">==</span> <span class="ch">&#39;1&#39;</span> <span class="op">||</span> tmp<span class="op">.</span><span class="fu">charAt</span><span class="op">(</span><span class="dv">2</span><span class="op">)</span> <span class="op">==</span> <span class="ch">&#39;3&#39;</span> <span class="op">||</span> tmp<span class="op">.</span><span class="fu">charAt</span><span class="op">(</span><span class="dv">2</span><span class="op">)</span> <span class="op">==</span> <span class="dv">5</span> <span class="op">||</span> </span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>        tmp<span class="op">.</span><span class="fu">charAt</span><span class="op">(</span><span class="dv">2</span><span class="op">)</span> <span class="op">==</span> <span class="ch">&#39;7&#39;</span> <span class="op">||</span> tmp<span class="op">.</span><span class="fu">charAt</span><span class="op">(</span><span class="dv">2</span><span class="op">)</span> <span class="op">==</span> <span class="ch">&#39;9&#39;</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>          <span class="cf">if</span> <span class="op">(</span>tmp<span class="op">.</span><span class="fu">charAt</span><span class="op">(</span><span class="dv">3</span><span class="op">)==</span><span class="ch">&#39;2&#39;</span><span class="op">||</span>tmp<span class="op">.</span><span class="fu">charAt</span><span class="op">(</span><span class="dv">3</span><span class="op">)==</span><span class="ch">&#39;6&#39;</span><span class="op">)</span> <span class="cf">return</span> <span class="kw">true</span><span class="op">;</span> <span class="co">/*R1*/</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>          <span class="cf">else</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>              <span class="cf">return</span> <span class="kw">false</span><span class="op">;</span> <span class="co">/*R2*/</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span><span class="cf">else</span><span class="op">{</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(</span>tmp<span class="op">.</span><span class="fu">charAt</span><span class="op">(</span><span class="dv">2</span><span class="op">)</span> <span class="op">==</span> <span class="ch">&#39;0&#39;</span> <span class="op">&amp;&amp;</span> tmp<span class="op">.</span><span class="fu">charAt</span><span class="op">(</span><span class="dv">3</span><span class="op">)</span> <span class="op">==</span> <span class="ch">&#39;0&#39;</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> <span class="kw">false</span><span class="op">;</span> <span class="co">/*R3*/</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(</span>tmp<span class="op">.</span><span class="fu">charAt</span><span class="op">(</span><span class="dv">3</span><span class="op">)==</span><span class="ch">&#39;0&#39;</span><span class="op">||</span>tmp<span class="op">.</span><span class="fu">charAt</span><span class="op">(</span><span class="dv">3</span><span class="op">)==</span><span class="ch">&#39;4&#39;</span><span class="op">||</span>tmp<span class="op">.</span><span class="fu">charAt</span><span class="op">(</span><span class="dv">3</span><span class="op">)==</span><span class="ch">&#39;8&#39;</span><span class="op">)</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>          <span class="cf">return</span> <span class="kw">true</span><span class="op">;</span> <span class="co">/*R4*/</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="kw">false</span><span class="op">;</span> <span class="co">/*R5*/</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<h2 id="c.-linters-and-formatters">C. Linters and formatters</h2>
+<p>In general, it’s expensive to spend the time of humans doing
+something a computer could do equally well – like formatting code
+correctly, or spotting errors that can be checked for mechanically. So
+before a human reviews your code, you should ensure it’s already been
+checked for basic errors by a computer.</p>
+<p>Programs called <a href="https://en.wikipedia.org/wiki/Prettyprint"><em>code
+formatters</em></a>, <em>code beautifiers</em> or
+<em>pretty-printers</em> apply consistent formatting to code. Some apply
+a single rigid, built-in style (e.g. “all indents are 4 spaces”) but
+most can be customised to reproduce a style the team prefers. One
+commonly-used formatter used in Java projects is <a href="https://github.com/diffplug/spotless"><em>Spotless</em></a>, which
+can be integrated easily with the Microsoft Visual Studio Code editor,
+or the <a href="https://www.jetbrains.com/idea/">IntelliJ IDEA IDE</a>.
+If you use either of those tools to write your Java code, you might like
+to experiment with it.</p>
+<p><a href="https://en.wikipedia.org/wiki/Lint_(software)"><em>Linters</em></a>
+analyse your source code looking for common programming errors, poor
+style, and programming language constructs which should be used with
+caution. They are performing a simple form of <em>static code
+analysis</em> (which we’ll talk more about later). Examples of linters
+for Java include <a href="http://checkstyle.sourceforge.net/">Checkstyle</a>, <a href="https://spotbugs.github.io/">Spotbugs</a>, and <a href="https://pmd.github.io/">PMD</a>. In your own time, you might like
+to try running one of these tools over code you have written, to see
+what sort of problems they can flag.</p>
+<h2 id="d.-ant-build-files-and-code-coverage-tools">D. Ant build files
+and code coverage tools</h2>
+<p>This exercise is to get you familiar with code coverage tools and
+some of their weaknesses.</p>
+<p>A repository with Java code is provided at <a href="https://github.com/cits5501/week-8-lab-coverage-example" class="uri">https://github.com/cits5501/week-8-lab-coverage-example</a>
+which contains a simple class for detecting whether a Java string is a
+palindrome (<code>Palindrome.java</code>), and tests for this class
+using JUnit.</p>
+<p>You can use <a href="https://www.gitpod.io">GitPod</a> to work with
+this code online. You will need a GitHub account; once you have one set
+up, follow the link below:</p>
+<p>  <a href="https://gitpod.io/new/#https://github.com/cits5501/week-8-lab-coverage-example" class="uri">https://gitpod.io/new/#https://github.com/cits5501/week-8-lab-coverage-example</a></p>
+<p>and select “New workspace”.</p>
+<p>After a minute or two, you should get access to an online version of
+the VS Code editor in which the source code for the repository is
+available. Take a look at the <code>build.xml</code> file; this file is
+used by the <a href="https://en.wikipedia.org/wiki/Apache_Ant">Apache
+Ant</a> build automation tool. It defines several “targets” representing
+tasks that can be run using the build file:</p>
+<ul>
+<li>init</li>
+<li>compile</li>
+<li>compileTest</li>
+<li>test, and</li>
+<li>report.</li>
+</ul>
+<p>(Some of these tasks you can also do just using VS Code. For
+instance, open <code>PalindromeTest.java</code>, expand the “outline”
+and “java projects” panes, and wait for the background tasks to finish.
+A green triangle should appear next to the start of the
+<code>PalindromeTest</code> class, indicating that it can be clicked to
+run the JUnit tests it contains.)</p>
+<p>Click the “Terminal” pane, and type <code>ant test</code> to run the
+JUnit tests. The messages should indicate that four tests were run with
+no failures.</p>
+<p>Now run <code>ant report</code>, and not only will the tests be run,
+but the paths they take through the code of <code>PalindromeTest</code>
+will be recorded by a tool called <a href="https://www.jacoco.org/jacoco/">JaCoCo</a>, and a report
+produced.</p>
+<p>You can view this by clicking “Go Live” in the VS Code taskbar
+(towards the right). This serves up the contents of the repository
+directory via HTTP, so it can be viewed in the browser. Click “report”,
+and by clicking through, you should be able to see a coverage report for
+our tests.</p>
+<p><img role="img" src="data:image/png;base64,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" style="width:20cm" /></p>
+<p>Read the JaCoco documentation on “Coverage Counters”, <a href="https://www.eclemma.org/jacoco/trunk/doc/counters.html">here</a>,
+for more information about exactly what is being measured.</p>
+<p><strong>Exercises</strong></p>
+<ul>
+<li><p>Comment out one of the assert statements (e.g. the one containing
+<code>p.isPalindrome(&quot;redivider&quot;)</code>) and replace it with the bare
+call to <code>p.isPalindrome()</code>.</p>
+<p>Does the coverage report change at all? Try doing the same for all
+tests, and check again. What weakness of coverage tools does this
+suggest?</p></li>
+<li><p>Comment out all but one of the tests. Again, does the coverage
+report change?</p></li>
+<li><p>Applying the ideas from ISP (but without necessarily doing a
+detailed analysis) – can you spot any test cases that are missing from
+the test suite?</p></li>
+</ul>
+<h2 id="e.-summary">E. Summary</h2>
+<p>Code review is a widely-used technique for improving software quality
+by human inspection. Code review can detect many kinds of problems in
+code, but in this workshop we looked at code samples which highlighted
+the following general principles:</p>
+<ul>
+<li>Don’t Repeat Yourself (DRY)</li>
+<li>Comments where needed</li>
+<li>Avoid magic numbers</li>
+<li>One purpose for each variable</li>
+<li>Use good names</li>
+<li>Use whitespace for readability</li>
+</ul>
+<p>These general principles help ensure that code is:</p>
+<ul>
+<li><p><strong>Safe from bugs.</strong> In general, code review uses
+human reviewers to find bugs. DRY code lets you fix a bug in only one
+place, without fear that it has propagated elsewhere. Commenting your
+assumptions clearly makes it less likely that another programmer will
+introduce a bug.</p></li>
+<li><p><strong>Easy to understand.</strong> Code review is really the
+only way to find obscure or confusing code, because other people are
+reading it and trying to understand it. Using judicious comments,
+avoiding magic numbers, keeping one purpose for each variable, using
+good names, and using whitespace well can all improve the
+understandability of code.</p></li>
+<li><p><strong>Ready for change.</strong> Code review helps here when
+it’s done by experienced software developers who can anticipate what
+might change and suggest ways to guard against it. DRY code is more
+ready for change, because a change only needs to be made in one
+place.</p></li>
+</ul>
+<h1 id="appendix-code-review-instructions">Appendix – Code review
+instructions</h1>
+<p>This document describes how and why to perform code reviews.</p>
+<p>You can’t learn how to write without learning how to read – and
+programming is no exception. Code reviewing is widely used in software
+development, both in industry and in open source projects. Some
+companies like Google even make it a policy that <em>all</em> code must
+be reviewed before being committed to version control – this means that
+for every single line of code in Google’s repository, another software
+developer has read it, given feedback on it, and signed off on it.</p>
+<p>Code review can be seen as a type of <em>static quality
+assurance</em> technique (it doesn’t require the code to be run), and
+has multiple benefits:</p>
+<ul>
+<li>It helps find bugs, in a way that’s complementary to other
+techniques (like testing and static analysis)</li>
+<li>Reviewing uncovers code that is confusing, poorly documented,
+unsafe, or otherwise not ready for maintenance or future change.</li>
+<li>Reviewing spreads knowledge through an organization, allowing
+developers to learn from each other by explicit feedback and by
+example.</li>
+</ul>
+<p>So code reviewing is not only a practically important skill that you
+will need in the real world, but also a learning opportunity.</p>
+<h2 id="what-to-look-for">What to look for</h2>
+<p>In the exercises for this workshop, you can make comments about
+<em>anything</em> you think is relevant. But some guiding principles are
+that we want code to be:</p>
+<ul>
+<li>free from bugs</li>
+<li>easy to understand, and</li>
+<li>easy for another developer to change.</li>
+</ul>
+<p>So read the code with those principles in mind. What follows are some
+concrete examples of problems to look for – feel free to add others.</p>
+<p><strong>Bugs or potential bugs.</strong></p>
+<ul>
+<li>Repetitive code (remember the “DRY” principle – “<a href="https://en.wikipedia.org/wiki/Don&#39;t_repeat_yourself">Don’t
+Repeat Yourself</a>”).</li>
+<li>Disagreement between code and specification.</li>
+<li>Off-by-one errors.</li>
+<li>Using global variables when a smaller scope could be used.</li>
+<li>Optimistic, undefensive programming.</li>
+<li><a href="https://en.wikipedia.org/wiki/Magic_number_(programming)">Magic
+numbers</a>.</li>
+</ul>
+<p><strong>Unclear, messy code.</strong></p>
+<ul>
+<li>Bad variable or method names.</li>
+<li>Inconsistent indentation.</li>
+<li>Convoluted control flow (if and while statements) that could be
+simplified.</li>
+<li>Packing too much into one line of code, or too much into one
+method.</li>
+<li>Failing to comment obscure code.</li>
+<li>Having too many trivial comments that are simply redundant with the
+code.</li>
+<li>Variables used for more than one purpose.</li>
+</ul>
+<p><strong>Misusing (or failing to use) essential design
+concepts.</strong></p>
+<ul>
+<li>Incomplete or incorrect specification for a method or class.</li>
+<li>Exposing (as <code>public</code> or <code>protected</code>)
+implementation details that should be kept <code>private</code>.</li>
+<li>Invariants that aren’t really invariant, or aren’t even stated.</li>
+</ul>
+<p>Positive comments are also a good thing. Don’t be afraid to make
+comments about things you really like, for example:</p>
+<ul>
+<li>unusually elegant code</li>
+<li>creative solutions, or</li>
+<li>great design.</li>
+</ul>
+<h1 id="credits">Credits</h1>
+<p>The code samples, instructions and exercises in sections A–B and E
+are adapted from MIT’s course 6.005, “Software Construction”, reading 4,
+“Code Review”, available from the <a href="https://web.mit.edu/6.005/www/fa15/classes/04-code-review/">MIT
+website</a>, which was collaboratively authored with contributiopn by
+Saman Amarasinghe, Adam Chlipala, Srini Devadas, Michael Ernst, Max
+Goldman, John Guttag, Daniel Jackson, Rob Miller, Martin Rinard, and
+Armando Solar-Lezama. This worksheet (as well as the original MIT
+content) is licensed under the <a href="http://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>
+license.</p>
+<!-- vim: syntax=markdown
+-->
+</body>
+</html>

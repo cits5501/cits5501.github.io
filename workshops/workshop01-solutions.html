@@ -1,0 +1,877 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang xml:lang>
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>CITS5501 lab 1 (week 2) – Testing introduction – solutions</title>
+  <style>
+html {
+line-height: 1.5;
+font-family: sans-serif;
+font-size: 12pt;
+color: black;
+background-color: white;
+}
+body {
+margin: 0 auto;
+max-width: 50em;
+padding-left: 50px;
+padding-right: 50px;
+padding-top: 50px;
+padding-bottom: 50px;
+hyphens: auto;
+overflow-wrap: break-word;
+text-rendering: optimizeLegibility;
+font-kerning: normal;
+}
+@media (max-width: 600px) {
+body {
+font-size: 0.9em;
+padding: 1em;
+}
+h1 {
+font-size: 1.8em;
+}
+}
+@media print {
+body {
+background-color: transparent;
+color: black;
+font-size: 12pt;
+}
+p, h2, h3 {
+orphans: 3;
+widows: 3;
+}
+h2, h3, h4 {
+page-break-after: avoid;
+}
+}
+p {
+margin: 1em 0;
+}
+img {
+max-width: 100%;
+}
+h1, h2, h3, h4, h5, h6 {
+margin-top: 1.4em;
+}
+h5, h6 {
+font-size: 1em;
+font-style: italic;
+}
+h6 {
+font-weight: normal;
+}
+ol, ul {
+padding-left: 1.7em;
+margin-top: 1em;
+}
+li > ol, li > ul {
+margin-top: 0;
+}
+blockquote {
+margin: 1em 0 1em 1.7em;
+padding-left: 1em;
+border-left: 2px solid #e6e6e6;
+color: #606060;
+}
+code {
+font-family: Menlo, Monaco, 'Lucida Console', Consolas, monospace;
+background-color: hsl(0, 0%, 98%);
+padding: .2em .4em;
+font-size: 85%;
+margin: 0;
+}
+pre {
+margin: 1em 0;
+background-color: hsl(0, 0%, 98%);
+padding: 1em;
+overflow: auto;
+}
+pre code {
+padding: 0;
+overflow: visible;
+overflow-wrap: normal;
+}
+
+:not(pre) > code {
+padding: 2px 4px;
+font-size: 90%;
+word-break: normal !important;
+white-space: nowrap;
+color: hsl(344.8,69%,10%);
+background-color: hsl(342.9,37%,96%);
+border-radius: 4px;
+}
+.sourceCode {
+background-color: hsl(0, 0%, 98%);
+overflow: visible;
+}
+hr {
+background-color: #1a1a1a;
+border: none;
+height: 1px;
+margin: 1em 0;
+}
+table {
+margin: 1em 0;
+border-collapse: collapse;
+width: 100%;
+overflow-x: auto;
+display: block;
+font-variant-numeric: lining-nums tabular-nums;
+}
+table caption {
+margin-bottom: 0.75em;
+}
+tbody {
+margin-top: 0.5em;
+border-top: 1px solid black;
+border-bottom: 1px solid black;
+}
+th {
+border-top: 1px solid black;
+padding: 0.25em 0.5em 0.25em 0.5em;
+}
+td {
+padding: 0.125em 0.5em 0.25em 0.5em;
+}
+header {
+margin-bottom: 4em;
+text-align: center;
+}
+#TOC li {
+list-style: none;
+}
+#TOC ul {
+padding-left: 1.3em;
+}
+#TOC > ul {
+padding-left: 0;
+}
+#TOC a:not(:hover) {
+text-decoration: none;
+}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+{ counter-reset: source-line 0; }
+pre.numberSource code > span
+{ position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+{ content: counter(source-line);
+position: relative; left: -1em; text-align: right; vertical-align: baseline;
+border: none; display: inline-block;
+-webkit-touch-callout: none; -webkit-user-select: none;
+-khtml-user-select: none; -moz-user-select: none;
+-ms-user-select: none; user-select: none;
+padding: 0 4px; width: 4em;
+color: #aaaaaa;
+}
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa; padding-left: 4px; }
+div.sourceCode
+{ }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } 
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.at { color: #7d9029; } 
+code span.bn { color: #40a070; } 
+code span.bu { color: #008000; } 
+code span.cf { color: #007020; font-weight: bold; } 
+code span.ch { color: #4070a0; } 
+code span.cn { color: #880000; } 
+code span.co { color: #60a0b0; font-style: italic; } 
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.do { color: #ba2121; font-style: italic; } 
+code span.dt { color: #902000; } 
+code span.dv { color: #40a070; } 
+code span.er { color: #ff0000; font-weight: bold; } 
+code span.ex { } 
+code span.fl { color: #40a070; } 
+code span.fu { color: #06287e; } 
+code span.im { color: #008000; font-weight: bold; } 
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.kw { color: #007020; font-weight: bold; } 
+code span.op { color: #666666; } 
+code span.ot { color: #007020; } 
+code span.pp { color: #bc7a00; } 
+code span.sc { color: #4070a0; } 
+code span.ss { color: #bb6688; } 
+code span.st { color: #4070a0; } 
+code span.va { color: #19177c; } 
+code span.vs { color: #4070a0; } 
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } 
+div.csl-bib-body { }
+div.csl-entry {
+clear: both;
+margin-bottom: 0em;
+}
+.hanging div.csl-entry {
+margin-left:2em;
+text-indent:-2em;
+}
+div.csl-left-margin {
+min-width:2em;
+float:left;
+}
+div.csl-right-inline {
+margin-left:2em;
+padding-left:1em;
+}
+div.csl-indent {
+margin-left: 2em;
+}
+</style>
+  <style>
+div.solutions {
+border: solid 2pt hsla(120, 100%, 35%, 1);
+border-radius: 5pt;
+background-color: hsla(120, 100%, 50%, 0.1);
+padding: 1em;
+}
+.block-caption {
+display: block;
+font-family: sans-serif;
+font-weight: bold;
+margin-bottom: 1.5rem;
+text-align: center;
+}
+details[open] summary *.only-open {
+opacity: 0.1;
+}
+</style>
+<script data-external="1" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript">
+</script>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title"><p>CITS5501 lab 1 (week 2) – Testing
+introduction – solutions</p></h1>
+</header>
+<nav id="TOC" role="doc-toc">
+<h2 id="toc-title">Contents</h2>
+<ul>
+<li><a href="#accessing-required-software" id="toc-accessing-required-software">1. Accessing required
+software</a></li>
+<li><a href="#junit-tests" id="toc-junit-tests">2. JUnit tests</a>
+<ul>
+<li><a href="#download-and-compile-lab-code" id="toc-download-and-compile-lab-code">Download and compile lab
+code</a></li>
+<li><a href="#run-the-junit-tests" id="toc-run-the-junit-tests">Run the
+JUnit tests</a></li>
+<li><a href="#inspect-the-junit-tests" id="toc-inspect-the-junit-tests">Inspect the JUnit tests</a></li>
+</ul></li>
+<li><a href="#api-documentation" id="toc-api-documentation">3. API
+documentation</a></li>
+<li><a href="#fix-the-code" id="toc-fix-the-code">4. Fix the
+code</a></li>
+<li><a href="#requirements-revision" id="toc-requirements-revision">5.
+Requirements revision</a></li>
+<li><a href="#concepts-review-questions" id="toc-concepts-review-questions">6. Concepts review questions</a></li>
+<li><a href="#moodle-activities" id="toc-moodle-activities">7. Moodle
+activities</a></li>
+<li><a href="#bibliography" id="toc-bibliography">References</a></li>
+</ul>
+</nav>
+<p></p>
+<div style="border: solid 2pt orange; border-radius: 5pt; background-color: hsl(22.35, 100%, 85%, 1); padding: 1em;">
+<div class="block-caption">
+<p>Laptop requirement</p>
+</div>
+<p>When attending lab classes, you will need access to a laptop.</p>
+<p>UWA provides <a href="https://www.uwa.edu.au/students/Support-services/Financial-assistance#:~:text=SOS%20IT%20Equipment%20Scheme">financial
+support</a> via the “SOS IT Equipment Scheme” to students who are unable
+to purchase a laptop due to financial hardship.</p>
+</div>
+<h2 id="accessing-required-software">1. Accessing required software</h2>
+<p>We will be using the Java language for the bulk of the labs, so you
+will need access to a platform where the Java Development Kit (JDK) is
+installed, and where you can make use of a good Java IDE (Integrated
+Development Environment) or editor.</p>
+<p>There are several options available:</p>
+<ul>
+<li>You can install Microsoft Visual Studio Code on your laptop or other
+personal computer (it is available for all common operating systems,
+such as Windows, Linux and Mac OS)</li>
+<li>You can access a Visual Studio Code–like environment on the web,
+using the <a href="https://www.gitpod.io">GitPod</a> cloud-based
+service</li>
+<li>You are also welcome to install any other editor or IDE of your
+choice (although our lab facilitators won’t be able to assist you in
+troubleshooting it, should you encounter problems).</li>
+</ul>
+<p>We describe these options in the following sections.</p>
+<dl>
+<dt><strong>Microsoft Visual Studio Code</strong></dt>
+<dd>
+<p>One recommended editor is <a href="https://code.visualstudio.com/download">Microsoft Visual Studio
+Code</a> (“VS Code”, for short) – it is available on all common
+operating systems (Windows, Linux and Mac OS), so you should be able to
+install it on a laptop or home PC.</p>
+<p>Some guidelines on configuring VS Code for Java development can be
+found <a href="https://code.visualstudio.com/docs/java/java-tutorial">on
+the VS Code website</a>.</p>
+<p>If using VS Code, you will need to make sure that</p>
+<ul>
+<li>you have the JDK installed (see the <a href="https://www.oracle.com/au/java/technologies/downloads/">Oracle
+website</a> for downloads)</li>
+<li>you’ve installed the <a href="https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-java-pack">Extension
+Pack for Java</a> within VS Code. Click the “extensions” icon in the
+left sidebar of VS Code (looks like this: <img role="img" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALgAAAC+BAMAAAB0RNjpAAAALVBMVEUzMzP///8lJSbMzMxmZmY3Nzdqamo0NDSVlZXu7u5GRkba2tq7u7tTU1Nubm7lZVtfAAAB+ElEQVR42u3ZP2vCQBgG8AwNBcHh6BTc+g2Ki8UMDraUTi76CWxxzCA4dbJkEiF07eDg6lD6EZykHdwK3fs9mgppc96/3N0rWHhenA758UKSe/NcguBAdZ5XABw4cODAgQMHDhw4cODAgQMHXlS46vL12aPDa6N1s1zxfEGGh8tpxsoVtW57VHhtdMn4elK3bokLjWtbt8TFxlmkbt0Sr0+z6HUdN/9+b1nU2tLgJxvWeOTuxJsX9twhwi/YWcewAhz4v8EnfJHip32+EkI8XF3fl2tYjBsKXDluCHD1uCHA1ePGH9eMG39cMm6K1v3x3bjhLmg7HzcfNPjPuEmFcXOV0OD5/+8S6Qpw4MCPGX/wfhHV4PWZbE/b0uDS3Thd0ODhcuYZWzS42HqkbtwaF1q3jYo6fPfWUQ5F76ldyNXivvFci/seLAAHfkw4F4nGwsrEB//iItFAWOkn7nhjzmWifNzsrQw1T70JF8bN/oruUM6EG0u303rjukM5f7xK6854ldZdL+hvSnK5FYVMpEpJh3j8K20IwIEDBw4cOHDgwD0y0dgHN2WigTO+MWci5xdR2REc2Su07AiOWRzKaXHJERxdbKnUeoXGVZ/PjK07R0Xxw59YcYXGlZ8su6ZyjedkBRw4cODAgQMHDhw4cODAgQMHfrz4N0IIXmUl8meGAAAAAElFTkSuQmCC" style="width:0.7cm" />), search for
+“Extension Pack for Java” in the search bar at top, and click
+“install”.</li>
+</ul>
+<p>Download the <code>lab-01-code.zip</code> file from <a href="https://cits5501.github.io/resources/#lab-labs" class="uri">https://cits5501.github.io/resources/#lab-labs</a>, and
+unzip it somewhere on your computer. Then run VS Code, select “File” /
+“Open Folder”, and open the folder containing the lab 1 code. (You can
+“agree to trust” the authors of the code, if a message about that pops
+up.)</p>
+<p>Then open one of the <code>.java</code> files in the <code>src</code>
+subdirectory, and go to <a href="#common-steps">“Common steps in VS Code
+or GitPod”</a>.</p>
+</dd>
+<dt><strong>GitHub CodeSpaces</strong></dt>
+<dd>
+<p>It’s possible to access a VS Code–like environment on the web,
+without needing to install any software, via [GitHub
+Codespaces][codespaces]. Codespaces provides web-based access to
+development environments hosted in the cloud, and provides a quota of
+free hours each month (which most students will probably not
+exceed).</p>
+<p>To use CodeSpaces, you’ll need to have a GitHub account, so if you
+don’t have one already, visit <a href="https://github.com/" class="uri">https://github.com/</a> and create one. Once that’s done,
+ensure you’re logged in to GitHub.</p>
+<p>Once you’re logged in, you can visit any GitHub-hosted repository and
+will be able to open the code using CodeSpaces. The repository could be
+owned by someone else, or could be one you’ve created yourself. For this
+lab, visit<br />
+<a href="https://github.com/cits5501/lab01" class="uri">https://github.com/cits5501/lab01</a>. Click the green
+“Code” button to get a drop-down menu with tabs; select the “codespaces”
+tab, then “Create codespace on master”.</p>
+<p>GitHub Codespaces will start a cloud-based virtual machine in which
+<a href="https://code.visualstudio.com/download">Visual Studio Code</a>
+(VS Code) is running. We don’t provide detailed instructions on how to
+use CodeSpaces with Java project – you can find those <a href="https://docs.github.com/en/codespaces/setting-up-your-project-for-codespaces/adding-a-dev-container-configuration/setting-up-your-java-project-for-codespaces">here</a>
+– but in general, you’ll want to</p>
+<ul>
+<li>install the “Extension Pack for Java” (a prompt should appear, lower
+right, after you open the project)</li>
+<li>accept offers to “import Java projects” (lower left of the screen,
+under “Java Projects”</li>
+<li>click the “flask” icon, enable Java tests, and specifically enable
+“Jupyter” tests.</li>
+</ul>
+<div style="border: solid 2pt orange; border-radius: 5pt; background-color: hsl(22.35, 100%, 85%, 1); padding: 1em;">
+<p>Note that if you use GitPod, your work is stored on a temporary,
+cloud-based virtual machine (VM), and will disappear once the VM is no
+longer in use. If you want to store your work more permanently, it’s up
+to you transfer it to some other storage location, such as student
+network storage (see <a href="https://cits5501.github.io/faq/#backups">here</a> for links to
+more information on student network storage).</p>
+</div>
+</dd>
+</dl>
+<dl>
+<dt><span id="common-steps"><strong>Common steps in VS Code or
+GitPod</strong></span></dt>
+<dd>
+<p>Once either VS Code or GitPod is set up as an editor, we can run some
+(already written) unit tests.</p>
+<p>When the editors open, you should see a message about “Java projects
+being opened”. Wait for that to pass, and there’ll now be a “Testing”
+icon on the left sidebar, in the shape of a conical lab flask (like
+this: <img role="img" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEkAAABLCAIAAACz2T2AAAAAA3NCSVQICAjb4U/gAAAFy0lEQVR4nO2bW1ATVxjHk00kasXRmaIFBwslAwWr1EKLolJBBEwUinR0Wt86WsIGnlpqp33pjNNpnT4J5EZC5CIgFVFAIlDohcELbdE+gBaoZARCCTBAChncsNn0YZ2TBXWzl6MYJr+n/bPn++b759vscs7ZCDEME6xQkOUu4Dni8+adiKFkwbBHBOGCkopEIvFDEBHPJEIo95KPjx+719vLPw9ArSuO37OHZ5KVfE36vHkncO4ln+Xnz/43Sx5bLCM/nD0LTskPH9mwceNTozp++3V4aIg8lkgkHx47Dk4FBgXxrwqOt5jYd8Fxf18f9dQnJ0+GSaVPjRq3jgFva9auzT99GkoxgJV8Tfq8eSc+b96Jz5t34vPmnfi8eSc+b96Jz5t34vPGBpvNxiEKX8ChVwLfW6mxxJ0dEa1fv/5ZI8WrVoHjubnZn9vb4FYC2dud7u4bnZ1AHpLJAjZtetbgzKNZVKkpUrlcMBdwIXsrKjjnTo2IPlUoaAa/FxdHXWgZGOhvbWmGWAxMbzc6O+90dwMpk8tfDwmhD0Fzc6lSq1IRBAGrHmjeXC6XqqDAnRcRncrO9hgVExsbt2sXkGaz+bqpCVZJ0Ly1t7Xdu+feEmDSNJIc5eLWqdVOpxNKSXC8EQShLip0J2XWNJK3d+7cHR8P5PDQUGNDPZSq4HhrutY4+OABkMybRrKkdcVaLY5DeNxB8IbjuE6tdmdk0zSSHdHRexMSgBy1WK7W1fEvDIK3usu1IyMjQLJtGgm6uHV6ndbhcPAsjK83DMP0Op07HfumkURt27Y/MRFIq9V6+dIlnrXx9VZTXT0xPg4kt6aRKFClUCgEssSgx7BHfGrj5c1utxtLDO5cXJtG8mZkZGLSASAnJyZ+vFjDpzxe3i6Ul89MTwPJp2kkCuWi1hkNhvn5ec7ZuHuz2WzlZaXuRPyaRhIeHp6ckgLk9PRUdWUl52zcvZ0vKbHPzQHJv2kkihwUQdxVlZ032u12bqk4epucnKR+olCaRhImlaampQFps9kqKyq4peK4J6zXaak3sfg98X5+fv+OjnLLtoTD6RnXTSYgK8pKPzpxwt/fn20eLu/OjFosGYflCwsLbAM5cypboczLYxvF5ZrUatQv0phAIKi6UGGbmWEbxdqb2Wy+1tDINoondru99LyRbRRrb+qiQoKAM79ixcWqqqmpKVYh7O4lf9+/39baCmTQli3ffvc99WkLl67btzWqIvJ4fn7eaNB//gWLd1DY3Uty0ZzOjg4gvzlz5oPMo8zD2YLjeIZcbrE8nmRIJJKm5pZXAwIYhrO4Jv+6e5dqLDg4+Eh6BvNwDojFYupKGYZhBn0x83AW3grPnaPKbBQVifi+vumRIxnpwVu3AllXWzs2NsYwlqm3Wzdvdv/5B5AhIaEyuZx5iZxBEJECRYF0OBx6nZZpLMNx1EVVgUCgUKL837llyCGZLDQ0FMj6K1fAN5AeRt5+aW/v7ekBMkwqTUlNoxkPFwQRZVNah+N4sZZR6zx7IwhCRVmfEwgEOcpc6r/qL4CU1DTqi4qN9Q1DDx96jPJcYrPJ9M/AAJDhEREHkpO5lcgZBEEUqBJIgnBqNWqa8Y+j6E87nU7w9CRBc/Oe38OahuSDB8MjIoBsNpnMg4P0IR68Xa2rGx4eBnLJatSLRCgUUtf5CILQqFX0IXTeHA5HsVZD/Quay3qiAZH9SUmRUVFA/tTS0t/fTzOezlvX7VtWqxXIHdHRe/ft418iH6h7Wi6Xq6a6imYwnbf+vkWfinJZm0ayL+H9t7ZvB/L3ri6awXTzgNVrVlNlnhJdlrvIEhYou/70WyJ03nbvjhcKhWAPmv8CPXRiKVvKT0J3Tb4RFpaZlUUzYHl5Zd06+v10D8+AL7/6OiMz82W4FJewefPmIrWGOkV4EkZzU4tlpLenh/MaKFxEiOi1wMB3YmLEYg+LBnB+//Zy4nufyzvxefNOVrK3/wGYp/pMwpNH1QAAAABJRU5ErkJggg==" style="width:0.7cm" />).</p>
+<p>Click on the testing icon, and then on the button “Enable Java
+Tests”. Select “JUnit Jupyter” tests from the options that pop up, and
+you should see a message saying that “Test libraries have been
+downloaded into ‘lib/’”.</p>
+<p>If you open the <code>CalculatorSimpleTest.java</code> file, then
+after a short while, a small icon should appear to the left of the line
+“<code>public class CalculatorSimpleTest</code>”. (Depending on your
+version of VS Code and the state of the tests, it may show up as a green
+triangle, a red cross, or a green tick.) Clicking it will run all
+<code>@Test</code> methods in the class.</p>
+<p>(If the icon doesn’t appear: select “View” / “Problems” from the
+menu, and see if there have been any compilation problems. If there
+have: select “Java Projects” from the left sidebar, “Reference
+Libraries”, and then the “+” (add) button. Add the
+<code>lib/junit-platform-console-standalone-1.9.2.jar</code> file that
+should be in the <code>lib</code> directory, then hit the “refresh” icon
+under “Referenced Libraries”. Ideally, the “Problems” should now
+disappear and the green triangle icon appear. If it doesn’t: click
+somewhere in the <code>CalculatorSimpleTest.java</code> source code, hit
+the <code>ctrl-shift-P</code> key combination, and type “java: run
+tests”.)</p>
+<p>If you are able to run the tests, you should see some tests pass (for
+instance, <code>testAdd</code>), but most tests fail. This is
+expected!</p>
+</dd>
+</dl>
+<p><strong>Other IDEs</strong></p>
+<p>You may already have some other IDE or editor you prefer to work in
+besides VS Code. If that is the case, you are welcome to use it for your
+CITS5501 work. Some other freely available IDEs are:</p>
+<ul>
+<li>Netbeans, downloadable from <a href="https://netbeans.org" class="uri">https://netbeans.org</a></li>
+<li>Eclipse IDE for Java Developers, downloadable from <a href="https://www.eclipse.org/downloads/packages/release/2020-12/r/eclipse-ide-java-developers" class="uri">https://www.eclipse.org/downloads/packages/release/2020-12/r/eclipse-ide-java-developers</a></li>
+<li>IntelliJ IDEA Community, downloadable from <a href="https://www.jetbrains.com/idea/download/" class="uri">https://www.jetbrains.com/idea/download/</a></li>
+</ul>
+<p>As a first step for today’s lab, ensure you have access to your
+preferred IDE or editor.</p>
+<p>After downloading and opening the lab code from <a href="https://cits5501.github.io/resources/#lab-labs" class="uri">https://cits5501.github.io/resources/#lab-labs</a>, you may
+need to instruct your IDE to add the “JUnit 5” libraries to the project;
+typically, viewing the project <em>properties</em> in your IDE will
+reveal some way of doing this.</p>
+<h2 id="junit-tests">2. JUnit tests</h2>
+<h3 id="download-and-compile-lab-code">Download and compile lab
+code</h3>
+<p>Take a look at the <code>Calculator</code> class, in
+<code>Calculator.java</code> – this class has trivial functionality, but
+is useful as an example of a <em>class under test</em>.</p>
+<p>Take a look at the <code>CalculatorSimpleTest</code> class, in
+<code>CalculatorSimpleTest.java</code>. This class defines a number of
+<em>JUnit tests</em> for our <code>Calculator</code> class.</p>
+<p>Test classes can be called anything, but by convention, <em>unit
+tests</em> (which are written to test a single class) usually start with
+the same name as the <em>class under test</em>, followed by a
+description of the test (or just the word “Test”).</p>
+<h3 id="run-the-junit-tests">Run the JUnit tests</h3>
+<p>Run the tests in the <code>CalculatorSimpleTest</code> class.</p>
+<p>In many IDEs, this can be done by right-clicking on the class (after
+compiling) and selecting “Test All”. In VS Code, it can be done by
+clicking the green triangle icon in the left margin of the code (see
+previous section).</p>
+<p>You should see that some tests “pass” (with green ticks) and some
+“fail” (with red crosses) – see if you can work out what the failing
+<code>testSubstract</code> test is telling you about what the problem
+is.</p>
+<h3 id="inspect-the-junit-tests">Inspect the JUnit tests</h3>
+<p>Look at the parts of the <code>CalculatorSimpleTest</code> test
+class, using the JUnit User Guide (<a href="https://junit.org/junit5/docs/current/user-guide/" class="uri">https://junit.org/junit5/docs/current/user-guide/</a>) as a
+reference.</p>
+<ul>
+<li><p>Test classes can be called anything.</p></li>
+<li><p>Test cases are written in methods annotated
+<code>@Test</code></p></li>
+<li><p>For each test, the methods annotated <code>@BeforeEach</code> and
+<code>@AfterEach</code> are run before the test and after the test,
+respectively.<br />
+These methods can be used to create and destroy test <em>fixtures</em> –
+in Java, fixtures are normally a set of objects in a known state. (The
+state <em>can</em> include things outside the Java program, however –
+databases, files on a remote system, anything we like. But for unit
+tests, the fixtures will only be Java objects.)</p></li>
+<li><p>The <code>testSubtractThrowsException()</code> test is intended
+to discover whether the <code>Calculator.subtract()</code> method throws
+an <em>exception</em> in circumstances where it should.</p>
+<p>The code</p>
+<div class="sourceCode" id="cb1" data-startFrom="47"><pre class="sourceCode java"><code class="sourceCode java" style="counter-reset: source-line 46;"><span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a>    <span class="bu">Throwable</span> exception <span class="op">=</span> <span class="fu">assertThrows</span><span class="op">(</span></span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a>        <span class="bu">ArithmeticException</span><span class="op">.</span><span class="fu">class</span><span class="op">,</span></span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a>        <span class="op">()</span> <span class="op">-&gt;</span> c<span class="op">.</span><span class="fu">subtract</span><span class="op">()</span></span>
+<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a>    <span class="op">);</span></span></code></pre></div>
+<p>calls the <code>assertThrows</code> method, which is used to assert
+that when its second parameter (a bit of executable Java code, called a
+<em>lambda expression</em>) is run, it throws the exception specified by
+its first parameter.</p>
+<p>We will look at these more later.</p></li>
+<li><p>Note that the first few test methods take no arguments, but the
+test is what JUnit calls a parameterized test – unlike other test
+methods, it does take arguments.<br />
+We will look at these more later; but JUnit’s parameterized tests are
+designed to make it easy to run what are called <em>data-driven
+tests</em> (see Wikipedia on <a href="https://en.wikipedia.org/wiki/Data-driven_testing%5D">Data-driven
+testing</a>), as well as a subset of data-driven testing called
+<em>property-based testing</em> (see the explanation given by the <a href="https://hypothesis.readthedocs.io/en/latest/">Hypothesis</a>
+Python-based library for doing this sort of testing).</p></li>
+</ul>
+<p>Consider the following question: if you want to get all the tests
+passing, how do you determine what each method is supposed to
+<em>do</em>, and when it is correct? (After all, someone writing the
+test could have made a mistake in the test code.)</p>
+<div class="solutions">
+<p><strong>Sample solutions</strong>:</p>
+<p>To find out what each method is supposed to do, the only reliable
+option is to read its documentation. If there is no documentation for
+the method, then you can never really know what the developer’s
+intention was.</p>
+</div>
+<h2 id="api-documentation">3. API documentation</h2>
+<p>Look at the <code>Calculator.java</code> class from the lab 1
+code.</p>
+<p>Can you identify</p>
+<ol type="a">
+<li>A Javadoc comment, which documents the API?</li>
+<li>A Java comment which is <em>not</em> Javadoc?</li>
+</ol>
+<p><strong>Viewing Javadoc comments from an IDE or editor</strong></p>
+<p>In most IDEs and editors, there is no need to explicitly run the
+<code>javadoc</code> tool in order to view API documentation for a
+method, class or annotation.</p>
+<p>Instead, you simply need to “hover” your mouse icon over some spot in
+the code where the item you’re interested in is defined or used, and a
+“pop-up” message should appear showing the API documentation.</p>
+<p>If you edit the Javadoc comments, the IDE or editor will normally use
+the edited, most up-to-date version when showing the documenttion.</p>
+<p><strong>Running the <code>javadoc</code> tool</strong></p>
+<p>If you wish, it’s also possible to run the <code>javadoc</code> tool
+from a terminal window, and the tool will generate HTML files from the
+source code.</p>
+<p>In VS Code, you can open a terminal window by selecting “Terminal” /
+“New Terminal” from the menu.</p>
+<p>Type <code>javadoc -help</code> to ensure you can invoke the command,
+and to see what the options for it are.</p>
+<p>To generate documentation for the <code>Calculator.java</code> file,
+with the documentation being generated in a directory <code>doc</code>,
+first change into the same directory where the
+<code>Calculator.java</code> file is, and run:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> javadoc <span class="at">-d</span> doc <span class="at">-sourcepath</span> . Calculator.java</span></code></pre></div>
+<p>You can then open the generated HTML web pages in a browser to view
+them.</p>
+<div style="border: solid 2pt blue; background-color: hsla(241, 100%,50%, 0.1); padding: 1em; border-radius: 5pt; margin-top: 1em;">
+<p><strong>Running Javadoc on a directory</strong></p>
+<p>In general, if you have a directory (e.g. “<code>src</code>”)
+containing Java source files, then if you <code>cd</code> to the parent
+directory, you can get Javadoc to process <em>all</em> the files in that
+directory with a command like the following:</p>
+<pre><code>$ javadoc -d doc -sourcepath src -subpackages &#39;&#39;</code></pre>
+<p>This assumes your Java code does not have any dependencies on
+external libraries (<code>.jar</code> files), however. If it does, then
+you’ll need to specify a <em>classpath</em> when invoking
+<code>javadoc</code>. You should refer to a Java textbook for details on
+how to do so.</p>
+</div>
+<p><strong>Javadoc exercises</strong></p>
+<ul>
+<li><p>In your IDE or editor, hover over a usage of a JUnit annotation
+or method (like one of the “assertion”) methods. You should be able to
+see the API documentation for it (and perhaps even click to get a fuller
+description) – can you?</p></li>
+<li><p>Identify one class member marked <code>private</code>, and make
+it <code>public</code> and write a Javadoc comment for it.</p>
+<p>Re-run <code>javadoc</code> (and/or re-view the documentation in your
+IDE/editor) – what changes do you see in the generated
+documentation?</p></li>
+</ul>
+<h2 id="fix-the-code">4. Fix the code</h2>
+<p>See if you can fix the code in the <code>Calculator</code> class so
+that all the tests pass.</p>
+<p>For the <code>subtract</code> method – aside from other changes you
+might need to make, you might want code something like the
+following:</p>
+<pre><code>  if (/* some condition goes here */) {
+    throw new ArithmeticException(&quot;can&#39;t return a negative result&quot;);
+  }</code></pre>
+<p>Try creating your own new tests. In BlueJ, if you right click on a
+class, there should be an option to create a test class. Use the
+existing tests as an example – can you think of other tests we might
+add?</p>
+<div class="solutions">
+<p><strong>Sample solutions</strong>:</p>
+<p>Fixing errors:</p>
+<p>The code for <code>subtract</code> has the numbers in the wrong
+order.</p>
+<p>The code for <code>subtract</code> also needs to throw an exception
+when the result would be negative.</p>
+<p>e.g.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> <span class="op">(</span>num2 <span class="op">&gt;</span> num1<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">throw</span> <span class="kw">new</span> <span class="bu">ArithmeticException</span><span class="op">(</span><span class="st">&quot;can&#39;t return a negative result&quot;</span><span class="op">);</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span></code></pre></div>
+</div>
+<h2 id="requirements-revision">5. Requirements revision</h2>
+<p>Recommended prior study for this unit is CITS4401/3301 Software
+Requirements and Design, which explores ways we can express clients’
+expectations for a system, and ensure they can be met once the system is
+designed and implemented.</p>
+<p>See if you can come up with examples of requirements which exhibit
+the following characteristics, and explain you reasoning. If you’re not
+clear on these concepts, then it’s recommended you refer to the textbook
+by Pressman, <a href="https://www.amazon.com.au/ISE-Software-Engineering-Practitioners-Approach/dp/1260548007/"><em>Software
+Engineering: A Practitioner’s Approach</em></a>. You should be able to
+access the textbook via UWA’s “Unit Readings” site – see <a href="https://cits5501.arranstewart.io/schedule/#recommended-readings">here</a>
+for more details.</p>
+<ul>
+<li>Give an example of a requirement that is <em>ambiguous</em>.</li>
+<li>Give an example of a requirement that is <em>vague</em>.</li>
+<li>Give an example of a requirement that is <em>functional</em>.</li>
+<li>Give an example of a requirement that is
+<em>non-functional</em>.</li>
+</ul>
+<div class="solutions">
+<p><strong>Sample solutions</strong>:</p>
+<ul>
+<li><p><em>Ambiguity</em>. Concept recap: An <em>ambiguous</em>
+requirement can be interpreted in multiple valid but conflicting
+ways.</p>
+<p>Example: “The operator identity consists of the operator name and
+password; the password consists of six digits. It should be displayed on
+the security screen and deposited in the login file when an operator
+logs into the system.”</p>
+<p>Here, does “it” refer to the identity, or the password? Both are
+valid interpretations, but we don’t know which was intended, so this is
+ambiguous.</p></li>
+<li><p><em>Vagueness</em>. Concept recap: a <em>vague</em> requirement
+is one which is underspecified, and where we often can’t draw a sharp
+dividing line between systems which would meet the requirements, and
+systems which wouldn’t.</p>
+<p>Example: “The system shall permit users to download high-resolution
+images for each frame of a stored video.”</p>
+<p>What qualifies as “high-resolution”? 1080p? 4K? Something else?</p>
+<p>You can find many other examples of vague requirements in the
+Pressman text and/or the CITS4401/3301 materials – for instance, one
+which require a system to be “easy to use” (this varies by user
+experience, cultural expectations, and task complexity, and there’s no
+precise measurable standard or criteria for success; a requirement like
+this generally needs to be rephrased or supported with usability
+metrics.)</p></li>
+<li><p><em>Functional Requirement</em>. Concept Recap: a
+<em>functional</em> requirement specifies what the system should do –
+specific behaviours, inputs, and outputs.</p>
+<p>Example: “The system shall send a confirmation email to the user
+after successful registration.”</p>
+<p>This clearly describes a specific action the system must perform.
+Additionally, it can be directly implemented and tested (e.g. checking
+email delivery after registration).</p></li>
+<li><p><em>Non-Functional Requirement</em>. Concept recap:
+<em>non-functional</em> requirements describe <em>how</em> the system
+performs its functions, or constraints on the way those functions are
+performed — for instance, requirements related to performance, security,
+usability, reliability, and so on.</p>
+<p>Example: “The system shall respond to all user actions within 1
+second under normal operating conditions.”</p>
+<p>This is requirement doesn’t describe a system function in terms of
+inputs and outputs – rather, it imposes a constraint on system
+behaviour, saying it must happen within specified time limits. This
+requirement is definitely measurable and testable, but it doesn’t itself
+describe an actual feature or functionality - if we were testing this,
+we’d instead look at all the functional requirements that describe
+responses to user actions, and check whether they meet the constraint
+that responses happen within 1 second.</p></li>
+</ul>
+</div>
+<h2 id="concepts-review-questions">6. Concepts review questions</h2>
+<p>Answer the following questions to test your understanding of concepts
+introduced in the lectures and prescribed reading.</p>
+<p>For each of the following scenarios, explain whether you think a
+<em>failure</em>, a <em>fault</em> or an <em>erroneous state</em> (or
+none of these, or more than one) has occurred, and explain why. If it is
+a failure – is it non-conformance with a functional or a non-functional
+requirement?</p>
+<ol type="a">
+<li><p>The social media site “Witter” allows users to specify that their
+email and date of birth should not be displayed publicly. But after a
+system update, that information is now visible for all users.</p></li>
+<li><p>The ride-sharing app Habari runs on a user’s mobile phone, and
+communicates with Habari’s servers to find nearby divers and arrange a
+ride. However, the communications are not encrypted, meaning a
+tech-savvy user could manipulate the system and obtain free
+rides.</p></li>
+<li><p>Your colleague Mila is writing a method which should return the
+arithmetic mean of numbers in a list:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> total <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> <span class="op">(</span><span class="dt">double</span> num <span class="op">:</span> number_list<span class="op">)</span> <span class="op">{</span> total <span class="op">+=</span> num <span class="op">;</span> <span class="op">}</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="cf">return</span> total <span class="op">/</span> number_list<span class="op">.</span><span class="fu">length</span></span></code></pre></div>
+<p>However, when the list is of length 0, this code returns the result
+“<code>INFINITY</code>”.</p></li>
+</ol>
+<div class="solutions">
+<p><strong>Possible solutions and discussion</strong>:</p>
+<p>To come to a conclusion for these questions you will need to make
+<em>reasonable assumptions</em> and state what they are. Your answer can
+vary, depending on what assumptions you make.</p>
+<p>The answers below are one possibility; but yours may be
+different.</p>
+<ol type="a">
+<li><p>We are told that users can specify that their email and date of
+birth should not be displayed publicly. So if those are displayed
+publicly, then that’s a failure: the system is not behaving in
+accordance with requirements.</p>
+<p>We don’t know in this case what the exact requirement is, but most
+likely, it is something like:</p>
+<blockquote>
+<p>“If the user specifies that their email and address and date of birth
+should not be displayed publicly on their profile, then those details
+should not appear on the user’s public profile.”</p>
+</blockquote>
+<p>So the failure is non-conformance with a functional requirement.</p>
+<p>Presumably, there’s also a problem somewhere in the code for the
+Witter site that causes this failure, but we aren’t given details: this
+problem constitutes a <em>defect</em>. And once execution hits that
+point in the code, the system will go into an <em>erroneous
+state</em>.</p>
+<p>[This scenario is loosely based on a security failure that occurred
+to Google’s social networking site, “Google+”, in 2018. See the article
+by <span class="citation" data-cites="NewmanGoogle2018">Newman (<a href="#ref-NewmanGoogle2018" role="doc-biblioref">2018</a>)</span>
+reporting on this <a href="https://www.wired.com/story/google-plus-bug-52-million-users-data-exposed/">here</a>;
+there is also a <a href="https://en.wikipedia.org/wiki/2018_Google_data_breach">Wikipedia
+page</a> on the incident.]</p></li>
+</ol>
+<ol start="2" type="a">
+<li><p>In this scenario, we aren’t told exactly what the requirements
+for the Habari system are; but presumably one of them is that
+communications between the mobile app and the Habari company servers
+should be secure. (Even if this is not an explicit requirement, it’s a
+reasonable expectation of drivers, users, and Habari management. Drivers
+and users presumably don’t want details of transactions to be visible to
+third parties, and management presumably would like people to pay for
+rides rather than getting them for free – else the company will go out
+of business.)</p>
+<p>If the requirement is something like “All communications between the
+mobile app and the Habari servers should be made securely” then this
+would be a <em>non-functional</em> requirement. (We’ll discuss later in
+the unit whether that requirement is precise enough.) In this context,
+“functional” means “treating the system as if it were a
+<em>function</em>, a black box that takes in inputs and spits out
+outputs”; and “non-functional” means “the manner in which some system
+function executes”, rather “not functioning”.</p>
+<p>For this unit, you aren’t expected to know the details of how secure
+computer communications work, but if you do, you are welcome to discuss
+what you can infer about the defect in the source code which causes the
+above failure. (In the scenario given, we probably could point to
+specific spots in the code where things should have been done
+differently – spots in the code where the programmers developing the
+Android app and the Habari servers should have used appropriate
+techniques to ensure that communications were secure. These would be
+<em>defects</em>.)</p>
+<p>[This scenario is loosely based on one described by Shubham Paramhans
+<span class="citation" data-cites="ParamhansOla2015">(<a href="#ref-ParamhansOla2015" role="doc-biblioref">2015</a>)</span>, who
+identified flaws in the security for the “Ola” ride-sharing app, as
+described in a <a href="https://medium.com">Medium.com</a> article, “<a href="https://medium.com/@CodeTheDevil/busting-ola-wallet-1ceea6174b1f">Fooling
+the Startup of the Year</a>”.]</p></li>
+</ol>
+<ol start="3" type="a">
+<li><p>When Mila’s method returns the result “<code>INFINITY</code>”,
+we’d need to know what the method’s specifications were in order to know
+if this was a failure or not (i.e., we’d need to look at the method’s
+documentation).</p>
+<p>As a matter of mathematics, the arithmetic mean for <span class="math inline">\(n\)</span> numbers <span class="math inline">\(a_0\)</span> through <span class="math inline">\(a_n\)</span> is defined as <span class="math inline">\(\displaystyle \frac{1}{n}\sum_{i=1}^n
+a_i\)</span>, or equivalently <span class="math inline">\(\displaystyle
+\frac{a_1+a_2+\cdots+a_n}{n}\)</span> <span class="citation" data-cites="WeissteinMean2005">(<a href="#ref-WeissteinMean2005" role="doc-biblioref">Weisstein 2005</a>)</span>.</p>
+<p>So when n = 0, the result is undefined, because dividing by zero is
+not defined. If we were writing a specification for this method, what
+are some reasonable things we could require the method to do in this
+case?</p>
+<p>Here are a few reasonable options:</p>
+<ol type="i">
+<li>The method should return the special floating-point value
+“<code>INFINITY</code>”. This is Java’s default behaviour when
+floating-point numbers are divided by zero. The advantage of this
+approach is it requires no extra work; but “<code>INFINITY</code>”
+perhap isn’t the best choice, since it doesn’t mean exactly the same
+thing as “undefined”.</li>
+<li>The method should return the special floating-point value
+“<code>Nan</code>” (“Not A Number”). This will require a little extra
+code, but reflects the correct mathematical answer slightly better than
+option (i) does.</li>
+<li>The method should throw an exception (e.g. something like Java’s
+<code>ArithmeticException</code> class). Throwing an exception is
+usually what maps best to a mathematically undefined result; but the
+caller having to handle the exception may not be very convenient.</li>
+</ol>
+<p>We’d need to know more about the business requirements here to know
+which is the best option.</p>
+<p>In any case: if the behaviour of Mila’s method does match its
+requirements, then there hasn’t been a failure; but if it doesn’t match
+them, then there has.</p></li>
+</ol>
+</div>
+<h2 id="moodle-activities">7. Moodle activities</h2>
+<p>All assessments for CITS5501 are submitted via the CSSE department <a href="https://quiz.jinhong.org">Moodle</a> server, which can be found at
+<a href="https://quiz.jinhong.org" class="uri">https://quiz.jinhong.org</a>.</p>
+<p>In addition to the assessments, in some weeks <em>unassessed</em>
+exercises and quizzes may be available on Moodle.</p>
+<p>This week, there are two unassessed Moodle quizzes available for you
+to test your understanding of prerequisite knowledge and week 1 topics
+in CITS5501:</p>
+<ul>
+<li>Java revision quiz, and</li>
+<li>Testing concepts review quiz</li>
+</ul>
+<dl>
+<dt><strong>Registering</strong></dt>
+<dd>
+<p>Visit <a href="https://quiz.jinhong.org" class="uri">https://quiz.jinhong.org</a> and sign up with your UWA email
+address, self-enrol into CITS5501, then attempt the quizzes (in your own
+time, if you don’t finish them in the lab).</p>
+<p>Note that it’s <strong>important to self-enrol</strong> on Moodle, so
+you can access the announcements and discussion forum, and submit future
+assessments.</p>
+</dd>
+<dt><strong>Assessed vs unassessed Moodle activities</strong></dt>
+<dd>
+<p>It’s recommended you complete all Moodle activities, even unassessed
+ones, because firstly, they help you gauge how well you understand the
+material, and secondly, the questions and answers are considered to be
+part of the examinable content for the unit.</p>
+<p><em>Unassessed</em> quizzes aim to help you gauge your initial
+understanding of concepts, and may apply a penalty for re-taking
+code-based questions – the penalties indicate that your initial
+understanding might not have been as thorough as you thought. However,
+in any <em>assessed</em> quiz, test or exam, this is not the case – if a
+code-based question provides feedback (using the “check” button), you
+can request feedback as many times as you like, and no penalty will be
+applied.</p>
+<p>Make sure you’re familiar with how Moodle quizzes and tests work so
+you’ll be prepared when the first <em>assessed</em> quiz is given (in
+week 4). One useful feature to be aware of is that when completing a
+quiz or test, you have access to a “pop out” panel showing the “table of
+contents” for a quiz or test (which provides the names of all headings
+and sub-headings, a view of which questions have been answered and which
+not, and a way of quickly navigating to a particular question).</p>
+</dd>
+<dt><strong>Rubric</strong></dt>
+<dd>
+<p>Assessed activities will be marked based on the <a href="https://cits5501.github.io/faq/#marking-rubric">standard CITS5501
+rubric</a> – you can read more about it at <a href="https://cits5501.github.io/faq/#marking-rubric" class="uri">https://cits5501.github.io/faq/#marking-rubric</a>. For long
+English or code-based questions, the markers will have a model solution
+and guidelines which helps them apply the rubric.</p>
+</dd>
+<dt><strong>Other questions about Moodle and assessments</strong></dt>
+<dd>
+<p>The unit <a href="https://cits5501.github.io/faq">FAQ page</a> has
+more information on how assessments are conducted, and on <a href="https://cits5501.github.io/faq/#tests-quizzes-and-exams">tests and
+quizzes</a> in particular. You may find that information useful to
+review some time between now and the first assessment (in week 4).</p>
+</dd>
+</dl>
+<!-- vim: syntax=markdown tw=92 :
+-->
+<h1 class="unnumbered" id="bibliography">References</h1>
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-NewmanGoogle2018" class="csl-entry" role="listitem">
+Newman, Lily Hay. 2018. <span>“Google+ Exposed Data of 52.5 Million
+Users and Will Shut Down in April.”</span> <em>Wired</em>, December 10,
+2018. <a href="https://www.wired.com/story/google-plus-bug-52-million-users-data-exposed/">https://www.wired.com/story/google-plus-bug-52-million-users-data-exposed/</a>.
+</div>
+<div id="ref-ParamhansOla2015" class="csl-entry" role="listitem">
+Paramhans, Shubham. 2015. <span>“Fooling the Startup of the Year:
+Hacking into Ola Wallet.”</span> <em>Medium Remember What That Was. I
+Was Monitoring My Phone Traffic from</em>. <a href="https://medium.com/@CodeTheDevil/busting-ola-wallet-1ceea6174b1f">https://medium.com/@CodeTheDevil/busting-ola-wallet-1ceea6174b1f</a>.
+</div>
+<div id="ref-WeissteinMean2005" class="csl-entry" role="listitem">
+Weisstein, Eric W. 2005. <span>“Arithmetic Mean.”</span> MathWorld.
+March 4, 2005. <a href="https://mathworld.wolfram.com/ArithmeticMean.html">https://mathworld.wolfram.com/ArithmeticMean.html</a>.
+</div>
+</div>
+</body>
+</html>
