@@ -61,7 +61,7 @@ like to get an idea in advance of what will be covered.)
 - Week 10
   - Lecture 10 -- Risk    {% resourceList "lect10--risk", ["pdf", "md"] %}
 - Week 11
-  - Guest Lecture -- Formal Methods in Industry
+  - Guest Lecture -- Formal Methods in Industry {% resourceList "FormalMethods", ["pdf"] %}
 - Week 12
   - Unit Review and Exam Questions  [(pdf)][sample-pdf]
 
