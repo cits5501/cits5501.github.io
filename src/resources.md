@@ -68,6 +68,7 @@ like to get an idea in advance of what will be covered.)
 :::
 
 [sample-pdf]: {{ "/lectures/sample.pdf" | url }}
+[FormalMethods-pdf]: {{ "/lectures/FormalMethods.pdf" | url }}
 
 ## Labs { #labs }
 
