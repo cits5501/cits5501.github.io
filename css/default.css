@@ -1,0 +1,453 @@
+
+/* clear spacing */
+
+html, body, div, nav
+{
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%
+}
+
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* small */
+@media (max-width: 767px) {
+}
+/* big */
+@media (min-width: 768px) {
+  body {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+/* stop targets scrolling to top
+   of viewport */
+
+:target {
+  scroll-margin-top: 85px;
+}
+
+/* layout */
+
+/* we have: nav, main, footer
+ */
+
+/* todo: could replace 750px with 47rem */
+
+.page {
+  padding: 25px;
+  flex-grow: 1;
+  flex-shrink: 0;
+  flex-basis: auto;
+  max-width: 750px;
+  position: relative;
+  left: 50%;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateX(-50%);
+  line-height: 1.7;
+  margin-top: 50pt;
+}
+
+
+footer {
+  padding-top: 3ex;
+  text-align: center;
+}
+
+/* minor tables */
+
+.inline-table-ctr tr td,
+.inline-table tr td
+{
+  vertical-align: top;
+}
+
+.inline-table-ctr td:nth-child(2),
+.inline-table td:nth-child(2)
+{
+  padding-left: 1em;
+}
+
+
+/* heading spacing */
+
+h1,h2,h3 {
+  line-height: 1.2;
+}
+
+h1 {
+  font-size: 1.30em;
+  text-align: center;
+}
+
+h2 {
+  font-size: 1.25em;
+}
+
+
+/* theme */
+
+body {
+  font-family: 'Merriweather', Georgia, Serif;
+  line-height: 1.6;
+}
+
+/* heading styles */
+
+h2, h3, h4, h5 {
+  font-weight: normal;
+}
+
+h1, h2, h3, h4, h5 {
+  font-family: 'Merriweather Sans', 'Trebuchet MS', 'Helvetica Neue', Tahoma, sans-serif;
+}
+
+/* links */
+
+main a {
+  color: #333f8c;
+  text-decoration:none;
+  border-bottom: dotted 1px #A1A3A1;
+}
+
+nav a {
+  text-decoration:none;
+}
+
+
+main a:focus,
+main a:hover  {
+  text-decoration:underline;
+  border-bottom: none;
+  color: #071cc8;
+}
+
+/* more space */
+
+.spacey {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+/* smallish breaks */
+
+.br {
+    display: block;
+    margin-bottom: 0.4rem;
+}
+
+/* em-dash lists */
+
+main ul {
+  list-style-type: none;
+  padding: 0px;
+  margin-left: 1em;
+}
+main ul > li {
+  text-indent: -0.5em;
+}
+main ul > li:before {
+  display: inline-block;
+  content: '\2012';
+  width: 0.5em;
+  text-indent: -0.5em;
+}
+
+/* loose lists */
+
+.medium-list li {
+  margin-bottom: 0.2rem;
+}
+
+.loose-list li {
+  margin-bottom: 1rem;
+}
+
+/* semantic */
+
+.hi-pri {
+  color: #053cc9;
+}
+
+.expanded {
+  position: absolute;
+  left:     0;
+  right:    0;
+}
+
+table {
+  table-layout: fixed;
+}
+
+
+
+code, pre {
+  background-color: transparent;
+}
+
+p.code {
+  text-indent: 0;
+  vertical-align: middle;
+  margin-top: -1.25em;
+  margin-bottom: 1.5em;
+  margin-left: 1em;
+  font-family: monospace;
+  white-space: pre;
+}
+
+.pjustify {
+  text-align: justify;
+}
+
+
+.even-row {
+  background-color: rgb(204, 204, 204);
+}
+
+.odd-row {
+  background-color: #eeeedf;
+}
+
+
+/* footer */
+.text-muted {
+  color: #666666;
+  font-size: 75%;
+}
+
+/* no italics for contact details */
+address {
+  font-style: normal;
+}
+
+
+/* pre on small-width screens */
+@media (max-width: 767px) {
+  pre {
+    overflow: scroll;
+  }
+}
+
+/* Inline code */
+:not(pre) code {
+  padding: 2px 4px;
+  font-size: 90%;
+  word-break: break-all !important;
+  color: #c7254e;
+  background-color: #f9f2f4;
+  border-radius: 4px;
+}
+
+/* Blocks of code */
+pre code {
+  padding: 0;
+  font-size: inherit;
+  color: inherit;
+  hyphens: none;
+  background-color: transparent;
+  border-radius: 0;
+}
+
+/* theme for wide vs narrow */
+/* small */
+@media (max-width: 767px) {
+  /* theme */
+  body {
+    background-color: #FBFBFB;
+  }
+}
+/* big */
+@media (min-width: 768px) {
+  body {
+    background: #FBFBFB ;
+  }
+
+  *[role="navigation"], .bar {
+    font-size:120%;
+    font-family: 'Merriweather Sans', 'ff-meta-serif-sc-web-pro';
+    background: #44508c;
+  }
+
+  *[role="navigation"] a
+    { color: #f7f7ff;
+      text-decoration: none;
+    }
+
+  *[role="navigation"] a.active {
+    color: white;
+  }
+}
+
+/* navbar */
+
+/* big */
+@media (min-width: 768px) {
+  .expandable-content-xs[data-expanded="false"] {
+    height: auto !important;
+  }
+}
+
+/* the max-width and s-m-t figures seem to be roughly right on chrome,
+   but looks like there is no good way of calculating height
+   of header
+*/
+@media (max-width: 950px) {
+  :target {
+    scroll-margin-top: 105px;
+  }
+}
+
+
+
+/* small */
+@media (max-width: 767px) {
+  /* content made initially 'invisible' (height 0) on eXtra-Small width screens*/
+  .expandable-content-xs {
+     overflow: hidden;
+     height:auto;
+     z-index: 900;
+     transition: height 0.3s ease-out;
+  }
+
+  .expandable-content-xs[data-expanded="false"] {
+    height: 0;
+  }
+  .expandable-content-xs[data-expanded="true"] {
+    height: auto;
+  }
+} /*end media */
+
+/* github corner icon */
+/* big */
+@media (min-width: 768px) {
+  .github-corner svg {
+    fill:var(--accent-v-light); color:var(--accent); position: fixed; top: 0; right: 0; z-index: 1040;
+  }
+  .github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}
+}
+
+/* small */
+@media (max-width: 767px) {
+  .github-corner {
+    display: none;
+  }
+}
+
+/* tooltips */
+
+/* indicate hoverable */
+.tooltip {
+  position:relative;
+  border-bottom: dotted 1px #A1A3A1;
+}
+
+/* tooltip content */
+.tooltip:before {
+  content: attr(data-tooltip-text);
+  position:absolute;
+
+  top:50%;
+  transform: translateY(-50%) scale(0.0);
+
+  left:100%;
+  margin-left:15px;
+
+  color: black;
+  text-align: left;
+  font-size: smaller;
+  text-decoration: #A1A3A1 dotted underline;
+
+  width: max-content;
+  max-width: 20rem;
+  padding: 10px;
+  border-radius: 10px;
+  background-color: hsl(0 0% 98%);
+  border: 3px outset hsl(0 0% 78%);
+
+  display: block;
+
+  transition-property: all;
+  /* or transform ?*/
+  transition-duration: 0.1s;
+  /* or 0.15s ?*/
+  transition-timing: linear;
+  /* ease-in;  */
+
+  opacity: 1;
+}
+
+/* show tooltip when hovering */
+.tooltip:hover:before {
+  display: block;
+  transform: translateY(-50%) scale(1);
+  z-index: 100;
+}
+
+/* footnote yellow flash
+
+   hsl(60 100% 50% / 0.7) = yellow, 70% opacity
+
+*/
+
+/* arrived at bottom of page - fade out background */
+
+.footnotes .footnote-item:target {
+  animation: yellowflash-bg 1.2s;
+}
+
+@keyframes yellowflash-bg {
+  from { background: hsl(60 100% 50% / 0.7); }
+  to   { background: transparent; }
+}
+
+/* returned to top - fade out background *plus* outline */
+
+.footnote-ref a:target {
+  animation: yellowflash-outline 1.2s;
+}
+
+@keyframes yellowflash-outline {
+  from {
+    outline: 10px solid hsl(60 100% 50% / 0.7);
+    background: hsl(60 100% 50% / 0.7);
+  }
+
+  to {
+    outline: 10px solid transparent;
+    background: transparent;
+  }
+}
+
+
+/* general (e.g. toc) link blue flash
+   hsl(183 100% 75% / 0.7) = electric blue, 70% opacity
+*/
+
+/* arrived at target */
+
+h2:target, h3:target, h4:target
+{
+  animation: blueflash-bg 1.6s;
+}
+
+
+@keyframes blueflash-bg {
+  from { background: hsl(183 100% 75% / 0.7); }
+  to   { background: transparent; }
+}
+
+/* avoid ugly default black outline style in chrome */
+* {
+  outline-color: DodgerBlue;
+}
+
+
+

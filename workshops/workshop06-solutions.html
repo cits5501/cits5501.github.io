@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang xml:lang>
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>CITS5501 lab 6 (week 7) – grammars and syntax-based testing  – solutions</title>
+  <style>
+html {
+line-height: 1.5;
+font-family: sans-serif;
+font-size: 12pt;
+color: black;
+background-color: white;
+}
+body {
+margin: 0 auto;
+max-width: 50em;
+padding-left: 50px;
+padding-right: 50px;
+padding-top: 50px;
+padding-bottom: 50px;
+hyphens: auto;
+overflow-wrap: break-word;
+text-rendering: optimizeLegibility;
+font-kerning: normal;
+}
+@media (max-width: 600px) {
+body {
+font-size: 0.9em;
+padding: 1em;
+}
+h1 {
+font-size: 1.8em;
+}
+}
+@media print {
+body {
+background-color: transparent;
+color: black;
+font-size: 12pt;
+}
+p, h2, h3 {
+orphans: 3;
+widows: 3;
+}
+h2, h3, h4 {
+page-break-after: avoid;
+}
+}
+p {
+margin: 1em 0;
+}
+img {
+max-width: 100%;
+}
+h1, h2, h3, h4, h5, h6 {
+margin-top: 1.4em;
+}
+h5, h6 {
+font-size: 1em;
+font-style: italic;
+}
+h6 {
+font-weight: normal;
+}
+ol, ul {
+padding-left: 1.7em;
+margin-top: 1em;
+}
+li > ol, li > ul {
+margin-top: 0;
+}
+blockquote {
+margin: 1em 0 1em 1.7em;
+padding-left: 1em;
+border-left: 2px solid #e6e6e6;
+color: #606060;
+}
+code {
+font-family: Menlo, Monaco, 'Lucida Console', Consolas, monospace;
+background-color: hsl(0, 0%, 98%);
+padding: .2em .4em;
+font-size: 85%;
+margin: 0;
+}
+pre {
+margin: 1em 0;
+background-color: hsl(0, 0%, 98%);
+padding: 1em;
+overflow: auto;
+}
+pre code {
+padding: 0;
+overflow: visible;
+overflow-wrap: normal;
+}
+
+:not(pre) > code {
+padding: 2px 4px;
+font-size: 90%;
+word-break: normal !important;
+white-space: nowrap;
+color: hsl(344.8,69%,10%);
+background-color: hsl(342.9,37%,96%);
+border-radius: 4px;
+}
+.sourceCode {
+background-color: hsl(0, 0%, 98%);
+overflow: visible;
+}
+hr {
+background-color: #1a1a1a;
+border: none;
+height: 1px;
+margin: 1em 0;
+}
+table {
+margin: 1em 0;
+border-collapse: collapse;
+width: 100%;
+overflow-x: auto;
+display: block;
+font-variant-numeric: lining-nums tabular-nums;
+}
+table caption {
+margin-bottom: 0.75em;
+}
+tbody {
+margin-top: 0.5em;
+border-top: 1px solid black;
+border-bottom: 1px solid black;
+}
+th {
+border-top: 1px solid black;
+padding: 0.25em 0.5em 0.25em 0.5em;
+}
+td {
+padding: 0.125em 0.5em 0.25em 0.5em;
+}
+header {
+margin-bottom: 4em;
+text-align: center;
+}
+#TOC li {
+list-style: none;
+}
+#TOC ul {
+padding-left: 1.3em;
+}
+#TOC > ul {
+padding-left: 0;
+}
+#TOC a:not(:hover) {
+text-decoration: none;
+}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+</style>
+  <style>
+div.solutions {
+border: solid 2pt hsla(120, 100%, 35%, 1);
+border-radius: 5pt;
+background-color: hsla(120, 100%, 50%, 0.1);
+padding: 1em;
+}
+.block-caption {
+display: block;
+font-family: sans-serif;
+font-weight: bold;
+margin-bottom: 1.5rem;
+text-align: center;
+}
+details[open] summary *.only-open {
+opacity: 0.1;
+}
+</style>
+<script data-external="1" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript">
+</script>
+</head>
+<body>
+<style>
+.pre-like {
+margin: 0;
+background-color: hsl(0, 0%, 98%);
+padding: 0 0.5em;
+overflow: auto;
+white-space: pre;
+font-family: Menlo, Monaco, 'Lucida Console', Consolas, monospace;
+overflow: auto !important;
+}
+</style>
+<header id="title-block-header">
+<h1 class="title"><p>CITS5501 lab 6 (week 7) – grammars and syntax-based
+testing  – solutions</p></h1>
+</header>
+<nav id="TOC" role="doc-toc">
+<h2 id="toc-title">Contents</h2>
+<ul>
+<li><a href="#reading" id="toc-reading">Reading</a></li>
+<li><a href="#command-line-argument-parsing" id="toc-command-line-argument-parsing">1. Command-line argument
+parsing</a>
+<ul>
+<li><a href="#documenting-command-line-arguments" id="toc-documenting-command-line-arguments">Documenting command-line
+arguments</a></li>
+<li><a href="#a-mini-docker-command-line-argument-syntax" id="toc-a-mini-docker-command-line-argument-syntax">A mini-Docker
+command-line argument syntax</a></li>
+<li><a href="#generators" id="toc-generators">Generators</a></li>
+</ul></li>
+<li><a href="#hand-written-parsers" id="toc-hand-written-parsers">2.
+Hand-written parsers</a></li>
+<li><a href="#testing-grammars-coverage" id="toc-testing-grammars-coverage">3. Testing grammars –
+coverage</a></li>
+</ul>
+</nav>
+<p></p>
+<h2 id="reading">Reading</h2>
+<p>It is strongly suggested you complete the recommended readings for
+weeks 1-7 <em>before</em> attempting this lab/workshop.</p>
+<h2 id="command-line-argument-parsing">1. Command-line argument
+parsing</h2>
+<p>A very common place to use grammars is when parsing <em>command-line
+arguments</em> to applications. As an example, we’ll look at a
+simplified version of the command-line arguments for
+<strong>Docker</strong>, software which allows programs to be run in a
+lightweight virtual Linux environment.</p>
+<p>For instance, suppose I use the Ubuntu distribution of Linux as the
+main operating system on my computer, but am working on a team which
+deploys software to servers running MySQL on the Fedora distribution.
+Docker allows me to easily run MySQL in a lightweight virtual
+environment which mimics the Fedora distribution.</p>
+<h3 id="documenting-command-line-arguments">Documenting command-line
+arguments</h3>
+<p>Take a look at the documentation page for Docker which explains the
+command-line arguments that can be given to the <a href="https://docs.docker.com/engine/reference/commandline/cli/">Docker</a>
+executable:</p>
+<ul>
+<li><a href="https://docs.docker.com/engine/reference/commandline/cli/" class="uri">https://docs.docker.com/engine/reference/commandline/cli/</a></li>
+</ul>
+<p>The page shows a typical way of documenting a command-line
+program:</p>
+<div class="pre-like">
+<pre style="margin:0; padding: 0; overflow: visible;">
+Usage:  docker [OPTIONS] COMMAND [ARG...]
+
+A self-sufficient runtime for containers.
+
+Options:
+      --config string      Location of client config files (default &quot;/root/.docker&quot;)
+  -c, --context string     Name of the context to use to connect to the daemon (overrides
+                           DOCKER_HOST env var and default context set with &quot;docker context use&quot;)
+  -D, --debug              Enable debug mode
+      --help               Print usage
+  -H, --host value         Daemon socket(s) to connect to (default [])
+</pre>
+<p><em>[... remaining documentation snipped ...]</em></p>
+</div>
+<p>The syntax used is a little like EBNF, with a few changes:<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
+<ul>
+<li>Non-terminals are usually written in ALL CAPS</li>
+<li>Square brackets (“<code>[ ]</code>”) are used to indicate optional
+elements (whereas EBNF would use the question mark,
+“<code>?</code>”)</li>
+<li>An ellipsis (“<code>...</code>”) means some element can be repeated
+(whereas EBNF would use the plus sign, “<code>+</code>”)</li>
+</ul>
+<p>On Linux or MacOS, you can see additional examples of this
+documentation style by typing <code>man ls</code> into a terminal
+window. On Windows, enter “cmd.exe” into the search box in the taskbar,
+run <code>cmd.exe</code>, and type <code>dir /?</code> into the terminal
+window.</p>
+<h3 id="a-mini-docker-command-line-argument-syntax">A mini-Docker
+command-line argument syntax</h3>
+<p>The following grammar represents a simplified, very small subset of
+these command-line arguments:</p>
+<pre><code>&lt;invocation&gt; ::= &quot;docker &quot; ( &quot;--verbose &quot; )? &lt;subcommand&gt; &lt;image&gt;
+&lt;subcommand&gt; ::= &quot;pull &quot; | &quot;run &quot; | &quot;build &quot;
+&lt;image&gt;      ::= &quot;debian&quot; | &quot;ubuntu&quot; | &quot;fedora&quot;</code></pre>
+<p>The question mark indicates an optional element.</p>
+<p>In your browser, visit the <a href="https://bnfplayground.pauliankline.com"><strong>BNF
+Playground</strong></a> webpage at <a href="https://bnfplayground.pauliankline.com" class="uri">https://bnfplayground.pauliankline.com</a>, and type the
+grammar into the box labelled “Enter your BNF (or EBNF) below”.</p>
+<p>Click the button labelled “Compile BNF”. This checks that our grammar
+follows the rules for BNF or EBNF, analyses it, and converts it into
+data structures which can be used to build:</p>
+<ol type="a">
+<li><em>recognizers</em> (programs which check a string, and see if it
+belongs to the language defined by the grammar), and</li>
+<li><em>generators</em> (programs which produce random strings belonging
+to the language).</li>
+</ol>
+<p>In the box labelled “Test a string here!”, <em>type</em> (don’t
+paste!):</p>
+<pre><code>docker pull debian</code></pre>
+<p>You’ll see that the box is initially red (indicating the string is
+<em>not</em> recognized as being in the language we have defined), and
+then turns green (once it <em>is</em> recognized).</p>
+<p><strong>Exercise</strong>:</p>
+<ul>
+<li>Try the string “docker pull alpine”, and note that it is not
+recognized.</li>
+<li>Amend the grammar so it <em>is</em> recognized.<br />
+(You might want to clear the “Test a string here!” box first –
+otherwise, when you make changes to the grammar, it may show up as
+invalid and display errors. Once you’ve amended the grammar, you need to
+re-compile.)</li>
+</ul>
+<div class="solutions">
+<p><strong>Sample solution</strong></p>
+<p>Amend the last line of the grammar so it reads:</p>
+<pre><code>&lt;image&gt;      ::= &quot;debian&quot; | &quot;ubuntu&quot; | &quot;fedora&quot; | &quot;alpine&quot;</code></pre>
+</div>
+<h3 id="generators">Generators</h3>
+<p>Now try hitting the button labelled “Generate random
+<code>&lt;invocation&gt;</code>” several times, and see what strings are
+produced.</p>
+<p>Note that the BNF differs slightly from the less formal version we
+have seen in class, in that it requires spaces be explicitly
+inserted.</p>
+<p><strong>Exercise</strong>:</p>
+<ul>
+<li>Remove the spaces after “pull”, “run” and “build”, and try
+generating random strings – are they what you would expect?</li>
+</ul>
+<p>Now put the original grammar back in and compile it again.</p>
+<p><strong>Exercise</strong>:</p>
+<ul>
+<li>When selecting which of several alternatives to use, the generator
+chooses one randomly. How would you alter the grammar so that the image
+“<code>ubuntu</code>” is chosen twice as often as the others?</li>
+</ul>
+<div class="solutions">
+<p>Alter the last line of the original grammar, which was:</p>
+<pre><code>&lt;image&gt;      ::= &quot;debian&quot; | &quot;ubuntu&quot; | &quot;fedora&quot;</code></pre>
+<p>Currently, “<code>debian</code>” and “<code>fedora</code>” occur once
+each; if we want “<code>ubuntu</code>” to be selected twice as often
+(i.e. two-thirds of the time), we should replace “<code>ubuntu</code>”
+with:</p>
+<pre><code>&quot;ubuntu&quot; | &quot;ubuntu&quot; | &quot;ubuntu&quot; | &quot;ubuntu&quot;</code></pre>
+<p>to get</p>
+<pre><code>&lt;image&gt;      ::= &quot;debian&quot; | &quot;ubuntu&quot; | &quot;ubuntu&quot; | &quot;ubuntu&quot;
+                | &quot;ubuntu&quot; | &quot;fedora&quot;</code></pre>
+</div>
+<h2 id="hand-written-parsers">2. Hand-written parsers</h2>
+<p>Suppose we wanted to write code ourselves to parse the command-line
+arguments of a program according to a grammar like this.</p>
+<p>For small programs, the simplest way is usally is to implement a
+<strong>hand-written parser</strong>. For an example of what this looks
+like, take a look at the <code>parseArgs()</code> method of the
+<code>MyDockerLiteProgram</code> class in the code for this
+workshop.</p>
+<p>In the <code>parseArgs()</code> method, we manually work our way
+through the <code>ArrayList</code> of arguments; after each argument is
+verified as valid, we remove it by calling <code>args.remove(0)</code>
+and move onto the next argument.</p>
+<p>This approach is fine if we only have a small number of arguments to
+verify, and if they can only be supplied in a fixed order. But for
+applications with many arguments, and where the arguments can be
+supplied in flexible order, it’s usual to make use of a
+<strong>command-line parsing library</strong>.</p>
+<p>Some examples of such libraries are:</p>
+<ul>
+<li>Apache Commons CLI (<a href="https://commons.apache.org/proper/commons-cli/" class="uri">https://commons.apache.org/proper/commons-cli/</a>)</li>
+<li>Picocli (<a href="https://picocli.info" class="uri">https://picocli.info</a>)</li>
+</ul>
+<p>These libraries allows us to more easily specify a grammar for
+validating command-line arguments; as a by-product, they also allow us
+to automatically generate documentation for our application (of the kind
+we saw for Docker in section A).</p>
+<p><strong>Challenge exercise</strong>:</p>
+<p>If you are already familiar with the idea of parsing command-line
+arguments and would like a challenge: read through the documentation for
+either Apache Commons CLI or Picocli, and amend our
+<code>MyDockerLiteProgram</code> class to use one of these libraries to
+parse its command-line arguments.</p>
+<h2 id="testing-grammars-coverage">3. Testing grammars – coverage</h2>
+<p>Recall that when testing something that can be represented as a
+grammar, there are different levels of <em>coverage</em> we might aim to
+achieve.</p>
+<p><strong>Exercise</strong>:</p>
+<ol type="a">
+<li>Looking at our original “mini-Docker” grammar – could we test this
+grammar <em>exhaustively</em>? Why or why not? If so, how many tests
+would be required?</li>
+<li>Can all grammars be tested exhaustively? Why or why not?</li>
+</ol>
+<div class="solutions">
+<ol type="a">
+<li><p>Yes, we could. It defines a <em>finite</em> language – that is, a
+language containing a finite set of strings.</p>
+<p>How many tests would be required? One for each string in the
+language.</p>
+<p>There are 3 options for “image”, and 3 options for “subcommand”, and
+two options for “–verbose” (either present, or not.)</p>
+<p>So the total number of tests is <span class="math inline">\(3 \times
+3 \times 2\)</span> or 18.</p></li>
+<li><p>No, they cannot. Some grammars define languages with an infinite
+number of strings.</p>
+<p>For instance</p>
+<pre><code>&lt;list&gt; ::= &quot;END&quot; | &quot;0&quot; &lt;list&gt;</code></pre>
+<p>defines an infinitely large language, consisting of any number (zero
+or more) of instances of the string “0”, then the string “END”.</p>
+<p>It uses recursion – the <code>&lt;list&gt;</code> rule refers to
+itself. Instead of recursion, we could alternatively write the grammar
+as</p>
+<pre><code>&lt;list&gt; ::= &quot;0&quot;* &quot;END&quot;</code></pre>
+<p>Both grammars define exactly the same language.</p></li>
+</ol>
+</div>
+<p><strong>Exercise</strong>:</p>
+<ul>
+<li><p>Looking at the original grammar – consider how many tests we
+would need to write if we wanted to get the following sorts of coverage
+for this grammar.</p>
+<ol type="a">
+<li>terminal coverage</li>
+<li>production coverage</li>
+</ol>
+<p>What would be the minimum number of tests needed? How many tests do
+you think would be most appropriate?</p></li>
+</ul>
+<div class="solutions">
+<ol type="a">
+<li><p>The number of terminals is the number of “raw” strings in the
+grammar (i.e. things that aren’t non-terminals). They are:</p>
+<ul>
+<li><code>&quot;docker &quot;</code></li>
+<li><code>&quot;--verbose &quot;</code></li>
+<li><code>&quot;pull &quot;</code></li>
+<li><code>&quot;run &quot;</code></li>
+<li><code>&quot;build &quot;</code></li>
+<li><code>&quot;debian&quot;</code></li>
+<li><code>&quot;ubuntu&quot;</code></li>
+<li><code>&quot;fedora&quot;</code></li>
+</ul>
+<p>In general, since there are 8 terminals, we know we should need at
+most 8 tests to achieve terminal coverage. But in this case, we can get
+away with three: we could use</p>
+<ul>
+<li><code>docker --verbose pull debian</code></li>
+<li><code>docker run ubuntu</code>, and</li>
+<li><code>docker build fedora</code></li>
+</ul>
+<p>And in this case, using more tests probably wouldn’t add much to our
+test suite.</p></li>
+<li><p>A <em>production</em>, as we define it in class, is one of the
+<em>alternatives</em> within a rule.</p>
+<p>(An optional element counts as two alternatives – it’s either present
+or not.)</p>
+<p>We can just count the number of alternatives in each rule:</p>
+<pre><code>&lt;invocation&gt; ::= &quot;docker &quot; ( &quot;--verbose &quot; )? &lt;subcommand&gt; &lt;image&gt;</code></pre>
+<ul>
+<li>two alternatives (verbose is present or not)</li>
+</ul>
+<pre><code>&lt;subcommand&gt; ::= &quot;pull &quot; | &quot;run &quot; | &quot;build &quot;</code></pre>
+<ul>
+<li>three alternatives, “pull” or “run” or “build”</li>
+</ul>
+<pre><code>&lt;image&gt;      ::= &quot;debian&quot; | &quot;ubuntu&quot; | &quot;fedora&quot;</code></pre>
+<ul>
+<li>three alternatives, “debian” or “ubuntu” or “fedora”</li>
+</ul>
+<p>So there are <span class="math inline">\(2 + 3 + 3\)</span>
+productions, and we should need at most 8 tests to cover them all. But
+in this case, we could get by with the same 3 tests as in the last
+question, and we would have covered all the different productions.</p>
+<p>Counting productions becomes trickier if we have asterisks (“*“) in
+our rules – so in this unit, we won’t ask you to work out production
+coverage for any grammars that contain asterisks.</p></li>
+</ol>
+</div>
+<p><strong>Exercise</strong>:</p>
+<p>A <em>recognizer</em> for a language can be regarded as a program
+which takes in a string, and gives back a boolean saying whether the
+string is in the language or not.</p>
+<ol type="a">
+<li>Suppose you wanted to write a test ensuring the “build” production
+can be recognized. If you wanted to document a test case which does
+this, what would it look like?</li>
+<li>Take a look at the test method <code>validArgumentsParseOk</code> in
+the <code>MyDockerLiteProgramTest</code> class. Adapt this to create a
+new test for the test case you described in problem (a).</li>
+</ol>
+<div class="solutions">
+<p>We might define the test case as follows:</p>
+<ul>
+<li>Test value: the string “docker build debian”</li>
+<li>Invoking the recognizer: run the recognizer on the test value.</li>
+<li>Expected result: The recognizer should return “true”.</li>
+</ul>
+</div>
+<p><strong>Exercise</strong>:</p>
+<ul>
+<li><p>Consider the following grammar:</p>
+<pre><code>&lt;list&gt; ::= &quot;1&quot; | &quot;0&quot; &lt;list&gt;</code></pre>
+<p>Try entering it into the BNF playground, generating some random
+strings, and seeing what strings it recognizes.</p>
+<ol type="a">
+<li>Give an example of a string containing just zeroes and ones which is
+<em>not</em> in the language defined by the grammar.</li>
+<li>Can the grammar be tested exhaustively? Explain why or why not.</li>
+<li>The grammar relies on recursion – the body of the
+<code>&lt;list&gt;</code> non-terminal itself refers to the
+<code>&lt;list&gt;</code> non-terminal. Can you think of an equivalent
+grammar – that is, one that defines exactly the same language – which
+instead uses asterisks?<br />
+(In general, using EBNF syntactic sugar like asterisks is much easier to
+read than using recursion, but both have exactly equivalent power.)</li>
+</ol></li>
+</ul>
+<div class="solutions">
+<ol type="a">
+<li><p>The string “<code>10</code>” is not in the language – all strings
+in the language <em>end</em> with 1.</p></li>
+<li><p>It cannot – it represents all strings consisting of one or more
+zeroes, then a 1. It is infinite in size.</p></li>
+<li><p>The grammar shown is exactly equivalent to</p>
+<pre><code>&lt;list&gt; ::= &quot;0&quot;* &quot;1&quot;</code></pre></li>
+</ol>
+</div>
+<!--
+  vim: syntax=markdown tw=92 :
+-->
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr />
+<ol>
+<li id="fn1"><p>There is no formal name for this syntax, but it is
+documented at <a href="https://man7.org/linux/man-pages/man7/man-pages.7.html" class="uri">https://man7.org/linux/man-pages/man7/man-pages.7.html</a>
+if you are interested (look under “Sections within a manual page” /
+“Synopsis”) and at <a href="https://pubs.opengroup.org/onlinepubs/9699919799/basedefs/V1_chap12.html" class="uri">https://pubs.opengroup.org/onlinepubs/9699919799/basedefs/V1_chap12.html</a>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
+</body>
+</html>

@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang xml:lang>
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>CITS5501 lab 3 (week 4) – ISP</title>
+  <style>
+html {
+line-height: 1.5;
+font-family: sans-serif;
+font-size: 12pt;
+color: black;
+background-color: white;
+}
+body {
+margin: 0 auto;
+max-width: 50em;
+padding-left: 50px;
+padding-right: 50px;
+padding-top: 50px;
+padding-bottom: 50px;
+hyphens: auto;
+overflow-wrap: break-word;
+text-rendering: optimizeLegibility;
+font-kerning: normal;
+}
+@media (max-width: 600px) {
+body {
+font-size: 0.9em;
+padding: 1em;
+}
+h1 {
+font-size: 1.8em;
+}
+}
+@media print {
+body {
+background-color: transparent;
+color: black;
+font-size: 12pt;
+}
+p, h2, h3 {
+orphans: 3;
+widows: 3;
+}
+h2, h3, h4 {
+page-break-after: avoid;
+}
+}
+p {
+margin: 1em 0;
+}
+img {
+max-width: 100%;
+}
+h1, h2, h3, h4, h5, h6 {
+margin-top: 1.4em;
+}
+h5, h6 {
+font-size: 1em;
+font-style: italic;
+}
+h6 {
+font-weight: normal;
+}
+ol, ul {
+padding-left: 1.7em;
+margin-top: 1em;
+}
+li > ol, li > ul {
+margin-top: 0;
+}
+blockquote {
+margin: 1em 0 1em 1.7em;
+padding-left: 1em;
+border-left: 2px solid #e6e6e6;
+color: #606060;
+}
+code {
+font-family: Menlo, Monaco, 'Lucida Console', Consolas, monospace;
+background-color: hsl(0, 0%, 98%);
+padding: .2em .4em;
+font-size: 85%;
+margin: 0;
+}
+pre {
+margin: 1em 0;
+background-color: hsl(0, 0%, 98%);
+padding: 1em;
+overflow: auto;
+}
+pre code {
+padding: 0;
+overflow: visible;
+overflow-wrap: normal;
+}
+
+:not(pre) > code {
+padding: 2px 4px;
+font-size: 90%;
+word-break: normal !important;
+white-space: nowrap;
+color: hsl(344.8,69%,10%);
+background-color: hsl(342.9,37%,96%);
+border-radius: 4px;
+}
+.sourceCode {
+background-color: hsl(0, 0%, 98%);
+overflow: visible;
+}
+hr {
+background-color: #1a1a1a;
+border: none;
+height: 1px;
+margin: 1em 0;
+}
+table {
+margin: 1em 0;
+border-collapse: collapse;
+width: 100%;
+overflow-x: auto;
+display: block;
+font-variant-numeric: lining-nums tabular-nums;
+}
+table caption {
+margin-bottom: 0.75em;
+}
+tbody {
+margin-top: 0.5em;
+border-top: 1px solid black;
+border-bottom: 1px solid black;
+}
+th {
+border-top: 1px solid black;
+padding: 0.25em 0.5em 0.25em 0.5em;
+}
+td {
+padding: 0.125em 0.5em 0.25em 0.5em;
+}
+header {
+margin-bottom: 4em;
+text-align: center;
+}
+#TOC li {
+list-style: none;
+}
+#TOC ul {
+padding-left: 1.3em;
+}
+#TOC > ul {
+padding-left: 0;
+}
+#TOC a:not(:hover) {
+text-decoration: none;
+}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+{ counter-reset: source-line 0; }
+pre.numberSource code > span
+{ position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+{ content: counter(source-line);
+position: relative; left: -1em; text-align: right; vertical-align: baseline;
+border: none; display: inline-block;
+-webkit-touch-callout: none; -webkit-user-select: none;
+-khtml-user-select: none; -moz-user-select: none;
+-ms-user-select: none; user-select: none;
+padding: 0 4px; width: 4em;
+color: #aaaaaa;
+}
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa; padding-left: 4px; }
+div.sourceCode
+{ }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } 
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.at { color: #7d9029; } 
+code span.bn { color: #40a070; } 
+code span.bu { color: #008000; } 
+code span.cf { color: #007020; font-weight: bold; } 
+code span.ch { color: #4070a0; } 
+code span.cn { color: #880000; } 
+code span.co { color: #60a0b0; font-style: italic; } 
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.do { color: #ba2121; font-style: italic; } 
+code span.dt { color: #902000; } 
+code span.dv { color: #40a070; } 
+code span.er { color: #ff0000; font-weight: bold; } 
+code span.ex { } 
+code span.fl { color: #40a070; } 
+code span.fu { color: #06287e; } 
+code span.im { color: #008000; font-weight: bold; } 
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.kw { color: #007020; font-weight: bold; } 
+code span.op { color: #666666; } 
+code span.ot { color: #007020; } 
+code span.pp { color: #bc7a00; } 
+code span.sc { color: #4070a0; } 
+code span.ss { color: #bb6688; } 
+code span.st { color: #4070a0; } 
+code span.va { color: #19177c; } 
+code span.vs { color: #4070a0; } 
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } 
+</style>
+  <style>
+div.solutions {
+border: solid 2pt hsla(120, 100%, 35%, 1);
+border-radius: 5pt;
+background-color: hsla(120, 100%, 50%, 0.1);
+padding: 1em;
+}
+.block-caption {
+display: block;
+font-family: sans-serif;
+font-weight: bold;
+margin-bottom: 1.5rem;
+text-align: center;
+}
+details[open] summary *.only-open {
+opacity: 0.1;
+}
+</style>
+<script data-external="1" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript">
+</script>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title"><p>CITS5501 lab 3 (week 4) – ISP</p></h1>
+</header>
+<nav id="TOC" role="doc-toc">
+<h2 id="toc-title">Contents</h2>
+<ul>
+<li><a href="#test-coverage-concepts" id="toc-test-coverage-concepts">1.
+Test coverage concepts</a></li>
+<li><a href="#binary-search" id="toc-binary-search">2. Binary
+search</a></li>
+<li><a href="#stack-class" id="toc-stack-class">3. Stack class</a></li>
+<li><a href="#further-questions" id="toc-further-questions">4. Further
+questions</a></li>
+</ul>
+</nav>
+<p></p>
+<h2 id="test-coverage-concepts">1. Test coverage concepts</h2>
+<p>Suppose you are asked to write tests for a Java method in the
+<code>AgePricing</code> class, whose Javadoc and signature are as
+follows:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">/** Returns true if age is eligible for adult ticket price.</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co"> *</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"> * @arg age The age of the customer</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"> * @return true if someone of that age is eligible for the adult ticket price,</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co"> *         false otherwise.</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co"> */</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span> <span class="dt">static</span> <span class="dt">boolean</span> <span class="fu">isAdult</span><span class="op">(</span><span class="dt">int</span> age<span class="op">);</span></span></code></pre></div>
+<p>Elsewhere in the API documentation, you’re told that any person who
+is 18 or over is considered an adult.</p>
+<p>Suppose also you’re given the following JUnit test for this method.
+(There’s no need to compile and run it, but you’re welcome to do so if
+you want.)</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">import</span> <span class="kw">static</span><span class="im"> org</span><span class="op">.</span><span class="im">junit</span><span class="op">.</span><span class="im">jupiter</span><span class="op">.</span><span class="im">api</span><span class="op">.</span><span class="im">Assertions</span><span class="op">.*;</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="kw">import</span> <span class="im">org</span><span class="op">.</span><span class="im">junit</span><span class="op">.</span><span class="im">jupiter</span><span class="op">.</span><span class="im">api</span><span class="op">.</span><span class="im">Test</span><span class="op">;</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> AgePricingTest <span class="op">{</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">@Test</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="dt">void</span> <span class="fu">adultAgeShouldReturnTrue</span><span class="op">()</span> <span class="op">{</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">assertTrue</span><span class="op">(</span>AgePricing<span class="op">.</span><span class="fu">isAdult</span><span class="op">(</span><span class="dv">30</span><span class="op">));</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p>The above test is the <em>only</em> test currently in place, and we
+aren’t given access to the implementation.</p>
+<dl>
+<dt><strong>Question</strong></dt>
+<dd>
+<p>Is this one test enough to be confident that the method works? If
+not, come up with additional <em>test cases</em>.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>
+Think about:</p>
+<ul>
+<li>What are all the different “kinds” of ages we might need to
+check?</li>
+<li>Are there any special or edge values?</li>
+<li>What’s just inside or just outside the adult cut-off?</li>
+<li>Are there unusual but possible inputs?</li>
+</ul>
+</dd>
+</dl>
+<p>In lectures, we’ve mentioned that Java code can be <a href="https://en.wikipedia.org/wiki/Instrumentation_(computer_programming)">instrumented</a>
+so that, after your tests run, a coverage tool can report which lines of
+implementation code were executed. One such tool is JaCoCo (Java Code
+Coverage), which integrates with build systems and IDEs to produce
+coverage reports: <a href="https://www.jacoco.org/jacoco/" class="uri">https://www.jacoco.org/jacoco/</a>.</p>
+<p>Suppose we now are given access to the implementation of the
+<code>isAdult(int age)</code> method (feel free to suggest a plausible
+one). We instrument the method, and run the original single-test suite,
+then later your improved multi-test suite.</p>
+<dl>
+<dt><strong>Question</strong></dt>
+<dd>
+<p>Do you think the reported line coverage will change between the two
+suites? Why or why not? If the reported coverage doesn’t change, what
+does that tell you about the limitations of line coverage as a measure
+of how thoroughly a method has been tested?</p>
+</dd>
+</dl>
+<div style="border: solid 2pt blue; background-color: hsla(241, 100%,50%, 0.1); padding: 1em; border-radius: 5pt; margin-top: 1em;">
+<div class="block-caption">
+<p>Pre-reading for remaining exercises</p>
+</div>
+<p>The remaining exercises in this worksheet assume general familiarity
+with the steps of Input Space Partitioning, so it’s recommended you
+complete the recommended reading for week 4 from the textbook before
+attempting them.</p>
+</div>
+<h2 id="binary-search">2. Binary search</h2>
+<p>Consider the Javadoc documentation and signature for the following
+Java method, which searches inside an array of <code>char</code>s for a
+particular value.</p>
+<p>(Adapted from the Android version of the Java standard library.)</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource java numberLines"><code class="sourceCode java"><span id="cb3-1"><a href="#cb3-1"></a><span class="co">/**</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a><span class="co"> * Performs a binary search for @code value in the ascending sorted</span></span>
+<span id="cb3-3"><a href="#cb3-3"></a><span class="co"> * array @code array, in the range specified by fromIndex (inclusive)</span></span>
+<span id="cb3-4"><a href="#cb3-4"></a><span class="co"> * and toIndex (exclusive).  Searching in an unsorted array has an</span></span>
+<span id="cb3-5"><a href="#cb3-5"></a><span class="co"> * undefined result. It&#39;s also undefined which element is found if there</span></span>
+<span id="cb3-6"><a href="#cb3-6"></a><span class="co"> * are multiple occurrences of the same element.</span></span>
+<span id="cb3-7"><a href="#cb3-7"></a><span class="co"> *</span></span>
+<span id="cb3-8"><a href="#cb3-8"></a><span class="co"> * @param array the sorted array to search.</span></span>
+<span id="cb3-9"><a href="#cb3-9"></a><span class="co"> * @param startIndex the inclusive start index.</span></span>
+<span id="cb3-10"><a href="#cb3-10"></a><span class="co"> * @param endIndex the exclusive start index.</span></span>
+<span id="cb3-11"><a href="#cb3-11"></a><span class="co"> * @param value the element to find.</span></span>
+<span id="cb3-12"><a href="#cb3-12"></a><span class="co"> * @return the non-negative index of the element, or a negative index</span></span>
+<span id="cb3-13"><a href="#cb3-13"></a><span class="co"> *         which is &lt;code&gt;-index - 1&lt;/code&gt; where the element would be</span></span>
+<span id="cb3-14"><a href="#cb3-14"></a><span class="co"> *         inserted.</span></span>
+<span id="cb3-15"><a href="#cb3-15"></a><span class="co"> * @throws IllegalArgumentException if &lt;code&gt;startIndex &gt; endIndex&lt;/code&gt;</span></span>
+<span id="cb3-16"><a href="#cb3-16"></a><span class="co"> * @throws ArrayIndexOutOfBoundsException if</span></span>
+<span id="cb3-17"><a href="#cb3-17"></a><span class="co"> *         &lt;code&gt;startIndex &lt; 0 || endIndex &gt; array.length&lt;/code&gt;</span></span>
+<span id="cb3-18"><a href="#cb3-18"></a><span class="co"> * @since 1.6</span></span>
+<span id="cb3-19"><a href="#cb3-19"></a><span class="co"> */</span></span>
+<span id="cb3-20"><a href="#cb3-20"></a><span class="kw">public</span> <span class="dt">static</span> <span class="dt">int</span> <span class="fu">binarySearch</span><span class="op">(</span><span class="dt">char</span><span class="op">[]</span> array<span class="op">,</span> <span class="dt">int</span> startIndex<span class="op">,</span> <span class="dt">int</span> endIndex<span class="op">,</span> <span class="dt">char</span> value<span class="op">)</span></span></code></pre></div>
+<p>Based on the prescribed reading, discuss how you would go about
+creating tests using Input Space Partitioning.</p>
+<ol type="a">
+<li>What steps are involved in doing ISP?</li>
+<li>What is the input domain here?</li>
+<li>What are some characteristics you could use? (You may wish to drop
+in on a timetabled lab session and compare with another student to see
+what characteristics they have come up with. Remember to make sure each
+characteristic does in fact give you a partitioning.)</li>
+</ol>
+<p>Once you’ve answered these questions, you might like to try
+implementing some of your tests in Java using JUnit.</p>
+<h2 id="stack-class">3. Stack class</h2>
+<p>Suppose we have a Stack class that is intended to implement the <a href="https://en.wikipedia.org/wiki/Stack_(abstract_data_type)">stack
+abstract data type</a>. The class stores <code>int</code>s, and provides
+methods for observing the state of the stack, and for performing the
+“push” and “pop” operations. The method signatures for the class are as
+follows:</p>
+<ul>
+<li><code>public IntStack ();</code></li>
+<li><code>public void push (int i);</code></li>
+<li><code>public int pop (); /** Throws an exception if empty */</code></li>
+<li><code>public boolean isEmpty()</code></li>
+</ul>
+<p>Assume the object state consists of an <code>int</code> array.</p>
+<ol type="a">
+<li>If we wanted to model <code>push</code> as a function, what sort of
+function would we use? How about <code>pop</code>?</li>
+<li>Identify all the parameters for the <code>pop</code> method, and
+suggest some characteristics that can be used to partition the input
+space.</li>
+</ol>
+<h2 id="further-questions">4. Further questions</h2>
+<p>Consider the following questions about ISP and try writing an answer
+to each. (Questions like this are typical of ones you might be asked in
+the mid-semester test or final exam.) Once you’ve made an attempt, you
+might like to drop in on a timetabled lab session to compare your
+answers with other students’.</p>
+<p>There is not necessarily any single correct answer to such questions;
+students are expected to base their answers on the information covered
+in class and in previous units, and on reasonable deductions they can
+make from those.</p>
+<ol type="a">
+<li><p>Suppose we need to test some method (let’s suppose it is a static
+method <code>myMethod</code> that takes one <code>int</code> for the
+sake of argument, and that it’s sensible to partition it into positive,
+negative and 0-valued <code>int</code>s. i.e. the signature is
+<code>static myMethod(int i)</code>).</p>
+<p>Suppose you’ve already written three tests for the function; each of
+your 3 tests uses a test value from one partition.</p>
+<p>Your supervisor says three tests is not enough, and you should write
+more. What do you think? Would more tests be better? Could more tests be
+<em>worse</em>?</p></li>
+<li><p>Research suggests that the later in the development life cycle a
+fault is discovered, the more expensive it is to fix. Why do you think
+this is so?</p></li>
+</ol>
+<!-- vim: syntax=markdown tw=92 :
+-->
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr />
+<ol>
+<li id="fn1"><p>As a reminder – when being asked to come up with
+<em>test cases</em>, you just need to come up with descriptions of
+tests; you’re <em>not</em> being asked to write code (refer to the week
+1 lectures) – if an assessment is asking you to write code, it will say
+so (e.g. “Write JUnit 5-based tests for your test cases”).<br />
+  Each <em>test case</em> must specify (i) the inputs to the thing being
+tested, and (ii) the expected outputs or results. The “thing being
+tested” is sometimes referred to as <em>the subject under test</em>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
+</body>
+</html>

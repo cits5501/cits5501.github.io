@@ -1,0 +1,1046 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang xml:lang>
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>CITS5501 lab 4 (week 5) – Testability, ISP and control flow – solutions</title>
+  <style>
+html {
+line-height: 1.5;
+font-family: sans-serif;
+font-size: 12pt;
+color: black;
+background-color: white;
+}
+body {
+margin: 0 auto;
+max-width: 50em;
+padding-left: 50px;
+padding-right: 50px;
+padding-top: 50px;
+padding-bottom: 50px;
+hyphens: auto;
+overflow-wrap: break-word;
+text-rendering: optimizeLegibility;
+font-kerning: normal;
+}
+@media (max-width: 600px) {
+body {
+font-size: 0.9em;
+padding: 1em;
+}
+h1 {
+font-size: 1.8em;
+}
+}
+@media print {
+body {
+background-color: transparent;
+color: black;
+font-size: 12pt;
+}
+p, h2, h3 {
+orphans: 3;
+widows: 3;
+}
+h2, h3, h4 {
+page-break-after: avoid;
+}
+}
+p {
+margin: 1em 0;
+}
+img {
+max-width: 100%;
+}
+h1, h2, h3, h4, h5, h6 {
+margin-top: 1.4em;
+}
+h5, h6 {
+font-size: 1em;
+font-style: italic;
+}
+h6 {
+font-weight: normal;
+}
+ol, ul {
+padding-left: 1.7em;
+margin-top: 1em;
+}
+li > ol, li > ul {
+margin-top: 0;
+}
+blockquote {
+margin: 1em 0 1em 1.7em;
+padding-left: 1em;
+border-left: 2px solid #e6e6e6;
+color: #606060;
+}
+code {
+font-family: Menlo, Monaco, 'Lucida Console', Consolas, monospace;
+background-color: hsl(0, 0%, 98%);
+padding: .2em .4em;
+font-size: 85%;
+margin: 0;
+}
+pre {
+margin: 1em 0;
+background-color: hsl(0, 0%, 98%);
+padding: 1em;
+overflow: auto;
+}
+pre code {
+padding: 0;
+overflow: visible;
+overflow-wrap: normal;
+}
+
+:not(pre) > code {
+padding: 2px 4px;
+font-size: 90%;
+word-break: normal !important;
+white-space: nowrap;
+color: hsl(344.8,69%,10%);
+background-color: hsl(342.9,37%,96%);
+border-radius: 4px;
+}
+.sourceCode {
+background-color: hsl(0, 0%, 98%);
+overflow: visible;
+}
+hr {
+background-color: #1a1a1a;
+border: none;
+height: 1px;
+margin: 1em 0;
+}
+table {
+margin: 1em 0;
+border-collapse: collapse;
+width: 100%;
+overflow-x: auto;
+display: block;
+font-variant-numeric: lining-nums tabular-nums;
+}
+table caption {
+margin-bottom: 0.75em;
+}
+tbody {
+margin-top: 0.5em;
+border-top: 1px solid black;
+border-bottom: 1px solid black;
+}
+th {
+border-top: 1px solid black;
+padding: 0.25em 0.5em 0.25em 0.5em;
+}
+td {
+padding: 0.125em 0.5em 0.25em 0.5em;
+}
+header {
+margin-bottom: 4em;
+text-align: center;
+}
+#TOC li {
+list-style: none;
+}
+#TOC ul {
+padding-left: 1.3em;
+}
+#TOC > ul {
+padding-left: 0;
+}
+#TOC a:not(:hover) {
+text-decoration: none;
+}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+{ counter-reset: source-line 0; }
+pre.numberSource code > span
+{ position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+{ content: counter(source-line);
+position: relative; left: -1em; text-align: right; vertical-align: baseline;
+border: none; display: inline-block;
+-webkit-touch-callout: none; -webkit-user-select: none;
+-khtml-user-select: none; -moz-user-select: none;
+-ms-user-select: none; user-select: none;
+padding: 0 4px; width: 4em;
+color: #aaaaaa;
+}
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa; padding-left: 4px; }
+div.sourceCode
+{ }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } 
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.at { color: #7d9029; } 
+code span.bn { color: #40a070; } 
+code span.bu { color: #008000; } 
+code span.cf { color: #007020; font-weight: bold; } 
+code span.ch { color: #4070a0; } 
+code span.cn { color: #880000; } 
+code span.co { color: #60a0b0; font-style: italic; } 
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.do { color: #ba2121; font-style: italic; } 
+code span.dt { color: #902000; } 
+code span.dv { color: #40a070; } 
+code span.er { color: #ff0000; font-weight: bold; } 
+code span.ex { } 
+code span.fl { color: #40a070; } 
+code span.fu { color: #06287e; } 
+code span.im { color: #008000; font-weight: bold; } 
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.kw { color: #007020; font-weight: bold; } 
+code span.op { color: #666666; } 
+code span.ot { color: #007020; } 
+code span.pp { color: #bc7a00; } 
+code span.sc { color: #4070a0; } 
+code span.ss { color: #bb6688; } 
+code span.st { color: #4070a0; } 
+code span.va { color: #19177c; } 
+code span.vs { color: #4070a0; } 
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } 
+</style>
+  <style>
+div.solutions {
+border: solid 2pt hsla(120, 100%, 35%, 1);
+border-radius: 5pt;
+background-color: hsla(120, 100%, 50%, 0.1);
+padding: 1em;
+}
+.block-caption {
+display: block;
+font-family: sans-serif;
+font-weight: bold;
+margin-bottom: 1.5rem;
+text-align: center;
+}
+details[open] summary *.only-open {
+opacity: 0.1;
+}
+</style>
+<script data-external="1" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript">
+</script>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title"><p>CITS5501 lab 4 (week 5) – Testability, ISP and
+control flow – solutions</p></h1>
+</header>
+<nav id="TOC" role="doc-toc">
+<h2 id="toc-title">Contents</h2>
+<ul>
+<li><a href="#test-fixtures" id="toc-test-fixtures">1. Test
+fixtures</a></li>
+<li><a href="#class-design-invariants-and-testability" id="toc-class-design-invariants-and-testability">2. Class design,
+invariants, and testability</a></li>
+<li><a href="#isp-and-control-flow" id="toc-isp-and-control-flow">3. ISP
+and control flow</a></li>
+</ul>
+</nav>
+<h2 id="test-fixtures">1. Test fixtures</h2>
+<p>Review the material from the textbook on test automation (ch 6), and
+the JUnit 4 “Text fixtures” documentation (at <a href="https://github.com/junit-team/junit4/wiki/Test-fixtures" class="uri">https://github.com/junit-team/junit4/wiki/Test-fixtures</a>).</p>
+<p>Consider the following code we wish to test:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> MyClass <span class="op">{</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>   <span class="kw">private</span> <span class="dt">int</span> x<span class="op">;</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>   <span class="kw">public</span> <span class="fu">MyClass</span><span class="op">(</span><span class="dt">int</span> x<span class="op">)</span> <span class="op">{</span> <span class="kw">this</span><span class="op">.</span><span class="fu">x</span> <span class="op">=</span> x<span class="op">;</span> <span class="op">}</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>   <span class="at">@Override</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>   <span class="kw">public</span> <span class="dt">boolean</span> <span class="fu">equals</span><span class="op">(</span><span class="bu">Object</span> obj<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>      <span class="cf">if</span> <span class="op">(!(</span>obj <span class="kw">instanceof</span> MyClass<span class="op">))</span> <span class="cf">return</span> <span class="kw">false</span><span class="op">;</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>      <span class="cf">return</span> <span class="op">((</span>MyClass<span class="op">)</span> obj<span class="op">).</span><span class="fu">x</span> <span class="op">==</span> <span class="kw">this</span><span class="op">.</span><span class="fu">x</span><span class="op">;</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>   <span class="op">}</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p>Find the Java library documentation for the <code>equals()</code>
+method (it’s in the <code>Object</code> class), and read what its
+requirements are.</p>
+<p>In Java, all other classes automatically inherit from the
+<code>Object</code> class, and may also <em>override</em> methods
+provided by the <code>Object</code> class – this is what the
+“<code>@Override</code>” annotation on the <code>equals()</code> method
+means.</p>
+<p>The <code>equals()</code> method should test whether the
+<code>Object</code> “<code>obj</code>” is “equal to” the receiver
+object, <code>this</code>, where what “equal to” means is decided on by
+the implementer of the class. (The <code>equals()</code> method in Java
+serves the same purpose as the <code>__eq__</code> special method in
+Python.) The implementer is free to decide for themselves what “equal
+to” means for their class.</p>
+<p>In order to avoid suprising behaviour for callers of the method, in
+general equality should be an <a href="https://en.wikipedia.org/wiki/Equivalence_relation"><em>equivalence
+relation</em></a>; for instance, an object should always be equal to
+itself, and if <code>a.equals(b)</code> is true and
+<code>b.equals(c)</code> is true, then <code>a.equals(c)</code> should
+also be true.</p>
+<p>The <code>instanceof</code> keyword in Java allows us to check
+whether an object is an instace of some class (or some class that
+inherits from that class, directly or indirectly). Normally,
+implementers of <code>equals</code> will want to return
+“<code>false</code>” whenever we try to compare with objects not of the
+same class.</p>
+<p>Create a new Java project, create a <code>MyClass.java</code> file
+containing the code above, and check that it compiles.</p>
+<p><strong>A test class</strong></p>
+<p>Suppose we use the following test code for our <code>MyClass</code>
+class:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">import</span> <span class="kw">static</span><span class="im"> org</span><span class="op">.</span><span class="im">junit</span><span class="op">.</span><span class="im">jupiter</span><span class="op">.</span><span class="im">api</span><span class="op">.</span><span class="im">Assertions</span><span class="op">.*;</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="kw">import</span> <span class="im">org</span><span class="op">.</span><span class="im">junit</span><span class="op">.</span><span class="im">jupiter</span><span class="op">.</span><span class="im">api</span><span class="op">.</span><span class="im">AfterEach</span><span class="op">;</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="kw">import</span> <span class="im">org</span><span class="op">.</span><span class="im">junit</span><span class="op">.</span><span class="im">jupiter</span><span class="op">.</span><span class="im">api</span><span class="op">.</span><span class="im">BeforeEach</span><span class="op">;</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="kw">import</span> <span class="im">org</span><span class="op">.</span><span class="im">junit</span><span class="op">.</span><span class="im">jupiter</span><span class="op">.</span><span class="im">api</span><span class="op">.</span><span class="im">Test</span><span class="op">;</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span> <span class="kw">class</span> MyClassTest <span class="op">{</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>   <span class="kw">private</span> MyClass mc1<span class="op">;</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>   <span class="kw">private</span> MyClass mc2<span class="op">;</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>   <span class="kw">private</span> MyClass mc3<span class="op">;</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>   <span class="at">@BeforeEach</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>   <span class="kw">public</span> <span class="dt">void</span> <span class="fu">setUp</span><span class="op">()</span> <span class="op">{</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>     mc1 <span class="op">=</span> <span class="kw">new</span> <span class="fu">MyClass</span><span class="op">(</span><span class="dv">3</span><span class="op">);</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>     mc2 <span class="op">=</span> <span class="kw">new</span> <span class="fu">MyClass</span><span class="op">(</span><span class="dv">5</span><span class="op">);</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>     mc3 <span class="op">=</span> <span class="kw">new</span> <span class="fu">MyClass</span><span class="op">(</span><span class="dv">3</span><span class="op">);</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>   <span class="op">}</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>   <span class="at">@Test</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>   <span class="co">/* Test the case when, for two objects, the second is null */</span></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>   <span class="kw">public</span> <span class="dt">void</span> <span class="fu">equalsWhenNullRef</span><span class="op">()</span> <span class="op">{</span> <span class="fu">fail</span><span class="op">(</span><span class="st">&quot;incomplete&quot;</span><span class="op">);</span> <span class="op">}</span></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>   <span class="at">@Test</span></span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>   <span class="co">/* Test the case when, for two objects, they are not equal */</span></span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>   <span class="kw">public</span> <span class="dt">void</span> <span class="fu">equalsWhenNotEq</span><span class="op">()</span> <span class="op">{</span><span class="co">/*...*/</span><span class="op">}</span></span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>   <span class="at">@Test</span></span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>   <span class="co">/* Test the case when, for two objects, they are equall */</span></span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>   <span class="kw">public</span> <span class="dt">void</span> <span class="fu">equalsWhenEq</span><span class="op">()</span> <span class="op">{</span><span class="co">/*...*/</span><span class="op">}</span></span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p>In this case, the instance variables <code>mc1</code>,
+<code>mc2</code> and <code>mc3</code> are potential <em>fixtures</em>
+for any test.</p>
+<ol type="1">
+<li><p>Given the test code above, how many times will the
+<code>setUp()</code> method execute?</p>
+<p>Compile and run the tests and check whether this is the
+case.</p></li>
+<li><p>It is good practice, when writing new tests, to ensure that at
+first they <em>fail</em>. This is useful as a warning, so that you know
+the test is not yet complete. (We don’t want to accidentally give our
+code to other developers when it contains tests that are incomplete, or
+do the wrong thing.)</p>
+<p>Insert code into the test methods that will always fail. What JUnit
+method have you used? Are there any other ways you can think of (or spot
+in the JUnit documentation) for writing a test that always
+fails?</p></li>
+<li><p>Fill in code for the test methods in this class.</p></li>
+<li><p>Are there any other tests you think we should add in order to
+thoroughly test our class? What are they?</p></li>
+<li><p>Using the material from lectures, and the JUnit user guide, write
+a “teardown” method. What code should go in it? Based on your
+understanding of the Java language, is a “teardown” method necessary in
+this case? Why or why not?</p></li>
+</ol>
+
+<div class="solutions">
+<p><strong>1. setUp method</strong></p>
+<p>As suggested in the question – you should compile and run the tests
+to find out how many times the <code>setUp()</code> method executes.</p>
+<p><strong>2. failing tests</strong></p>
+<p>Some possibilities are:</p>
+<ul>
+<li><p>inserting an assertion you know will fail (e.g.
+<code>assertTrue(false)</code>)</p></li>
+<li><p>throwing an exception (if your test is <em>intended</em> to throw
+an exception, then throwing an exception other than the expected one).
+For example:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>  <span class="cf">throw</span> <span class="kw">new</span> <span class="bu">RuntimeException</span><span class="op">(</span><span class="st">&quot;test not implemented yet&quot;</span><span class="op">);</span></span></code></pre></div></li>
+<li><p>calling the method <code>fail(String message)</code> from the
+<code>org.junit.jupiter.api.Assertions</code> class (or one of several
+similar overloaded <code>fail</code> methods). For instance:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fail</span><span class="op">(</span><span class="st">&quot;test not implemented yet&quot;</span><span class="op">);</span></span></code></pre></div></li>
+</ul>
+<p>Of these, the last is the best, as it most clearly demonstrates the
+intention – to fail, not because some assertion is false, but because a
+test is not complete or has not yet been written.</p>
+<p>(You can also check out the answers to this <a href="https://stackoverflow.com/questions/14341277/is-there-a-general-way-to-mark-a-junit-test-as-pending">StackOverflow
+question</a> for some other possibilities.)</p>
+<p>Some testing frameworks have special assertions or annotations for
+marking a test as <em>pending</em> (not yet running, for some reason),
+but JUnit does not yet have this functionality built into it.</p>
+<p><strong>3–4. unit test practice</strong></p>
+<p>You should gain practise writing tests by doing these exercises
+yourself – model solutions are not provided. Feel free to show your code
+to facilitators or the unit coordinator for feedback if you have
+attempted them.</p>
+<p><strong>5. tearDown method</strong></p>
+<p>You could write something like</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>  <span class="at">@AfterEach</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">public</span> <span class="dt">void</span> <span class="fu">tearDown</span><span class="op">()</span> <span class="op">{</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    mc1 <span class="op">=</span> <span class="kw">null</span><span class="op">;</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    mc2 <span class="op">=</span> <span class="kw">null</span><span class="op">;</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    mc3 <span class="op">=</span> <span class="kw">null</span><span class="op">;</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span></code></pre></div>
+<p>But this is not actually necessary. The order of events is that for
+each test, the JVM will</p>
+<ul>
+<li>create an instance of <code>MyClassTest</code></li>
+<li>run the <code>setUp</code> method, and</li>
+<li>execute the test</li>
+</ul>
+<p>and sometime after this, the instance of <code>MyClassTest</code>
+will get garbage-collected and any memory associated with it will be
+freed. Since the Java</p>
+<p>We only need to write a <code>tearDown</code> method when there are
+resources (e.g. files on disk, database tables) that are <em>not</em>
+cleaned up by the JVM. In that case, we would write a
+<code>tearDown</code> method that, for instance, deletes any created
+files.</p>
+</div>
+<p></p>
+<h2 id="class-design-invariants-and-testability">2. Class design,
+invariants, and testability</h2>
+<p>Suppose we are writing a <code>DigitalTimer</code> class representing
+24-hour times – it could be used, for example, in simulation programs.
+Rather than measuring “real” time, it measures simulated time, where
+every call to the <code>tick()</code> method causes one second to
+“elapse”. Other objects in the simulation could then query a
+<code>DigitalTimer</code> object to find out what the current time is.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
+<p>A colleague has suggested the following method signatures and
+documentation for the class:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">/** Represents a simulated time, where the &quot;tick&quot; method causes the time to be incremented</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co">  * by one second.</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co">  */</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span> <span class="kw">class</span> DigitalTimer <span class="op">{</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="co">/** Construct a new DigitalTimer, initialized to time zero.</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="co">   */</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  <span class="kw">public</span> <span class="fu">DigitalTimer</span><span class="op">();</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>  <span class="co">/** Get the &quot;hours&quot; component of the time elapsed since</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="co">   * the timer was started.</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="co">   */</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>  <span class="kw">public</span> <span class="dt">int</span> <span class="fu">getHours</span><span class="op">();</span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>  <span class="co">/** Get the &quot;minutes&quot; component of the time elapsed since</span></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a><span class="co">   * the timer was started.</span></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a><span class="co">   */</span></span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>  <span class="kw">public</span> <span class="dt">int</span> <span class="fu">getMinutes</span><span class="op">();</span></span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>  <span class="co">/** Get the &quot;seconds&quot; component of the time elapsed since</span></span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a><span class="co">   * the timer was started.</span></span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a><span class="co">   */</span></span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>  <span class="kw">public</span> <span class="dt">int</span> <span class="fu">getSeconds</span><span class="op">();</span></span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>  <span class="co">/** Cause one simulated second to elapse. Once the timer reaches</span></span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a><span class="co">   * 23 hours, 59 minutes, and 59 seconds, further calls to tick will</span></span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a><span class="co">   * have no effect.</span></span>
+<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a><span class="co">   */</span></span>
+<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a>  <span class="kw">public</span> <span class="dt">void</span> <span class="fu">tick</span><span class="op">();</span></span>
+<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p>The method signatures your colleague has written represent the public
+API for the class; they don’t show the implementation.</p>
+<dl>
+<dt><strong>Question:</strong></dt>
+<dd>
+<p>Before going on – what might be useful attributes (fields) for the
+class? These will be part of the implementation. Can you think of
+multiple different alternatives? Should they be added to the API? Why,
+or why not?</p>
+</dd>
+</dl>
+
+<div class="solutions">
+<p><strong>Solution</strong></p>
+<p>There should be two obvious possibilities for an implementation:</p>
+<ol type="a">
+<li><p>We could add <code>int</code> attributes <code>hours</code>,
+<code>minutes</code> and <code>seconds</code>. In this case, the
+implementations of <code>getHour</code>, <code>getMinute</code> and
+<code>getSecond</code> will be very simple; but the <code>tick</code>
+implentation will need to ensure values are properly “carried” when, for
+instance, <code>seconds</code> equals 59 and <code>tick</code> is
+invoked.</p></li>
+<li><p>We could add a single <code>second</code> attribute, and no
+others. In this case, the <code>tick</code> implementation will be very
+simple (we simply increment our <code>seconds</code> attribute), but the
+<code>getHour</code>, <code>getMinute</code> and <code>getSecond</code>
+will be more complex.</p></li>
+</ol>
+<p>The fields should be kept private, because otherwise, any user of the
+class can alter them, and we have no ability to maintain the invariants
+(see next question) – and thus, no way of ensuring our objects are still
+in a sensible, consistent state.</p>
+</div>
+<p></p>
+<dl>
+<dt><strong>Question:</strong></dt>
+<dd>
+<p>Consider whether there are any <em>invariants</em> that govern the
+values of these attributes. Class invariants are constraints on what
+values the attributes of the class can take. They do <em>not</em> form
+part of the public API: they are an implementation detail, for use by
+the developer of the class (and any other developers maintaining the
+code).</p>
+</dd>
+</dl>
+<p>For this lab, it’s suggested you use three <code>int</code>
+attributes, <code>hours</code>, <code>minutes</code> and
+<code>seconds</code>. Using your colleague’s API sketch as a starting
+point, add in the attributes and add “skeleton” method bodies to the
+code – e.g., for <code>getSeconds()</code>, you might start with</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>  <span class="kw">public</span> <span class="dt">int</span> <span class="fu">getSeconds</span><span class="op">()</span> <span class="op">{</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="op">-</span><span class="dv">1</span><span class="op">;</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span></code></pre></div>
+<p>The aim is to write code that will compile (but isn’t yet a correct
+implementation).</p>
+<p>You should be able to come up with a number of class invariants
+relating these attributes. Write them down as inline comments
+(<em>not</em> as Javadoc comments) in the body of the class. If you drop
+in on a timetabled lab session, compare the invariants you have proposed
+with those of other students (or with the lab facilitator).</p>
+
+<div class="solutions">
+<p><strong>Solutions</strong></p>
+<p>The invariants will depend on whether we chose implementation (a) or
+(b).</p>
+<p>But in either case, there are some obvious invariants that apply to
+the class. For instance, assuming we have chosen implementation (b):</p>
+<ul>
+<li><code>seconds</code>, <code>hours</code> and <code>minutes</code>
+should always be greater than or equal to 0.</li>
+<li>Attributes will have a maximum value they can never exceed – 23 for
+hours, 59 for seconds, and 59 for seconds.</li>
+</ul>
+</div>
+<p></p>
+<p><em>Before</em> writing a constructor and filling in the method
+bodies, write a <code>DigitalTimerTest</code> class:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">import</span> <span class="kw">static</span><span class="im"> org</span><span class="op">.</span><span class="im">junit</span><span class="op">.</span><span class="im">jupiter</span><span class="op">.</span><span class="im">api</span><span class="op">.</span><span class="im">Assertions</span><span class="op">.*;</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="kw">import</span> <span class="im">org</span><span class="op">.</span><span class="im">junit</span><span class="op">.</span><span class="im">jupiter</span><span class="op">.</span><span class="im">api</span><span class="op">.</span><span class="im">Test</span><span class="op">;</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span> <span class="kw">class</span> DigitalTimerTest <span class="op">{</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">@Test</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>  <span class="kw">public</span> <span class="dt">void</span> <span class="fu">testConstructor</span><span class="op">()</span> <span class="op">{</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">@Test</span></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>  <span class="kw">public</span> <span class="dt">void</span> <span class="fu">testTick</span><span class="op">()</span> <span class="op">{</span></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p>See if you can suggest some possible test cases for this JUnit class,
+and try implementing them. Obviously, they will fail at first; but since
+your tests should rely only on the documented behaviour of the class,
+it’s quite possible to write them before the class has been implemented.
+This approach is used in the <a href="https://en.wikipedia.org/wiki/Test-driven_development">test-driven
+development methodology</a> (TDD).</p>
+<p>Lastly, try filling in the method bodies for
+<code>DigitalTimerTest</code>. Some notes to bear in mind:</p>
+<ul>
+<li>The job of a <em>constructor</em> is to initialize a new class
+object, ensuring (by the time the constructor has finished) that the
+object is in a sensible state and all the invariants hold.</li>
+<li>The job of any mutator method is to alter the state of an object in
+some way. Assuming the class invariants hold before the mutator is
+called, the mutator might break them temporarily (say, temporarily
+setting “<code>seconds</code>” to 60); but it should ensure the
+invariants hold again by the time it finishes executing.</li>
+</ul>
+<p>You could find it useful, while testing, to write a
+<code>private</code> “<code>checkInvariants</code>” method, which tests
+whether the invariants hold, and throws an <a href="https://docs.oracle.com/en%2Fjava%2Fjavase%2F11%2Fdocs%2Fapi%2F%2F/java.base/java/lang/IllegalStateException.html"><code>IllegalStateException</code></a>
+if not. Such an exception typically signals a logic error in the
+program, so generally shouldn’t be caught.</p>
+
+<div class="solutions">
+<p>Sample solution code (not including the Javadoc):</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span> <span class="kw">class</span> DigitalTimer <span class="op">{</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">private</span> <span class="dt">int</span> hours<span class="op">;</span> <span class="co">// invariant: 0 &lt;= hours &lt;= 23</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="kw">private</span> <span class="dt">int</span> minutes<span class="op">;</span> <span class="co">// invariant: 0 &lt;= minutes &lt;= 59</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">private</span> <span class="dt">int</span> seconds<span class="op">;</span> <span class="co">// invariant: 0 &lt;= seconds &lt;= 59</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>  <span class="kw">public</span> <span class="fu">DigitalTimer</span><span class="op">()</span> <span class="op">{</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>    <span class="kw">this</span><span class="op">.</span><span class="fu">hours</span> <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>    <span class="kw">this</span><span class="op">.</span><span class="fu">minutes</span> <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>    <span class="kw">this</span><span class="op">.</span><span class="fu">seconds</span> <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>  <span class="kw">public</span> <span class="dt">int</span> <span class="fu">getHours</span><span class="op">()</span> <span class="op">{</span></span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> hours<span class="op">;</span></span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>  <span class="kw">public</span> <span class="dt">int</span> <span class="fu">getMinutes</span><span class="op">()</span> <span class="op">{</span></span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> minutes<span class="op">;</span></span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>  <span class="kw">public</span> <span class="dt">int</span> <span class="fu">getSeconds</span><span class="op">()</span> <span class="op">{</span></span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> seconds<span class="op">;</span></span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a>  <span class="kw">public</span> <span class="dt">void</span> <span class="fu">tick</span><span class="op">()</span> <span class="op">{</span></span>
+<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>hours <span class="op">==</span> <span class="dv">23</span> <span class="op">&amp;&amp;</span> minutes <span class="op">==</span> <span class="dv">59</span> <span class="op">&amp;&amp;</span> seconds <span class="op">==</span> <span class="dv">59</span><span class="op">)</span></span>
+<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a>      <span class="cf">return</span><span class="op">;</span></span>
+<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a>    seconds<span class="op">++;</span></span>
+<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>seconds <span class="op">==</span> <span class="dv">60</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb9-31"><a href="#cb9-31" aria-hidden="true" tabindex="-1"></a>      seconds <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb9-32"><a href="#cb9-32" aria-hidden="true" tabindex="-1"></a>      minutes<span class="op">++;</span></span>
+<span id="cb9-33"><a href="#cb9-33" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb9-34"><a href="#cb9-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-35"><a href="#cb9-35" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>minutes <span class="op">==</span> <span class="dv">60</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb9-36"><a href="#cb9-36" aria-hidden="true" tabindex="-1"></a>      minutes <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb9-37"><a href="#cb9-37" aria-hidden="true" tabindex="-1"></a>      hours<span class="op">++;</span></span>
+<span id="cb9-38"><a href="#cb9-38" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb9-39"><a href="#cb9-39" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb9-40"><a href="#cb9-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-41"><a href="#cb9-41" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p>Note that the <code>tick</code> method sometimes breaks the
+invariants (for instance, <code>seconds</code> might temporarily be set
+to 60), but they are restored again by the time the method ends.</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="kw">import</span> <span class="im">org</span><span class="op">.</span><span class="im">junit</span><span class="op">.</span><span class="im">jupiter</span><span class="op">.</span><span class="im">api</span><span class="op">.</span><span class="im">Test</span><span class="op">;</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="kw">import</span> <span class="kw">static</span><span class="im"> org</span><span class="op">.</span><span class="im">junit</span><span class="op">.</span><span class="im">jupiter</span><span class="op">.</span><span class="im">api</span><span class="op">.</span><span class="im">Assertions</span><span class="op">.*;</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span> <span class="kw">class</span> DigitalTimerTest <span class="op">{</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">@Test</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>  <span class="kw">public</span> <span class="dt">void</span> <span class="fu">testConstructor_initialValues</span><span class="op">()</span> <span class="op">{</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>    DigitalTimer timer <span class="op">=</span> <span class="kw">new</span> <span class="fu">DigitalTimer</span><span class="op">();</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">assertEquals</span><span class="op">(</span><span class="dv">0</span><span class="op">,</span> timer<span class="op">.</span><span class="fu">getHours</span><span class="op">(),</span> <span class="st">&quot;Initial hours should be 0&quot;</span><span class="op">);</span></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">assertEquals</span><span class="op">(</span><span class="dv">0</span><span class="op">,</span> timer<span class="op">.</span><span class="fu">getMinutes</span><span class="op">(),</span> <span class="st">&quot;Initial minutes should be 0&quot;</span><span class="op">);</span></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">assertEquals</span><span class="op">(</span><span class="dv">0</span><span class="op">,</span> timer<span class="op">.</span><span class="fu">getSeconds</span><span class="op">(),</span> <span class="st">&quot;Initial seconds should be 0&quot;</span><span class="op">);</span></span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">@Test</span></span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>  <span class="kw">public</span> <span class="dt">void</span> <span class="fu">testTick_incrementSeconds</span><span class="op">()</span> <span class="op">{</span></span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>    DigitalTimer timer <span class="op">=</span> <span class="kw">new</span> <span class="fu">DigitalTimer</span><span class="op">();</span></span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>    timer<span class="op">.</span><span class="fu">tick</span><span class="op">();</span></span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>    <span class="fu">assertEquals</span><span class="op">(</span><span class="dv">0</span><span class="op">,</span> timer<span class="op">.</span><span class="fu">getHours</span><span class="op">(),</span> <span class="st">&quot;Hours should still be 0 after 1 tick&quot;</span><span class="op">);</span></span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>    <span class="fu">assertEquals</span><span class="op">(</span><span class="dv">0</span><span class="op">,</span> timer<span class="op">.</span><span class="fu">getMinutes</span><span class="op">(),</span> <span class="st">&quot;Minutes should still be 0 after 1 tick&quot;</span><span class="op">);</span></span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a>    <span class="fu">assertEquals</span><span class="op">(</span><span class="dv">1</span><span class="op">,</span> timer<span class="op">.</span><span class="fu">getSeconds</span><span class="op">(),</span> <span class="st">&quot;Seconds should be incremented by 1&quot;</span><span class="op">);</span></span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a>  <span class="at">@Test</span></span>
+<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a>  <span class="kw">public</span> <span class="dt">void</span> <span class="fu">testTick_incrementMinutes</span><span class="op">()</span> <span class="op">{</span></span>
+<span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a>    DigitalTimer timer <span class="op">=</span> <span class="kw">new</span> <span class="fu">DigitalTimer</span><span class="op">();</span></span>
+<span id="cb10-26"><a href="#cb10-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-27"><a href="#cb10-27" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> <span class="dv">60</span><span class="op">;</span> i<span class="op">++)</span> <span class="op">{</span></span>
+<span id="cb10-28"><a href="#cb10-28" aria-hidden="true" tabindex="-1"></a>      timer<span class="op">.</span><span class="fu">tick</span><span class="op">();</span></span>
+<span id="cb10-29"><a href="#cb10-29" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb10-30"><a href="#cb10-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-31"><a href="#cb10-31" aria-hidden="true" tabindex="-1"></a>    <span class="fu">assertEquals</span><span class="op">(</span><span class="dv">0</span><span class="op">,</span> timer<span class="op">.</span><span class="fu">getHours</span><span class="op">(),</span> <span class="st">&quot;Hours should still be 0 after 60 ticks&quot;</span><span class="op">);</span></span>
+<span id="cb10-32"><a href="#cb10-32" aria-hidden="true" tabindex="-1"></a>    <span class="fu">assertEquals</span><span class="op">(</span><span class="dv">1</span><span class="op">,</span> timer<span class="op">.</span><span class="fu">getMinutes</span><span class="op">(),</span> <span class="st">&quot;Minutes should be incremented by 1 after 60 ticks&quot;</span><span class="op">);</span></span>
+<span id="cb10-33"><a href="#cb10-33" aria-hidden="true" tabindex="-1"></a>    <span class="fu">assertEquals</span><span class="op">(</span><span class="dv">0</span><span class="op">,</span> timer<span class="op">.</span><span class="fu">getSeconds</span><span class="op">(),</span> <span class="st">&quot;Seconds should reset to 0 after 60 ticks&quot;</span><span class="op">);</span></span>
+<span id="cb10-34"><a href="#cb10-34" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb10-35"><a href="#cb10-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-36"><a href="#cb10-36" aria-hidden="true" tabindex="-1"></a>  <span class="at">@Test</span></span>
+<span id="cb10-37"><a href="#cb10-37" aria-hidden="true" tabindex="-1"></a>  <span class="kw">public</span> <span class="dt">void</span> <span class="fu">testTick_incrementHours</span><span class="op">()</span> <span class="op">{</span></span>
+<span id="cb10-38"><a href="#cb10-38" aria-hidden="true" tabindex="-1"></a>    DigitalTimer timer <span class="op">=</span> <span class="kw">new</span> <span class="fu">DigitalTimer</span><span class="op">();</span></span>
+<span id="cb10-39"><a href="#cb10-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-40"><a href="#cb10-40" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> <span class="dv">3600</span><span class="op">;</span> i<span class="op">++)</span> <span class="op">{</span></span>
+<span id="cb10-41"><a href="#cb10-41" aria-hidden="true" tabindex="-1"></a>      timer<span class="op">.</span><span class="fu">tick</span><span class="op">();</span></span>
+<span id="cb10-42"><a href="#cb10-42" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb10-43"><a href="#cb10-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-44"><a href="#cb10-44" aria-hidden="true" tabindex="-1"></a>    <span class="fu">assertEquals</span><span class="op">(</span><span class="dv">1</span><span class="op">,</span> timer<span class="op">.</span><span class="fu">getHours</span><span class="op">(),</span> <span class="st">&quot;Hours should be incremented by 1 after 3600 ticks&quot;</span><span class="op">);</span></span>
+<span id="cb10-45"><a href="#cb10-45" aria-hidden="true" tabindex="-1"></a>    <span class="fu">assertEquals</span><span class="op">(</span><span class="dv">0</span><span class="op">,</span> timer<span class="op">.</span><span class="fu">getMinutes</span><span class="op">(),</span> <span class="st">&quot;Minutes should reset to 0 after 3600 ticks&quot;</span><span class="op">);</span></span>
+<span id="cb10-46"><a href="#cb10-46" aria-hidden="true" tabindex="-1"></a>    <span class="fu">assertEquals</span><span class="op">(</span><span class="dv">0</span><span class="op">,</span> timer<span class="op">.</span><span class="fu">getSeconds</span><span class="op">(),</span> <span class="st">&quot;Seconds should reset to 0 after 3600 ticks&quot;</span><span class="op">);</span></span>
+<span id="cb10-47"><a href="#cb10-47" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb10-48"><a href="#cb10-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-49"><a href="#cb10-49" aria-hidden="true" tabindex="-1"></a>  <span class="at">@Test</span></span>
+<span id="cb10-50"><a href="#cb10-50" aria-hidden="true" tabindex="-1"></a>  <span class="kw">public</span> <span class="dt">void</span> <span class="fu">testTick_maxTimeReached</span><span class="op">()</span> <span class="op">{</span></span>
+<span id="cb10-51"><a href="#cb10-51" aria-hidden="true" tabindex="-1"></a>    DigitalTimer timer <span class="op">=</span> <span class="kw">new</span> <span class="fu">DigitalTimer</span><span class="op">();</span></span>
+<span id="cb10-52"><a href="#cb10-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-53"><a href="#cb10-53" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Set the timer to 23:59:59</span></span>
+<span id="cb10-54"><a href="#cb10-54" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> <span class="op">(</span><span class="dv">23</span> <span class="op">*</span> <span class="dv">3600</span> <span class="op">+</span> <span class="dv">59</span> <span class="op">*</span> <span class="dv">60</span> <span class="op">+</span> <span class="dv">59</span><span class="op">);</span> i<span class="op">++)</span> <span class="op">{</span></span>
+<span id="cb10-55"><a href="#cb10-55" aria-hidden="true" tabindex="-1"></a>      timer<span class="op">.</span><span class="fu">tick</span><span class="op">();</span></span>
+<span id="cb10-56"><a href="#cb10-56" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb10-57"><a href="#cb10-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-58"><a href="#cb10-58" aria-hidden="true" tabindex="-1"></a>    <span class="fu">assertEquals</span><span class="op">(</span><span class="dv">23</span><span class="op">,</span> timer<span class="op">.</span><span class="fu">getHours</span><span class="op">(),</span> <span class="st">&quot;Hours should be 23 after 86399 ticks&quot;</span><span class="op">);</span></span>
+<span id="cb10-59"><a href="#cb10-59" aria-hidden="true" tabindex="-1"></a>    <span class="fu">assertEquals</span><span class="op">(</span><span class="dv">59</span><span class="op">,</span> timer<span class="op">.</span><span class="fu">getMinutes</span><span class="op">(),</span> <span class="st">&quot;Minutes should be 59 after 86399 ticks&quot;</span><span class="op">);</span></span>
+<span id="cb10-60"><a href="#cb10-60" aria-hidden="true" tabindex="-1"></a>    <span class="fu">assertEquals</span><span class="op">(</span><span class="dv">59</span><span class="op">,</span> timer<span class="op">.</span><span class="fu">getSeconds</span><span class="op">(),</span> <span class="st">&quot;Seconds should be 59 after 86399 ticks&quot;</span><span class="op">);</span></span>
+<span id="cb10-61"><a href="#cb10-61" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-62"><a href="#cb10-62" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Tick once more, timer should remain at 23:59:59</span></span>
+<span id="cb10-63"><a href="#cb10-63" aria-hidden="true" tabindex="-1"></a>    timer<span class="op">.</span><span class="fu">tick</span><span class="op">();</span></span>
+<span id="cb10-64"><a href="#cb10-64" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-65"><a href="#cb10-65" aria-hidden="true" tabindex="-1"></a>    <span class="fu">assertEquals</span><span class="op">(</span><span class="dv">23</span><span class="op">,</span> timer<span class="op">.</span><span class="fu">getHours</span><span class="op">(),</span> <span class="st">&quot;Hours should remain 23 after max time is reached&quot;</span><span class="op">);</span></span>
+<span id="cb10-66"><a href="#cb10-66" aria-hidden="true" tabindex="-1"></a>    <span class="fu">assertEquals</span><span class="op">(</span><span class="dv">59</span><span class="op">,</span> timer<span class="op">.</span><span class="fu">getMinutes</span><span class="op">(),</span> <span class="st">&quot;Minutes should remain 59 after max time is reached&quot;</span><span class="op">);</span></span>
+<span id="cb10-67"><a href="#cb10-67" aria-hidden="true" tabindex="-1"></a>    <span class="fu">assertEquals</span><span class="op">(</span><span class="dv">59</span><span class="op">,</span> timer<span class="op">.</span><span class="fu">getSeconds</span><span class="op">(),</span> <span class="st">&quot;Seconds should remain 59 after max time is reached&quot;</span><span class="op">);</span></span>
+<span id="cb10-68"><a href="#cb10-68" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb10-69"><a href="#cb10-69" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+</div>
+<p></p>
+<p>How will you test that <code>tick</code> operates correctly after,
+say, 59 seconds, or once the time reaches 23:59:59?</p>
+<p>There are a few different options here:</p>
+<dl>
+<dt><strong>Test through public API</strong></dt>
+<dd>
+<p>If possible, it’s usually preferable to test a class solely through
+its public methods and constructors, treating the implementation of the
+class as a “black box”. The reason this is preferred is because it
+ensures the class behaves correctly when its behaviour is invoked via
+the API – which is, after all, how we expect it to be used.</p>
+<p>However, it might prove challenging to test the class thoroughly when
+some behaviours are difficult to trigger. If this is the case, we might
+consider using another method (see below), or we might consider
+redesigning the API to make the class more testable.</p>
+</dd>
+<dt><strong>Use reflection</strong></dt>
+<dd>
+<p>Ideally, our classes should be designed with testability in mind. But
+if necessary, it’s possible to use Java’s <a href="https://docs.oracle.com/javase/7/docs/api/java/lang/reflect/package-summary.html">reflection
+API</a>. This allows us to obtain information about the methods and
+fields of an object at runtime, and to alter their visibility.</p>
+<p>You can see an example of how to access private field information <a href="https://www.geeksforgeeks.org/how-to-access-private-field-and-method-using-reflection-in-java/">here</a>,
+and read more about the reflection API in Oracle’s technical article on
+the topic <a href="https://www.oracle.com/technical-resources/articles/java/javareflection.html">here</a>.</p>
+<p>This allows us to directly set particular internal states, which can
+be convenient for testing. But a disadvantage is that the tests are now
+tightly coupled to the class’s implementation, and will likely break if
+that implementation is altered. By setting the state directly, we’re
+also bypassing the publicly documented API – we need to make sure that
+the state we set <em>is</em> one that could still be achieved directly
+through the API (otherwise, we’re testing something that couldn’t
+actually happen). Finally, use of reflection tends to make tests more
+complex and harder to maintain.</p>
+</dd>
+</dl>
+<dl>
+<dt><strong>Use protected, “package-private” setter methods, and/or
+inheritance</strong></dt>
+<dd>
+<p>An alternative to using the reflection API is to write protected or
+“package-private” methods that set the state directly.</p>
+<p>Protected methods of some class can be invoked by other classes in
+the same package, or by subclasses; they’re indicated by writing
+“<code>protected</code>” as a method modifier. “Package-private” methods
+can be accessed by other classes in the same package, and are indicated
+by not writing any method modifier – for instance:</p>
+<pre><code>  public setMinutes(int minutes) {
+    this.minutes = minutes;
+  }</code></pre>
+<p>Our test classes can then use these methods to directly set the state
+of the class under test. This is simpler than using the reflection API,
+but other than that, has much the same drawbacks: we’re subverting the
+public API, and our tests are now more tightly coupled to the
+implementation.</p>
+<p>One variant of this is to <em>subclass</em> our original
+class-under-test, and add mutators to the subclass. Technically, if we
+haven’t made our class under test <code>final</code>, this
+<em>isn’t</em> subverting the API (as long as our subclass maintains all
+the invariants of the original class), since inheritance is an allowable
+way of using a class.</p>
+<p>But in general, it’s better to only allow classes to be inherited
+from if they’ve been designed with that in mind – it’s better practice
+to make classes <code>final</code>, preventing inheritance.</p>
+</dd>
+</dl>
+<p>In the present case, it should be possible to test the class entirely
+through its public API (though it might seem a little awkward).</p>
+<div style="border: solid 2pt blue; background-color: hsla(241, 100%,50%, 0.1); padding: 1em; border-radius: 5pt; margin-top: 1em;">
+<div class="block-caption">
+<p>Pre-reading</p>
+</div>
+<p>The following exercises in this worksheet assume general familiarity
+with graph-based testing concepts, so it’s recommended you work through
+chapter 7 from the Ammann and Offutt textbook before attempting
+them.</p>
+</div>
+<h2 id="isp-and-control-flow">3. ISP and control flow</h2>
+<p>Consider the following Java method for collapsing sequences of
+blanks, taken from the <code>StringUtils</code> class of Apache Velocity
+(<a href="http://velocity.apache.org/" class="uri">http://velocity.apache.org/</a>), version 1.3.1:</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode numberSource java numberLines"><code class="sourceCode java"><span id="cb12-1"><a href="#cb12-1"></a></span>
+<span id="cb12-2"><a href="#cb12-2"></a><span class="co">/**</span></span>
+<span id="cb12-3"><a href="#cb12-3"></a><span class="co">* Remove/collapse multiple spaces.</span></span>
+<span id="cb12-4"><a href="#cb12-4"></a><span class="co">*</span></span>
+<span id="cb12-5"><a href="#cb12-5"></a><span class="co">* @param String string to remove multiple spaces from.</span></span>
+<span id="cb12-6"><a href="#cb12-6"></a><span class="co">* @return String</span></span>
+<span id="cb12-7"><a href="#cb12-7"></a><span class="co">*/</span></span>
+<span id="cb12-8"><a href="#cb12-8"></a></span>
+<span id="cb12-9"><a href="#cb12-9"></a><span class="kw">public</span> <span class="dt">static</span> <span class="bu">String</span> <span class="fu">collapseSpaces</span><span class="op">(</span><span class="bu">String</span> argStr<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb12-10"><a href="#cb12-10"></a>  <span class="dt">char</span> last <span class="op">=</span> argStr<span class="op">.</span><span class="fu">charAt</span><span class="op">(</span><span class="dv">0</span><span class="op">);</span></span>
+<span id="cb12-11"><a href="#cb12-11"></a>  <span class="bu">StringBuffer</span> argBuf <span class="op">=</span> <span class="kw">new</span> <span class="bu">StringBuffer</span><span class="op">();</span></span>
+<span id="cb12-12"><a href="#cb12-12"></a></span>
+<span id="cb12-13"><a href="#cb12-13"></a>  <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> cIdx <span class="op">=</span> <span class="dv">0</span> <span class="op">;</span> cIdx <span class="op">&lt;</span> argStr<span class="op">.</span><span class="fu">length</span><span class="op">();</span> cIdx<span class="op">++)</span> <span class="op">{</span></span>
+<span id="cb12-14"><a href="#cb12-14"></a>    <span class="dt">char</span> ch <span class="op">=</span> argStr<span class="op">.</span><span class="fu">charAt</span><span class="op">(</span>cIdx<span class="op">);</span></span>
+<span id="cb12-15"><a href="#cb12-15"></a>    <span class="cf">if</span> <span class="op">(</span>ch <span class="op">!=</span> <span class="ch">&#39; &#39;</span> <span class="op">||</span> last <span class="op">!=</span> <span class="ch">&#39; &#39;</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb12-16"><a href="#cb12-16"></a>      argBuf<span class="op">.</span><span class="fu">append</span><span class="op">(</span>ch<span class="op">);</span></span>
+<span id="cb12-17"><a href="#cb12-17"></a>      last <span class="op">=</span> ch<span class="op">;</span></span>
+<span id="cb12-18"><a href="#cb12-18"></a>    <span class="op">}</span></span>
+<span id="cb12-19"><a href="#cb12-19"></a>  <span class="op">}</span></span>
+<span id="cb12-20"><a href="#cb12-20"></a>  <span class="cf">return</span> argBuf<span class="op">.</span><span class="fu">toString</span><span class="op">();</span></span>
+<span id="cb12-21"><a href="#cb12-21"></a><span class="op">}</span></span></code></pre></div>
+<dl>
+<dt><strong>Exercise</strong></dt>
+<dd>
+<p>Using the ISP principles we have covered in class, suggest some
+<em>characteristics</em> we could use to partition the
+<code>argStr</code> parameter.</p>
+<p>Once you have several characteristics, consider how you might choose
+combinations of partitions from them. A recommended approach is to aim
+for “Base Choice” coverage:</p>
+<ol type="i">
+<li>For each characteristic, pick a <em>base choice</em> (and explain
+the reasoning behind that choice). Usually, the base choice will be one
+that is simpler, smaller, or more likely to occur than the other
+possibilities.</li>
+<li>Select test values for a “base choice” test.</li>
+<li>Go through and derive test values for the “non-base”
+partitions.</li>
+</ol>
+<p>Try writing JUnit tests for some of your test values.</p>
+<p>After you have finished the lab exercises, you might like to drop
+into one of the timetabled lab sessions and compare the characteristics
+and test values you derived with those of another student. Are your
+solutions the same? If not, how do they differ? Do either of your
+solutions have an advantage over the other?</p>
+</dd>
+</dl>
+
+<div class="solutions">
+<p><strong>Sample solutions</strong>:</p>
+<p><strong>ISP characteristics</strong></p>
+<p>Here are some possible characteristics, and values we might select
+from each partition:</p>
+<ul>
+<li>Is the string empty, or non-empty?
+<ul>
+<li>This gives us two partitions.</li>
+<li>For the “non-empty” option, we might choose as test values a
+“typical” string, say <code>&quot;too many assessments :/&quot;</code>, and maybe
+some less typical options (perhaps very long strings, strings using
+non-English Unicode characters, or the string
+<code>&quot;not nearly enough assessments :/&quot;</code>)</li>
+</ul></li>
+</ul>
+<p>We can define some <em>sub</em>-characteristics for the non-empty
+option. Some sample characteristics follow, all of which assume the
+string is non-empty:</p>
+<ul>
+<li>Does the string contain spaces? (Gives 2 partitions; strings that
+do, and strings that don’t)</li>
+<li>Does the string contain only spaces? (ditto – gives 2
+partitions)</li>
+<li>Does the string contain spaces at the start? (gives 2
+partitions)</li>
+<li>Does the string contain spaces at the end? (gives 2 partitions)</li>
+<li>Does the string contain a run of two or more contiguous spaces?
+(gives 2 partitions)</li>
+<li>Does the string contain a run of two or more tab (<code>\t</code>)
+characters? (gives 2 partitions)</li>
+<li>Does the string contain a run of two or more <a href="https://en.wikipedia.org/wiki/Zero-width_space">zero-width
+space</a> (unicode <code>U+200B</code>) characters? (gives 2
+partitions)</li>
+</ul>
+<p>For a <em>base choice</em>, we might select the following partitions
+from those:</p>
+<ul>
+<li>Does the string contain spaces? Base choice: yes. (A string
+containing some spaces would be a typical use case for this
+method.)</li>
+<li>Does the string contain only spaces? Base choice: no. (A string with
+all spaces would be atypical.)</li>
+<li>Does the string contain spaces at the start? Base choice: no. (We
+might think that the most common case is where the parameter starts and
+ends with a letter or punctuation.)</li>
+<li>Does the string contain spaces at the end? Base choice: no. (See
+previous point)</li>
+<li>Does the string contain a run of two or more contiguous spaces? Base
+choice: we might decide either way, but let’s say that we think “Yes”
+represents a more typical use case here.</li>
+<li>Does the string contain a run of two or more tab (<code>\t</code>)
+characters? Base choice: we might select “no”, on the grounds that
+spaces are more common than tabs.</li>
+<li>Does the string contain a run of two or more <a href="https://en.wikipedia.org/wiki/Zero-width_space">zero-width
+space</a> (unicode <code>U+200B</code>) characters? Base choice: no,
+again (see previous point).</li>
+</ul>
+<p>We can then construct a test <em>value</em> which satisfies all those
+base choices – <code>&quot;some␣random␣␣string&quot;</code>, perhaps (here, we’ve
+used the <code>␣</code> character to represent a space – note the 2
+spaces after “random”).</p>
+<p>We would then go through and vary the partitions for different
+characteristics. (This <em>doesn’t</em> mean we have to use our original
+test <em>value</em> as a template, though we could if we want.)</p>
+<p>For instance, “Does the string contain spaces at the start?”. The
+base choice selects from the “no” partition; we could vary this by using
+<code>&quot;␣some␣random␣␣string&quot;</code> as a test value.</p>
+<p>There might well be better ways of organizing our characteristics –
+what were yours? (For instance, one other possibility is: partition
+strings into “Strings containing a run of two or more consecutive
+whitespace characters” vs “Strings that don’t”. We might then make most
+of the characteristics listed above <em>sub-</em>partitions of the
+“Strings that do…” partition.)</p>
+</div>
+<p></p>
+<p>In previous labs, we’ve seen that attempting to measure test coverage
+simply by recording which lines of code a test suite exercises can
+mislead us as to how thoroughly our tests exercise the code.</p>
+<p>One alternative is to construct a <em>control flow graph</em> of the
+code being tested. A control flow graph (CFG) is a way of representing
+all the possible paths that a program’s execution can take.</p>
+<ul>
+<li><p>The graph is made up of <em>nodes</em>. Each node represents a
+<em>basic block</em> of code: a chunk of instructions that will always
+run together in sequence. Sometimes, a node corresponds to only
+<em>part</em> of a statement – for example, in a Java <code>for</code>
+loop like</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> mylist<span class="op">.</span><span class="fu">size</span><span class="op">();</span> i<span class="op">++)</span> <span class="op">{</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="co">// loop body</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p>there might be a node for the <em>initialisation</em>
+(<code>int i = 0</code>), a node for the <em>condition check</em>
+(<code>i &lt; mylist.size()</code>), a node for the <em>update</em>
+(<code>i++</code>), and nodes for the loop body.</p></li>
+<li><p>The connections between nodes are called <em>edges</em> (we can
+think of them informally as “arrows”). An edge shows that after
+finishing one node, control may flow to another node.</p></li>
+<li><p>By following the arrows, we can trace out every possible route
+execution might take through the code.</p></li>
+</ul>
+<p>Take another look at the <code>collapseSpaces</code> method. Can we
+construct a control flow graph for the method? For the purposes of this
+lab, we’ll take a simplified approach: we’ll ignore calls to other
+methods, such as <code>.charAt()</code>, and only model the control flow
+<em>within</em> the method. (Initially, you may want to ignore possible
+exceptions, too. Once you’ve completed the exercises, see if you can
+revise your graph to include them – do they seem useful?)</p>
+<p>A typical way of “labelling” graph nodes needs is to use letters
+(“A”, “B”, “C” and so on), and to provide a legend, showing a reader
+which nodes correspond to which lines (or fragments of lines) of
+code.</p>
+<p>Note that sometimes there may be multiple nodes representing
+fragments of code all within the same line (e.g. line 11). But as long
+as we have a clear explanation of what each node represents (e.g. “node
+D: the line 11 loop condition”) then that’s fine.</p>
+<dl>
+<dt><strong>Exercise</strong></dt>
+<dd>
+<p>Try to construct a control flow graph of the
+<code>collapseSpaces</code> method. How many nodes do you end up with?
+How many edges?</p>
+</dd>
+</dl>
+
+<div class="solutions">
+<p><strong>Sample solutions</strong>:</p>
+<p><strong>b. control flow graph</strong></p>
+<p>Here is one possible control flow graph:</p>
+<p> <!-- ![](images/controlflow-solution.eps){ width=70% } --> <img role="img" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9Im5vIj8+CjxzdmcKICAgeG1sbnM6eGh0bWw9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGh0bWwiCiAgIHhtbG5zOmRjPSJodHRwOi8vcHVybC5vcmcvZGMvZWxlbWVudHMvMS4xLyIKICAgeG1sbnM6Y2M9Imh0dHA6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL25zIyIKICAgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIgogICB4bWxuczpzdmc9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIgogICB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciCiAgIHhtbG5zOnNvZGlwb2RpPSJodHRwOi8vc29kaXBvZGkuc291cmNlZm9yZ2UubmV0L0RURC9zb2RpcG9kaS0wLmR0ZCIKICAgeG1sbnM6aW5rc2NhcGU9Imh0dHA6Ly93d3cuaW5rc2NhcGUub3JnL25hbWVzcGFjZXMvaW5rc2NhcGUiCiAgIHdpZHRoPSI1MzkuNTM2NzQiCiAgIGhlaWdodD0iNTExIgogICB2ZXJzaW9uPSIxLjEiCiAgIGNvbnRlbnQ9IiZsdDtteGZpbGUgdXNlckFnZW50PSZxdW90O01vemlsbGEvNS4wIChYMTE7IExpbnV4IHg4Nl82NCkgQXBwbGVXZWJLaXQvNTM3LjM2IChLSFRNTCwgbGlrZSBHZWNrbykgQ2hyb21lLzY2LjAuMzM1OS4xODEgU2FmYXJpLzUzNy4zNiZxdW90OyB2ZXJzaW9uPSZxdW90OzguNy42JnF1b3Q7IGVkaXRvcj0mcXVvdDt3d3cuZHJhdy5pbyZxdW90OyZndDsmbHQ7ZGlhZ3JhbSBpZD0mcXVvdDs3NDVmNjUzNS0yM2MzLThjNjItYzM0My0wZjAwOGQwMjEwOWImcXVvdDsgbmFtZT0mcXVvdDtQYWdlLTEmcXVvdDsmZ3Q7N1ZwZmIrTW9FUDhzKzJEdDNVTk94dGhKL05pbTdkN0RuYlJTVjdyYlIySlRtMXRpTEV5YVpELzlnZzJ4Q1U2VmJSMWZHbTNWcGpBTTRKbmYvSUZ4UExoWWJUOXhWT1ovc3hSVEwvRFRyUWZ2dkNDWVI1SDhWSVJkUTRobW1wQnhrallrMEJJZXlYZXNpYjZtcmttS0s0dFJNRVlGS1cxaXdvb0NKOEtpSWM3WnhtWjdZdFRldFVRWmRnaVBDYUl1OVIrU2lseUxGY3hhK3ArWVpMblpHVXpqWm1TSmttOFpaK3RDNytjRjhLbithWVpYeUt5bEJhMXlsTEpOaHdUdlBiamdqSW1tdGRvdU1GV3FOV3ByNWowY0dkMC9OOGVGT0dVQzFETXFzVE95NDFTcVFuY0xWc2gvdDhtYVAyTTFBOGhPTGxaVU4vR1dpSDlsMi84ajByMnZlcVFTaUlzYmhVUzdTazE3SUZUTjloVi9rUnFPSldYSnR5ODVLUnF5WmxJTC9ZZUYyR2tEUVd2QkpJbHhrYk9NRllqK3hWaHBIcVVRZk5kNUZ0WDlxamRxUkZSeUhkV1NVUU5iODBSekJkcnVFTSt3NW9KN2hLVGhZN2JDY2hQSndqRkZnanpicXlOdGd0bWViei8xTXlOeTM4RGZHZ3kwTWV5TUUvajJFczBqNkZrdG1MTFJlWXlXVkVQY0Q3ZVc2Um5SdFg3YUd4ZC9TcVdiS2NBMk9SSDRzVVMxUmpiUzBXMzBVVlUydnZkRXRzbzZ0SjZmTVJkNCs3S21YUjBhWFVTMkxrTGQzYlJlQ0RVcDd6Z2c5SThyM1ZMWFM3cUI1M0dGbHl4emREZDVuU3RBMXhYaU43ckN5YWlFZzZEU3dhUUR3MzVvajBrOTluNVJBZEVRRVVvS2huWWRobEpGbnVwNEFKdUEyUGJhWU80ZllOd3MrZHF3Qloyd2RYdlpZUXNFMFdoeEszS1VFMDlVUnBFVHAyaWxoQytXVlZuTE9hVkNtWEtKQ3RuT1ZCdW9CT0JQMUhJRkVRUlJhYXpjTU1xZHU3eUd2T1F0NVFBRXFVRmhhNXZqaW54SHk1cEIrWTIySmNrZDNYclJuY0pET2tiVitFZ05EeVdaOUtRN2lwL1VVZ29XSWc5bU41b3NsTk1vRVJKU1pGOXFENXFFQTRFNG4xc2dSaTZHSU9nQk1SZ0F4TGtESWxBMlhpTkRWYUNvejdxcGhJZ1YxNmIxMEhZZE9LTGF6WUgrVjg1M3NrdmNrMTJPSURsNDBvOGRiMWhjZHJ5WEZqcGF2RGUzaFc2c2NJK3U3endtUkxaNmc5UFVPMGhJbVA4S0NVZENBakNsbUc1TWVPdWQrRlJjVEZwNEd5N0FPM29SQU41N3ZRajA0ZkxtQzlxcmJnTFJ3VVVBem9hOUNCaEpPN0h2N3JJekEvVEQ4VEtEVzk0Qjd2WDV1akpEZkpwNmg4Z01jSmhTeEZWbWhwNWF4R2dsSXVDV0IrNHZQQ2pNcCtNRmhkQU5DdEVFVEs4dExnQmJ3N0dyNGVoTWNRRzRGWmhQbDIxL2tSRjdEUHR6TDNPS2RPMmxKTHVvRWZVVU5jNldwb2E1d0RnSDVmL3hsVjQzSzc0K1NmV1ZOTTcwUnUrd0hCd2U0SHJramQ3UEhyZmhRVm9CdzU2MmUrb3dENWNkMk1Kd3ZMbzdkSThkUU5XcHVqVmJVaVFjcjdCRytZckNtMTBwRDZkdVBnRm5pMjlUUis5Skx2c2Y2cmIvVWY5NXM0WDZsVkNnU2pqRDE0UkdNTFdUemQ0cHVtaUFjNkV4YzlBb21QanQ4TjNUenlQay8zNWRLSVh4d1FsMTFvTlNPQXhLc3R0K2hhZ0ovTzNYdE9EOUR3PT0mbHQ7L2RpYWdyYW0mZ3Q7Jmx0Oy9teGZpbGUmZ3Q7IgogICBpZD0ic3ZnMiIKICAgaW5rc2NhcGU6dmVyc2lvbj0iMC45MSByMTM3MjUiCiAgIHNvZGlwb2RpOmRvY25hbWU9ImNvbnRyb2xmbG93LXNvbHV0aW9uLnN2ZyI+CiAgPG1ldGFkYXRhCiAgICAgaWQ9Im1ldGFkYXRhMTUyIj4KICAgIDxyZGY6UkRGPgogICAgICA8Y2M6V29yawogICAgICAgICByZGY6YWJvdXQ9IiI+CiAgICAgICAgPGRjOmZvcm1hdD5pbWFnZS9zdmcreG1sPC9kYzpmb3JtYXQ+CiAgICAgICAgPGRjOnR5cGUKICAgICAgICAgICByZGY6cmVzb3VyY2U9Imh0dHA6Ly9wdXJsLm9yZy9kYy9kY21pdHlwZS9TdGlsbEltYWdlIiAvPgogICAgICAgIDxkYzp0aXRsZT48L2RjOnRpdGxlPgogICAgICA8L2NjOldvcms+CiAgICA8L3JkZjpSREY+CiAgPC9tZXRhZGF0YT4KICA8c29kaXBvZGk6bmFtZWR2aWV3CiAgICAgcGFnZWNvbG9yPSIjZmZmZmZmIgogICAgIGJvcmRlcmNvbG9yPSIjNjY2NjY2IgogICAgIGJvcmRlcm9wYWNpdHk9IjEiCiAgICAgb2JqZWN0dG9sZXJhbmNlPSIxMCIKICAgICBncmlkdG9sZXJhbmNlPSIxMCIKICAgICBndWlkZXRvbGVyYW5jZT0iMTAiCiAgICAgaW5rc2NhcGU6cGFnZW9wYWNpdHk9IjAiCiAgICAgaW5rc2NhcGU6cGFnZXNoYWRvdz0iMiIKICAgICBpbmtzY2FwZTp3aW5kb3ctd2lkdGg9IjE0MjQiCiAgICAgaW5rc2NhcGU6d2luZG93LWhlaWdodD0iNzYwIgogICAgIGlkPSJuYW1lZHZpZXcxNTAiCiAgICAgc2hvd2dyaWQ9ImZhbHNlIgogICAgIGlua3NjYXBlOnpvb209IjEuMDY1MTI0OCIKICAgICBpbmtzY2FwZTpjeD0iMjY5Ljc2ODM4IgogICAgIGlua3NjYXBlOmN5PSIyNTQuNjkyIgogICAgIGlua3NjYXBlOndpbmRvdy14PSIyOTUiCiAgICAgaW5rc2NhcGU6d2luZG93LXk9IjE3OSIKICAgICBpbmtzY2FwZTp3aW5kb3ctbWF4aW1pemVkPSIwIgogICAgIGlua3NjYXBlOmN1cnJlbnQtbGF5ZXI9InN3aXRjaDEzNC02IgogICAgIGZpdC1tYXJnaW4tdG9wPSIwIgogICAgIGZpdC1tYXJnaW4tbGVmdD0iMCIKICAgICBmaXQtbWFyZ2luLXJpZ2h0PSIwIgogICAgIGZpdC1tYXJnaW4tYm90dG9tPSIwIiAvPgogIDxkZWZzCiAgICAgaWQ9ImRlZnM0IiAvPgogIDxnCiAgICAgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMC4zNDc1NzIyLDAuNSkiCiAgICAgaWQ9Imc2Ij4KICAgIDxwYXRoCiAgICAgICBkPSJtIDI4NywzMCBxIDAsMCAwLDQ2Ljg4IgogICAgICAgc3Ryb2tlLW1pdGVybGltaXQ9IjEwIgogICAgICAgcG9pbnRlci1ldmVudHM9Im5vbmUiCiAgICAgICBpZD0icGF0aDgiCiAgICAgICBpbmtzY2FwZTpjb25uZWN0b3ItY3VydmF0dXJlPSIwIgogICAgICAgc3R5bGU9ImZpbGw6bm9uZTtzdHJva2U6IzAwMDAwMDtzdHJva2UtbWl0ZXJsaW1pdDoxMCIgLz4KICAgIDxwYXRoCiAgICAgICBkPSJtIDI4Nyw4My44OCAtMi4zMywtNyA0LjY2LDAgeiIKICAgICAgIHN0cm9rZS1taXRlcmxpbWl0PSIxMCIKICAgICAgIHBvaW50ZXItZXZlbnRzPSJub25lIgogICAgICAgaWQ9InBhdGgxMCIKICAgICAgIGlua3NjYXBlOmNvbm5lY3Rvci1jdXJ2YXR1cmU9IjAiCiAgICAgICBzdHlsZT0iZmlsbDojMDAwMDAwO3N0cm9rZTojMDAwMDAwO3N0cm9rZS1taXRlcmxpbWl0OjEwIiAvPgogICAgPGNpcmNsZQogICAgICAgY3g9IjI4NyIKICAgICAgIGN5PSIxNSIKICAgICAgIHBvaW50ZXItZXZlbnRzPSJub25lIgogICAgICAgaWQ9ImVsbGlwc2UxMiIKICAgICAgIHI9IjE1IgogICAgICAgc3R5bGU9ImZpbGw6I2ZmZmZmZjtzdHJva2U6IzAwMDAwMCIgLz4KICAgIDxnCiAgICAgICB0cmFuc2Zvcm09InRyYW5zbGF0ZSgyODIuNSw4LjUpIgogICAgICAgaWQ9ImcxNCI+CiAgICAgIDxzd2l0Y2gKICAgICAgICAgaWQ9InN3aXRjaDE2Ij4KICAgICAgICA8Zm9yZWlnbk9iamVjdAogICAgICAgICAgIHN0eWxlPSJvdmVyZmxvdzp2aXNpYmxlOyIKICAgICAgICAgICBwb2ludGVyLWV2ZW50cz0iYWxsIgogICAgICAgICAgIHdpZHRoPSI4IgogICAgICAgICAgIGhlaWdodD0iMTIiCiAgICAgICAgICAgcmVxdWlyZWRGZWF0dXJlcz0iaHR0cDovL3d3dy53My5vcmcvVFIvU1ZHMTEvZmVhdHVyZSNFeHRlbnNpYmlsaXR5Ij4KICAgICAgICAgIDx4aHRtbDpkaXYKICAgICAgICAgICAgIHN0eWxlPSJkaXNwbGF5OiBpbmxpbmUtYmxvY2s7IGZvbnQtc2l6ZTogMTJweDsgZm9udC1mYW1pbHk6IEhlbHZldGljYTsgY29sb3I6IHJnYigwLCAwLCAwKTsgbGluZS1oZWlnaHQ6IDEuMjsgdmVydGljYWwtYWxpZ246IHRvcDsgd2lkdGg6IDEwcHg7IHdoaXRlLXNwYWNlOiBub3dyYXA7IHdvcmQtd3JhcDogbm9ybWFsOyB0ZXh0LWFsaWduOiBjZW50ZXI7Ij4KICAgICAgICAgICAgPHhodG1sOmRpdgogICAgICAgICAgICAgICBzdHlsZT0iZGlzcGxheTppbmxpbmUtYmxvY2s7dGV4dC1hbGlnbjppbmhlcml0O3RleHQtZGVjb3JhdGlvbjppbmhlcml0OyI+QTwveGh0bWw6ZGl2PgogICAgICAgICAgPC94aHRtbDpkaXY+CiAgICAgICAgPC9mb3JlaWduT2JqZWN0PgogICAgICAgIDx0ZXh0CiAgICAgICAgICAgeD0iNCIKICAgICAgICAgICB5PSIxMiIKICAgICAgICAgICBmb250LXNpemU9IjEycHgiCiAgICAgICAgICAgaWQ9InRleHQxOCIKICAgICAgICAgICBzdHlsZT0iZm9udC1zaXplOjEycHg7Zm9udC1mYW1pbHk6SGVsdmV0aWNhO3RleHQtYW5jaG9yOm1pZGRsZTtmaWxsOiMwMDAwMDAiPkE8L3RleHQ+CiAgICAgIDwvc3dpdGNoPgogICAgPC9nPgogICAgPHBhdGgKICAgICAgIGQ9Im0gMjg3LDExNSBxIDAsMCAwLDQ4Ljg4IgogICAgICAgc3Ryb2tlLW1pdGVybGltaXQ9IjEwIgogICAgICAgcG9pbnRlci1ldmVudHM9Im5vbmUiCiAgICAgICBpZD0icGF0aDIwIgogICAgICAgaW5rc2NhcGU6Y29ubmVjdG9yLWN1cnZhdHVyZT0iMCIKICAgICAgIHN0eWxlPSJmaWxsOm5vbmU7c3Ryb2tlOiMwMDAwMDA7c3Ryb2tlLW1pdGVybGltaXQ6MTAiIC8+CiAgICA8cGF0aAogICAgICAgZD0ibSAyODcsMTcwLjg4IC0yLjMzLC03IDQuNjYsMCB6IgogICAgICAgc3Ryb2tlLW1pdGVybGltaXQ9IjEwIgogICAgICAgcG9pbnRlci1ldmVudHM9Im5vbmUiCiAgICAgICBpZD0icGF0aDIyIgogICAgICAgaW5rc2NhcGU6Y29ubmVjdG9yLWN1cnZhdHVyZT0iMCIKICAgICAgIHN0eWxlPSJmaWxsOiMwMDAwMDA7c3Ryb2tlOiMwMDAwMDA7c3Ryb2tlLW1pdGVybGltaXQ6MTAiIC8+CiAgICA8cGF0aAogICAgICAgZD0ibSAyNzIsMTAwIHEgLTU0MCwxNDAgLTcuMzQsMzkxLjUzIgogICAgICAgc3Ryb2tlLW1pdGVybGltaXQ9IjEwIgogICAgICAgcG9pbnRlci1ldmVudHM9Im5vbmUiCiAgICAgICBpZD0icGF0aDI0IgogICAgICAgaW5rc2NhcGU6Y29ubmVjdG9yLWN1cnZhdHVyZT0iMCIKICAgICAgIHN0eWxlPSJmaWxsOm5vbmU7c3Ryb2tlOiMwMDAwMDA7c3Ryb2tlLW1pdGVybGltaXQ6MTAiIC8+CiAgICA8cGF0aAogICAgICAgZD0ibSAyNzAuOTksNDk0LjUyIC03LjMzLC0wLjg4IDIsLTQuMjIgeiIKICAgICAgIHN0cm9rZS1taXRlcmxpbWl0PSIxMCIKICAgICAgIHBvaW50ZXItZXZlbnRzPSJub25lIgogICAgICAgaWQ9InBhdGgyNiIKICAgICAgIGlua3NjYXBlOmNvbm5lY3Rvci1jdXJ2YXR1cmU9IjAiCiAgICAgICBzdHlsZT0iZmlsbDojMDAwMDAwO3N0cm9rZTojMDAwMDAwO3N0cm9rZS1taXRlcmxpbWl0OjEwIiAvPgogICAgPGNpcmNsZQogICAgICAgY3g9IjI4NyIKICAgICAgIGN5PSIxMDAiCiAgICAgICBwb2ludGVyLWV2ZW50cz0ibm9uZSIKICAgICAgIGlkPSJlbGxpcHNlMjgiCiAgICAgICByPSIxNSIKICAgICAgIHN0eWxlPSJmaWxsOiNmZmZmZmY7c3Ryb2tlOiMwMDAwMDAiIC8+CiAgICA8ZwogICAgICAgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMjgyLjUsOTMuNSkiCiAgICAgICBpZD0iZzMwIj4KICAgICAgPHN3aXRjaAogICAgICAgICBpZD0ic3dpdGNoMzIiPgogICAgICAgIDxmb3JlaWduT2JqZWN0CiAgICAgICAgICAgc3R5bGU9Im92ZXJmbG93OnZpc2libGU7IgogICAgICAgICAgIHBvaW50ZXItZXZlbnRzPSJhbGwiCiAgICAgICAgICAgd2lkdGg9IjgiCiAgICAgICAgICAgaGVpZ2h0PSIxMiIKICAgICAgICAgICByZXF1aXJlZEZlYXR1cmVzPSJodHRwOi8vd3d3LnczLm9yZy9UUi9TVkcxMS9mZWF0dXJlI0V4dGVuc2liaWxpdHkiPgogICAgICAgICAgPHhodG1sOmRpdgogICAgICAgICAgICAgc3R5bGU9ImRpc3BsYXk6IGlubGluZS1ibG9jazsgZm9udC1zaXplOiAxMnB4OyBmb250LWZhbWlseTogSGVsdmV0aWNhOyBjb2xvcjogcmdiKDAsIDAsIDApOyBsaW5lLWhlaWdodDogMS4yOyB2ZXJ0aWNhbC1hbGlnbjogdG9wOyB3aWR0aDogMTBweDsgd2hpdGUtc3BhY2U6IG5vd3JhcDsgd29yZC13cmFwOiBub3JtYWw7IHRleHQtYWxpZ246IGNlbnRlcjsiPgogICAgICAgICAgICA8eGh0bWw6ZGl2CiAgICAgICAgICAgICAgIHN0eWxlPSJkaXNwbGF5OmlubGluZS1ibG9jazt0ZXh0LWFsaWduOmluaGVyaXQ7dGV4dC1kZWNvcmF0aW9uOmluaGVyaXQ7Ij5CPC94aHRtbDpkaXY+CiAgICAgICAgICA8L3hodG1sOmRpdj4KICAgICAgICA8L2ZvcmVpZ25PYmplY3Q+CiAgICAgICAgPHRleHQKICAgICAgICAgICB4PSI0IgogICAgICAgICAgIHk9IjEyIgogICAgICAgICAgIGZvbnQtc2l6ZT0iMTJweCIKICAgICAgICAgICBpZD0idGV4dDM0IgogICAgICAgICAgIHN0eWxlPSJmb250LXNpemU6MTJweDtmb250LWZhbWlseTpIZWx2ZXRpY2E7dGV4dC1hbmNob3I6bWlkZGxlO2ZpbGw6IzAwMDAwMCI+QjwvdGV4dD4KICAgICAgPC9zd2l0Y2g+CiAgICA8L2c+CiAgICA8ZwogICAgICAgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMzExLjUsMTcuNSkiCiAgICAgICBpZD0iZzM2Ij4KICAgICAgPHN3aXRjaAogICAgICAgICBpZD0ic3dpdGNoMzgiPgogICAgICAgIDxmb3JlaWduT2JqZWN0CiAgICAgICAgICAgc3R5bGU9Im92ZXJmbG93OnZpc2libGU7IgogICAgICAgICAgIHBvaW50ZXItZXZlbnRzPSJhbGwiCiAgICAgICAgICAgd2lkdGg9IjEwOSIKICAgICAgICAgICBoZWlnaHQ9IjEyIgogICAgICAgICAgIHJlcXVpcmVkRmVhdHVyZXM9Imh0dHA6Ly93d3cudzMub3JnL1RSL1NWRzExL2ZlYXR1cmUjRXh0ZW5zaWJpbGl0eSI+CiAgICAgICAgICA8eGh0bWw6ZGl2CiAgICAgICAgICAgICBzdHlsZT0iZGlzcGxheTogaW5saW5lLWJsb2NrOyBmb250LXNpemU6IDEycHg7IGZvbnQtZmFtaWx5OiBIZWx2ZXRpY2E7IGNvbG9yOiByZ2IoMCwgMCwgMCk7IGxpbmUtaGVpZ2h0OiAxLjI7IHZlcnRpY2FsLWFsaWduOiB0b3A7IHdoaXRlLXNwYWNlOiBub3dyYXA7Ij4KICAgICAgICAgICAgPHhodG1sOmRpdgogICAgICAgICAgICAgICBzdHlsZT0iZGlzcGxheTppbmxpbmUtYmxvY2s7dGV4dC1hbGlnbjppbmhlcml0O3RleHQtZGVjb3JhdGlvbjppbmhlcml0OyI+OS0xMCzCoDx4aHRtbDpzcGFuPjEyQSAtIGluaXRpYWxpemVyPC94aHRtbDpzcGFuPgo8eGh0bWw6YnIgLz4KPC94aHRtbDpkaXY+CiAgICAgICAgICA8L3hodG1sOmRpdj4KICAgICAgICA8L2ZvcmVpZ25PYmplY3Q+CiAgICAgICAgPHRleHQKICAgICAgICAgICB4PSI0OC40MjgwMDEiCiAgICAgICAgICAgeT0iMTEuMDYxMTQzIgogICAgICAgICAgIGZvbnQtc2l6ZT0iMTJweCIKICAgICAgICAgICBpZD0idGV4dDQwIgogICAgICAgICAgIHN0eWxlPSJmb250LXNpemU6MTJweDtmb250LWZhbWlseTpIZWx2ZXRpY2E7dGV4dC1hbmNob3I6bWlkZGxlO2ZpbGw6IzAwMDAwMCI+OS0xMCzCoDEyQSAtIGluaXRpYWxpemVyPC90ZXh0PgogICAgICA8L3N3aXRjaD4KICAgIDwvZz4KICAgIDxnCiAgICAgICB0cmFuc2Zvcm09InRyYW5zbGF0ZSgzMDcuNSw5Ny41KSIKICAgICAgIGlkPSJnNDIiPgogICAgICA8c3dpdGNoCiAgICAgICAgIGlkPSJzd2l0Y2g0NCI+CiAgICAgICAgPGZvcmVpZ25PYmplY3QKICAgICAgICAgICBzdHlsZT0ib3ZlcmZsb3c6dmlzaWJsZTsiCiAgICAgICAgICAgcG9pbnRlci1ldmVudHM9ImFsbCIKICAgICAgICAgICB3aWR0aD0iMTA2IgogICAgICAgICAgIGhlaWdodD0iMTIiCiAgICAgICAgICAgcmVxdWlyZWRGZWF0dXJlcz0iaHR0cDovL3d3dy53My5vcmcvVFIvU1ZHMTEvZmVhdHVyZSNFeHRlbnNpYmlsaXR5Ij4KICAgICAgICAgIDx4aHRtbDpkaXYKICAgICAgICAgICAgIHN0eWxlPSJkaXNwbGF5OiBpbmxpbmUtYmxvY2s7IGZvbnQtc2l6ZTogMTJweDsgZm9udC1mYW1pbHk6IEhlbHZldGljYTsgY29sb3I6IHJnYigwLCAwLCAwKTsgbGluZS1oZWlnaHQ6IDEuMjsgdmVydGljYWwtYWxpZ246IHRvcDsgd2hpdGUtc3BhY2U6IG5vd3JhcDsiPgogICAgICAgICAgICA8eGh0bWw6ZGl2CiAgICAgICAgICAgICAgIHN0eWxlPSJkaXNwbGF5OmlubGluZS1ibG9jazt0ZXh0LWFsaWduOmluaGVyaXQ7dGV4dC1kZWNvcmF0aW9uOmluaGVyaXQ7Ij4xMkIgLSBsb29wIGNvbmRpdGlvbjwveGh0bWw6ZGl2PgogICAgICAgICAgPC94aHRtbDpkaXY+CiAgICAgICAgPC9mb3JlaWduT2JqZWN0PgogICAgICAgIDx0ZXh0CiAgICAgICAgICAgeD0iNTMiCiAgICAgICAgICAgeT0iMTIiCiAgICAgICAgICAgZm9udC1zaXplPSIxMnB4IgogICAgICAgICAgIGlkPSJ0ZXh0NDYiCiAgICAgICAgICAgc3R5bGU9ImZvbnQtc2l6ZToxMnB4O2ZvbnQtZmFtaWx5OkhlbHZldGljYTt0ZXh0LWFuY2hvcjptaWRkbGU7ZmlsbDojMDAwMDAwIj4xMkIgLSBsb29wIGNvbmRpdGlvbjwvdGV4dD4KICAgICAgPC9zd2l0Y2g+CiAgICA8L2c+CiAgICA8cGF0aAogICAgICAgZD0ibSAyODcsMjAyIHEgMCwwIDAsNTMuODgiCiAgICAgICBzdHJva2UtbWl0ZXJsaW1pdD0iMTAiCiAgICAgICBwb2ludGVyLWV2ZW50cz0ibm9uZSIKICAgICAgIGlkPSJwYXRoNDgiCiAgICAgICBpbmtzY2FwZTpjb25uZWN0b3ItY3VydmF0dXJlPSIwIgogICAgICAgc3R5bGU9ImZpbGw6bm9uZTtzdHJva2U6IzAwMDAwMDtzdHJva2UtbWl0ZXJsaW1pdDoxMCIgLz4KICAgIDxwYXRoCiAgICAgICBkPSJtIDI4NywyNjIuODggLTIuMzMsLTcgNC42NiwwIHoiCiAgICAgICBzdHJva2UtbWl0ZXJsaW1pdD0iMTAiCiAgICAgICBwb2ludGVyLWV2ZW50cz0ibm9uZSIKICAgICAgIGlkPSJwYXRoNTAiCiAgICAgICBpbmtzY2FwZTpjb25uZWN0b3ItY3VydmF0dXJlPSIwIgogICAgICAgc3R5bGU9ImZpbGw6IzAwMDAwMDtzdHJva2U6IzAwMDAwMDtzdHJva2UtbWl0ZXJsaW1pdDoxMCIgLz4KICAgIDxjaXJjbGUKICAgICAgIGN4PSIyODciCiAgICAgICBjeT0iMTg3IgogICAgICAgcG9pbnRlci1ldmVudHM9Im5vbmUiCiAgICAgICBpZD0iZWxsaXBzZTUyIgogICAgICAgcj0iMTUiCiAgICAgICBzdHlsZT0iZmlsbDojZmZmZmZmO3N0cm9rZTojMDAwMDAwIiAvPgogICAgPGcKICAgICAgIHRyYW5zZm9ybT0idHJhbnNsYXRlKDI4Mi41LDE4MC41KSIKICAgICAgIGlkPSJnNTQiPgogICAgICA8c3dpdGNoCiAgICAgICAgIGlkPSJzd2l0Y2g1NiI+CiAgICAgICAgPGZvcmVpZ25PYmplY3QKICAgICAgICAgICBzdHlsZT0ib3ZlcmZsb3c6dmlzaWJsZTsiCiAgICAgICAgICAgcG9pbnRlci1ldmVudHM9ImFsbCIKICAgICAgICAgICB3aWR0aD0iOCIKICAgICAgICAgICBoZWlnaHQ9IjEyIgogICAgICAgICAgIHJlcXVpcmVkRmVhdHVyZXM9Imh0dHA6Ly93d3cudzMub3JnL1RSL1NWRzExL2ZlYXR1cmUjRXh0ZW5zaWJpbGl0eSI+CiAgICAgICAgICA8eGh0bWw6ZGl2CiAgICAgICAgICAgICBzdHlsZT0iZGlzcGxheTogaW5saW5lLWJsb2NrOyBmb250LXNpemU6IDEycHg7IGZvbnQtZmFtaWx5OiBIZWx2ZXRpY2E7IGNvbG9yOiByZ2IoMCwgMCwgMCk7IGxpbmUtaGVpZ2h0OiAxLjI7IHZlcnRpY2FsLWFsaWduOiB0b3A7IHdpZHRoOiAxMHB4OyB3aGl0ZS1zcGFjZTogbm93cmFwOyB3b3JkLXdyYXA6IG5vcm1hbDsgdGV4dC1hbGlnbjogY2VudGVyOyI+CiAgICAgICAgICAgIDx4aHRtbDpkaXYKICAgICAgICAgICAgICAgc3R5bGU9ImRpc3BsYXk6aW5saW5lLWJsb2NrO3RleHQtYWxpZ246aW5oZXJpdDt0ZXh0LWRlY29yYXRpb246aW5oZXJpdDsiPkM8L3hodG1sOmRpdj4KICAgICAgICAgIDwveGh0bWw6ZGl2PgogICAgICAgIDwvZm9yZWlnbk9iamVjdD4KICAgICAgICA8dGV4dAogICAgICAgICAgIHg9IjQiCiAgICAgICAgICAgeT0iMTIiCiAgICAgICAgICAgZm9udC1zaXplPSIxMnB4IgogICAgICAgICAgIGlkPSJ0ZXh0NTgiCiAgICAgICAgICAgc3R5bGU9ImZvbnQtc2l6ZToxMnB4O2ZvbnQtZmFtaWx5OkhlbHZldGljYTt0ZXh0LWFuY2hvcjptaWRkbGU7ZmlsbDojMDAwMDAwIj5DPC90ZXh0PgogICAgICA8L3N3aXRjaD4KICAgIDwvZz4KICAgIDxnCiAgICAgICB0cmFuc2Zvcm09InRyYW5zbGF0ZSgzMDguNSwxODQuNSkiCiAgICAgICBpZD0iZzYwIj4KICAgICAgPHN3aXRjaAogICAgICAgICBpZD0ic3dpdGNoNjIiPgogICAgICAgIDxmb3JlaWduT2JqZWN0CiAgICAgICAgICAgc3R5bGU9Im92ZXJmbG93OnZpc2libGU7IgogICAgICAgICAgIHBvaW50ZXItZXZlbnRzPSJhbGwiCiAgICAgICAgICAgd2lkdGg9IjEzIgogICAgICAgICAgIGhlaWdodD0iMTIiCiAgICAgICAgICAgcmVxdWlyZWRGZWF0dXJlcz0iaHR0cDovL3d3dy53My5vcmcvVFIvU1ZHMTEvZmVhdHVyZSNFeHRlbnNpYmlsaXR5Ij4KICAgICAgICAgIDx4aHRtbDpkaXYKICAgICAgICAgICAgIHN0eWxlPSJkaXNwbGF5OiBpbmxpbmUtYmxvY2s7IGZvbnQtc2l6ZTogMTJweDsgZm9udC1mYW1pbHk6IEhlbHZldGljYTsgY29sb3I6IHJnYigwLCAwLCAwKTsgbGluZS1oZWlnaHQ6IDEuMjsgdmVydGljYWwtYWxpZ246IHRvcDsgd2hpdGUtc3BhY2U6IG5vd3JhcDsiPgogICAgICAgICAgICA8eGh0bWw6ZGl2CiAgICAgICAgICAgICAgIHN0eWxlPSJkaXNwbGF5OmlubGluZS1ibG9jazt0ZXh0LWFsaWduOmluaGVyaXQ7dGV4dC1kZWNvcmF0aW9uOmluaGVyaXQ7Ij4xMzwveGh0bWw6ZGl2PgogICAgICAgICAgPC94aHRtbDpkaXY+CiAgICAgICAgPC9mb3JlaWduT2JqZWN0PgogICAgICAgIDx0ZXh0CiAgICAgICAgICAgeD0iNyIKICAgICAgICAgICB5PSIxMiIKICAgICAgICAgICBmb250LXNpemU9IjEycHgiCiAgICAgICAgICAgaWQ9InRleHQ2NCIKICAgICAgICAgICBzdHlsZT0iZm9udC1zaXplOjEycHg7Zm9udC1mYW1pbHk6SGVsdmV0aWNhO3RleHQtYW5jaG9yOm1pZGRsZTtmaWxsOiMwMDAwMDAiPjEzPC90ZXh0PgogICAgICA8L3N3aXRjaD4KICAgIDwvZz4KICAgIDxwYXRoCiAgICAgICBkPSJtIDI4NywyOTQgcSAwLDAgMCw0My44OCIKICAgICAgIHN0cm9rZS1taXRlcmxpbWl0PSIxMCIKICAgICAgIHBvaW50ZXItZXZlbnRzPSJub25lIgogICAgICAgaWQ9InBhdGg2NiIKICAgICAgIGlua3NjYXBlOmNvbm5lY3Rvci1jdXJ2YXR1cmU9IjAiCiAgICAgICBzdHlsZT0iZmlsbDpub25lO3N0cm9rZTojMDAwMDAwO3N0cm9rZS1taXRlcmxpbWl0OjEwIiAvPgogICAgPHBhdGgKICAgICAgIGQ9Im0gMjg3LDM0NC44OCAtMi4zMywtNyA0LjY2LDAgeiIKICAgICAgIHN0cm9rZS1taXRlcmxpbWl0PSIxMCIKICAgICAgIHBvaW50ZXItZXZlbnRzPSJub25lIgogICAgICAgaWQ9InBhdGg2OCIKICAgICAgIGlua3NjYXBlOmNvbm5lY3Rvci1jdXJ2YXR1cmU9IjAiCiAgICAgICBzdHlsZT0iZmlsbDojMDAwMDAwO3N0cm9rZTojMDAwMDAwO3N0cm9rZS1taXRlcmxpbWl0OjEwIiAvPgogICAgPHBhdGgKICAgICAgIGQ9Im0gMzAyLDI3OSBxIDIxMCw1MSA3LjQ2LDEzNy44IgogICAgICAgc3Ryb2tlLW1pdGVybGltaXQ9IjEwIgogICAgICAgcG9pbnRlci1ldmVudHM9Im5vbmUiCiAgICAgICBpZD0icGF0aDcwIgogICAgICAgaW5rc2NhcGU6Y29ubmVjdG9yLWN1cnZhdHVyZT0iMCIKICAgICAgIHN0eWxlPSJmaWxsOm5vbmU7c3Ryb2tlOiMwMDAwMDA7c3Ryb2tlLW1pdGVybGltaXQ6MTAiIC8+CiAgICA8cGF0aAogICAgICAgZD0ibSAzMDMuMDMsNDE5LjU2IDUuNTEsLTQuOSAxLjg0LDQuMjkgeiIKICAgICAgIHN0cm9rZS1taXRlcmxpbWl0PSIxMCIKICAgICAgIHBvaW50ZXItZXZlbnRzPSJub25lIgogICAgICAgaWQ9InBhdGg3MiIKICAgICAgIGlua3NjYXBlOmNvbm5lY3Rvci1jdXJ2YXR1cmU9IjAiCiAgICAgICBzdHlsZT0iZmlsbDojMDAwMDAwO3N0cm9rZTojMDAwMDAwO3N0cm9rZS1taXRlcmxpbWl0OjEwIiAvPgogICAgPGNpcmNsZQogICAgICAgY3g9IjI4NyIKICAgICAgIGN5PSIyNzkiCiAgICAgICBwb2ludGVyLWV2ZW50cz0ibm9uZSIKICAgICAgIGlkPSJlbGxpcHNlNzQiCiAgICAgICByPSIxNSIKICAgICAgIHN0eWxlPSJmaWxsOiNmZmZmZmY7c3Ryb2tlOiMwMDAwMDAiIC8+CiAgICA8ZwogICAgICAgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMjgyLjUsMjcyLjUpIgogICAgICAgaWQ9Imc3NiI+CiAgICAgIDxzd2l0Y2gKICAgICAgICAgaWQ9InN3aXRjaDc4Ij4KICAgICAgICA8Zm9yZWlnbk9iamVjdAogICAgICAgICAgIHN0eWxlPSJvdmVyZmxvdzp2aXNpYmxlOyIKICAgICAgICAgICBwb2ludGVyLWV2ZW50cz0iYWxsIgogICAgICAgICAgIHdpZHRoPSI4IgogICAgICAgICAgIGhlaWdodD0iMTIiCiAgICAgICAgICAgcmVxdWlyZWRGZWF0dXJlcz0iaHR0cDovL3d3dy53My5vcmcvVFIvU1ZHMTEvZmVhdHVyZSNFeHRlbnNpYmlsaXR5Ij4KICAgICAgICAgIDx4aHRtbDpkaXYKICAgICAgICAgICAgIHN0eWxlPSJkaXNwbGF5OiBpbmxpbmUtYmxvY2s7IGZvbnQtc2l6ZTogMTJweDsgZm9udC1mYW1pbHk6IEhlbHZldGljYTsgY29sb3I6IHJnYigwLCAwLCAwKTsgbGluZS1oZWlnaHQ6IDEuMjsgdmVydGljYWwtYWxpZ246IHRvcDsgd2lkdGg6IDEwcHg7IHdoaXRlLXNwYWNlOiBub3dyYXA7IHdvcmQtd3JhcDogbm9ybWFsOyB0ZXh0LWFsaWduOiBjZW50ZXI7Ij4KICAgICAgICAgICAgPHhodG1sOmRpdgogICAgICAgICAgICAgICBzdHlsZT0iZGlzcGxheTppbmxpbmUtYmxvY2s7dGV4dC1hbGlnbjppbmhlcml0O3RleHQtZGVjb3JhdGlvbjppbmhlcml0OyI+RDwveGh0bWw6ZGl2PgogICAgICAgICAgPC94aHRtbDpkaXY+CiAgICAgICAgPC9mb3JlaWduT2JqZWN0PgogICAgICAgIDx0ZXh0CiAgICAgICAgICAgeD0iNCIKICAgICAgICAgICB5PSIxMiIKICAgICAgICAgICBmb250LXNpemU9IjEycHgiCiAgICAgICAgICAgaWQ9InRleHQ4MCIKICAgICAgICAgICBzdHlsZT0iZm9udC1zaXplOjEycHg7Zm9udC1mYW1pbHk6SGVsdmV0aWNhO3RleHQtYW5jaG9yOm1pZGRsZTtmaWxsOiMwMDAwMDAiPkQ8L3RleHQ+CiAgICAgIDwvc3dpdGNoPgogICAgPC9nPgogICAgPGcKICAgICAgIHRyYW5zZm9ybT0idHJhbnNsYXRlKDMwOC41LDI1Ni41KSIKICAgICAgIGlkPSJnODIiPgogICAgICA8c3dpdGNoCiAgICAgICAgIGlkPSJzd2l0Y2g4NCI+CiAgICAgICAgPGZvcmVpZ25PYmplY3QKICAgICAgICAgICBzdHlsZT0ib3ZlcmZsb3c6dmlzaWJsZTsiCiAgICAgICAgICAgcG9pbnRlci1ldmVudHM9ImFsbCIKICAgICAgICAgICB3aWR0aD0iMTMiCiAgICAgICAgICAgaGVpZ2h0PSIxMiIKICAgICAgICAgICByZXF1aXJlZEZlYXR1cmVzPSJodHRwOi8vd3d3LnczLm9yZy9UUi9TVkcxMS9mZWF0dXJlI0V4dGVuc2liaWxpdHkiPgogICAgICAgICAgPHhodG1sOmRpdgogICAgICAgICAgICAgc3R5bGU9ImRpc3BsYXk6IGlubGluZS1ibG9jazsgZm9udC1zaXplOiAxMnB4OyBmb250LWZhbWlseTogSGVsdmV0aWNhOyBjb2xvcjogcmdiKDAsIDAsIDApOyBsaW5lLWhlaWdodDogMS4yOyB2ZXJ0aWNhbC1hbGlnbjogdG9wOyB3aGl0ZS1zcGFjZTogbm93cmFwOyI+CiAgICAgICAgICAgIDx4aHRtbDpkaXYKICAgICAgICAgICAgICAgc3R5bGU9ImRpc3BsYXk6aW5saW5lLWJsb2NrO3RleHQtYWxpZ246aW5oZXJpdDt0ZXh0LWRlY29yYXRpb246aW5oZXJpdDsiPjE0PC94aHRtbDpkaXY+CiAgICAgICAgICA8L3hodG1sOmRpdj4KICAgICAgICA8L2ZvcmVpZ25PYmplY3Q+CiAgICAgICAgPHRleHQKICAgICAgICAgICB4PSI3IgogICAgICAgICAgIHk9IjEyIgogICAgICAgICAgIGZvbnQtc2l6ZT0iMTJweCIKICAgICAgICAgICBpZD0idGV4dDg2IgogICAgICAgICAgIHN0eWxlPSJmb250LXNpemU6MTJweDtmb250LWZhbWlseTpIZWx2ZXRpY2E7dGV4dC1hbmNob3I6bWlkZGxlO2ZpbGw6IzAwMDAwMCI+MTQ8L3RleHQ+CiAgICAgIDwvc3dpdGNoPgogICAgPC9nPgogICAgPHBhdGgKICAgICAgIGQ9Im0gMjg3LDM3NiBxIDAsMCAwLDIwLjg4IgogICAgICAgc3Ryb2tlLW1pdGVybGltaXQ9IjEwIgogICAgICAgcG9pbnRlci1ldmVudHM9Im5vbmUiCiAgICAgICBpZD0icGF0aDg4IgogICAgICAgaW5rc2NhcGU6Y29ubmVjdG9yLWN1cnZhdHVyZT0iMCIKICAgICAgIHN0eWxlPSJmaWxsOm5vbmU7c3Ryb2tlOiMwMDAwMDA7c3Ryb2tlLW1pdGVybGltaXQ6MTAiIC8+CiAgICA8cGF0aAogICAgICAgZD0ibSAyODcsNDAzLjg4IC0yLjMzLC03IDQuNjYsMCB6IgogICAgICAgc3Ryb2tlLW1pdGVybGltaXQ9IjEwIgogICAgICAgcG9pbnRlci1ldmVudHM9Im5vbmUiCiAgICAgICBpZD0icGF0aDkwIgogICAgICAgaW5rc2NhcGU6Y29ubmVjdG9yLWN1cnZhdHVyZT0iMCIKICAgICAgIHN0eWxlPSJmaWxsOiMwMDAwMDA7c3Ryb2tlOiMwMDAwMDA7c3Ryb2tlLW1pdGVybGltaXQ6MTAiIC8+CiAgICA8Y2lyY2xlCiAgICAgICBjeD0iMjg3IgogICAgICAgY3k9IjM2MSIKICAgICAgIHBvaW50ZXItZXZlbnRzPSJub25lIgogICAgICAgaWQ9ImVsbGlwc2U5MiIKICAgICAgIHI9IjE1IgogICAgICAgc3R5bGU9ImZpbGw6I2ZmZmZmZjtzdHJva2U6IzAwMDAwMCIgLz4KICAgIDxnCiAgICAgICB0cmFuc2Zvcm09InRyYW5zbGF0ZSgyODIuNSwzNTQuNSkiCiAgICAgICBpZD0iZzk0Ij4KICAgICAgPHN3aXRjaAogICAgICAgICBpZD0ic3dpdGNoOTYiPgogICAgICAgIDxmb3JlaWduT2JqZWN0CiAgICAgICAgICAgc3R5bGU9Im92ZXJmbG93OnZpc2libGU7IgogICAgICAgICAgIHBvaW50ZXItZXZlbnRzPSJhbGwiCiAgICAgICAgICAgd2lkdGg9IjgiCiAgICAgICAgICAgaGVpZ2h0PSIxMiIKICAgICAgICAgICByZXF1aXJlZEZlYXR1cmVzPSJodHRwOi8vd3d3LnczLm9yZy9UUi9TVkcxMS9mZWF0dXJlI0V4dGVuc2liaWxpdHkiPgogICAgICAgICAgPHhodG1sOmRpdgogICAgICAgICAgICAgc3R5bGU9ImRpc3BsYXk6IGlubGluZS1ibG9jazsgZm9udC1zaXplOiAxMnB4OyBmb250LWZhbWlseTogSGVsdmV0aWNhOyBjb2xvcjogcmdiKDAsIDAsIDApOyBsaW5lLWhlaWdodDogMS4yOyB2ZXJ0aWNhbC1hbGlnbjogdG9wOyB3aWR0aDogMTBweDsgd2hpdGUtc3BhY2U6IG5vd3JhcDsgd29yZC13cmFwOiBub3JtYWw7IHRleHQtYWxpZ246IGNlbnRlcjsiPgogICAgICAgICAgICA8eGh0bWw6ZGl2CiAgICAgICAgICAgICAgIHN0eWxlPSJkaXNwbGF5OmlubGluZS1ibG9jazt0ZXh0LWFsaWduOmluaGVyaXQ7dGV4dC1kZWNvcmF0aW9uOmluaGVyaXQ7Ij5FPC94aHRtbDpkaXY+CiAgICAgICAgICA8L3hodG1sOmRpdj4KICAgICAgICA8L2ZvcmVpZ25PYmplY3Q+CiAgICAgICAgPHRleHQKICAgICAgICAgICB4PSI0IgogICAgICAgICAgIHk9IjEyIgogICAgICAgICAgIGZvbnQtc2l6ZT0iMTJweCIKICAgICAgICAgICBpZD0idGV4dDk4IgogICAgICAgICAgIHN0eWxlPSJmb250LXNpemU6MTJweDtmb250LWZhbWlseTpIZWx2ZXRpY2E7dGV4dC1hbmNob3I6bWlkZGxlO2ZpbGw6IzAwMDAwMCI+RTwvdGV4dD4KICAgICAgPC9zd2l0Y2g+CiAgICA8L2c+CiAgICA8ZwogICAgICAgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMzA0LjUsMzU4LjUpIgogICAgICAgaWQ9ImcxMDAiPgogICAgICA8c3dpdGNoCiAgICAgICAgIGlkPSJzd2l0Y2gxMDIiPgogICAgICAgIDxmb3JlaWduT2JqZWN0CiAgICAgICAgICAgc3R5bGU9Im92ZXJmbG93OnZpc2libGU7IgogICAgICAgICAgIHBvaW50ZXItZXZlbnRzPSJhbGwiCiAgICAgICAgICAgd2lkdGg9IjMxIgogICAgICAgICAgIGhlaWdodD0iMTIiCiAgICAgICAgICAgcmVxdWlyZWRGZWF0dXJlcz0iaHR0cDovL3d3dy53My5vcmcvVFIvU1ZHMTEvZmVhdHVyZSNFeHRlbnNpYmlsaXR5Ij4KICAgICAgICAgIDx4aHRtbDpkaXYKICAgICAgICAgICAgIHN0eWxlPSJkaXNwbGF5OiBpbmxpbmUtYmxvY2s7IGZvbnQtc2l6ZTogMTJweDsgZm9udC1mYW1pbHk6IEhlbHZldGljYTsgY29sb3I6IHJnYigwLCAwLCAwKTsgbGluZS1oZWlnaHQ6IDEuMjsgdmVydGljYWwtYWxpZ246IHRvcDsgd2hpdGUtc3BhY2U6IG5vd3JhcDsiPgogICAgICAgICAgICA8eGh0bWw6ZGl2CiAgICAgICAgICAgICAgIHN0eWxlPSJkaXNwbGF5OmlubGluZS1ibG9jazt0ZXh0LWFsaWduOmluaGVyaXQ7dGV4dC1kZWNvcmF0aW9uOmluaGVyaXQ7Ij4xNS0xNjwveGh0bWw6ZGl2PgogICAgICAgICAgPC94aHRtbDpkaXY+CiAgICAgICAgPC9mb3JlaWduT2JqZWN0PgogICAgICAgIDx0ZXh0CiAgICAgICAgICAgeD0iMTYiCiAgICAgICAgICAgeT0iMTIiCiAgICAgICAgICAgZm9udC1zaXplPSIxMnB4IgogICAgICAgICAgIGlkPSJ0ZXh0MTA0IgogICAgICAgICAgIHN0eWxlPSJmb250LXNpemU6MTJweDtmb250LWZhbWlseTpIZWx2ZXRpY2E7dGV4dC1hbmNob3I6bWlkZGxlO2ZpbGw6IzAwMDAwMCI+MTUtMTY8L3RleHQ+CiAgICAgIDwvc3dpdGNoPgogICAgPC9nPgogICAgPGNpcmNsZQogICAgICAgY3g9IjI4NyIKICAgICAgIGN5PSI0OTUiCiAgICAgICBwb2ludGVyLWV2ZW50cz0ibm9uZSIKICAgICAgIGlkPSJlbGxpcHNlMTA2IgogICAgICAgcj0iMTUiCiAgICAgICBzdHlsZT0iZmlsbDojZmZmZmZmO3N0cm9rZTojMDAwMDAwIiAvPgogICAgPGcKICAgICAgIHRyYW5zZm9ybT0idHJhbnNsYXRlKDI4MS41LDQ4OC41KSIKICAgICAgIGlkPSJnMTA4Ij4KICAgICAgPHN3aXRjaAogICAgICAgICBpZD0ic3dpdGNoMTEwIj4KICAgICAgICA8Zm9yZWlnbk9iamVjdAogICAgICAgICAgIHN0eWxlPSJvdmVyZmxvdzp2aXNpYmxlOyIKICAgICAgICAgICBwb2ludGVyLWV2ZW50cz0iYWxsIgogICAgICAgICAgIHdpZHRoPSIxMCIKICAgICAgICAgICBoZWlnaHQ9IjEyIgogICAgICAgICAgIHJlcXVpcmVkRmVhdHVyZXM9Imh0dHA6Ly93d3cudzMub3JnL1RSL1NWRzExL2ZlYXR1cmUjRXh0ZW5zaWJpbGl0eSI+CiAgICAgICAgICA8eGh0bWw6ZGl2CiAgICAgICAgICAgICBzdHlsZT0iZGlzcGxheTogaW5saW5lLWJsb2NrOyBmb250LXNpemU6IDEycHg7IGZvbnQtZmFtaWx5OiBIZWx2ZXRpY2E7IGNvbG9yOiByZ2IoMCwgMCwgMCk7IGxpbmUtaGVpZ2h0OiAxLjI7IHZlcnRpY2FsLWFsaWduOiB0b3A7IHdpZHRoOiAxMHB4OyB3aGl0ZS1zcGFjZTogbm93cmFwOyB3b3JkLXdyYXA6IG5vcm1hbDsgdGV4dC1hbGlnbjogY2VudGVyOyI+CiAgICAgICAgICAgIDx4aHRtbDpkaXYKICAgICAgICAgICAgICAgc3R5bGU9ImRpc3BsYXk6aW5saW5lLWJsb2NrO3RleHQtYWxpZ246aW5oZXJpdDt0ZXh0LWRlY29yYXRpb246aW5oZXJpdDsiPkc8L3hodG1sOmRpdj4KICAgICAgICAgIDwveGh0bWw6ZGl2PgogICAgICAgIDwvZm9yZWlnbk9iamVjdD4KICAgICAgICA8dGV4dAogICAgICAgICAgIHg9IjUiCiAgICAgICAgICAgeT0iMTIiCiAgICAgICAgICAgZm9udC1zaXplPSIxMnB4IgogICAgICAgICAgIGlkPSJ0ZXh0MTEyIgogICAgICAgICAgIHN0eWxlPSJmb250LXNpemU6MTJweDtmb250LWZhbWlseTpIZWx2ZXRpY2E7dGV4dC1hbmNob3I6bWlkZGxlO2ZpbGw6IzAwMDAwMCI+RzwvdGV4dD4KICAgICAgPC9zd2l0Y2g+CiAgICA8L2c+CiAgICA8cGF0aAogICAgICAgZD0iTSAyNzIsNDIwIFEgLTQ4LDI3MCAyNjguNzEsMTE0LjU4IgogICAgICAgc3Ryb2tlLW1pdGVybGltaXQ9IjEwIgogICAgICAgcG9pbnRlci1ldmVudHM9Im5vbmUiCiAgICAgICBpZD0icGF0aDEyMCIKICAgICAgIGlua3NjYXBlOmNvbm5lY3Rvci1jdXJ2YXR1cmU9IjAiCiAgICAgICBzdHlsZT0iZmlsbDpub25lO3N0cm9rZTojMDAwMDAwO3N0cm9rZS1taXRlcmxpbWl0OjEwIiAvPgogICAgPHBhdGgKICAgICAgIGQ9Im0gMjc1LDExMS40OSAtNS4yNiw1LjE4IC0yLjA2LC00LjE5IHoiCiAgICAgICBzdHJva2UtbWl0ZXJsaW1pdD0iMTAiCiAgICAgICBwb2ludGVyLWV2ZW50cz0ibm9uZSIKICAgICAgIGlkPSJwYXRoMTIyIgogICAgICAgaW5rc2NhcGU6Y29ubmVjdG9yLWN1cnZhdHVyZT0iMCIKICAgICAgIHN0eWxlPSJmaWxsOiMwMDAwMDA7c3Ryb2tlOiMwMDAwMDA7c3Ryb2tlLW1pdGVybGltaXQ6MTAiIC8+CiAgICA8Y2lyY2xlCiAgICAgICBjeD0iMjg3IgogICAgICAgY3k9IjQyMCIKICAgICAgIHBvaW50ZXItZXZlbnRzPSJub25lIgogICAgICAgaWQ9ImVsbGlwc2UxMjQiCiAgICAgICByPSIxNSIKICAgICAgIHN0eWxlPSJmaWxsOiNmZmZmZmY7c3Ryb2tlOiMwMDAwMDAiIC8+CiAgICA8ZwogICAgICAgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMjgyLjUsNDEzLjUpIgogICAgICAgaWQ9ImcxMjYiPgogICAgICA8c3dpdGNoCiAgICAgICAgIGlkPSJzd2l0Y2gxMjgiPgogICAgICAgIDxmb3JlaWduT2JqZWN0CiAgICAgICAgICAgc3R5bGU9Im92ZXJmbG93OnZpc2libGU7IgogICAgICAgICAgIHBvaW50ZXItZXZlbnRzPSJhbGwiCiAgICAgICAgICAgd2lkdGg9IjgiCiAgICAgICAgICAgaGVpZ2h0PSIxMiIKICAgICAgICAgICByZXF1aXJlZEZlYXR1cmVzPSJodHRwOi8vd3d3LnczLm9yZy9UUi9TVkcxMS9mZWF0dXJlI0V4dGVuc2liaWxpdHkiPgogICAgICAgICAgPHhodG1sOmRpdgogICAgICAgICAgICAgc3R5bGU9ImRpc3BsYXk6IGlubGluZS1ibG9jazsgZm9udC1zaXplOiAxMnB4OyBmb250LWZhbWlseTogSGVsdmV0aWNhOyBjb2xvcjogcmdiKDAsIDAsIDApOyBsaW5lLWhlaWdodDogMS4yOyB2ZXJ0aWNhbC1hbGlnbjogdG9wOyB3aWR0aDogOHB4OyB3aGl0ZS1zcGFjZTogbm93cmFwOyB3b3JkLXdyYXA6IG5vcm1hbDsgdGV4dC1hbGlnbjogY2VudGVyOyI+CiAgICAgICAgICAgIDx4aHRtbDpkaXYKICAgICAgICAgICAgICAgc3R5bGU9ImRpc3BsYXk6aW5saW5lLWJsb2NrO3RleHQtYWxpZ246aW5oZXJpdDt0ZXh0LWRlY29yYXRpb246aW5oZXJpdDsiPkY8L3hodG1sOmRpdj4KICAgICAgICAgIDwveGh0bWw6ZGl2PgogICAgICAgIDwvZm9yZWlnbk9iamVjdD4KICAgICAgICA8dGV4dAogICAgICAgICAgIHg9IjQiCiAgICAgICAgICAgeT0iMTIiCiAgICAgICAgICAgZm9udC1zaXplPSIxMnB4IgogICAgICAgICAgIGlkPSJ0ZXh0MTMwIgogICAgICAgICAgIHN0eWxlPSJmb250LXNpemU6MTJweDtmb250LWZhbWlseTpIZWx2ZXRpY2E7dGV4dC1hbmNob3I6bWlkZGxlO2ZpbGw6IzAwMDAwMCI+RjwvdGV4dD4KICAgICAgPC9zd2l0Y2g+CiAgICA8L2c+CiAgICA8ZwogICAgICAgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMzExLjUsNDIyLjUpIgogICAgICAgaWQ9ImcxMzIiPgogICAgICA8c3dpdGNoCiAgICAgICAgIGlkPSJzd2l0Y2gxMzQiPgogICAgICAgIDxmb3JlaWduT2JqZWN0CiAgICAgICAgICAgc3R5bGU9Im92ZXJmbG93OnZpc2libGU7IgogICAgICAgICAgIHBvaW50ZXItZXZlbnRzPSJhbGwiCiAgICAgICAgICAgd2lkdGg9IjExMSIKICAgICAgICAgICBoZWlnaHQ9IjEyIgogICAgICAgICAgIHJlcXVpcmVkRmVhdHVyZXM9Imh0dHA6Ly93d3cudzMub3JnL1RSL1NWRzExL2ZlYXR1cmUjRXh0ZW5zaWJpbGl0eSI+CiAgICAgICAgICA8eGh0bWw6ZGl2CiAgICAgICAgICAgICBzdHlsZT0iZGlzcGxheTogaW5saW5lLWJsb2NrOyBmb250LXNpemU6IDEycHg7IGZvbnQtZmFtaWx5OiBIZWx2ZXRpY2E7IGNvbG9yOiByZ2IoMCwgMCwgMCk7IGxpbmUtaGVpZ2h0OiAxLjI7IHZlcnRpY2FsLWFsaWduOiB0b3A7IHdoaXRlLXNwYWNlOiBub3dyYXA7Ij4KICAgICAgICAgICAgPHhodG1sOmRpdgogICAgICAgICAgICAgICBzdHlsZT0iZGlzcGxheTppbmxpbmUtYmxvY2s7dGV4dC1hbGlnbjppbmhlcml0O3RleHQtZGVjb3JhdGlvbjppbmhlcml0OyI+MTJDIC0gbG9vcCBpbmNyZW1lbnQ8L3hodG1sOmRpdj4KICAgICAgICAgIDwveGh0bWw6ZGl2PgogICAgICAgIDwvZm9yZWlnbk9iamVjdD4KICAgICAgICA8dGV4dAogICAgICAgICAgIHg9IjU2IgogICAgICAgICAgIHk9IjEyIgogICAgICAgICAgIGZvbnQtc2l6ZT0iMTJweCIKICAgICAgICAgICBpZD0idGV4dDEzNiIKICAgICAgICAgICBzdHlsZT0iZm9udC1zaXplOjEycHg7Zm9udC1mYW1pbHk6SGVsdmV0aWNhO3RleHQtYW5jaG9yOm1pZGRsZTtmaWxsOiMwMDAwMDAiPjEyQyAtIGxvb3AgaW5jcmVtZW50PC90ZXh0PgogICAgICA8L3N3aXRjaD4KICAgIDwvZz4KICAgIDxnCiAgICAgICB0cmFuc2Zvcm09InRyYW5zbGF0ZSgxODcuNSwzMTIuNSkiCiAgICAgICBpZD0iZzEzOCI+CiAgICAgIDxzd2l0Y2gKICAgICAgICAgaWQ9InN3aXRjaDE0MCI+CiAgICAgICAgPGZvcmVpZ25PYmplY3QKICAgICAgICAgICBzdHlsZT0ib3ZlcmZsb3c6dmlzaWJsZTsiCiAgICAgICAgICAgcG9pbnRlci1ldmVudHM9ImFsbCIKICAgICAgICAgICB3aWR0aD0iOTQiCiAgICAgICAgICAgaGVpZ2h0PSIxMiIKICAgICAgICAgICByZXF1aXJlZEZlYXR1cmVzPSJodHRwOi8vd3d3LnczLm9yZy9UUi9TVkcxMS9mZWF0dXJlI0V4dGVuc2liaWxpdHkiPgogICAgICAgICAgPHhodG1sOmRpdgogICAgICAgICAgICAgc3R5bGU9ImRpc3BsYXk6IGlubGluZS1ibG9jazsgZm9udC1zaXplOiAxMnB4OyBmb250LWZhbWlseTogSGVsdmV0aWNhOyBjb2xvcjogcmdiKDAsIDAsIDApOyBsaW5lLWhlaWdodDogMS4yOyB2ZXJ0aWNhbC1hbGlnbjogdG9wOyB3aGl0ZS1zcGFjZTogbm93cmFwOyI+CiAgICAgICAgICAgIDx4aHRtbDpkaXYKICAgICAgICAgICAgICAgc3R5bGU9ImRpc3BsYXk6aW5saW5lLWJsb2NrO3RleHQtYWxpZ246aW5oZXJpdDt0ZXh0LWRlY29yYXRpb246aW5oZXJpdDsiPmNoICE9ICcgJyB8fCBsYXN0ICE9ICcgJzwveGh0bWw6ZGl2PgogICAgICAgICAgPC94aHRtbDpkaXY+CiAgICAgICAgPC9mb3JlaWduT2JqZWN0PgogICAgICAgIDx0ZXh0CiAgICAgICAgICAgeD0iNDciCiAgICAgICAgICAgeT0iMTIiCiAgICAgICAgICAgZm9udC1zaXplPSIxMnB4IgogICAgICAgICAgIGlkPSJ0ZXh0MTQyIgogICAgICAgICAgIHN0eWxlPSJmb250LXNpemU6MTJweDtmb250LWZhbWlseTpIZWx2ZXRpY2E7dGV4dC1hbmNob3I6bWlkZGxlO2ZpbGw6IzAwMDAwMCI+Y2ggIT0gJyAnIHx8IGxhc3QgIT0gJyAnPC90ZXh0PgogICAgICA8L3N3aXRjaD4KICAgIDwvZz4KICAgIDxnCiAgICAgICB0cmFuc2Zvcm09InRyYW5zbGF0ZSg0MTQuNSwzMzIuNSkiCiAgICAgICBpZD0iZzE0NCI+CiAgICAgIDxzd2l0Y2gKICAgICAgICAgaWQ9InN3aXRjaDE0NiI+CiAgICAgICAgPGZvcmVpZ25PYmplY3QKICAgICAgICAgICBzdHlsZT0ib3ZlcmZsb3c6dmlzaWJsZTsiCiAgICAgICAgICAgcG9pbnRlci1ldmVudHM9ImFsbCIKICAgICAgICAgICB3aWR0aD0iMTI1IgogICAgICAgICAgIGhlaWdodD0iMTIiCiAgICAgICAgICAgcmVxdWlyZWRGZWF0dXJlcz0iaHR0cDovL3d3dy53My5vcmcvVFIvU1ZHMTEvZmVhdHVyZSNFeHRlbnNpYmlsaXR5Ij4KICAgICAgICAgIDx4aHRtbDpkaXYKICAgICAgICAgICAgIHN0eWxlPSJkaXNwbGF5OiBpbmxpbmUtYmxvY2s7IGZvbnQtc2l6ZTogMTJweDsgZm9udC1mYW1pbHk6IEhlbHZldGljYTsgY29sb3I6IHJnYigwLCAwLCAwKTsgbGluZS1oZWlnaHQ6IDEuMjsgdmVydGljYWwtYWxpZ246IHRvcDsgd2hpdGUtc3BhY2U6IG5vd3JhcDsiPgogICAgICAgICAgICA8eGh0bWw6ZGl2CiAgICAgICAgICAgICAgIHN0eWxlPSJkaXNwbGF5OmlubGluZS1ibG9jazt0ZXh0LWFsaWduOmluaGVyaXQ7dGV4dC1kZWNvcmF0aW9uOmluaGVyaXQ7Ij5ub3QowqBjaCAhPSAnICcgfHwgbGFzdCAhPSAnICcgKTwveGh0bWw6ZGl2PgogICAgICAgICAgPC94aHRtbDpkaXY+CiAgICAgICAgPC9mb3JlaWduT2JqZWN0PgogICAgICAgIDx0ZXh0CiAgICAgICAgICAgeD0iNjMiCiAgICAgICAgICAgeT0iMTIiCiAgICAgICAgICAgZm9udC1zaXplPSIxMnB4IgogICAgICAgICAgIGlkPSJ0ZXh0MTQ4IgogICAgICAgICAgIHN0eWxlPSJmb250LXNpemU6MTJweDtmb250LWZhbWlseTpIZWx2ZXRpY2E7dGV4dC1hbmNob3I6bWlkZGxlO2ZpbGw6IzAwMDAwMCI+bm90KMKgY2ggIT0gJyAnIHx8IGxhc3QgIT0gJyAnICk8L3RleHQ+CiAgICAgIDwvc3dpdGNoPgogICAgPC9nPgogICAgPGcKICAgICAgIHRyYW5zZm9ybT0idHJhbnNsYXRlKDMwOS4xODIzNCw0ODYuOTU4KSIKICAgICAgIGlkPSJnMTMyLTMiPgogICAgICA8c3dpdGNoCiAgICAgICAgIGlkPSJzd2l0Y2gxMzQtNiI+CiAgICAgICAgPGZvcmVpZ25PYmplY3QKICAgICAgICAgICBzdHlsZT0ib3ZlcmZsb3c6dmlzaWJsZTsiCiAgICAgICAgICAgcG9pbnRlci1ldmVudHM9ImFsbCIKICAgICAgICAgICB3aWR0aD0iMTExIgogICAgICAgICAgIGhlaWdodD0iMTIiCiAgICAgICAgICAgcmVxdWlyZWRGZWF0dXJlcz0iaHR0cDovL3d3dy53My5vcmcvVFIvU1ZHMTEvZmVhdHVyZSNFeHRlbnNpYmlsaXR5Ij4KICAgICAgICAgIDx4aHRtbDpkaXYKICAgICAgICAgICAgIHN0eWxlPSJkaXNwbGF5OiBpbmxpbmUtYmxvY2s7IGZvbnQtc2l6ZTogMTJweDsgZm9udC1mYW1pbHk6IEhlbHZldGljYTsgY29sb3I6IHJnYigwLCAwLCAwKTsgbGluZS1oZWlnaHQ6IDEuMjsgdmVydGljYWwtYWxpZ246IHRvcDsgd2hpdGUtc3BhY2U6IG5vd3JhcDsiPgogICAgICAgICAgICA8eGh0bWw6ZGl2CiAgICAgICAgICAgICAgIHN0eWxlPSJkaXNwbGF5OmlubGluZS1ibG9jazt0ZXh0LWFsaWduOmluaGVyaXQ7dGV4dC1kZWNvcmF0aW9uOmluaGVyaXQ7Ij4xMkMgLSBsb29wIGluY3JlbWVudDwveGh0bWw6ZGl2PgogICAgICAgICAgPC94aHRtbDpkaXY+CiAgICAgICAgPC9mb3JlaWduT2JqZWN0PgogICAgICAgIDx0ZXh0CiAgICAgICAgICAgc3R5bGU9ImZvbnQtc2l6ZToxMnB4O2ZvbnQtZmFtaWx5OkhlbHZldGljYTt0ZXh0LWFuY2hvcjptaWRkbGU7ZmlsbDojMDAwMDAwIgogICAgICAgICAgIHg9IjAuNjA3NDI4NTUiCiAgICAgICAgICAgeT0iNC40ODkxNDI5IgogICAgICAgICAgIGZvbnQtc2l6ZT0iMTJweCIKICAgICAgICAgICBpZD0idGV4dDEzNi03Ij4xOTwvdGV4dD4KICAgICAgPC9zd2l0Y2g+CiAgICA8L2c+CiAgPC9nPgo8L3N2Zz4K" style="width:70.0%" /> </p>
+<p>Here, the nodes are labelled with the section of code they represent.
+Contiguous lines of code (e.g. lines 9–10 and the start of 12) are
+“collapsed” together to save space – since they must <em>always</em> be
+executed together (in our simple model of the function), there’s no real
+point in giving each line its own node.</p>
+</div>
+<p></p>
+<ol start="3" type="a">
+<li><p>Given your test cases from part (a), try mentally or on paper
+“executing” several tests, and see what paths of the graph get exercised
+by each of your tests.</p>
+<p>How would you subjectively rate the “coverage” of the graph by your
+tests – good? reasonable? poor?</p></li>
+</ol>
+
+<div class="solutions">
+<p><strong>Sample solutions</strong>:</p>
+<p><strong>c. subjective graph coverage</strong></p>
+<p>The answers here will depend on your suggested tests.</p>
+</div>
+<p></p>
+<ol start="4" type="a">
+<li><p>Work out whether your tests give the following sorts of
+coverage:</p>
+<ol type="i">
+<li>node coverage</li>
+<li>edge coverage</li>
+</ol></li>
+</ol>
+
+<div class="solutions">
+<p><strong>Sample solutions</strong>:</p>
+<p><strong>d. node and edge coverage</strong></p>
+<p>The answers here will depend on your suggested tests.</p>
+</div>
+<p></p>
+<ol start="5" type="a">
+<li><p>What are the <em>prime paths</em> in your graph? What proportion
+of the prime paths are exercised by the tests you’ve given?</p>
+<p>Can you construct some tests which exercise prime paths you haven’t
+already covered?</p></li>
+</ol>
+
+<div class="solutions">
+<p><strong>Sample solutions</strong>:</p>
+<p><strong>e. prime paths</strong></p>
+<p>For the graph solution shown earlier, the prime paths are (we have
+grouped related paths together – e.g. when they have a shared prefix, or
+represent paths through the same loop):</p>
+<ul>
+<li>ABG, ABCDEF, ABCDF</li>
+<li>BCDEFB, CDEFBC, DEFBCD, EFBCDE, FBCDEF <em>(these all execute the
+left-hand ‘if’ branch)</em></li>
+<li>BCDFB, CDFBC, DFBCD <em>(these all execute the right-hand ‘if’
+branch)</em></li>
+<li>CDEFBG <em>(takes left branch)</em></li>
+<li>CDFBG <em>(takes right branch)</em></li>
+</ul>
+<p>What proportion of the prime paths your tests cover will depend on
+what tests you chose. But note that if your tests don’t have node or
+statement coverage, then they certainly won’t have prime path
+coverage.</p>
+<p>One useful path is the path ABG, which will get exercised when we
+pass in the empty string. This is a useful test because it reveals a
+problem with the code – passing in empty strings causes an exception to
+be thrown when we reach line 9 (the <code>.charAt</code> call
+fails).</p>
+<p>We might arrive at this test <em>either</em> by applying ISP
+techniques, or by looking to see what sort of graph coverage we have –
+as long as we find the bug, either approach is fine!</p>
+</div>
+<p></p>
+<!-- vim: syntax=markdown tw=92 :
+-->
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr />
+<ol>
+<li id="fn1"><p>This is a very simplified representation of how a
+simulated timer might work. In an actual simulation, rather than other
+objects having to actively query a <code>DigitalTimer</code> object to
+find out its state, we would want to give them the ability to be
+<em>alerted</em> whenever a “tick” occurs. A typical approach is to use
+the <a href="https://en.wikipedia.org/wiki/Observer_pattern">“Observer”</a> or
+<a href="https://en.wikipedia.org/wiki/Publish%E2%80%93subscribe_pattern">“Publish-subscribe”</a>
+software patterns. You can see example of “timer” classes which use the
+“Observer” pattern <a href="https://users.cs.jmu.edu/foxcj/Public/ISED/aqualush/src/simulation/SimTime.java">here</a>
+and <a href="https://gist.github.com/vilmaralmeida/1514576">here</a>,
+and read more about how the pattern is implemented in Java <a href="https://www.baeldung.com/java-observer-pattern">here</a>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
+</body>
+</html>
