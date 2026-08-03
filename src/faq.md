@@ -531,102 +531,11 @@ apply to quizzes, tests or exams for {{ siteinfo.unitcode }}.
 
 ## Group assessment
 
-### Are project groups self-selected or allocated? Why?
+For questions about the CITS5501 group project, see the dedicated
+[Group Asssessment FAQ][project-faq] page.
 
-Students will be **allocated** to a group of (approx.) 5 students for the project.
-Each group is assigned a lab facilitator who will meet with the group fortnightly to support team forming and project matters, and
-who will mark the project and moderate the team professional contribution mark.
-The group list will be published in the CITS5501/3501 MS Teams area and announced in the discussion forum.
+[project-faq]: {{ "/project-faq" | url }}
 
-See the [Project Teams](https://teams.microsoft.com/l/channel/19%3Aec632d098f164f5a8fefc272e14ae398%40thread.tacv2/Project%20Teams?groupId=daaeb288-ca0c-4b3f-824b-60462e4a2e3d&tenantId=05894af0-cb28-46d8-8716-74cdb46e2226) link in MS Teams for more resources on getting the most out of team work.
-
-Project groups are randomly allocated. This method simulates real-world working
-environments where you'll often collaborate with colleagues and clients you haven't chosen.
-Random allocation also promotes fairness by ensuring that students who might struggle to form a group independently are included.
-Our aim is to foster diverse and inclusive teams, as working with diverse perspectives tends
-to lead to more nuanced understanding of the unit material.
-
-<!--
-{#
-
-on group assessment, see
-<https://teaching.cornell.edu/teaching-resources/active-collaborative-learning/collaborative-learning/how-evaluate-group-work>
-
-#}
--->
-
-When students choose their own groups, they often select friends or close acquaintances.
-While this can create a [comfortable working environment][groupthink],
-learning to communicate effectively with different working styles is crucial in real-world
-teams,
-and research shows that personal growth is best fostered when students go [outside their comfort zone][comfort].
-
-<!--
-{#
-comment:
-also - some evidence suggests students have more creative ideas
-when groups _don't_ self-select.
-https://pubsonline.informs.org/doi/10.1287/orsc.2021.1520
-#}
--->
-
-[groupthink]: https://www.bbcdigital.com.au/breaking-the-consensus-trap-how-to-avoid-groupthink-in-the-workplace/
-[comfort]: https://news.cornell.edu/stories/2022/03/leaving-your-comfort-zone-inspires-motivation-growth
-
-
-### My team and I are unable to find a time when we can all meet – what can we do?
-
-Groups are allocated based on the lab session you selected in CAS.  Groups can meet online or face to face, although at least some face to face meetings should be arranged.   Any problems with group attendance should be raised in the first instance with your assigned facilitator, or with the unit coordinator by making an Office Hours appointment or by emailing <cits5501-pmc@uwa.edu.au>.
-
-
-<!--
-{#
-comment: NO SWAPS
-If your team is struggling to find a suitable meeting time, there is an opportunity to swap
-team members during the first two weeks after groups are announced (and before the project
-specification is released). You can post on the
-forum explaining your reason for wanting to swap, or, if your reasons are more personal and
-should remain private, you can contact the Unit Coordinator directly.
-Normally, swaps must be agreed upon by all parties involved.
-#}
--->
-
-### Is individual contribution taken into account?
-
-Yes, individual contributions are taken into account. Students are asked to quantify the
-contributions made by each team member, including themselves. A Contribution Factor (ranging
-from 0.0 to 1.2) is calculated based on these assessments and is used to adjust the final
-project grade accordingly (with a maximum possible final grade of 100%).
-It is highly recommended that students keep a spreadsheet (updated weekly) tracking each
-member's allocated tasks and contributions, and/or use a private GitHub repository to track version control.
-While these records are not submitted with the project, the Unit Coordinator may request to see
-them if any discrepancies arise during the grading process.
-
-In the project, your facilitator meetings will be used for formative discussions and evaluation of professional behaviour
-to help you get the best out of group work.
-
-
-### What are the rules for late submissions and special considerations for the group project? { #late-project }
-
-Groups must submit the project deliverables by their due date.  Penalties will be applied to late submissions according to UWA policy.
-UWA's assessment policy states that 
-"In cases where a student who is part of a group assessment receives approval for an EVA application, the outcome must be considered in consultation with the Unit Coordinator."
-For this project, in accordance with UWA's assessment policy, the 
-unit coordinator will "provide an alternative assessment for the individual student" if required; and 
-mark to "a reduced assessment task for the group".
-Any questions about EVA or UAAPs can be discussed with the unit coordinator at consultation times or email to {% email_el_spannized coordinator.email %}.
-
-<!--
-COMMENT: Note that UWA's sem 2 2025 EAV policy DOES allow extensions for group submissions at the discretion of the UC
-
-5.6	In cases where a student who is part of a group assessment receives approval for an EVA application, the outcome must be considered in consultation with the Unit Coordinator. The possible outcomes include:
-(a)	extension to an assessment deadline for the whole group;
-(b)	provision of alternative assessment for the individual student; and 
-i.	redistribution of the assigned work to the rest of the group members with the possibility of an extension to the assessment deadline; and/or
-ii.	a reduced assessment task for the group
-(c)	Reassignment of group mark to other assessments if assessment task/item is weighted 10 per cent or less. This may be relevant for in-class group activities such as group presentations.
-(d)	Where a group member has a UAAP in place, any approved adjustment may be extended to the whole group within reason at the discretion of the UC.
--->
 
 ## Academic conduct and source citation { #academic-conduct-source-citation }
 
