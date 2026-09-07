@@ -172,11 +172,9 @@
 
 # {{ title }}
 
-The table below shows the topics intended to be covered in
-each week of semester.
-The order or delivery date of
-lectures on this page may change during the semester.
+For the topics intended to be covered in each week, refer to the blackboard LMS.
 
+{#
 - For **lecture slides**{ class="hi-pri" } and
   **lab worksheets**{ class="hi-pri" }
   see the [Resources page]({{ "/resources/" | url }}).
@@ -209,6 +207,8 @@ material will be greatly enhanced if you work through these readings
 
 [unit-readings]: https://www.unitreadings.library.uwa.edu.au/leganto/readinglist/lists/13685908730002101
 
+#}
+
 ### Java resources
 
 The unit assumes you are familiar with at least one statically type-checked
@@ -231,6 +231,8 @@ You may also want to take a look at
 the following (very brief) revision document on Java language concepts, available
 [here]({{ "/workshops/java-revision.pdf" | url }}) (PDF). In addition to basic language
 concepts, it provides references to books and resources that may be useful.
+
+{#
 
 <!--!
 </div>
@@ -286,7 +288,7 @@ concepts, it provides references to books and resources that may be useful.
 </tr>
 {%- endfor %}
 
-
+#}
 
 <!--!
 </tbody>
