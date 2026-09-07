@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang xml:lang>
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>CITS5501 lab 8 (week 9) – system testing</title>
+  <style>
+html {
+line-height: 1.5;
+font-family: sans-serif;
+font-size: 12pt;
+color: black;
+background-color: white;
+}
+body {
+margin: 0 auto;
+max-width: 50em;
+padding-left: 50px;
+padding-right: 50px;
+padding-top: 50px;
+padding-bottom: 50px;
+hyphens: auto;
+overflow-wrap: break-word;
+text-rendering: optimizeLegibility;
+font-kerning: normal;
+}
+@media (max-width: 600px) {
+body {
+font-size: 0.9em;
+padding: 1em;
+}
+h1 {
+font-size: 1.8em;
+}
+}
+@media print {
+body {
+background-color: transparent;
+color: black;
+font-size: 12pt;
+}
+p, h2, h3 {
+orphans: 3;
+widows: 3;
+}
+h2, h3, h4 {
+page-break-after: avoid;
+}
+}
+p {
+margin: 1em 0;
+}
+img {
+max-width: 100%;
+}
+h1, h2, h3, h4, h5, h6 {
+margin-top: 1.4em;
+}
+h5, h6 {
+font-size: 1em;
+font-style: italic;
+}
+h6 {
+font-weight: normal;
+}
+ol, ul {
+padding-left: 1.7em;
+margin-top: 1em;
+}
+li > ol, li > ul {
+margin-top: 0;
+}
+blockquote {
+margin: 1em 0 1em 1.7em;
+padding-left: 1em;
+border-left: 2px solid #e6e6e6;
+color: #606060;
+}
+code {
+font-family: Menlo, Monaco, 'Lucida Console', Consolas, monospace;
+background-color: hsl(0, 0%, 98%);
+padding: .2em .4em;
+font-size: 85%;
+margin: 0;
+}
+pre {
+margin: 1em 0;
+background-color: hsl(0, 0%, 98%);
+padding: 1em;
+overflow: auto;
+}
+pre code {
+padding: 0;
+overflow: visible;
+overflow-wrap: normal;
+}
+
+:not(pre) > code {
+padding: 2px 4px;
+font-size: 90%;
+word-break: normal !important;
+white-space: nowrap;
+color: hsl(344.8,69%,10%);
+background-color: hsl(342.9,37%,96%);
+border-radius: 4px;
+}
+.sourceCode {
+background-color: hsl(0, 0%, 98%);
+overflow: visible;
+}
+hr {
+background-color: #1a1a1a;
+border: none;
+height: 1px;
+margin: 1em 0;
+}
+table {
+margin: 1em 0;
+border-collapse: collapse;
+width: 100%;
+overflow-x: auto;
+display: block;
+font-variant-numeric: lining-nums tabular-nums;
+}
+table caption {
+margin-bottom: 0.75em;
+}
+tbody {
+margin-top: 0.5em;
+border-top: 1px solid black;
+border-bottom: 1px solid black;
+}
+th {
+border-top: 1px solid black;
+padding: 0.25em 0.5em 0.25em 0.5em;
+}
+td {
+padding: 0.125em 0.5em 0.25em 0.5em;
+}
+header {
+margin-bottom: 4em;
+text-align: center;
+}
+#TOC li {
+list-style: none;
+}
+#TOC ul {
+padding-left: 1.3em;
+}
+#TOC > ul {
+padding-left: 0;
+}
+#TOC a:not(:hover) {
+text-decoration: none;
+}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+{ counter-reset: source-line 0; }
+pre.numberSource code > span
+{ position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+{ content: counter(source-line);
+position: relative; left: -1em; text-align: right; vertical-align: baseline;
+border: none; display: inline-block;
+-webkit-touch-callout: none; -webkit-user-select: none;
+-khtml-user-select: none; -moz-user-select: none;
+-ms-user-select: none; user-select: none;
+padding: 0 4px; width: 4em;
+color: #aaaaaa;
+}
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa; padding-left: 4px; }
+div.sourceCode
+{ }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } 
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.at { color: #7d9029; } 
+code span.bn { color: #40a070; } 
+code span.bu { color: #008000; } 
+code span.cf { color: #007020; font-weight: bold; } 
+code span.ch { color: #4070a0; } 
+code span.cn { color: #880000; } 
+code span.co { color: #60a0b0; font-style: italic; } 
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.do { color: #ba2121; font-style: italic; } 
+code span.dt { color: #902000; } 
+code span.dv { color: #40a070; } 
+code span.er { color: #ff0000; font-weight: bold; } 
+code span.ex { } 
+code span.fl { color: #40a070; } 
+code span.fu { color: #06287e; } 
+code span.im { color: #008000; font-weight: bold; } 
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.kw { color: #007020; font-weight: bold; } 
+code span.op { color: #666666; } 
+code span.ot { color: #007020; } 
+code span.pp { color: #bc7a00; } 
+code span.sc { color: #4070a0; } 
+code span.ss { color: #bb6688; } 
+code span.st { color: #4070a0; } 
+code span.va { color: #19177c; } 
+code span.vs { color: #4070a0; } 
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } 
+</style>
+  <style>
+div.solutions {
+border: solid 2pt hsla(120, 100%, 35%, 1);
+border-radius: 5pt;
+background-color: hsla(120, 100%, 50%, 0.1);
+padding: 1em;
+}
+.block-caption {
+display: block;
+font-family: sans-serif;
+font-weight: bold;
+margin-bottom: 1.5rem;
+text-align: center;
+}
+details[open] summary *.only-open {
+opacity: 0.1;
+}
+</style>
+<script data-external="1" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript">
+</script>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title"><p>CITS5501 lab 8 (week 9) – system testing</p></h1>
+</header>
+<nav id="TOC" role="doc-toc">
+<h2 id="toc-title">Contents</h2>
+<ul>
+<li><a href="#reading" id="toc-reading">Reading</a></li>
+<li><a href="#a.-sample-web-app" id="toc-a.-sample-web-app">A. Sample
+web app</a></li>
+<li><a href="#b.-load-testing" id="toc-b.-load-testing">B. Load
+testing</a></li>
+<li><a href="#c.-testability" id="toc-c.-testability">C.
+Testability</a></li>
+<li><a href="#d.-security-testing" id="toc-d.-security-testing">D.
+Security testing</a></li>
+</ul>
+</nav>
+<p></p>
+<h2 id="reading">Reading</h2>
+<p>It is strongly suggested you complete the recommended readings for
+previous weeks <em>before</em> attempting this lab/workshop.</p>
+<h2 id="a.-sample-web-app">A. Sample web app</h2>
+<p>The Git repository at <a href="https://github.com/cits5501/week-9-lab-system-testing" class="uri">https://github.com/cits5501/week-9-lab-system-testing</a>
+contains a very simple sample web application. If you’re not familiar
+with how web servers and web apps work, <a href="https://www.geeksforgeeks.org/what-is-web-app/">this article</a>
+provides a brief guide.</p>
+<p>You can use <a href="https://www.gitpod.io">GitPod</a> to work with
+this code online. You will need a GitHub account; once you have one set
+up, follow the link below:</p>
+<p>  <a href="https://gitpod.io/new/#https://github.com/cits5501/week-9-lab-system-testing" class="uri">https://gitpod.io/new/#https://github.com/cits5501/week-9-lab-system-testing</a></p>
+<p>You can find further information on working with GitPod in the <a href="https://cits5501.github.io/workshops/workshop01.html#accessing-required-software">lab
+1 worksheet</a>.</p>
+<p>Alternatively, if you’re familiar with using Git and Java from the
+command line, you can download a copy of the source code using the
+command</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clone https://github.com/cits5501/week-9-lab-system-testing</span></code></pre></div>
+<p>This worksheet will assume you’re using GitPod to access the
+repository. GitPod provides you with access to the Visual Studio Code
+(VS Code) editor. Once VS Code starts, it will take a few seconds to
+recognize the repository as containing Java source code and to analyse
+it; once it does, the project explorer should show expandable tabs
+entitled “JAVA PROJECTS” and “OUTLINE”.</p>
+<p>Spend some time looking at the source code for the web app. The web
+app makes use of <a href="https://github.com/pcdv/flak">Flak</a>, a
+simple web framework inspired by Python’s <a href="https://flask.palletsprojects.com/en/2.3.x/">Flask</a>
+framework.</p>
+<p>Some of the major components of the web app are:</p>
+<dl>
+<dt><strong>The <code>app</code> instance variable.</strong></dt>
+<dd>
+<p>The <code>App</code> interface is provided by Flak; you can see the
+source code for it <a href="https://github.com/pcdv/flak/blob/master/flak-api/src/main/java/flak/App.java">here</a>.
+It allows the web app to be started and stopped (using the
+<code>start()</code> and <code>stop()</code> methods), and also allows
+code within the web app to obtain information about the server it’s
+running on (<code>getServer()</code>) and the web request currently
+being processed (<code>getRequest()</code>).</p>
+</dd>
+<dt><strong>Route handlers.</strong></dt>
+<dd>
+<p>The URLs a user can access within a website are referred to as
+<em>routes</em>, and when a user tries to access a particular URL, the
+Flak framework processes it using a particular <em>route
+handler</em>.</p>
+<p>Here is an example route handler for the <code>/login</code>
+route:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>  <span class="at">@Route</span><span class="op">(</span><span class="st">&quot;/login&quot;</span><span class="op">)</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">public</span> <span class="bu">String</span> <span class="fu">login</span><span class="op">()</span> <span class="kw">throws</span> <span class="bu">IOException</span> <span class="op">{</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    Path filePath <span class="op">=</span> Path<span class="op">.</span><span class="fu">of</span><span class="op">(</span><span class="st">&quot;resources/login.html&quot;</span><span class="op">);</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">String</span> contents <span class="op">=</span> Files<span class="op">.</span><span class="fu">readString</span><span class="op">(</span>filePath<span class="op">);</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> contents<span class="op">;</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span></code></pre></div>
+<p>The <code>@Route</code> annotation tells Flak what route this is the
+handler for. The code within the handler is responsible for returning
+the contents of the web page (here, as a <code>String</code>, though
+other formats are also possible).</p>
+<p>Different routes handle the case where a web page is being
+<em>viewed</em> (as in the case above), versus when data is being sent
+by the browser to the server. For an example of the latter, see the code
+that starts:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>  <span class="co">/**</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co">   * process a &quot;/login&quot; form submission</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co">   */</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">@Post</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">@Route</span><span class="op">(</span><span class="st">&quot;/login&quot;</span><span class="op">)</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="kw">public</span> <span class="dt">void</span> <span class="fu">login</span><span class="op">(</span><span class="bu">Response</span> r<span class="op">,</span> Form form<span class="op">,</span> SessionManager sessionManager<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    <span class="co">// ...</span></span></code></pre></div>
+<p>The <code>@Post</code> annotation here says that Flak should only
+invoke this handler when data (in this case, the contents of a login
+form) is being sent <em>to</em> the web server by a browser using what’s
+called a “POST request”.</p>
+</dd>
+<dt><strong><code>main()</code> method</strong></dt>
+<dd>
+<p>The <code>VeryBasicWebApp</code> class has a <code>main()</code>
+method which can be used to start the server running, listening for
+requests on a particular port.</p>
+</dd>
+</dl>
+<p>In VS Code, you should be able to start the web app running by
+right-clicking on the “VeryBasicWebApp.java” file in the VS Code
+explorer, and selecting “Run Java”.</p>
+<div style="border: solid 2pt blue; background-color: hsla(241, 100%,50%, 0.1); padding: 1em; border-radius: 5pt; margin-top: 1em;">
+<div style="text-align: center;">
+<b>Launching the app</b>
+</div>
+<p>You can also launch the web app from the command line.</p>
+<p>If the Java code for the web app has been compiled into
+<code>.class</code> files contained in the directory “bin”, then the
+following will launch the app:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> java <span class="at">-cp</span> <span class="st">&#39;lib/*&#39;</span>:.:bin VeryBasicWebApp</span></code></pre></div>
+</div>
+<p>A notification will appear at the bottom right of the editor similar
+to the following:</p>
+<div style="margin-left: auto; margin-right: auto; width: 80%;">
+<p><img role="img" src="data:image/png;base64,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" style="width:80.0%" /></p>
+</div>
+<p>Click the “Open Browser” button, and a new browser tab should open,
+displaying the content “To log in, visit the login page”.</p>
+<p>If you visit the “login” page, enter a username and password, and
+submit the form, the following method is the one that handles the
+attempted login:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource java numberLines"><code class="sourceCode java"><span id="cb5-1"><a href="#cb5-1"></a>  <span class="co">/**</span></span>
+<span id="cb5-2"><a href="#cb5-2"></a><span class="co">   * process a &quot;/login&quot; form submission</span></span>
+<span id="cb5-3"><a href="#cb5-3"></a><span class="co">   */</span></span>
+<span id="cb5-4"><a href="#cb5-4"></a>  <span class="at">@Post</span></span>
+<span id="cb5-5"><a href="#cb5-5"></a>  <span class="at">@Route</span><span class="op">(</span><span class="st">&quot;/login&quot;</span><span class="op">)</span></span>
+<span id="cb5-6"><a href="#cb5-6"></a>  <span class="kw">public</span> <span class="dt">void</span> <span class="fu">login</span><span class="op">(</span><span class="bu">Response</span> r<span class="op">,</span> Form form<span class="op">,</span> SessionManager sessionManager<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb5-7"><a href="#cb5-7"></a>    <span class="co">// just for debugging</span></span>
+<span id="cb5-8"><a href="#cb5-8"></a>    <span class="bu">System</span><span class="op">.</span><span class="fu">err</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span><span class="st">&quot;form params were:&quot;</span> <span class="op">+</span> form<span class="op">.</span><span class="fu">parameters</span><span class="op">());</span></span>
+<span id="cb5-9"><a href="#cb5-9"></a>    </span>
+<span id="cb5-10"><a href="#cb5-10"></a>    <span class="bu">String</span> username <span class="op">=</span> form<span class="op">.</span><span class="fu">get</span><span class="op">(</span><span class="st">&quot;username&quot;</span><span class="op">);</span></span>
+<span id="cb5-11"><a href="#cb5-11"></a>    <span class="bu">String</span> password <span class="op">=</span> form<span class="op">.</span><span class="fu">get</span><span class="op">(</span><span class="st">&quot;password&quot;</span><span class="op">);</span></span>
+<span id="cb5-12"><a href="#cb5-12"></a></span>
+<span id="cb5-13"><a href="#cb5-13"></a>    <span class="cf">if</span> <span class="op">(</span>username<span class="op">.</span><span class="fu">equals</span><span class="op">(</span><span class="st">&quot;foo&quot;</span><span class="op">)</span> <span class="op">&amp;&amp;</span> password<span class="op">.</span><span class="fu">equals</span><span class="op">(</span><span class="st">&quot;bar&quot;</span><span class="op">))</span> <span class="op">{</span></span>
+<span id="cb5-14"><a href="#cb5-14"></a>      SessionManager sm <span class="op">=</span> sessionManager<span class="op">;</span></span>
+<span id="cb5-15"><a href="#cb5-15"></a>      FlakUser user <span class="op">=</span> sm<span class="op">.</span><span class="fu">createUser</span><span class="op">(</span>username<span class="op">);</span></span>
+<span id="cb5-16"><a href="#cb5-16"></a>      sm<span class="op">.</span><span class="fu">openSession</span><span class="op">(</span>app<span class="op">,</span> user<span class="op">,</span> r<span class="op">);</span></span>
+<span id="cb5-17"><a href="#cb5-17"></a>      r<span class="op">.</span><span class="fu">redirect</span><span class="op">(</span><span class="st">&quot;/app&quot;</span><span class="op">);</span></span>
+<span id="cb5-18"><a href="#cb5-18"></a>    <span class="op">}</span></span>
+<span id="cb5-19"><a href="#cb5-19"></a>    <span class="cf">else</span></span>
+<span id="cb5-20"><a href="#cb5-20"></a>      r<span class="op">.</span><span class="fu">redirect</span><span class="op">(</span><span class="st">&quot;/login&quot;</span><span class="op">);</span></span>
+<span id="cb5-21"><a href="#cb5-21"></a>  <span class="op">}</span></span></code></pre></div>
+<p>Key aspects of this code are:</p>
+<ul>
+<li><p>Currently, the code recognizes only one username (“foo”) and one
+password (“bar”) – lines 10–13.</p></li>
+<li><p>If the username and password are correct, the code requests the
+Flak framework to create a new <a href="https://en.wikipedia.org/wiki/Session_(computer_science)">web
+session</a> (a way of identifying a particular logged in user – lines
+14–16), and then redirects the user to the <code>/app</code> page (line
+17).</p>
+<p>The <code>/app</code> page here represents protected content which
+only logged-in users can access; take a look at the
+<code>appPage()</code> method which handles it, and you can see a
+<code>@LoginRequired</code> annotation, which tells Flak to restrict
+access to this page.</p></li>
+<li><p>If the username and password are not correct, the user is
+redirected back to the <code>/login</code> page again (line
+20).</p></li>
+</ul>
+<h2 id="b.-load-testing">B. Load testing</h2>
+<p>Suppose we want to perform load testing of our web app – ensuring
+that it can handle the expected load of web requests. How can we do
+this?</p>
+<p>It’s possible to access our web app from the command line, using Unix
+utilities such as <a href="https://en.wikipedia.org/wiki/CURL">cURL</a>.
+In VS Code, with the server still running, open a new Bash terminal, by
+clicking on the “+” sign at the lower right of the window, and selecting
+“Bash”.</p>
+<p>Within the terminal, type</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>  <span class="ex">curl</span> <span class="at">-w</span> <span class="st">&#39;%{time_connect}:%{time_starttransfer}:%{time_total}\n&#39;</span> http://localhost:8080/login</span></code></pre></div>
+<p>cURL will download the page you requested, display the page content,
+and display some statistics about how much data was transferred (with
+colons as separators) – the time taken to set up a connection to the
+server (<code>time_connect</code>), the time at which cURL starts
+transferring data from the server (<code>time_starttransfer</code>), and
+the total time spent retrieving the page (<code>time_total</code>).</p>
+<p>We could do very simple load testing by making many requests using
+cURL in a short period of time against our web app, and measuring the
+time taken. (In reality: we would likely want the web app to be running
+on a different computer from the one where we do tests, so that the
+process of running tests doesn’t interfere with the running of the web
+app.)</p>
+<p>A load test would follow the same ‘Arrange, Act, Assert’ pattern we
+have seen for other sorts of test:</p>
+<dl>
+<dt><strong>Arrange</strong></dt>
+<dd>
+<p>Start the web app running</p>
+</dd>
+<dt><strong>Act</strong></dt>
+<dd>
+<p>Make requests against the web app, and measure the time taken to
+complete them.</p>
+</dd>
+<dt><strong>Assert</strong></dt>
+<dd>
+<p>Assert that the time taken meets whatever criterion we have
+specified.</p>
+</dd>
+</dl>
+<p>We could write our tests using JUnit if we wished (perhaps using the
+<a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Process.html">java.lang.Process</a>
+API to launch cURL, or perhaps making and timing web requests using Java
+libraries), or we could write our tests in a scripting language such as
+Bash or Python.</p>
+<p>More typically, however, we would use dedicated load-testing
+software. An example of this is <a href="https://jmeter.apache.org">Apache JMeter</a>, which can be used to
+test the performance of a wide range of systems – not just web
+applications, but also systems that act as (for instance) mail servers
+or authentication servers. As an exercise in your own time, you might
+like to try using JMeter to record and run load tests (see <a href="https://jmeter.apache.org/usermanual/get-started.html" class="uri">https://jmeter.apache.org/usermanual/get-started.html</a>),
+but we will not include that in this lab.</p>
+<h2 id="c.-testability">C. Testability</h2>
+<p>Currently, the <code>login()</code> method is very limited – only one
+username and password are considered valid, and they are hard-coded into
+the app.</p>
+<p>We would like to allow different forms of authentication to be
+selected at run-time. Besides being more useful in the end product, this
+has other advantages, such as modularity. Each sort of authentication
+can be encapsulated as a class and tested separately from the main web
+application.</p>
+<p>To do this, we’ll alter the web app code to use a separate interface,
+“Authenticator”.</p>
+<ul>
+<li><p>Add a new instance variable to <code>VeryBasicWebApp</code> –
+<code>Authenticator auth</code>.</p></li>
+<li><p>Alter the current constructor,
+<code>VeryBasicWebApp(int port)</code>. It should now also take an
+<code>Authenticator auth</code> parameter, and set the instance variable
+to that parameter.</p></li>
+<li><p>Remove the code in the <code>login()</code> method, around
+<code>if (username.equals(&quot;foo&quot;) &amp;&amp; password.equals(&quot;bar&quot;))</code>.
+Instead of using those hard-coded values, query the <code>auth</code>
+instance variable to find out if a username and password are
+valid.</p></li>
+<li><p>If you’ve done the previous steps correctly, your editor or IDE
+should now show an error in the <code>main()</code> method. The line</p>
+<pre><code>  VeryBasicWebApp hw = new VeryBasicWebApp(port);</code></pre>
+<p>is no longer correct.</p></li>
+<li><p>Add the following code to <code>main()</code>, near the top of
+the method:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>    <span class="bu">Authenticator</span> auth <span class="op">=</span> <span class="kw">new</span> <span class="bu">Authenticator</span><span class="op">()</span> <span class="op">{</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>      <span class="at">@Override</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>      <span class="kw">public</span> <span class="dt">boolean</span> <span class="fu">isValid</span><span class="op">(</span><span class="bu">String</span> username<span class="op">,</span> <span class="bu">String</span> password<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="kw">false</span><span class="op">;</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>      <span class="op">}</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>    <span class="op">};</span></span></code></pre></div>
+<p>and then pass the new <code>auth</code> variable to the
+<code>VeryBasicWebApp</code> constructor.</p></li>
+</ul>
+<p>We’ve now made our web app more testable. Rather than being
+hard-coded, an <code>Authenticator</code> is created in the
+<code>main()</code> method, as the web app is started. Currently, our
+new <code>Authenticator</code> only ever returns <code>false</code>
+(indicating that a username and password combination is invalid). Alter
+the code so that one particular username and password are valid.</p>
+<p>If we wanted, we could analyse the <code>String[] args</code>
+parameters passed to <code>main()</code> (or make use of the Java <a href="https://docs.oracle.com/javase/8/docs/api/java/util/Properties.html">Properties</a>
+API), and “slot in” different authenticators depending on how our web
+app was invoked from the command line. This is known as <a href="https://en.wikipedia.org/wiki/Dependency_injection">dependency
+injection</a> – we have made our web app more independent from the
+authenticator.</p>
+<p>As an exercise in your own time, you might like to try adding other
+implementations of <code>Authenticator</code>, which (for example)
+obtain lists of valid username+password pairs from a text file or a
+database.</p>
+<h2 id="d.-security-testing">D. Security testing</h2>
+<p>We have seen that some portions of the web app are restricted to
+logged-in users. From what has been covered in lectures and the text
+books, what are some sorts of security testing we could use to ensure
+that these restrictions are effective? Are there any other security
+practices we would need to bear in mind besides testing?</p>
+<!-- vim: syntax=markdown
+-->
+</body>
+</html>

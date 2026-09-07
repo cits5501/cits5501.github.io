@@ -1,0 +1,1046 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang xml:lang>
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>CITS5501 lab 5 (week 6) – version control, logic-based testing  – solutions</title>
+  <style>
+html {
+line-height: 1.5;
+font-family: sans-serif;
+font-size: 12pt;
+color: black;
+background-color: white;
+}
+body {
+margin: 0 auto;
+max-width: 50em;
+padding-left: 50px;
+padding-right: 50px;
+padding-top: 50px;
+padding-bottom: 50px;
+hyphens: auto;
+overflow-wrap: break-word;
+text-rendering: optimizeLegibility;
+font-kerning: normal;
+}
+@media (max-width: 600px) {
+body {
+font-size: 0.9em;
+padding: 1em;
+}
+h1 {
+font-size: 1.8em;
+}
+}
+@media print {
+body {
+background-color: transparent;
+color: black;
+font-size: 12pt;
+}
+p, h2, h3 {
+orphans: 3;
+widows: 3;
+}
+h2, h3, h4 {
+page-break-after: avoid;
+}
+}
+p {
+margin: 1em 0;
+}
+img {
+max-width: 100%;
+}
+h1, h2, h3, h4, h5, h6 {
+margin-top: 1.4em;
+}
+h5, h6 {
+font-size: 1em;
+font-style: italic;
+}
+h6 {
+font-weight: normal;
+}
+ol, ul {
+padding-left: 1.7em;
+margin-top: 1em;
+}
+li > ol, li > ul {
+margin-top: 0;
+}
+blockquote {
+margin: 1em 0 1em 1.7em;
+padding-left: 1em;
+border-left: 2px solid #e6e6e6;
+color: #606060;
+}
+code {
+font-family: Menlo, Monaco, 'Lucida Console', Consolas, monospace;
+background-color: hsl(0, 0%, 98%);
+padding: .2em .4em;
+font-size: 85%;
+margin: 0;
+}
+pre {
+margin: 1em 0;
+background-color: hsl(0, 0%, 98%);
+padding: 1em;
+overflow: auto;
+}
+pre code {
+padding: 0;
+overflow: visible;
+overflow-wrap: normal;
+}
+
+:not(pre) > code {
+padding: 2px 4px;
+font-size: 90%;
+word-break: normal !important;
+white-space: nowrap;
+color: hsl(344.8,69%,10%);
+background-color: hsl(342.9,37%,96%);
+border-radius: 4px;
+}
+.sourceCode {
+background-color: hsl(0, 0%, 98%);
+overflow: visible;
+}
+hr {
+background-color: #1a1a1a;
+border: none;
+height: 1px;
+margin: 1em 0;
+}
+table {
+margin: 1em 0;
+border-collapse: collapse;
+width: 100%;
+overflow-x: auto;
+display: block;
+font-variant-numeric: lining-nums tabular-nums;
+}
+table caption {
+margin-bottom: 0.75em;
+}
+tbody {
+margin-top: 0.5em;
+border-top: 1px solid black;
+border-bottom: 1px solid black;
+}
+th {
+border-top: 1px solid black;
+padding: 0.25em 0.5em 0.25em 0.5em;
+}
+td {
+padding: 0.125em 0.5em 0.25em 0.5em;
+}
+header {
+margin-bottom: 4em;
+text-align: center;
+}
+#TOC li {
+list-style: none;
+}
+#TOC ul {
+padding-left: 1.3em;
+}
+#TOC > ul {
+padding-left: 0;
+}
+#TOC a:not(:hover) {
+text-decoration: none;
+}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+{ counter-reset: source-line 0; }
+pre.numberSource code > span
+{ position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+{ content: counter(source-line);
+position: relative; left: -1em; text-align: right; vertical-align: baseline;
+border: none; display: inline-block;
+-webkit-touch-callout: none; -webkit-user-select: none;
+-khtml-user-select: none; -moz-user-select: none;
+-ms-user-select: none; user-select: none;
+padding: 0 4px; width: 4em;
+color: #aaaaaa;
+}
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa; padding-left: 4px; }
+div.sourceCode
+{ }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } 
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.at { color: #7d9029; } 
+code span.bn { color: #40a070; } 
+code span.bu { color: #008000; } 
+code span.cf { color: #007020; font-weight: bold; } 
+code span.ch { color: #4070a0; } 
+code span.cn { color: #880000; } 
+code span.co { color: #60a0b0; font-style: italic; } 
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.do { color: #ba2121; font-style: italic; } 
+code span.dt { color: #902000; } 
+code span.dv { color: #40a070; } 
+code span.er { color: #ff0000; font-weight: bold; } 
+code span.ex { } 
+code span.fl { color: #40a070; } 
+code span.fu { color: #06287e; } 
+code span.im { color: #008000; font-weight: bold; } 
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.kw { color: #007020; font-weight: bold; } 
+code span.op { color: #666666; } 
+code span.ot { color: #007020; } 
+code span.pp { color: #bc7a00; } 
+code span.sc { color: #4070a0; } 
+code span.ss { color: #bb6688; } 
+code span.st { color: #4070a0; } 
+code span.va { color: #19177c; } 
+code span.vs { color: #4070a0; } 
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } 
+</style>
+  <style>
+div.solutions {
+border: solid 2pt hsla(120, 100%, 35%, 1);
+border-radius: 5pt;
+background-color: hsla(120, 100%, 50%, 0.1);
+padding: 1em;
+}
+.block-caption {
+display: block;
+font-family: sans-serif;
+font-weight: bold;
+margin-bottom: 1.5rem;
+text-align: center;
+}
+details[open] summary *.only-open {
+opacity: 0.1;
+}
+</style>
+<script data-external="1" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript">
+</script>
+</head>
+<body>
+<style>
+xtable {
+border: solid 1pt black;
+}
+table tr, table th {
+border: solid 1pt black;
+}
+tr td, th td {
+border: solid 1pt black;
+}
+</style>
+<header id="title-block-header">
+<h1 class="title"><p>CITS5501 lab 5 (week 6) – version control,
+logic-based testing  – solutions</p></h1>
+</header>
+<nav id="TOC" role="doc-toc">
+<h2 id="toc-title">Contents</h2>
+<ul>
+<li><a href="#project-version-control" id="toc-project-version-control">1. Project version control</a></li>
+<li><a href="#logic-notation" id="toc-logic-notation">2. Logic
+notation</a></li>
+<li><a href="#terminology-clauses-and-predicates" id="toc-terminology-clauses-and-predicates">3. Terminology – clauses and
+predicates</a></li>
+<li><a href="#making-clauses-active" id="toc-making-clauses-active">4.
+Making clauses active</a></li>
+<li><a href="#scenario-trap-doors" id="toc-scenario-trap-doors">5.
+Scenario – trap-doors</a></li>
+<li><a href="#scenario-login-page" id="toc-scenario-login-page">6.
+Scenario – login page</a></li>
+<li><a href="#tips-and-tricks" id="toc-tips-and-tricks">7. Tips and
+tricks</a></li>
+</ul>
+</nav>
+<h2 id="project-version-control">1. Project version control</h2>
+<p>The week 5 lectures include a workshop on using Git and GitHub for <a href="https://en.wikipedia.org/wiki/Version_control">version
+control</a>.</p>
+<p>If this is the first time you have used Git and GitHub, you should
+work through the resources included there, including the <a href="https://docs.github.com/en/get-started/start-your-journey/hello-world">Github
+Hello World Step by Step</a> tutorial.</p>
+<p>If you <em>have</em> used Git and GitHub before, you might like to
+think in more depth about how version control can contribute to (or pose
+problems for) software quality. The questions below ask you to reflect
+on this.</p>
+<dl>
+<dt><strong>Question</strong></dt>
+<dd>
+<p>What is the basic purpose of version control? How does it differ from
+simply keeping copies of files with different names or dates?</p>
+</dd>
+<dt><strong>Question</strong></dt>
+<dd>
+<p>How might version control make software development easier or harder?
+You may want to check online resources to help you answer these
+questions.</p>
+<ul>
+<li>How can version control make it easier to trace the source of a
+bug?</li>
+<li>In what ways might poor version control practices (e.g. unclear
+commit messages, cluttered history) make testing or debugging
+harder?</li>
+<li>How might including large generated files in a repository affect
+development speed and reliability?<br />
+ </li>
+</ul>
+</dd>
+<dt><strong>Question</strong></dt>
+<dd>
+<p>In group assessments from previous units, has your group adopted any
+conventions or best practices when using version control? If so, do you
+think they were useful – and in what ways? If not, did you encounter any
+problems where adopting a convention might have made things easier?</p>
+<p>Think about the following:</p>
+<ul>
+<li>Why might a team agree on a commit message convention or branching
+strategy?</li>
+<li>What problems can arise if different team members ignore these
+agreements?</li>
+<li>How could poor version control practices create extra work for
+testers or integrators?<br />
+ </li>
+</ul>
+</dd>
+<dt><strong>Question</strong></dt>
+<dd>
+<p>Can you think of any indicators in a version control repository that
+might be a sign of good version control discipline (or conversely, or
+poor version control discipline)? If you were reviewing a peer’s
+repository, what would you look for as signs of good or bad version
+control discipline?</p>
+</dd>
+</dl>
+<p>Version control tools can either support software quality or
+undermine it, depending on how they’re used. Good practices make
+repositories easier to work with, simplify testing, and reduce the risk
+of errors. But poor practices can lead to confusion, wasted time, and
+hidden bugs.</p>
+<p>In a well-managed repository, the version control history should
+clearly show</p>
+<ul>
+<li><em>what</em> changed</li>
+<li><em>when</em> it changed</li>
+<li>and <em>why</em>.</li>
+</ul>
+<p>Information about the first two items comes directly from the version
+control tool – all version control tools will show what content in what
+files was changed, and when a commit occurred. However, providing
+reasons <em>why</em> the change was made can only be done by the
+developer who committed it. In version control systems, <em>commit
+messages</em> are used to explain the reasons for a change. You can read
+more about what makes for good or bad commit messages in Simon Tatham’s
+guide to <a href="https://www.chiark.greenend.org.uk/~sgtatham/quasiblog/commit-messages/">“Writing
+commit messages”</a>.</p>
+<p>When used properly, version control systems make it much easier to
+solve problems like</p>
+<ul>
+<li>Diagnosing when and how a bug was introduced.</li>
+<li>Understanding the reasons for implementation decisions.</li>
+<li>Reverting buggy software to a known good state.</li>
+<li>Letting teams work on multiple features in parallel (using branches
+and merges).</li>
+</ul>
+<h4 id="version-control-best-practices">Version control best
+practices</h4>
+<p>We won’t discuss version control best practices in exhaustive detail
+here, but will highlight a few important ones. For more detail, you can
+read Michael Ernst’s <a href="https://homes.cs.washington.edu/~mernst/advice/version-control.html">“Version
+control concepts and best practices”</a>.</p>
+<ul>
+<li><em>Avoid committing generated files.</em> They add “noise” to the
+version control history, are a common source of merge conflicts, and can
+quickly bloat the repository.
+<!-- see also https://kentcdodds.com/blog/why-i-dont-commit-generated-files-to-master --></li>
+<li><em>Avoid versioning binary files where possible.</em> Instead,
+version the text format or build recipe. If you do need to track binary
+files, consider specialised tools (e.g. Git LFS).</li>
+<li><em>Write informative commit messages.</em> A good message explains
+<em>what</em> changed and <em>why</em>. If your team follows a standard
+(e.g. <a href="https://www.conventionalcommits.org/">Conventional
+Commits</a>), stick to it.</li>
+<li><em>Commit early, commit often</em>. Don’t leave work uncommitted
+for any extended period of time – you lose the advantage of having a
+version control system if you do that.</li>
+<li><em>Create commits at logical points.</em> Each commit should
+represent a coherent change, small enough to review and test in
+isolation. <!--
+- *Use branches for features and fixes.** This keeps experimental work separate from production-ready code and makes integration safer.
+--></li>
+<li><em>Review before merging.</em> Code review not only catches bugs,
+it also enforces quality in commit history and documentation.</li>
+</ul>
+<p>You might notice that some of these practices are in tension – if you
+<em>commit early and commit often</em> to stop work from being lost, how
+can you also ensure that you’ve provided good commit messages, or
+created commits at logical points?</p>
+<p>The answer to this apparent paradox is that it’s possible to
+<em>rewrite the local history</em> of your repository, and in fact it’s
+a good idea to</p>
+<ul>
+<li><em>Tidy history before sharing.</em> Squash or reorganise commits
+so that the branch history tells a clear story.</li>
+</ul>
+<p>Once you’ve pushed your commits to a remote repository, it’s
+generally a bad idea to alter them, since other team-mates’ work may be
+affected by any changes. But <em>before</em> you push your commits, it’s
+perfectly alright – in fact, recommended – to tidy up the history before
+pushing it. Read Carlos Schults’s post <a href="https://carlosschults.net/en/git-beautiful-history/">“Make Your
+Git History Look Beautiful Using Amend and Rebase”</a> for more
+information on how to do this.</p>
+<!--
+https://www.atlassian.com/blog/git/written-unwritten-guide-pull-requests
+-->
+<!--
+
+for another semester - some exercises
+
+1. **Commit Messages and History**
+
+   * Create a small repository and add a simple program (e.g. “Hello world”).
+   * Make three changes to it, but commit with vague messages like “fix”, “update”, or “stuff”.
+   * Now try to identify *why* you made each change.
+   * Redo the exercise with clear, descriptive messages. Compare the difference in traceability.
+
+2. **Generated and Binary Files**
+
+   * Add a large generated file (e.g. a compiled binary, log file, or data export) to the repository and commit it.
+   * Observe how the repo size changes. Then make a trivial edit and commit again—note that the *entire file* is stored again.
+   * Remove the file from version control, add it to `.gitignore`, and discuss why this is a better approach.
+
+3. **Commit Granularity**
+
+   * Make multiple unrelated changes in your code (e.g. fix a bug, add a feature, update documentation). Commit them *all together*.
+   * Now imagine trying to undo just the bug fix—how easy is it?
+   * Redo the exercise, this time committing each change separately. Compare the flexibility.
+
+4. **Branching and Integration**
+
+   * Create a new branch for a “feature” and make a couple of commits.
+   * Switch back to main, make a conflicting change, then try merging the feature branch.
+   * Resolve the conflict, then tidy the history (e.g. squash commits).
+   * Reflect on how branching helps isolate work, and how merge practices affect repository clarity.
+
+5. **Code Review Simulation (Optional, Pair Activity)**
+
+   * Swap repositories with a partner. Review their commit history for clarity, granularity, and adherence to best practices.
+   * Give each other feedback: what would make the history easier to understand or maintain?
+
+-->
+<div style="border: solid 2pt blue; background-color: hsla(241, 100%,50%, 0.1); padding: 1em; border-radius: 5pt; margin-top: 1em;">
+<div class="block-caption">
+<p>Pre-reading</p>
+</div>
+<p>The following exercises in this worksheet assume general familiarity
+with logic-based testing concepts, so if you haven’t already, it’s
+recommended you work through chapter 8 from the Ammann and Offutt
+textbook before attempting them.</p>
+</div>
+<h2 id="logic-notation">2. Logic notation</h2>
+<p>The remaining sections of this lab focus on assessing whether a test
+suite thoroughly exercises (i.e., has good coverage of) the logic
+expressions contained in the component under test.</p>
+<p>When writing logic expressions, we will often use mathematical
+notation for “and”, “or”, and “not”:</p>
+<ul>
+<li><span class="math inline">\(\wedge\)</span> – “and”</li>
+<li><span class="math inline">\(\vee\)</span> – “or”</li>
+<li><span class="math inline">\(\neg\)</span> – “not”</li>
+</ul>
+<p>This notation is independent of any language; it could be turned into
+Java, or C, or Python – each of which uses different logical operators –
+depending on what language our system and our tests are implemented
+in.</p>
+<p>If writing actual Java code, however, we use the normal Java logical
+operators:</p>
+<ul>
+<li><code>&amp;&amp;</code> – “and”</li>
+<li><code>||</code> – “or”</li>
+<li><code>!</code> – “not”</li>
+</ul>
+<div style="border: solid 2pt blue; background-color: hsla(241, 100%,50%, 0.1); padding: 1em; border-radius: 5pt; margin-top: 1em;">
+<div class="block-caption">
+<p>Other operators and languages</p>
+</div>
+<p>Java also has non–short-circuiting logic operators, <code>|</code>
+and <code>&amp;</code>.</p>
+<p>We won’t be focusing on Python in this unit – but for reference, in
+Python, the logic operators are all spelled out as English words: “and”,
+“or” and “not”.</p>
+</div>
+<h2 id="terminology-clauses-and-predicates">3. Terminology – clauses and
+predicates</h2>
+<p>If you need to, review the lecture material and recommended readings
+that explain what <em>predicates</em> and <em>clauses</em> are.</p>
+<p>What are the <em>clauses</em> in the predicates below?</p>
+<ol type="a">
+<li><p><span class="math inline">\(((f \leqslant g) \wedge (x &gt; 0))
+\vee (M \wedge (e &lt; d +c))\)</span></p></li>
+<li><p><span class="math inline">\(G \vee ((m &gt; a) \vee (s \leqslant
+o + n)) \wedge U\)</span></p></li>
+</ol>
+<div class="solutions">
+<p><strong>Solutions</strong></p>
+<ol type="a">
+<li><p><span class="math inline">\(((f \leqslant g) \wedge (x &gt; 0))
+\vee (M \wedge (e &lt; d +c))\)</span></p>
+<p>There are 4 clauses:</p>
+<ol type="i">
+<li><span class="math inline">\(f \leqslant g\)</span></li>
+<li><span class="math inline">\(x &gt; 0\)</span></li>
+<li><span class="math inline">\(M\)</span></li>
+<li><span class="math inline">\((e &lt; d +c)\)</span></li>
+</ol></li>
+<li><p><span class="math inline">\(G \vee ((m &gt; a) \vee (s \leqslant
+o + n)) \wedge U\)</span></p>
+<p>There are 4 clauses:</p>
+<ol type="i">
+<li><span class="math inline">\(G\)</span></li>
+<li><span class="math inline">\(m &gt; a\)</span></li>
+<li><span class="math inline">\(s \leqslant o + n\)</span></li>
+<li><span class="math inline">\(U\)</span></li>
+</ol></li>
+</ol>
+</div>
+<h2 id="making-clauses-active">4. Making clauses active</h2>
+<p>To make a particular clause <span class="math inline">\(c\)</span> in
+some predicate <em>active</em> means to assign values to variables so
+that the truth-value of the whole predicate depends on <span class="math inline">\(c\)</span>.</p>
+<p>When coming up with test values which make clauses active, the
+easiest way of showing your test values is in a table.</p>
+<p>E.g. Suppose we have a predicate <span class="math inline">\(s \wedge
+(m \vee w)\)</span>, where</p>
+<ul>
+<li><span class="math inline">\(m\)</span> = “the moon is full”</li>
+<li><span class="math inline">\(s\)</span> = “the sky is clear”</li>
+<li><span class="math inline">\(w\)</span> = “the wind is calm”</li>
+</ul>
+<p>If asked to come up with test inputs which make each clause active in
+turn, and achieve Restricted Active Clause Coverage, we could show them
+like this:</p>
+<table style="width:99%;">
+<colgroup>
+<col style="width: 29%" />
+<col style="width: 40%" />
+<col style="width: 28%" />
+</colgroup>
+<thead>
+<tr>
+<th><strong>Test description</strong></th>
+<th><strong>Inputs</strong></th>
+<th><strong>Predicate value</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Make s active, and<br>   s = true<br>   s = false</td>
+<td>s = true, m = true, w = false<br> s = false, m = true, w =
+false</td>
+<td>true<br> false</td>
+</tr>
+<tr>
+<td>Make m active, and<br>   m = true<br>   m = false</td>
+<td>s = true, m = true, w = false<br> s = true, m = false, w =
+false</td>
+<td>true<br> false</td>
+</tr>
+<tr>
+<td>Make w active, and<br>   w = true<br>   w = false</td>
+<td>s = true, m = false, w = true<br> s = true, m = false, w =
+false</td>
+<td>true<br> false</td>
+</tr>
+</tbody>
+</table>
+<p>(Here, we aren’t told what the expected outcome is if the predicate
+comes out true or false; if we were, we could add a column “Expected
+outcome” which listed this.)</p>
+<p>If you aren’t told the exact <em>types</em> of variables or methods
+used in a predicate, that means you should be able to work them out from
+context. For example, for the predicate</p>
+<p><span class="math display">\[
+(x &gt; 0) \vee (M \wedge (e &lt; d +c))
+\]</span></p>
+<p>you can assume that <span class="math inline">\(M\)</span> is a
+boolean, and that <span class="math inline">\(x\)</span>, <span class="math inline">\(c\)</span>, <span class="math inline">\(d\)</span>
+and <span class="math inline">\(e\)</span> are some numeric type (such
+as <code>int</code>).</p>
+<p>For each of the clauses in the predicates below, identify test inputs
+which will make the clause <em>active</em> (that is: state what values
+need to be assigned to the variables in the predicate), and vary that
+clause so it takes on both true and false values. (In other words: write
+test values that achieve Restricted Active Clause Coverage.) Explain
+your reasoning.</p>
+<ol type="a">
+<li><span class="math inline">\(A \vee (B \wedge \neg C)\)</span></li>
+<li><span class="math inline">\(x &gt; 0 \; \vee  (M \wedge (e &lt; d
++c))\)</span></li>
+<li><span class="math inline">\(G \vee (m \geqslant a) \vee H \wedge
+U\)</span></li>
+</ol>
+<div class="solutions">
+<p>In the solutions, we explain our reasoning, and then give a table
+with test values. This is a good way to format your answers, if you’re
+asked to come up with test values.</p>
+<p>Almost always, there are multiple possible solutions (because there
+are many possible choices for the test values), but we show only
+one.</p>
+<p><strong>For (a):</strong></p>
+<p>This one should be simple. Our predicate is <span class="math inline">\(A \vee (B \wedge \neg C)\)</span>, and so our
+clauses here are <span class="math inline">\(A\)</span>, <span class="math inline">\(B\)</span> and <span class="math inline">\(C\)</span>.</p>
+<p>Note that strictly speaking, we don’t need the parentheses in <span class="math inline">\(A \vee (B \wedge \neg C)\)</span>, since “<span class="math inline">\(\wedge\)</span>” is considered to bind more
+tightly than “<span class="math inline">\(\vee\)</span>”, but we add
+them for clarity. (This is reflected in most programming languages,
+where “<code>&amp;&amp;</code>” has higher precedence than
+“<code>||</code>”.)</p>
+<ol type="i">
+<li><strong><em>To make <span class="math inline">\(A\)</span>
+active:</em></strong> Set <span class="math inline">\(B \wedge \neg
+C\)</span> to false.<br />
+So, suitable test values might be: <span class="math inline">\(A \in \{
+\text{true}, \text{false} \}\)</span>, <span class="math inline">\(B\)</span> = false, <span class="math inline">\(C\)</span> = true.</li>
+<li><strong><em>To make <span class="math inline">\(B\)</span>
+active:</em></strong> Set <span class="math inline">\(A\)</span> to
+false and <span class="math inline">\(\neg C\)</span> to true.<br />
+So, suitable test values might be: <span class="math inline">\(B \in \{
+\text{true}, \text{false} \}\)</span>, <span class="math inline">\(A\)</span> = false, <span class="math inline">\(C\)</span> = false.</li>
+<li><strong><em>To make <span class="math inline">\(C\)</span>
+active:</em></strong> Set <span class="math inline">\(A\)</span> to
+false and <span class="math inline">\(B\)</span> to true.<br />
+So, suitable test values might be: <span class="math inline">\(C \in \{
+\text{true}, \text{false} \}\)</span>, <span class="math inline">\(A\)</span> = false, <span class="math inline">\(B\)</span> = true.</li>
+</ol>
+<p>Our table of test inputs would then look like this:</p>
+<!-- markdown version -->
+<table style="width:99%;">
+<colgroup>
+<col style="width: 29%" />
+<col style="width: 42%" />
+<col style="width: 26%" />
+</colgroup>
+<thead>
+<tr>
+<th><strong>Test description</strong></th>
+<th><strong>Inputs</strong></th>
+<th><strong>Predicate value</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Make <span class="math inline">\(A\)</span> active, and<br>   <span class="math inline">\(A\)</span> = true<br>   <span class="math inline">\(A\)</span> = false</td>
+<td><span class="math inline">\(A\)</span> = true, <span class="math inline">\(B\)</span> = false, <span class="math inline">\(C\)</span> = true<br> <span class="math inline">\(A\)</span> = false, <span class="math inline">\(B\)</span> = false, <span class="math inline">\(C\)</span> = true</td>
+<td>true<br> false</td>
+</tr>
+<tr>
+<td>Make <span class="math inline">\(B\)</span> active, and<br>   <span class="math inline">\(B\)</span> = true<br>   <span class="math inline">\(B\)</span> = false</td>
+<td><span class="math inline">\(A\)</span> = false, <span class="math inline">\(B\)</span> = true, <span class="math inline">\(C\)</span> = false<br> <span class="math inline">\(A\)</span> = false, <span class="math inline">\(B\)</span> = false, <span class="math inline">\(C\)</span> = false</td>
+<td>true<br> false</td>
+</tr>
+<tr>
+<td>Make <span class="math inline">\(C\)</span> active, and<br>   <span class="math inline">\(C\)</span> = true<br>   <span class="math inline">\(C\)</span> = false</td>
+<td><span class="math inline">\(A\)</span> = false, <span class="math inline">\(B\)</span> = true, <span class="math inline">\(C\)</span> = true<br> <span class="math inline">\(A\)</span> = false, <span class="math inline">\(B\)</span> = true, <span class="math inline">\(C\)</span> = false</td>
+<td>false<br> true</td>
+</tr>
+</tbody>
+</table>
+<p><strong>For (b):</strong></p>
+<p>Our predicate here is <span class="math inline">\(x &gt; 0 \;
+\vee  (M \wedge (e &lt; d +c))\)</span>, so our clauses are <span class="math inline">\(x &gt; 0\)</span>, <span class="math inline">\(M\)</span>, and <span class="math inline">\(e &lt;
+d +c\)</span>.</p>
+<p>If you look at the logical structure of this, it actually has a
+similar logical form as in (a): <span class="math inline">\(A \vee (B
+\wedge C)\)</span>. But here, some of the variables are of some integral
+type, so our test values will be any integers we choose that make the
+relevant clauses true or false.</p>
+<ol type="i">
+<li><strong><em>To make <span class="math inline">\(x &gt; 0\)</span>
+active:</em></strong> Set <span class="math inline">\(M \wedge (e &lt; d
++ c)\)</span> to false.<br />
+So, suitable test values might be: <span class="math inline">\(x \in \{
+0, 1 \}\)</span>, <span class="math inline">\(M\)</span> = false, <span class="math inline">\(e = d = c = 0\)</span>.</li>
+<li><strong><em>To make <span class="math inline">\(M\)</span>
+active:</em></strong> Set <span class="math inline">\(x &gt; 0\)</span>
+to false and <span class="math inline">\(e &lt; d + c\)</span> to
+true.<br />
+So, suitable test values might be: <span class="math inline">\(M \in \{
+\text{true}, \text{false} \}\)</span>, <span class="math inline">\(x =
+0\)</span>, and <span class="math inline">\(e = d = c = 1\)</span>.</li>
+<li><strong><em>To make <span class="math inline">\(e &lt; d +
+c\)</span> active:</em></strong> Set <span class="math inline">\(x &gt;
+0\)</span> to false and <span class="math inline">\(M\)</span> to
+true.<br />
+So, suitable test values for <span class="math inline">\(x\)</span> and
+<span class="math inline">\(M\)</span> might be: <span class="math inline">\(x = 0\)</span>, <span class="math inline">\(M\)</span> = true. We then have to make <span class="math inline">\(e &lt; d + c\)</span> true and false, each in
+turn. To make it true, we could select <span class="math inline">\(e = d
+= c = 1\)</span>, and to make it false, we could select <span class="math inline">\(e = d = c = 0\)</span>. (Note that any values
+which make <span class="math inline">\(e &lt; d + c\)</span> true then
+false would be fine; but the values we have chosen happen to be easy to
+write down.)</li>
+</ol>
+<p>Our table of test inputs would then look like this:</p>
+<table style="width:99%;">
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 40%" />
+<col style="width: 24%" />
+</colgroup>
+<thead>
+<tr>
+<th><strong>Test description</strong></th>
+<th><strong>Inputs</strong></th>
+<th><strong>Predicate value</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Make <span class="math inline">\(x &gt; 0\)</span> active, and<br>  
+<span class="math inline">\(x &gt; 0\)</span> = true<br>   <span class="math inline">\(x &gt; 0\)</span> = false</td>
+<td><span class="math inline">\(x = 1\)</span>, <span class="math inline">\(M\)</span> = false, <span class="math inline">\(e
+= d = c = 0\)</span><br> <span class="math inline">\(x = 0\)</span>,
+<span class="math inline">\(M\)</span> = false, <span class="math inline">\(e = d = c = 0\)</span></td>
+<td>true<br> false</td>
+</tr>
+<tr>
+<td>Make <span class="math inline">\(M\)</span> active, and<br>   <span class="math inline">\(M\)</span> = true<br>   <span class="math inline">\(M\)</span> = false</td>
+<td><span class="math inline">\(M = \text{true}\)</span>, <span class="math inline">\(x = 0\)</span>, <span class="math inline">\(e = d
+= c = 1\)</span><br> <span class="math inline">\(M =
+\text{false}\)</span>, <span class="math inline">\(x = 0\)</span>, <span class="math inline">\(e = d = c = 0\)</span></td>
+<td>true<br> false</td>
+</tr>
+<tr>
+<td>Make <span class="math inline">\(e &lt; d + c\)</span> active,
+and<br>   <span class="math inline">\(e &lt; d + c\)</span> = true<br>  
+<span class="math inline">\(e &lt; d + c\)</span> = false</td>
+<td><span class="math inline">\(x = 0, M = \text{true}\)</span>, <span class="math inline">\(e = d = c = 1\)</span><br> <span class="math inline">\(x = 0, M = \text{true}\)</span>, <span class="math inline">\(e = d = c = 0\)</span></td>
+<td>true<br> false</td>
+</tr>
+</tbody>
+</table>
+<p><strong>For (c):</strong></p>
+<p>Our predicate here is <span class="math inline">\(G \vee (m \geqslant
+a) \vee H \wedge U\)</span>, so our clauses are <span class="math inline">\(G\)</span>, <span class="math inline">\(m
+\geqslant a\)</span>, <span class="math inline">\(H\)</span> and <span class="math inline">\(U\)</span>.</p>
+<p>Note that because “<span class="math inline">\(\wedge\)</span>” binds
+more tightly than “<span class="math inline">\(\vee\)</span>”, this
+predicate is equivalent to</p>
+<p><span class="math display">\[
+G \vee (m \geqslant a) \vee (H \wedge U)
+\]</span></p>
+<p>Our process for making each clause active is as follows:</p>
+<ol type="i">
+<li><strong><em>To make <span class="math inline">\(G\)</span>
+active.</em></strong> We need to make <span class="math inline">\(m
+\geqslant a\)</span> and <span class="math inline">\(H \wedge U\)</span>
+both false.<br />
+So, suitable test values might be: <span class="math inline">\(G \in \{
+\text{true}, \text{false} \}\)</span>, <span class="math inline">\(m = a
+= 0\)</span>, and <span class="math inline">\(H = U =
+\text{false}\)</span>.</li>
+<li><strong><em>To make <span class="math inline">\(m \geqslant
+a\)</span> active.</em></strong> We must make <span class="math inline">\(G\)</span> and <span class="math inline">\(H
+\wedge U\)</span> both false.<br />
+So suitable values for them could be <span class="math inline">\(G = H =
+U = \text{false}\)</span>.<br />
+Then we need to make <span class="math inline">\(m \geqslant a\)</span>
+true and false each in turn; to make it true, we could use <span class="math inline">\(m = a = 0\)</span>, and to make it false, <span class="math inline">\(m = 0\)</span> and <span class="math inline">\(a =
+1\)</span>.</li>
+<li><strong><em>To make <span class="math inline">\(H\)</span>
+active.</em></strong> We need to make <span class="math inline">\(G\)</span> and <span class="math inline">\(m
+\geqslant a\)</span> both false, and <span class="math inline">\(U\)</span> true.<br />
+So suitable inputs would be: <span class="math inline">\(H \in \{
+\text{true}, \text{false} \}\)</span>, <span class="math inline">\(G =
+\text{false}, m = 0, a = 1, U = \text{true}\)</span>.</li>
+<li><strong><em>To make <span class="math inline">\(U\)</span>
+active.</em></strong> We need to make <span class="math inline">\(G\)</span> and <span class="math inline">\(m
+\geqslant a\)</span> both false, and <span class="math inline">\(H\)</span> true.<br />
+So suitable inputs would be: <span class="math inline">\(U \in \{
+\text{true}, \text{false} \}\)</span>, <span class="math inline">\(G =
+\text{false}, m = 0, a = 1, H = \text{true}\)</span>.</li>
+</ol>
+<p>Our table of test inputs would then look like this:</p>
+<table style="width:99%;">
+<colgroup>
+<col style="width: 28%" />
+<col style="width: 50%" />
+<col style="width: 20%" />
+</colgroup>
+<thead>
+<tr>
+<th><strong>Test description</strong></th>
+<th><strong>Inputs</strong></th>
+<th><strong>Predicate value</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Make <span class="math inline">\(G\)</span> active, and<br>   <span class="math inline">\(G\)</span> = true<br>   <span class="math inline">\(G\)</span> = false</td>
+<td><span class="math inline">\(G = \text{true}\)</span>, <span class="math inline">\(m = a = 0\)</span>, <span class="math inline">\(H
+= U = \text{false}\)</span><br> <span class="math inline">\(G =
+\text{false}\)</span>, <span class="math inline">\(m = a = 0\)</span>,
+<span class="math inline">\(H = U = \text{false}\)</span></td>
+<td>true<br> false</td>
+</tr>
+<tr>
+<td>Make <span class="math inline">\(m \geqslant a\)</span> active,
+and<br>   <span class="math inline">\(m \geqslant a\)</span> = true<br>
+  <span class="math inline">\(m \geqslant a\)</span> = false</td>
+<td><span class="math inline">\(m = a = 0\)</span>, <span class="math inline">\(G = H = U = \text{false}\)</span><br> <span class="math inline">\(m = 0, a = 1\)</span>, <span class="math inline">\(G = H = U = \text{false}\)</span></td>
+<td>true<br> false</td>
+</tr>
+<tr>
+<td>Make <span class="math inline">\(H\)</span> active, and<br>   <span class="math inline">\(H\)</span> = true<br> <br>   <span class="math inline">\(H\)</span> = false</td>
+<td><span class="math inline">\(H = \text{true}\)</span>, <span class="math inline">\(G = \text{false}\)</span>, <span class="math inline">\(m = 0, a = 1, U = \text{true}\)</span><br> <br>
+<span class="math inline">\(H = \text{false}\)</span>, <span class="math inline">\(G = \text{false}\)</span>, <span class="math inline">\(m = 0, a = 1, U = \text{true}\)</span></td>
+<td>false<br> <br> true</td>
+</tr>
+<tr>
+<td>Make <span class="math inline">\(U\)</span> active, and<br>   <span class="math inline">\(U\)</span> = true<br> <br>   <span class="math inline">\(U\)</span> = false</td>
+<td><span class="math inline">\(U = \text{true}\)</span>, <span class="math inline">\(G = \text{false}, m = 0, a = 1, H =
+\text{true}\)</span><br> <br> <span class="math inline">\(U =
+\text{false}\)</span>, <span class="math inline">\(G = \text{false}, m =
+0, a = 1, H = \text{true}\)</span></td>
+<td>false<br> <br> true</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="scenario-trap-doors">5. Scenario – trap-doors</h2>
+<p>Suppose a component under test has the following requirements:</p>
+<div style="border: solid 2pt blue; background-color: hsla(241, 100%,50%, 0.1); padding: 1em; border-radius: 5pt; margin-top: 1em;">
+<p>If the lever is pulled and the chair is occupied, open the
+trap-door.</p>
+<p>If the button is pressed, open the trap-door.</p>
+</div>
+<p>Represent the component as a set of logic expressions. You should
+explain what each variable in your expressions means. (For an example,
+look in section 2 at the way we gave definitions for the variables in
+the predicate <span class="math inline">\(s \wedge (m \vee
+w)\)</span>.)</p>
+<p>(Hint: if you’re stuck, try writing out what the component does as
+one or more “<code>if</code>” statements, in pseudocode. Then recall
+that the set of all predicates in a system means the set of all logical
+expressions found in things like “<code>if</code>” statements.)</p>
+<div class="solutions">
+<p><strong>Answer:</strong></p>
+<p>We have two predicates in our component: the first is “the lever is
+pulled and the chair is occupied”, and the second is “the button is
+pressed”.</p>
+<p>We will define three variables to represent the clauses in these
+predicates:</p>
+<ul>
+<li>Let <span class="math inline">\(L\)</span> represent “the lever is
+pulled”</li>
+<li>Let <span class="math inline">\(C\)</span> represent “the chair is
+occupied”</li>
+<li>Let <span class="math inline">\(B\)</span> represent “the button is
+pressed”</li>
+</ul>
+<p>Using these definitions, the set of logic expressions (i.e.
+predicates) in our component is therefore:</p>
+<ul>
+<li><span class="math inline">\(L \wedge C\)</span></li>
+<li><span class="math inline">\(B\)</span></li>
+</ul>
+<p><strong>Incorrect answers</strong></p>
+<p>Note that it’s <em>incorrect</em> to try and represent “open the
+trap-door” as a clause.</p>
+<p>This is because from the requirement we’re given, “open the
+trap-door” is clearly not a condition we have to detect, but rather an
+<em>action</em> our system must take (and something we can hopefully
+observe as part of seeing whether we get the <em>expected
+outcome</em>).</p>
+<p>To see why this is so, and why we shouldn’t model “open the
+trap-door” as a clause, imagine writing pseudocode to represent what our
+component does. It might look something like this:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> lever pulled <span class="kw">and</span> chair occupied:</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="bu">open</span> trap<span class="op">-</span>door</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> button pressed:</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="bu">open</span> trap<span class="op">-</span>door</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span></span></code></pre></div>
+<p>Then recall that doing logic-based testing means to test the
+<em>logical expressions</em> in our system – the conditions following
+the “if” statements – and to ensure we’ve thoroughly tested the clauses
+that make them up.</p>
+<p>Now imagine we are writing JUnit style tests to see if our component
+(let’s call it <code>TrapDoorController</code>) behaves as expected.
+We’ll assume we have mock objects called <code>lever</code> and
+<code>chair</code> and <code>button</code> created in a
+<code>setUp</code> method, and that our controller has a
+<code>control()</code> method to which we pass the <code>lever</code>
+and <code>chair</code> and <code>button</code>. For one of our tests, we
+might have something like:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="at">@Test</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co">/** Test the case when lever pulled, chair not occupied,</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co">  * button not pressed */</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span> <span class="dt">void</span> <span class="fu">testA</span><span class="op">()</span> <span class="op">{</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="co">// prepare the test environment</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  lever<span class="op">.</span><span class="fu">setPosition</span><span class="op">(</span><span class="st">&quot;pulled&quot;</span><span class="op">);</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  chair<span class="op">.</span><span class="fu">setOccupancy</span><span class="op">(</span><span class="st">&quot;occupied&quot;</span><span class="op">);</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  button<span class="op">.</span><span class="fu">setPosition</span><span class="op">(</span><span class="st">&quot;unpressed&quot;</span><span class="op">);</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  <span class="co">// invoke the method under test</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  TrapDoorController c <span class="op">=</span> <span class="kw">new</span> <span class="fu">TrapDoorController</span><span class="op">();</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>  c<span class="op">.</span><span class="fu">control</span><span class="op">(</span>lever<span class="op">,</span> chair<span class="op">,</span> button<span class="op">);</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>  <span class="co">// assert that the behaviour is as we expect</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">assertEquals</span><span class="op">(</span> c<span class="op">.</span><span class="fu">getStatus</span><span class="op">(),</span> <span class="st">&quot;closed&quot;</span><span class="op">,</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>                <span class="st">&quot;trapdoor should be closed&quot;</span><span class="op">);</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p>And we’d have a bunch of other tests to test other scenarios. So –
+what if “open the trap-door” were a clause, rather than an action to
+take? Then it would become part of the test environment. But if that
+were the case – what would be left to be the component under test? And
+what could we possibly assert in order to find out if the system behaved
+as expected or not? There are no sensible answers to these questions;
+hence it makes no sense to make “open the trap-door” a clause.</p>
+<p>Note that for the exam and assignment, student answers that make this
+sort of mistake will generally be awarded very few (if any) marks – it
+will be taken to indicate a poor understanding of logic-based
+testing.</p>
+</div>
+<h2 id="scenario-login-page">6. Scenario – login page</h2>
+<p>Suppose you are part of a team developing a website called
+“RateMyVeterinarian”, where people can log in and provide anonymous
+reviews of the veterinarian services they use.</p>
+<p>Requirements for the site are currently being finalised, and one
+requirement is stated as follows:</p>
+<div style="border: solid 2pt blue; background-color: hsla(241, 100%,50%, 0.1); padding: 1em; border-radius: 5pt; margin-top: 1em;">
+<p>When a user enters a user ID and password into the login page and
+hits the “log in” button, then if that user ID is listed in the “users”
+database, and the password matches against the password in the record
+for that user, and the user record does not state that the account has
+been disabled, a “Welcome” page should be displayed.</p>
+</div>
+<ol type="a">
+<li><p>How easy to understand do you think this requirement is? If you
+think it could be made easier to understand, suggest how.</p></li>
+<li><p>One of your colleagues suggests that because correctly
+authenticating users (and keeping their details secure) is an important
+feature, this requirement should be thoroughly tested – so you should
+design a test suite that meets RAC (Restricted Active Clause) levels of
+coverage. Do you agree? Why or why not?</p></li>
+</ol>
+<div class="solutions">
+<p><strong>a. Requirement clarity and readability</strong></p>
+<p>This requirement would probably be more readable if the various
+conditions were given as bullet points, rather than a run-on sentence
+(together with a little re-phrasing):</p>
+<div style="border: solid 2pt blue; background-color: hsla(241, 100%,50%, 0.1); padding: 1em; border-radius: 5pt; margin-top: 1em;">
+<p>When a user enters a user ID and password into the login page and
+hits the “log in” button, then if:</p>
+<ul>
+<li>the user ID is listed in the “users” database;</li>
+<li>the entered password matches against the password in the database
+record for that user; and</li>
+<li>the user record does not state that the account has been
+disabled</li>
+</ul>
+<p>a “Welcome” page should be displayed.</p>
+</div>
+<p>You may have other suggestions for how the requirement could be made
+clearer.</p>
+<p><strong>b. RACC coverage</strong></p>
+<p>There is no one correct answer to this question.</p>
+<p>It’s certainly true that we should probably test the login feature
+thoroughly. However, once we have portions of the system implemented and
+at least a partial test suite in place, we may discover that we in fact
+already <em>have</em> achieved an RACC level of coverage.</p>
+<p>So our colleague is not incorrect in saying that thorough testing is
+warranted, and they’re not wrong to suggest that RACC is a good level of
+coverage to aim for. However, if they are suggesting that the tests need
+to be designed <em>right now</em>, that doesn’t necessarily follow. The
+coverage our colleague wants may arise naturally out of applying
+techniques like Input Space Partitioning and graph-based testing.</p>
+<p>For instance, suppose that when we come to implement the login
+feature, we end up with a method that looks something like this:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span> <span class="dt">void</span> <span class="fu">handleLogin</span><span class="op">(</span>HttpRequest request<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="bu">String</span> userID   <span class="op">=</span> request<span class="op">.</span><span class="fu">getParameter</span><span class="op">(</span><span class="st">&quot;userID&quot;</span><span class="op">);</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="bu">String</span> password <span class="op">=</span> request<span class="op">.</span><span class="fu">getParameter</span><span class="op">(</span><span class="st">&quot;password&quot;</span><span class="op">);</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  UserRecord userRecord <span class="op">=</span> userDb<span class="op">.</span><span class="fu">lookup</span><span class="op">(</span>userID<span class="op">);</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> <span class="op">(</span>userRecord <span class="op">==</span> <span class="kw">null</span><span class="op">)</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">throw</span> <span class="kw">new</span> <span class="fu">NoSuchUserException</span><span class="op">(</span><span class="st">&quot;no user called &quot;</span> <span class="op">+</span> userID<span class="op">);</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> <span class="op">(!</span> userRecord<span class="op">.</span><span class="fu">getPassword</span><span class="op">().</span><span class="fu">equals</span><span class="op">(</span>password<span class="op">)</span> <span class="op">)</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">throw</span> <span class="kw">new</span> <span class="fu">InvalidPassword</span><span class="op">();</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> <span class="op">(</span>userRecord<span class="op">.</span><span class="fu">getDisabledStatus</span> <span class="op">==</span> DISABLED<span class="op">)</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">throw</span> <span class="kw">new</span> <span class="fu">UnauthorisedAccess</span><span class="op">(</span><span class="st">&quot;account is disabled&quot;</span><span class="op">);</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>  <span class="co">// if still here, all is OK</span></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">renderWelcomePage</span><span class="op">();</span></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p>(Note that this is simplified from how a real login handler method
+would work – amongst other things, we shouldn’t be storing user
+passwords in a database in their raw, original format.)</p>
+<p>We will probably write unit tests (using the ISP method) to make sure
+this method does the right thing. We might also check what level of
+graph coverage we have of the method, and perhaps write more unit tests
+and/or integration tests in response to that.</p>
+<p>By the time we’ve done all that, it’s quite possible we will have
+achieved an RACC level of coverage anyway, and don’t have to write
+additional tests.</p>
+<p>(If you’re familiar with what HTTP requests look like, you might like
+to consider how you’d write ISP-based tests for this method. You would
+probably decided to use partitioning characteristics like “HTTP request
+contains a valid userID” and “HTTP request contains a password matching
+the userID”, amongst other things. Once you apply something like Base
+Choice Coverage as criterion for your ISP tests, it’s highly likely RACC
+will be satisfied for the requirement.)</p>
+</div>
+<h2 id="tips-and-tricks">7. Tips and tricks</h2>
+<p>When solving problems that involve logic-based testing, make sure you
+understand the difference between <em>expressions</em> and
+<em>statements</em> in the programming language or languages that you’re
+using.</p>
+<p>For instance, simple Java <code>if</code> statements <a href="https://docs.oracle.com/javase/specs/jls/se22/html/jls-14.html#jls-14.9">are
+of the form</a>:</p>
+<p>   <code>if (</code> <strong><code>Boolean expression</code></strong>
+<code>) {</code> <strong><code>Statements</code></strong>
+<code>}</code></p>
+<p>Statements are parts of the language that <em>do</em> things; we
+usually execute them in order to achieve some side effect. Boolean
+expressions evaluate to a Java <code>boolean</code> value, and we
+typically intend that they should <em>not</em> have side effects – they
+just evaluate to <code>true</code> or <code>false</code>.</p>
+<p>When we do logic-based testing, we’re focusing on the collection of
+logic <em>expressions</em> of a program or system that control program
+flow, and working out how to write tests that thoroughly exercise the
+component parts (the clauses) of those expressions.</p>
+<!--
+ (unless they happen to have more logic expressions within them); we're just
+working out how to get the correct clauses to be evaluated. If using the "Arrange, Act, Assert"
+pattern, we're focusing on the "Act" portion -- what parameters etc. we need to supply in
+order for the correct clauses to be evaluated.
+-->
+<p>Confusing expressions with statements, or vice versa, is a common
+reason for students to do poorly in test or exam questions involving
+logic-based testing.</p>
+<!-- vim: syntax=markdown tw=92 :
+-->
+</body>
+</html>

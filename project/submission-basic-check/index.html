@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" >
+    <meta name="viewport"       content="width=device-width, initial-scale=1" >
+    <meta name="language"       content="en" >
+    <meta name="DC.Language"    content="en" >
+    <meta name="DC.Format"      content="text/html" >
+    <title>Basic check of submission files</title>
+
+    <link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.4/themes/overcast/jquery-ui.css" media="screen" rel="StyleSheet" type="text/css">
+    <script language="javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js" type="text/javascript"></script>
+    <script language="javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.6/jquery-ui.min.js" type="text/javascript"></script>
+
+  <style>
+    html {
+      line-height: 1.5;
+      font-family: Georgia, serif;
+      font-size: 17px;
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 42em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 1em;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, 'Lucida Console', Consolas, monospace;
+      font-size: 85%;
+      margin: 0;
+    }
+    /*
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    */
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+
+
+    <style>
+      .warning {
+        color: hsl(33, 100%, 50%);
+      }
+
+      .error {
+        color: hsl(33, 100%, 50%);
+      }
+
+      .okay {
+        color: hsl(96, 100%, 43%);
+      }
+
+      pre {
+        white-space: pre-wrap;
+        line-height: 1.4;
+        font-size: 16px;
+      }
+
+      button.test {
+        display: none;
+      }
+
+    </style>
+
+    <script>
+      //let server_url = 'http://localhost:8080/project';
+      let server_url = 'https://jdoccheck.waldorf.arranstewart.info/project';
+
+      function breakify(str) {
+        let arr = str.split(/\r?\n/);
+        return arr.join("<br>&nbsp;&nbsp;")
+      }
+
+      const sampleCompileError = {
+        "tag": "Error",
+        "message": "couldn't compile Java code in code zip-file \"badtest.zip\" using compile command: \"javac -cp .:bin:lib:lib/junit-platform-commons-1.8.2.jar:lib/apiguardian-api-1.1.2.jar:lib/junit5-4.4.0-beta.0.jar:lib/junit-jupiter-api-5.8.2.jar:lib/junit-jupiter-params-5.8.2.jar -d bin `find src test -name '*.java'`\" - this will result in zero marks for some JUnit tests. Error was: error running: bash -c javac -cp .:bin:lib:lib/junit-platform-commons-1.8.2.jar:lib/apiguardian-api-1.1.2.jar:lib/junit5-4.4.0-beta.0.jar:lib/junit-jupiter-api-5.8.2.jar:lib/junit-jupiter-params-5.8.2.jar -d bin `find src test -name '*.java'`\nexit status: 1\nstderr: test/parsers/ParserTest.java:17: error: class ParserTestXXX is public, should be declared in a file named ParserTestXXX.java\npublic class ParserTestXXX {\n       ^\n1 error\n"
+        }
+
+
+      window.MESSAGES = []
+
+      function displayMessages(messages, messageDiv) {
+        //console.log("messages", messages);
+        if (messages.length > 0) {
+          for (const message of messages) {
+            console.log("messages", message);
+            let messageX = breakify(message.message);
+            if (message.tag == "Warning" || message.tag == "Error") {
+              let newContent = `<span class="warning"><pre>${messageX}</pre>
+                                </span><br>`;
+              messageDiv.insertAdjacentHTML('beforeend', newContent);
+            }
+            if (message.tag == "Info") {
+              let newContent = `<span class="okay"><pre>${messageX}</pre>
+                                </span><br>`;
+              messageDiv.insertAdjacentHTML('beforeend', newContent);
+            }
+
+          }
+        } else {
+            let newContent = `<span class="okay">File formats look okay
+                              </span><br>`;
+            messageDiv.insertAdjacentHTML('beforeend', newContent);
+        }
+      }
+
+      function testDisplay() {
+        let messageDiv    = document.getElementById("checkfiles-message-panel");
+        messageDiv.innerHTML = "";
+        displayMessages([sampleCompileError], messageDiv);
+      }
+
+      function readFile(file){
+        return new Promise((resolve, reject) => {
+          let fr = new FileReader();
+          fr.onload = () => {
+            resolve(fr.result)
+          };
+          fr.onerror = reject;
+          fr.readAsText(file);
+        });
+      }
+
+      function checkFiles() {
+        console.log("sending files to be checked");
+        let formData      = new FormData(),
+            reportUpload  = document.getElementById("report-inpt"),
+            codeUpload    = document.getElementById("code-inpt");
+            messageDiv    = document.getElementById("checkfiles-message-panel");
+        messageDiv.innerHTML = "";
+        formData.append("report", reportUpload.files[0]);
+        formData.append("code",   codeUpload.files[0]);
+        fetch(server_url, {
+          method: "POST",
+          body: formData
+        })
+        .then( response => response.json()
+        )
+        .then( jsonData =>  {
+                  console.log("jsonData:", jsonData );
+                  //console.log("messageDiv:", messageDiv );
+                  if ('messages' in jsonData) {
+                    displayMessages(jsonData.messages, messageDiv);
+                  } else {
+                    throw "JSON response had no 'messages' key";
+                  }
+               }
+        )
+        .catch(function(err){
+          console.error("error", err);
+          messageDiv.innerHTML = `
+            Unable to check files, error was: ${err}
+          `;
+
+        });
+      }
+    </script>
+
+
+  </head>
+
+  
+
+    <h2>
+      Basic check of submission files
+    </h2>
+
+    <!--
+    <form action="http://localhost:8080/project"
+          method="POST"
+          enctype="multipart/form-data"
+    >
+    -->
+    <form>
+      <table>
+        <tr>
+          <td> <label for="fname">PDF report:</label>
+          </td>
+          <td> <input type="file" id="report-inpt" name="report">
+          </td>
+        </tr>
+        <tr>
+          <td> <label for="lname">Code zip file:</label>
+          </td>
+          <td> <input type="file" id="code-inpt" name="code">
+          </td>
+        </tr>
+        <tr>
+          <td><button id="checkfiles-btn" onclick="checkFiles(); return false" >basic submission check</button>
+            </td><td></td>
+        </tr>
+
+      </table>
+    </form>
+
+    <button class="test" id="test-display-btn" onclick="testDisplay(); return false" >display err</button>
+
+
+    <div id="checkfiles-message-panel" style="color: hsl(33, 100%, 50%); font-weight: bold;" >
+    </div>
+
+</html>
